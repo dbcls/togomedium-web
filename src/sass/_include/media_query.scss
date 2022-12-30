@@ -1,0 +1,42 @@
+$-responsive-threshold-1: 1020px;
+
+@mixin lg {
+  @media screen and (min-width: #{$-responsive-threshold-1}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media screen and (max-width: #{$-responsive-threshold-1 - 1}) {
+    @content;
+  }
+}
+
+@mixin no-sm {
+  @include sm {
+    display: none !important;
+  }
+}
+@mixin no-lg {
+  @include lg {
+    display: none !important;
+  }
+}
+
+@mixin make-switching-class {
+  .no-sm {
+    @include no-sm;
+  }
+
+  .no-lg {
+    @include no-lg;
+  }
+
+  .sm-only {
+    @include no-lg;
+  }
+
+  .lg-only {
+    @include no-sm;
+  }
+}

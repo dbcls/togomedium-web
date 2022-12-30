@@ -1,1 +1,6 @@
-console.log("hello world!");
+import { setOnReady } from "yohak-tools";
+import { initHeader } from "./main/initHeader";
+
+setOnReady(() => {
+  initHeader();
+});

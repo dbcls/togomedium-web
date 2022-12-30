@@ -1,0 +1,21 @@
+@mixin dummy-image-border {
+  border: 1px dashed rgba(255, 0, 0, 0.5);
+}
+
+@mixin line-clamp($line) {
+  /* stylelint-disable-next-line */
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+@mixin fit-image($method: cover) {
+  overflow: hidden;
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: $method;
+  }
+}

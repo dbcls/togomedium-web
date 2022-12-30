@@ -1,6 +1,6 @@
 -
   var bodyClasses = [];
-  var titleBase = 'YOHAK Boilerplate';
+  var titleBase = 'TogoMedium';
   var titleChild = '';
   var TBD = '#TBD';
   var BLANK = '_blank';
@@ -14,6 +14,7 @@ block vars
 -
   title = titleChild ? titleChild + ' | ' + titleBase : titleBase;
   bodyClasses.push(lev1ID);
+  pageID = lev1ID;
   for(let i = 0; i < lev; i++){
     pathToRoot += '../';
   }
@@ -34,21 +35,25 @@ html(lang="ja", xmlns:og="http://ogp.me/ns#")
     meta(name="format-detection", content="telephone=no")
     meta(name="viewport", content="width=device-width,initial-scale=1.0,minimum-scale=1.0")
     meta(name="description", content=`${meta.description}`)
-    meta(name="keywords", content=``)
+    meta(name="keywords", content="")
+    link(href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;600&display=swap", rel="stylesheet")
     link(href=`${pathToLibs}html5reset.css`, rel="stylesheet", type="text/css")
     link(href=`${pathToCSS}main.css${hash}`, rel="stylesheet", type="text/css")
     block links
 
-    meta(property="og:title", content=``)
-    meta(property="og:description", content=``)
-    meta(property="og:type", content=``)
-    meta(property="og:image", content=``)
+    meta(property="og:title", content="")
+    meta(property="og:description", content="")
+    meta(property="og:type", content="")
+    meta(property="og:image", content="")
     meta(property="og:image:width", content="1200")
     meta(property="og:image:height", content="630")
-    meta(property="og:url", content=``)
+    meta(property="og:url", content="")
     title= title
-  body(class=bodyClasses)
+  body(class=bodyClasses, id=pageID)
+    .document-wrapper
+      include ../_include/header
     main
-      h1 HELLO WORLD
       block main
+    script(src=`${pathToJS}main.js`)
     block scripts
+    include ../_include/dbcls.html

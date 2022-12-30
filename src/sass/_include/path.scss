@@ -1,0 +1,8 @@
+$-teaser-path: "../images/teaser/";
+$path-to-img: "../images/";
+
+@mixin bg-main($name, $bg-size: contain) {
+  background-image: url("../images/#{$name}");
+  background-repeat: no-repeat;
+  background-size: $bg-size;
+}

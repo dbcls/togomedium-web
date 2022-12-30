@@ -1,0 +1,32 @@
+@use "sass:meta";
+@use "sass:math";
+@use "_include/color";
+@use "_include/decoration";
+@use "_include/ease";
+@use "_include/media_query" as mq;
+@use "_include/path";
+@use "_include/typography";
+@use "_include/vw";
+@use "_include/geom";
+
+#dbcls-common-header nav.gnav {
+  width: auto !important;
+  margin: 0 30px !important;
+}
+
+body {
+  font-family: "Fira Sans Condensed", sans-serif;
+  //color: v.$base-color;
+  background-color: color.$gray-bg;
+}
+
+main {
+  min-height: calc(100vh - (24px + 45px + 28px));
+}
+
+a {
+  color: color.$black-text;
+  text-decoration: none;
+}
+
+@include meta.load-css("main/header.scss");

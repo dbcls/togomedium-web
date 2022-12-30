@@ -1,0 +1,14 @@
+@use "vw";
+@use "sass:color";
+
+@function shadow-lg($blur: 40, $opacity: 0.1) {
+  @return _shadow(vw.lg($blur), $opacity);
+}
+
+@function shadow-sm($blur: 40, $opacity: 0.1) {
+  @return _shadow(vw.sm($blur), $opacity);
+}
+
+@function _shadow($blur, $opacity) {
+  @return drop-shadow(0 4px $blur color.change(#002250, $alpha: $opacity));
+}

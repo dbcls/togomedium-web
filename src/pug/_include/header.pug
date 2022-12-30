@@ -1,0 +1,43 @@
+header.global-header(data-js-target="globalHeader")
+  .inner
+    a.logo(href="/")
+    nav
+      ul
+        li.home
+          a(href="/")
+            include svg/home.svg
+            span Home
+        li.data(data-nav-target="data")
+          span
+            include svg/server.svg
+            span Data
+        li.find(data-nav-target="find")
+          span
+            include svg/glass.svg
+            span Find
+        li.tools(data-nav-target="tools")
+          span
+            include svg/toolbox.svg
+            span Tools
+        li.about(data-nav-target="about")
+          span
+            include svg/file.svg
+            span About
+      input
+  .sub
+    ul(data-nav-key="data")
+      li: a(href="") Media
+      li: a(href="") Organisms
+      li: a(href="") Components
+    ul(data-nav-key="find")
+      li: a(href="") Find media by components
+      li: a(href="") Find media by taxonomic tree
+      li: a(href="") Find media by organism phenotype
+      li: a(href="") Find media by relavance
+    ul(data-nav-key="tools")
+      li: a(href="") Compare media
+      li: a(href="") Compare media of organisms
+      li: a(href="") Compare media with kegg tree alignment
+    ul(data-nav-key="about")
+      li: a(href="") About this site
+      li: a(href="") Statistics
