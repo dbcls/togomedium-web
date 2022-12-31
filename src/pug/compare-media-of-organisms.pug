@@ -1,5 +1,15 @@
 extends ./_template/_base
 
+block vars
+  - lev1ID = "compare";
+  - stanzaIDs = ["gmdb-media-alignment-table"];
 
 block main
-  p compare-media-of-organism
+  section
+    h2 Compare media of organisms
+    fieldset.id-input
+      input#ids(type="text", placeholder="77580,28024,2771,38275")
+      input#compareBtn(type="button", value="compare")
+      span#errorMsg.error-msg
+    .stanza-wrapper
+      togostanza-gmdb-media-alignment-table(gm_ids="", togostanza-menu-placement="none", style="display: none; min-height: 600px")

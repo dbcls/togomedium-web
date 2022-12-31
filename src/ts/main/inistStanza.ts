@@ -1,3 +1,6 @@
+import { initCompareKeggTree } from "./stanza/initCompareKeggTree";
+import { initCompareMedia } from "./stanza/initCompareMedia";
+import { initCompareMediaOfOrganisms } from "./stanza/initCompareMediaOfOrganisms";
 import { initComponentDetail } from "./stanza/initComponentDetail";
 import { initMediumDetail } from "./stanza/initMediumDetail";
 import { initOrganismDetail } from "./stanza/initOrganismDetail";
@@ -13,5 +16,14 @@ export const initStanza = () => {
   }
   if (pathParam?.page === "component" && !!pathParam.param) {
     initComponentDetail(pathParam.param);
+  }
+  if (pathParam?.page === "compare-media") {
+    initCompareMedia();
+  }
+  if (pathParam?.page === "compare-media-of-organisms") {
+    initCompareMediaOfOrganisms();
+  }
+  if (pathParam?.page === "compare-media-with-kegg-tree-alignment") {
+    initCompareKeggTree();
   }
 };

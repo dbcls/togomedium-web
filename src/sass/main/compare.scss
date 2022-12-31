@@ -1,0 +1,41 @@
+@use "sass:meta";
+@use "sass:math";
+@use "../_include/color";
+@use "../_include/decoration";
+@use "../_include/ease";
+@use "../_include/media_query" as mq;
+@use "../_include/path";
+@use "../_include/typography";
+@use "../_include/vw";
+@use "../_include/geom";
+
+body.compare {
+  .id-input {
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    margin: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+  }
+
+  input[type="text"] {
+    width: 600px;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  input[type="button"] {
+    height: 42px;
+    padding: 0 10px;
+    margin-left: 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .error-msg {
+    margin-bottom: 2px;
+    margin-left: 16px;
+    color: color.$red;
+  }
+}

@@ -50,8 +50,8 @@ export default makeConfig({
       "find-media-by-relavance/index.html": "find-media-by-relavance.pug",
       "compare-media/index.html": "compare-media.pug",
       "compare-media-of-organisms/index.html": "compare-media-of-organisms.pug",
-      "compare-media-width-kegg-tree-alignment/index.html":
-        "compare-media-width-kegg-tree-alignment.pug",
+      "compare-media-with-kegg-tree-alignment/index.html":
+        "compare-media-with-kegg-tree-alignment.pug",
       "about/index.html": "about.pug",
       "statistics/index.html": "statistics.pug",
     },

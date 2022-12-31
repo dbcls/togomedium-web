@@ -1,0 +1,12 @@
+extends ./_template/_base
+
+block vars
+  - lev = 1;
+  - stanzaIDs = ["gmdb-roundtree", "gmdb-gms-by-tid"];
+  - lev1ID = "alignment";
+
+block main
+  section
+    h2 Compare media with kegg tree alignment
+    togostanza-gmdb-roundtree#info(newick="http://keggoc-rdf.dbcls.jp/tmp/phylo2.newick", togostanza-menu-placement="none")
+    togostanza-gmdb-gms-by-tid#table(togostanza-menu-placement="none")

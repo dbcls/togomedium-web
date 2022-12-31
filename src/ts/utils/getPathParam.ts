@@ -1,4 +1,11 @@
-type pageKey = "medium" | "organism" | "component" | string | undefined;
+type pageKey =
+  | "medium"
+  | "organism"
+  | "component"
+  | "compare-media"
+  | "compare-media-of-organisms"
+  | string
+  | undefined;
 
 export const getPathParam = ():
   | {
