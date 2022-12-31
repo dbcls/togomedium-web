@@ -1,5 +1,12 @@
 extends ./_template/_base
 
+block vars
+  - stanzaIDs = ["gmdb-component-by-gmoid", "gmdb-meta-list"];
 
 block main
-  p component detail
+  section
+    h2 Component information
+    .stanza-wrapper
+      togostanza-gmdb-component-by-gmoid#info(gmo_id="", togostanza-menu-placement="none")
+    .stanza-wrapper
+      togostanza-gmdb-meta-list#media(api_url="", limit="10", title="", column_names="true", togostanza-menu-placement="none")

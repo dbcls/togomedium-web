@@ -1,5 +1,10 @@
 extends ./_template/_base
 
+block vars
+  - stanzaIDs = ["gmdb-meta-list"];
 
 block main
-  p medium list
+  section
+    h2 All media
+    .stanza-wrapper
+      togostanza-gmdb-meta-list#list(api_url=`${pathToAPI}list_media`, limit="20", title="", column_names="true", column-size="15,85", togostanza-menu-placement="none")
