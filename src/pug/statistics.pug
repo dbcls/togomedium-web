@@ -1,5 +1,10 @@
 extends ./_template/_base
 
+block vars
+  - lev = 1;
+  - lev1ID = "statistics";
+  - stanzaIDs = ["gmdb-meta-list"];
 
 block main
-  p stats
+  .stanza-wrapper
+    togostanza-gmdb-meta-list(api_url=`${URL_API}gmdb_stat_phylum_gm`, limit="", title="The number of growth media per phylum", column_names="true", togostanza-menu-placement="none")
