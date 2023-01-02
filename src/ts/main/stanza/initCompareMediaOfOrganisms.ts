@@ -1,6 +1,6 @@
 import { qs } from "yohak-tools";
 import { MediaByTaxonResponse } from "./types";
-import { URL_API_BASE } from "../../consts";
+import { URL_API } from "../../consts";
 
 export const initCompareMediaOfOrganisms = () => {
   const ids = qs<HTMLInputElement>("#ids")!;
@@ -14,14 +14,13 @@ export const initCompareMediaOfOrganisms = () => {
   } else {
     // ids.value = "1111041,1658616,760260";
     ids.value = "77580,28024,2771,38275";
-    execute();
   }
   //
   button.addEventListener("click", () => execute());
 };
 
 const fetchMedia = async (tax_ids: string[]): Promise<string[]> => {
-  const API = `${URL_API_BASE}gmdb_media_by_taxon`;
+  const API = `${URL_API}gmdb_media_by_taxon`;
   const response = await fetch(API, {
     method: "POST",
     mode: "cors",
@@ -36,7 +35,7 @@ const fetchMedia = async (tax_ids: string[]): Promise<string[]> => {
 };
 
 const filterTaxIds = async (tax_ids: string[]): Promise<string[]> => {
-  const API = `${URL_API_BASE}gmdb_taxa_with_media_within_genus`;
+  const API = `${URL_API}gmdb_taxa_with_media_within_genus`;
   const response = await fetch(API, {
     method: "POST",
     mode: "cors",

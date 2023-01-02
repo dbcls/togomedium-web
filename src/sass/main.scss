@@ -11,5 +11,6 @@
 
 @include meta.load-css("main/structure.scss");
 @include meta.load-css("main/header.scss");
+@include meta.load-css("main/home.scss");
 @include meta.load-css("main/about.scss");
 @include meta.load-css("main/compare.scss");

@@ -27,6 +27,9 @@ export default makeConfig({
           case /^\/component\/.+/.test(req.url):
             req.url = "/component/detail.html";
             break;
+          case /^\/taxon\/.+/.test(req.url):
+            req.url = "/taxon/detail.html";
+            break;
         }
         return next();
       },
@@ -54,6 +57,7 @@ export default makeConfig({
         "compare-media-with-kegg-tree-alignment.pug",
       "about/index.html": "about.pug",
       "statistics/index.html": "statistics.pug",
+      "taxon/detail.html": "taxon-detail.pug",
     },
   },
   sass: {

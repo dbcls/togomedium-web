@@ -1,0 +1,175 @@
+@use "sass:meta";
+@use "sass:math";
+@use "../_include/color";
+@use "../_include/decoration";
+@use "../_include/ease";
+@use "../_include/media_query" as mq;
+@use "../_include/path";
+@use "../_include/typography";
+@use "../_include/vw";
+@use "../_include/geom";
+
+@mixin section-wrapper() {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  margin: 0 auto 80px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+
+  h2 {
+    margin-top: -24px;
+    margin-bottom: 16px;
+    text-align: center;
+
+    span {
+      padding: 0 4px;
+      background-color: color.$gray-bg;
+    }
+  }
+}
+
+body.top {
+  .instruction {
+    width: 70%;
+    margin: 20px auto 80px;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .stats {
+    h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      width: 600px;
+      margin: 0 auto 100px;
+    }
+
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      height: 100%;
+      color: color.$green;
+      text-decoration: none;
+      transition-timing-function: ease.$custom1;
+      transition-duration: 0.5s;
+      transition-property: color, fill;
+
+      &:hover {
+        color: color.$light-green;
+
+        span {
+          color: color.$green;
+        }
+      }
+
+      svg {
+        width: 120px;
+        height: 120px;
+      }
+
+      & > span {
+        display: flex;
+        flex-direction: column;
+        margin-top: 12px;
+        color: color.$black-text;
+        text-align: center;
+        transition-timing-function: ease.$custom1;
+        transition-duration: 1s;
+        transition-property: color;
+
+        & > span {
+          &:nth-child(1) {
+            font-size: 48px;
+          }
+
+          &:nth-child(2) {
+            font-size: 24px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+
+  .free-search {
+    @include section-wrapper;
+
+    #queryInput {
+      display: block;
+      width: 80%;
+      max-width: 480px;
+      padding: 5px;
+      margin: 40px auto;
+      font-size: 32px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+    }
+
+    .info {
+      $base-color: color.$green;
+      display: block;
+      width: 80%;
+      max-width: 640px;
+      padding: 8px;
+      margin: 40px auto;
+      font-size: 20px;
+      line-height: 1.4;
+      color: darken($base-color, 20%);
+      background-color: fade-out($base-color, 0.95);
+      border: 1px solid $base-color;
+      border-radius: 5px;
+    }
+
+    .stanza {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      font-size: 24px;
+      text-align: center;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+
+      30% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+
+      70% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .blink {
+      animation-name: blink;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+
+    .stanza-wrapper {
+      div + div {
+        margin-top: 40px;
+      }
+    }
+  }
+}

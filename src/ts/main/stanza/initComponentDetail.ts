@@ -1,5 +1,5 @@
 import { qs } from "yohak-tools";
-import { URL_API_BASE } from "../../consts";
+import { URL_API } from "../../consts";
 import { getData } from "../../utils/getData";
 
 export const initComponentDetail = async (id: string) => {
@@ -11,7 +11,7 @@ export const initComponentDetail = async (id: string) => {
   info.setAttribute("togostanza-menu-placement", "none");
   //
   const mediaStanza: HTMLElement = qs("#media")!;
-  mediaStanza.setAttribute("api_url", `${URL_API_BASE}gmdb_media_by_gmoid?gmo_id=${id}`);
+  mediaStanza.setAttribute("api_url", `${URL_API}gmdb_media_by_gmoid?gmo_id=${id}`);
   mediaStanza.setAttribute("title", `Media with ${name}`);
   mediaStanza.setAttribute("column_sizes", "15,85");
 };

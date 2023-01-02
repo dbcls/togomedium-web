@@ -27,3 +27,11 @@ export type MediaByTaxonResponse = {
     name: string;
   }[];
 };
+
+export type ListResponse = {
+  columns: any[];
+  contents: any[];
+  limit: string | number;
+  total: string | number;
+  offset: string | number;
+};

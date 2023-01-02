@@ -12,6 +12,7 @@
 $nav-gap: min(40px, 3vw);
 
 header.global-header {
+  @include typography.regular;
   @include geom.fixed(0, 24px);
   z-index: 999;
   width: 100%;

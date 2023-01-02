@@ -2,6 +2,7 @@ type pageKey =
   | "medium"
   | "organism"
   | "component"
+  | "taxon"
   | "compare-media"
   | "compare-media-of-organisms"
   | string

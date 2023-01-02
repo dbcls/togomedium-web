@@ -1,9 +1,9 @@
-import { URL_API_BASE } from "../consts";
+import { URL_API } from "../consts";
 
-export async function getData<T = any>(apiName: string, body: string): Promise<T | undefined> {
-  const detailAPI = `${URL_API_BASE}${apiName}`;
+export async function getData<T = any>(apiName: string, body: string = ""): Promise<T | undefined> {
+  const api = `${URL_API}${apiName}`;
   try {
-    const res = await fetch(detailAPI, {
+    const res = await fetch(api, {
       method: "POST",
       mode: "cors",
       body,

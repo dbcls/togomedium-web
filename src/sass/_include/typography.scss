@@ -1,3 +1,7 @@
+@mixin light() {
+  font-weight: 300;
+}
+
 @mixin regular() {
   font-weight: 400;
 }

@@ -23,7 +23,8 @@ header.global-header(data-js-target="globalHeader")
           span
             include svg/file.svg
             span About
-      input
+      form(method="GET", action="/")
+        input(placeholder="search", name="query")
   .sub
     ul(data-nav-key="data")
       li: a(href="/medium/") Media

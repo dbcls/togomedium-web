@@ -15,6 +15,7 @@
 }
 
 body {
+  @include typography.light;
   font-family: "Fira Sans Condensed", sans-serif;
   //color: v.$base-color;
   background-color: color.$gray-bg;
