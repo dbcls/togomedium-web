@@ -1,10 +1,12 @@
 import { qs } from "yohak-tools";
 import { URL_API } from "../../consts";
 import { getData } from "../../utils/getData";
+import { makePageTitle } from "../../utils/makePageTitle";
 
 export const initComponentDetail = async (id: string) => {
   const data = await getData("gmdb_component_by_gmoid", `gmo_id=${id}`);
   const name = data?.pref_label ?? id;
+  qs("title")!.innerHTML = makePageTitle(name);
 
   const info: HTMLElement = qs("#info")!;
   info.setAttribute("gmo_id", id);
