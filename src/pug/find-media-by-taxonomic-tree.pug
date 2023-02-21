@@ -1,5 +1,9 @@
 extends ./_template/_base
-
+block vars
+  - stanzaIDs = ["gmdb-find-media-by-taxonomic-tree"];
 
 block main
-  p find media by taxonomic tree
+  section
+    h2 Find media by taxonomic tree
+    .stanza-wrapper
+      togostanza-gmdb-find-media-by-taxonomic-tree#list

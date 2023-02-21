@@ -1,11 +1,14 @@
-type pageKey =
+export type pageKey =
   | "medium"
   | "organism"
   | "component"
   | "taxon"
   | "compare-media"
   | "compare-media-of-organisms"
-  | string
+  | "compare-media-with-kegg-tree-alignment"
+  | "find-media-by-components"
+  | "find-media-by-organism-phenotype"
+  | "find-media-by-taxonomic-tree"
   | undefined;
 
 export const getPathParam = ():
@@ -16,7 +19,7 @@ export const getPathParam = ():
   | undefined => {
   const paths = location.pathname.split("/");
   return {
-    page: paths[1],
+    page: paths[1] as pageKey,
     param: paths[2],
   };
 };

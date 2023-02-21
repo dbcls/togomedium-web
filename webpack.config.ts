@@ -50,7 +50,7 @@ export default makeConfig({
       "find-media-by-components/index.html": "find-media-by-components.pug",
       "find-media-by-taxonomic-tree/index.html": "find-media-by-taxonomic-tree.pug",
       "find-media-by-organism-phenotype/index.html": "find-media-by-organism-phenotype.pug",
-      "find-media-by-relavance/index.html": "find-media-by-relavance.pug",
+      "find-media-by-relevance/index.html": "find-media-by-relevance.pug",
       "compare-media/index.html": "compare-media.pug",
       "compare-media-of-organisms/index.html": "compare-media-of-organisms.pug",
       "compare-media-with-kegg-tree-alignment/index.html":

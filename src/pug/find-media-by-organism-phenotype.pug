@@ -1,5 +1,9 @@
 extends ./_template/_base
-
+block vars
+  - stanzaIDs = ["gmdb-find-media-by-organism-phenotype"];
 
 block main
-  p find media by phenotype
+  section
+    h2 Find media by organism phenotype
+    .stanza-wrapper
+      togostanza-gmdb-find-media-by-organism-phenotype#list

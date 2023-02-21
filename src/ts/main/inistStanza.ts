@@ -4,6 +4,7 @@ import { initCompareMediaOfOrganisms } from "./stanza/initCompareMediaOfOrganism
 import { initComponentDetail } from "./stanza/initComponentDetail";
 import { initFreeSearch } from "./stanza/initFreeSearch";
 import { initHomeStats } from "./stanza/initHomeStats";
+import { initMediaFinder } from "./stanza/initMediFinder";
 import { initMediumDetail } from "./stanza/initMediumDetail";
 import { initOrganismDetail } from "./stanza/initOrganismDetail";
 import { initTaxonDetail } from "./stanza/initTaxonDetail";
@@ -35,5 +36,12 @@ export const initStanza = () => {
   }
   if (pathParam?.page === "compare-media-with-kegg-tree-alignment") {
     initCompareKeggTree();
+  }
+  if (
+    pathParam?.page === "find-media-by-components" ||
+    pathParam?.page === "find-media-by-organism-phenotype" ||
+    pathParam?.page === "find-media-by-taxonomic-tree"
+  ) {
+    initMediaFinder();
   }
 };

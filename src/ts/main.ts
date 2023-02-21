@@ -7,6 +7,7 @@ declare global {
     STANZA_ON_QUERY_DATA: CustomEvent<string>;
     STANZA_ON_LOAD_DATA: CustomEvent<string>;
     STANZA_ROUND_TREE_CLICK: CustomEvent<string>;
+    STANZA_RUN_ACTION: CustomEvent<string>;
   }
 }
 

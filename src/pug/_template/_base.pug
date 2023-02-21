@@ -27,7 +27,7 @@ block vars
   var pathToImgLG = pathToAssets + 'images/lg/';
   var pathToImgMD = pathToAssets + 'images/md/';
   var pathToImgSM = pathToAssets + 'images/sm/';
-  var URL_STANZA = "https://dbcls.github.io/togomedium-stanza/";
+  var URL_STANZA = "https://yohak.github.io/togomedium-stanza/";
   var URL_API = "http://growthmedium.org/sparqlist/api/";
 
 doctype html
@@ -44,6 +44,7 @@ html(lang="ja", xmlns:og="http://ogp.me/ns#")
       script(src=`${URL_STANZA}${stanzaID}.js`, type="module", async)
     link(href=`${pathToLibs}html5reset.css`, rel="stylesheet", type="text/css")
     link(href=`${pathToCSS}main.css${hash}`, rel="stylesheet", type="text/css")
+    link(href=`${pathToAssets}images/misc/favicon.png`, rel="icon")
     block links
 
     meta(property="og:title", content="")

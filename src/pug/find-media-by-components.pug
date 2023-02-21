@@ -1,5 +1,9 @@
 extends ./_template/_base
-
+block vars
+  - stanzaIDs = ["gmdb-find-media-by-components"];
 
 block main
-  p find media by components
+  section
+    h2 Find media by components
+    .stanza-wrapper
+      togostanza-gmdb-find-media-by-components#list
