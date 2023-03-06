@@ -2,7 +2,8 @@ import { qs } from "yohak-tools";
 import { MediaAlignmentTableResponse } from "./types";
 
 export const initCompareMedia = () => {
-  const table = qs<HTMLElement>("togostanza-gmdb-media-alignment-table")!;
+  const componentAlignment = qs<HTMLElement>("togostanza-gmdb-media-alignment-table")!;
+  const strainAlignment = qs<HTMLElement>("togostanza-gmdb-media-strains-alignment-table")!;
   const ids = qs<HTMLInputElement>("#ids")!;
   const button = qs("#compareBtn")!;
   const url = new URL(location.href);
@@ -12,8 +13,10 @@ export const initCompareMedia = () => {
   const execute = () => {
     queriedData = ids.value.split(",").map((str) => str.trim());
     const value = queriedData.join(",");
-    table.setAttribute("gm_ids", value);
-    table.style.display = "block";
+    componentAlignment.setAttribute("gm_ids", value);
+    componentAlignment.style.display = "block";
+    strainAlignment.setAttribute("gm_ids", value);
+    strainAlignment.style.display = "block";
     //
     const url = new URL(location.href);
     url.searchParams.set("gm_ids", value);

@@ -53,7 +53,10 @@ section {
 
 .stanza-wrapper {
   display: block;
+  width: auto;
+  height: fit-content;
   margin-bottom: 24px;
+  overflow-x: auto;
 
   & + .stanza-wrapper {
     margin-top: 48px;

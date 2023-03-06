@@ -2,7 +2,7 @@ extends ./_template/_base
 
 block vars
   - lev1ID = "compare";
-  - stanzaIDs = ["gmdb-media-alignment-table"];
+  - stanzaIDs = ["gmdb-media-alignment-table", "gmdb-media-strains-alignment-table"];
   - titleChild = "Compare media";
 
 block main
@@ -13,4 +13,6 @@ block main
       input#compareBtn(type="button", value="compare")
       span#errorMsg.error-msg
     .stanza-wrapper
-      togostanza-gmdb-media-alignment-table(gm_ids="", togostanza-menu-placement="none", style="display: none; min-height: 600px")
+      togostanza-gmdb-media-alignment-table(gm_ids="", togostanza-menu-placement="none", style="display: none")
+    .stanza-wrapper
+      togostanza-gmdb-media-strains-alignment-table(gm_ids="", togostanza-menu-placement="none", style="display: none")
