@@ -12,7 +12,12 @@ export const initOrganismDetail = async (id: string) => {
   info.setAttribute("tax_id", id);
 
   const phenotype: HTMLElement = qs("#phenotype")!;
-  phenotype.setAttribute("tax_id", id);
+  phenotype.setAttribute(
+    "api_url",
+    `${URL_API}/gmdb_phenotype_by_strainid?strain_id=${"000000001"}`
+  );
+  // phenotype.setAttribute("column_sizes", "20,80");
+  phenotype.setAttribute("title", `Phenotypes of ${name}`);
 
   const media: HTMLElement = qs("#media")!;
   media.setAttribute("api_url", `${URL_API}/gmdb_media_by_taxid?tax_id=${id}`);
