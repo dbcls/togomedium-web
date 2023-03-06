@@ -55,7 +55,8 @@ const setError = (queried: string[], filtered: string[]) => {
 };
 
 const execute = async () => {
-  const table = qs<HTMLElement>("togostanza-gmdb-media-alignment-table")!;
+  const componentAlignment = qs<HTMLElement>("togostanza-gmdb-media-alignment-table")!;
+  const strainAlignment = qs<HTMLElement>("togostanza-gmdb-media-strains-alignment-table")!;
   const url = new URL(location.href);
   const ids = qs<HTMLInputElement>("#ids")!;
   const queriedData = ids.value.split(",").map((str) => str.trim());
@@ -63,9 +64,11 @@ const execute = async () => {
   const gmIds = await fetchMedia(filteredData);
   const value = gmIds.join(",");
   setError(queriedData, filteredData);
-  table.setAttribute("gm_ids", value);
-  table.setAttribute("prioritized_tax_ids", filteredData.join(","));
-  table.style.display = "block";
+  componentAlignment.setAttribute("gm_ids", value);
+  componentAlignment.setAttribute("prioritized_tax_ids", filteredData.join(","));
+  componentAlignment.style.display = "block";
+  strainAlignment.setAttribute("gm_ids", value);
+  strainAlignment.style.display = "block";
   //
   url.searchParams.set("tax_ids", queriedData.join(","));
   history.pushState(null, "", url);
