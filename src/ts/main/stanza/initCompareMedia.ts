@@ -37,7 +37,10 @@ export const initCompareMedia = () => {
   });
   document.addEventListener("STANZA_ON_LOAD_DATA", (e: CustomEvent) => {
     const response: MediaAlignmentTableResponse = e.detail;
-    const loadedMedia: string[] = response.media.map((m) => m.gm_id);
+    const loadedMedia: string[] = [
+      ...response.media.map((m) => m.gm_id),
+      ...response.media.map((m) => m.original_media_id),
+    ];
     //
     const notFound = queriedData.filter((str) => !loadedMedia.includes(str));
     const errorMsg = notFound.length ? `Not found: ${notFound.join(", ")}` : "";

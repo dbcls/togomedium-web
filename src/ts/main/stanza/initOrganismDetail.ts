@@ -21,6 +21,6 @@ export const initOrganismDetail = async (id: string) => {
 
   const media: HTMLElement = qs("#media")!;
   media.setAttribute("api_url", `${URL_API}/gmdb_media_by_taxid?tax_id=${id}`);
-  media.setAttribute("column_sizes", "20,80");
+  media.setAttribute("column_sizes", "10,15,75");
   media.setAttribute("title", `Media with ${name}`);
 };
