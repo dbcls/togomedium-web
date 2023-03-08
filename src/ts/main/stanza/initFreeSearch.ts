@@ -120,13 +120,14 @@ const loadOrganismsByIds = async (query: string) => {
 const loadItemsByKeyWords = async (query: string) => {
   const [media, components, organisms] = await Promise.all([
     getListData(API_MEDIA_BY_KEYWORD, query),
-    getListData(API_ORGANISMS_BY_KEYWORD, query),
     getListData(API_COMPONENTS_BY_KEYWORD, query),
+    getListData(API_ORGANISMS_BY_KEYWORD, query),
   ]);
 
   const hasMedia = hasContents(media);
   const hasComponents = hasContents(components);
   const hasOrganisms = hasContents(organisms);
+  console.log(query, organisms);
   clearWrapper();
   hasMedia ? showMediaByKeyword(query) : "";
   hasComponents ? showComponentsByKeyword(query) : "";
@@ -164,6 +165,7 @@ const matchWithGMID = (str: string): boolean => {
     case str.match(/^NBRC_M(\d+)$/) !== null:
     case str.match(/^HM(\w+)$/) !== null:
     case str.match(/^SY\d(\w*)$/) !== null:
+    case str.match(/^M\d(\w*)$/) !== null:
       return true;
     default:
       return false;
