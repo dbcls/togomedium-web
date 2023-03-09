@@ -1,5 +1,6 @@
 import { qs } from "yohak-tools";
 import { URL_API } from "../../consts";
+import { decodeHtmlEntities } from "../../utils/decodeHtmlEntity";
 import { getData } from "../../utils/getData";
 import { makePageTitle } from "../../utils/makePageTitle";
 
@@ -14,6 +15,6 @@ export const initComponentDetail = async (id: string) => {
   //
   const mediaStanza: HTMLElement = qs("#media")!;
   mediaStanza.setAttribute("api_url", `${URL_API}gmdb_media_by_gmoid?gmo_id=${id}`);
-  mediaStanza.setAttribute("title", `Media with ${name}`);
+  mediaStanza.setAttribute("title", `Media including ${decodeHtmlEntities(name)}`);
   mediaStanza.setAttribute("column_sizes", "15,85");
 };

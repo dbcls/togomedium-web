@@ -127,7 +127,6 @@ const loadItemsByKeyWords = async (query: string) => {
   const hasMedia = hasContents(media);
   const hasComponents = hasContents(components);
   const hasOrganisms = hasContents(organisms);
-  console.log(query, organisms);
   clearWrapper();
   hasMedia ? showMediaByKeyword(query) : "";
   hasComponents ? showComponentsByKeyword(query) : "";
