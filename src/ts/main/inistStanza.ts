@@ -6,7 +6,7 @@ import { initFreeSearch } from "./stanza/initFreeSearch";
 import { initHomeStats } from "./stanza/initHomeStats";
 import { initMediaFinder } from "./stanza/initMediFinder";
 import { initMediumDetail } from "./stanza/initMediumDetail";
-import { initOrganismDetail } from "./stanza/initOrganismDetail";
+import { initStrainDetail } from "./stanza/initStrainDetail";
 import { initTaxonDetail } from "./stanza/initTaxonDetail";
 import { getPathParam } from "../utils/getPathParam";
 
@@ -19,8 +19,8 @@ export const initStanza = () => {
   if (pathParam?.page === "medium" && !!pathParam.param) {
     initMediumDetail(pathParam.param);
   }
-  if (pathParam?.page === "organism" && !!pathParam.param) {
-    initOrganismDetail(pathParam.param);
+  if (pathParam?.page === "strain" && !!pathParam.param) {
+    initStrainDetail(pathParam.param);
   }
   if (pathParam?.page === "component" && !!pathParam.param) {
     initComponentDetail(pathParam.param);

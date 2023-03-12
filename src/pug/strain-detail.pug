@@ -1,13 +1,13 @@
 extends ./_template/_base
 
 block vars
-  - stanzaIDs = ["gmdb-organism-by-taxid", "gmdb-phenotype-info", "gmdb-meta-list"];
+  - stanzaIDs = ["gmdb-strain-by-strainid", "gmdb-phenotype-info", "gmdb-meta-list"];
 
 block main
   section
-    h2 Organism information
+    h2 Strain information
     .stanza-wrapper
-      togostanza-gmdb-organism-by-taxid#info(tax_id="", togostanza-menu-placement="none")
+      togostanza-gmdb-strain-by-strainid#info(strain_id="", togostanza-menu-placement="none")
     .stanza-wrapper
       togostanza-gmdb-meta-list#phenotype(api_url="", limit="10", title="", column_names="true", togostanza-menu-placement="none")
     .stanza-wrapper

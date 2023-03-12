@@ -1,6 +1,6 @@
 export type pageKey =
   | "medium"
-  | "organism"
+  | "strain"
   | "component"
   | "taxon"
   | "compare-media"

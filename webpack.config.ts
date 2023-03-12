@@ -30,6 +30,9 @@ export default makeConfig({
           case /^\/taxon\/.+/.test(req.url):
             req.url = "/taxon/detail.html";
             break;
+          case /^\/strain\/.+/.test(req.url):
+            req.url = "/strain/detail.html";
+            break;
         }
         return next();
       },
@@ -45,8 +48,8 @@ export default makeConfig({
       "medium/detail.html": "medium-detail.pug",
       "component/index.html": "component-list.pug",
       "component/detail.html": "component-detail.pug",
-      "organism/index.html": "organism-list.pug",
-      "organism/detail.html": "organism-detail.pug",
+      "strain/index.html": "strain-list.pug",
+      "strain/detail.html": "strain-detail.pug",
       "find-media-by-components/index.html": "find-media-by-components.pug",
       "find-media-by-taxonomic-tree/index.html": "find-media-by-taxonomic-tree.pug",
       "find-media-by-organism-phenotype/index.html": "find-media-by-organism-phenotype.pug",

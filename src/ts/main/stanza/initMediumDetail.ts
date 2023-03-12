@@ -17,8 +17,8 @@ export const initMediumDetail = async (id: string) => {
   similar.setAttribute("title", `Similar growth media of ${name}`);
   similar.setAttribute("column_sizes", "15,70,15");
   //
-  const organisms = qs("#organisms")!;
-  organisms.setAttribute("api_url", `${URL_API}gmdb_organisms_by_gmid?gm_id=${id}`);
-  organisms.setAttribute("title", `Organisms cultured in ${name}`);
-  organisms.setAttribute("column_sizes", "15,85");
+  const organisms = qs("togostanza-gmdb-media-strains-alignment-table")!;
+  organisms.setAttribute("gm_ids", id);
+  const organismTitle = qs("*[data-js-target=strainAlignmentTitle]")!;
+  organismTitle.textContent = `Organisms clustered by ${name}`;
 };

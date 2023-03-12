@@ -1,7 +1,7 @@
 extends ./_template/_base
 
 block vars
-  - stanzaIDs = ["gmdb-medium-by-gmid", "gmdb-meta-list"];
+  - stanzaIDs = ["gmdb-medium-by-gmid", "gmdb-meta-list", "gmdb-media-strains-alignment-table"];
 
 block main
   section
@@ -11,4 +11,5 @@ block main
     .stanza-wrapper
       togostanza-gmdb-meta-list#similar(api_url="", limit="10", title="", column_names="true", togostanza-menu-placement="none")
     .stanza-wrapper
-      togostanza-gmdb-meta-list#organisms(api_url="", limit="10", title="", column_names="true", togostanza-menu-placement="none")
+      h3.stanza-title(data-js-target="strainAlignmentTitle") Organisms clustered by this medium
+      togostanza-gmdb-media-strains-alignment-table(gm_ids="", togostanza-menu-placement="none")
