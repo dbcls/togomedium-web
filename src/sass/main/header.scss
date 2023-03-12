@@ -32,8 +32,9 @@ header.global-header {
     }
 
     a.logo {
-      @include geom.rect(135px, 30px);
-      @include path.bg-main("svg/logo.svg");
+      //@include geom.rect(135px, 30px);
+      @include geom.rect(163px, 30px);
+      @include path.bg-main("svg/logo_beta.svg");
     }
 
     nav {
