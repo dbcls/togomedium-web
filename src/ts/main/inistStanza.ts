@@ -31,7 +31,7 @@ export const initStanza = () => {
   if (pathParam?.page === "compare-media") {
     initCompareMedia();
   }
-  if (pathParam?.page === "compare-media-of-organisms") {
+  if (pathParam?.page === "compare-media-by-taxids") {
     initCompareMediaOfOrganisms();
   }
   if (pathParam?.page === "compare-media-with-kegg-tree-alignment") {

@@ -55,7 +55,7 @@ export default makeConfig({
       "find-media-by-organism-phenotype/index.html": "find-media-by-organism-phenotype.pug",
       "find-media-by-relevance/index.html": "find-media-by-relevance.pug",
       "compare-media/index.html": "compare-media.pug",
-      "compare-media-of-organisms/index.html": "compare-media-of-organisms.pug",
+      "compare-media-by-taxids/index.html": "compare-media-by-taxids.pug",
       "compare-media-with-kegg-tree-alignment/index.html":
         "compare-media-with-kegg-tree-alignment.pug",
       "about/index.html": "about.pug",

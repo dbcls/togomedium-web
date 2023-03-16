@@ -4,7 +4,7 @@ export type pageKey =
   | "component"
   | "taxon"
   | "compare-media"
-  | "compare-media-of-organisms"
+  | "compare-media-by-taxids"
   | "compare-media-with-kegg-tree-alignment"
   | "find-media-by-components"
   | "find-media-by-organism-phenotype"

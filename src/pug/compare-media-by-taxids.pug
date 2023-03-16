@@ -3,11 +3,11 @@ extends ./_template/_base
 block vars
   - lev1ID = "compare";
   - stanzaIDs = ["gmdb-media-alignment-table", "gmdb-media-strains-alignment-table"];
-  - titleChild = "Compare media of organisms";
+  - titleChild = "Compare media by Tax IDs";
 
 block main
   section
-    h2 Compare media of organisms
+    h2 Compare media specified by Tax IDs
     fieldset.id-input
       input#ids(type="text", placeholder="77580,28024,2771,38275")
       input#compareBtn(type="button", value="compare")
