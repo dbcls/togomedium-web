@@ -14,11 +14,11 @@ export const initMediumDetail = async (id: string) => {
   //
   const similar = qs("#similar")!;
   similar.setAttribute("api_url", `${URL_API}gmdb_list_similar_media_by_gmid?gm_id=${id}`);
-  similar.setAttribute("title", `Similar growth media of ${name}`);
+  similar.setAttribute("title", `Growth media similar to ${name}`);
   similar.setAttribute("column_sizes", "15,70,15");
   //
   const organisms = qs("togostanza-gmdb-media-strains-alignment-table")!;
   organisms.setAttribute("gm_ids", id);
   const organismTitle = qs("*[data-js-target=strainAlignmentTitle]")!;
-  organismTitle.textContent = `Organisms clustered by ${name}`;
+  organismTitle.textContent = `Organisms that can be cultured in XXX${name}`;
 };
