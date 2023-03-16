@@ -5,6 +5,7 @@ export const initCompareMedia = () => {
   const componentAlignment = qs<HTMLElement>("togostanza-gmdb-media-alignment-table")!;
   const strainAlignment = qs<HTMLElement>("togostanza-gmdb-media-strains-alignment-table")!;
   const ids = qs<HTMLInputElement>("#ids")!;
+
   const button = qs("#compareBtn")!;
   const url = new URL(location.href);
   const queriedGmIds = url.searchParams.get("gm_ids");
@@ -27,7 +28,7 @@ export const initCompareMedia = () => {
     ids.value = queriedGmIds;
     execute();
   } else {
-    ids.value = "HM_D00001,JCM_M333";
+    ids.value = ids.placeholder;
   }
   //
 
