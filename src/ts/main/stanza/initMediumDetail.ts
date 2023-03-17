@@ -20,5 +20,5 @@ export const initMediumDetail = async (id: string) => {
   const organisms = qs("togostanza-gmdb-media-strains-alignment-table")!;
   organisms.setAttribute("gm_ids", id);
   const organismTitle = qs("*[data-js-target=strainAlignmentTitle]")!;
-  organismTitle.textContent = `Organisms that can be cultured in XXX${name}`;
+  organismTitle.textContent = `Organisms that can be cultured in ${name}`;
 };
