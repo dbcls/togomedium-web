@@ -20,7 +20,7 @@ export const initFreeSearch = () => {
   //
   const urlQuery = getUrlQuery();
   if (urlQuery) {
-    input.value = urlQuery;
+    input.value = decodeURIComponent(urlQuery);
     animateScrollTo(input);
   }
   //
