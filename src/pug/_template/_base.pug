@@ -42,6 +42,7 @@ html(lang="ja", xmlns:og="http://ogp.me/ns#")
     meta(name="viewport", content="width=device-width,initial-scale=1.0,minimum-scale=1.0")
     meta(name="description", content=`${meta.description}`)
     meta(name="keywords", content="")
+    include ../_include/redirect.html
     link(href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;600&display=swap", rel="stylesheet")
     each stanzaID in stanzaIDs
       script(src=`${URL_STANZA}${stanzaID}.js`, type="module", async)
