@@ -86,9 +86,9 @@ export default makeConfig({
       from: join(DIR_SRC, "assets/img"),
       to: join(DIR_ASSETS, "images"),
     },
-    {
-      from: join(DIR_SRC, "stanza"),
-      to: join(DIR_PUBLIC, "stanza"),
-    },
+    // {
+    //   from: join(DIR_SRC, "stanza"),
+    //   to: join(DIR_PUBLIC, "stanza"),
+    // },
   ],
 });
