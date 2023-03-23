@@ -8,6 +8,7 @@ _notes/
 .idea/
 .vscode/
 .prepros
+.env
 
 npm-debug.log
 

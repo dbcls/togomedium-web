@@ -1,3 +1,4 @@
+import * as dotenv from "dotenv";
 import { CompileConf, ConfigProps, PugConf } from "./types";
 import { join, relative } from "path";
 import { inspect } from "util";
@@ -14,14 +15,18 @@ const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const PugPlugin = require("pug-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const LiveReloadPlugin = require("webpack-livereload-plugin");
 const WebpackBar = require("webpackbar");
+
 type Output = Configuration["output"];
 type Entry = Configuration["entry"];
 type Optimization = NonNullable<Configuration["optimization"]>;
+
+dotenv.config();
 
 const IS_DEVELOP = process.env.MODE === "development";
 const IS_BROWSER_SYNC = process.env.SERVER === "browserSync";
@@ -165,6 +170,7 @@ const makePlugins = ({ copy, server, clean, output }: ConfigProps): WebpackPlugi
       dry: clean?.dry === undefined ? false : clean.dry,
       cleanOnceBeforeBuildPatterns: makeCleanLocationPattern(clean, output),
     }),
+    new Dotenv(),
     new PugPlugin({
       pretty: true,
       modules: [PugPlugin.extractCss({ test: /\.(css|less|sass|scss)$/ })],
@@ -183,7 +189,7 @@ const loadPugData = ({ data, src }: PugConf): any => {
   data.forEach((str) => {
     const path = join(src, str);
     const data = require(path);
-    result = { ...result, ...data };
+    result = { ...result, ...data, env: { ...process.env } };
   });
   return result;
 };

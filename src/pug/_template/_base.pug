@@ -28,11 +28,8 @@ block vars
   var pathToImgMD = pathToAssets + 'images/md/';
   var pathToImgSM = pathToAssets + 'images/sm/';
   // var URL_STANZA = "/stanza/";
-  var URL_STANZA = "https://dbcls.github.io/togomedium-stanza/";
-  // var URL_STANZA = "http://localhost:8080/";
-  // var URL_STANZA = "https://dbcls.github.io/togomedium-stanza/";
-  var URL_API = "http://togomedium.org/sparqlist/api/";
-  // var URL_API = "http://growthmedium.org/sparqlist_dev/api/";
+  var URL_STANZA = env.URL_STANZA ?? "https://dbcls.github.io/togomedium-stanza/";
+  var URL_API = env.URL_API ?? "http://togomedium.org/sparqlist/api/";
 
 doctype html
 html(lang="ja", xmlns:og="http://ogp.me/ns#")
