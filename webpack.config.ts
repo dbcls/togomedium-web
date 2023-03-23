@@ -43,52 +43,41 @@ export default makeConfig({
     dest: join(DIR_PUBLIC),
     data: ["_include/settings.js", "_include/meta.js"],
     files: {
-      "index.html": "home.pug",
-      "medium/index.html": "medium-list.pug",
-      "medium/detail.html": "medium-detail.pug",
-      "component/index.html": "component-list.pug",
-      "component/detail.html": "component-detail.pug",
-      "strain/index.html": "strain-list.pug",
-      "strain/detail.html": "strain-detail.pug",
-      "find-media-by-components/index.html": "find-media-by-components.pug",
-      "find-media-by-taxonomic-tree/index.html": "find-media-by-taxonomic-tree.pug",
-      "find-media-by-organism-phenotype/index.html": "find-media-by-organism-phenotype.pug",
-      "find-media-by-relevance/index.html": "find-media-by-relevance.pug",
-      "compare-media/index.html": "compare-media.pug",
-      "compare-media-by-taxids/index.html": "compare-media-by-taxids.pug",
-      "compare-media-with-kegg-tree-alignment/index.html":
-        "compare-media-with-kegg-tree-alignment.pug",
-      "about/index.html": "about.pug",
-      "statistics/index.html": "statistics.pug",
-      "taxon/detail.html": "taxon-detail.pug",
+      // the key is the output file without '.html' extension
+      index: "home.pug",
+      "medium/index": "medium-list.pug",
+      "medium/detail": "medium-detail.pug",
+      "component/index": "component-list.pug",
+      "component/detail": "component-detail.pug",
+      "strain/index": "strain-list.pug",
+      "strain/detail": "strain-detail.pug",
+      "find-media-by-components/index": "find-media-by-components.pug",
+      "find-media-by-taxonomic-tree/index": "find-media-by-taxonomic-tree.pug",
+      "find-media-by-organism-phenotype/index": "find-media-by-organism-phenotype.pug",
+      "find-media-by-relevance/index": "find-media-by-relevance.pug",
+      "compare-media/index": "compare-media.pug",
+      "compare-media-by-taxids/index": "compare-media-by-taxids.pug",
+      "compare-media-with-kegg-tree-alignment/index": "compare-media-with-kegg-tree-alignment.pug",
+      "about/index": "about.pug",
+      "statistics/index": "statistics.pug",
+      "taxon/detail": "taxon-detail.pug",
     },
   },
+
+  // All source style/script files must be specified directly in pug template.
   sass: {
     src: join(DIR_SRC, "sass"),
     dest: join(DIR_ASSETS, "css"),
-    files: {
-      "main.css": "main.scss",
-    },
+    files: {},
   },
   ts: {
     src: join(DIR_SRC, "ts"),
     dest: join(DIR_ASSETS, "js"),
-    files: {
-      "main.js": "main.ts",
-    },
+    files: {},
   },
-  copy: [
-    {
-      from: join(DIR_SRC, "assets/libs"),
-      to: join(DIR_ASSETS, "libs"),
-    },
-    {
-      from: join(DIR_SRC, "assets/img"),
-      to: join(DIR_ASSETS, "images"),
-    },
-    // {
-    //   from: join(DIR_SRC, "stanza"),
-    //   to: join(DIR_PUBLIC, "stanza"),
-    // },
-  ],
+
+  // pug-plugin automatically handeln all source assets (scripts, styles, images, fonts)
+  // and copy output assets into destination directory
+  // no need to use copy-webpack-plugin
+  copy: [],
 });

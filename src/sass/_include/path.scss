@@ -2,7 +2,9 @@ $-teaser-path: "../images/teaser/";
 $path-to-img: "../images/";
 
 @mixin bg-main($name, $bg-size: contain) {
-  background-image: url("../images/#{$name}");
+  // pug-plugin automatically handeln source image file
+  // the '@images' is the Webpack alias to the source images directory
+  background-image: url("@images/#{$name}");
   background-repeat: no-repeat;
   background-size: $bg-size;
 }

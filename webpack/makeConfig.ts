@@ -13,7 +13,6 @@ import type { Configuration as DevServerConfiguration } from "webpack-dev-server
 const ansis = require("ansis");
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
@@ -75,6 +74,13 @@ const makeSingleConfig = (props: ConfigProps): Configuration => {
     output: makeOutput(props.output),
     optimization: makeOptimization(props.optimization),
     resolve: {
+      alias: {
+        // aliases used in pug template
+        "@libs": join(process.cwd(), "src/assets/libs"),
+        "@images": join(process.cwd(), "src/assets/img"),
+        "@styles": join(process.cwd(), "src/sass"),
+        "@scripts": join(process.cwd(), "src/ts"),
+      },
       extensions: [".ts", ".tsx", ".js", ".json"],
     },
     stats: {
@@ -109,27 +115,21 @@ const makeDevServer = ({ server }: ConfigProps): DevServerConfiguration => {
   };
 };
 
-const makeEntry = ({ pug, less, sass, ts, output }: ConfigProps): Entry => {
+// Entry points can be only pug templates.
+// All source style/script files must be specified directly in pug template.
+const makeEntry = ({ pug }: ConfigProps): Entry => {
   let result: Entry = {};
-  if (pug) result = { ...result, ...makeEntryFromConf(pug, output) };
-  if (less) result = { ...result, ...makeEntryFromConf(less, output) };
-  if (sass) result = { ...result, ...makeEntryFromConf(sass, output) };
-  if (ts) result = { ...result, ...makeEntryFromConf(ts, output) };
-
+  if (pug) result = { ...result, ...makeEntryFromConf(pug) };
   return result;
 };
 
-const makeEntryFromConf = ({ files, dest, src }: CompileConf, output: string): EntryObject => {
+// The key of entry is the output filename without '.html' extension.
+// The value is source pug file relative to project directory.
+const makeEntryFromConf = ({ files, src }: CompileConf): EntryObject => {
   const result: Entry = {};
   const relativeSrc = relative(process.cwd(), src);
-  const relativeDest = relative(output, dest);
   Object.entries(files).forEach(([key, value]) => {
-    const filename = join(relativeDest, key);
-    const importStr = `./${join(relativeSrc, value)}`;
-    result[filename] = {
-      filename,
-      import: importStr,
-    };
+    result[key] = join(relativeSrc, value);
   });
   return result;
 };
@@ -144,7 +144,7 @@ const makeOutput = (path: string): Output => {
   };
 };
 
-const makePlugins = ({ copy, server, clean, output }: ConfigProps): WebpackPluginInstance[] => {
+const makePlugins = ({ server, clean, output }: ConfigProps): WebpackPluginInstance[] => {
   const { root, port } = server;
   //
   const browserSync = IS_BROWSER_SYNC
@@ -173,10 +173,14 @@ const makePlugins = ({ copy, server, clean, output }: ConfigProps): WebpackPlugi
     new Dotenv(),
     new PugPlugin({
       pretty: true,
-      modules: [PugPlugin.extractCss({ test: /\.(css|less|sass|scss)$/ })],
-    }),
-    new CopyPlugin({
-      patterns: copy,
+      js: {
+        // output filename of extracted JS
+        filename: "assets/js/[name].[contenthash:8].js",
+      },
+      css: {
+        // output filename of extracted CSS
+        filename: "assets/css/[name].[contenthash:8].css",
+      },
     }),
     new WebpackBar(),
   ].filter((item) => !!item);
@@ -200,6 +204,7 @@ const makeModule = ({ pug, less, sass, ts }: ConfigProps): ModuleOptions => {
   less ? rules.push(makeLessLoadRule()) : "";
   sass ? rules.push(makeSassLoadRule()) : "";
   ts ? rules.push(makeTsLoadRule()) : "";
+  rules.push(makeImageLoadRule());
   return { rules };
 };
 
@@ -234,12 +239,12 @@ const makePugLoadRule = (pug: PugConf): RuleSetRule => {
 
 const makeSassLoadRule = (): RuleSetRule => {
   return {
-    test: /\.(sass|scss)$/,
+    test: /\.(sass|s?css)$/,
     use: [
       {
         loader: "css-loader",
         options: {
-          url: false,
+          url: true, // using pug-plugin, must be true
         },
       },
       {
@@ -256,7 +261,7 @@ const makeLessLoadRule = (): RuleSetRule => {
       {
         loader: "css-loader",
         options: {
-          url: false,
+          url: true, // using pug-plugin, must be true
         },
       },
       {
@@ -268,6 +273,16 @@ const makeLessLoadRule = (): RuleSetRule => {
         },
       },
     ],
+  };
+};
+
+const makeImageLoadRule = (): RuleSetRule => {
+  return {
+    test: /\.(png|jpg|svg)$/,
+    type: "asset/resource",
+    generator: {
+      filename: "assets/img/[name][ext][query]",
+    },
   };
 };
 

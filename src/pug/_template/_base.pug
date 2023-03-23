@@ -43,9 +43,11 @@ html(lang="ja", xmlns:og="http://ogp.me/ns#")
     link(href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;600&display=swap", rel="stylesheet")
     each stanzaID in stanzaIDs
       script(src=`${URL_STANZA}${stanzaID}.js`, type="module", async)
-    link(href=`${pathToLibs}html5reset.css`, rel="stylesheet", type="text/css")
-    link(href=`${pathToCSS}main.css${hash}`, rel="stylesheet", type="text/css")
-    link(href=`${pathToAssets}images/misc/favicon.png`, rel="icon")
+
+    //- use require to handeln source style, script, image files
+    link(href=require('@libs/html5reset.css'), rel="stylesheet", type="text/css")
+    link(href=require('@styles/main.scss'), rel="stylesheet", type="text/css")
+    link(href=require('@images/misc/favicon.png'), rel="icon")
     block links
 
     meta(property="og:title", content="")
@@ -61,6 +63,7 @@ html(lang="ja", xmlns:og="http://ogp.me/ns#")
       include ../_include/header
     main
       block main
-    script(src=`${pathToJS}main.js`)
+    //- load source script file directly in template
+    script(src=require('@scripts/main.ts'))
     block scripts
     include ../_include/dbcls.html
