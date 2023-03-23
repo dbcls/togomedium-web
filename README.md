@@ -7,6 +7,15 @@
 * NodeJS及びyarnの最新安定版
 * **本要件は開発・修正作業を行うPCに対する要件でありではありません**
 
+## .envについて
+本レポジトリでは、環境変数を管理するために `.env` ファイルを使用しています。  
+本番環境で動作させるためには`.env` ファイルは、以下のように記述します。
+開発中は適宜参照先を変更してください。
+```
+URL_API=http://togomedium.org/sparqlist/api/
+URL_STANZA=https://dbcls.github.io/togomedium-stanza/
+```
+
 ## Install
 ```bash
 yarn install
