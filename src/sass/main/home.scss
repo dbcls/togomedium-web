@@ -211,6 +211,38 @@ body.top {
       border-radius: 5px;
     }
 
+    .links {
+      width: 80%;
+      max-width: 640px;
+      margin: -20px auto 40px;
+      font-size: 20px;
+      line-height: 1.4;
+
+      ul {
+        display: flex;
+        gap: 10px;
+
+        li + li {
+          display: flex;
+          gap: 10px;
+
+          &::before {
+            content: " / ";
+          }
+        }
+      }
+
+      a {
+        font-size: 20px;
+        line-height: 1.4;
+        color: color.$dark-green;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
     .stanza {
       display: block;
       margin-bottom: 20px;
