@@ -12,7 +12,7 @@
 本番環境で動作させるためには`.env` ファイルは、以下のように記述します。
 開発中は適宜参照先を変更してください。
 ```
-URL_API=http://togomedium.org/sparqlist/api/
+URL_API=https://togomedium.org/sparqlist/api/
 URL_STANZA=https://dbcls.github.io/togomedium-stanza/
 ```
 
