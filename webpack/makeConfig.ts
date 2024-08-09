@@ -26,7 +26,7 @@ type Output = Configuration["output"];
 type Entry = Configuration["entry"];
 type Optimization = NonNullable<Configuration["optimization"]>;
 
-dotenv.config();
+!process.env.URL_API && dotenv.config();
 
 const IS_DEVELOP = process.env.MODE === "development";
 const IS_BROWSER_SYNC = process.env.SERVER === "browserSync";
