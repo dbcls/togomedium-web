@@ -1,47 +1,39 @@
 [[redirects]]
-from = "/component/*"
+from = "/component/:id"
 to = "/component/detail.html"
 status = 200
-force = true
 
 [[redirects]]
 from = "/component/"
 to = "/component/index.html"
 status = 200
-force = false
 
 [[redirects]]
-from = "/strain/*"
+from = "/strain/:id"
 to = "/strain/detail.html"
 status = 200
-force = true
 
 [[redirects]]
 from = "/strain/"
 to = "/strain/index.html"
 status = 200
-force = false
 
 [[redirects]]
-from = "/medium/*"
+from = "/medium/:id"
 to = "/medium/detail.html"
 status = 200
-force = true
 
 [[redirects]]
 from = "/medium/"
 to = "/medium/index.html"
 status = 200
-force = false
 
 [[redirects]]
-from = "/taxon/*"
+from = "/taxon/:id"
 to = "/taxon/detail.html"
 status = 200
-force = true
 
 [[redirects]]
 from = "/taxon/"
 to = "/taxon/index.html"
 status = 200
-force = false
