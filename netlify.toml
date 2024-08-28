@@ -1,0 +1,23 @@
+[[redirects]]
+from = "/component/*"
+to = "/component/:splat"
+status = 200
+force = true
+
+[[redirects]]
+from = "/strain/*"
+to = "/strain/:splat"
+status = 200
+force = true
+
+[[redirects]]
+from = "/medium/*"
+to = "/medium/:splat"
+status = 200
+force = true
+
+[[redirects]]
+from = "/taxon/*"
+to = "/taxon/:splat"
+status = 200
+force = true
