@@ -1,23 +1,23 @@
 [[redirects]]
-from = "/component/*"
+from = "/component/.+"
 to = "/component/detail.html"
 status = 200
 force = true
 
 [[redirects]]
-from = "/strain/*"
+from = "/strain/.+"
 to = "/strain/detail.html"
 status = 200
 force = true
 
 [[redirects]]
-from = "/medium/*"
+from = "/medium/.+"
 to = "/medium/detail.html"
 status = 200
 force = true
 
 [[redirects]]
-from = "/taxon/*"
+from = "/taxon/.+"
 to = "/taxon/detail.html"
 status = 200
 force = true
