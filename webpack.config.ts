@@ -44,6 +44,7 @@ export default makeConfig({
     data: ["_include/settings.js", "_include/meta.js"],
     files: {
       "index.html": "home.pug",
+      "api.html": "api.pug",
       "medium/index.html": "medium-list.pug",
       "medium/detail.html": "medium-detail.pug",
       "component/index.html": "component-list.pug",
@@ -85,6 +86,10 @@ export default makeConfig({
     {
       from: join(DIR_SRC, "assets/img"),
       to: join(DIR_ASSETS, "images"),
+    },
+    {
+      from: join(DIR_SRC, "assets/data"),
+      to: join(DIR_ASSETS, "data"),
     },
     // {
     //   from: join(DIR_SRC, "stanza"),

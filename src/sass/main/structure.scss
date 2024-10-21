@@ -29,6 +29,13 @@ main {
   min-height: calc(100vh - (24px + 28px));
   padding: 80px 30px 30px;
   margin: 0 auto;
+
+  &.no-padding {
+    > main {
+      display: block;
+      padding: 0;
+    }
+  }
 }
 
 a {
