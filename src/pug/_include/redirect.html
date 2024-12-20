@@ -1,9 +1,0 @@
-<script>
-	const from = "growthmedium.org";
-	const to = "togomedium.org";
-	const {hostname, protocol, pathname} = window.location;
-	if (hostname === from) {
-		const newUrl = `${protocol}//${to}${pathname}`
-		window.location.href = newUrl;
-	}
-</script>
