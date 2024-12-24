@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#dbcls-common-header nav.gnav {
+  width: auto !important;
+  margin: 0 30px !important;
+}

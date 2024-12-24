@@ -1,83 +1,50 @@
-# TogoMedium Web
+# React + TypeScript + Vite
 
-## About
-本レポジトリは、togomedium.org におけるWebサイトのソースコードを管理するためのレポジトリです。
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 必要環境
-* NodeJS及びyarnの最新安定版
-* **本要件は開発・修正作業を行うPCに対する要件でありではありません**
+Currently, two official plugins are available:
 
-## .envについて
-本レポジトリでは、環境変数を管理するために `.env` ファイルを使用しています。  
-本番環境で動作させるためには`.env` ファイルは、以下のように記述します。
-開発中は適宜参照先を変更してください。
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
-URL_API=https://togomedium.org/sparqlist/api/
-URL_STANZA=https://dbcls.github.io/togomedium-stanza/
-```
 
-## Install
-```bash
-yarn install
-```
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-## Scripts
-```bash
-yarn webpack
-```
-`public` にファイルを書き出す
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-
-```bash
-yarn serve
-```
-上記 `webpack` に加えてbrowserSyncサーバーを起動する。  
-確認用URLは以下  
-http://localhost:9000/
-
-
-```bash
-yarn build
-```
-上記 `webpack` と同等かつ圧縮・難読化を行う。デプロイ前に使用する。  
-圧縮設定は `webpack.config.ts` から変更可能。
-
-
-## Lint / Code format
-本プロジェクトでは ESLint, StyleLint 及び prettier を採用している。以下の拡張子に対して保存時に自動で適用されるようにエディターの設定を行うこと。
-* `ESLint` : `js,jsx,ts,tsx`
-* `StyleLint` : `scss`
-* `prettier` : `js,jsx,ts,tsx,json,yaml,pug,scss,css`
-
-
-
-## Rewrite Rule
-デプロイ時にはサーバーに応じて以下のリライトルールを設定してください。
-### nginx
-```
-location / {
-  rewrite ^/medium/$ /medium/index.html break;
-  rewrite ^/medium/.*$ /medium/detail.html break;
-  rewrite ^/organism/$ /organism/index.html break;
-  rewrite ^/organism/.*$ /organism/detail.html break;
-  rewrite ^/component/$ /component/index.html break;
-  rewrite ^/component/.*$ /component/detail.html break;
-  rewrite ^/taxon/$ /taxon/index.html break;
-  rewrite ^/taxon/.*$ /taxon/detail.html break;
-}
-```
-### Apache
-```
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^taxon/$ /taxon/index.html [END]
-RewriteRule ^taxon/.+$ /taxon/detail.html [END]
-RewriteRule ^medium/$ /medium/index.html [END]
-RewriteRule ^medium/.+$ /medium/detail.html [END]
-RewriteRule ^organism/$ /organism/index.html [END]
-RewriteRule ^organism/.+$ /organism/detail.html [END]
-RewriteRule ^component/$ /component/index.html [END]
-RewriteRule ^component/.+$ /component/detail.html [END]
-
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
 ```
