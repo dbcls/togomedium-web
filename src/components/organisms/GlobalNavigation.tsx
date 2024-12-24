@@ -1,9 +1,9 @@
-import { FC } from "react";
 import { Listbox, ListboxItem, ListboxSection } from "@nextui-org/react";
+import { FC } from "react";
 
 export const GlobalNavigation: FC = () => {
   return (
-    <Listbox className="p-2 flex flex-col gap-8 w-72 h-full border-r-small">
+    <Listbox className="flex h-full w-72 flex-col gap-8 border-r-small p-2">
       <ListboxItem href={"/medium"}>Home</ListboxItem>
       <ListboxSection title={"DATA"}>
         <ListboxItem href={"/medium"} title={"All media"} />
@@ -11,10 +11,7 @@ export const GlobalNavigation: FC = () => {
         <ListboxItem href={"/component"} title={"All components"} />
       </ListboxSection>
       <ListboxSection>
-        <ListboxItem
-          href={"/find-media-by-components"}
-          title={"Find media by components"}
-        />
+        <ListboxItem href={"/find-media-by-components"} title={"Find media by components"} />
         <ListboxItem
           href={"/find-media-by-taxonomic-tree"}
           title={"Find media by taxonomic tree"}
