@@ -1,9 +1,6 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-// Import the generated route tree
 import { App } from "@/app.tsx";
-
-// Create a new router instance
 
 // Render the app
 const rootElement = document.getElementById("root")!;
@@ -14,4 +11,13 @@ if (!rootElement.innerHTML) {
       <App />
     </StrictMode>
   );
+}
+
+declare global {
+  interface DocumentEventMap {
+    STANZA_ON_QUERY_DATA: CustomEvent<string>;
+    STANZA_ON_LOAD_DATA: CustomEvent<string>;
+    STANZA_ROUND_TREE_CLICK: CustomEvent<string>;
+    STANZA_RUN_ACTION: CustomEvent<string>;
+  }
 }

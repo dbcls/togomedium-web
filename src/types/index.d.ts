@@ -2,6 +2,7 @@ type BooleanString = "true" | "false";
 
 type StanzaProps = {
   id?: string;
+  className?: string;
   "togostanza-menu-placement": "none";
 };
 
@@ -9,9 +10,6 @@ declare global {
   declare module "react" {
     namespace JSX {
       interface IntrinsicElements {
-        "togostanza-gmdb-find-media-by-components": unknown;
-        "togostanza-gmdb-find-media-by-organism-phenotype": unknown;
-        // todo consolidate stanza types
         "togostanza-gmdb-meta-list": {
           api_url: string;
           limit: string;
@@ -34,6 +32,8 @@ declare global {
         "togostanza-gmdb-component-by-gmoid": {
           gmo_id: string;
         } & StanzaProps;
+        "togostanza-gmdb-find-media-by-components": {} & StanzaProps;
+        "togostanza-gmdb-find-media-by-organism-phenotype": {} & StanzaProps;
       }
     }
   }
