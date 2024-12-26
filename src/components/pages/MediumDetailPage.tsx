@@ -6,6 +6,7 @@ import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { MediumDetailStanza } from "@/components/stanzas/MediumDetailStanza";
 import { StrainAlignmentStanza } from "@/components/stanzas/StrainAlignmentStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
+import { API_SIMILAR_MEDIA } from "@/consts.ts";
 import { Route } from "@/routes/medium/$gmId.tsx";
 import { makePageTitle } from "@/utils/string.ts";
 
@@ -16,15 +17,12 @@ export const MediumDetailPage: FC = () => {
   return (
     <PageWrapper>
       <div>
-        <H2>Medium Information</H2>
+        <H2>Medium information</H2>
         <MediumDetailStanza gmId={gmId} />
       </div>
       <div>
         <H3>Growth media similar to {name}</H3>
-        <ListStanza
-          api={`https://togomedium.org/sparqlist/api/gmdb_list_similar_media_by_gmid?gm_id=${gmId}`}
-          columnSizes={[15, 70, 15]}
-        />
+        <ListStanza api={`${API_SIMILAR_MEDIA}?gm_id=${gmId}`} columnSizes={[15, 70, 15]} />
       </div>
       <div>
         <H3>Organisms that can be cultured in {name}</H3>

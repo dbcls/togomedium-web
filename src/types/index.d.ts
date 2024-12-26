@@ -31,6 +31,9 @@ declare global {
         "togostanza-gmdb-strain-by-strainid": {
           strain_id: string;
         } & StanzaProps;
+        "togostanza-gmdb-component-by-gmoid": {
+          gmo_id: string;
+        } & StanzaProps;
       }
     }
   }

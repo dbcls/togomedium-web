@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { StrainDetailPage } from "@/components/pages/StrainDetailPage.tsx";
-import { URL_API_STRAIN_DETAIL } from "@/consts.ts";
+import { API_STRAIN_DETAIL } from "@/consts.ts";
 import { getData } from "@/utils/fetch.ts";
 
 type APIResponse = {
@@ -10,7 +10,7 @@ type APIResponse = {
 };
 export const Route = createFileRoute("/strain/$strainId")({
   loader: async ({ params: { strainId } }) => {
-    const api = URL_API_STRAIN_DETAIL;
+    const api = API_STRAIN_DETAIL;
     const apiBody = `strain_id=${strainId}`;
     const result = await getData<APIResponse>(api, apiBody);
     // console.log(result);
