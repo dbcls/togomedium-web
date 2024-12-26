@@ -8,10 +8,10 @@ type APIResponse = {
     name: string;
   };
 };
-export const Route = createFileRoute("/medium/$postId")({
-  loader: async ({ params: { postId } }) => {
+export const Route = createFileRoute("/medium/$gmId")({
+  loader: async ({ params: { gmId } }) => {
     const api = URL_API_MEDIUM_DETAIL;
-    const apiBody = `gm_id=${postId}`;
+    const apiBody = `gm_id=${gmId}`;
     const result = await getData<APIResponse>(api, apiBody);
     // console.log(result);
     return result;

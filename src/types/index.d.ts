@@ -23,6 +23,14 @@ declare global {
         "togostanza-gmdb-medium-by-gmid": {
           gm_id: string;
         } & StanzaProps;
+
+        "togostanza-gmdb-media-strains-alignment-table": {
+          gm_ids: string;
+          hide_media: BooleanString;
+        } & StanzaProps;
+        "togostanza-gmdb-strain-by-strainid": {
+          strain_id: string;
+        } & StanzaProps;
       }
     }
   }
