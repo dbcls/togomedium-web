@@ -3,8 +3,11 @@ import { FC } from "react";
 
 export const GlobalNavigation: FC = () => {
   return (
-    <Listbox className="flex h-full w-72 flex-col gap-8 border-r-small p-2">
-      <ListboxItem href={"/medium"}>Home</ListboxItem>
+    <Listbox
+      aria-label={"nav"}
+      className="flex w-72 shrink-0 grow-0 flex-col gap-8 border-r-small p-2"
+    >
+      <ListboxItem href={"/"} title={"Home"} />
       <ListboxSection title={"DATA"}>
         <ListboxItem href={"/medium"} title={"All media"} />
         <ListboxItem href={"/strain"} title={"All strains"} />

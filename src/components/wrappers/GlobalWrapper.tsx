@@ -1,5 +1,9 @@
 import { FC, PropsWithChildren } from "react";
 
 export const GlobalWrapper: FC<PropsWithChildren> = ({ children }) => {
-  return <div className="flex min-h-dvh w-full gap-4 border-b-small">{children}</div>;
+  return (
+    <div className="flex h-full min-h-[var(--view-height)] w-full items-stretch border-b-small bg-gray-100">
+      {children}
+    </div>
+  );
 };

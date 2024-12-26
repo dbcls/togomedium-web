@@ -1,15 +1,22 @@
 import { FC } from "react";
+import { booleanToString } from "@/utils/boolean.ts";
 
 type Props = {
   id?: string;
-  api_url?: string;
-  limit?: string;
+  api: string;
+  limit?: number;
   title?: string;
-  column_names?: boolean;
-  column_size?: number[];
+  columnNames?: boolean;
+  columnSizes: number[];
 };
 
-export const ListStanza: FC<Props> = () => {
+export const ListStanza: FC<Props> = ({
+  api,
+  limit = 20,
+  title = "",
+  columnNames = true,
+  columnSizes,
+}) => {
   return (
     <div>
       <script
@@ -19,11 +26,11 @@ export const ListStanza: FC<Props> = () => {
       ></script>
       <togostanza-gmdb-meta-list
         id="list"
-        api_url="https://togomedium.org/sparqlist/api/list_media"
-        limit="20"
-        title=""
-        column_names="true"
-        column-size="15,85"
+        api_url={api}
+        limit={Math.round(limit).toString()}
+        title={title}
+        column_names={booleanToString(columnNames)}
+        column_sizes={columnSizes.join(",")}
         togostanza-menu-placement="none"
       />
     </div>

@@ -1,3 +1,10 @@
+type BooleanString = "true" | "false";
+
+type StanzaProps = {
+  id?: string;
+  "togostanza-menu-placement": "none";
+};
+
 declare global {
   declare module "react" {
     namespace JSX {
@@ -6,14 +13,16 @@ declare global {
         "togostanza-gmdb-find-media-by-organism-phenotype": unknown;
         // todo consolidate stanza types
         "togostanza-gmdb-meta-list": {
-          id: string;
           api_url: string;
           limit: string;
           title: string;
-          column_names: string;
-          "column-size": string;
-          "togostanza-menu-placement": string;
-        };
+          column_names: BooleanString;
+          column_sizes: string;
+        } & StanzaProps;
+
+        "togostanza-gmdb-medium-by-gmid": {
+          gm_id: string;
+        } & StanzaProps;
       }
     }
   }

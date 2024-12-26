@@ -16,6 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as StrainIndexImport } from './routes/strain/index'
 import { Route as MediumIndexImport } from './routes/medium/index'
 import { Route as ComponentIndexImport } from './routes/component/index'
+import { Route as MediumPostIdImport } from './routes/medium/$postId'
 
 // Create Virtual Routes
 
@@ -123,6 +124,12 @@ const ComponentIndexRoute = ComponentIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const MediumPostIdRoute = MediumPostIdImport.update({
+  id: '/medium/$postId',
+  path: '/medium/$postId',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -190,6 +197,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StatisticsLazyImport
       parentRoute: typeof rootRoute
     }
+    '/medium/$postId': {
+      id: '/medium/$postId'
+      path: '/medium/$postId'
+      fullPath: '/medium/$postId'
+      preLoaderRoute: typeof MediumPostIdImport
+      parentRoute: typeof rootRoute
+    }
     '/component/': {
       id: '/component/'
       path: '/component'
@@ -226,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/find-media-by-organism-phenotype': typeof FindMediaByOrganismPhenotypeLazyRoute
   '/find-media-by-taxonomic-tree': typeof FindMediaByTaxonomicTreeLazyRoute
   '/statistics': typeof StatisticsLazyRoute
+  '/medium/$postId': typeof MediumPostIdRoute
   '/component': typeof ComponentIndexRoute
   '/medium': typeof MediumIndexRoute
   '/strain': typeof StrainIndexRoute
@@ -241,6 +256,7 @@ export interface FileRoutesByTo {
   '/find-media-by-organism-phenotype': typeof FindMediaByOrganismPhenotypeLazyRoute
   '/find-media-by-taxonomic-tree': typeof FindMediaByTaxonomicTreeLazyRoute
   '/statistics': typeof StatisticsLazyRoute
+  '/medium/$postId': typeof MediumPostIdRoute
   '/component': typeof ComponentIndexRoute
   '/medium': typeof MediumIndexRoute
   '/strain': typeof StrainIndexRoute
@@ -257,6 +273,7 @@ export interface FileRoutesById {
   '/find-media-by-organism-phenotype': typeof FindMediaByOrganismPhenotypeLazyRoute
   '/find-media-by-taxonomic-tree': typeof FindMediaByTaxonomicTreeLazyRoute
   '/statistics': typeof StatisticsLazyRoute
+  '/medium/$postId': typeof MediumPostIdRoute
   '/component/': typeof ComponentIndexRoute
   '/medium/': typeof MediumIndexRoute
   '/strain/': typeof StrainIndexRoute
@@ -274,6 +291,7 @@ export interface FileRouteTypes {
     | '/find-media-by-organism-phenotype'
     | '/find-media-by-taxonomic-tree'
     | '/statistics'
+    | '/medium/$postId'
     | '/component'
     | '/medium'
     | '/strain'
@@ -288,6 +306,7 @@ export interface FileRouteTypes {
     | '/find-media-by-organism-phenotype'
     | '/find-media-by-taxonomic-tree'
     | '/statistics'
+    | '/medium/$postId'
     | '/component'
     | '/medium'
     | '/strain'
@@ -302,6 +321,7 @@ export interface FileRouteTypes {
     | '/find-media-by-organism-phenotype'
     | '/find-media-by-taxonomic-tree'
     | '/statistics'
+    | '/medium/$postId'
     | '/component/'
     | '/medium/'
     | '/strain/'
@@ -318,6 +338,7 @@ export interface RootRouteChildren {
   FindMediaByOrganismPhenotypeLazyRoute: typeof FindMediaByOrganismPhenotypeLazyRoute
   FindMediaByTaxonomicTreeLazyRoute: typeof FindMediaByTaxonomicTreeLazyRoute
   StatisticsLazyRoute: typeof StatisticsLazyRoute
+  MediumPostIdRoute: typeof MediumPostIdRoute
   ComponentIndexRoute: typeof ComponentIndexRoute
   MediumIndexRoute: typeof MediumIndexRoute
   StrainIndexRoute: typeof StrainIndexRoute
@@ -333,6 +354,7 @@ const rootRouteChildren: RootRouteChildren = {
   FindMediaByOrganismPhenotypeLazyRoute: FindMediaByOrganismPhenotypeLazyRoute,
   FindMediaByTaxonomicTreeLazyRoute: FindMediaByTaxonomicTreeLazyRoute,
   StatisticsLazyRoute: StatisticsLazyRoute,
+  MediumPostIdRoute: MediumPostIdRoute,
   ComponentIndexRoute: ComponentIndexRoute,
   MediumIndexRoute: MediumIndexRoute,
   StrainIndexRoute: StrainIndexRoute,
@@ -357,6 +379,7 @@ export const routeTree = rootRoute
         "/find-media-by-organism-phenotype",
         "/find-media-by-taxonomic-tree",
         "/statistics",
+        "/medium/$postId",
         "/component/",
         "/medium/",
         "/strain/"
@@ -388,6 +411,9 @@ export const routeTree = rootRoute
     },
     "/statistics": {
       "filePath": "statistics.lazy.tsx"
+    },
+    "/medium/$postId": {
+      "filePath": "medium/$postId.tsx"
     },
     "/component/": {
       "filePath": "component/index.tsx"
