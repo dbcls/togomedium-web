@@ -1,18 +1,17 @@
 import { FC } from "react";
-import { useDocumentTitle } from "usehooks-ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { StrainDetailStanza } from "@/components/stanzas/StrainDetailStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
 import { API_MEDIA_OF_STRAIN, API_STRAIN_PHENOTYPES } from "@/consts.ts";
+import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/strain/$strainId.tsx";
-import { makePageTitle } from "@/utils/string.ts";
 
 export const StrainDetailPage: FC = () => {
   const strainId = Route.useParams().strainId;
   const name = useStrainName(strainId);
-  useDocumentTitle(makePageTitle(name));
+  usePageTitle(name);
   return (
     <PageWrapper>
       <div>

@@ -1,7 +1,9 @@
 // const URL_API_ENV = process.env.URL_API ?? "https://togomedium.org/sparqlist/api/";
 // export const URL_API: string = URL_API_ENV;
 
-export const URL_API: string = "https://togomedium.org/sparqlist/api";
+export const URL_STANZA = "https://dbcls.github.io/togomedium-stanza";
+
+const URL_API: string = "https://togomedium.org/sparqlist/api";
 export const API_MEDIA_LIST = `${URL_API}/list_media`;
 export const API_STRAIN_LIST = `${URL_API}/list_strains`;
 export const API_COMPONENT_LIST = `${URL_API}/list_components`;

@@ -1,10 +1,9 @@
 import { FC } from "react";
-import { useDocumentTitle } from "usehooks-ts";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
-import { makePageTitle } from "@/utils/string.ts";
+import { usePageTitle } from "@/hooks/usePageTitle.ts";
 
 export const HomePage: FC = () => {
-  useDocumentTitle(makePageTitle());
+  usePageTitle("");
   return (
     <PageWrapper>
       <div className={"grow"}>

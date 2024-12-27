@@ -3,7 +3,7 @@ import { URL_STANZA } from "@/consts.ts";
 
 type Props = {};
 
-const stanzaName = "gmdb-find-media-by-components";
+const stanzaName = "gmdb-find-media-by-organism-phenotype";
 const StanzaTag = `togostanza-${stanzaName}`;
 
 const handleRunAction = (e: CustomEvent) => {
@@ -13,7 +13,7 @@ const handleRunAction = (e: CustomEvent) => {
   window.open(`/${target}/?gm_ids=${encodedIds}`);
 };
 
-export const FindMediaByComponentsStanza: FC<Props> = () => {
+export const FindMediaByOrganismPhenotypeStanza: FC<Props> = () => {
   useEffect(() => {
     document.addEventListener("STANZA_RUN_ACTION", handleRunAction);
     return () => {

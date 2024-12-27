@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { URL_STANZA } from "@/consts.ts";
 import { booleanToString } from "@/utils/boolean.ts";
 
 type Props = {
@@ -10,6 +11,9 @@ type Props = {
   columnSizes: number[];
 };
 
+const stanzaName = "gmdb-meta-list";
+const StanzaTag = `togostanza-${stanzaName}`;
+
 export const ListStanza: FC<Props> = ({
   api,
   limit = 20,
@@ -19,12 +23,8 @@ export const ListStanza: FC<Props> = ({
 }) => {
   return (
     <div>
-      <script
-        src="https://dbcls.github.io/togomedium-stanza/gmdb-meta-list.js"
-        type="module"
-        async
-      ></script>
-      <togostanza-gmdb-meta-list
+      <script src={`${URL_STANZA}/${stanzaName}.js`} type="module" async></script>
+      <StanzaTag
         id="list"
         api_url={api}
         limit={Math.round(limit).toString()}

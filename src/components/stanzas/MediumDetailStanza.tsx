@@ -1,21 +1,18 @@
 import { FC } from "react";
+import { URL_STANZA } from "@/consts.ts";
 
 type Props = {
   gmId: string;
 };
 
+const stanzaName = "gmdb-medium-by-gmid";
+const StanzaTag = `togostanza-${stanzaName}`;
+
 export const MediumDetailStanza: FC<Props> = ({ gmId }) => {
   return (
-    <div>
-      <script
-        src="https://dbcls.github.io/togomedium-stanza/gmdb-medium-by-gmid.js"
-        type="module"
-        async
-      ></script>
-      <togostanza-gmdb-medium-by-gmid
-        gm_id={gmId}
-        togostanza-menu-placement="none"
-      ></togostanza-gmdb-medium-by-gmid>
-    </div>
+    <>
+      <script src={`${URL_STANZA}/${stanzaName}.js`} type="module" async></script>
+      <StanzaTag gm_id={gmId} togostanza-menu-placement="none"></StanzaTag>
+    </>
   );
 };

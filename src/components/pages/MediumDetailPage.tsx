@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { useDocumentTitle } from "usehooks-ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
@@ -7,13 +6,13 @@ import { MediumDetailStanza } from "@/components/stanzas/MediumDetailStanza";
 import { StrainAlignmentStanza } from "@/components/stanzas/StrainAlignmentStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
 import { API_SIMILAR_MEDIA } from "@/consts.ts";
+import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/medium/$gmId.tsx";
-import { makePageTitle } from "@/utils/string.ts";
 
 export const MediumDetailPage: FC = () => {
   const gmId = Route.useParams().gmId;
   const name = useMediumName(gmId);
-  useDocumentTitle(makePageTitle(name));
+  usePageTitle(name);
   return (
     <PageWrapper>
       <div>

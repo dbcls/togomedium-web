@@ -1,18 +1,17 @@
 import { FC } from "react";
-import { useDocumentTitle } from "usehooks-ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { ComponentDetailStanza } from "@/components/stanzas/ComponentDetailStanza.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
 import { API_MEDIA_OF_COMPONENT } from "@/consts.ts";
+import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/component/$gmoId.tsx";
-import { makePageTitle } from "@/utils/string.ts";
 
 export const ComponentDetailPage: FC = () => {
   const gmoId = Route.useParams().gmoId;
   const name = useComponentName(gmoId);
-  useDocumentTitle(makePageTitle(name));
+  usePageTitle(name);
   return (
     <PageWrapper>
       <div>

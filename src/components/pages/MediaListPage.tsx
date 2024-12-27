@@ -1,13 +1,12 @@
 import { FC } from "react";
-import { useDocumentTitle } from "usehooks-ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
 import { API_MEDIA_LIST } from "@/consts.ts";
-import { makePageTitle } from "@/utils/string.ts";
+import { usePageTitle } from "@/hooks/usePageTitle.ts";
 
 export const MediaListPage: FC = () => {
-  useDocumentTitle(makePageTitle("All media"));
+  usePageTitle("All media");
   return (
     <PageWrapper>
       <div>

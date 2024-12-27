@@ -1,16 +1,16 @@
 import { FC } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
-import { FindMediaByComponentsStanza } from "@/components/stanzas/FindMediaByComponentsStanza.tsx";
+import { FindMediaByTaxonomicTreeStanza } from "@/components/stanzas/FindMediaByTaxonomicTreeStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
 
-export const FindMediaByComponentsPage: FC = () => {
-  usePageTitle("Find media by components");
+export const FindMediaByTaxonomicTreePage: FC = () => {
+  usePageTitle("Find media by taxonomic tree");
   return (
     <PageWrapper>
       <div className={"flex grow flex-col"}>
-        <H2>Find media by components</H2>
-        <FindMediaByComponentsStanza />
+        <H2>Find media by taxonomic tree</H2>
+        <FindMediaByTaxonomicTreeStanza />
       </div>
     </PageWrapper>
   );
