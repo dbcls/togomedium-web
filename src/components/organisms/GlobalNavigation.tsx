@@ -25,14 +25,8 @@ export const GlobalNavigation: FC = () => {
         />
       </ListboxSection>
       <ListboxSection title={"Tools"}>
-        <ListboxItem
-          href={"/find-media-by-organism-phenotype"}
-          title={"Media by organism phenotype"}
-        />
-        <ListboxItem
-          href={"/find-media-by-organism-phenotype"}
-          title={"Media by organism phenotype"}
-        />
+        <ListboxItem href={"/compare-media"} title={"Compare media"} />
+        <ListboxItem href={"/compare-media-by-taxids"} title={"Compare media by TAX IDs"} />
       </ListboxSection>
       <ListboxSection title={"About"}>
         <ListboxItem href={"/about"} title={"About this site"} />

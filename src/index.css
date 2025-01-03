@@ -14,9 +14,19 @@
   --dbcls-header-height:24px;
   --dbcls-footer-height:28px;
   --view-height:calc(100dvh - var(--dbcls-header-height) - var(--dbcls-footer-height));
+  /* */
 }
+
+
 
 
 body{
   font-family: "Fira Sans Condensed", serif;
 }
+
+
+.references-navigation-list{
+  top:24px !important;
+  height: calc(100dvh - 24px)!important;
+}
+

@@ -1,9 +1,10 @@
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from "@tanstack/react-router";
+import { CompareMediaByTaxIdsPage } from "@/components/pages/CompareMediaByTaxIdsPage.tsx";
 
-export const Route = createLazyFileRoute('/compare-media-by-taxids')({
+export const Route = createLazyFileRoute("/compare-media-by-taxids")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  return <div>Hello "/compare-strain"!</div>
+  return <CompareMediaByTaxIdsPage />;
 }

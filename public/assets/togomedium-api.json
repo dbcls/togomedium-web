@@ -1,0 +1,4866 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "0.1.0",
+    "title": "TogoMedium API",
+    "contact": {
+      "url": "https://togomedium.org"
+    },
+    "description": "TogoMedium API is a RESTful API for TogoMedium, a database of growth media for microorganisms.\n"
+  },
+  "servers": [
+    {
+      "url": "https://togomedium.org/sparqlist/api",
+      "description": "TogoMedium SPARQList API server"
+    }
+  ],
+  "security": [],
+  "tags": [
+    {
+      "name": "List Stanza",
+      "description": "These endpoints return a list of data which is used by TogoMedium's List Stanza."
+    },
+    {
+      "name": "Detail",
+      "description": "These endpoints return detailed information."
+    },
+    {
+      "name": "Stanza",
+      "description": "These endpoints return is used by TogoMedium's Stanza."
+    },
+    {
+      "name": "Media Finder",
+      "description": "These endpoints are related to the media finder Stanzas"
+    },
+    {
+      "name": "Deprecated",
+      "description": "These endpoints have been deprecated."
+    }
+  ],
+  "paths": {
+    "/gmdb_components_with_components": {
+      "get": {
+        "summary": "gmdb_components_with_components",
+        "operationId": "componentsWithComponents",
+        "tags": [
+          "Media Finder"
+        ],
+        "description": "Mostly used at \"Find media by components\" page. <br /> Find media with the given components, then return all components in the media.\n",
+        "parameters": [
+          {
+            "name": "gmo_ids",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "comma-separated gmo_ids. If omitted, return all components\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "name": "ABCM agar (Eiken)",
+                    "gmo_id": "GMO_001348"
+                  },
+                  {
+                    "name": "ACES; ACES buffer, N-(2-Acetamido)-2-aminoethanesulfonic acid",
+                    "gmo_id": "GMO_001860"
+                  },
+                  {
+                    "name": "Acetate",
+                    "gmo_id": "GMO_001926"
+                  },
+                  {
+                    "name": "Acetic acid",
+                    "gmo_id": "GMO_001179"
+                  }
+                ],
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "gmo_id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_taxonomy_children": {
+      "get": {
+        "summary": "gmdb_taxonomy_children",
+        "operationId": "taxonomyChildren",
+        "tags": [
+          "Media Finder"
+        ],
+        "description": "Mostly used at \"Find media by taxonomic tree\" page.<br />\nreturns the direct children of the given taxonomy id<br />\nif no children are found, returns an empty array `[]`\n",
+        "parameters": [
+          {
+            "name": "tax_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": 2157
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "tax_id": "28890",
+                    "name": "Euryarchaeota",
+                    "rank": "Phylum"
+                  },
+                  {
+                    "tax_id": "28889",
+                    "name": "Crenarchaeota",
+                    "rank": "Phylum"
+                  },
+                  {
+                    "tax_id": "651137",
+                    "name": "Thaumarchaeota",
+                    "rank": "Phylum"
+                  },
+                  {
+                    "tax_id": "192989",
+                    "name": "Nanoarchaeota",
+                    "rank": "Phylum"
+                  }
+                ],
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "tax_id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "rank": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_media_strains_alignment_by_gm_ids": {
+      "get": {
+        "summary": "gmdb_media_strains_alignment_by_gm_ids",
+        "operationId": "mediaStrainsAlignmentByGmIds",
+        "tags": [
+          "Stanza"
+        ],
+        "description": "Mostly used at the media detail page. <br /> find multiple media by gm_id and return alignment information of organisms\n",
+        "parameters": [
+          {
+            "name": "gm_ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "comma separated gm_id\n",
+            "example": "aa,aaa"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "gm_id": {
+                        "type": "string"
+                      },
+                      "original_media_id": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "organisms": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "superkingdom": {
+                              "$ref": "#/components/schemas/simple-taxon"
+                            },
+                            "phylum": {
+                              "$ref": "#/components/schemas/simple-taxon"
+                            },
+                            "class": {
+                              "$ref": "#/components/schemas/simple-taxon"
+                            },
+                            "order": {
+                              "$ref": "#/components/schemas/simple-taxon"
+                            },
+                            "family": {
+                              "$ref": "#/components/schemas/simple-taxon"
+                            },
+                            "genus": {
+                              "$ref": "#/components/schemas/simple-taxon"
+                            },
+                            "species": {
+                              "$ref": "#/components/schemas/simple-taxon"
+                            },
+                            "strain": {
+                              "$ref": "#/components/schemas/simple-taxon"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_media_by_taxon": {
+      "get": {
+        "summary": "gmdb_media_by_taxon",
+        "operationId": "mediaByTaxon",
+        "tags": [
+          "Media Finder",
+          "List Stanza"
+        ],
+        "description": "Search for media associated with a taxon and return a list\n",
+        "parameters": [
+          {
+            "name": "tax_ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "comma-separated tax_id\n",
+            "example": "aa,aaa"
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": {
+                  "total": 2,
+                  "offset": 0,
+                  "limit": 10,
+                  "contents": [
+                    {
+                      "gm_id": "HM_D00001a",
+                      "name": "REACTIVATION WITH LIQUID MEDIUM 1"
+                    },
+                    {
+                      "gm_id": "HM_D00065",
+                      "name": "GYM STREPTOMYCES MEDIUM"
+                    }
+                  ]
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "gm_id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "exact_match": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_all_components": {
+      "get": {
+        "summary": "gmdb_all_components",
+        "operationId": "allComponents",
+        "tags": [
+          "Media Finder"
+        ],
+        "description": "This endpoint returns a list of all components in the GMDB.\n",
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "name": "ABCM agar (Eiken)",
+                    "gmo_id": "GMO_001348"
+                  },
+                  {
+                    "name": "ACES; ACES buffer, N-(2-Acetamido)-2-aminoethanesulfonic acid",
+                    "gmo_id": "GMO_001860"
+                  },
+                  {
+                    "name": "Acetate",
+                    "gmo_id": "GMO_001926"
+                  },
+                  {
+                    "name": "Acetic acid",
+                    "gmo_id": "GMO_001179"
+                  }
+                ],
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "gmo_id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_organisms_by_phenotypes": {
+      "get": {
+        "summary": "gmdb_organisms_by_phenotypes",
+        "operationId": "organismsByPhenotypes",
+        "tags": [
+          "Media Finder",
+          "List Stanza"
+        ],
+        "description": "Mostly used at \"Find media by organism phenotype\" page. <br> Search organisms by various phenotypes\n",
+        "parameters": [
+          {
+            "name": "growth_temp",
+            "in": "query",
+            "description": "string of 2 numbers separated by comma to represent min and max\n",
+            "schema": {
+              "type": "string",
+              "example": "0,110"
+            }
+          },
+          {
+            "name": "growth_ph",
+            "in": "query",
+            "description": "string of 2 numbers separated by comma to represent min and max\n",
+            "schema": {
+              "type": "string",
+              "example": "0,14"
+            }
+          },
+          {
+            "name": "growth_salinity",
+            "in": "query",
+            "description": "string of 2 numbers separated by comma to represent min and max\n",
+            "schema": {
+              "type": "string",
+              "example": "0,15"
+            }
+          },
+          {
+            "name": "MPO_10002",
+            "description": "Single MPO id of Oxygen requirement",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "MPO_04002"
+            }
+          },
+          {
+            "name": "MPO_07001",
+            "description": "Single MPO id of Gram Strain",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "MPO_07002"
+            }
+          },
+          {
+            "name": "MPO_02000",
+            "description": "Single MPO id of Motility",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "MPO_02001"
+            }
+          },
+          {
+            "name": "MPO_01001",
+            "description": "Single MPO id of Cell shape",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "MPO_01015"
+            }
+          },
+          {
+            "name": "MPO_03006",
+            "description": "Single MPO id of Salinity",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "MPO_03007"
+            }
+          },
+          {
+            "name": "MPO_04053",
+            "description": "Single MPO id of Carbon fixation",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "MPO_03007"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": {
+                  "total": 4,
+                  "offset": 0,
+                  "limit": 10,
+                  "contents": [
+                    {
+                      "tax_id": "384676",
+                      "name": "Pseudomonas entomophila L48"
+                    },
+                    {
+                      "tax_id": "643561",
+                      "name": "Acidovorax avenae subsp. avenae ATCC 19860"
+                    },
+                    {
+                      "tax_id": "316284",
+                      "name": "Streptomyces noursei ATCC 11455"
+                    },
+                    {
+                      "tax_id": "446462",
+                      "name": "Actinosynnema mirum DSM 43827"
+                    }
+                  ]
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "tax_id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_media_by_attributes": {
+      "get": {
+        "summary": "gmdb_media_by_attributes",
+        "operationId": "mediaByAttributes",
+        "tags": [
+          "Media Finder",
+          "List Stanza"
+        ],
+        "description": "Search media by attributes. <br /> Currently only component(gmo_id) is supported.<br /> Mostly used at \"Find media by components\" page.\n",
+        "parameters": [
+          {
+            "name": "gmo_ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string of gmo_id(s) separated by comma.\n",
+            "example": "aa,aaa"
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": {
+                  "total": 2,
+                  "offset": 0,
+                  "limit": 10,
+                  "contents": [
+                    {
+                      "gm_id": "HM_D00001a",
+                      "name": "REACTIVATION WITH LIQUID MEDIUM 1"
+                    },
+                    {
+                      "gm_id": "HM_D00065",
+                      "name": "GYM STREPTOMYCES MEDIUM"
+                    }
+                  ]
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "gm_id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "original_media_id": {
+                            "type": "string"
+                          },
+                          "exact_match": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_media_alignment_by_gm_ids": {
+      "get": {
+        "summary": "gmdb_media_alignment_by_gm_ids",
+        "operationId": "mediaAlignmentTableByGmIds",
+        "tags": [
+          "Stanza"
+        ],
+        "description": "returns the alignment information of components based on gm_ids. <br /> mostly used at \"Compare media\" page.\n",
+        "parameters": [
+          {
+            "name": "gm_ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "single string of gm_ids separated by comma\n",
+            "example": "aa,aaa"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": {
+                  "media": [
+                    {
+                      "gm_id": "M941",
+                      "name": "M13a Medium",
+                      "original_media_id": "JCM_M900",
+                      "components": [
+                        "GMO_001053",
+                        "GMO_001025",
+                        "GMO_001815",
+                        "GMO_001003",
+                        "GMO_001221",
+                        "GMO_001903",
+                        "GMO_001033",
+                        "GMO_001001",
+                        "GMO_001037",
+                        "GMO_001278",
+                        "GMO_001016",
+                        "GMO_001300",
+                        "GMO_001028",
+                        "GMO_001110",
+                        "GMO_000012",
+                        "GMO_001034",
+                        "GMO_001235",
+                        "GMO_001005",
+                        "GMO_001065",
+                        "GMO_001026",
+                        "GMO_001058",
+                        "GMO_001730",
+                        "GMO_001039",
+                        "GMO_001023",
+                        "GMO_001598",
+                        "GMO_001002",
+                        "GMO_001162",
+                        "GMO_001029"
+                      ],
+                      "organisms": [
+                        "1031537",
+                        "1031540",
+                        "265606"
+                      ]
+                    },
+                    {
+                      "gm_id": "M2794",
+                      "name": "Tryptic soy broth medium supplemented with 0.5% yeast extract, 0.05% cysteine HCl-H2O, 0.5 mg/ml of hemin, 2 μg/ml of vitamin K1, and 5% sheep blood",
+                      "original_media_id": "SY4047",
+                      "components": [
+                        "GMO_001312",
+                        "GMO_002263",
+                        "GMO_001205",
+                        "GMO_002257",
+                        "GMO_001003",
+                        "GMO_002260",
+                        "GMO_001117",
+                        "GMO_002261",
+                        "GMO_001829"
+                      ],
+                      "organisms": [
+                        "1747"
+                      ]
+                    }
+                  ],
+                  "organisms": [
+                    {
+                      "tax_id": "1031537",
+                      "name": "Blastopirellula cremea"
+                    },
+                    {
+                      "tax_id": "1031540",
+                      "name": "Rhodopirellula rosea"
+                    },
+                    {
+                      "tax_id": "1747",
+                      "name": "Cutibacterium acnes"
+                    },
+                    {
+                      "tax_id": "265606",
+                      "name": "Rhodopirellula baltica"
+                    }
+                  ],
+                  "components": [
+                    {
+                      "gmo_id": "GMO_001066",
+                      "name": "Seawater",
+                      "parent": null,
+                      "category": "Solvent",
+                      "display_order": 16
+                    },
+                    {
+                      "gmo_id": "GMO_001235",
+                      "name": "Artificial seawater",
+                      "parent": "GMO_001066",
+                      "category": "Solvent",
+                      "display_order": 18
+                    },
+                    {
+                      "gmo_id": "GMO_001891",
+                      "name": "Water",
+                      "parent": null,
+                      "category": "Solvent",
+                      "display_order": 27
+                    },
+                    {
+                      "gmo_id": "GMO_001890",
+                      "name": "Purified water",
+                      "parent": "GMO_001891",
+                      "category": "Solvent",
+                      "display_order": 28
+                    },
+                    {
+                      "gmo_id": "GMO_001001",
+                      "name": "Distilled water",
+                      "parent": "GMO_001890",
+                      "category": "Solvent",
+                      "display_order": 31
+                    },
+                    {
+                      "gmo_id": "GMO_000019",
+                      "name": "Prepared culture medium",
+                      "parent": null,
+                      "category": "Ready-made medium",
+                      "display_order": 36
+                    },
+                    {
+                      "gmo_id": "GMO_002116",
+                      "name": "Tryptic soy broth",
+                      "parent": "GMO_000019",
+                      "category": "Ready-made medium",
+                      "display_order": 183
+                    },
+                    {
+                      "gmo_id": "GMO_001117",
+                      "name": "Bacto &trade; Tryptic soy broth",
+                      "parent": "GMO_002116",
+                      "category": "Ready-made medium",
+                      "display_order": 185
+                    },
+                    {
+                      "gmo_id": "GMO_000012",
+                      "name": "Peptone",
+                      "parent": null,
+                      "category": "Peptone",
+                      "display_order": 194
+                    },
+                    {
+                      "gmo_id": "GMO_000011",
+                      "name": "Extract",
+                      "parent": null,
+                      "category": "Extract",
+                      "display_order": 251
+                    },
+                    {
+                      "gmo_id": "GMO_001003",
+                      "name": "Yeast extract",
+                      "parent": "GMO_000011",
+                      "category": "Extract",
+                      "display_order": 281
+                    },
+                    {
+                      "gmo_id": "GMO_001893",
+                      "name": "Blood-derived component",
+                      "parent": null,
+                      "category": "Nutrient component",
+                      "display_order": 301
+                    },
+                    {
+                      "gmo_id": "GMO_002257",
+                      "name": "Sheep blood",
+                      "parent": "GMO_001893",
+                      "category": "Nutrient component",
+                      "display_order": 346
+                    },
+                    {
+                      "gmo_id": "GMO_001815",
+                      "name": "Glucose",
+                      "parent": null,
+                      "category": "Nutrient component (Carbon source)",
+                      "display_order": 559
+                    },
+                    {
+                      "gmo_id": "GMO_001026",
+                      "name": "4-Aminobenzoic acid",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 675
+                    },
+                    {
+                      "gmo_id": "GMO_001025",
+                      "name": "Biotin",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 689
+                    },
+                    {
+                      "gmo_id": "GMO_001028",
+                      "name": "Calcium pantothenate",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 693
+                    },
+                    {
+                      "gmo_id": "GMO_001034",
+                      "name": "Cobalamin",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 698
+                    },
+                    {
+                      "gmo_id": "GMO_001033",
+                      "name": "Folic acid",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 721
+                    },
+                    {
+                      "gmo_id": "GMO_001312",
+                      "name": "Hemin",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 724
+                    },
+                    {
+                      "gmo_id": "GMO_001162",
+                      "name": "Nicotinamide",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 744
+                    },
+                    {
+                      "gmo_id": "GMO_001037",
+                      "name": "Riboflavin",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 754
+                    },
+                    {
+                      "gmo_id": "GMO_001027",
+                      "name": "Thiamine hydrochloride",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 771
+                    },
+                    {
+                      "gmo_id": "GMO_001278",
+                      "name": "Thiamine hydrochloride dihydrate",
+                      "parent": "GMO_001027",
+                      "category": "Growth factor",
+                      "display_order": 772
+                    },
+                    {
+                      "gmo_id": "GMO_001978",
+                      "name": "Vitamin B6",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 786
+                    },
+                    {
+                      "gmo_id": "GMO_001632",
+                      "name": "Pyridoxine",
+                      "parent": "GMO_001978",
+                      "category": "Growth factor",
+                      "display_order": 794
+                    },
+                    {
+                      "gmo_id": "GMO_001029",
+                      "name": "Pyridoxine hydrochloride",
+                      "parent": "GMO_001632",
+                      "category": "Growth factor",
+                      "display_order": 796
+                    },
+                    {
+                      "gmo_id": "GMO_001829",
+                      "name": "Vitamin K1",
+                      "parent": null,
+                      "category": "Growth factor",
+                      "display_order": 797
+                    },
+                    {
+                      "gmo_id": "GMO_001984",
+                      "name": "Ammonium heptamolybdate",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 809
+                    },
+                    {
+                      "gmo_id": "GMO_001221",
+                      "name": "Ammonium heptamolybdate tetrahydrate",
+                      "parent": "GMO_001984",
+                      "category": "Mineral source",
+                      "display_order": 810
+                    },
+                    {
+                      "gmo_id": "GMO_001061",
+                      "name": "Calcium chloride",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 827
+                    },
+                    {
+                      "gmo_id": "GMO_001005",
+                      "name": "Calcium chloride dihydrate",
+                      "parent": "GMO_001061",
+                      "category": "Mineral source",
+                      "display_order": 829
+                    },
+                    {
+                      "gmo_id": "GMO_001883",
+                      "name": "Cobalt(II) nitrate",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 860
+                    },
+                    {
+                      "gmo_id": "GMO_001110",
+                      "name": "Cobalt(II) nitrate hexahydrate",
+                      "parent": "GMO_001883",
+                      "category": "Mineral source",
+                      "display_order": 861
+                    },
+                    {
+                      "gmo_id": "GMO_001103",
+                      "name": "Copper(II) sulfate",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 871
+                    },
+                    {
+                      "gmo_id": "GMO_001039",
+                      "name": "Copper(II) sulfate pentahydrate",
+                      "parent": "GMO_001103",
+                      "category": "Mineral source",
+                      "display_order": 875
+                    },
+                    {
+                      "gmo_id": "GMO_001187",
+                      "name": "Disodium tetraborate",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 880
+                    },
+                    {
+                      "gmo_id": "GMO_001598",
+                      "name": "Borax",
+                      "parent": "GMO_001187",
+                      "category": "Mineral source",
+                      "display_order": 881
+                    },
+                    {
+                      "gmo_id": "GMO_001337",
+                      "name": "Iron(II) sulfate",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 894
+                    },
+                    {
+                      "gmo_id": "GMO_001016",
+                      "name": "Iron(II) sulfate heptahydrate",
+                      "parent": "GMO_001337",
+                      "category": "Mineral source",
+                      "display_order": 895
+                    },
+                    {
+                      "gmo_id": "GMO_001096",
+                      "name": "Magnesium sulfate",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 936
+                    },
+                    {
+                      "gmo_id": "GMO_001002",
+                      "name": "Magnesium sulfate heptahydrate",
+                      "parent": "GMO_001096",
+                      "category": "Mineral source",
+                      "display_order": 939
+                    },
+                    {
+                      "gmo_id": "GMO_001763",
+                      "name": "Manganese sulfate",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 951
+                    },
+                    {
+                      "gmo_id": "GMO_001065",
+                      "name": "Manganese sulfate n-hydrate",
+                      "parent": "GMO_001763",
+                      "category": "Mineral source",
+                      "display_order": 956
+                    },
+                    {
+                      "gmo_id": "GMO_001053",
+                      "name": "Nitrilotriacetic acid",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 973
+                    },
+                    {
+                      "gmo_id": "GMO_001902",
+                      "name": "Potassium hydroxide",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 983
+                    },
+                    {
+                      "gmo_id": "GMO_001903",
+                      "name": "Potassium hydroxide solution",
+                      "parent": "GMO_001902",
+                      "category": "Mineral source",
+                      "display_order": 984
+                    },
+                    {
+                      "gmo_id": "GMO_001764",
+                      "name": "Zinc sulfate",
+                      "parent": null,
+                      "category": "Mineral source",
+                      "display_order": 1051
+                    },
+                    {
+                      "gmo_id": "GMO_001023",
+                      "name": "Zinc sulfate heptahydrate",
+                      "parent": "GMO_001764",
+                      "category": "Mineral source",
+                      "display_order": 1053
+                    },
+                    {
+                      "gmo_id": "GMO_002260",
+                      "name": "Carbon dioxide gas",
+                      "parent": null,
+                      "category": "Gas",
+                      "display_order": 1128
+                    },
+                    {
+                      "gmo_id": "GMO_002263",
+                      "name": "Hydrogen gas",
+                      "parent": null,
+                      "category": "Gas",
+                      "display_order": 1130
+                    },
+                    {
+                      "gmo_id": "GMO_002261",
+                      "name": "Nitrogen gas",
+                      "parent": null,
+                      "category": "Gas",
+                      "display_order": 1134
+                    },
+                    {
+                      "gmo_id": "GMO_001233",
+                      "name": "Tris",
+                      "parent": null,
+                      "category": "Buffer",
+                      "display_order": 1200
+                    },
+                    {
+                      "gmo_id": "GMO_001730",
+                      "name": "Tris buffer",
+                      "parent": "GMO_001233",
+                      "category": "Buffer",
+                      "display_order": 1201
+                    },
+                    {
+                      "gmo_id": "GMO_001032",
+                      "name": "Cysteine hydrochloride",
+                      "parent": null,
+                      "category": "Other",
+                      "display_order": 1228
+                    },
+                    {
+                      "gmo_id": "GMO_001205",
+                      "name": "L-Cysteine hydrochloride monohydrate",
+                      "parent": "GMO_001032",
+                      "category": "Other",
+                      "display_order": 1232
+                    },
+                    {
+                      "gmo_id": "GMO_001058",
+                      "name": "Disodium EDTA",
+                      "parent": null,
+                      "category": "Other",
+                      "display_order": 1239
+                    },
+                    {
+                      "gmo_id": "GMO_001078",
+                      "name": "Sodium hydroxide",
+                      "parent": null,
+                      "category": "Other",
+                      "display_order": 1326
+                    },
+                    {
+                      "gmo_id": "GMO_001300",
+                      "name": "Sodium hydroxide solution",
+                      "parent": "GMO_001078",
+                      "category": "Other",
+                      "display_order": 1327
+                    }
+                  ]
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "media": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "gm_id": {
+                            "type": "string"
+                          },
+                          "original_media_id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "components": {
+                            "type": "array",
+                            "description": "list of tax ids",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "organisms": {
+                            "type": "array",
+                            "description": "list of gmo ids",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "organisms": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "tax_id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "components": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "gmo_id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "parent": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "category": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "display_order": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_component_by_gmoid": {
+      "get": {
+        "summary": "gmdb_component_by_gmoid",
+        "operationId": "componentByGmoid",
+        "description": "returns detailed information of a component based on gmo_id.\n",
+        "tags": [
+          "Stanza",
+          "Detail"
+        ],
+        "parameters": [
+          {
+            "name": "gmo_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "",
+            "example": "GMO_001010"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": {
+                  "pref_label": "D-Glucose",
+                  "id": "GMO_001010",
+                  "label_ja": "D-グルコース",
+                  "alt_labels_en": [
+                    "grape sugar",
+                    "Dextrose"
+                  ],
+                  "alt_labels_ja": [
+                    "ブドウ糖",
+                    "デキストロース"
+                  ],
+                  "super_classes": [
+                    {
+                      "gmo_id": "GMO_001815",
+                      "uri": "http://purl.jp/bio/10/gmo/GMO_001815",
+                      "label_en": "Glucose"
+                    }
+                  ],
+                  "sub_classes": [
+                    {
+                      "gmo_id": "alpha-D-Glucose",
+                      "uri": "http://purl.jp/bio/10/gmo/GMO_002477",
+                      "label_en": "alpha-D-Glucose"
+                    },
+                    {
+                      "gmo_id": "GMO_001826",
+                      "uri": "http://purl.jp/bio/10/gmo/GMO_001826",
+                      "label_en": "D-Glucose (anhydrous)"
+                    },
+                    {
+                      "gmo_id": "GMO_002477",
+                      "uri": "http://purl.jp/bio/10/gmo/GMO_002477",
+                      "label_en": "alpha-D-Glucose"
+                    }
+                  ],
+                  "properties": [
+                    {
+                      "gmo_id": "GMO_000046",
+                      "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                      "label_en": "Defined component"
+                    },
+                    {
+                      "gmo_id": "GMO_000049",
+                      "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                      "label_en": "Simple component"
+                    },
+                    {
+                      "gmo_id": "GMO_000041",
+                      "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                      "label_en": "Organic compound"
+                    }
+                  ],
+                  "roles": [
+                    {
+                      "gmo_id": "GMO_000063",
+                      "uri": "http://purl.jp/bio/10/gmo/GMO_000063",
+                      "label_en": "Carbon source"
+                    }
+                  ],
+                  "links": [
+                    "http://en.wikipedia.org/wiki/Glucose",
+                    "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#Glucose",
+                    "http://purl.bioontology.org/ontology/NDFRT/N0000006402",
+                    "http://purl.obolibrary.org/obo/CHEBI_17234",
+                    "http://mediadive.dsmz.de/ingredients/211",
+                    "http://mediadive.dsmz.de/ingredients/60",
+                    "http://mediadive.dsmz.de/ingredients/94",
+                    "http://pubchem.ncbi.nlm.nih.gov/compound/5793"
+                  ]
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pref_label": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "label_ja": {
+                      "type": "string"
+                    },
+                    "alt_labels_en": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "alt_labels_ja": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "super_classes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "gmo_id": {
+                            "type": "string"
+                          },
+                          "uri": {
+                            "type": "string"
+                          },
+                          "label_en": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "sub_classes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "gmo_id": {
+                            "type": "string"
+                          },
+                          "uri": {
+                            "type": "string"
+                          },
+                          "label_en": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "properties": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "gmo_id": {
+                            "type": "string"
+                          },
+                          "uri": {
+                            "type": "string"
+                          },
+                          "label_en": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "roles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "gmo_id": {
+                            "type": "string"
+                          },
+                          "uri": {
+                            "type": "string"
+                          },
+                          "label_en": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_medium_by_gmid": {
+      "get": {
+        "summary": "gmdb_medium_by_gmid",
+        "operationId": "mediumByGmid",
+        "description": "returns the detailed information of a medium by its gmid\n",
+        "tags": [
+          "Stanza",
+          "Detail"
+        ],
+        "parameters": [
+          {
+            "name": "gmid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "",
+            "example": "M1470"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": {
+                  "meta": {
+                    "gm": "http://togomedium.org/medium/M1470",
+                    "name": "(Unnamed medium)",
+                    "original_media_id": "NBRC_M249",
+                    "src_url": "https://www.nite.go.jp/nbrc/catalogue/NBRCMediumDetailServlet?NO=249",
+                    "ph": "6.5"
+                  },
+                  "components": [
+                    {
+                      "paragraph_index": 1,
+                      "subcomponent_name": "main solution 1",
+                      "items": [
+                        {
+                          "component_name": "Distilled water",
+                          "volume": 738,
+                          "unit": "ml",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001001",
+                          "gmo_id": "GMO_001001",
+                          "label": "Distilled water",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000044",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000044",
+                              "label": "Solvating media"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Yeast extract",
+                          "volume": 1,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001003",
+                          "gmo_id": "GMO_001003",
+                          "label": "Yeast extract",
+                          "properties": [
+                            {
+                              "id": "GMO_000047",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000047",
+                              "label": "Undefined component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000042",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000042",
+                              "label": "Nutrient source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "KH2PO4",
+                          "volume": 1.5,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001006",
+                          "gmo_id": "GMO_001006",
+                          "label": "Potassium phosphate monobasic",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000038",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000038",
+                              "label": "Buffer"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "NH4Cl",
+                          "volume": 0.6,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001008",
+                          "gmo_id": "GMO_001008",
+                          "label": "Ammonium chloride",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000062",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000062",
+                              "label": "Nitrogen source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "MgCl2·6H2O",
+                          "volume": 0.4,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001013",
+                          "gmo_id": "GMO_001013",
+                          "label": "Magnesium chloride hexahydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Na2CO3",
+                          "volume": 4,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001045",
+                          "gmo_id": "GMO_001045",
+                          "label": "Sodium carbonate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000038",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000038",
+                              "label": "Buffer"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Na2WO4·2H2O",
+                          "volume": 0.4,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001057",
+                          "gmo_id": "GMO_001057",
+                          "label": "Sodium tungstate dihydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Na2HPO4·12H2O",
+                          "volume": 4.2,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001115",
+                          "gmo_id": "GMO_001115",
+                          "label": "Disodium phosphate dodecahydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000038",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000038",
+                              "label": "Buffer"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Bacto Tryptone (Difco)",
+                          "volume": 1,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001043",
+                          "gmo_id": "GMO_001043",
+                          "label": "Bacto &trade; Tryptone",
+                          "properties": [
+                            {
+                              "id": "GMO_000047",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000047",
+                              "label": "Undefined component"
+                            }
+                          ],
+                          "roles": []
+                        },
+                        {
+                          "component_name": "Wolfe's modified mineral solution*",
+                          "volume": 50,
+                          "unit": "ml",
+                          "reference_media_id": "M1470",
+                          "properties": [],
+                          "roles": []
+                        },
+                        {
+                          "component_name": "VFA**",
+                          "volume": 1,
+                          "unit": "ml",
+                          "reference_media_id": "M1470",
+                          "properties": [],
+                          "roles": []
+                        },
+                        {
+                          "component_name": "KOH",
+                          "conc_value": 10,
+                          "conc_unit": "N",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001903",
+                          "gmo_id": "GMO_001903",
+                          "label": "Potassium hydroxide solution",
+                          "properties": [
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000051",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000051",
+                              "label": "Solution"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "paragraph_index": 5,
+                      "subcomponent_name": "main solution 2",
+                      "items": [
+                        {
+                          "component_name": "0.1% Resazurin solution",
+                          "volume": 1,
+                          "unit": "ml",
+                          "conc_value": 0.1,
+                          "conc_unit": "%",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001403",
+                          "gmo_id": "GMO_001403",
+                          "label": "Resazurin solution",
+                          "properties": [
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000051",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000051",
+                              "label": "Solution"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000055",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000055",
+                              "label": "pH dependent redox indicator"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Cellobiose",
+                          "volume": 0.2,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001137",
+                          "gmo_id": "GMO_001137",
+                          "label": "Cellobiose",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000063",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000063",
+                              "label": "Carbon source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "myo-Inositol",
+                          "volume": 1,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001814",
+                          "gmo_id": "GMO_001814",
+                          "label": "myo-Inositol",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000067",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000067",
+                              "label": "Growth factor"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Vitamin mixture***",
+                          "volume": 10,
+                          "unit": "ml",
+                          "reference_media_id": "M1470",
+                          "properties": [],
+                          "roles": []
+                        },
+                        {
+                          "component_name": "Cellulose****",
+                          "volume": 200,
+                          "unit": "ml",
+                          "reference_media_id": "M1470",
+                          "properties": [],
+                          "roles": []
+                        },
+                        {
+                          "component_name": "N2 gas",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_002261",
+                          "gmo_id": "GMO_002261",
+                          "label": "Nitrogen gas",
+                          "properties": [
+                            {
+                              "id": "GMO_000077",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000077",
+                              "label": "Gas"
+                            }
+                          ],
+                          "roles": []
+                        }
+                      ]
+                    },
+                    {
+                      "paragraph_index": 8,
+                      "subcomponent_name": "main solution 3",
+                      "items": [
+                        {
+                          "component_name": "Na2S·9H2O",
+                          "volume": 0.5,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001014",
+                          "gmo_id": "GMO_001014",
+                          "label": "Sodium sulfide nonahydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000064",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000064",
+                              "label": "Reducing agent"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Cysteine",
+                          "volume": 0.5,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001318",
+                          "gmo_id": "GMO_001318",
+                          "label": "Cysteine",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000062",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000062",
+                              "label": "Nitrogen source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Agar (if needed)",
+                          "volume": 15,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001007",
+                          "gmo_id": "GMO_001007",
+                          "label": "Agar",
+                          "properties": [],
+                          "roles": [
+                            {
+                              "id": "GMO_000048",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000048",
+                              "label": "Solidifying component"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "paragraph_index": 12,
+                      "subcomponent_name": "*Wolfe's modified mineral solution",
+                      "items": [
+                        {
+                          "component_name": "Distilled water",
+                          "volume": 1,
+                          "unit": "L",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001001",
+                          "gmo_id": "GMO_001001",
+                          "label": "Distilled water",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000044",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000044",
+                              "label": "Solvating media"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "MgSO4·7H2O",
+                          "volume": 3,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001002",
+                          "gmo_id": "GMO_001002",
+                          "label": "Magnesium sulfate heptahydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "NaCl",
+                          "volume": 1,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001004",
+                          "gmo_id": "GMO_001004",
+                          "label": "Sodium chloride",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Na2MoO4·2H2O",
+                          "volume": 0.01,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001011",
+                          "gmo_id": "GMO_001011",
+                          "label": "Sodium molybdate dihydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Boric acid",
+                          "volume": 0.01,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001015",
+                          "gmo_id": "GMO_001015",
+                          "label": "Boric acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "FeSO4·7H2O",
+                          "volume": 0.1,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001016",
+                          "gmo_id": "GMO_001016",
+                          "label": "Iron(II) sulfate heptahydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "ZnSO4·7H2O",
+                          "volume": 0.1,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001023",
+                          "gmo_id": "GMO_001023",
+                          "label": "Zinc sulfate heptahydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "CuSO4·5H2O",
+                          "volume": 0.01,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001039",
+                          "gmo_id": "GMO_001039",
+                          "label": "Copper(II) sulfate pentahydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Nitrilotriacetic acid (NTA)",
+                          "volume": 1.5,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001053",
+                          "gmo_id": "GMO_001053",
+                          "label": "Nitrilotriacetic acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "CaCl2",
+                          "volume": 0.1,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001061",
+                          "gmo_id": "GMO_001061",
+                          "label": "Calcium chloride",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "MnSO4·H2O",
+                          "volume": 0.5,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001081",
+                          "gmo_id": "GMO_001081",
+                          "label": "Manganese sulfate monohydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Co(NO3)2·6H2O",
+                          "volume": 0.1,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001110",
+                          "gmo_id": "GMO_001110",
+                          "label": "Cobalt(II) nitrate hexahydrate",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Na2SeO3",
+                          "volume": 0.001,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001093",
+                          "gmo_id": "GMO_001093",
+                          "label": "Sodium selenite",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "KOH",
+                          "conc_value": 2,
+                          "conc_unit": "N",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001903",
+                          "gmo_id": "GMO_001903",
+                          "label": "Potassium hydroxide solution",
+                          "properties": [
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000051",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000051",
+                              "label": "Solution"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000078",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000078",
+                              "label": "Mineral source"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "paragraph_index": 15,
+                      "subcomponent_name": "**VFA",
+                      "items": [
+                        {
+                          "component_name": "DL-α-Methylbutyric acid",
+                          "volume": 1,
+                          "unit": "ml",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001175",
+                          "gmo_id": "GMO_001175",
+                          "label": "DL-alpha-Methylbutyric acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000063",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000063",
+                              "label": "Carbon source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Butyric acid",
+                          "volume": 4,
+                          "unit": "ml",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001178",
+                          "gmo_id": "GMO_001178",
+                          "label": "Butyric acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000063",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000063",
+                              "label": "Carbon source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Acetic acid",
+                          "volume": 17,
+                          "unit": "ml",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001179",
+                          "gmo_id": "GMO_001179",
+                          "label": "Acetic acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000063",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000063",
+                              "label": "Carbon source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "n-Valeric acid",
+                          "volume": 1,
+                          "unit": "ml",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001181",
+                          "gmo_id": "GMO_001181",
+                          "label": "Valeric acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000063",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000063",
+                              "label": "Carbon source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "iso-Valeric acid",
+                          "volume": 1,
+                          "unit": "ml",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001182",
+                          "gmo_id": "GMO_001182",
+                          "label": "Isovaleric acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000063",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000063",
+                              "label": "Carbon source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "iso-Butyric acid",
+                          "volume": 1,
+                          "unit": "ml",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001184",
+                          "gmo_id": "GMO_001184",
+                          "label": "Isobutyric acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000063",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000063",
+                              "label": "Carbon source"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Propionic acid",
+                          "volume": 6,
+                          "unit": "ml",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001192",
+                          "gmo_id": "GMO_001192",
+                          "label": "Propionic acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000063",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000063",
+                              "label": "Carbon source"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "paragraph_index": 17,
+                      "subcomponent_name": "***Vitamin mixture",
+                      "items": [
+                        {
+                          "component_name": "Distilled water",
+                          "volume": 1,
+                          "unit": "L",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001001",
+                          "gmo_id": "GMO_001001",
+                          "label": "Distilled water",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000044",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000044",
+                              "label": "Solvating media"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Biotin",
+                          "volume": 0.2,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001025",
+                          "gmo_id": "GMO_001025",
+                          "label": "Biotin",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000045",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000045",
+                              "label": "Vitamin"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "p-Aminobenzoic acid",
+                          "volume": 20,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001026",
+                          "gmo_id": "GMO_001026",
+                          "label": "4-Aminobenzoic acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000045",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000045",
+                              "label": "Vitamin"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Thiamin-HCl",
+                          "volume": 20,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001027",
+                          "gmo_id": "GMO_001027",
+                          "label": "Thiamine hydrochloride",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000045",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000045",
+                              "label": "Vitamin"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Ca-pantothenate",
+                          "volume": 40,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001028",
+                          "gmo_id": "GMO_001028",
+                          "label": "Calcium pantothenate",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000045",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000045",
+                              "label": "Vitamin"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Pyridoxine-HCl",
+                          "volume": 40,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001029",
+                          "gmo_id": "GMO_001029",
+                          "label": "Pyridoxine hydrochloride",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000045",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000045",
+                              "label": "Vitamin"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Folic acid",
+                          "volume": 0.2,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001033",
+                          "gmo_id": "GMO_001033",
+                          "label": "Folic acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000045",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000045",
+                              "label": "Vitamin"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Cyanocobalamin",
+                          "volume": 2,
+                          "unit": "ug",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001034",
+                          "gmo_id": "GMO_001034",
+                          "label": "Cobalamin",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000045",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000045",
+                              "label": "Vitamin"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Riboflavin",
+                          "volume": 40,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001037",
+                          "gmo_id": "GMO_001037",
+                          "label": "Riboflavin",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000045",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000045",
+                              "label": "Vitamin"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Niacin",
+                          "volume": 40,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001038",
+                          "gmo_id": "GMO_001038",
+                          "label": "Nicotinic acid",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000045",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000045",
+                              "label": "Vitamin"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Choline chloride",
+                          "volume": 100,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001099",
+                          "gmo_id": "GMO_001099",
+                          "label": "Choline chloride",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000067",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000067",
+                              "label": "Growth factor"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "myo-Inositol",
+                          "volume": 200,
+                          "unit": "mg",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001814",
+                          "gmo_id": "GMO_001814",
+                          "label": "myo-Inositol",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000067",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000067",
+                              "label": "Growth factor"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "paragraph_index": 20,
+                      "subcomponent_name": "****Cellulose",
+                      "items": [
+                        {
+                          "component_name": "Distilled water",
+                          "volume": 1,
+                          "unit": "L",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001001",
+                          "gmo_id": "GMO_001001",
+                          "label": "Distilled water",
+                          "properties": [
+                            {
+                              "id": "GMO_000040",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000040",
+                              "label": "Inorganic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000044",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000044",
+                              "label": "Solvating media"
+                            }
+                          ]
+                        },
+                        {
+                          "component_name": "Cellulose",
+                          "volume": 30,
+                          "unit": "g",
+                          "gmo": "http://purl.jp/bio/10/gmo/GMO_001180",
+                          "gmo_id": "GMO_001180",
+                          "label": "Cellulose",
+                          "properties": [
+                            {
+                              "id": "GMO_000041",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000041",
+                              "label": "Organic compound"
+                            },
+                            {
+                              "id": "GMO_000046",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000046",
+                              "label": "Defined component"
+                            },
+                            {
+                              "id": "GMO_000049",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000049",
+                              "label": "Simple component"
+                            }
+                          ],
+                          "roles": [
+                            {
+                              "id": "GMO_000063",
+                              "uri": "http://purl.jp/bio/10/gmo/GMO_000063",
+                              "label": "Carbon source"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "comments": [
+                    {
+                      "paragraph_index": 2,
+                      "comment": "pH 6.5"
+                    },
+                    {
+                      "paragraph_index": 3,
+                      "comment": ""
+                    },
+                    {
+                      "paragraph_index": 4,
+                      "comment": "Adjust pH to 6.5 with 10 N KOH and add the following medium."
+                    },
+                    {
+                      "paragraph_index": 6,
+                      "comment": ""
+                    },
+                    {
+                      "paragraph_index": 7,
+                      "comment": "Heat the above mixed solution at 60℃ for 5 to 10 min and then bubble with N2 gas. And then add the following ingredients."
+                    },
+                    {
+                      "paragraph_index": 9,
+                      "comment": ""
+                    },
+                    {
+                      "paragraph_index": 10,
+                      "comment": "Under anaerobic condition, the medium is autoclaved at 100℃ for 10 min."
+                    },
+                    {
+                      "paragraph_index": 11,
+                      "comment": ""
+                    },
+                    {
+                      "paragraph_index": 13,
+                      "comment": "Nitrilotriacetic acid is suspended in 500 ml water, and dissolved by titrating with 2 N KOH until its pH stabilize at 6.5. The rest of the ingredients are added and dissolved. Finally total volume is adjusted to 1 L."
+                    },
+                    {
+                      "paragraph_index": 14,
+                      "comment": ""
+                    },
+                    {
+                      "paragraph_index": 16,
+                      "comment": ""
+                    },
+                    {
+                      "paragraph_index": 18,
+                      "comment": ""
+                    },
+                    {
+                      "paragraph_index": 19,
+                      "comment": "****3% Cellulose suspension which is ball-milled for 3 days."
+                    }
+                  ]
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "gm": {
+                          "type": "string",
+                          "format": "uri",
+                          "example": "http://togomedium.org/medium/M1470"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "(Unnamed medium)"
+                        },
+                        "original_media_id": {
+                          "type": "string",
+                          "example": "NBRC_M249"
+                        },
+                        "src_url": {
+                          "type": "string",
+                          "format": "uri",
+                          "example": "https://www.nite.go.jp/nbrc/catalogue/NBRCMediumDetailServlet?NO=249"
+                        },
+                        "ph": {
+                          "type": "string",
+                          "example": 6.5
+                        }
+                      }
+                    },
+                    "components": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "paragraph_index": {
+                            "type": "number"
+                          },
+                          "subcomponent_name": {
+                            "type": "string"
+                          },
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "component_name": {
+                                  "type": "string",
+                                  "example": "Carbon source"
+                                },
+                                "conc_unit": {
+                                  "type": "string"
+                                },
+                                "conc_value": {
+                                  "type": "number"
+                                },
+                                "reference_media_id": {
+                                  "type": "string"
+                                },
+                                "volume": {
+                                  "type": "number"
+                                },
+                                "unit": {
+                                  "type": "string",
+                                  "example": "g/L"
+                                },
+                                "gmo": {
+                                  "type": "string"
+                                },
+                                "gmo_id": {
+                                  "type": "string"
+                                },
+                                "label": {
+                                  "type": "string"
+                                },
+                                "properties": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "uri": {
+                                        "type": "string"
+                                      },
+                                      "label": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "roles": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "uri": {
+                                        "type": "string"
+                                      },
+                                      "label": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "comments": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "paragraph_index": {
+                            "type": "integer",
+                            "example": 2
+                          },
+                          "comment": {
+                            "type": "string",
+                            "example": "pH 6.5"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_organism_by_taxid": {
+      "get": {
+        "summary": "gmdb_organism_by_taxid",
+        "operationId": "organismByTaxid",
+        "description": "returns the detailed information of an organism by its taxid\n",
+        "tags": [
+          "Stanza",
+          "Detail"
+        ],
+        "parameters": [
+          {
+            "name": "tax_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "",
+            "example": 315405
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": {
+                  "scientific_name": "Streptococcus gallolyticus",
+                  "taxid": 315405,
+                  "rank": "http://ddbj.nig.ac.jp/ontologies/taxonomy/Species",
+                  "authority_name": "Streptococcus caprinus Brooker et al. 1996",
+                  "lineage": [
+                    {
+                      "uri": "http://identifiers.org/taxonomy/2",
+                      "taxid": 2,
+                      "label": "Bacteria",
+                      "rank": "superkingdom"
+                    },
+                    {
+                      "uri": "http://identifiers.org/taxonomy/1239",
+                      "taxid": 1239,
+                      "label": "Firmicutes",
+                      "rank": "phylum"
+                    },
+                    {
+                      "uri": "http://identifiers.org/taxonomy/91061",
+                      "taxid": 91061,
+                      "label": "Bacilli",
+                      "rank": "class"
+                    },
+                    {
+                      "uri": "http://identifiers.org/taxonomy/186826",
+                      "taxid": 186826,
+                      "label": "Lactobacillales",
+                      "rank": "order"
+                    },
+                    {
+                      "uri": "http://identifiers.org/taxonomy/1300",
+                      "taxid": 1300,
+                      "label": "Streptococcaceae",
+                      "rank": "family"
+                    },
+                    {
+                      "uri": "http://identifiers.org/taxonomy/1301",
+                      "taxid": 1301,
+                      "label": "Streptococcus",
+                      "rank": "genus"
+                    },
+                    {
+                      "uri": "http://identifiers.org/taxonomy/315405",
+                      "taxid": 315405,
+                      "label": "Streptococcus gallolyticus",
+                      "rank": "species"
+                    }
+                  ],
+                  "type_material": [
+                    {
+                      "label": "ACM 3611"
+                    },
+                    {
+                      "label": "CCUG 35224"
+                    },
+                    {
+                      "label": "CIP 105428"
+                    },
+                    {
+                      "label": "DSM 16831"
+                    },
+                    {
+                      "label": "HDP 98035"
+                    },
+                    {
+                      "label": "JCM 10005"
+                    },
+                    {
+                      "label": "LMG 16802"
+                    },
+                    {
+                      "label": "LMG:16802"
+                    },
+                    {
+                      "label": "NCTC 13773"
+                    }
+                  ],
+                  "other_type_material": [
+                    {
+                      "label": "ACM 3969",
+                      "name": "Streptococcus caprinus"
+                    },
+                    {
+                      "label": "ATCC 700065",
+                      "name": "Streptococcus caprinus"
+                    },
+                    {
+                      "label": "LMG 15572",
+                      "name": "Streptococcus caprinus"
+                    },
+                    {
+                      "label": "LMG:15572",
+                      "name": "Streptococcus caprinus"
+                    },
+                    {
+                      "label": "strain TPC 2.3",
+                      "name": "Streptococcus caprinus"
+                    }
+                  ]
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "scientific_name": {
+                      "type": "string",
+                      "example": "Streptococcus gallolyticus"
+                    },
+                    "taxid": {
+                      "type": "integer",
+                      "example": 315405
+                    },
+                    "rank": {
+                      "type": "string",
+                      "format": "uri",
+                      "example": "http://ddbj.nig.ac.jp/ontologies/taxonomy/Species"
+                    },
+                    "authority_name": {
+                      "type": "string",
+                      "example": "Streptococcus caprinus Brooker et al. 1996"
+                    },
+                    "lineage": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "uri": {
+                            "type": "string",
+                            "format": "uri",
+                            "example": "http://identifiers.org/taxonomy/2"
+                          },
+                          "taxid": {
+                            "type": "integer",
+                            "example": 2
+                          },
+                          "label": {
+                            "type": "string",
+                            "example": "Bacteria"
+                          },
+                          "rank": {
+                            "type": "string",
+                            "example": "superkingdom"
+                          }
+                        }
+                      }
+                    },
+                    "type_material": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "label": {
+                            "type": "string",
+                            "example": "ACM 3611"
+                          }
+                        }
+                      }
+                    },
+                    "other_type_material": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "label": {
+                            "type": "string",
+                            "example": "ACM 3969"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Streptococcus caprinus"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_taxonomic_rank_by_taxid": {
+      "get": {
+        "summary": "gmdb_taxonomic_rank_by_taxid",
+        "operationId": "taxonomicRankByTaxid",
+        "description": "returns detailed information of a taxonomic rank based on taxid.\n",
+        "tags": [
+          "Stanza",
+          "Detail"
+        ],
+        "parameters": [
+          {
+            "name": "tax_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "",
+            "example": 91061
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "example": {
+                  "scientific_name": "Bacilli",
+                  "taxid": "91061",
+                  "rank": "http://ddbj.nig.ac.jp/ontologies/taxonomy/Class",
+                  "authority_name": "Bacilli Ludwig et al. 2010",
+                  "lineage": [
+                    {
+                      "rank": "superkingdom",
+                      "label": "Bacteria",
+                      "uri": "http://identifiers.org/taxonomy/2",
+                      "taxid": "2"
+                    },
+                    {
+                      "rank": "phylum",
+                      "label": "Firmicutes",
+                      "uri": "http://identifiers.org/taxonomy/1239",
+                      "taxid": "1239"
+                    },
+                    {
+                      "rank": "class",
+                      "label": "NA",
+                      "uri": "NA",
+                      "taxid": "NA"
+                    },
+                    {
+                      "rank": "order",
+                      "label": "NA",
+                      "uri": "NA",
+                      "taxid": "NA"
+                    },
+                    {
+                      "rank": "family",
+                      "label": "NA",
+                      "uri": "NA",
+                      "taxid": "NA"
+                    },
+                    {
+                      "rank": "genus",
+                      "label": "NA",
+                      "uri": "NA",
+                      "taxid": "NA"
+                    }
+                  ]
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "scientific_name": {
+                      "type": "string"
+                    },
+                    "taxid": {
+                      "type": "string"
+                    },
+                    "rank": {
+                      "type": "string"
+                    },
+                    "authority_name": {
+                      "type": "string"
+                    },
+                    "lineage": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "rank": {
+                            "type": "string"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "uri": {
+                            "type": "string"
+                          },
+                          "taxid": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gms_by_kegg_tids_3": {
+      "get": {
+        "summary": "gms_by_kegg_tids_3",
+        "operationId": "gmsByKeggTids3",
+        "description": "Mostly used at the Alignment page.\n",
+        "tags": [
+          "Stanza"
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gms_kegg_code_tid": {
+      "get": {
+        "summary": "gms_kegg_code_tid",
+        "operationId": "gmsKeggCodeTid",
+        "description": "Mostly used at the alignment page.\n",
+        "tags": [
+          "Stanza"
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_list_components_by_gmoids": {
+      "get": {
+        "summary": "gmdb_list_components_by_gmoids",
+        "operationId": "getListComponentsByGmoIds",
+        "description": "List growth media components with the given GMO IDs\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "name": "gmo_ids",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated GMO IDs.",
+            "required": true
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "items": {
+                        "properties": {
+                          "gmo_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_list_components_by_keyword": {
+      "get": {
+        "summary": "gmdb_list_components_by_keyword",
+        "operationId": "listComponentsByKeyword",
+        "description": "List growth media components with the given keyword\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "keyword",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Keyword to search for"
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "gmo_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_list_media_by_gmids": {
+      "get": {
+        "summary": "gmdb_list_media_by_gmids",
+        "operationId": "listMediaByGmids",
+        "description": "List growth media with the given GMIDs\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "name": "gm_ids",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated GMIDs"
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "items": {
+                        "properties": {
+                          "media_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "original_media_id": {
+                            "type": "string"
+                          },
+                          "media_name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_list_media_by_keyword": {
+      "get": {
+        "summary": "gmdb_list_media_by_keyword",
+        "operationId": "listMediaByKeyword",
+        "description": "List growth media with the given keyword\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated GMO IDs.",
+            "required": true
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "items": {
+                        "properties": {
+                          "media_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "original_media_id": {
+                            "type": "string"
+                          },
+                          "media_name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_list_organisms_by_keyword": {
+      "get": {
+        "summary": "gmdb_list_organisms_by_keyword",
+        "operationId": "listOrganismsByKeyword",
+        "description": "List organisms with the given keyword\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "keyword",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Keyword to search for"
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "tax_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "label": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_list_organisms_by_taxids": {
+      "get": {
+        "summary": "gmdb_list_organisms_by_taxids",
+        "operationId": "listOrganismsByTaxIDs",
+        "description": "List organisms with the given tax IDs\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "tax_ids",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated list of tax IDs"
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "tax_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "label": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_list_similar_media_by_gmid": {
+      "get": {
+        "summary": "gmdb_list_similar_media_by_gmid",
+        "operationId": "getListSimilarMediaByGmId",
+        "description": "Get similar growth media by GM ID\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "name": "gm_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "items": {
+                        "properties": {
+                          "gm_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "score": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_media_by_gmoid": {
+      "get": {
+        "summary": "gmdb_media_by_gmoid",
+        "operationId": "mediaByGmoid",
+        "description": "Get growth media by a component's GMO ID\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "name": "gmo_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "items": {
+                        "properties": {
+                          "media_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "original_media_id": {
+                            "type": "string"
+                          },
+                          "media_name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_media_by_taxid": {
+      "get": {
+        "summary": "gmdb_media_by_taxid",
+        "operationId": "mediaByTaxid",
+        "description": "Get growth media by NCBI's tax ID\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "name": "tax_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "NCBI's tax ID"
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "items": {
+                        "properties": {
+                          "media_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "original_media_id": {
+                            "type": "string"
+                          },
+                          "media_name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_organisms_by_gmid": {
+      "get": {
+        "summary": "gmdb_organisms_by_gmid",
+        "operationId": "organismsByGMID",
+        "description": "Get organisms by a growth medium ID\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "name": "gm_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "NCBI's tax ID"
+          },
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "items": {
+                        "properties": {
+                          "tax_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_stat_phylum_gm": {
+      "get": {
+        "summary": "gmdb_stat_phylum_gm",
+        "operationId": "statPhylumGm",
+        "description": "Statistics number of gm by phylum\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "items": {
+                        "properties": {
+                          "phylum": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "gms": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/list_components": {
+      "get": {
+        "summary": "list_components",
+        "operationId": "listComponents",
+        "description": "List all components\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "items": {
+                        "properties": {
+                          "gmo_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/list_media": {
+      "get": {
+        "summary": "list_media",
+        "operationId": "_listMedia",
+        "description": "list all growth media\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "items": {
+                        "properties": {
+                          "media_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "original_media_id": {
+                            "type": "string"
+                          },
+                          "media_name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/list_organisms": {
+      "get": {
+        "summary": "list_organisms",
+        "operationId": "listOrganisms",
+        "description": "list all organisms\n",
+        "tags": [
+          "List Stanza"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/list-limit"
+          },
+          {
+            "$ref": "#/components/parameters/list-offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "tax_id": {
+                            "$ref": "#/components/schemas/link-obj"
+                          },
+                          "label": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "$ref": "#/components/schemas/total"
+                    },
+                    "offset": {
+                      "$ref": "#/components/schemas/offset"
+                    },
+                    "limit": {
+                      "$ref": "#/components/schemas/limit"
+                    },
+                    "columns": {
+                      "$ref": "#/components/schemas/columns"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_list_media": {
+      "get": {
+        "deprecated": true,
+        "summary": "gmdb_list_media",
+        "operationId": "listMedia",
+        "description": "This endpoint is deprecated. Use `/list_media` instead.\n",
+        "tags": [
+          "Deprecated"
+        ],
+        "responses": {
+          "200": {
+            "description": "Unknown"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/gmdb_infraspecific_list_by_taxid": {
+      "get": {
+        "deprecated": true,
+        "summary": "gmdb_infraspecific_list_by_taxid",
+        "operationId": "GetInfraspecificListByTaxid",
+        "description": "listing up organisms of taxonomy\n",
+        "tags": [
+          "Deprecated"
+        ],
+        "responses": {
+          "200": {
+            "description": "List Stanza",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "integer"
+                    },
+                    "offset": {
+                      "type": "integer"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "contents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "object",
+                            "properties": {
+                              "label": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "rank": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "columns": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string"
+                          },
+                          "label": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/list_taxons_by_rank": {
+      "get": {
+        "deprecated": true,
+        "summary": "list_taxons_by_rank",
+        "operationId": "listTaxonsByRank",
+        "description": "historically used at the top page for displaying the taxon hierarchy<br>\n",
+        "tags": [
+          "Deprecated"
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "400": {
+        "description": "Invalid request"
+      }
+    },
+    "schemas": {
+      "simple-taxon": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      },
+      "total": {
+        "type": "integer",
+        "example": 1000
+      },
+      "offset": {
+        "type": "integer",
+        "example": 0
+      },
+      "limit": {
+        "type": "integer",
+        "example": 10
+      },
+      "columns": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "link-obj": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "list-limit": {
+        "name": "limit",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        },
+        "description": "Maximum number of results to return"
+      },
+      "list-offset": {
+        "name": "offset",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        },
+        "description": "Number of results to skip before returning"
+      }
+    }
+  }
+}

@@ -1,31 +1,32 @@
 import clsx from "clsx";
 import { FC } from "react";
 import { URL_STANZA } from "@/consts.ts";
-import { booleanToString } from "@/utils/boolean.ts";
 
 type Props = {
   gmIds: string[];
-  hideMedia?: boolean;
   isVisible?: boolean;
+  prioritizedTaxIds?: string[];
 };
-const stanzaName = "gmdb-media-strains-alignment-table";
+const stanzaName = "gmdb-media-alignment-table";
 const StanzaTag = `togostanza-${stanzaName}`;
 
-export const StrainAlignmentStanza: FC<Props> = ({
+export const ComponentAlignmentStanza: FC<Props> = ({
   gmIds,
-  hideMedia = false,
   isVisible = true,
+  prioritizedTaxIds = [],
 }) => {
   const visibleClass = clsx(isVisible ? "block" : "hidden");
   return (
     <>
       <script src={`${URL_STANZA}/${stanzaName}.js`} type="module" async></script>
-      <StanzaTag
-        gm_ids={gmIds.join(",")}
-        hide_media={booleanToString(hideMedia)}
-        className={visibleClass}
-        togostanza-menu-placement="none"
-      ></StanzaTag>
+      {gmIds.length > 0 && (
+        <StanzaTag
+          gm_ids={gmIds.join(",")}
+          className={visibleClass}
+          togostanza-menu-placement="none"
+          prioritized_tax_ids={prioritizedTaxIds.join(",")}
+        ></StanzaTag>
+      )}
     </>
   );
 };

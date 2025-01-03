@@ -17,14 +17,16 @@ declare global {
           column_names: BooleanString;
           column_sizes: string;
         } & StanzaProps;
-
         "togostanza-gmdb-medium-by-gmid": {
           gm_id: string;
         } & StanzaProps;
-
         "togostanza-gmdb-media-strains-alignment-table": {
           gm_ids: string;
           hide_media: BooleanString;
+        } & StanzaProps;
+        "togostanza-gmdb-media-alignment-table": {
+          gm_ids: string;
+          prioritized_tax_ids?: string;
         } & StanzaProps;
         "togostanza-gmdb-strain-by-strainid": {
           strain_id: string;
