@@ -10,5 +10,6 @@ const config = {
   printWidth: 100,
   plugins: ["prettier-plugin-tailwindcss"],
   tailwindFunctions: ["clsx"],
+  singleAttributePerLine: true,
 };
 export default config;

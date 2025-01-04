@@ -18,3 +18,5 @@ export const API_MEDIA_OF_STRAIN = `${URL_API}/gmdb_media_by_strainid`;
 export const API_SIMILAR_MEDIA = `${URL_API}/gmdb_list_similar_media_by_gmid`;
 export const API_MEDIA_OF_COMPONENT = `${URL_API}/gmdb_media_by_gmoid`;
 export const API_PHYLUM_STATS = `${URL_API}/gmdb_stat_phylum_gm`;
+
+export const URL_CONTACT = "https://dbcls.rois.ac.jp/contact-en.html";
