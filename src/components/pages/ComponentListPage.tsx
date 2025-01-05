@@ -11,7 +11,10 @@ export const ComponentListPage: FC = () => {
     <PageWrapper>
       <div>
         <H2>All Components</H2>
-        <ListStanza api={API_COMPONENT_LIST} columnSizes={[15, 15, 70]} />
+        <ListStanza
+          api={API_COMPONENT_LIST}
+          columnSizes={[20, 80]}
+        />
       </div>
     </PageWrapper>
   );

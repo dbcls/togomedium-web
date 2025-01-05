@@ -1,3 +1,4 @@
+import parse from "html-react-parser";
 import { FC } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
@@ -21,11 +22,17 @@ export const MediumDetailPage: FC = () => {
       </div>
       <div>
         <H3>Growth media similar to {name}</H3>
-        <ListStanza api={`${API_SIMILAR_MEDIA}?gm_id=${gmId}`} columnSizes={[15, 70, 15]} />
+        <ListStanza
+          api={`${API_SIMILAR_MEDIA}?gm_id=${gmId}`}
+          columnSizes={[15, 70, 15]}
+        />
       </div>
       <div>
         <H3>Organisms that can be cultured in {name}</H3>
-        <StrainAlignmentStanza gmIds={[gmId]} hideMedia={true} />
+        <StrainAlignmentStanza
+          gmIds={[gmId]}
+          hideMedia={true}
+        />
       </div>
     </PageWrapper>
   );
@@ -36,5 +43,5 @@ const useMediumName = (id: string) => {
   const hasName: boolean =
     data?.meta?.name !== "" && data?.meta?.name !== "(Unnamed medium)" && !!data?.meta?.name;
   const name = hasName ? `[${id}] ${data?.meta.name}` : `[${id}] `;
-  return name;
+  return parse(name).toString();
 };

@@ -1,3 +1,4 @@
+import parse from "html-react-parser";
 import { FC } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
@@ -39,5 +40,5 @@ export const StrainDetailPage: FC = () => {
 const useStrainName = (id: string) => {
   const data = Route.useLoaderData();
   const name = data?.strain.strain_name ?? id;
-  return name;
+  return parse(name).toString();
 };

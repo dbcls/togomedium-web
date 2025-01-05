@@ -11,7 +11,11 @@ export const StatisticsPage: FC = () => {
     <PageWrapper>
       <div>
         <H2>The number of growth media per phylum</H2>
-        <ListStanza api={API_PHYLUM_STATS} columnSizes={[50, 50]} limit={999} />
+        <ListStanza
+          api={API_PHYLUM_STATS}
+          columnSizes={[50, 50]}
+          limit={999}
+        />
       </div>
     </PageWrapper>
   );

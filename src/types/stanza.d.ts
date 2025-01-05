@@ -34,6 +34,9 @@ declare global {
         "togostanza-gmdb-component-by-gmoid": {
           gmo_id: string;
         } & StanzaProps;
+        "togostanza-gmdb-taxon-by-taxid": {
+          tax_id: string;
+        } & StanzaProps;
         "togostanza-gmdb-find-media-by-components": {} & StanzaProps;
         "togostanza-gmdb-find-media-by-organism-phenotype": {} & StanzaProps;
         "togostanza-gmdb-find-media-by-taxonomic-tree": {} & StanzaProps;

@@ -11,7 +11,10 @@ export const MediaListPage: FC = () => {
     <PageWrapper>
       <div>
         <H2>All Media</H2>
-        <ListStanza api={API_MEDIA_LIST} columnSizes={[15, 15, 70]} />
+        <ListStanza
+          api={API_MEDIA_LIST}
+          columnSizes={[15, 15, 70]}
+        />
       </div>
     </PageWrapper>
   );

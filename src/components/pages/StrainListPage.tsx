@@ -11,7 +11,10 @@ export const StrainListPage: FC = () => {
     <PageWrapper>
       <div>
         <H2>All Strains</H2>
-        <ListStanza api={API_STRAIN_LIST} columnSizes={[15, 40, 15, 30]} />
+        <ListStanza
+          api={API_STRAIN_LIST}
+          columnSizes={[15, 40, 15, 30]}
+        />
       </div>
     </PageWrapper>
   );

@@ -16,6 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as StrainIndexImport } from './routes/strain/index'
 import { Route as MediumIndexImport } from './routes/medium/index'
 import { Route as ComponentIndexImport } from './routes/component/index'
+import { Route as TaxonTaxIdImport } from './routes/taxon/$taxId'
 import { Route as StrainStrainIdImport } from './routes/strain/$strainId'
 import { Route as MediumGmIdImport } from './routes/medium/$gmId'
 import { Route as ComponentGmoIdImport } from './routes/component/$gmoId'
@@ -126,6 +127,12 @@ const ComponentIndexRoute = ComponentIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const TaxonTaxIdRoute = TaxonTaxIdImport.update({
+  id: '/taxon/$taxId',
+  path: '/taxon/$taxId',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const StrainStrainIdRoute = StrainStrainIdImport.update({
   id: '/strain/$strainId',
   path: '/strain/$strainId',
@@ -232,6 +239,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StrainStrainIdImport
       parentRoute: typeof rootRoute
     }
+    '/taxon/$taxId': {
+      id: '/taxon/$taxId'
+      path: '/taxon/$taxId'
+      fullPath: '/taxon/$taxId'
+      preLoaderRoute: typeof TaxonTaxIdImport
+      parentRoute: typeof rootRoute
+    }
     '/component/': {
       id: '/component/'
       path: '/component'
@@ -271,6 +285,7 @@ export interface FileRoutesByFullPath {
   '/component/$gmoId': typeof ComponentGmoIdRoute
   '/medium/$gmId': typeof MediumGmIdRoute
   '/strain/$strainId': typeof StrainStrainIdRoute
+  '/taxon/$taxId': typeof TaxonTaxIdRoute
   '/component': typeof ComponentIndexRoute
   '/medium': typeof MediumIndexRoute
   '/strain': typeof StrainIndexRoute
@@ -289,6 +304,7 @@ export interface FileRoutesByTo {
   '/component/$gmoId': typeof ComponentGmoIdRoute
   '/medium/$gmId': typeof MediumGmIdRoute
   '/strain/$strainId': typeof StrainStrainIdRoute
+  '/taxon/$taxId': typeof TaxonTaxIdRoute
   '/component': typeof ComponentIndexRoute
   '/medium': typeof MediumIndexRoute
   '/strain': typeof StrainIndexRoute
@@ -308,6 +324,7 @@ export interface FileRoutesById {
   '/component/$gmoId': typeof ComponentGmoIdRoute
   '/medium/$gmId': typeof MediumGmIdRoute
   '/strain/$strainId': typeof StrainStrainIdRoute
+  '/taxon/$taxId': typeof TaxonTaxIdRoute
   '/component/': typeof ComponentIndexRoute
   '/medium/': typeof MediumIndexRoute
   '/strain/': typeof StrainIndexRoute
@@ -328,6 +345,7 @@ export interface FileRouteTypes {
     | '/component/$gmoId'
     | '/medium/$gmId'
     | '/strain/$strainId'
+    | '/taxon/$taxId'
     | '/component'
     | '/medium'
     | '/strain'
@@ -345,6 +363,7 @@ export interface FileRouteTypes {
     | '/component/$gmoId'
     | '/medium/$gmId'
     | '/strain/$strainId'
+    | '/taxon/$taxId'
     | '/component'
     | '/medium'
     | '/strain'
@@ -362,6 +381,7 @@ export interface FileRouteTypes {
     | '/component/$gmoId'
     | '/medium/$gmId'
     | '/strain/$strainId'
+    | '/taxon/$taxId'
     | '/component/'
     | '/medium/'
     | '/strain/'
@@ -381,6 +401,7 @@ export interface RootRouteChildren {
   ComponentGmoIdRoute: typeof ComponentGmoIdRoute
   MediumGmIdRoute: typeof MediumGmIdRoute
   StrainStrainIdRoute: typeof StrainStrainIdRoute
+  TaxonTaxIdRoute: typeof TaxonTaxIdRoute
   ComponentIndexRoute: typeof ComponentIndexRoute
   MediumIndexRoute: typeof MediumIndexRoute
   StrainIndexRoute: typeof StrainIndexRoute
@@ -399,6 +420,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentGmoIdRoute: ComponentGmoIdRoute,
   MediumGmIdRoute: MediumGmIdRoute,
   StrainStrainIdRoute: StrainStrainIdRoute,
+  TaxonTaxIdRoute: TaxonTaxIdRoute,
   ComponentIndexRoute: ComponentIndexRoute,
   MediumIndexRoute: MediumIndexRoute,
   StrainIndexRoute: StrainIndexRoute,
@@ -426,6 +448,7 @@ export const routeTree = rootRoute
         "/component/$gmoId",
         "/medium/$gmId",
         "/strain/$strainId",
+        "/taxon/$taxId",
         "/component/",
         "/medium/",
         "/strain/"
@@ -466,6 +489,9 @@ export const routeTree = rootRoute
     },
     "/strain/$strainId": {
       "filePath": "strain/$strainId.tsx"
+    },
+    "/taxon/$taxId": {
+      "filePath": "taxon/$taxId.tsx"
     },
     "/component/": {
       "filePath": "component/index.tsx"

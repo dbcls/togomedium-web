@@ -1,12 +1,13 @@
 import { deepEqual } from "@tanstack/react-router";
 import { FC, useEffect, useRef, useState } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
+import { SearchPane } from "@/components/organisms/SearchPane.tsx";
 import { ComponentAlignmentStanza } from "@/components/stanzas/ComponentAlignmentStanza.tsx";
 import { StrainAlignmentStanza } from "@/components/stanzas/StrainAlignmentStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
 import { URL_API } from "@/consts.ts";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
-import { MediaByTaxonResponse } from "@/types/MediaAlignmentTableResponse.ts";
+import { MediaByTaxonResponse } from "@/types/responses.ts";
 
 export const CompareMediaByTaxIdsPage: FC = () => {
   usePageTitle("Compare media specified by Tax IDs");
@@ -16,20 +17,23 @@ export const CompareMediaByTaxIdsPage: FC = () => {
     <PageWrapper>
       <div>
         <H2>Compare media specified by Tax IDs</H2>
-        <fieldset className="id-input">
-          <input
-            type="text"
-            placeholder="77580,28024,2771,38275"
-            defaultValue={"77580,28024,2771,38275"}
-            ref={inputRef}
-          />
-          <input type="button" value="compare" onClick={onClickButton} />
-          {errorMsg && <p id="errorMsg">{errorMsg}</p>}
-        </fieldset>
+        <SearchPane
+          inputRef={inputRef}
+          onClickButton={onClickButton}
+          errorMsg={errorMsg}
+          defaultIds={["77580", "28024", "2771", "38275"]}
+          label={"Tax IDs"}
+        />
       </div>
 
-      <ComponentAlignmentStanza gmIds={gmIds} isVisible={isVisible} />
-      <StrainAlignmentStanza gmIds={gmIds} isVisible={isVisible} />
+      <ComponentAlignmentStanza
+        gmIds={gmIds}
+        isVisible={isVisible}
+      />
+      <StrainAlignmentStanza
+        gmIds={gmIds}
+        isVisible={isVisible}
+      />
     </PageWrapper>
   );
 };

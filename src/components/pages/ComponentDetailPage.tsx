@@ -1,3 +1,4 @@
+import parse from "html-react-parser";
 import { FC } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
@@ -20,7 +21,10 @@ export const ComponentDetailPage: FC = () => {
       </div>
       <div>
         <H3>Media including {name}</H3>
-        <ListStanza api={`${API_MEDIA_OF_COMPONENT}?gmo_id=${gmoId}`} columnSizes={[15, 85]} />
+        <ListStanza
+          api={`${API_MEDIA_OF_COMPONENT}?gmo_id=${gmoId}`}
+          columnSizes={[15, 85]}
+        />
       </div>
     </PageWrapper>
   );
@@ -29,5 +33,5 @@ export const ComponentDetailPage: FC = () => {
 const useComponentName = (id: string) => {
   const data = Route.useLoaderData();
   const name = data?.pref_label ?? id;
-  return name;
+  return parse(name).toString();
 };

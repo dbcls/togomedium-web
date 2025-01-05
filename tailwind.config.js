@@ -8,7 +8,16 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#8FC31F",
+        "primary-dark": "#6FA80C",
+      },
+      fontFamily: {
+        wide: ["Fira Sans", "sans-serif"],
+        narrow: ["Fira Sans Condensed", "sans-serif"],
+      },
+    },
   },
   darkMode: "class",
   plugins: [nextui()],

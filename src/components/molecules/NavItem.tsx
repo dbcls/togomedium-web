@@ -16,8 +16,8 @@ export const NavItem: FC<Props> = ({ title, to, href, icon, exactActive = true }
   const baseClasses = clsx(
     "group flex items-center gap-x-1.5 rounded-md p-2 align-middle text-sm/6 font-medium"
   );
-  const activeClasses = clsx("bg-gray-50 text-indigo-600");
-  const inactiveClasses = clsx("text-gray-700 hover:bg-gray-50 hover:text-indigo-600");
+  const activeClasses = clsx("text-primary-dark bg-gray-50");
+  const inactiveClasses = clsx("hover:text-primary-dark bg-white text-gray-700 hover:bg-gray-50");
   return (
     <li className={"text-sm"}>
       {isExternal ? (

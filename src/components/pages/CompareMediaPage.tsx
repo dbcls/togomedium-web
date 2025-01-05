@@ -1,11 +1,12 @@
 import { deepEqual } from "@tanstack/react-router";
 import { FC, useEffect, useRef, useState } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
+import { SearchPane } from "@/components/organisms/SearchPane.tsx";
 import { ComponentAlignmentStanza } from "@/components/stanzas/ComponentAlignmentStanza.tsx";
 import { StrainAlignmentStanza } from "@/components/stanzas/StrainAlignmentStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
-import { MediaAlignmentTableResponse } from "@/types/MediaAlignmentTableResponse.ts";
+import { MediaAlignmentTableResponse } from "@/types/responses.ts";
 
 export const CompareMediaPage: FC = () => {
   usePageTitle("Compare Media");
@@ -15,15 +16,23 @@ export const CompareMediaPage: FC = () => {
     <PageWrapper>
       <div>
         <H2>Compare media</H2>
-        <fieldset className="id-input">
-          <input type="text" placeholder="M2339,M328" defaultValue={"M2339,M328"} ref={inputRef} />
-          <input type="button" value="compare" onClick={onClickButton} />
-          {errorMsg && <p id="errorMsg">{errorMsg}</p>}
-        </fieldset>
+        <SearchPane
+          inputRef={inputRef}
+          onClickButton={onClickButton}
+          errorMsg={errorMsg}
+          defaultIds={["M2339", "M328"]}
+          label={"Enter GM IDs to compare"}
+        />
       </div>
 
-      <ComponentAlignmentStanza gmIds={gmIds} isVisible={isVisible} />
-      <StrainAlignmentStanza gmIds={gmIds} isVisible={isVisible} />
+      <ComponentAlignmentStanza
+        gmIds={gmIds}
+        isVisible={isVisible}
+      />
+      <StrainAlignmentStanza
+        gmIds={gmIds}
+        isVisible={isVisible}
+      />
     </PageWrapper>
   );
 };
