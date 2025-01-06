@@ -1,4 +1,7 @@
-export async function getData<T = unknown>(api: string, body: string = ""): Promise<T | undefined> {
+export async function fetchData<T = unknown>(
+  api: string,
+  body: string = ""
+): Promise<T | undefined> {
   try {
     const res = await fetch(api, {
       method: "POST",
