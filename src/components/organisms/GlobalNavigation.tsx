@@ -18,7 +18,7 @@ import {
 } from "@/components/molecules/NavIcon.tsx";
 import { NavItem } from "@/components/molecules/NavItem.tsx";
 import { NavItemGroup } from "@/components/molecules/NavItemGroup.tsx";
-import { URL_CONTACT } from "@/consts.ts";
+import { URL_CONTACT } from "@/consts/api.ts";
 
 export const GlobalNavigation: FC = () => {
   return (

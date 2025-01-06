@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { URL_STANZA } from "@/consts.ts";
+import { URL_STANZA } from "@/consts/api.ts";
 
 type Props = {
   gmoId: string;
@@ -11,8 +11,15 @@ const StanzaTag = `togostanza-${stanzaName}`;
 export const ComponentDetailStanza: FC<Props> = ({ gmoId }) => {
   return (
     <>
-      <script src={`${URL_STANZA}/${stanzaName}.js`} type="module" async></script>
-      <StanzaTag gmo_id={gmoId} togostanza-menu-placement="none"></StanzaTag>
+      <script
+        src={`${URL_STANZA}/${stanzaName}.js`}
+        type="module"
+        async
+      ></script>
+      <StanzaTag
+        gmo_id={gmoId}
+        togostanza-menu-placement="none"
+      ></StanzaTag>
     </>
   );
 };

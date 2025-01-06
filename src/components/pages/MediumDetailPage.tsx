@@ -6,7 +6,7 @@ import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { MediumDetailStanza } from "@/components/stanzas/MediumDetailStanza";
 import { StrainAlignmentStanza } from "@/components/stanzas/StrainAlignmentStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
-import { API_SIMILAR_MEDIA } from "@/consts.ts";
+import { API_SIMILAR_MEDIA } from "@/consts/api.ts";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/medium/$gmId.tsx";
 

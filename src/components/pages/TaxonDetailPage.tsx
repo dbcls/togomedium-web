@@ -5,7 +5,7 @@ import { H3 } from "@/components/atoms/H3.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { TaxonDetailStanza } from "@/components/stanzas/TaxonDetailStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
-import { API_CHILDREN_OF_TAXON, API_MEDIA_OF_TAXON, API_STRAINS_OF_TAXON } from "@/consts.ts";
+import { API_CHILDREN_OF_TAXON, API_MEDIA_OF_TAXON, API_STRAINS_OF_TAXON } from "@/consts/api.ts";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/taxon/$taxId.tsx";
 

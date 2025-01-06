@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
+import clsx from "clsx";
 import { FC } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { ComponentIcon } from "@/components/atoms/svg/ComponentIcon.tsx";
 import { MediumIcon } from "@/components/atoms/svg/MediumIcon.tsx";
 import { OrganismIcon } from "@/components/atoms/svg/OrganismIcon.tsx";
-import { StatsCard } from "@/components/organisms/home/StatsCard.tsx";
-import { API_COMPONENT_LIST, API_MEDIA_LIST, API_STRAIN_LIST } from "@/consts.ts";
+import { StatsCard } from "@/components/molecules/home/StatsCard.tsx";
+import { API_COMPONENT_LIST, API_MEDIA_LIST, API_STRAIN_LIST } from "@/consts/api.ts";
+import { basicTextLink } from "@/consts/styles.ts";
 import { ListResponse } from "@/types/responses.ts";
 import { fetchData } from "@/utils/fetch.ts";
 
@@ -38,6 +41,14 @@ export const Stats: FC = () => {
           icon={<ComponentIcon />}
         />
       </ul>
+      <p className={"flex w-full justify-end pr-10 pt-4"}>
+        <Link
+          to={"/statistics"}
+          className={clsx(basicTextLink, ["text-large", "font-wide"])}
+        >
+          More about the database &gt;
+        </Link>
+      </p>
     </div>
   );
 };

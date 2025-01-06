@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { FC } from "react";
-import { URL_STANZA } from "@/consts.ts";
+import { URL_STANZA } from "@/consts/api.ts";
 
 type Props = {
   gmIds: string[];
@@ -18,7 +18,11 @@ export const ComponentAlignmentStanza: FC<Props> = ({
   const visibleClass = clsx(isVisible ? "block" : "hidden");
   return (
     <>
-      <script src={`${URL_STANZA}/${stanzaName}.js`} type="module" async></script>
+      <script
+        src={`${URL_STANZA}/${stanzaName}.js`}
+        type="module"
+        async
+      ></script>
       {gmIds.length > 0 && (
         <StanzaTag
           gm_ids={gmIds.join(",")}

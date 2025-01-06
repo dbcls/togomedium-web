@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
+import clsx from "clsx";
 import { FC } from "react";
 import { Logo } from "@/components/atoms/svg/logo.tsx";
+import { basicTextLink } from "@/consts/styles.ts";
 
 export const Introduction: FC = () => {
   return (
@@ -22,7 +24,7 @@ export const Introduction: FC = () => {
           </p>
         </div>
       </div>
-      <p className={"text-large font-light"}>
+      <p className={"hyphens-auto text-justify text-large font-light"}>
         TogoMedium is a comprehensive knowledge base focused on culture media for microorganisms.
         The media available in TogoMedium have been compiled from information provided by diverse
         bioresource centers and research papers. All information in TogoMedium is described as RDF
@@ -33,7 +35,7 @@ export const Introduction: FC = () => {
       <p className={"flex w-full justify-end"}>
         <Link
           to={"/about"}
-          className={"text-primary-dark text-large font-light underline hover:text-primary"}
+          className={clsx(basicTextLink, "text-large")}
         >
           More about us &gt;
         </Link>

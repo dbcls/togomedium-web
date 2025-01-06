@@ -5,7 +5,7 @@ import { H3 } from "@/components/atoms/H3.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { StrainDetailStanza } from "@/components/stanzas/StrainDetailStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
-import { API_MEDIA_OF_STRAIN, API_STRAIN_PHENOTYPES } from "@/consts.ts";
+import { API_MEDIA_OF_STRAIN, API_STRAIN_PHENOTYPES } from "@/consts/api.ts";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/strain/$strainId.tsx";
 

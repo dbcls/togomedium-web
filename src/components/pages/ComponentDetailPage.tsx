@@ -5,7 +5,7 @@ import { H3 } from "@/components/atoms/H3.tsx";
 import { ComponentDetailStanza } from "@/components/stanzas/ComponentDetailStanza.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
-import { API_MEDIA_OF_COMPONENT } from "@/consts.ts";
+import { API_MEDIA_OF_COMPONENT } from "@/consts/api.ts";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/component/$gmoId.tsx";
 

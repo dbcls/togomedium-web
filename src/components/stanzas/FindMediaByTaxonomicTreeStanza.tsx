@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { URL_STANZA } from "@/consts.ts";
+import { URL_STANZA } from "@/consts/api.ts";
 
 type Props = {};
 
@@ -23,8 +23,15 @@ export const FindMediaByTaxonomicTreeStanza: FC<Props> = () => {
 
   return (
     <>
-      <script src={`${URL_STANZA}/${stanzaName}.js`} type="module" async></script>
-      <StanzaTag className={"flex grow"} togostanza-menu-placement="none"></StanzaTag>
+      <script
+        src={`${URL_STANZA}/${stanzaName}.js`}
+        type="module"
+        async
+      ></script>
+      <StanzaTag
+        className={"flex grow"}
+        togostanza-menu-placement="none"
+      ></StanzaTag>
     </>
   );
 };

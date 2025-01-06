@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { URL_STANZA } from "@/consts.ts";
+import { URL_STANZA } from "@/consts/api.ts";
 import { booleanToString } from "@/utils/boolean.ts";
 
 type Props = {
@@ -23,7 +23,11 @@ export const ListStanza: FC<Props> = ({
 }) => {
   return (
     <div>
-      <script src={`${URL_STANZA}/${stanzaName}.js`} type="module" async></script>
+      <script
+        src={`${URL_STANZA}/${stanzaName}.js`}
+        type="module"
+        async
+      ></script>
       <StanzaTag
         id="list"
         api_url={api}

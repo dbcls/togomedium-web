@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { URL_STANZA } from "@/consts.ts";
+import { URL_STANZA } from "@/consts/api.ts";
 
 type Props = {
   taxId: string;

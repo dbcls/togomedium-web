@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { TaxonDetailPage } from "@/components/pages/TaxonDetailPage.tsx";
-import { API_TAX_DETAIL } from "@/consts.ts";
+import { API_TAX_DETAIL } from "@/consts/api.ts";
 import { fetchData } from "@/utils/fetch.ts";
 
 type APIResponse = {
