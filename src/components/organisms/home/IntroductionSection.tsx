@@ -4,9 +4,9 @@ import { FC } from "react";
 import { Logo } from "@/components/atoms/svg/logo.tsx";
 import { basicTextLink } from "@/consts/styles.ts";
 
-export const Introduction: FC = () => {
+export const IntroductionSection: FC = () => {
   return (
-    <div className={"font-wide flex flex-col items-start gap-6 rounded-2xl bg-white p-10"}>
+    <section className={"font-wide flex flex-col items-start gap-6 rounded-2xl bg-white p-10"}>
       <div className={"flex justify-start gap-6"}>
         <div className={"flex w-1/3 max-w-96 shrink-0 grow-0 items-center"}>
           <figure className={"overflow-clip rounded"}>
@@ -40,6 +40,6 @@ export const Introduction: FC = () => {
           More about us &gt;
         </Link>
       </p>
-    </div>
+    </section>
   );
 };

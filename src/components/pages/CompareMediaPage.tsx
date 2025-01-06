@@ -10,7 +10,7 @@ import { MediaAlignmentTableResponse } from "@/types/responses.ts";
 
 export const CompareMediaPage: FC = () => {
   usePageTitle("Compare Media");
-  const { gmIds, isVisible, errorMsg, inputRef, onClickButton } = useCompareMedia();
+  const { gmIds, isVisible, errorMsg, inputRef, onSubmit } = useCompareMedia();
 
   return (
     <PageWrapper>
@@ -18,10 +18,12 @@ export const CompareMediaPage: FC = () => {
         <H2>Compare media</H2>
         <SearchPane
           inputRef={inputRef}
-          onClickButton={onClickButton}
+          onSubmit={onSubmit}
           errorMsg={errorMsg}
-          defaultIds={["M2339", "M328"]}
           label={"Enter GM IDs to compare"}
+          buttonLabel={"Compare"}
+          placeHolder={["M2339", "M328"].join(",")}
+          defaultWithPlaceHolder={true}
         />
       </div>
 
@@ -52,7 +54,7 @@ const useCompareMedia = () => {
     setSearchParams(_gmIds);
   };
 
-  const onClickButton = () => {
+  const onSubmit = () => {
     execute();
   };
 
@@ -78,7 +80,7 @@ const useCompareMedia = () => {
     }
   }, [execute]);
 
-  return { gmIds, isVisible, errorMsg, inputRef, onClickButton };
+  return { gmIds, isVisible, errorMsg, inputRef, onSubmit };
 };
 
 const setSearchParams = (ids: string[]) => {

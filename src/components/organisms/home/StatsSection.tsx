@@ -12,13 +12,13 @@ import { basicTextLink } from "@/consts/styles.ts";
 import { ListResponse } from "@/types/responses.ts";
 import { fetchData } from "@/utils/fetch.ts";
 
-export const Stats: FC = () => {
+export const StatsSection: FC = () => {
   const mediumCount = useListCount(API_MEDIA_LIST);
   const strainCount = useListCount(API_STRAIN_LIST);
   const componentCount = useListCount(API_COMPONENT_LIST);
 
   return (
-    <div>
+    <section>
       <H2>In our database:</H2>
       <ul className={"grid grid-cols-3 justify-between gap-4"}>
         <StatsCard
@@ -49,7 +49,7 @@ export const Stats: FC = () => {
           More about the database &gt;
         </Link>
       </p>
-    </div>
+    </section>
   );
 };
 

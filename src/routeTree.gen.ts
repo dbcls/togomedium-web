@@ -24,6 +24,7 @@ import { Route as ComponentGmoIdImport } from './routes/component/$gmoId'
 // Create Virtual Routes
 
 const StatisticsLazyImport = createFileRoute('/statistics')()
+const SearchLazyImport = createFileRoute('/search')()
 const FindMediaByTaxonomicTreeLazyImport = createFileRoute(
   '/find-media-by-taxonomic-tree',
 )()
@@ -48,6 +49,12 @@ const StatisticsLazyRoute = StatisticsLazyImport.update({
   path: '/statistics',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/statistics.lazy').then((d) => d.Route))
+
+const SearchLazyRoute = SearchLazyImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/search.lazy').then((d) => d.Route))
 
 const FindMediaByTaxonomicTreeLazyRoute =
   FindMediaByTaxonomicTreeLazyImport.update({
@@ -211,6 +218,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FindMediaByTaxonomicTreeLazyImport
       parentRoute: typeof rootRoute
     }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/statistics': {
       id: '/statistics'
       path: '/statistics'
@@ -281,6 +295,7 @@ export interface FileRoutesByFullPath {
   '/find-media-by-components': typeof FindMediaByComponentsLazyRoute
   '/find-media-by-organism-phenotype': typeof FindMediaByOrganismPhenotypeLazyRoute
   '/find-media-by-taxonomic-tree': typeof FindMediaByTaxonomicTreeLazyRoute
+  '/search': typeof SearchLazyRoute
   '/statistics': typeof StatisticsLazyRoute
   '/component/$gmoId': typeof ComponentGmoIdRoute
   '/medium/$gmId': typeof MediumGmIdRoute
@@ -300,6 +315,7 @@ export interface FileRoutesByTo {
   '/find-media-by-components': typeof FindMediaByComponentsLazyRoute
   '/find-media-by-organism-phenotype': typeof FindMediaByOrganismPhenotypeLazyRoute
   '/find-media-by-taxonomic-tree': typeof FindMediaByTaxonomicTreeLazyRoute
+  '/search': typeof SearchLazyRoute
   '/statistics': typeof StatisticsLazyRoute
   '/component/$gmoId': typeof ComponentGmoIdRoute
   '/medium/$gmId': typeof MediumGmIdRoute
@@ -320,6 +336,7 @@ export interface FileRoutesById {
   '/find-media-by-components': typeof FindMediaByComponentsLazyRoute
   '/find-media-by-organism-phenotype': typeof FindMediaByOrganismPhenotypeLazyRoute
   '/find-media-by-taxonomic-tree': typeof FindMediaByTaxonomicTreeLazyRoute
+  '/search': typeof SearchLazyRoute
   '/statistics': typeof StatisticsLazyRoute
   '/component/$gmoId': typeof ComponentGmoIdRoute
   '/medium/$gmId': typeof MediumGmIdRoute
@@ -341,6 +358,7 @@ export interface FileRouteTypes {
     | '/find-media-by-components'
     | '/find-media-by-organism-phenotype'
     | '/find-media-by-taxonomic-tree'
+    | '/search'
     | '/statistics'
     | '/component/$gmoId'
     | '/medium/$gmId'
@@ -359,6 +377,7 @@ export interface FileRouteTypes {
     | '/find-media-by-components'
     | '/find-media-by-organism-phenotype'
     | '/find-media-by-taxonomic-tree'
+    | '/search'
     | '/statistics'
     | '/component/$gmoId'
     | '/medium/$gmId'
@@ -377,6 +396,7 @@ export interface FileRouteTypes {
     | '/find-media-by-components'
     | '/find-media-by-organism-phenotype'
     | '/find-media-by-taxonomic-tree'
+    | '/search'
     | '/statistics'
     | '/component/$gmoId'
     | '/medium/$gmId'
@@ -397,6 +417,7 @@ export interface RootRouteChildren {
   FindMediaByComponentsLazyRoute: typeof FindMediaByComponentsLazyRoute
   FindMediaByOrganismPhenotypeLazyRoute: typeof FindMediaByOrganismPhenotypeLazyRoute
   FindMediaByTaxonomicTreeLazyRoute: typeof FindMediaByTaxonomicTreeLazyRoute
+  SearchLazyRoute: typeof SearchLazyRoute
   StatisticsLazyRoute: typeof StatisticsLazyRoute
   ComponentGmoIdRoute: typeof ComponentGmoIdRoute
   MediumGmIdRoute: typeof MediumGmIdRoute
@@ -416,6 +437,7 @@ const rootRouteChildren: RootRouteChildren = {
   FindMediaByComponentsLazyRoute: FindMediaByComponentsLazyRoute,
   FindMediaByOrganismPhenotypeLazyRoute: FindMediaByOrganismPhenotypeLazyRoute,
   FindMediaByTaxonomicTreeLazyRoute: FindMediaByTaxonomicTreeLazyRoute,
+  SearchLazyRoute: SearchLazyRoute,
   StatisticsLazyRoute: StatisticsLazyRoute,
   ComponentGmoIdRoute: ComponentGmoIdRoute,
   MediumGmIdRoute: MediumGmIdRoute,
@@ -444,6 +466,7 @@ export const routeTree = rootRoute
         "/find-media-by-components",
         "/find-media-by-organism-phenotype",
         "/find-media-by-taxonomic-tree",
+        "/search",
         "/statistics",
         "/component/$gmoId",
         "/medium/$gmId",
@@ -477,6 +500,9 @@ export const routeTree = rootRoute
     },
     "/find-media-by-taxonomic-tree": {
       "filePath": "find-media-by-taxonomic-tree.lazy.tsx"
+    },
+    "/search": {
+      "filePath": "search.lazy.tsx"
     },
     "/statistics": {
       "filePath": "statistics.lazy.tsx"

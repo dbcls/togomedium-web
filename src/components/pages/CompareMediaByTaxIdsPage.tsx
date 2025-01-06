@@ -11,7 +11,7 @@ import { MediaByTaxonResponse } from "@/types/responses.ts";
 
 export const CompareMediaByTaxIdsPage: FC = () => {
   usePageTitle("Compare media specified by Tax IDs");
-  const { gmIds, isVisible, errorMsg, inputRef, onClickButton } = useCompareMediaByTaxIds();
+  const { gmIds, isVisible, errorMsg, inputRef, onSubmit } = useCompareMediaByTaxIds();
 
   return (
     <PageWrapper>
@@ -19,10 +19,12 @@ export const CompareMediaByTaxIdsPage: FC = () => {
         <H2>Compare media specified by Tax IDs</H2>
         <SearchPane
           inputRef={inputRef}
-          onClickButton={onClickButton}
+          onSubmit={onSubmit}
           errorMsg={errorMsg}
-          defaultIds={["77580", "28024", "2771", "38275"]}
-          label={"Tax IDs"}
+          label={"Enter tax Ids to compare"}
+          buttonLabel={"Compare"}
+          placeHolder={["77580", "28024", "2771", "38275"].join(",")}
+          defaultWithPlaceHolder={true}
         />
       </div>
 
@@ -44,7 +46,7 @@ const useCompareMediaByTaxIds = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const onClickButton = () => {
+  const onSubmit = () => {
     execute();
   };
   const execute = async () => {
@@ -75,7 +77,7 @@ const useCompareMediaByTaxIds = () => {
     }
   }, [execute]);
 
-  return { gmIds, isVisible, errorMsg, inputRef, onClickButton };
+  return { gmIds, isVisible, errorMsg, inputRef, onSubmit };
 };
 
 const filterTaxIds = async (taxIds: string[]): Promise<string[]> => {

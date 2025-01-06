@@ -7,9 +7,9 @@ import { TreeIcon } from "@/components/atoms/svg/TreeIcon.tsx";
 import { ToolsCard } from "@/components/molecules/home/ToolsCard.tsx";
 
 type Props = {};
-export const Tools: FC<Props> = () => {
+export const ToolsSection: FC<Props> = () => {
   return (
-    <div>
+    <section>
       <H2>Find and compare media with various ways</H2>
       <ul className={"grid grid-cols-3 gap-4"}>
         <ToolsCard
@@ -38,6 +38,6 @@ export const Tools: FC<Props> = () => {
           icon={<GridIcon />}
         />
       </ul>
-    </div>
+    </section>
   );
 };
