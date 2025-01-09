@@ -18,6 +18,7 @@ import {
 } from "@/components/molecules/NavIcon.tsx";
 import { NavItem } from "@/components/molecules/NavItem.tsx";
 import { NavItemGroup } from "@/components/molecules/NavItemGroup.tsx";
+import { SearchInput } from "@/components/molecules/SearchInput.tsx";
 import { URL_CONTACT } from "@/consts/api.ts";
 
 export const GlobalNavigation: FC = () => {
@@ -27,6 +28,8 @@ export const GlobalNavigation: FC = () => {
         <Link to={"/"}>
           <Logo className={"mt-3 w-[160px]"} />
         </Link>
+        <SearchInput className={"mt-6"} />
+
         <ul className="mt-4 flex flex-col gap-0.5">
           <NavItem
             to={"/"}

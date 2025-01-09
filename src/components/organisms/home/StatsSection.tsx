@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { FC } from "react";
@@ -9,8 +8,7 @@ import { OrganismIcon } from "@/components/atoms/svg/OrganismIcon.tsx";
 import { StatsCard } from "@/components/molecules/home/StatsCard.tsx";
 import { API_COMPONENT_LIST, API_MEDIA_LIST, API_STRAIN_LIST } from "@/consts/api.ts";
 import { basicTextLink } from "@/consts/styles.ts";
-import { ListResponse } from "@/types/responses.ts";
-import { fetchData } from "@/utils/fetch.ts";
+import { useListCount } from "@/hooks/useListCount.ts";
 
 export const StatsSection: FC = () => {
   const mediumCount = useListCount(API_MEDIA_LIST);
@@ -51,16 +49,4 @@ export const StatsSection: FC = () => {
       </p>
     </section>
   );
-};
-
-const useListCount = (apiUrl: string) => {
-  const { data } = useQuery({
-    queryKey: [apiUrl],
-    queryFn: async () => {
-      const response = await fetchData<ListResponse>(apiUrl);
-      return response;
-    },
-    staleTime: Infinity,
-  });
-  return parseInt((data?.total ?? 0).toString());
 };
