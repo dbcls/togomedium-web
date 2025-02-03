@@ -1,0 +1,24 @@
+{
+  "name": "@packages/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite serve ./ --config vite.config.ts",
+    "build": "vite build ./ --config vite.config.ts  --outDir ./dist/",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@nextui-org/react": "^2.6.11",
+    "@scalar/api-reference-react": "^0.4.22",
+    "@tanstack/react-query": "^5.66.0",
+    "@tanstack/react-router": "^1.99.0",
+    "@tanstack/router-devtools": "^1.99.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.0.6",
+    "html-react-parser": "^5.2.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "usehooks-ts": "^3.1.0"
+  }
+}
