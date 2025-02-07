@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ComponentDetailPage } from "@/components/pages/ComponentDetailPage.tsx";
 import { API_COMPONENT_DETAIL } from "@/consts/api.ts";
+import { ComponentDetailPage } from "@/pages/ComponentDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 
 type APIResponse = {

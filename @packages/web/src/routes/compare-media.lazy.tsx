@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { CompareMediaPage } from "@/components/pages/CompareMediaPage.tsx";
+import { CompareMediaPage } from "@/pages/CompareMediaPage.tsx";
 
 export const Route = createLazyFileRoute("/compare-media")({
   component: RouteComponent,

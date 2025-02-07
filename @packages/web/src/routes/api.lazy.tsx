@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { ApiPage } from "@/components/pages/ApiPage";
+import { ApiPage } from "@/pages/ApiPage";
 
 export const Route = createLazyFileRoute("/api")({
   component: RouteComponent,

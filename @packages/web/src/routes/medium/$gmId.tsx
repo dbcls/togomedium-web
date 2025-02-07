@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MediumDetailPage } from "@/components/pages/MediumDetailPage.tsx";
 import { API_MEDIUM_DETAIL } from "@/consts/api.ts";
+import { MediumDetailPage } from "@/pages/MediumDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 
 type APIResponse = {
