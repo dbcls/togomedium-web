@@ -1,4 +1,3 @@
-import { NextUIProvider } from "@nextui-org/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { FC } from "react";
@@ -29,11 +28,9 @@ declare module "@tanstack/react-router" {
 export const App: FC = () => {
   return (
     <div>
-      <NextUIProvider>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-        </QueryClientProvider>
-      </NextUIProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </div>
   );
 };

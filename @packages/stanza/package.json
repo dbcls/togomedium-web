@@ -1,0 +1,48 @@
+{
+  "name": "@packages/stanza",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "stanza:server": "togostanza s",
+    "stanza:build": "togostanza build",
+    "stanza:generate": "togostanza g stanza",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^6.3.0",
+    "@mui/material": "^6.3.0",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@tanstack/react-query": "^5.66.0",
+    "@tanstack/react-query-devtools": "^5.51.11",
+    "@types/d3-drag": "^3.0.7",
+    "colord": "^2.9.3",
+    "copy-anything": "^3.0.3",
+    "d3": "^7.9.0",
+    "d3-drag": "^3.0.0",
+    "jotai": "^2.11.1",
+    "nanoid": "^3.3.4",
+    "node-fetch": "^3.3.2",
+    "pluralize": "^8.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "rollup-plugin-dotenv": "^0.5.1",
+    "sleep-promise": "^9.1.0",
+    "togostanza": "github:togostanza/togostanza",
+    "usehooks-ts": "^3.1.0",
+    "yohak-tools": "0.1.18"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.9",
+    "@emotion/babel-plugin": "^11.11.0",
+    "@emotion/babel-preset-css-prop": "^11.11.0",
+    "@emotion/eslint-plugin": "^11.12.0",
+    "@types/d3": "^7.4.0",
+    "tslib": "^2.6.3"
+  }
+}

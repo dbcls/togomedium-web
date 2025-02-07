@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "noResolve": false,
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "noEmit": false,
+    "noEmitHelpers": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "types": ["@emotion/react", "d3-drag"],
+    "skipLibCheck": true,
+
+    "paths": {
+      "%viewer/*": ["../viewer/src/*"],
+      "%core/*": ["../core/src/*"],
+      "%editor/*": ["../editor/src/*"],
+      "%schema/*": ["../schema/src/*"]
+    }
+  }
+}

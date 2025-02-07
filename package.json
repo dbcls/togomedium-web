@@ -13,7 +13,17 @@
     "@eslint/compat": "^1.2.6",
     "@eslint/js": "^9.19.0",
     "@react-types/shared": "^3.27.0",
+    "@storybook/addon-essentials": "^8.5.0",
+    "@storybook/addon-interactions": "^8.5.0",
+    "@storybook/addon-links": "^8.5.0",
+    "@storybook/addon-onboarding": "^8.5.0",
+    "@storybook/blocks": "^8.5.0",
+    "@storybook/react": "^8.5.0",
+    "@storybook/react-vite": "^8.5.0",
+    "@storybook/test": "^8.5.0",
+    "@testing-library/react": "^16.2.0",
     "@tanstack/router-plugin": "^1.99.3",
+    "@types/node": "^22.13.1",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react-swc": "^3.7.2",
@@ -25,7 +35,6 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
-    "nextui-cli": "^0.5.2",
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
@@ -36,7 +45,8 @@
     "vite": "^6.0.11",
     "vite-multiple-assets": "^2.2.5",
     "vite-plugin-full-reload": "^1.2.0",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.5"
   },
   "resolutions": {
     "esbuild": "0.24.0"
