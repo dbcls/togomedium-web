@@ -8,10 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "paths": {
-      "%viewer/*": ["../viewer/src/*"],
-      "%core/*": ["../core/src/*"],
-      "%editor/*": ["../editor/src/*"],
-      "%schema/*": ["../schema/src/*"],
+      "%stanza/*": ["../stanza/*"]
     }
   },
   "include": [

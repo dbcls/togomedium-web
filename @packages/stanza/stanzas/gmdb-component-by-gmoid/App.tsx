@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
-import { StanzaView } from "./components/StanzaView";
-import { getComponentData, ViewProps } from "./utils/api";
-import { fetchWikipediaData } from "../../components/info-detail/WikipediaView";
+import { StanzaView } from "%stanza/stanzas/gmdb-component-by-gmoid/components/StanzaView";
+import { getComponentData, ViewProps } from "%stanza/stanzas/gmdb-component-by-gmoid/utils/api";
+import { fetchWikipediaData } from "%stanza/utils/fetchWikipediaData";
 
 type Props = {
   stanzaElement?: ShadowRoot;
@@ -31,7 +31,12 @@ const App: FC<Props> = ({ gmo_id }) => {
   const { componentData, isLoading } = useComponentDataQuery(gmo_id);
   const wikipediaData = useWikipediaQuery(componentData);
   if (isLoading || !componentData) return <>Loading...</>;
-  return <StanzaView {...componentData} wikipediaData={wikipediaData} />;
+  return (
+    <StanzaView
+      {...componentData}
+      wikipediaData={wikipediaData}
+    />
+  );
 };
 
 export default App;

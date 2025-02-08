@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider } from "jotai";
 import React from "react";
-import { EmotionGlobalStyles } from "../../stanza/shared/components/EmotionGlobalStyles";
-import { muiTheme } from "../../stanza/shared/components/muiTheme";
+import { EmotionGlobalStyles } from "../../stanza/components/EmotionGlobalStyles";
+import { muiTheme } from "../../stanza/components/muiTheme";
 import type { Preview } from "@storybook/react";
 const queryClient = new QueryClient();
 const preview: Preview = {

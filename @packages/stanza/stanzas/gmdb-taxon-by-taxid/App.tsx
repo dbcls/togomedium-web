@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { Optional } from "yohak-tools";
 import { StanzaView } from "./components/StanzaView";
 import { getTaxonData } from "./utils/api";
-import { fetchWikipediaData } from "../../components/info-detail/WikipediaView";
+import { fetchWikipediaData } from "%stanza/utils/fetchWikipediaData";
 
 type Props = {
   stanzaElement?: ShadowRoot;
@@ -33,7 +33,12 @@ const App: FC<Props> = ({ tax_id }) => {
   const { taxonData, isLoading } = useTaxonDataQuery(tax_id);
   const wikipediaData = useWikipediaQuery(taxonData?.scientificName);
   if (isLoading || !taxonData) return <>Loading...</>;
-  return <StanzaView {...taxonData} wikipediaData={wikipediaData} />;
+  return (
+    <StanzaView
+      {...taxonData}
+      wikipediaData={wikipediaData}
+    />
+  );
 };
 
 export default App;

@@ -7,21 +7,17 @@ export default function config(environment) {
       plugins: [dotenv()],
       alias: [
         {
-          find: /^%viewer\//,
-          replacement: join(__dirname, "../", "viewer/src/"),
+          find: /^%stanza\//,
+          replacement: join(__dirname, "../", "stanza/"),
         },
-        {
-          find: /^%editor\//,
-          replacement: join(__dirname, "../", "editor/src/"),
-        },
-        {
-          find: /^%core\//,
-          replacement: join(__dirname, "../", "core/src/"),
-        },
-        {
-          find: /^%schema\//,
-          replacement: join(__dirname, "../", "schema/src/"),
-        },
+        // {
+        //   find: /^%core\//,
+        //   replacement: join(__dirname, "../", "core/src/"),
+        // },
+        // {
+        //   find: /^%schema\//,
+        //   replacement: join(__dirname, "../", "schema/src/"),
+        // },
       ],
     },
   };

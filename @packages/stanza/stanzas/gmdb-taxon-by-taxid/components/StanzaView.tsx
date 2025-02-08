@@ -11,8 +11,9 @@ import {
   StandardParagraph,
   SubHeading,
 } from "../../../components/info-detail/styles";
-import { WikipediaData, WikipediaView } from "../../../components/info-detail/WikipediaView";
+import { WikipediaView } from "../../../components/info-detail/WikipediaView";
 import { stanzaWrapper } from "../../../styles/common";
+import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
 
 const linkNCBI = "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=";
 const linkTogoGenome = "http://togogenome.org/organism/";

@@ -1,6 +1,6 @@
 import React from "react";
-import App from "./App";
-import { TogoMediumReactStanza } from "../../components/StanzaReactProvider";
+import { TogoMediumReactStanza } from "%stanza/components/StanzaReactProvider";
+import App from "%stanza/stanzas/gmdb-component-by-gmoid/App";
 
 type StanzaParameters = {
   gmo_id: string;
@@ -9,6 +9,11 @@ type StanzaParameters = {
 export default class ReactStanza extends TogoMediumReactStanza<StanzaParameters> {
   makeApp() {
     const gmo_id = this.params.gmo_id;
-    return <App stanzaElement={this.root} gmo_id={gmo_id} />;
+    return (
+      <App
+        stanzaElement={this.root}
+        gmo_id={gmo_id}
+      />
+    );
   }
 }

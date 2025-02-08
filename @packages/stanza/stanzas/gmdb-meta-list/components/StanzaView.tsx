@@ -6,7 +6,7 @@ import { BottomController } from "./BottomController";
 import { ListTable } from "./ListTable";
 import { LoadingCover } from "./LoadingCover";
 import { TopInfo } from "./TopInfo";
-import { StanzaWrapper } from "../../../components/StanzaWrapper";
+import { StanzaWrapper } from "../../../components/styled/StanzaWrapper";
 import { ListApiBody } from "../types";
 
 type Props = {

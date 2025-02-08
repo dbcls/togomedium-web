@@ -1,21 +1,18 @@
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import {
-  ColorButton,
-  ColWrapper,
-  InfoId,
-  InfoTitle,
-  StandardParagraph,
-  SubHeading,
-  TagList,
-} from "../../../components/info-detail/styles";
-import { WikipediaData, WikipediaView } from "../../../components/info-detail/WikipediaView";
-import { stanzaWrapper } from "../../../styles/common";
-import { COLOR_PRIMARY } from "../../../styles/variables";
-import { decodeHTMLEntities } from "../../../utils/string";
-import { ComponentClass, LinkInfo } from "../utils/api";
+import { WikipediaView } from "%stanza/components/info-detail/WikipediaView";
+import { ColorButton } from "%stanza/components/styled/ColorButton";
+import { ColWrapper } from "%stanza/components/styled/ColWrapper";
+import { InfoId } from "%stanza/components/styled/InfoId";
+import { InfoTitle } from "%stanza/components/styled/InfoTitle";
+import { LinkList } from "%stanza/components/styled/LinkList";
+import { StandardParagraph } from "%stanza/components/styled/StandardParagraph";
+import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
+import { SubHeading } from "%stanza/components/styled/SubHeading";
+import { TagList } from "%stanza/components/styled/TagList";
+//TODO: replace with the type packages
+import { ComponentClass, LinkInfo } from "%stanza/stanzas/gmdb-component-by-gmoid/utils/api";
+import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
+import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
   prefLabel: string;
@@ -27,11 +24,9 @@ type Props = {
   subClasses: ComponentClass[];
   links: LinkInfo[];
   wikipediaData?: WikipediaData;
-} & AcceptsEmotion;
+};
 
 export const StanzaView: FC<Props> = ({
-  css,
-  className,
   prefLabel,
   gmoId,
   altLabels,
@@ -43,10 +38,7 @@ export const StanzaView: FC<Props> = ({
   wikipediaData,
 }) => {
   return (
-    <div
-      css={[stanzaView, css, stanzaWrapper]}
-      className={className}
-    >
+    <StanzaWrapper>
       <ColWrapper>
         <div>
           <InfoId>
@@ -135,23 +127,10 @@ export const StanzaView: FC<Props> = ({
         </div>
         {wikipediaData && <WikipediaView {...wikipediaData} />}
       </ColWrapper>
-    </div>
+    </StanzaWrapper>
   );
 };
 
 const addLastComma = (index: number, arr: any[]): "" | ", " => {
   return index === arr.length - 1 ? "" : ", ";
 };
-
-const LinkList = styled.ul`
-  li {
-    display: flex;
-    gap: 8px;
-  }
-
-  a {
-    color: ${COLOR_PRIMARY};
-  }
-`;
-
-const stanzaView = css``;

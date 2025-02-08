@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ListTable } from "./ListTable";
 import { data1 } from "../../../api/all-media/data1";
-import { StanzaWrapper } from "../../../components/StanzaWrapper";
+import { StanzaWrapper } from "../../../components/styled/StanzaWrapper";
 
 const meta: Meta<typeof ListTable> = {
   component: ListTable,

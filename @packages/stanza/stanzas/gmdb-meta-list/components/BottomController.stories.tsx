@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { BottomController } from "./BottomController";
-import { StanzaWrapper } from "../../../components/StanzaWrapper";
+import { StanzaWrapper } from "../../../components/styled/StanzaWrapper";
 
 const meta: Meta<typeof BottomController> = {
   component: BottomController,

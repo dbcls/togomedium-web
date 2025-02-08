@@ -4,11 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "%viewer/*": ["../viewer/src/*"],
-      "%core/*": ["../core/src/*"],
-      "%editor/*": ["../editor/src/*"],
-      "%schema/*": ["../schema/src/*"],
-      "%storybook/*": ["../storybook/src/*"],
+      "%stanza/*": ["../stanza/*"],
     }
   },
   "exclude": ["node_modules", "**/*.spec.ts"],
