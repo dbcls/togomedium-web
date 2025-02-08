@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import Stanza from "togostanza/stanza";
-import { URL_API } from "../../shared/utils/variables";
+import { URL_API } from "../../utils/variables";
 
 type D3Selection = d3.Selection<any, any, any, any>;
 

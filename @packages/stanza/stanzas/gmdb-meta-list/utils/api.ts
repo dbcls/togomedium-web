@@ -1,5 +1,5 @@
-import { makeFormBody } from "../../../shared/utils/getData";
-import { ApiResponse, SimpleObject } from "../../../shared/utils/types";
+import { makeFormBody } from "../../../utils/getData";
+import { ApiResponse, SimpleObject } from "../../../utils/types";
 import { ListApiBody } from "../types";
 
 export const fetchData = async (

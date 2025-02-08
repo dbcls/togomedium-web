@@ -1,7 +1,7 @@
 import { ComponentProps } from "react";
 import { Nullable, Optional } from "yohak-tools";
-import { getData } from "../../../shared/utils/getData";
-import { URL_API } from "../../../shared/utils/variables";
+import { getData } from "../../../utils/getData";
+import { URL_API } from "../../../utils/variables";
 import { StanzaView } from "../components/StanzaView";
 
 export type ViewProps = ComponentProps<typeof StanzaView>;

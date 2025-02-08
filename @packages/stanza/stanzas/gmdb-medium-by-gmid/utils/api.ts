@@ -1,7 +1,7 @@
 import { copy } from "copy-anything";
 import { ComponentProps } from "react";
-import { getData } from "../../../shared/utils/getData";
-import { URL_API } from "../../../shared/utils/variables";
+import { getData } from "../../../utils/getData";
+import { URL_API } from "../../../utils/variables";
 import {
   RecipeCommentProps,
   RecipeTableProps,

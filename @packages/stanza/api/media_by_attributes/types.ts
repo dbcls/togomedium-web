@@ -1,4 +1,4 @@
-import { MediaFinderListApiBody } from "../../shared/utils/types";
+import { MediaFinderListApiBody } from "../../utils/types";
 
 export type MediaByAttributesResponse = MediaFinderListApiBody<"gm_id" | "name">;
 

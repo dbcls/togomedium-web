@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 import React, { ComponentProps, FC } from "react";
 import { AcceptsEmotion, Optional } from "yohak-tools";
-import { CapsuleList } from "../../../shared/components/info-detail/capsuleList";
-import { LineageList } from "../../../shared/components/info-detail/LineageList";
+import { CapsuleList } from "../../../components/info-detail/capsuleList";
+import { LineageList } from "../../../components/info-detail/LineageList";
 import {
   ColorButton,
   ColWrapper,
@@ -10,9 +10,9 @@ import {
   InfoTitle,
   StandardParagraph,
   SubHeading,
-} from "../../../shared/components/info-detail/styles";
-import { WikipediaData, WikipediaView } from "../../../shared/components/info-detail/WikipediaView";
-import { stanzaWrapper } from "../../../shared/styles/common";
+} from "../../../components/info-detail/styles";
+import { WikipediaData, WikipediaView } from "../../../components/info-detail/WikipediaView";
+import { stanzaWrapper } from "../../../styles/common";
 
 const linkNCBI = "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=";
 const linkTogoGenome = "http://togogenome.org/organism/";

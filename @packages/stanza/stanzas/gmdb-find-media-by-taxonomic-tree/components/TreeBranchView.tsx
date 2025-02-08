@@ -8,7 +8,7 @@ import {
   IconExpand,
   IconLoading,
   IconNoChildren,
-} from "../../../shared/components/icons";
+} from "../../../components/icons";
 import {
   COLOR_GRAY300,
   COLOR_GRAY400,
@@ -16,7 +16,7 @@ import {
   COLOR_GRAY_LINE,
   COLOR_PRIMARY,
   COLOR_WHITE,
-} from "../../../shared/styles/variables";
+} from "../../../styles/variables";
 
 export type CheckStatus = "none" | "checked" | "grouped" | "indeterminate";
 export type ToggleIconStatus = "none" | "expand" | "compact" | "loading";

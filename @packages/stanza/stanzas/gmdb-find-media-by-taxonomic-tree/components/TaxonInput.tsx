@@ -6,8 +6,8 @@ import { useDebounceValue } from "usehooks-ts";
 import { AcceptsEmotion } from "yohak-tools";
 import { API_TAXON_BY_NAME } from "../../../api/paths";
 import { TaxonomyQueryResponse } from "../../../api/taxonomy_children/types";
-import { COLOR_GRAY400, COLOR_WHITE } from "../../../shared/styles/variables";
-import { getData } from "../../../shared/utils/getData";
+import { COLOR_GRAY400, COLOR_WHITE } from "../../../styles/variables";
+import { getData } from "../../../utils/getData";
 
 type Props = {} & AcceptsEmotion;
 

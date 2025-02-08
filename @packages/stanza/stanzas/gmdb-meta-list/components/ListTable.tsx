@@ -2,8 +2,8 @@ import { css } from "@emotion/react";
 import { nanoid } from "nanoid";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_PRIMARY_DARK } from "../../../shared/styles/variables";
-import { decodeHTMLEntities } from "../../../shared/utils/string";
+import { COLOR_PRIMARY_DARK } from "../../../styles/variables";
+import { decodeHTMLEntities } from "../../../utils/string";
 import { ListApiBody } from "../types";
 
 type Props = {

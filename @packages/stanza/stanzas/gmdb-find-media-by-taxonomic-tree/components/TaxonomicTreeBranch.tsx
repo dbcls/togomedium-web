@@ -8,7 +8,7 @@ import {
   TaxonomyChildrenParams,
   TaxonomyChildrenResponse,
 } from "../../../api/taxonomy_children/types";
-import { getData } from "../../../shared/utils/getData";
+import { getData } from "../../../utils/getData";
 import { findAscendants, findDescendants } from "../functions/proessTaxonInfo";
 import { useSelectedTaxonMutators, useSelectedTaxonState } from "../states/selectedTaxon";
 import { TaxonInfo, useTaxonListMutators, useTaxonListState } from "../states/taxonList";

@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 import Slider from "@mui/material/Slider";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { AngleLeftIcon } from "../../../shared/components/svg/AngleLeftIcon";
-import { AngleRightIcon } from "../../../shared/components/svg/AngleRightIcon";
-import { DoubleAngleLeftIcon } from "../../../shared/components/svg/DoubleAngleLeftIcon";
-import { DoubleAngleRightIcon } from "../../../shared/components/svg/DoubleAngleRightIcon";
-import { COLOR_GRAY500, COLOR_PRIMARY, COLOR_WHITE } from "../../../shared/styles/variables";
+import { AngleLeftIcon } from "../../../components/svg/AngleLeftIcon";
+import { AngleRightIcon } from "../../../components/svg/AngleRightIcon";
+import { DoubleAngleLeftIcon } from "../../../components/svg/DoubleAngleLeftIcon";
+import { DoubleAngleRightIcon } from "../../../components/svg/DoubleAngleRightIcon";
+import { COLOR_GRAY500, COLOR_PRIMARY, COLOR_WHITE } from "../../../styles/variables";
 import { getPagination } from "../utils/getPagination";
 
 type Props = {

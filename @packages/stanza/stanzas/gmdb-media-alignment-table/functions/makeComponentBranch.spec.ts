@@ -1,7 +1,7 @@
 import { describe, expect, it, test } from "vitest";
 import { makeComponentTree } from "./makeComponentBranch";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { makeRawComponent } from "../../../shared/utils/testing";
+import { makeRawComponent } from "../../../utils/testing";
 import { ROOT_COMPONENT } from "../consts";
 import { RawComponent } from "../types";
 

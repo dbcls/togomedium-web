@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { InfoCell } from "./InfoCell";
-import { PATH_MEDIUM, PATH_TAXON } from "../../../shared/components/consts";
+import { PATH_MEDIUM, PATH_TAXON } from "../../../components/consts";
 
 const meta: Meta<typeof InfoCell> = {
   component: InfoCell,

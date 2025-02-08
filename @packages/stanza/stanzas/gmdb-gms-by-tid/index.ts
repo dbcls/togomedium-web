@@ -1,8 +1,8 @@
 import * as d3 from "d3";
 import Stanza from "togostanza/stanza";
 import { addClass } from "yohak-tools";
-import { getData } from "../../shared/utils/getData";
-import { URL_API } from "../../shared/utils/variables";
+import { getData } from "../../utils/getData";
+import { URL_API } from "../../utils/variables";
 
 type D3Selection = d3.Selection<any, any, any, any>;
 

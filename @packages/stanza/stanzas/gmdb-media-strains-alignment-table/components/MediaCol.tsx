@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { MediaCell } from "./MediaCell";
-import { COLOR_WHITE } from "../../../shared/styles/variables";
+import { COLOR_WHITE } from "../../../styles/variables";
 import { CellInfo } from "../functions/types";
 
 type Props = { mediaList: CellInfo[] } & AcceptsEmotion;

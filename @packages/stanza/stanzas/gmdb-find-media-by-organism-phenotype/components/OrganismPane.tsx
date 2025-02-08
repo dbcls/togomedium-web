@@ -4,7 +4,7 @@ import { AcceptsEmotion } from "yohak-tools";
 import { FoundOrganismsList } from "./FoundOrganismsList";
 import { OrganismTab } from "./OrganismTab";
 import { SelectedOrganismsList } from "./SelectedOrganismsList";
-import { COLOR_WHITE, ROUNDED_CORNER, SIZE1, SIZE2 } from "../../../shared/styles/variables";
+import { COLOR_WHITE, ROUNDED_CORNER, SIZE1, SIZE2 } from "../../../styles/variables";
 import { useOrganismPaginationMutators } from "../states/organismPagination";
 import { useOrganismTabFocusMutators, useOrganismTabFocusState } from "../states/organismTabFocus";
 import { usePhenotypeQueryState } from "../states/phenotypeQuery";

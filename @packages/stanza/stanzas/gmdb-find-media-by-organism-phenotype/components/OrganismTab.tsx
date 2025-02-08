@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { Badge, Tab, Tabs } from "@mui/material";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_GRAY_LINE, SIZE4 } from "../../../shared/styles/variables";
+import { COLOR_GRAY_LINE, SIZE4 } from "../../../styles/variables";
 import {
   OrganismTabName,
   organismTabNames,

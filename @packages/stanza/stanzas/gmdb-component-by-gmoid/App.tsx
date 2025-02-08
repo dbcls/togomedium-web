@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 import { StanzaView } from "./components/StanzaView";
 import { getComponentData, ViewProps } from "./utils/api";
-import { fetchWikipediaData } from "../../shared/components/info-detail/WikipediaView";
+import { fetchWikipediaData } from "../../components/info-detail/WikipediaView";
 
 type Props = {
   stanzaElement?: ShadowRoot;

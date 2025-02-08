@@ -1,5 +1,5 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
-import { filterOutInfo, hasInfo, LabelInfo } from "../../../shared/utils/labelInfo";
+import { filterOutInfo, hasInfo, LabelInfo } from "../../../utils/labelInfo";
 
 const selectedOrganisms = atom<LabelInfo[]>([]);
 

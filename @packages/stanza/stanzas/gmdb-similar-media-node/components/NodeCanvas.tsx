@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC, useEffect, useRef } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_WHITE } from "../../../shared/styles/variables";
+import { COLOR_WHITE } from "../../../styles/variables";
 import { drawGraph } from "../utils/drawGraph";
 import { GraphData } from "../utils/useGraphData";
 

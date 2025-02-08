@@ -1,5 +1,5 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
-import { clone } from "../../../shared/utils/clone";
+import { clone } from "../../../utils/clone";
 
 type QueryObj = { [key: string]: string };
 const phenotypeQuery = atom<QueryObj>({});

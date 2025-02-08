@@ -1,11 +1,11 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "jotai";
-import React, { StrictMode, FC, ReactElement, useEffect, useState } from "react";
+import React, { FC, ReactElement, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import Stanza from "togostanza/stanza";
-import { EmotionCacheProvider } from "./components/EmotionCacheProvider";
-import { muiTheme } from "./components/muiTheme";
+import { EmotionCacheProvider } from "./EmotionCacheProvider";
+import { muiTheme } from "./muiTheme";
 
 const queryClient = new QueryClient();
 const StanzaReactProvider: FC<{ children: ReactElement }> = ({ children }) => {

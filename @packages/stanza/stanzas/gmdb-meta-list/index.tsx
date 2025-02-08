@@ -1,6 +1,6 @@
 import React from "react";
 import App from "./App";
-import { TogoMediumReactStanza } from "../../shared/StanzaReactProvider";
+import { TogoMediumReactStanza } from "../../components/StanzaReactProvider";
 
 export type StanzaParameters = {
   api_url: string;

@@ -2,15 +2,15 @@ import { css } from "@emotion/react";
 import Checkbox from "@mui/material/Checkbox";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { PATH_TAXON } from "../../../shared/components/consts";
+import { PATH_TAXON } from "../../../components/consts";
 import {
   COLOR_GRAY_LINE,
   COLOR_PRIMARY,
   COLOR_WHITE,
   SIZE1,
   SIZE2,
-} from "../../../shared/styles/variables";
-import { LabelInfo } from "../../../shared/utils/labelInfo";
+} from "../../../styles/variables";
+import { LabelInfo } from "../../../utils/labelInfo";
 
 type Props = {
   isChecked: boolean;

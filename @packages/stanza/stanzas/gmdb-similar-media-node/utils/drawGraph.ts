@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { SimulationLinkDatum, SimulationNodeDatum } from "d3";
 import { D3DragEvent } from "d3-drag";
 import { GraphData } from "./useGraphData";
-import { COLOR_ACCENT, COLOR_PRIMARY, COLOR_WHITE } from "../../../shared/styles/variables";
+import { COLOR_ACCENT, COLOR_PRIMARY, COLOR_WHITE } from "../../../styles/variables";
 
 extend([mixPlugin]);
 

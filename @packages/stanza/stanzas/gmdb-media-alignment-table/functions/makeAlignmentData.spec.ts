@@ -4,7 +4,7 @@ import { makeComponentTree } from "./makeComponentBranch";
 import { makeFooterComponents } from "./makeFooterComponents";
 import { mediaAlignmentTableResponse1 } from "../../../api/media-alignment-table/response1";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { makeRawComponent } from "../../../shared/utils/testing";
+import { makeRawComponent } from "../../../utils/testing";
 import { ComponentTrunk, RawComponent } from "../types";
 describe("makeAlignmentData", () => {
   it("should work", () => {

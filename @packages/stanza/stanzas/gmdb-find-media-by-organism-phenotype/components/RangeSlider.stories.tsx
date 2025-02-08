@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { RangeSlider } from "./RangeSlider";
-import { StanzaWrapper } from "../../../shared/components/StanzaWrapper";
+import { StanzaWrapper } from "../../../components/StanzaWrapper";
 
 const meta: Meta<typeof RangeSlider> = {
   component: RangeSlider,

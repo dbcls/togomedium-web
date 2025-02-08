@@ -9,11 +9,11 @@ import {
   OrganismsByPhenotypesResponse,
 } from "../../../api/organisms_by_phenotypes/types";
 import { API_ORGANISMS_BY_PHENOTYPES } from "../../../api/paths";
-import { Pagination } from "../../../shared/components/media-finder/Pagination";
-import { COLOR_GRAY700, FONT_WEIGHT_BOLD, SIZE1 } from "../../../shared/styles/variables";
-import { getData } from "../../../shared/utils/getData";
-import { hasIdOfLabel } from "../../../shared/utils/labelInfo";
-import { MediaFinderListApiBody } from "../../../shared/utils/types";
+import { Pagination } from "../../../components/media-finder/Pagination";
+import { COLOR_GRAY700, FONT_WEIGHT_BOLD, SIZE1 } from "../../../styles/variables";
+import { getData } from "../../../utils/getData";
+import { hasIdOfLabel } from "../../../utils/labelInfo";
+import { MediaFinderListApiBody } from "../../../utils/types";
 import {
   useOrganismPaginationMutators,
   useOrganismPaginationState,

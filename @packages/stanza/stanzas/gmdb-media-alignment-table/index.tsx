@@ -1,7 +1,7 @@
 import React from "react";
 import App from "./App";
-import { TogoMediumReactStanza } from "../../shared/StanzaReactProvider";
-import { stringToArray } from "../../shared/utils/string";
+import { TogoMediumReactStanza } from "../../components/StanzaReactProvider";
+import { stringToArray } from "../../utils/string";
 
 type StanzaParameters = {
   gm_ids: string;

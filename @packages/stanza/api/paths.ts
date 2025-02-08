@@ -1,4 +1,4 @@
-import { URL_API } from "../shared/utils/variables";
+import { URL_API } from "../utils/variables";
 
 export const API_MEDIA_ALIGNMENT = `${URL_API}gmdb_media_alignment_by_gm_ids`;
 export const API_MEDIA_BY_ATTRIBUTES = `${URL_API}gmdb_media_by_attributes`;

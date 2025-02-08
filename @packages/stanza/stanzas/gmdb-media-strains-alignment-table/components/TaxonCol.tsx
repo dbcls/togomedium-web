@@ -2,8 +2,8 @@ import { css } from "@emotion/react";
 import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
 import { AcceptsEmotion, Ease } from "yohak-tools";
 import { TaxonCell } from "./TaxonCell";
-import { COLOR_GRAY_LINE, COLOR_WHITE } from "../../../shared/styles/variables";
-import { capitalizeFirstLetter } from "../../../shared/utils/string";
+import { COLOR_GRAY_LINE, COLOR_WHITE } from "../../../styles/variables";
+import { capitalizeFirstLetter } from "../../../utils/string";
 import { CellInfo, LineageRank } from "../functions/types";
 import { useFilterRankMutators } from "../states/filterRank";
 

@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import React, { FC, useEffect } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { NodeCanvas } from "./NodeCanvas";
-import { stanzaWrapper } from "../../../shared/styles/common";
+import { stanzaWrapper } from "../../../styles/common";
 import { useGraphData } from "../utils/useGraphData";
 
 type Props = {

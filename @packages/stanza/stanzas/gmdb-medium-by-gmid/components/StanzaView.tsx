@@ -3,9 +3,9 @@ import React, { ComponentProps, FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { RecipeComment } from "./RecipeComment";
 import { RecipeTable } from "./RecipeTable";
-import { InfoId, InfoTitle, SubHeading } from "../../../shared/components/info-detail/styles";
-import { stanzaWrapper } from "../../../shared/styles/common";
-import { decodeHTMLEntities } from "../../../shared/utils/string";
+import { InfoId, InfoTitle, SubHeading } from "../../../components/info-detail/styles";
+import { stanzaWrapper } from "../../../styles/common";
+import { decodeHTMLEntities } from "../../../utils/string";
 
 type Props = {
   id: string | undefined;

@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_PRIMARY, COLOR_WHITE } from "../../../shared/styles/variables";
+import { COLOR_PRIMARY, COLOR_WHITE } from "../../../styles/variables";
 import { makeCellHeight } from "../functions/processMediaCell";
 import { CellInfo } from "../functions/types";
 

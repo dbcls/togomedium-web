@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
 import React, { FC } from "react";
-import { PATH_COMPONENT } from "../../../shared/components/consts";
-import { COLOR_GRAY, COLOR_PRIMARY, COLOR_WHITE, SIZE1 } from "../../../shared/styles/variables";
+import { PATH_COMPONENT } from "../../../components/consts";
+import { COLOR_GRAY, COLOR_PRIMARY, COLOR_WHITE, SIZE1 } from "../../../styles/variables";
 
 export type AlignmentCellState = "grouped" | "available" | "none";
 

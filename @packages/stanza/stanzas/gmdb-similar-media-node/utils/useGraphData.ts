@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { haveSameElements } from "../../../shared/utils/arr";
-import { clone } from "../../../shared/utils/clone";
-import { getData } from "../../../shared/utils/getData";
-import { sleep } from "../../../shared/utils/promise";
-import { URL_API } from "../../../shared/utils/variables";
+import { haveSameElements } from "../../../utils/arr";
+import { clone } from "../../../utils/clone";
+import { getData } from "../../../utils/getData";
+import { sleep } from "../../../utils/promise";
+import { URL_API } from "../../../utils/variables";
 import { getMedia } from "../../gmdb-medium-by-gmid/utils/api";
 
 type ProcessStatus = "processing" | "done" | "ready";

@@ -10,11 +10,11 @@ import {
   StandardParagraph,
   SubHeading,
   TagList,
-} from "../../../shared/components/info-detail/styles";
-import { WikipediaData, WikipediaView } from "../../../shared/components/info-detail/WikipediaView";
-import { stanzaWrapper } from "../../../shared/styles/common";
-import { COLOR_PRIMARY } from "../../../shared/styles/variables";
-import { decodeHTMLEntities } from "../../../shared/utils/string";
+} from "../../../components/info-detail/styles";
+import { WikipediaData, WikipediaView } from "../../../components/info-detail/WikipediaView";
+import { stanzaWrapper } from "../../../styles/common";
+import { COLOR_PRIMARY } from "../../../styles/variables";
+import { decodeHTMLEntities } from "../../../utils/string";
 import { ComponentClass, LinkInfo } from "../utils/api";
 
 type Props = {

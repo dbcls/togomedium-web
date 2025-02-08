@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { RangeSlider } from "./RangeSlider";
 import { SelectBox } from "./SelectBox";
-import { COLOR_WHITE } from "../../../shared/styles/variables";
+import { COLOR_WHITE } from "../../../styles/variables";
 import { usePhenotypeQueryMutators } from "../states/phenotypeQuery";
 
 type Props = {} & AcceptsEmotion;

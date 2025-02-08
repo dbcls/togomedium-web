@@ -2,8 +2,8 @@ import { css } from "@emotion/react";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { OrganismListItem } from "./OrganismListItem";
-import { Pagination } from "../../../shared/components/media-finder/Pagination";
-import { LabelInfo } from "../../../shared/utils/labelInfo";
+import { Pagination } from "../../../components/media-finder/Pagination";
+import { LabelInfo } from "../../../utils/labelInfo";
 import {
   useSelectedOrganismsMutators,
   useSelectedOrganismsState,

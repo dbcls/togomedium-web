@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
-import { IconBlank, IconCompact, IconExpand } from "../../../shared/components/icons";
-import { COLOR_WHITE, SIZE1, SIZE3, SIZE4 } from "../../../shared/styles/variables";
-import { decodeHTMLEntities } from "../../../shared/utils/string";
+import { IconBlank, IconCompact, IconExpand } from "../../../components/icons";
+import { COLOR_WHITE, SIZE1, SIZE3, SIZE4 } from "../../../styles/variables";
+import { decodeHTMLEntities } from "../../../utils/string";
 import { WIDTH_ALIGNMENT_CELL } from "../consts";
 import { useComponentTreeMutators } from "../states/componentTree";
 

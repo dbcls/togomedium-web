@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { ComponentProps, FC } from "react";
 import { AcceptsEmotion, Nullable } from "yohak-tools";
-import { LineageList } from "../../../shared/components/info-detail/LineageList";
+import { LineageList } from "../../../components/info-detail/LineageList";
 import {
   ColorButton,
   ColWrapper,
@@ -9,8 +9,8 @@ import {
   InfoTitle,
   SubHeading,
   TagList,
-} from "../../../shared/components/info-detail/styles";
-import { stanzaWrapper } from "../../../shared/styles/common";
+} from "../../../components/info-detail/styles";
+import { stanzaWrapper } from "../../../styles/common";
 
 type Props = {
   strainId: string;

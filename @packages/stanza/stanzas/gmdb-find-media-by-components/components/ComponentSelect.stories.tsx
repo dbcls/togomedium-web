@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ComponentSelect } from "./ComponentSelect";
-import { COLOR_WHITE, SIZE2 } from "../../../shared/styles/variables";
+import { COLOR_WHITE, SIZE2 } from "../../../styles/variables";
 
 const meta: Meta<typeof ComponentSelect> = {
   component: ComponentSelect,

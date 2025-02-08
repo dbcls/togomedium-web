@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_GRAY_LINE, COLOR_PRIMARY_DARK } from "../../../shared/styles/variables";
-import { decodeHTMLEntities } from "../../../shared/utils/string";
+import { COLOR_GRAY_LINE, COLOR_PRIMARY_DARK } from "../../../styles/variables";
+import { decodeHTMLEntities } from "../../../utils/string";
 
 type Props = {
   index: number;

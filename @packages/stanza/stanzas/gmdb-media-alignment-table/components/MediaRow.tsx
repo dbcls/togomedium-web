@@ -2,9 +2,9 @@ import { css } from "@emotion/react";
 import React, { ComponentProps, FC } from "react";
 import { AlignmentCell } from "./AlignmentCell";
 import { InfoCell } from "./InfoCell";
-import { PATH_MEDIUM, PATH_TAXON } from "../../../shared/components/consts";
-import { COLOR_WHITE } from "../../../shared/styles/variables";
-import { LabelInfo } from "../../../shared/utils/labelInfo";
+import { PATH_MEDIUM, PATH_TAXON } from "../../../components/consts";
+import { COLOR_WHITE } from "../../../styles/variables";
+import { LabelInfo } from "../../../utils/labelInfo";
 import { useIsMediaExpendedState } from "../states/isMediaExpanded";
 import { useIsOrganismsExpendedState } from "../states/isOrganismsExpanded";
 

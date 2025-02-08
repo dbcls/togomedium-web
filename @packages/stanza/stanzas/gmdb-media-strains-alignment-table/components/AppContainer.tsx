@@ -4,7 +4,7 @@ import { AcceptsEmotion } from "yohak-tools";
 import { MediaCol } from "./MediaCol";
 import { TaxonCol } from "./TaxonCol";
 import { MediaStrainsAlimentResponse } from "../../../api/media_strains_alignment/types";
-import { COLOR_GRAY_LINE } from "../../../shared/styles/variables";
+import { COLOR_GRAY_LINE } from "../../../styles/variables";
 import { processDisplayData } from "../functions/processMediaCell";
 import { lineageRanks } from "../functions/types";
 import { useFilterRankState } from "../states/filterRank";

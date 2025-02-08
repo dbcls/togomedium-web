@@ -1,8 +1,8 @@
 import { ComponentProps } from "react";
-import { ApiLineage, parseLineage } from "../../../shared/components/info-detail/LineageList";
-import { getData } from "../../../shared/utils/getData";
-import { unescapeJsonString } from "../../../shared/utils/string";
-import { URL_API } from "../../../shared/utils/variables";
+import { ApiLineage, parseLineage } from "../../../components/info-detail/LineageList";
+import { getData } from "../../../utils/getData";
+import { unescapeJsonString } from "../../../utils/string";
+import { URL_API } from "../../../utils/variables";
 import { StanzaView } from "../components/StanzaView";
 
 export type ViewProps = ComponentProps<typeof StanzaView>;

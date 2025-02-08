@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import CircularProgress from "@mui/material/CircularProgress";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_WHITE } from "../../../shared/styles/variables";
+import { COLOR_WHITE } from "../../../styles/variables";
 
 type Props = { showLoading: boolean; errorMessage: string } & AcceptsEmotion;
 

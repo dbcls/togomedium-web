@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { Optional } from "yohak-tools";
 import { StanzaView } from "./components/StanzaView";
 import { getTaxonData } from "./utils/api";
-import { fetchWikipediaData } from "../../shared/components/info-detail/WikipediaView";
+import { fetchWikipediaData } from "../../components/info-detail/WikipediaView";
 
 type Props = {
   stanzaElement?: ShadowRoot;

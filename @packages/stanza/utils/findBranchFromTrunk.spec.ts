@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { findBranchFromTrunk } from "./findBranchFromTrunk";
 import { makeRawComponent } from "./testing";
-import { makeComponentTree } from "../../stanzas/gmdb-media-alignment-table/functions/makeComponentBranch";
-import { ComponentTrunk } from "../../stanzas/gmdb-media-alignment-table/types";
+import { makeComponentTree } from "../stanzas/gmdb-media-alignment-table/functions/makeComponentBranch";
+import { ComponentTrunk } from "../stanzas/gmdb-media-alignment-table/types";
 
 describe("findBranchFromTrunk", () => {
   it("should find branch", () => {

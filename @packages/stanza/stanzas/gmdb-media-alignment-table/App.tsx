@@ -4,8 +4,8 @@ import React, { useCallback } from "react";
 import { ScrollableTable } from "./components/ScrollableTable";
 import { MediaAlignmentTableResponse } from "../../api/media-alignment-table/types";
 import { API_MEDIA_ALIGNMENT } from "../../api/paths";
-import { COLOR_WHITE, SIZE1 } from "../../shared/styles/variables";
-import { getData } from "../../shared/utils/getData";
+import { COLOR_WHITE, SIZE1 } from "../../styles/variables";
+import { getData } from "../../utils/getData";
 
 export type AppProps = {
   gm_ids: string[];

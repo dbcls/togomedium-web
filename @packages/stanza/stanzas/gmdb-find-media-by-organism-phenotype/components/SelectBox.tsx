@@ -3,7 +3,7 @@ import { Autocomplete, Chip, FormControl, TextField } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import React, { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_WHITE } from "../../../shared/styles/variables";
+import { COLOR_WHITE } from "../../../styles/variables";
 
 type Props = {
   label: string;

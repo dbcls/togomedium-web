@@ -3,16 +3,16 @@ import React, { FC, useEffect } from "react";
 import { TaxonomicTreeSection } from "./TaxonomicTreeSection";
 import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
 import { API_MEDIA_BY_TAXON } from "../../../api/paths";
-import { queryPane, subPane, wrapper } from "../../../shared/components/media-finder/appStyles";
-import { MediaPane } from "../../../shared/components/media-finder/MediaPane";
-import { useFoundMediaMutators } from "../../../shared/state/media-finder/foundMedia";
-import { useIsMediaLoadingMutators } from "../../../shared/state/media-finder/isMediaLoading";
+import { queryPane, subPane, wrapper } from "../../../components/media-finder/appStyles";
+import { MediaPane } from "../../../components/media-finder/MediaPane";
+import { useFoundMediaMutators } from "../../../state/media-finder/foundMedia";
+import { useIsMediaLoadingMutators } from "../../../state/media-finder/isMediaLoading";
 import {
   useMediaPaginationMutators,
   useMediaPaginationState,
-} from "../../../shared/state/media-finder/mediaPagination";
-import { useQueryDataMutators } from "../../../shared/state/media-finder/queryData";
-import { getData } from "../../../shared/utils/getData";
+} from "../../../state/media-finder/mediaPagination";
+import { useQueryDataMutators } from "../../../state/media-finder/queryData";
+import { getData } from "../../../utils/getData";
 import { useSelectedTaxonState } from "../states/selectedTaxon";
 
 type Props = {

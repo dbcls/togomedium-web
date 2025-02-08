@@ -1,5 +1,5 @@
 import { App } from "./App";
-import { TogoMediumReactStanza } from "../../shared/StanzaReactProvider";
+import { TogoMediumReactStanza } from "../../components/StanzaReactProvider";
 
 type StanzaParameters = {
   gm_id: string;

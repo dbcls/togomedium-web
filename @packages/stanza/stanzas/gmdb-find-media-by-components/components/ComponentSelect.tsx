@@ -3,9 +3,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import React, { FC, SyntheticEvent, useState } from "react";
 import { AllComponentsResponse } from "../../../api/all-components/types";
 import { API_COMPONENTS_WITH_COMPONENTS } from "../../../api/paths";
-import { getData } from "../../../shared/utils/getData";
-import { LabelInfo } from "../../../shared/utils/labelInfo";
-import { decodeHTMLEntities } from "../../../shared/utils/string";
+import { getData } from "../../../utils/getData";
+import { LabelInfo } from "../../../utils/labelInfo";
+import { decodeHTMLEntities } from "../../../utils/string";
 
 type Props = {
   onChangeSelection: (ids: string[]) => void;

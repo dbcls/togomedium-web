@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { decodeHTMLEntities } from "../../../shared/utils/string";
+import { decodeHTMLEntities } from "../../../utils/string";
 
 type Props = {
   index: number;

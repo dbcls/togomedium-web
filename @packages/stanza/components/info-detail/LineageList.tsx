@@ -3,7 +3,7 @@ import React, { ComponentProps, FC } from "react";
 import {
   LineageRank,
   lineageRanks,
-} from "../../../stanzas/gmdb-media-strains-alignment-table/functions/types";
+} from "../../stanzas/gmdb-media-strains-alignment-table/functions/types";
 import { COLOR_GRAY_LINE, COLOR_PRIMARY } from "../../styles/variables";
 import { capitalizeFirstLetter, makeSpeciesName } from "../../utils/string";
 
