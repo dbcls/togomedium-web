@@ -1,0 +1,19 @@
+{
+  "name": "@packages/storybook",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "yohak-tools": "0.1.18"
+  },
+  "devDependencies": {
+    "@mui/material": "^6.3.0",
+    "@tanstack/react-query": "^5.66.0",
+    "@tanstack/react-query-devtools": "^5.51.11",
+    "jotai": "^2.11.1"
+  }
+}

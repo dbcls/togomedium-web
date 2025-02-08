@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["src", ".storybook/preview.tsx"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "%viewer/*": ["../viewer/src/*"],
+      "%core/*": ["../core/src/*"],
+      "%editor/*": ["../editor/src/*"],
+      "%schema/*": ["../schema/src/*"],
+      "%storybook/*": ["../storybook/src/*"],
+    }
+  },
+  "exclude": ["node_modules", "**/*.spec.ts"],
+  "references": [{ "path": "./tsconfig.node.json"}]
+}
