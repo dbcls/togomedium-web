@@ -1,27 +1,19 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { decodeHTMLEntities } from "../../../utils/string";
+import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
   index: number;
   comment: string;
-} & AcceptsEmotion;
-
-export const RecipeComment: FC<Props> = ({ css, className, comment }) => {
-  return (
-    <div
-      css={[recipeComments, css]}
-      className={className}
-    >
-      {parseText(comment)}
-    </div>
-  );
 };
 
-const recipeComments = css`
-  margin: 4px 0;
-`;
+export const RecipeComment: FC<Props> = ({ comment }) => {
+  return <Wrapper>{parseText(comment)}</Wrapper>;
+};
+
+const Wrapper = styled("div")({
+  margin: "4px 0",
+});
 
 const parseText = (str: string) => {
   return decodeHTMLEntities(str.replace(/℃/g, "°C"));

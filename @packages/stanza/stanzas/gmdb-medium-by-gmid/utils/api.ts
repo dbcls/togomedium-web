@@ -1,13 +1,13 @@
 import { copy } from "copy-anything";
 import { ComponentProps } from "react";
-import { getData } from "../../../utils/getData";
-import { URL_API } from "../../../utils/variables";
 import {
   RecipeCommentProps,
   RecipeTableProps,
   ReferencingRecipe,
   StanzaView,
-} from "../components/StanzaView";
+} from "%stanza/stanzas/gmdb-medium-by-gmid/components/StanzaView";
+import { getData } from "%stanza/utils/getData";
+import { URL_API } from "%stanza/utils/variables";
 
 export type ViewProps = ComponentProps<typeof StanzaView>;
 export const getMedia = async (gm_id: string) => {

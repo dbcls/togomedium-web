@@ -1,8 +1,7 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_GRAY_LINE, COLOR_PRIMARY_DARK } from "../../../styles/variables";
-import { decodeHTMLEntities } from "../../../utils/string";
+import { COLOR_GRAY_LINE, COLOR_PRIMARY_DARK } from "%stanza/styles/variables";
+import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
   index: number;
@@ -18,23 +17,20 @@ type Props = {
     volume: string;
     unit: string;
   }[];
-} & AcceptsEmotion;
+};
 
-export const RecipeTable: FC<Props> = ({ css, className, name, items, referenceId }) => {
+export const RecipeTable: FC<Props> = ({ name, items, referenceId }) => {
   return (
-    <div
-      css={[recipeTable, css]}
-      className={className}
-    >
-      <div css={titleWrapper}>
-        <h4 css={titleStyle}>{name}</h4>
+    <div>
+      <TitleWrapper>
+        <h4>{name}</h4>
         {referenceId && (
           <span>
             (See also <a href={`/medium/${referenceId}`}>{referenceId}</a>)
           </span>
         )}
-      </div>
-      <table css={tableStyle}>
+      </TitleWrapper>
+      <Table>
         <thead>
           <tr>
             <th className="id">GMO ID</th>
@@ -73,69 +69,73 @@ export const RecipeTable: FC<Props> = ({ css, className, name, items, referenceI
             );
           })}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };
 
-const recipeTable = css``;
+const TitleWrapper = styled("div")({
+  marginTop: 16,
+  display: "flex",
+  gap: 16,
+  span: {
+    paddingTop: 2,
+  },
+  a: {
+    color: COLOR_PRIMARY_DARK,
+  },
 
-const titleWrapper = css`
-  margin-top: 16px;
-  display: flex;
-  gap: 16px;
-  span {
-    padding-top: 2px;
-  }
-  a {
-    color: ${COLOR_PRIMARY_DARK};
-  }
-`;
+  h4: {
+    fontSize: 18,
+  },
+});
 
-const titleStyle = css`
-  font-size: 18px;
-`;
-
-const tableStyle = css`
-  width: 100%;
-  border-collapse: collapse;
-  margin: 4px 0 16px;
-  border: 1px solid ${COLOR_GRAY_LINE};
-  a {
-    color: ${COLOR_PRIMARY_DARK};
-  }
-  th,
-  td {
-    border: 1px solid ${COLOR_GRAY_LINE};
-    padding: 8px;
-    text-align: left;
-  }
-  tbody {
-    tr:nth-of-type(odd) {
-      background-color: #f2f2f2;
-    }
-  }
-  .id {
-    width: 10%;
-    white-space: nowrap;
-  }
-  .name {
-    width: 35%;
-  }
-  .volume {
-    width: 10%;
-    white-space: nowrap;
-    span {
-      display: inline-block;
-      &:first-of-type {
-        width: 60%;
-        text-align: right;
-        box-sizing: border-box;
-        padding-right: 4px;
-      }
-      &:last-of-type {
-        width: 40%;
-      }
-    }
-  }
-`;
+const Table = styled("table")({
+  width: "100%",
+  borderCollapse: "collapse",
+  margin: "4px 0 16px",
+  border: `1px solid ${COLOR_GRAY_LINE}`,
+  a: {
+    color: COLOR_PRIMARY_DARK,
+  },
+  th: {
+    border: `1px solid ${COLOR_GRAY_LINE}`,
+    padding: 8,
+    textAlign: "left",
+  },
+  td: {
+    border: `1px solid ${COLOR_GRAY_LINE}`,
+    padding: 8,
+    textAlign: "left",
+  },
+  tbody: {
+    tr: {
+      "&:nth-of-type(odd)": {
+        backgroundColor: "#f2f2f2",
+      },
+    },
+  },
+  ".id": {
+    width: "10%",
+    whiteSpace: "nowrap",
+  },
+  ".name": {
+    width: "35%",
+  },
+  ".volume": {
+    width: "10%",
+    whiteSpace: "nowrap",
+    span: {
+      display: "inline-block",
+      "&:first-of-type": {
+        width: "60%",
+        textAlign: "right",
+        boxSizing: "border-box",
+        paddingRight: 4,
+      },
+      "&:last-of-type": {
+        width: "40%",
+      },
+    },
+  },
+});

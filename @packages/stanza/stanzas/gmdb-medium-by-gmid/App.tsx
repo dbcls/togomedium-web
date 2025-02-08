@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
-import { StanzaView } from "./components/StanzaView";
-import { getMedia } from "./utils/api";
+import { StanzaView } from "%stanza/stanzas/gmdb-medium-by-gmid/components/StanzaView";
+import { getMedia } from "%stanza/stanzas/gmdb-medium-by-gmid/utils/api";
 
 type Props = {
   gm_id: string;

@@ -1,11 +1,11 @@
-import { css } from "@emotion/react";
 import React, { ComponentProps, FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { RecipeComment } from "./RecipeComment";
-import { RecipeTable } from "./RecipeTable";
-import { InfoId, InfoTitle, SubHeading } from "../../../components/info-detail/styles";
-import { stanzaWrapper } from "../../../styles/common";
-import { decodeHTMLEntities } from "../../../utils/string";
+import { InfoId } from "%stanza/components/styled/InfoId";
+import { InfoTitle } from "%stanza/components/styled/InfoTitle";
+import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
+import { SubHeading } from "%stanza/components/styled/SubHeading";
+import { RecipeComment } from "%stanza/stanzas/gmdb-medium-by-gmid/components/RecipeComment";
+import { RecipeTable } from "%stanza/stanzas/gmdb-medium-by-gmid/components/RecipeTable";
+import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
   id: string | undefined;
@@ -16,7 +16,7 @@ type Props = {
   ph: string | undefined;
   components: ComponentRecipe[];
   extraComponents: ReferencingRecipe[];
-} & AcceptsEmotion;
+};
 
 export type RecipeTableProps = ComponentProps<typeof RecipeTable>;
 export type RecipeCommentProps = ComponentProps<typeof RecipeComment>;
@@ -24,8 +24,6 @@ export type ComponentRecipe = RecipeTableProps | RecipeCommentProps;
 export type ReferencingRecipe = { components: ComponentRecipe[]; id: string };
 
 export const StanzaView: FC<Props> = ({
-  css,
-  className,
   id,
   originalId,
   srcUrl,
@@ -36,10 +34,7 @@ export const StanzaView: FC<Props> = ({
   extraComponents,
 }) => {
   return (
-    <div
-      css={[stanzaView, css, stanzaWrapper]}
-      className={className}
-    >
+    <StanzaWrapper>
       <InfoId>
         <span>Growth Medium ID:&nbsp;</span>
         <span>{id}</span>
@@ -108,8 +103,6 @@ export const StanzaView: FC<Props> = ({
           </div>
         );
       })}
-    </div>
+    </StanzaWrapper>
   );
 };
-
-const stanzaView = css``;
