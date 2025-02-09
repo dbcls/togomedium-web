@@ -1,16 +1,13 @@
-import { css } from "@emotion/react";
 import React, { ComponentProps, FC } from "react";
-import { AcceptsEmotion, Nullable } from "yohak-tools";
-import { LineageList } from "../../../components/info-detail/LineageList";
-import {
-  ColorButton,
-  ColWrapper,
-  InfoId,
-  InfoTitle,
-  SubHeading,
-  TagList,
-} from "../../../components/info-detail/styles";
-import { stanzaWrapper } from "../../../styles/common";
+import { Nullable } from "yohak-tools";
+import { LineageList } from "%stanza/components/info-detail/LineageList";
+import { ColorButton } from "%stanza/components/styled/ColorButton";
+import { ColWrapper } from "%stanza/components/styled/ColWrapper";
+import { InfoId } from "%stanza/components/styled/InfoId";
+import { InfoTitle } from "%stanza/components/styled/InfoTitle";
+import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
+import { SubHeading } from "%stanza/components/styled/SubHeading";
+import { TagList } from "%stanza/components/styled/TagList";
 
 type Props = {
   strainId: string;
@@ -26,21 +23,11 @@ type Props = {
     authorityName: string;
     lineage: ComponentProps<typeof LineageList>["lineage"];
   }>;
-} & AcceptsEmotion;
+};
 
-export const StanzaView: FC<Props> = ({
-  css,
-  className,
-  strainId,
-  strainName,
-  infoSources,
-  taxonomy,
-}) => {
+export const StanzaView: FC<Props> = ({ strainId, strainName, infoSources, taxonomy }) => {
   return (
-    <div
-      css={[stanzaView, css, stanzaWrapper]}
-      className={className}
-    >
+    <StanzaWrapper>
       <ColWrapper>
         <div>
           <InfoId>
@@ -69,7 +56,6 @@ export const StanzaView: FC<Props> = ({
           )}
         </div>
       </ColWrapper>
-    </div>
+    </StanzaWrapper>
   );
 };
-const stanzaView = css``;

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
-import { StanzaView } from "./components/StanzaView";
-import { getStrainData } from "./utils/api";
+import { StanzaView } from "%stanza/stanzas/gmdb-strain-by-strainid/components/StanzaView";
+import { getStrainData } from "%stanza/stanzas/gmdb-strain-by-strainid/utils/api";
 
 type Props = {
   stanzaElement?: ShadowRoot;
