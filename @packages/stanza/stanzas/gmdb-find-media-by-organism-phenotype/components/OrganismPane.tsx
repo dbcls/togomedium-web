@@ -4,7 +4,7 @@ import { AcceptsEmotion } from "yohak-tools";
 import { FoundOrganismsList } from "./FoundOrganismsList";
 import { OrganismTab } from "./OrganismTab";
 import { SelectedOrganismsList } from "./SelectedOrganismsList";
-import { COLOR_WHITE, ROUNDED_CORNER, SIZE1, SIZE2 } from "../../../styles/variables";
+import { COLOR_WHITE, ROUNDED_CORNER_STYLE, SIZE1, SIZE2 } from "../../../styles/variables";
 import { useOrganismPaginationMutators } from "../states/organismPagination";
 import { useOrganismTabFocusMutators, useOrganismTabFocusState } from "../states/organismTabFocus";
 import { usePhenotypeQueryState } from "../states/phenotypeQuery";
@@ -38,7 +38,7 @@ const wrapper = css`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  ${ROUNDED_CORNER};
+  ${ROUNDED_CORNER_STYLE};
   padding: ${SIZE1};
   background-color: ${COLOR_WHITE};
 `;

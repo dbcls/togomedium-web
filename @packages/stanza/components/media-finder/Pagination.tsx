@@ -1,7 +1,7 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { SIZE1 } from "../../styles/variables";
+import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   total: number;
@@ -12,8 +12,6 @@ type Props = {
 } & AcceptsEmotion;
 
 export const Pagination: FC<Props> = ({
-  css,
-  className,
   total,
   current,
   displayLength,
@@ -21,10 +19,7 @@ export const Pagination: FC<Props> = ({
   onClickPrev,
 }) => {
   return (
-    <div
-      css={[pagination, css]}
-      className={className}
-    >
+    <Wrapper>
       <div>
         {current > 0 && (
           <input
@@ -42,7 +37,7 @@ export const Pagination: FC<Props> = ({
         )}
       </div>
       <div>{makeDisplayMessage(total, current, displayLength)}</div>
-    </div>
+    </Wrapper>
   );
 };
 
@@ -55,13 +50,13 @@ const makeDisplayMessage = (total: number, current: number, displayLength: numbe
   }
 };
 
-const pagination = css`
-  display: flex;
-  justify-content: space-between;
-  margin-top: ${SIZE1};
-  input[type="button"] {
-    cursor: pointer;
-    padding: 0 ${SIZE1};
-    margin-right: ${SIZE1};
-  }
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  justifyContent: "space-between",
+  marginTop: THEME.SIZE.S1,
+  "& input[type='button']": {
+    cursor: "pointer",
+    paddingInline: THEME.SIZE.S1,
+    marginRight: THEME.SIZE.S1,
+  },
+});

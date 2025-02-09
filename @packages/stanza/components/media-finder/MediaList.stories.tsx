@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps, useEffect } from "react";
-import { FoundMediaList } from "./FoundMediaList";
-import { FoundMedia, useFoundMediaMutators } from "../../state/media-finder/foundMedia";
+import { FoundMediaList } from "%stanza/components/media-finder/FoundMediaList";
+import { FoundMedia, useFoundMediaMutators } from "%stanza/state/media-finder/foundMedia";
 
 type WithCustomArgs = { media: FoundMedia } & ComponentProps<typeof FoundMediaList>;
 const meta: Meta<WithCustomArgs> = {

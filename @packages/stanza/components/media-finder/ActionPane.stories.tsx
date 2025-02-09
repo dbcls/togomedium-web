@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps, useEffect } from "react";
-import { ActionPane } from "./ActionPane";
-import { useSelectedMediaMutators } from "../../state/media-finder/selectedMedia";
-import { LabelInfo } from "../../utils/labelInfo";
+import { ActionPane } from "%stanza/components/media-finder/ActionPane";
+import { useSelectedMediaMutators } from "%stanza/state/media-finder/selectedMedia";
+import { LabelInfo } from "%stanza/utils/labelInfo";
 
 type WithCustomArgs = { selectedMedia: LabelInfo[] } & ComponentProps<typeof ActionPane>;
 const meta: Meta<WithCustomArgs> = {

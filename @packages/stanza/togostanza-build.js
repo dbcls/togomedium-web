@@ -10,6 +10,10 @@ export default function config(environment) {
           find: /^%stanza\//,
           replacement: join(__dirname, "../", "stanza/"),
         },
+        {
+          find: /^%storybook\//,
+          replacement: join(__dirname, "../", "storybook/src/"),
+        },
         // {
         //   find: /^%core\//,
         //   replacement: join(__dirname, "../", "core/src/"),

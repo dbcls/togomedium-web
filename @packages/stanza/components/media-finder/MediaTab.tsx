@@ -1,19 +1,18 @@
-import { css } from "@emotion/react";
-import { Badge, Tab, Tabs } from "@mui/material";
+import { Badge, SxProps, Tab, Tabs } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
 import {
   MediaTabName,
   mediaTabNames,
   useMediaTabFocusMutators,
   useMediaTabFocusState,
-} from "../../state/media-finder/mediaTabFocus";
-import { useSelectedMediaState } from "../../state/media-finder/selectedMedia";
-import { COLOR_GRAY_LINE, SIZE4 } from "../../styles/variables";
+} from "%stanza/state/media-finder/mediaTabFocus";
+import { useSelectedMediaState } from "%stanza/state/media-finder/selectedMedia";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = {} & AcceptsEmotion;
+type Props = {};
 
-export const MediaTab: FC<Props> = ({ css, className }) => {
+export const MediaTab: FC<Props> = () => {
   const tabFocus = useMediaTabFocusState();
   const { setMediaTabFocus } = useMediaTabFocusMutators();
   const selected = useSelectedMediaState();
@@ -21,10 +20,7 @@ export const MediaTab: FC<Props> = ({ css, className }) => {
     setMediaTabFocus(newValue);
   };
   return (
-    <div
-      css={[wrapper, css]}
-      className={className}
-    >
+    <Wrapper>
       <Tabs
         value={tabFocus}
         onChange={handleChange}
@@ -43,7 +39,7 @@ export const MediaTab: FC<Props> = ({ css, className }) => {
                   </Badge>
                 }
                 value={label}
-                css={tabCSS}
+                sx={tabStyles}
               />
             );
           }
@@ -52,27 +48,24 @@ export const MediaTab: FC<Props> = ({ css, className }) => {
               key={label}
               label={label}
               value={label}
-              css={tabCSS}
+              sx={tabStyles}
             />
           );
         })}
       </Tabs>
-    </div>
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  width: 100%;
-  border-bottom: 1px solid ${COLOR_GRAY_LINE};
-  & > * {
-    position: relative;
-    top: 1px;
-  }
-`;
+const Wrapper = styled("div")({
+  width: "100%",
+  borderBottom: `1px solid ${THEME.COLOR.GRAY_LINE}`,
+  "& > *": {
+    position: "relative",
+    top: "1px",
+  },
+});
 
-const tabCSS = css`
-  text-transform: none;
-  padding-left: ${SIZE4};
-  padding-right: ${SIZE4};
-  //width: 200px;
-`;
+const tabStyles: SxProps = {
+  textTransform: "none",
+};

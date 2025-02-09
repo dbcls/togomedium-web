@@ -1,6 +1,9 @@
 import { css } from "@emotion/react";
 import { COLOR_TEXT, COLOR_WHITE } from "./variables";
 
+/**
+ * @deprecated
+ */
 export const stanzaWrapper = css`
   position: relative;
   font-size: 16px;

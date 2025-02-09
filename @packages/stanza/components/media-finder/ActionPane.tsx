@@ -1,18 +1,11 @@
-import { css } from "@emotion/react";
 import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import {
   useSelectedMediaMutators,
   useSelectedMediaState,
-} from "../../state/media-finder/selectedMedia";
-import {
-  COLOR_WHITE,
-  FONT_WEIGHT_MEDIUM,
-  ROUNDED_CORNER,
-  SIZE05,
-  SIZE1,
-  SIZE2,
-} from "../../styles/variables";
+} from "%stanza/state/media-finder/selectedMedia";
+import { THEME } from "%stanza/styles/theme";
 
 type Props = { actionLabel: string; dispatchEvent: (gmIds: string[]) => void };
 
@@ -24,9 +17,9 @@ export const ActionPane: FC<Props> = ({ actionLabel, dispatchEvent }) => {
     dispatchEvent(selectedMedia.map((item) => item.id));
   };
   return (
-    <div css={wrapper}>
+    <Wrapper>
       <p className={"info"}>{getInfoText(selectedMedia.length)}</p>
-      <div css={buttonWrapper}>
+      <ButtonWrapper>
         <Button
           variant="contained"
           disableElevation={true}
@@ -43,8 +36,8 @@ export const ActionPane: FC<Props> = ({ actionLabel, dispatchEvent }) => {
         >
           Clear selection
         </Button>
-      </div>
-    </div>
+      </ButtonWrapper>
+    </Wrapper>
   );
 };
 
@@ -58,24 +51,24 @@ const getInfoText = (mediaLength: number): string => {
   }
 };
 
-const wrapper = css`
-  ${ROUNDED_CORNER};
-  background-color: ${COLOR_WHITE};
-  padding: ${SIZE1} ${SIZE2};
+const Wrapper = styled("div")({
+  borderRadius: THEME.ROUND.BASE,
+  backgroundColor: THEME.COLOR.WHITE,
+  paddingBlock: THEME.SIZE.S1,
+  paddingInline: THEME.SIZE.S2,
+  "& p.info": {
+    marginBottom: THEME.SIZE.S05,
+    fontSize: 18,
+    fontWeight: THEME.FONT_WEIGHT.MEDIUM,
+  },
+});
 
-  p.info {
-    margin-bottom: ${SIZE05};
-    font-size: 18px;
-    ${FONT_WEIGHT_MEDIUM};
-  }
-`;
+const ButtonWrapper = styled("div")({
+  display: "flex",
+  gap: THEME.SIZE.S1,
 
-const buttonWrapper = css`
-  display: flex;
-  gap: ${SIZE1};
-
-  & > * {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
-`;
+  "& > *": {
+    flexGrow: 1,
+    flexBasis: 0,
+  },
+});

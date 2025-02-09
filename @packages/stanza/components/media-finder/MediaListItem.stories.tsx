@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { MediaListItem } from "./MediaListItem";
+import { MediaListItem } from "%stanza/components/media-finder/MediaListItem";
 
 const meta: Meta<typeof MediaListItem> = {
   component: MediaListItem,

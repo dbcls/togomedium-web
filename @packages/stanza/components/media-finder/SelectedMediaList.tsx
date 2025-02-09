@@ -1,17 +1,15 @@
-import { css } from "@emotion/react";
 import React, { FC, useMemo, useState } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { MediaListItem } from "./MediaListItem";
-import { Pagination } from "./Pagination";
+import { MediaListItem } from "%stanza/components/media-finder/MediaListItem";
+import { Pagination } from "%stanza/components/media-finder/Pagination";
 import {
   useSelectedMediaMutators,
   useSelectedMediaState,
-} from "../../state/media-finder/selectedMedia";
+} from "%stanza/state/media-finder/selectedMedia";
 
-type Props = {} & AcceptsEmotion;
+type Props = {};
 
 const SHOW_COUNT = 10;
-export const SelectedMediaList: FC<Props> = ({ css, className }) => {
+export const SelectedMediaList: FC<Props> = () => {
   const selectedMedia = useSelectedMediaState();
   const { toggleMediumSelection } = useSelectedMediaMutators();
   const [current, setCurrent] = useState<number>(0);
@@ -27,10 +25,7 @@ export const SelectedMediaList: FC<Props> = ({ css, className }) => {
   );
 
   return (
-    <div
-      css={[selectedMediaList, css]}
-      className={className}
-    >
+    <div>
       <div>
         {data.map((item) => (
           <MediaListItem
@@ -55,5 +50,3 @@ export const SelectedMediaList: FC<Props> = ({ css, className }) => {
     </div>
   );
 };
-
-const selectedMediaList = css``;

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { ComponentSelect } from "./ComponentSelect";
-import { useSelectedAttributesMutators } from "../states/selectedAttributes";
+import { ComponentSelect } from "%stanza/stanzas/gmdb-find-media-by-components/components/ComponentSelect";
+import { useSelectedAttributesMutators } from "%stanza/stanzas/gmdb-find-media-by-components/states/selectedAttributes";
 
 type Props = {};
 

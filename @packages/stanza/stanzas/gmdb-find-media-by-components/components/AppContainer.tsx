@@ -1,22 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, useEffect } from "react";
-import { AttributesSection } from "./AttributesSection";
 import {
   MediaByAttributesParams,
   MediaByAttributesResponse,
-} from "../../../api/media_by_attributes/types";
-import { API_MEDIA_BY_ATTRIBUTES } from "../../../api/paths";
-import { queryPane, subPane, wrapper } from "../../../components/media-finder/appStyles";
-import { MediaPane } from "../../../components/media-finder/MediaPane";
-import { useFoundMediaMutators } from "../../../state/media-finder/foundMedia";
-import { useIsMediaLoadingMutators } from "../../../state/media-finder/isMediaLoading";
+} from "%stanza/api/media_by_attributes/types";
+import { API_MEDIA_BY_ATTRIBUTES } from "%stanza/api/paths";
+import { MediaPane } from "%stanza/components/media-finder/MediaPane";
+import { AppWrapper } from "%stanza/components/styled/AppWrapper";
+import { QueryPane } from "%stanza/components/styled/QueryPane";
+import { SubPane } from "%stanza/components/styled/SubPane";
+import { AttributesSection } from "%stanza/stanzas/gmdb-find-media-by-components/components/AttributesSection";
+import { useSelectedAttributesState } from "%stanza/stanzas/gmdb-find-media-by-components/states/selectedAttributes";
+import { useFoundMediaMutators } from "%stanza/state/media-finder/foundMedia";
+import { useIsMediaLoadingMutators } from "%stanza/state/media-finder/isMediaLoading";
 import {
   useMediaPaginationMutators,
   useMediaPaginationState,
-} from "../../../state/media-finder/mediaPagination";
-import { useQueryDataMutators } from "../../../state/media-finder/queryData";
-import { getData } from "../../../utils/getData";
-import { useSelectedAttributesState } from "../states/selectedAttributes";
+} from "%stanza/state/media-finder/mediaPagination";
+import { useQueryDataMutators } from "%stanza/state/media-finder/queryData";
+import { getData } from "%stanza/utils/getData";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;
@@ -25,14 +27,14 @@ type Props = {
 export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
   useMediaLoadFromComponents();
   return (
-    <div css={wrapper}>
-      <div css={queryPane}>
+    <AppWrapper>
+      <QueryPane>
         <AttributesSection />
-      </div>
-      <div css={subPane}>
+      </QueryPane>
+      <SubPane>
         <MediaPane dispatchEvent={dispatchEvent} />
-      </div>
-    </div>
+      </SubPane>
+    </AppWrapper>
   );
 };
 
@@ -67,14 +69,14 @@ const useMediaLoadFromComponents = () => {
   });
   useEffect(() => {
     setQueryData({ gmo_ids: selectedAttributes.gmo_ids });
-  }, [selectedAttributes]);
+  }, [selectedAttributes, setQueryData]);
   useEffect(() => {
-    query.data && setFoundMedia(query.data);
-  }, [query.data]);
+    query.data ? setFoundMedia(query.data) : "";
+  }, [query.data, setFoundMedia]);
   useEffect(() => {
     setIsMediaLoading(query.isLoading || query.isPlaceholderData);
-  }, [query.isLoading, query.isPlaceholderData]);
+  }, [query.isLoading, query.isPlaceholderData, setIsMediaLoading]);
   useEffect(() => {
     reset();
-  }, [selectedAttributes]);
+  }, [reset, selectedAttributes]);
 };

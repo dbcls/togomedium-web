@@ -1,13 +1,9 @@
-import { css } from "@emotion/react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps, useEffect } from "react";
-import { SelectedMediaList } from "./SelectedMediaList";
-import { useSelectedMediaMutators } from "../../state/media-finder/selectedMedia";
-import { LabelInfo } from "../../utils/labelInfo";
-
-const wrapper = css`
-  padding: 1vw 15vw;
-`;
+import { SelectedMediaList } from "%stanza/components/media-finder/SelectedMediaList";
+import { useSelectedMediaMutators } from "%stanza/state/media-finder/selectedMedia";
+import { LabelInfo } from "%stanza/utils/labelInfo";
+import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 
 type WithCustomArgs = { media: LabelInfo[] } & ComponentProps<typeof SelectedMediaList>;
 const meta: Meta<WithCustomArgs> = {
@@ -20,9 +16,9 @@ const meta: Meta<WithCustomArgs> = {
         setSelectedMedia(media);
       }, [media, setSelectedMedia]);
       return (
-        <div css={wrapper}>
+        <ComponentWrapper>
           <StoryItem />
-        </div>
+        </ComponentWrapper>
       );
     },
   ],

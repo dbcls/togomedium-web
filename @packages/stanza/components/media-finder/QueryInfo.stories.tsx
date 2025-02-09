@@ -1,14 +1,8 @@
-import { css } from "@emotion/react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps, useEffect } from "react";
 import { QueryInfo } from "./QueryInfo";
-import { QueryData, useQueryDataMutators } from "../../state/media-finder/queryData";
-import { COLOR_WHITE, SIZE2 } from "../../styles/variables";
-
-const wrapper = css`
-  background-color: ${COLOR_WHITE};
-  padding: ${SIZE2};
-`;
+import { QueryData, useQueryDataMutators } from "%stanza/state/media-finder/queryData";
+import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 
 type WithCustomArgs = { queryData: QueryData } & ComponentProps<typeof QueryInfo>;
 const meta: Meta<WithCustomArgs> = {
@@ -21,9 +15,9 @@ const meta: Meta<WithCustomArgs> = {
         setQueryData(queryData);
       }, [queryData]);
       return (
-        <div css={wrapper}>
+        <ComponentWrapper>
           <StoryItem />
-        </div>
+        </ComponentWrapper>
       );
     },
   ],

@@ -1,22 +1,16 @@
-import { css } from "@emotion/react";
 import { Meta, StoryObj } from "@storybook/react";
-import { ComponentProps } from "react";
-import { Pagination } from "./Pagination";
+import React, { ComponentProps } from "react";
+import { Pagination } from "%stanza/components/media-finder/Pagination";
+import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 
 const meta: Meta<typeof Pagination> = {
   component: Pagination,
   decorators: [
     (StoryItem) => {
       return (
-        <div
-          css={css`
-            width: 600px;
-            background-color: white;
-            padding: 20px;
-          `}
-        >
+        <ComponentWrapper>
           <StoryItem />
-        </div>
+        </ComponentWrapper>
       );
     },
   ],

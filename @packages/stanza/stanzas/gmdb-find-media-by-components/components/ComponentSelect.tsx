@@ -1,11 +1,11 @@
 import { Autocomplete, Chip, TextField } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import React, { FC, SyntheticEvent, useState } from "react";
-import { AllComponentsResponse } from "../../../api/all-components/types";
-import { API_COMPONENTS_WITH_COMPONENTS } from "../../../api/paths";
-import { getData } from "../../../utils/getData";
-import { LabelInfo } from "../../../utils/labelInfo";
-import { decodeHTMLEntities } from "../../../utils/string";
+import { AllComponentsResponse } from "%stanza/api/all-components/types";
+import { API_COMPONENTS_WITH_COMPONENTS } from "%stanza/api/paths";
+import { getData } from "%stanza/utils/getData";
+import { LabelInfo } from "%stanza/utils/labelInfo";
+import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
   onChangeSelection: (ids: string[]) => void;

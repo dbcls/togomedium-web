@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FoundMediaList } from "./FoundMediaList";
+import { FoundMediaList } from "%stanza/components/media-finder/FoundMediaList";
 
 const meta: Meta<typeof FoundMediaList> = {
   component: FoundMediaList,

@@ -1,15 +1,14 @@
-import { css } from "@emotion/react";
 import { Meta, StoryObj } from "@storybook/react";
-import { ComponentSelect } from "./ComponentSelect";
-import { COLOR_WHITE, SIZE2 } from "../../../styles/variables";
+import { ComponentSelect } from "%stanza/stanzas/gmdb-find-media-by-components/components/ComponentSelect";
+import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 
 const meta: Meta<typeof ComponentSelect> = {
   component: ComponentSelect,
   decorators: [
     (Story) => (
-      <div css={wrapper}>
+      <ComponentWrapper>
         <Story />
-      </div>
+      </ComponentWrapper>
     ),
   ],
 };
@@ -23,8 +22,3 @@ export const Primary: Story = {
     },
   },
 };
-
-const wrapper = css`
-  background-color: ${COLOR_WHITE};
-  padding: ${SIZE2};
-`;

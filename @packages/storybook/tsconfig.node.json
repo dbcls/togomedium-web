@@ -8,7 +8,8 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "paths": {
-      "%stanza/*": ["../stanza/*"]
+      "%stanza/*": ["../stanza/*"],
+      "%storybook/*": ["../storybook/src/*"]
     }
   },
   "include": [

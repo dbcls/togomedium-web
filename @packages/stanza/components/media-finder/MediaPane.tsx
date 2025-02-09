@@ -1,42 +1,38 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { FC, useEffect } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { ActionPane } from "./ActionPane";
-import { FoundMediaList } from "./FoundMediaList";
-import { MediaTab } from "./MediaTab";
-import { SelectedMediaList } from "./SelectedMediaList";
-import { useFoundMediaState } from "../../state/media-finder/foundMedia";
+import { ActionPane } from "%stanza/components/media-finder/ActionPane";
+import { FoundMediaList } from "%stanza/components/media-finder/FoundMediaList";
+import { MediaTab } from "%stanza/components/media-finder/MediaTab";
+import { SelectedMediaList } from "%stanza/components/media-finder/SelectedMediaList";
+import { useFoundMediaState } from "%stanza/state/media-finder/foundMedia";
 import {
   useMediaTabFocusMutators,
   useMediaTabFocusState,
-} from "../../state/media-finder/mediaTabFocus";
-import { COLOR_WHITE, ROUNDED_CORNER, SIZE1, SIZE2 } from "../../styles/variables";
+} from "%stanza/state/media-finder/mediaTabFocus";
+import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;
-} & AcceptsEmotion;
+};
 
-export const MediaPane: FC<Props> = ({ css, className, dispatchEvent }) => {
+export const MediaPane: FC<Props> = ({ dispatchEvent }) => {
   const { tabFocus } = useTabFocus();
   return (
-    <div css={wrapper}>
-      <div
-        css={[media, css]}
-        className={className}
-      >
+    <Wrapper>
+      <Media>
         <MediaTab />
-        <div css={contents}>
+        <Contents>
           {tabFocus === "Found media" && <FoundMediaList />}
           {tabFocus === "Selected media" && <SelectedMediaList />}
-        </div>
-      </div>
+        </Contents>
+      </Media>
       {tabFocus === "Selected media" && (
         <ActionPane
           actionLabel={"Compare media"}
           dispatchEvent={dispatchEvent}
         />
       )}
-    </div>
+    </Wrapper>
   );
 };
 
@@ -50,26 +46,27 @@ const useTabFocus = () => {
   return { tabFocus };
 };
 
-const wrapper = css`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: ${SIZE1};
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  flexGrow: 1,
+  gap: THEME.SIZE.S1,
+});
 
-const media = css`
-  ${ROUNDED_CORNER};
-  padding: ${SIZE1};
-  background-color: ${COLOR_WHITE};
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-`;
+const Media = styled("div")({
+  padding: THEME.SIZE.S1,
+  borderRadius: THEME.ROUND.BASE,
+  backgroundColor: THEME.COLOR.WHITE,
+  display: "flex",
+  flexDirection: "column",
+  flexGrow: 1,
+});
 
-const contents = css`
-  padding: ${SIZE2} ${SIZE1};
-  flex-grow: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-`;
+const Contents = styled("div")({
+  paddingBlock: THEME.SIZE.S2,
+  paddingInline: THEME.SIZE.S1,
+  flexGrow: 1,
+  overflowY: "auto",
+  display: "flex",
+  flexDirection: "column",
+});

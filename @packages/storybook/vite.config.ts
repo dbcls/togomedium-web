@@ -12,6 +12,10 @@ export default defineConfig({
         find: /^%stanza\//,
         replacement: join(__dirname, "../", "stanza/"),
       },
+      {
+        find: /^%storybook\//,
+        replacement: join(__dirname, "../", "storybook/src/"),
+      },
       // {
       //   find: /^%editor\//,
       //   replacement: join(__dirname, "../", "editor/src/"),

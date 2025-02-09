@@ -1,10 +1,11 @@
 import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { COLOR_GRAY_LINE, COLOR_PRIMARY, COLOR_WHITE, SIZE1, SIZE2 } from "../../styles/variables";
-import { LabelInfo } from "../../utils/labelInfo";
-import { PATH_MEDIUM } from "../consts";
+import { PATH_MEDIUM } from "%stanza/components/consts";
+import { THEME } from "%stanza/styles/theme";
+import { LabelInfo } from "%stanza/utils/labelInfo";
 
 type Props = {
   isChecked: boolean;
@@ -15,16 +16,15 @@ export type MediaListItemInfo = Omit<Props, "onClick">;
 
 export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
   return (
-    <div css={wrapper}>
-      <a
-        css={idCol}
+    <Wrapper>
+      <IdCol
         href={`${PATH_MEDIUM}${id}`}
         target="_blank"
         rel="noreferrer"
       >
         {id}
-      </a>
-      <span css={labelCol}>
+      </IdCol>
+      <LabelCol>
         <Tooltip
           title={label}
           placement={"top"}
@@ -32,8 +32,8 @@ export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
         >
           <span>{label}</span>
         </Tooltip>
-      </span>
-      <span css={checkCol}>
+      </LabelCol>
+      <span css={CheckCol}>
         <Checkbox
           checked={isChecked}
           onClick={() => onClick({ id, label })}
@@ -42,37 +42,39 @@ export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
           `}
         />
       </span>
-    </div>
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  & + & {
-    border-top: none;
-  }
-  display: flex;
-  background-color: ${COLOR_WHITE};
-  border: 1px solid ${COLOR_GRAY_LINE};
-  padding: 0 ${SIZE1};
-  justify-content: space-between;
-  align-items: center;
-  gap: ${SIZE2};
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  backgroundColor: THEME.COLOR.WHITE,
+  border: `1px solid ${THEME.COLOR.GRAY_LINE}`,
+  padding: `0 ${THEME.SIZE.S1}px`,
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: THEME.SIZE.S2,
+  "& + &": {
+    borderTop: "none",
+  },
+});
 
-const idCol = css`
-  flex-shrink: 0;
-  flex-grow: 0;
-  width: 90px;
-  color: ${COLOR_PRIMARY};
-  text-decoration: none;
-`;
-const labelCol = css`
-  flex-grow: 1;
-  flex-shrink: 1;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-`;
-const checkCol = css`
-  flex-shrink: 0;
-`;
+const IdCol = styled("a")({
+  flexShrink: 0,
+  flexGrow: 0,
+  width: 90,
+  color: THEME.COLOR.PRIMARY,
+  textDecoration: "none",
+});
+
+const LabelCol = styled("span")({
+  flexGrow: 1,
+  flexShrink: 1,
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+});
+
+const CheckCol = styled("span")({
+  flexShrink: 0,
+});

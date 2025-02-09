@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { MediaPane } from "./MediaPane";
+import { MediaPane } from "%stanza/components/media-finder/MediaPane";
 
 const meta: Meta<typeof MediaPane> = {
   component: MediaPane,
