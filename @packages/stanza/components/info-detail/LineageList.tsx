@@ -1,11 +1,11 @@
-import styled from "@emotion/styled";
-import React, { ComponentProps, FC } from "react";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 import {
   LineageRank,
   lineageRanks,
-} from "../../stanzas/gmdb-media-strains-alignment-table/functions/types";
-import { COLOR_GRAY_LINE, COLOR_PRIMARY } from "../../styles/variables";
-import { capitalizeFirstLetter, makeSpeciesName } from "../../utils/string";
+} from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
+import { COLOR_GRAY_LINE, COLOR_PRIMARY } from "%stanza/styles/variables";
+import { capitalizeFirstLetter, makeSpeciesName } from "%stanza/utils/string";
 
 export type ApiLineage = {
   uri: string;
@@ -44,32 +44,6 @@ export const LineageList: FC<{
   );
 };
 
-const LineageListWrapper = styled.ul`
-  display: flex;
-  gap: 8px;
-
-  li {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid ${COLOR_GRAY_LINE};
-    border-radius: 5px;
-
-    span {
-      width: 100%;
-      text-align: center;
-      border-bottom: 1px solid ${COLOR_GRAY_LINE};
-      padding: 4px 8px;
-      font-weight: 500;
-    }
-
-    a {
-      padding: 4px 8px;
-      color: ${COLOR_PRIMARY};
-    }
-  }
-`;
-
 const LineageItem: FC<{ rank: LineageRank; label: string; id: string }> = ({ rank, label, id }) => (
   <li>
     <span>{capitalizeFirstLetter(rank)}</span>
@@ -77,15 +51,28 @@ const LineageItem: FC<{ rank: LineageRank; label: string; id: string }> = ({ ran
   </li>
 );
 
-export const parseLineage = (lineage: ApiLineage): ComponentProps<typeof LineageList>["lineage"] =>
-  lineage.reduce((accum, current) => {
-    return current.label === "NA"
-      ? { ...accum }
-      : {
-          ...accum,
-          [current.rank]: {
-            taxid: current.taxid.toString(),
-            label: current.label,
-          },
-        };
-  }, {});
+const LineageListWrapper = styled("ul")({
+  display: "flex",
+  gap: 8,
+
+  li: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    border: `1px solid ${COLOR_GRAY_LINE}`,
+    borderRadius: 5,
+
+    span: {
+      width: "100%",
+      textAlign: "center",
+      borderBottom: `1px solid ${COLOR_GRAY_LINE}`,
+      padding: "4px 8px",
+      fontWeight: 500,
+    },
+
+    a: {
+      padding: "4px 8px",
+      color: COLOR_PRIMARY,
+    },
+  },
+});

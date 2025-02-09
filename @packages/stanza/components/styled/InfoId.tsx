@@ -12,7 +12,7 @@ export const InfoId = styled("div")({
     marginLeft: 20,
     gap: 4,
   },
-  "& a": {
-    color: COLOR_PRIMARY_DARK,
-  },
+  // "& a": {
+  //   color: COLOR_PRIMARY_DARK,
+  // },
 });

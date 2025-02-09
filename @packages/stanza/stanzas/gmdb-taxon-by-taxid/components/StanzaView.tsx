@@ -1,18 +1,15 @@
-import { css } from "@emotion/react";
 import React, { ComponentProps, FC } from "react";
-import { AcceptsEmotion, Optional } from "yohak-tools";
-import { CapsuleList } from "../../../components/info-detail/capsuleList";
-import { LineageList } from "../../../components/info-detail/LineageList";
-import {
-  ColorButton,
-  ColWrapper,
-  InfoId,
-  InfoTitle,
-  StandardParagraph,
-  SubHeading,
-} from "../../../components/info-detail/styles";
-import { WikipediaView } from "../../../components/info-detail/WikipediaView";
-import { stanzaWrapper } from "../../../styles/common";
+import { Optional } from "yohak-tools";
+import { CapsuleList } from "%stanza/components/info-detail/CapsuleList";
+import { LineageList } from "%stanza/components/info-detail/LineageList";
+import { WikipediaView } from "%stanza/components/info-detail/WikipediaView";
+import { ColorButton } from "%stanza/components/styled/ColorButton";
+import { ColWrapper } from "%stanza/components/styled/ColWrapper";
+import { InfoId } from "%stanza/components/styled/InfoId";
+import { InfoTitle } from "%stanza/components/styled/InfoTitle";
+import { StandardParagraph } from "%stanza/components/styled/StandardParagraph";
+import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
+import { SubHeading } from "%stanza/components/styled/SubHeading";
 import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
 
 const linkNCBI = "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=";
@@ -26,11 +23,9 @@ type Props = {
   typeMaterials: string[];
   otherTypeMaterials: { key: string; labels: string[] }[];
   wikipediaData?: WikipediaData;
-} & AcceptsEmotion;
+};
 
 export const StanzaView: FC<Props> = ({
-  css,
-  className,
   taxid,
   scientificName,
   authorityName,
@@ -40,10 +35,7 @@ export const StanzaView: FC<Props> = ({
   wikipediaData,
 }) => {
   return (
-    <div
-      css={[stanzaView, css, stanzaWrapper]}
-      className={className}
-    >
+    <StanzaWrapper>
       <ColWrapper>
         <div>
           <InfoId>
@@ -97,8 +89,6 @@ export const StanzaView: FC<Props> = ({
         </div>
         {wikipediaData?.description && !lineage.species && <WikipediaView {...wikipediaData} />}
       </ColWrapper>
-    </div>
+    </StanzaWrapper>
   );
 };
-
-const stanzaView = css``;

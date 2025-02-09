@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
 import { Optional } from "yohak-tools";
-import { StanzaView } from "./components/StanzaView";
-import { getTaxonData } from "./utils/api";
+import { StanzaView } from "%stanza/stanzas/gmdb-taxon-by-taxid/components/StanzaView";
+import { getTaxonData } from "%stanza/stanzas/gmdb-taxon-by-taxid/utils/api";
 import { fetchWikipediaData } from "%stanza/utils/fetchWikipediaData";
 
 type Props = {

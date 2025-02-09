@@ -1,9 +1,10 @@
 import { ComponentProps } from "react";
-import { ApiLineage, parseLineage } from "../../../components/info-detail/LineageList";
+import { ApiLineage } from "../../../components/info-detail/LineageList";
 import { getData } from "../../../utils/getData";
 import { unescapeJsonString } from "../../../utils/string";
 import { URL_API } from "../../../utils/variables";
 import { StanzaView } from "../components/StanzaView";
+import { parseLineage } from "%stanza/utils/parseLineage";
 
 export type ViewProps = ComponentProps<typeof StanzaView>;
 export type ApiBody = {
