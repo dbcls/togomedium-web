@@ -1,18 +1,15 @@
-import { css } from "@emotion/react";
-import React, { FC, useEffect, useMemo, useState } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { OrganismListItem } from "./OrganismListItem";
-import { Pagination } from "../../../components/media-finder/Pagination";
-import { LabelInfo } from "../../../utils/labelInfo";
+import React, { FC, useMemo, useState } from "react";
+import { Pagination } from "%stanza/components/media-finder/Pagination";
+import { OrganismListItem } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismListItem";
 import {
   useSelectedOrganismsMutators,
   useSelectedOrganismsState,
-} from "../states/selectedOrganisms";
+} from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/selectedOrganisms";
 
-type Props = {} & AcceptsEmotion;
+type Props = {};
 
 const SHOW_COUNT = 10;
-export const SelectedOrganismsList: FC<Props> = ({ css, className }) => {
+export const SelectedOrganismsList: FC<Props> = () => {
   const selectedOrganisms = useSelectedOrganismsState();
   const { toggleOrganismSelection } = useSelectedOrganismsMutators();
   const [current, setCurrent] = useState<number>(0);
@@ -27,10 +24,7 @@ export const SelectedOrganismsList: FC<Props> = ({ css, className }) => {
     [selectedOrganisms, current]
   );
   return (
-    <div
-      css={[selectedOrganismsList, css]}
-      className={className}
-    >
+    <div>
       <div>
         {data.map((item) => (
           <OrganismListItem
@@ -55,5 +49,3 @@ export const SelectedOrganismsList: FC<Props> = ({ css, className }) => {
     </div>
   );
 };
-
-const selectedOrganismsList = css``;

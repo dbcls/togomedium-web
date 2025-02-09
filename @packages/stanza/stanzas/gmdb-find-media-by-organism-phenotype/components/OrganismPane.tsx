@@ -1,17 +1,19 @@
-import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import React, { FC, useEffect } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { FoundOrganismsList } from "./FoundOrganismsList";
-import { OrganismTab } from "./OrganismTab";
-import { SelectedOrganismsList } from "./SelectedOrganismsList";
-import { COLOR_WHITE, ROUNDED_CORNER_STYLE, SIZE1, SIZE2 } from "../../../styles/variables";
-import { useOrganismPaginationMutators } from "../states/organismPagination";
-import { useOrganismTabFocusMutators, useOrganismTabFocusState } from "../states/organismTabFocus";
-import { usePhenotypeQueryState } from "../states/phenotypeQuery";
+import { FoundOrganismsList } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/FoundOrganismsList";
+import { OrganismTab } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismTab";
+import { SelectedOrganismsList } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/SelectedOrganismsList";
+import { useOrganismPaginationMutators } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/organismPagination";
+import {
+  useOrganismTabFocusMutators,
+  useOrganismTabFocusState,
+} from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/organismTabFocus";
+import { usePhenotypeQueryState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/phenotypeQuery";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = {} & AcceptsEmotion;
+type Props = {};
 
-export const OrganismPane: FC<Props> = ({ css, className }) => {
+export const OrganismPane: FC<Props> = () => {
   const tabFocus = useOrganismTabFocusState();
   const { reset } = useOrganismPaginationMutators();
   const { setOrganismTabFocus } = useOrganismTabFocusMutators();
@@ -21,31 +23,28 @@ export const OrganismPane: FC<Props> = ({ css, className }) => {
     setOrganismTabFocus("Found organisms");
   }, [phenotypeQueryParams]);
   return (
-    <div
-      css={[wrapper, css]}
-      className={className}
-    >
+    <Wrapper>
       <OrganismTab />
-      <div css={contents}>
+      <Contents>
         {tabFocus === "Found organisms" && <FoundOrganismsList />}
         {tabFocus === "Selected organisms" && <SelectedOrganismsList />}
-      </div>
-    </div>
+      </Contents>
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  ${ROUNDED_CORNER_STYLE};
-  padding: ${SIZE1};
-  background-color: ${COLOR_WHITE};
-`;
+const Wrapper = styled("div")({
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  padding: THEME.SIZE.S1,
+  backgroundColor: THEME.COLOR.WHITE,
+  borderRadius: THEME.ROUND.BASE,
+});
 
-const contents = css`
-  padding: ${SIZE2} ${SIZE1};
-  //background-color: #007bff;
-  flex-grow: 1;
-  overflow-y: auto;
-`;
+const Contents = styled("div")({
+  paddingBlock: THEME.SIZE.S2,
+  paddingInline: THEME.SIZE.S1,
+  flexGrow: 1,
+  overflowY: "auto",
+});

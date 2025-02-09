@@ -1,54 +1,50 @@
-import { css } from "@emotion/react";
 import CircularProgress from "@mui/material/CircularProgress";
+import { styled } from "@mui/material/styles";
 import { useQuery } from "@tanstack/react-query";
 import React, { ComponentProps, FC, useEffect, useState } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { OrganismListItem } from "./OrganismListItem";
 import {
   OrganismsByPhenotypeParams,
   OrganismsByPhenotypesResponse,
-} from "../../../api/organisms_by_phenotypes/types";
-import { API_ORGANISMS_BY_PHENOTYPES } from "../../../api/paths";
-import { Pagination } from "../../../components/media-finder/Pagination";
-import { COLOR_GRAY700, FONT_WEIGHT_BOLD, SIZE1 } from "../../../styles/variables";
-import { getData } from "../../../utils/getData";
-import { hasIdOfLabel } from "../../../utils/labelInfo";
-import { MediaFinderListApiBody } from "../../../utils/types";
+} from "%stanza/api/organisms_by_phenotypes/types";
+import { API_ORGANISMS_BY_PHENOTYPES } from "%stanza/api/paths";
+import { Pagination } from "%stanza/components/media-finder/Pagination";
+import { OrganismListItem } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismListItem";
 import {
   useOrganismPaginationMutators,
   useOrganismPaginationState,
-} from "../states/organismPagination";
-import { usePhenotypeQueryState } from "../states/phenotypeQuery";
+} from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/organismPagination";
+import { usePhenotypeQueryState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/phenotypeQuery";
 import {
   useSelectedOrganismsMutators,
   useSelectedOrganismsState,
-} from "../states/selectedOrganisms";
+} from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/selectedOrganisms";
+import { THEME } from "%stanza/styles/theme";
+import { getData } from "%stanza/utils/getData";
+import { hasIdOfLabel } from "%stanza/utils/labelInfo";
+import { MediaFinderListApiBody } from "%stanza/utils/types";
 
-type Props = {} & AcceptsEmotion;
+type Props = {};
 type OrganismListInfo = Omit<ComponentProps<typeof OrganismListItem>, "onClick">;
 type FoundOrganisms = MediaFinderListApiBody<"tax_id" | "name">;
 
-export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
+export const FoundOrganismsList: FC<Props> = () => {
   const { data, isLoading, isPlaceholderData } = useOrganismQuery();
   const { next, prev } = useOrganismPaginationMutators();
   const { list, toggleOrganismSelection } = useOrganismList(data);
 
   return (
-    <div
-      css={[foundOrganismsList, css]}
-      className={className}
-    >
+    <Wrapper>
       <div>
         {(isLoading || isPlaceholderData) && (
-          <div css={loadingIndicator}>
+          <LoadingIndicator>
             <CircularProgress
               color="inherit"
               size={40}
             />
-          </div>
+          </LoadingIndicator>
         )}
-        <p css={infoTextCSS}>{getInfoText(data?.total, isLoading)}</p>
-        <div css={inner}>
+        <InfoText>{getInfoText(data?.total, isLoading)}</InfoText>
+        <Inner>
           {(list ?? []).map((item) => (
             <OrganismListItem
               key={item.id}
@@ -56,7 +52,7 @@ export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
               onClick={toggleOrganismSelection}
             />
           ))}
-        </div>
+        </Inner>
         {!!data?.total && !isLoading && (
           <Pagination
             total={data.total}
@@ -67,7 +63,7 @@ export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
           />
         )}
       </div>
-    </div>
+    </Wrapper>
   );
 };
 
@@ -123,30 +119,30 @@ const getInfoText = (organismLength: number | undefined, isLoading: boolean): st
   }
 };
 
-const foundOrganismsList = css`
-  position: relative;
-`;
+const Wrapper = styled("div")({
+  position: "relative",
+});
 
-const infoTextCSS = css`
-  font-size: 18px;
-  ${FONT_WEIGHT_BOLD};
-  margin-bottom: ${SIZE1};
-`;
+const InfoText = styled("p")({
+  fontSize: "18px",
+  fontWeight: THEME.FONT_WEIGHT.BOLD,
+  marginBottom: THEME.SIZE.S1,
+});
 
-const inner = css`
-  max-height: 100%;
-  overflow-y: auto;
-`;
+const Inner = styled("div")({
+  maxHeight: "100%",
+  overflowY: "auto",
+});
 
-const loadingIndicator = css`
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${COLOR_GRAY700};
-`;
+const LoadingIndicator = styled("div")({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  backgroundColor: "rgba(255, 255, 255, 0.7)",
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  color: THEME.COLOR.GRAY700,
+});

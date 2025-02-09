@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { SelectBox } from "./SelectBox";
+import { SelectBox } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/SelectBox";
 
 const meta: Meta<typeof SelectBox> = {
   component: SelectBox,

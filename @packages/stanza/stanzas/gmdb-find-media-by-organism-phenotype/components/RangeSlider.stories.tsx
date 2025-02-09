@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { RangeSlider } from "./RangeSlider";
-import { StanzaWrapper } from "../../../components/styled/StanzaWrapper";
+import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 
 const meta: Meta<typeof RangeSlider> = {
   component: RangeSlider,
   decorators: [
     (Story) => (
-      <StanzaWrapper>
+      <ComponentWrapper>
         <Story />
-      </StanzaWrapper>
+      </ComponentWrapper>
     ),
   ],
 };

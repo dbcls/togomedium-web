@@ -1,24 +1,20 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { PhenotypeSearchArea } from "./PhenotypeSearchArea";
-import { COLOR_WHITE } from "../../../styles/variables";
+import { PhenotypeSearchArea } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/PhenotypeSearchArea";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = {} & AcceptsEmotion;
+type Props = {};
 
-export const PhenotypeSection: FC<Props> = ({ css, className }) => {
+export const PhenotypeSection: FC<Props> = () => {
   return (
-    <div
-      css={[phenotypeSection, css]}
-      className={className}
-    >
+    <Wrapper>
       <PhenotypeSearchArea />
-    </div>
+    </Wrapper>
   );
 };
 
-const phenotypeSection = css`
-  background-color: ${COLOR_WHITE};
-  display: flex;
-  flex-grow: 1;
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  backgroundColor: THEME.COLOR.WHITE,
+  flexGrow: 1,
+});

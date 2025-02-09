@@ -1,14 +1,13 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { RangeSlider } from "./RangeSlider";
-import { SelectBox } from "./SelectBox";
-import { COLOR_WHITE } from "../../../styles/variables";
-import { usePhenotypeQueryMutators } from "../states/phenotypeQuery";
+import { RangeSlider } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/RangeSlider";
+import { SelectBox } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/SelectBox";
+import { usePhenotypeQueryMutators } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/phenotypeQuery";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = {} & AcceptsEmotion;
+type Props = {};
 
-export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
+export const PhenotypeSearchArea: FC<Props> = () => {
   const { updatePhenotypeQuery, removePhenotypeQuery } = usePhenotypeQueryMutators();
   const handleEnabledChange = (key: string, enabled: boolean) => {
     !enabled && removePhenotypeQuery(key);
@@ -18,79 +17,73 @@ export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
   };
 
   return (
-    <div
-      css={[phenotypeSearchArea, css]}
-      className={className}
-    >
-      <RangeSlider
-        css={sliderStyle}
-        min={0}
-        max={110}
-        label={"Growth temperature"}
-        marks={[
-          { value: 0, label: "0°C" },
-          { value: 37, label: "37°C" },
-          { value: 55, label: "55°C" },
-          { value: 75, label: "75°C" },
-          { value: 90, label: "90°C" },
-          { value: 110, label: "110°C" },
-        ]}
-        queryKey={"growth_temp"}
-        handleEnabledChange={handleEnabledChange}
-        handleValueChange={handleValueChange}
-      />
-      <RangeSlider
-        css={sliderStyle}
-        min={0}
-        max={14}
-        label={"Growth pH"}
-        marks={[
-          { value: 0, label: "0" },
-          { value: 14, label: "14" },
-        ]}
-        queryKey={"growth_ph"}
-        handleEnabledChange={handleEnabledChange}
-        handleValueChange={handleValueChange}
-      />
-      <RangeSlider
-        css={sliderStyle}
-        min={0}
-        max={25}
-        label={"Growth salinity"}
-        marks={[
-          { value: 0, label: "0%" },
-          { value: 25, label: "25%" },
-        ]}
-        queryKey={"growth_salinity"}
-        handleEnabledChange={handleEnabledChange}
-        handleValueChange={handleValueChange}
-      />
-      <RangeSlider
-        css={sliderStyle}
-        min={0}
-        max={50}
-        label={"Cell length"}
-        marks={[
-          { value: 0, label: "0µm" },
-          { value: 50, label: "50µm" },
-        ]}
-        queryKey={"cell_length"}
-        handleEnabledChange={handleEnabledChange}
-        handleValueChange={handleValueChange}
-      />
-      <RangeSlider
-        css={sliderStyle}
-        min={0}
-        max={25}
-        label={"Cell diameter"}
-        marks={[
-          { value: 0, label: "0µm" },
-          { value: 25, label: "25µm" },
-        ]}
-        queryKey={"cell_diameter"}
-        handleEnabledChange={handleEnabledChange}
-        handleValueChange={handleValueChange}
-      />
+    <Wrapper>
+      <Sliders>
+        <RangeSlider
+          min={0}
+          max={110}
+          label={"Growth temperature"}
+          marks={[
+            { value: 0, label: "0°C" },
+            { value: 37, label: "37°C" },
+            { value: 55, label: "55°C" },
+            { value: 75, label: "75°C" },
+            { value: 90, label: "90°C" },
+            { value: 110, label: "110°C" },
+          ]}
+          queryKey={"growth_temp"}
+          handleEnabledChange={handleEnabledChange}
+          handleValueChange={handleValueChange}
+        />
+        <RangeSlider
+          min={0}
+          max={14}
+          label={"Growth pH"}
+          marks={[
+            { value: 0, label: "0" },
+            { value: 14, label: "14" },
+          ]}
+          queryKey={"growth_ph"}
+          handleEnabledChange={handleEnabledChange}
+          handleValueChange={handleValueChange}
+        />
+        <RangeSlider
+          min={0}
+          max={25}
+          label={"Growth salinity"}
+          marks={[
+            { value: 0, label: "0%" },
+            { value: 25, label: "25%" },
+          ]}
+          queryKey={"growth_salinity"}
+          handleEnabledChange={handleEnabledChange}
+          handleValueChange={handleValueChange}
+        />
+        <RangeSlider
+          min={0}
+          max={50}
+          label={"Cell length"}
+          marks={[
+            { value: 0, label: "0µm" },
+            { value: 50, label: "50µm" },
+          ]}
+          queryKey={"cell_length"}
+          handleEnabledChange={handleEnabledChange}
+          handleValueChange={handleValueChange}
+        />
+        <RangeSlider
+          min={0}
+          max={25}
+          label={"Cell diameter"}
+          marks={[
+            { value: 0, label: "0µm" },
+            { value: 25, label: "25µm" },
+          ]}
+          queryKey={"cell_diameter"}
+          handleEnabledChange={handleEnabledChange}
+          handleValueChange={handleValueChange}
+        />
+      </Sliders>
       <SelectBox
         label={"Oxygen requirement"}
         items={[
@@ -173,18 +166,18 @@ export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
         handleEnabledChange={handleEnabledChange}
         handleValueChange={handleValueChange}
       />
-    </div>
+    </Wrapper>
   );
 };
 
-const phenotypeSearchArea = css`
-  background-color: ${COLOR_WHITE};
-  padding: 0 20px;
-  flex-grow: 1;
-`;
+const Wrapper = styled("div")({
+  backgroundColor: THEME.COLOR.WHITE,
+  paddingInline: 20,
+  flexGrow: 1,
+});
 
-const sliderStyle = css`
-  & + & {
-    margin-top: 10px;
-  }
-`;
+const Sliders = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  gap: 10,
+});

@@ -1,9 +1,8 @@
-import { css } from "@emotion/react";
 import { Autocomplete, Chip, FormControl, TextField } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import { styled } from "@mui/material/styles";
 import React, { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_WHITE } from "../../../styles/variables";
+import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   label: string;
@@ -11,11 +10,9 @@ type Props = {
   items: [string, string][];
   handleEnabledChange: (key: string, enabled: boolean) => void;
   handleValueChange: (key: string, value: string) => void;
-} & AcceptsEmotion;
+};
 
 export const SelectBox: FC<Props> = ({
-  css,
-  className,
   label,
   items,
   queryKey,
@@ -46,13 +43,10 @@ export const SelectBox: FC<Props> = ({
   }, [value, enabled]);
 
   return (
-    <div
-      css={[selectBox, css]}
-      className={className}
-    >
+    <Wrapper>
       <Checkbox
-        css={checkBoxStyle}
         onChange={handleCheckChange}
+        sx={{ paddingLeft: 0 }}
       />
       <FormControl sx={{ m: 1, minWidth: 200 }}>
         <Autocomplete
@@ -67,10 +61,6 @@ export const SelectBox: FC<Props> = ({
             <TextField
               {...params}
               label={label}
-              // InputProps={{
-              //   ...params.InputProps,
-              //   endAdornment: <>{params.InputProps.endAdornment}</>,
-              // }}
             />
           )}
           renderTags={(value, getTagProps) =>
@@ -85,15 +75,12 @@ export const SelectBox: FC<Props> = ({
           }
         />
       </FormControl>
-    </div>
+    </Wrapper>
   );
 };
 
-const selectBox = css`
-  background-color: ${COLOR_WHITE};
-  display: flex;
-  align-items: center;
-`;
-const checkBoxStyle = css`
-  padding-left: 0;
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  backgroundColor: THEME.COLOR.WHITE,
+});

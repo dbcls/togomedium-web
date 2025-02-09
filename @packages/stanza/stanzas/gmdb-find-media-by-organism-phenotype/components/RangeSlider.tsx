@@ -1,9 +1,7 @@
-import { css } from "@emotion/react";
 import { FormControlLabel } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Slider from "@mui/material/Slider";
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
-import { AcceptsEmotion } from "yohak-tools";
 
 type Mark = any;
 
@@ -15,15 +13,13 @@ type Props = {
   queryKey: string;
   handleEnabledChange: (key: string, enabled: boolean) => void;
   handleValueChange: (key: string, value: string) => void;
-} & AcceptsEmotion;
+};
 
 function valuetext(value: number) {
   return `${value}°C`;
 }
 
 export const RangeSlider: FC<Props> = ({
-  css,
-  className,
   min,
   max,
   label,
@@ -56,10 +52,7 @@ export const RangeSlider: FC<Props> = ({
     }
   }, [enabled]);
   return (
-    <div
-      css={[rangeSlider, css]}
-      className={className}
-    >
+    <div>
       <div>
         <span>
           <FormControlLabel
@@ -67,7 +60,7 @@ export const RangeSlider: FC<Props> = ({
             control={
               <Checkbox
                 onChange={handleCheckChange}
-                css={checkBoxStyle}
+                sx={{ paddingLeft: 0 }}
               />
             }
           />
@@ -88,8 +81,3 @@ export const RangeSlider: FC<Props> = ({
     </div>
   );
 };
-
-const rangeSlider = css``;
-const checkBoxStyle = css`
-  padding-left: 0;
-`;

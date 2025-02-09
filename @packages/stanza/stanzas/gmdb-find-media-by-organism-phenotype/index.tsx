@@ -1,6 +1,6 @@
 import React from "react";
-import App from "./App";
-import { TogoMediumReactStanza } from "../../components/StanzaReactProvider";
+import { TogoMediumReactStanza } from "%stanza/components/StanzaReactProvider";
+import App from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/App";
 
 type StanzaParameters = {};
 

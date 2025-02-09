@@ -1,85 +1,74 @@
-import { css } from "@emotion/react";
 import Checkbox from "@mui/material/Checkbox";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { PATH_TAXON } from "../../../components/consts";
-import {
-  COLOR_GRAY_LINE,
-  COLOR_PRIMARY,
-  COLOR_WHITE,
-  SIZE1,
-  SIZE2,
-} from "../../../styles/variables";
-import { LabelInfo } from "../../../utils/labelInfo";
+import { PATH_TAXON } from "%stanza/components/consts";
+import { THEME } from "%stanza/styles/theme";
+import { LabelInfo } from "%stanza/utils/labelInfo";
 
 type Props = {
   isChecked: boolean;
   onClick: (info: LabelInfo) => void;
-} & LabelInfo &
-  AcceptsEmotion;
+} & LabelInfo;
 
-export const OrganismListItem: FC<Props> = ({ css, className, id, label, isChecked, onClick }) => {
+export const OrganismListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
   return (
-    <div
-      css={[organismListItem, css]}
-      className={className}
-    >
-      <div css={listInner}>
-        <span css={labelCol}>{label}</span>
-        <a
-          css={idCol}
+    <Wrapper>
+      <ListInner>
+        <LabelCol>{label}</LabelCol>
+        <IdCol
           href={`${PATH_TAXON}${id}`}
           target="_blank"
           rel="noreferrer"
         >
           [tax_id:{id}]
-        </a>
-      </div>
-      <span css={checkCol}>
+        </IdCol>
+      </ListInner>
+      <CheckCol>
         <Checkbox
           checked={isChecked}
           onClick={() => onClick({ id, label })}
         />
-      </span>
-    </div>
+      </CheckCol>
+    </Wrapper>
   );
 };
 
-const organismListItem = css`
-  & + & {
-    border-top: none;
-  }
-  display: flex;
-  justify-content: space-between;
-  background-color: ${COLOR_WHITE};
-  border: 1px solid ${COLOR_GRAY_LINE};
-  padding: 0 ${SIZE1};
-  align-items: center;
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  justifyContent: "space-between",
+  backgroundColor: THEME.COLOR.WHITE,
+  border: `1px solid ${THEME.COLOR.GRAY_LINE}`,
+  paddingInline: THEME.SIZE.S1,
+  alignItems: "center",
+  "& + &": {
+    borderTop: "none",
+  },
+});
 
-const listInner = css`
-  display: flex;
-  gap: ${SIZE2};
-  flex-shrink: 0;
-  flex-grow: 0;
-  width: calc(100% - 40px);
-`;
+const ListInner = styled("div")({
+  display: "flex",
+  gap: THEME.SIZE.S2,
+  flexShrink: 0,
+  flexGrow: 0,
+  width: "calc(100% - 40px)",
+});
 
-const idCol = css`
-  flex-shrink: 0;
-  flex-grow: 0;
-  width: 100px;
-  color: ${COLOR_PRIMARY};
-  text-decoration: none;
-`;
-const labelCol = css`
-  flex-grow: 0;
-  flex-shrink: 1;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-`;
-const checkCol = css`
-  flex-shrink: 0;
-  flex-grow: 0;
-`;
+const IdCol = styled("a")({
+  flexShrink: 0,
+  flexGrow: 0,
+  width: 100,
+  color: THEME.COLOR.PRIMARY,
+  textDecoration: "none",
+});
+
+const LabelCol = styled("span")({
+  flexGrow: 0,
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+});
+
+const CheckCol = styled("span")({
+  flexShrink: 0,
+  flexGrow: 0,
+});

@@ -2,20 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 import React, { FC, useEffect } from "react";
 import { OrganismPane } from "./OrganismPane";
 import { PhenotypeSection } from "./PhenotypeSection";
-import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
-import { API_MEDIA_BY_TAXON } from "../../../api/paths";
-import { queryPane, subPane, wrapper } from "../../../components/media-finder/appStyles";
-import { MediaPane } from "../../../components/media-finder/MediaPane";
-import { useFoundMediaMutators } from "../../../state/media-finder/foundMedia";
-import { useIsMediaLoadingMutators } from "../../../state/media-finder/isMediaLoading";
+import { MediaByTaxonParams, MediaByTaxonResponse } from "%stanza/api/media_by_taxon/types";
+import { API_MEDIA_BY_TAXON } from "%stanza/api/paths";
+import { MediaPane } from "%stanza/components/media-finder/MediaPane";
+import { AppWrapper } from "%stanza/components/styled/AppWrapper";
+import { QueryPane } from "%stanza/components/styled/QueryPane";
+import { SubPane } from "%stanza/components/styled/SubPane";
+import { useSelectedOrganismsState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/selectedOrganisms";
+import { useFoundMediaMutators } from "%stanza/state/media-finder/foundMedia";
+import { useIsMediaLoadingMutators } from "%stanza/state/media-finder/isMediaLoading";
 import {
   useMediaPaginationMutators,
   useMediaPaginationState,
-} from "../../../state/media-finder/mediaPagination";
-import { useQueryDataMutators } from "../../../state/media-finder/queryData";
-import { getData } from "../../../utils/getData";
-import { extractLabelIds } from "../../../utils/labelInfo";
-import { useSelectedOrganismsState } from "../states/selectedOrganisms";
+} from "%stanza/state/media-finder/mediaPagination";
+import { useQueryDataMutators } from "%stanza/state/media-finder/queryData";
+import { getData } from "%stanza/utils/getData";
+import { extractLabelIds } from "%stanza/utils/labelInfo";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;
@@ -24,17 +26,17 @@ type Props = {
 export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
   useMediaLoadFromOrganismSelection();
   return (
-    <div css={wrapper}>
-      <div css={queryPane}>
+    <AppWrapper>
+      <QueryPane>
         <PhenotypeSection />
-      </div>
-      <div css={subPane}>
+      </QueryPane>
+      <SubPane>
         <OrganismPane />
-      </div>
-      <div css={subPane}>
+      </SubPane>
+      <SubPane>
         <MediaPane dispatchEvent={dispatchEvent} />
-      </div>
-    </div>
+      </SubPane>
+    </AppWrapper>
   );
 };
 

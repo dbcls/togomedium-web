@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { PhenotypeSection } from "./PhenotypeSection";
+import { PhenotypeSection } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/PhenotypeSection";
 
 const meta: Meta<typeof PhenotypeSection> = {
   component: PhenotypeSection,
