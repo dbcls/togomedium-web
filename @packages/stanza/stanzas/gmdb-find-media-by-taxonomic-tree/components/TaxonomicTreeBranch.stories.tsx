@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { TaxonomicTreeBranch } from "./TaxonomicTreeBranch";
+import { TaxonomicTreeBranch } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonomicTreeBranch";
 
 const meta: Meta<typeof TaxonomicTreeBranch> = {
   component: TaxonomicTreeBranch,

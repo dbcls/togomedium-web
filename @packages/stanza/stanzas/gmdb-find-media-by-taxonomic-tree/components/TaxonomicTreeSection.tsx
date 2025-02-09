@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
-import { TaxonomicTreeBranch } from "./TaxonomicTreeBranch";
+import { TaxonomicTreeBranch } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonomicTreeBranch";
 
 type Props = {};
 

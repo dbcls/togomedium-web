@@ -1,15 +1,14 @@
-import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { Autocomplete, Box, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, useMemo } from "react";
 import { useDebounceValue } from "usehooks-ts";
-import { AcceptsEmotion } from "yohak-tools";
-import { API_TAXON_BY_NAME } from "../../../api/paths";
-import { TaxonomyQueryResponse } from "../../../api/taxonomy_children/types";
-import { COLOR_GRAY400, COLOR_WHITE } from "../../../styles/variables";
-import { getData } from "../../../utils/getData";
+import { API_TAXON_BY_NAME } from "%stanza/api/paths";
+import { TaxonomyQueryResponse } from "%stanza/api/taxonomy_children/types";
+import { THEME } from "%stanza/styles/theme";
+import { getData } from "%stanza/utils/getData";
 
-type Props = {} & AcceptsEmotion;
+type Props = {};
 
 type Opts = {
   tax_id: string;
@@ -53,7 +52,7 @@ const useTaxonChildrenSearch = () => {
   return { options, setValue, optionsText };
 };
 
-export const TaxonInput: FC<Props> = ({ css, className }) => {
+export const TaxonInput: FC<Props> = () => {
   const { options, setValue, optionsText } = useTaxonChildrenSearch();
   return (
     <Autocomplete
@@ -79,8 +78,8 @@ export const TaxonInput: FC<Props> = ({ css, className }) => {
             {...optionProps}
           >
             <Box sx={{ display: "flex", gap: 1, alignItems: "baseline" }}>
-              <span css={tagTip}>{option.rank}</span>
-              <span css={taxId}>[tax_id:{option.tax_id}]</span>
+              <TagTip>{option.rank}</TagTip>
+              <TaxId>[tax_id:{option.tax_id}]</TaxId>
               <span>{option.name}</span>
             </Box>
           </li>
@@ -91,15 +90,15 @@ export const TaxonInput: FC<Props> = ({ css, className }) => {
   );
 };
 
-const taxonInput = css``;
-const tagTip = css`
-  font-size: 12px;
-  background-color: ${COLOR_GRAY400};
-  color: ${COLOR_WHITE};
-  padding: 4px 6px;
-  border-radius: 5px;
-`;
+const TagTip = styled("div")({
+  fontSize: 12,
+  backgroundColor: THEME.COLOR.GRAY400,
+  color: THEME.COLOR.WHITE,
+  borderRadius: THEME.ROUND.BASE,
+  paddingBlock: 4,
+  paddingInline: 6,
+});
 
-const taxId = css`
-  font-size: 13px;
-`;
+const TaxId = styled("span")({
+  fontSize: 13,
+});

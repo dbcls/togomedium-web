@@ -1,17 +1,16 @@
-import { css } from "@emotion/react";
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/test";
-import { TaxonInput } from "./TaxonInput";
-import { COLOR_WHITE, SIZE2 } from "../../../styles/variables";
-import { sleep } from "../../../utils/promise";
+import { TaxonInput } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonInput";
+import { sleep } from "%stanza/utils/promise";
+import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 
 const meta: Meta<typeof TaxonInput> = {
   component: TaxonInput,
   decorators: [
     (Story) => (
-      <div css={wrapper}>
+      <ComponentWrapper>
         <Story />
-      </div>
+      </ComponentWrapper>
     ),
   ],
   parameters: {},
@@ -32,8 +31,3 @@ export const Primary: Story = {
     await userEvent.type(input, "Deinoc", { delay: 16 });
   },
 };
-
-const wrapper = css`
-  background-color: ${COLOR_WHITE};
-  padding: ${SIZE2};
-`;

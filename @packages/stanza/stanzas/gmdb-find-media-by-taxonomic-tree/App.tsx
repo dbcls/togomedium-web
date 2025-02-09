@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { AppContainer } from "./components/AppContainer";
+import { AppContainer } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/AppContainer";
 
 type Props = {
   stanzaElement?: ShadowRoot;

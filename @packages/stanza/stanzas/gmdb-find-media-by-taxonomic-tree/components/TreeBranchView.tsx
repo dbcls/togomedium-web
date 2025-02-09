@@ -1,22 +1,9 @@
-import { css } from "@emotion/react";
-import { Tooltip } from "@mui/material";
+import { SxProps, Tooltip } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import { styled } from "@mui/material/styles";
 import React, { FC, PropsWithChildren } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import {
-  IconCompact,
-  IconExpand,
-  IconLoading,
-  IconNoChildren,
-} from "../../../components/icons";
-import {
-  COLOR_GRAY300,
-  COLOR_GRAY400,
-  COLOR_GRAY700,
-  COLOR_GRAY_LINE,
-  COLOR_PRIMARY,
-  COLOR_WHITE,
-} from "../../../styles/variables";
+import { IconCompact, IconExpand, IconLoading, IconNoChildren } from "%stanza/components/icons";
+import { THEME } from "%stanza/styles/theme";
 
 export type CheckStatus = "none" | "checked" | "grouped" | "indeterminate";
 export type ToggleIconStatus = "none" | "expand" | "compact" | "loading";
@@ -33,8 +20,7 @@ type Props = {
   linkURL?: string;
   onClickCheck: (id: string) => void;
   onToggleChildren: (id: string) => void;
-} & AcceptsEmotion &
-  PropsWithChildren;
+} & PropsWithChildren;
 
 export const TreeBranchView: FC<Props> = ({
   label,
@@ -47,18 +33,13 @@ export const TreeBranchView: FC<Props> = ({
   onClickCheck,
   onToggleChildren,
   children,
-  className,
-  css,
   toolTipLabel = "",
   toggle,
 }) => {
   return (
-    <li
-      css={[wrapper, css]}
-      className={className}
-    >
-      <div css={inner}>
-        <div css={left}>
+    <Wrapper>
+      <Inner>
+        <Left>
           <span onClick={() => onToggleChildren(id)}>
             <ToggleIcon status={toggle} />
           </span>
@@ -69,7 +50,7 @@ export const TreeBranchView: FC<Props> = ({
           >
             <span>{label}</span>
           </Tooltip>
-          {tag && <span css={tagTip}>{tag}</span>}
+          {tag && <TagTip>{tag}</TagTip>}
           {linkString && linkURL && (
             <a
               href={linkURL}
@@ -79,80 +60,81 @@ export const TreeBranchView: FC<Props> = ({
               [{linkString}]
             </a>
           )}
-        </div>
+        </Left>
         <Checkbox
           checked={check === "checked" || check === "grouped"}
           indeterminate={check === "indeterminate"}
           onClick={() => onClickCheck(id)}
         />
-      </div>
-      {isOpen && !!children && <ul css={childrenWrapper}>{children}</ul>}
-    </li>
+      </Inner>
+      {isOpen && !!children && <ChildrenWrapper>{children}</ChildrenWrapper>}
+    </Wrapper>
   );
 };
 
 const ToggleIcon: FC<{ status: ToggleIconStatus }> = ({ status }) => {
   switch (status) {
     case "none":
-      return <IconNoChildren css={icon} />;
+      return <IconNoChildren sx={iconStyle} />;
     case "expand":
-      return <IconExpand css={[icon, clickable]} />;
+      return <IconExpand sx={clickableIconStyle} />;
     case "compact":
-      return <IconCompact css={[icon, clickable]} />;
+      return <IconCompact sx={clickableIconStyle} />;
     case "loading":
-      return <IconLoading css={icon} />;
+      return <IconLoading sx={iconStyle} />;
   }
 };
 
-const wrapper = css`
-  margin-top: -1px;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-`;
+const Wrapper = styled("li")({
+  marginTop: "-1px",
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+});
 
-const inner = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-grow: 1;
-  background-color: ${COLOR_WHITE};
-  padding: 0 8px;
-  border: 1px solid ${COLOR_GRAY_LINE};
-`;
+const Inner = styled("div")({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  flexGrow: 1,
+  backgroundColor: THEME.COLOR.WHITE,
+  padding: "0 8px",
+  border: `1px solid ${THEME.COLOR.GRAY_LINE}`,
+});
 
-const left = css`
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  gap: 8px;
-  line-height: 1;
-  font-size: 16px;
-  a {
-    font-size: 14px;
-    color: ${COLOR_PRIMARY};
-  }
-`;
+const Left = styled("div")({
+  display: "flex",
+  justifyContent: "left",
+  alignItems: "center",
+  gap: 8,
+  lineHeight: 1,
+  fontSize: 16,
+  a: {
+    fontSize: 14,
+    color: THEME.COLOR.PRIMARY,
+  },
+});
 
-const icon = css`
-  display: block;
-  color: ${COLOR_GRAY300};
-  width: 24px;
-  height: 24px;
-`;
+const iconStyle: SxProps = {
+  display: "block",
+  color: THEME.COLOR.GRAY300,
+  width: 24,
+  height: 24,
+};
+const clickableIconStyle: SxProps = {
+  ...iconStyle,
+  cursor: "pointer",
+  color: THEME.COLOR.GRAY700,
+};
 
-const clickable = css`
-  cursor: pointer;
-  color: ${COLOR_GRAY700};
-`;
+const ChildrenWrapper = styled("ul")({
+  paddingLeft: 16,
+});
 
-const childrenWrapper = css`
-  padding-left: 16px;
-`;
-const tagTip = css`
-  font-size: 12px;
-  background-color: ${COLOR_GRAY400};
-  color: ${COLOR_WHITE};
-  padding: 4px 6px;
-  border-radius: 5px;
-`;
+const TagTip = styled("span")({
+  fontSize: 12,
+  backgroundColor: THEME.COLOR.GRAY400,
+  color: THEME.COLOR.WHITE,
+  padding: "4px 6px",
+  borderRadius: 5,
+});

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps } from "react";
-import { TreeBranchView } from "./TreeBranchView";
+import { TreeBranchView } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TreeBranchView";
 
 const meta: Meta<typeof TreeBranchView> = {
   component: TreeBranchView,

@@ -1,21 +1,34 @@
-import { css } from "@emotion/react";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
-import { AcceptsEmotion, Optional } from "yohak-tools";
-import { CheckStatus, ToggleIconStatus, TreeBranchView } from "./TreeBranchView";
-import { API_TAXONOMY_CHILDREN } from "../../../api/paths";
+import { Optional } from "yohak-tools";
+import { API_TAXONOMY_CHILDREN } from "%stanza/api/paths";
 import {
   TaxonomyChildrenParams,
   TaxonomyChildrenResponse,
-} from "../../../api/taxonomy_children/types";
-import { getData } from "../../../utils/getData";
-import { findAscendants, findDescendants } from "../functions/proessTaxonInfo";
-import { useSelectedTaxonMutators, useSelectedTaxonState } from "../states/selectedTaxon";
-import { TaxonInfo, useTaxonListMutators, useTaxonListState } from "../states/taxonList";
+} from "%stanza/api/taxonomy_children/types";
+import {
+  CheckStatus,
+  ToggleIconStatus,
+  TreeBranchView,
+} from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TreeBranchView";
+import {
+  findAscendants,
+  findDescendants,
+} from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/functions/proessTaxonInfo";
+import {
+  useSelectedTaxonMutators,
+  useSelectedTaxonState,
+} from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/selectedTaxon";
+import {
+  TaxonInfo,
+  useTaxonListMutators,
+  useTaxonListState,
+} from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
+import { getData } from "%stanza/utils/getData";
 
-type Props = { id: string } & AcceptsEmotion & PropsWithChildren;
+type Props = { id: string } & PropsWithChildren;
 
-export const TaxonomicTreeBranch: FC<Props> = ({ id, css, className }) => {
+export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
   const taxonList = useTaxonListState();
   const myInfo: Optional<TaxonInfo> = useMemo(() => {
     return taxonList.find((item) => item.id === id);
@@ -28,8 +41,6 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id, css, className }) => {
 
   return (
     <TreeBranchView
-      css={css}
-      className={className}
       label={label}
       id={id}
       tag={rank}
@@ -169,5 +180,3 @@ const useLineages = (id: string, taxonList: TaxonInfo[]) => {
   // }, [descendants]);
   return { ascendants, descendants, ascendantsLabel };
 };
-
-const taxonomicTreeBranch = css``;
