@@ -1,13 +1,13 @@
 import { styled } from "@mui/material/styles";
-import { COLOR_GRAY_BG, SIZE1 } from "%stanza/styles/variables";
+import { THEME } from "%stanza/styles/theme";
 
 export const AppWrapper = styled("div")({
   position: "relative",
-  backgroundColor: COLOR_GRAY_BG,
-  padding: SIZE1,
+  backgroundColor: THEME.COLOR.GRAY_BG,
+  padding: THEME.SIZE.S1,
   height: "100%",
   display: "flex",
   flexGrow: 1,
   alignItems: "stretch",
-  gap: SIZE1,
+  gap: THEME.SIZE.S1,
 });

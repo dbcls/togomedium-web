@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { COLOR_PRIMARY } from "%stanza/styles/variables";
+import { THEME } from "%stanza/styles/theme";
 
 export const CapsuleList: FC<{ labels: string[] }> = ({ labels }) => (
   <CapsuleListWrapper>
@@ -12,15 +12,15 @@ export const CapsuleList: FC<{ labels: string[] }> = ({ labels }) => (
 
 const CapsuleListWrapper = styled("ul")({
   display: "flex",
-  marginTop: 8,
-  marginBottom: -8,
+  marginTop: THEME.SIZE.S1,
+  marginBottom: -THEME.SIZE.S1,
   flexWrap: "wrap",
 
   li: {
-    border: `1px solid ${COLOR_PRIMARY}`,
-    padding: "5px 10px",
-    borderRadius: 20,
-    marginRight: 8,
-    marginBottom: 8,
+    border: `1px solid ${THEME.COLOR.PRIMARY}`,
+    padding: `${THEME.SIZE.S05}px ${THEME.SIZE.S1 * 1.25}px`,
+    borderRadius: THEME.ROUND.BASE * 4,
+    marginRight: THEME.SIZE.S1,
+    marginBottom: THEME.SIZE.S1,
   },
 });

@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { SimulationLinkDatum, SimulationNodeDatum } from "d3";
 import { D3DragEvent } from "d3-drag";
 import { GraphData } from "./useGraphData";
-import { COLOR_ACCENT, COLOR_PRIMARY, COLOR_WHITE } from "../../../styles/variables";
+import { THEME } from "%stanza/styles/theme";
 
 extend([mixPlugin]);
 
@@ -77,8 +77,8 @@ class GraphManager {
       .style("opacity", 0)
       .attr("stroke-width", (d) => ((d.score - 50) / 50) * 2)
       .attr("stroke", (d) =>
-        colord(COLOR_ACCENT)
-          .mix(COLOR_WHITE, 1 - d.score / 100)
+        colord(THEME.COLOR.ACCENT)
+          .mix(THEME.COLOR.WHITE, 1 - d.score / 100)
           .toHex()
       );
     newLinks.transition().duration(300).style("opacity", 1);
@@ -203,8 +203,8 @@ const setCircleColor = (active: boolean) => (d: NodeDatum) => {
     case d.status === "processing":
       return "white";
     default:
-      return colord(COLOR_PRIMARY)
-        .mix(COLOR_WHITE, Math.min(d.level * 0.2, 0.8))
+      return colord(THEME.COLOR.PRIMARY)
+        .mix(THEME.COLOR.WHITE, Math.min(d.level * 0.2, 0.8))
         .toHex();
   }
 };
@@ -213,7 +213,7 @@ const setCircleStroke = (active: boolean) => (d: NodeDatum) => {
     case active:
       return "red";
     case d.status === "processing":
-      return COLOR_PRIMARY;
+      return THEME.COLOR.PRIMARY;
     // case !d.processed:
     //   return "#EEE";
     default:

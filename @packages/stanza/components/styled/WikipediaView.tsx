@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { COLOR_GRAY300, COLOR_PRIMARY } from "%stanza/styles/variables";
+import { THEME } from "%stanza/styles/theme";
 import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
 
 export const WikipediaView: FC<WikipediaData> = ({ thumb, description, link }) => (
@@ -29,7 +29,7 @@ export const WikipediaView: FC<WikipediaData> = ({ thumb, description, link }) =
 const WikipediaInfo = styled("div")({
   marginTop: 32,
   width: 336,
-  border: `1px ${COLOR_GRAY300} dashed`,
+  border: `1px ${THEME.COLOR.GRAY300} dashed`,
   padding: 8,
   borderRadius: 5,
   height: "fit-content",
@@ -39,7 +39,7 @@ const WikipediaInfo = styled("div")({
     textAlign: "right",
     marginTop: 8,
     "& a": {
-      color: COLOR_PRIMARY,
+      color: THEME.COLOR.PRIMARY,
     },
   },
 });

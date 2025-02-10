@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import { ApiLineage } from "../../../components/info-detail/LineageList";
+import { ApiLineage } from "../../../components/styled/LineageList";
 import { getData } from "../../../utils/getData";
 import { unescapeJsonString } from "../../../utils/string";
 import { URL_API } from "../../../utils/variables";

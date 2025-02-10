@@ -1,10 +1,10 @@
 import React, { ComponentProps, FC } from "react";
 import { Nullable } from "yohak-tools";
-import { LineageList } from "%stanza/components/info-detail/LineageList";
 import { ColorButton } from "%stanza/components/styled/ColorButton";
 import { ColWrapper } from "%stanza/components/styled/ColWrapper";
 import { InfoId } from "%stanza/components/styled/InfoId";
 import { InfoTitle } from "%stanza/components/styled/InfoTitle";
+import { LineageList } from "%stanza/components/styled/LineageList";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { SubHeading } from "%stanza/components/styled/SubHeading";
 import { TagList } from "%stanza/components/styled/TagList";

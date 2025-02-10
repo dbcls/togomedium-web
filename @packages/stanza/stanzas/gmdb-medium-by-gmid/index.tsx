@@ -1,4 +1,4 @@
-import { TogoMediumReactStanza } from "%stanza/components/StanzaReactProvider";
+import { TogoMediumReactStanza } from "%stanza/components/providers/StanzaReactProvider";
 import { App } from "%stanza/stanzas/gmdb-medium-by-gmid/App";
 
 type StanzaParameters = {

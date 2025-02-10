@@ -1,31 +1,22 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useRef } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_WHITE } from "../../../styles/variables";
-import { drawGraph } from "../utils/drawGraph";
-import { GraphData } from "../utils/useGraphData";
+import { drawGraph } from "%stanza/stanzas/gmdb-similar-media-node/utils/drawGraph";
+import { GraphData } from "%stanza/stanzas/gmdb-similar-media-node/utils/useGraphData";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = { data: GraphData } & AcceptsEmotion;
+type Props = { data: GraphData };
 
-export const NodeCanvas: FC<Props> = ({ css, className, data }) => {
+export const NodeCanvas: FC<Props> = ({ data }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
     drawGraph(ref.current, data);
   }, [ref, data]);
-  return <div css={[nodeCanvas, css]} className={className} ref={ref}></div>;
+  return <Wrapper ref={ref}></Wrapper>;
 };
 
-// const Wrapper = React.memo(() =>);
-
-const nodeCanvas = css`
-  background-color: ${COLOR_WHITE};
-  min-height: 600px;
-`;
-
-const svgCanvas = css`
-  display: block;
-  width: 100%;
-  height: 100%;
-`;
+const Wrapper = styled("div")({
+  background: THEME.COLOR.WHITE,
+  minHeight: 600,
+});

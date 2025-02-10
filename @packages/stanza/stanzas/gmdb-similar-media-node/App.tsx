@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { StanzaView } from "./components/StanzaView";
+import { StanzaView } from "%stanza/stanzas/gmdb-similar-media-node/components/StanzaView";
 
 type Props = {
   stanzaElement?: ShadowRoot;

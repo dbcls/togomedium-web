@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
-import { COLOR_WHITE, SIZE2 } from "%stanza/styles/variables";
+import { THEME } from "%stanza/styles/theme";
 
-export const ComponentWrapper = styled("div")(({ theme }) => ({
-  backgroundColor: COLOR_WHITE,
-  padding: SIZE2,
-}));
+export const ComponentWrapper = styled("div")({
+  padding: THEME.SIZE.S2,
+  backgroundColor: THEME.COLOR.WHITE,
+});

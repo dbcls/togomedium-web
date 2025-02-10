@@ -1,10 +1,10 @@
 import Slider from "@mui/material/Slider";
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useMemo, useState } from "react";
-import { AngleLeftIcon } from "%stanza/components/svg/AngleLeftIcon";
-import { AngleRightIcon } from "%stanza/components/svg/AngleRightIcon";
-import { DoubleAngleLeftIcon } from "%stanza/components/svg/DoubleAngleLeftIcon";
-import { DoubleAngleRightIcon } from "%stanza/components/svg/DoubleAngleRightIcon";
+import { AngleLeftIcon } from "%stanza/components/icons/AngleLeftIcon";
+import { AngleRightIcon } from "%stanza/components/icons/AngleRightIcon";
+import { DoubleAngleLeftIcon } from "%stanza/components/icons/DoubleAngleLeftIcon";
+import { DoubleAngleRightIcon } from "%stanza/components/icons/DoubleAngleRightIcon";
 import { getPagination } from "%stanza/stanzas/gmdb-meta-list/utils/getPagination";
 import { THEME } from "%stanza/styles/theme";
 

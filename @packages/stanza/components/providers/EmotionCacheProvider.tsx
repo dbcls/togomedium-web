@@ -1,9 +1,8 @@
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import React, { FC, PropsWithChildren, useEffect, useRef, useState } from "react";
-import { EmotionGlobalStyles } from "./EmotionGlobalStyles";
+import { EmotionGlobalStyles } from "%stanza/styles/EmotionGlobalStyles";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type EmotionCacheProviderProps = {} & PropsWithChildren;
 
 export const EmotionCacheProvider: FC<EmotionCacheProviderProps> = ({ children }) => {

@@ -3,9 +3,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider } from "jotai";
 import React from "react";
-import { EmotionGlobalStyles } from "../../stanza/components/EmotionGlobalStyles";
-import { muiTheme } from "../../stanza/components/muiTheme";
 import type { Preview } from "@storybook/react";
+import { EmotionGlobalStyles } from "%stanza/styles/EmotionGlobalStyles";
+import { muiTheme } from "%stanza/styles/muiTheme";
 const queryClient = new QueryClient();
 const preview: Preview = {
   parameters: {

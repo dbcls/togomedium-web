@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
@@ -33,15 +32,13 @@ export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
           <span>{label}</span>
         </Tooltip>
       </LabelCol>
-      <span css={CheckCol}>
+      <CheckCol>
         <Checkbox
           checked={isChecked}
           onClick={() => onClick({ id, label })}
-          css={css`
-            padding: 5px;
-          `}
+          sx={{ padding: 5 }}
         />
-      </span>
+      </CheckCol>
     </Wrapper>
   );
 };

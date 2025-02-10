@@ -1,23 +1,20 @@
-import { css } from "@emotion/react";
 import React, { FC, useEffect } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { NodeCanvas } from "./NodeCanvas";
-import { stanzaWrapper } from "../../../styles/common";
-import { useGraphData } from "../utils/useGraphData";
+import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
+import { NodeCanvas } from "%stanza/stanzas/gmdb-similar-media-node/components/NodeCanvas";
+import { useGraphData } from "%stanza/stanzas/gmdb-similar-media-node/utils/useGraphData";
 
 type Props = {
   gmId: string;
-} & AcceptsEmotion;
+};
 
-export const StanzaView: FC<Props> = ({ css, className, gmId }) => {
+export const StanzaView: FC<Props> = ({ gmId }) => {
   const { graphData } = useGraphData(gmId);
   useEffect(() => {
     console.log(graphData);
   }, [graphData]);
   return (
-    <div css={[stanzaView, css, stanzaWrapper]} className={className}>
+    <StanzaWrapper>
       <NodeCanvas data={graphData} />
-    </div>
+    </StanzaWrapper>
   );
 };
-const stanzaView = css``;

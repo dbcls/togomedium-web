@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FilterIcon } from "%stanza/components/svg/FilterIcon";
+import { AngleRightIcon } from "%stanza/components/icons/AngleRightIcon";
 
-const meta: Meta<typeof FilterIcon> = {
-  component: FilterIcon,
+const meta: Meta<typeof AngleRightIcon> = {
+  component: AngleRightIcon,
   decorators: [
     (StoryItem) => {
       return (
@@ -15,5 +15,5 @@ const meta: Meta<typeof FilterIcon> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof FilterIcon>;
+type Story = StoryObj<typeof AngleRightIcon>;
 export const Primary: Story = {};

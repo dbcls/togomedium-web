@@ -1,22 +1,22 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Provider } from "jotai";
+import { Provider as JotaiProvider } from "jotai";
 import React, { FC, ReactElement, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import Stanza from "togostanza/stanza";
-import { EmotionCacheProvider } from "./EmotionCacheProvider";
-import { muiTheme } from "./muiTheme";
+import { EmotionCacheProvider } from "%stanza/components/providers/EmotionCacheProvider";
+import { muiTheme } from "%stanza/styles/muiTheme";
 
 const queryClient = new QueryClient();
 const StanzaReactProvider: FC<{ children: ReactElement }> = ({ children }) => {
   return (
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <Provider>
+        <JotaiProvider>
           <ThemeProvider theme={muiTheme}>
             <EmotionCacheProvider>{children}</EmotionCacheProvider>
           </ThemeProvider>
-        </Provider>
+        </JotaiProvider>
       </QueryClientProvider>
     </StrictMode>
   );

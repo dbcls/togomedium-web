@@ -1,15 +1,15 @@
 import React, { ComponentProps, FC } from "react";
 import { Optional } from "yohak-tools";
-import { CapsuleList } from "%stanza/components/info-detail/CapsuleList";
-import { LineageList } from "%stanza/components/info-detail/LineageList";
-import { WikipediaView } from "%stanza/components/info-detail/WikipediaView";
+import { CapsuleList } from "%stanza/components/styled/CapsuleList";
 import { ColorButton } from "%stanza/components/styled/ColorButton";
 import { ColWrapper } from "%stanza/components/styled/ColWrapper";
 import { InfoId } from "%stanza/components/styled/InfoId";
 import { InfoTitle } from "%stanza/components/styled/InfoTitle";
+import { LineageList } from "%stanza/components/styled/LineageList";
 import { StandardParagraph } from "%stanza/components/styled/StandardParagraph";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { SubHeading } from "%stanza/components/styled/SubHeading";
+import { WikipediaView } from "%stanza/components/styled/WikipediaView";
 import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
 
 const linkNCBI = "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=";

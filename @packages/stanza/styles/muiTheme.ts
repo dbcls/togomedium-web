@@ -1,15 +1,12 @@
 import { createTheme } from "@mui/material";
-import { COLOR_PRIMARY, COLOR_WHITE, FONT_EN } from "../styles/variables";
+import { THEME } from "%stanza/styles/theme";
 
 export const muiTheme = createTheme({
   palette: {
     primary: {
-      main: COLOR_PRIMARY,
-      contrastText: COLOR_WHITE,
+      main: THEME.COLOR.PRIMARY,
+      contrastText: THEME.COLOR.WHITE,
     },
-  },
-  typography: {
-    fontFamily: FONT_EN,
   },
   components: {
     MuiTab: {

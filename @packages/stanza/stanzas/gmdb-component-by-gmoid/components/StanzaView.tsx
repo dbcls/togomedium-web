@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { WikipediaView } from "%stanza/components/info-detail/WikipediaView";
 import { ColorButton } from "%stanza/components/styled/ColorButton";
 import { ColWrapper } from "%stanza/components/styled/ColWrapper";
 import { InfoId } from "%stanza/components/styled/InfoId";
@@ -9,6 +8,7 @@ import { StandardParagraph } from "%stanza/components/styled/StandardParagraph";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { SubHeading } from "%stanza/components/styled/SubHeading";
 import { TagList } from "%stanza/components/styled/TagList";
+import { WikipediaView } from "%stanza/components/styled/WikipediaView";
 //TODO: replace with the type packages
 import { ComponentClass, LinkInfo } from "%stanza/stanzas/gmdb-component-by-gmoid/utils/api";
 import { WikipediaData } from "%stanza/utils/fetchWikipediaData";

@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { COLOR_PRIMARY } from "%stanza/styles/variables";
+import { THEME } from "%stanza/styles/theme";
 
 export const LinkList = styled("ul")({
   li: {
@@ -7,6 +7,6 @@ export const LinkList = styled("ul")({
     gap: 8,
   },
   a: {
-    color: COLOR_PRIMARY,
+    color: THEME.COLOR.PRIMARY,
   },
 });

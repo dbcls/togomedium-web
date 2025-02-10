@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { COLOR_GRAY_LINE, COLOR_PRIMARY_DARK } from "%stanza/styles/variables";
+import { THEME } from "%stanza/styles/theme";
 import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
@@ -82,29 +82,28 @@ const TitleWrapper = styled("div")({
     paddingTop: 2,
   },
   a: {
-    color: COLOR_PRIMARY_DARK,
+    color: THEME.COLOR.PRIMARY_DARK,
   },
 
   h4: {
     fontSize: 18,
   },
 });
-
 const Table = styled("table")({
   width: "100%",
   borderCollapse: "collapse",
   margin: "4px 0 16px",
-  border: `1px solid ${COLOR_GRAY_LINE}`,
+  border: `1px solid ${THEME.COLOR.GRAY_LINE}`,
   a: {
-    color: COLOR_PRIMARY_DARK,
+    color: THEME.COLOR.PRIMARY_DARK,
   },
   th: {
-    border: `1px solid ${COLOR_GRAY_LINE}`,
+    border: `1px solid ${THEME.COLOR.GRAY_LINE}`,
     padding: 8,
     textAlign: "left",
   },
   td: {
-    border: `1px solid ${COLOR_GRAY_LINE}`,
+    border: `1px solid ${THEME.COLOR.GRAY_LINE}`,
     padding: 8,
     textAlign: "left",
   },

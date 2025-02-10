@@ -1,7 +1,7 @@
 import { SxProps, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useMemo } from "react";
-import { FilterIcon } from "%stanza/components/svg/FilterIcon";
+import { FilterIcon } from "%stanza/components/icons/FilterIcon";
 import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCell";
 import { makeCellHeight } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
 import {

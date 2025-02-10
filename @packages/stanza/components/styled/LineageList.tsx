@@ -4,7 +4,7 @@ import {
   LineageRank,
   lineageRanks,
 } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
-import { COLOR_GRAY_LINE, COLOR_PRIMARY } from "%stanza/styles/variables";
+import { THEME } from "%stanza/styles/theme";
 import { capitalizeFirstLetter, makeSpeciesName } from "%stanza/utils/string";
 
 export type ApiLineage = {
@@ -59,20 +59,20 @@ const LineageListWrapper = styled("ul")({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    border: `1px solid ${COLOR_GRAY_LINE}`,
+    border: `1px solid ${THEME.COLOR.GRAY_LINE}`,
     borderRadius: 5,
 
     span: {
       width: "100%",
       textAlign: "center",
-      borderBottom: `1px solid ${COLOR_GRAY_LINE}`,
+      borderBottom: `1px solid ${THEME.COLOR.GRAY_LINE}`,
       padding: "4px 8px",
       fontWeight: 500,
     },
 
     a: {
       padding: "4px 8px",
-      color: COLOR_PRIMARY,
+      color: THEME.COLOR.PRIMARY,
     },
   },
 });

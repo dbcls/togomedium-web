@@ -1,4 +1,12 @@
-export const PATH_BASE = "http://growthmedium.org";
+/**
+ * @deprecated
+ */
 export const PATH_MEDIUM = `/medium/`;
+/**
+ * @deprecated
+ */
 export const PATH_TAXON = `/taxon/`;
+/**
+ * @deprecated
+ */
 export const PATH_COMPONENT = `/component/`;

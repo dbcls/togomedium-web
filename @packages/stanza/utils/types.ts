@@ -1,10 +1,5 @@
 import { Optional } from "yohak-tools";
 
-export type AcceptsEmotion = {
-  css?: any;
-  className?: string;
-};
-
 export type TemplateBase = {
   isLoading?: boolean;
   error?: boolean;

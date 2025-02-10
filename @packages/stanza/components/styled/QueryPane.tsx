@@ -1,12 +1,12 @@
 import { styled } from "@mui/material/styles";
-import { COLOR_WHITE, ROUND_CORNER, SIZE1 } from "%stanza/styles/variables";
+import { THEME } from "%stanza/styles/theme";
 
 export const QueryPane = styled("div")({
   flex: 1,
   overflowY: "auto",
-  borderRadius: ROUND_CORNER,
-  padding: SIZE1,
-  backgroundColor: COLOR_WHITE,
+  borderRadius: THEME.ROUND.BASE,
+  padding: THEME.SIZE.S1,
+  backgroundColor: THEME.COLOR.WHITE,
   display: "flex",
   flexDirection: "column",
 });

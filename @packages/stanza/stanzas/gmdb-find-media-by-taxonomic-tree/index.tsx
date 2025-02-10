@@ -1,5 +1,5 @@
 import React from "react";
-import { TogoMediumReactStanza } from "%stanza/components/StanzaReactProvider";
+import { TogoMediumReactStanza } from "%stanza/components/providers/StanzaReactProvider";
 import App from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/App";
 
 type StanzaParameters = {};

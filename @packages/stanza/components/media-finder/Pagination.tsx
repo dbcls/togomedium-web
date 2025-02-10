@@ -1,6 +1,5 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = {
@@ -9,7 +8,7 @@ type Props = {
   displayLength: number;
   onClickNext: () => void;
   onClickPrev: () => void;
-} & AcceptsEmotion;
+};
 
 export const Pagination: FC<Props> = ({
   total,
