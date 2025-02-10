@@ -36,7 +36,7 @@ export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
         <Checkbox
           checked={isChecked}
           onClick={() => onClick({ id, label })}
-          sx={{ padding: 5 }}
+          // sx={{ padding: 5 }}
         />
       </CheckCol>
     </Wrapper>

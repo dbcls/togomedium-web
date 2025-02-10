@@ -1,54 +1,32 @@
 import { Autocomplete, Chip, TextField } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
-import React, { FC, SyntheticEvent, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { FC, useState } from "react";
 import {
   ComponentsWithComponentsResponse,
   componentsWithComponentsURL,
   ComponentWithComponentsRequest,
 } from "%api/componentsWithComponents/definitions";
 import { getData } from "%core/network/getData";
-import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
-import { LabelInfo } from "%stanza/utils/labelInfo";
+import { parseLabelInfo } from "%stanza/stanzas/gmdb-find-media-by-components/functions/parseLabelInfo";
 
 type Props = {
   onChangeSelection: (ids: string[]) => void;
 };
-type ComponentLabelInfo = LabelInfo & { japaneseName: string };
 export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
-  const [loading, setLoading] = useState(false);
-  const [components, setComponents] = useState<readonly ComponentLabelInfo[]>([]);
-  // todo use useQuery
-  const loadComponents = async (ids: string[] = []) => {
-    const response = await getData<
-      ComponentsWithComponentsResponse,
-      ComponentWithComponentsRequest
-    >(componentsWithComponentsURL, {
-      gmo_ids: ids.join(","),
-    });
-    if (response.body) {
-      setComponents(
-        response.body
-          .map<ComponentLabelInfo>((item) => ({
-            id: item.gmo_id,
-            label: item.name.includes(";") ? decodeHTMLEntities(item.name) : item.name,
-            japaneseName: item.japanese_name,
-          }))
-          .filter((item) => !ids.includes(item.id))
-      );
-    }
-    setLoading(false);
-  };
-  const onOpen = () => {
-    if (components.length) return;
-    loadComponents();
-  };
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const { data, isPending } = useQuery({
+    queryKey: ["componentsOfComponents", { selectedIds }],
+    queryFn: async () => {
+      const gmo_ids = selectedIds.join(",");
+      const response = await getData<
+        ComponentsWithComponentsResponse,
+        ComponentWithComponentsRequest
+      >(componentsWithComponentsURL, { gmo_ids });
+      if (!response.body) throw new Error("No response body");
+      return parseLabelInfo(response.body, selectedIds);
+    },
+  });
 
-  const onChange = (e: SyntheticEvent, value: LabelInfo[]) => {
-    const ids = value.map((v) => v.id);
-    onChangeSelection(ids);
-    loadComponents(ids);
-  };
-  //
   return (
     <Autocomplete
       multiple
@@ -61,30 +39,19 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
           return label.includes(filter) || japaneseName.includes(filter);
         });
       }}
-      onChange={onChange}
-      onOpen={onOpen}
+      onChange={(_e, v) => {
+        const ids = v.map((v) => v.id);
+        setSelectedIds(ids);
+        onChangeSelection(ids);
+      }}
       disablePortal={true}
-      options={components}
-      loading={loading}
+      options={data || []}
+      loading={isPending}
       getOptionLabel={(option) => option.label}
       renderInput={(params) => (
         <TextField
           {...params}
           label="Components"
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <>
-                {loading ? (
-                  <CircularProgress
-                    color="inherit"
-                    size={20}
-                  />
-                ) : null}
-                {params.InputProps.endAdornment}
-              </>
-            ),
-          }}
         />
       )}
       renderTags={(value, getTagProps) =>

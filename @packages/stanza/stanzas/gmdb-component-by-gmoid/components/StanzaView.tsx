@@ -1,4 +1,6 @@
 import React, { FC } from "react";
+import { ComponentDetailResponse } from "%api/componentDetail/definitions";
+import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { ColorButton } from "%stanza/components/styled/ColorButton";
 import { ColWrapper } from "%stanza/components/styled/ColWrapper";
 import { InfoId } from "%stanza/components/styled/InfoId";
@@ -9,10 +11,10 @@ import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { SubHeading } from "%stanza/components/styled/SubHeading";
 import { TagList } from "%stanza/components/styled/TagList";
 import { WikipediaView } from "%stanza/components/styled/WikipediaView";
-//TODO: replace with the type packages
-import { ComponentClass, LinkInfo } from "%stanza/stanzas/gmdb-component-by-gmoid/utils/api";
+import { LinkInfo } from "%stanza/stanzas/gmdb-component-by-gmoid/functions/LinkLabelInfo";
 import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
-import { decodeHTMLEntities } from "%stanza/utils/string";
+
+type ComponentClass = ComponentDetailResponse["super_classes"][0];
 
 type Props = {
   prefLabel: string;
@@ -25,6 +27,7 @@ type Props = {
   links: LinkInfo[];
   wikipediaData?: WikipediaData;
 };
+export type ViewProps = Props;
 
 export const StanzaView: FC<Props> = ({
   prefLabel,

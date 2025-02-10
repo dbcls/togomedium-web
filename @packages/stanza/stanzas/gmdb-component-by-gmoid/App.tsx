@@ -1,7 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
-import { StanzaView } from "%stanza/stanzas/gmdb-component-by-gmoid/components/StanzaView";
-import { getComponentData, ViewProps } from "%stanza/stanzas/gmdb-component-by-gmoid/utils/api";
+import {
+  ComponentDetailRequest,
+  ComponentDetailResponse,
+  componentDetailURL,
+} from "%api/componentDetail/definitions";
+import { getData } from "%core/network/getData";
+import {
+  StanzaView,
+  ViewProps,
+} from "%stanza/stanzas/gmdb-component-by-gmoid/components/StanzaView";
+import { parseData } from "%stanza/stanzas/gmdb-component-by-gmoid/functions/parseData";
 import { fetchWikipediaData } from "%stanza/utils/fetchWikipediaData";
 
 type Props = {
@@ -11,7 +20,18 @@ type Props = {
 const useComponentDataQuery = (gmo_id: string) => {
   const { data, isLoading } = useQuery({
     queryKey: [{ gmo_id }],
-    queryFn: () => getComponentData(gmo_id),
+    queryFn: async () => {
+      const result = await getData<ComponentDetailResponse, ComponentDetailRequest>(
+        componentDetailURL,
+        {
+          gmo_id,
+        }
+      );
+      if (!result.body) {
+        throw new Error("No data found");
+      }
+      return parseData(result.body);
+    },
     staleTime: Infinity,
   });
   return { componentData: data, isLoading };
