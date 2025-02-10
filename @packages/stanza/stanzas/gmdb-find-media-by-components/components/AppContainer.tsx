@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, useEffect } from "react";
+import { nullListResponse } from "%api/ListApi";
 import {
-  MediaByAttributesParams,
-  MediaByAttributesResponse,
-} from "%stanza/api/media_by_attributes/types";
-import { API_MEDIA_BY_ATTRIBUTES } from "%stanza/api/paths";
+  ListMediaByAttributesRequest,
+  ListMediaByAttributesResponse,
+  listMediaByAttributesURL,
+} from "%api/listMediaByAttributes/definitions";
+import { getData } from "%core/network/getData";
 import { MediaPane } from "%stanza/components/media-finder/MediaPane";
 import { AppWrapper } from "%stanza/components/styled/AppWrapper";
 import { QueryPane } from "%stanza/components/styled/QueryPane";
@@ -18,7 +20,6 @@ import {
   useMediaPaginationState,
 } from "%stanza/state/media-finder/mediaPagination";
 import { useQueryDataMutators } from "%stanza/state/media-finder/queryData";
-import { getData } from "%stanza/utils/getData";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;
@@ -46,15 +47,14 @@ const useMediaLoadFromComponents = () => {
   const { setQueryData } = useQueryDataMutators();
   const { setIsMediaLoading } = useIsMediaLoadingMutators();
   const { reset } = useMediaPaginationMutators();
-  const nullResponse = { total: 0, contents: [], offset: 0, limit: 0 };
   const query = useQuery({
     queryKey: [selectedAttributes, { page }],
     queryFn: async () => {
-      const gmo_ids = selectedAttributes.gmo_ids;
-      if (gmo_ids.length === 0) return nullResponse;
+      const gmo_ids = selectedAttributes.gmo_ids.join(",");
+      if (gmo_ids.length === 0) return nullListResponse;
       //
-      const response = await getData<MediaByAttributesResponse, MediaByAttributesParams>(
-        API_MEDIA_BY_ATTRIBUTES,
+      const response = await getData<ListMediaByAttributesResponse, ListMediaByAttributesRequest>(
+        listMediaByAttributesURL,
         {
           gmo_ids,
           limit: SHOW_COUNT,

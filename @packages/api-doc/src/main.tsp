@@ -20,8 +20,8 @@ import "./paths/list_organisms_by_keyword.tsp";
 import "./paths/list_organisms_by_taxids.tsp";
 import "./paths/list_similar_media_by_gmid.tsp";
 import "./paths/list_taxons_by_rank.tsp";
+import "./paths/list_media_by_attributes.tsp";
 import "./paths/media_alignment_table.tsp";
-import "./paths/media_by_attributes.tsp";
 import "./paths/media_by_gmoid.tsp";
 import "./paths/media_by_taxid.tsp";
 import "./paths/media_strains_alignment_by_gm_ids.tsp";
@@ -72,7 +72,7 @@ namespace Root;
 //namespace List{}
 interface _MediaByTaxon extends MediaByTaxon {}
 interface _OrganismsByPhenotypes extends OrganismsByPhenotypes {}
-interface _MediaByAttributes extends MediaByAttributes {}
+interface _ListMediaByAttributes extends ListMediaByAttributes {}
 interface _ListComponentsByGmoIds extends ListComponentsByGmoIds {}
 interface _ListComponentsByKeyword extends ListComponentsByKeyword {}
 interface _ListMediaByGmIds extends ListMediaByGmIds {}

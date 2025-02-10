@@ -10,7 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 
-model MediaByAttributesRequest {
+model ListMediaByAttributesRequest {
   @query
   @doc("String of gmo_id(s) separated by comma.")
   gmo_ids: string;
@@ -18,7 +18,7 @@ model MediaByAttributesRequest {
   ...ListRequest;
 }
 
-model MediaByAttributesResponse {
+model ListMediaByAttributesResponse {
   ...ListResponse<{
     @doc("Media ID")
     gm_id: string;
@@ -34,11 +34,11 @@ model MediaByAttributesResponse {
   }>;
 }
 
-interface MediaByAttributes {
+interface ListMediaByAttributes {
   @route("gmdb_media_by_attributes")
   @tag(Tags.MediaFinder)
   @tag(Tags.ListStanza)
   @doc("Search media by attributes. Currently, only component(gmo_id) is supported. Mostly used at 'Find media by components' page.")
   @get
-  get(...MediaByAttributesRequest): MediaByAttributesResponse;
+  get(...ListMediaByAttributesRequest): ListMediaByAttributesResponse;
 }

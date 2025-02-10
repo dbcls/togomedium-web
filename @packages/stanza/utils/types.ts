@@ -12,12 +12,18 @@ export type TemplateBase = {
  */
 export type SimpleObject = { [key: string]: string | number | string[] | number[] };
 
+/**
+ * @deprecated
+ */
 export type ApiResponse<T> = {
   status: number;
   message?: string;
   body: Optional<T>;
 };
 
+/**
+ * @deprecated
+ */
 export type MediaFinderListApiBody<T extends string = string> = {
   limit: number;
   total: number;
