@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "esnext",
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react",
     "moduleResolution": "bundler",
     "module": "ESNext",
     "noResolve": false,
@@ -13,7 +12,6 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "types": ["@emotion/react", "d3-drag"],
     "skipLibCheck": true,
 
     "paths": {

@@ -65,6 +65,9 @@ export const makeStrainName = (str: string) => {
   return `${first}. ${second}. ${rest}`;
 };
 
+/**
+ * @deprecated
+ */
 export const decodeHTMLEntities = (text: string): string => {
   const textArea = document.createElement("textarea");
   textArea.innerHTML = text;

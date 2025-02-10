@@ -17,11 +17,9 @@ model ComponentsWithComponentsRequest {
 }
 
 model ComponentsWithComponentsResponse {
-  @doc("List of components")
-  items: {
-    gmo_id: string;
-    name: string;
-  }[];
+  gmo_id: string;
+  name: string;
+  japanese_name: string;
 }
 
 interface ComponentsWithComponents {
@@ -29,5 +27,5 @@ interface ComponentsWithComponents {
   @tag(Tags.MediaFinder)
   @doc("Find media with the given components, then return all components in the media. Mostly used at 'Find media by components' page.")
   @get
-  get(...ComponentsWithComponentsRequest): ComponentsWithComponentsResponse;
+  get(...ComponentsWithComponentsRequest): ComponentsWithComponentsResponse[];
 }

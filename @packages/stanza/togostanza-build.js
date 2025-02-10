@@ -14,14 +14,14 @@ export default function config(environment) {
           find: /^%storybook\//,
           replacement: join(__dirname, "../", "storybook/src/"),
         },
-        // {
-        //   find: /^%core\//,
-        //   replacement: join(__dirname, "../", "core/src/"),
-        // },
-        // {
-        //   find: /^%schema\//,
-        //   replacement: join(__dirname, "../", "schema/src/"),
-        // },
+        {
+          find: /^%core\//,
+          replacement: join(__dirname, "../", "core/src/"),
+        },
+        {
+          find: /^%api\//,
+          replacement: join(__dirname, "../", "api/src/"),
+        },
       ],
     },
   };

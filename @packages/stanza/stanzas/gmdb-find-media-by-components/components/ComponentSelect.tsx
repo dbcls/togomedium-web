@@ -1,11 +1,14 @@
 import { Autocomplete, Chip, TextField } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import React, { FC, SyntheticEvent, useState } from "react";
-import { AllComponentsResponse } from "%stanza/api/all-components/types";
-import { API_COMPONENTS_WITH_COMPONENTS } from "%stanza/api/paths";
-import { getData } from "%stanza/utils/getData";
+import {
+  ComponentsWithComponentsResponse,
+  componentsWithComponentsURL,
+  ComponentWithComponentsRequest,
+} from "%api/componentsWithComponents/definitions";
+import { getData } from "%core/network/getData";
+import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { LabelInfo } from "%stanza/utils/labelInfo";
-import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
   onChangeSelection: (ids: string[]) => void;
@@ -16,7 +19,10 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
   const [components, setComponents] = useState<readonly ComponentLabelInfo[]>([]);
   // todo use useQuery
   const loadComponents = async (ids: string[] = []) => {
-    const response = await getData<AllComponentsResponse>(API_COMPONENTS_WITH_COMPONENTS, {
+    const response = await getData<
+      ComponentsWithComponentsResponse,
+      ComponentWithComponentsRequest
+    >(componentsWithComponentsURL, {
       gmo_ids: ids.join(","),
     });
     if (response.body) {

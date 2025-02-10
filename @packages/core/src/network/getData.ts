@@ -1,11 +1,6 @@
-import { Nullable } from "yohak-tools";
-import { isArray } from "yohak-tools/";
-import { ApiResponse, SimpleObject } from "./types";
+import { isArray, Optional, Nullable } from "yohak-tools";
 
-/**
- * @deprecated
- */
-export const getData = async <ResponseBody, Params extends SimpleObject = SimpleObject>(
+export const getData = async <ResponseBody, Params extends ParamObject = ParamObject>(
   url: string,
   params: Params,
   abortController?: AbortController
@@ -29,14 +24,22 @@ export const getData = async <ResponseBody, Params extends SimpleObject = Simple
   };
 };
 
-export const makeFormBody = (params: SimpleObject) => {
+type ApiResponse<T> = {
+  status: number;
+  message?: string;
+  body: Optional<T>;
+};
+
+type ParamObject = { [key: string]: string | number | string[] | number[] };
+
+const makeFormBody = (params: ParamObject) => {
   const formBody = Object.entries(params).map(
     ([key, value]) => `${key}=${encodeURIComponent(isArray(value) ? value.join(",") : value)}`
   );
   return formBody.join("&");
 };
 
-const makeOptions = (params: SimpleObject, signal: Nullable<AbortSignal> = null): RequestInit => {
+const makeOptions = (params: ParamObject, signal: Nullable<AbortSignal> = null): RequestInit => {
   const body = makeFormBody(params);
   return {
     method: "POST",

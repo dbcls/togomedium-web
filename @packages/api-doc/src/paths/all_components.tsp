@@ -19,9 +19,10 @@ model AllComponentsResponse {
 }
 
 interface AllComponents {
+  #deprecated ""
   @route("gmdb_all_components")
-  @tag(Tags.MediaFinder)
-  @doc("This endpoint returns a list of all components in the GMDB.")
+  @tag(Tags.Deprecated)
+  @doc("Deprecated, in favor of `components_with_components`. This endpoint returns a list of all components in the GMDB.")
   @get
   get(): AllComponentsResponse;
 }

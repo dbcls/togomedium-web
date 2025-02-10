@@ -9,6 +9,8 @@
     "strict": true,
     "paths": {
       "%stanza/*": ["../stanza/*"],
+      "%api/*": ["../api/src/*"],
+      "%core/*": ["../core/src/*"],
       "%storybook/*": ["../storybook/src/*"]
     }
   },

@@ -1,8 +1,8 @@
 import { ComponentProps } from "react";
 import { Nullable, Optional } from "yohak-tools";
-import { getData } from "../../../utils/getData";
-import { URL_API } from "../../../utils/variables";
 import { StanzaView } from "../components/StanzaView";
+import { getData } from "%stanza/utils/getData";
+import { URL_API } from "%stanza/utils/variables";
 
 export type ViewProps = ComponentProps<typeof StanzaView>;
 type ApiBody = {

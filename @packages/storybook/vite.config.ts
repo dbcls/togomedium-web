@@ -16,22 +16,14 @@ export default defineConfig({
         find: /^%storybook\//,
         replacement: join(__dirname, "../", "storybook/src/"),
       },
-      // {
-      //   find: /^%editor\//,
-      //   replacement: join(__dirname, "../", "editor/src/"),
-      // },
-      // {
-      //   find: /^%core\//,
-      //   replacement: join(__dirname, "../", "core/src/"),
-      // },
-      // {
-      //   find: /^%schema\//,
-      //   replacement: join(__dirname, "../", "schema/src/"),
-      // },
-      // {
-      //   find: /^%storybook\//,
-      //   replacement: join(__dirname, "../", "storybook/src/"),
-      // },
+      {
+        find: /^%core\//,
+        replacement: join(__dirname, "../", "core/src/"),
+      },
+      {
+        find: /^%api\//,
+        replacement: join(__dirname, "../", "api/src/"),
+      },
     ],
   },
 });

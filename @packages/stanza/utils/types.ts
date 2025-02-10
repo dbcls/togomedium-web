@@ -7,6 +7,9 @@ export type TemplateBase = {
   statusText?: string;
 };
 
+/**
+ * @deprecated
+ */
 export type SimpleObject = { [key: string]: string | number | string[] | number[] };
 
 export type ApiResponse<T> = {
