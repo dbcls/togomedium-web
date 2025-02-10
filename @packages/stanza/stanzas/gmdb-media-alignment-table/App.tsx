@@ -1,11 +1,11 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import { useQuery } from "@tanstack/react-query";
 import React, { useCallback } from "react";
-import { ScrollableTable } from "./components/ScrollableTable";
-import { MediaAlignmentTableResponse } from "../../api/media-alignment-table/types";
-import { API_MEDIA_ALIGNMENT } from "../../api/paths";
-import { COLOR_WHITE, SIZE1 } from "../../styles/variables";
-import { getData } from "../../utils/getData";
+import { MediaAlignmentTableResponse } from "%stanza/api/media-alignment-table/types";
+import { API_MEDIA_ALIGNMENT } from "%stanza/api/paths";
+import { ScrollableTable } from "%stanza/stanzas/gmdb-media-alignment-table/components/ScrollableTable";
+import { THEME } from "%stanza/styles/theme";
+import { getData } from "%stanza/utils/getData";
 
 export type AppProps = {
   gm_ids: string[];
@@ -41,19 +41,22 @@ const App = ({ gm_ids, stanzaElement, prioritizedOrganism = [] }: AppProps) => {
     [stanzaElement]
   );
   const dataQuery = useDataQuery(gm_ids, dispatchStanzaEvent);
-  if (!dataQuery.data) return <div css={wrapper}>Loading...</div>;
+  if (!dataQuery.data) return <Wrapper>Loading...</Wrapper>;
   return (
-    <div css={wrapper}>
-      <ScrollableTable data={dataQuery.data} prioritizedOrganism={prioritizedOrganism} />
-    </div>
+    <Wrapper>
+      <ScrollableTable
+        data={dataQuery.data}
+        prioritizedOrganism={prioritizedOrganism}
+      />
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  min-height: 100px;
-  background-color: ${COLOR_WHITE};
-  border-radius: 5px;
-  padding: ${SIZE1};
-`;
+const Wrapper = styled("div")({
+  minHeight: 100,
+  backgroundColor: THEME.COLOR.WHITE,
+  borderRadius: 5,
+  padding: THEME.SIZE.S1,
+});
 
 export default App;

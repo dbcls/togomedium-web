@@ -1,8 +1,8 @@
-import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { PATH_COMPONENT } from "../../../components/consts";
-import { COLOR_GRAY, COLOR_PRIMARY, COLOR_WHITE, SIZE1 } from "../../../styles/variables";
+import { PATH_COMPONENT } from "%stanza/components/consts";
+import { THEME } from "%stanza/styles/theme";
 
 export type AlignmentCellState = "grouped" | "available" | "none";
 
@@ -14,7 +14,7 @@ type Props = {
 
 export const AlignmentCell: FC<Props> = ({ state, label, id }) => {
   return (
-    <div css={wrapper}>
+    <Wrapper>
       <Tooltip
         title={label}
         placement={"top"}
@@ -29,45 +29,45 @@ export const AlignmentCell: FC<Props> = ({ state, label, id }) => {
           <span />
         </a>
       </Tooltip>
-    </div>
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  box-sizing: border-box;
-  background-color: ${COLOR_WHITE};
-  padding: ${SIZE1};
-  display: flex;
-  width: fit-content;
-  align-items: center;
-  flex-grow: 0;
-  .icon {
-    display: flex;
-    width: 24px;
-    height: 24px;
-    justify-content: center;
-    align-items: center;
-  }
-  .icon-available > span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: ${COLOR_PRIMARY};
-  }
-  .icon-grouped > span {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    border: 2px solid ${COLOR_PRIMARY};
-  }
-
-  .icon-none > span {
-    display: none;
-    box-sizing: border-box;
-    width: 100%;
-    height: 4px;
-    background-color: ${COLOR_GRAY};
-    border-radius: 4px;
-  }
-`;
+const Wrapper = styled("div")({
+  boxSizing: "border-box",
+  backgroundColor: THEME.COLOR.WHITE,
+  // padding: SIZE1,
+  padding: THEME.SIZE.S1,
+  display: "flex",
+  width: "fit-content",
+  alignItems: "center",
+  flexGrow: 0,
+  ".icon": {
+    display: "flex",
+    width: 24,
+    height: 24,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ".icon-available > span": {
+    display: "block",
+    width: "100%",
+    height: "100%",
+    backgroundColor: THEME.COLOR.PRIMARY,
+  },
+  ".icon-grouped > span": {
+    display: "block",
+    boxSizing: "border-box",
+    width: "100%",
+    height: "100%",
+    border: `2px solid ${THEME.COLOR.PRIMARY}`,
+  },
+  ".icon-none > span": {
+    display: "none",
+    boxSizing: "border-box",
+    width: "100%",
+    height: 4,
+    backgroundColor: THEME.COLOR.GRAY,
+    borderRadius: 4,
+  },
+});

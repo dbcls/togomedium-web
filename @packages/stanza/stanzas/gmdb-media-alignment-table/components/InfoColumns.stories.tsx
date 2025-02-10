@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { InfoColumns } from "./InfoColumns";
-import { mediaAlignmentTableResponse1 } from "../../../api/media-alignment-table/response1";
+import { mediaAlignmentTableResponse1 } from "%stanza/api/media-alignment-table/response1";
+import { InfoColumns } from "%stanza/stanzas/gmdb-media-alignment-table/components/InfoColumns";
 
 const meta: Meta<typeof InfoColumns> = {
   component: InfoColumns,

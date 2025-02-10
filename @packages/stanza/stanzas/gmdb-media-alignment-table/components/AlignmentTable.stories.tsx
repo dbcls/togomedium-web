@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { AlignmentTable } from "./AlignmentTable";
-import { mediaAlignmentTableResponse1 } from "../../../api/media-alignment-table/response1";
+import { mediaAlignmentTableResponse1 } from "%stanza/api/media-alignment-table/response1";
 
 const meta: Meta<typeof AlignmentTable> = {
   component: AlignmentTable,

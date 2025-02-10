@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { InfoCell } from "./InfoCell";
-import { PATH_MEDIUM, PATH_TAXON } from "../../../components/consts";
+import { PATH_MEDIUM, PATH_TAXON } from "%stanza/components/consts";
+import { InfoCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/InfoCell";
 
 const meta: Meta<typeof InfoCell> = {
   component: InfoCell,

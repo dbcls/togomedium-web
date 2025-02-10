@@ -1,12 +1,12 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { ComponentProps, FC } from "react";
 import { AlignmentCell } from "./AlignmentCell";
 import { InfoCell } from "./InfoCell";
-import { PATH_MEDIUM, PATH_TAXON } from "../../../components/consts";
-import { COLOR_WHITE } from "../../../styles/variables";
-import { LabelInfo } from "../../../utils/labelInfo";
-import { useIsMediaExpendedState } from "../states/isMediaExpanded";
-import { useIsOrganismsExpendedState } from "../states/isOrganismsExpanded";
+import { PATH_MEDIUM, PATH_TAXON } from "%stanza/components/consts";
+import { useIsMediaExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table/states/isMediaExpanded";
+import { useIsOrganismsExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table/states/isOrganismsExpanded";
+import { THEME } from "%stanza/styles/theme";
+import { LabelInfo } from "%stanza/utils/labelInfo";
 
 type Props = {
   medium: LabelInfo;
@@ -24,7 +24,7 @@ export const MediaRow: FC<Props> = ({
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
   return (
-    <div css={wrapper}>
+    <Wrapper>
       <InfoCell
         info={[medium]}
         expanded={isMediaExpanded}
@@ -42,22 +42,22 @@ export const MediaRow: FC<Props> = ({
           key={component.id}
         />
       ))}
-      <div css={spacer} />
-    </div>
+      <Spacer />
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  display: flex;
-  gap: 1px;
-  width: 100%;
-  & > * {
-    flex-grow: 0;
-    flex-shrink: 0;
-  }
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  gap: 1,
+  width: "100%",
+  "& > *": {
+    flexGrow: 0,
+    flexShrink: 0,
+  },
+});
 
-const spacer = css`
-  background-color: ${COLOR_WHITE};
-  flex-grow: 1 !important;
-`;
+const Spacer = styled("div")({
+  backgroundColor: THEME.COLOR.WHITE,
+  flexGrow: "1 !important",
+});

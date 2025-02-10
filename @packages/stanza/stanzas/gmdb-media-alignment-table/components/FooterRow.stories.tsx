@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps, useEffect } from "react";
-import { FooterRow } from "./FooterRow";
-import { useIsMediaExpandedMutators } from "../states/isMediaExpanded";
-import { useIsOrganismsExpandedMutators } from "../states/isOrganismsExpanded";
+import { FooterRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/FooterRow";
+import { useIsMediaExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table/states/isMediaExpanded";
+import { useIsOrganismsExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table/states/isOrganismsExpanded";
 
 type WithCustomArgs = {
   isMediaExpanded: boolean;

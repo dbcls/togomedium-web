@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FooterCell } from "./FooterCell";
+import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/FooterCell";
 
 const meta: Meta<typeof FooterCell> = {
   component: FooterCell,

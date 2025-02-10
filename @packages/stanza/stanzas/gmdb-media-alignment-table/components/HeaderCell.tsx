@@ -1,8 +1,9 @@
-import { css } from "@emotion/react";
+import { SxProps } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { IconCompact, IconExpand } from "../../../components/icons";
-import { COLOR_GRAY700, COLOR_WHITE, SIZE1 } from "../../../styles/variables";
-import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
+import { IconCompact, IconExpand } from "%stanza/components/icons";
+import { WIDTH_COMPACT, WIDTH_EXPANDED } from "%stanza/stanzas/gmdb-media-alignment-table/consts";
+import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   label: string;
@@ -12,45 +13,40 @@ type Props = {
 
 export const HeaderCell: FC<Props> = ({ label, onClickIcon, isExpanded }) => {
   return (
-    <div
-      css={wrapper}
-      className={isExpanded ? "expanded" : "compact"}
-    >
+    <Wrapper className={isExpanded ? "expanded" : "compact"}>
       <span>{label}</span>
       {isExpanded ? (
         <IconCompact
-          css={icon}
+          sx={iconStyle}
           onClick={onClickIcon}
         />
       ) : (
         <IconExpand
-          css={icon}
+          sx={iconStyle}
           onClick={onClickIcon}
         />
       )}
-    </div>
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  display: flex;
-  background-color: ${COLOR_WHITE};
-  align-items: center;
-  justify-content: space-between;
-  padding: ${SIZE1};
-  box-sizing: border-box;
+const Wrapper = styled("div")({
+  display: "flex",
+  backgroundColor: THEME.COLOR.WHITE,
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: THEME.SIZE.S1,
+  boxSizing: "border-box",
+  "&.expanded": {
+    width: WIDTH_EXPANDED,
+  },
+  "&.compact": {
+    width: WIDTH_COMPACT,
+  },
+});
 
-  &.expanded {
-    width: ${WIDTH_EXPANDED};
-  }
-
-  &.compact {
-    width: ${WIDTH_COMPACT};
-  }
-`;
-
-const icon = css`
-  font-size: 24px;
-  color: ${COLOR_GRAY700};
-  cursor: pointer;
-`;
+const iconStyle: SxProps = {
+  fontSize: 24,
+  color: THEME.COLOR.GRAY700,
+  cursor: "pointer",
+};

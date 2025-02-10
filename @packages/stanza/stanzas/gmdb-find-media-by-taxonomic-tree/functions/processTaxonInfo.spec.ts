@@ -1,6 +1,10 @@
 import { describe, expect, it, test } from "vitest";
-import { findAscendants, findDescendants, makeNewSelection } from "./proessTaxonInfo";
-import { TaxonInfo } from "../states/taxonList";
+import {
+  findAscendants,
+  findDescendants,
+  makeNewSelection,
+} from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/functions/proessTaxonInfo";
+import { TaxonInfo } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
 expect.extend({
   toIncludeSameMembers(received: any[], expected: any[]) {
     const { isNot } = this;

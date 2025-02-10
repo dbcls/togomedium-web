@@ -1,20 +1,22 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { HeaderCell } from "./HeaderCell";
-import { MediaRow } from "./MediaRow";
-import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { COLOR_GRAY_LINE, COLOR_WHITE } from "../../../styles/variables";
-import { AcceptsEmotion } from "../../../utils/types";
-import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
-import { useIsMediaExpandedMutators, useIsMediaExpendedState } from "../states/isMediaExpanded";
+import { MediaAlignmentTableResponse } from "%stanza/api/media-alignment-table/types";
+import { HeaderCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderCell";
+import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/MediaRow";
+import { WIDTH_COMPACT, WIDTH_EXPANDED } from "%stanza/stanzas/gmdb-media-alignment-table/consts";
+import {
+  useIsMediaExpandedMutators,
+  useIsMediaExpendedState,
+} from "%stanza/stanzas/gmdb-media-alignment-table/states/isMediaExpanded";
 import {
   useIsOrganismsExpandedMutators,
   useIsOrganismsExpendedState,
-} from "../states/isOrganismsExpanded";
+} from "%stanza/stanzas/gmdb-media-alignment-table/states/isOrganismsExpanded";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = { data: MediaAlignmentTableResponse; prioritizedOrganism: string[] } & AcceptsEmotion;
+type Props = { data: MediaAlignmentTableResponse; prioritizedOrganism: string[] };
 
-export const InfoColumns: FC<Props> = ({ data, css, className, prioritizedOrganism = [] }) => {
+export const InfoColumns: FC<Props> = ({ data, prioritizedOrganism = [] }) => {
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
   const { setIsMediaExpanded } = useIsMediaExpandedMutators();
@@ -27,11 +29,8 @@ export const InfoColumns: FC<Props> = ({ data, css, className, prioritizedOrgani
     setIsOrganismsExpanded(!isOrganismsExpanded);
   };
   return (
-    <div
-      css={[wrapper, css]}
-      className={className}
-    >
-      <div css={header}>
+    <Wrapper>
+      <Header>
         <HeaderCell
           label={"Media"}
           isExpanded={isMediaExpanded}
@@ -42,7 +41,7 @@ export const InfoColumns: FC<Props> = ({ data, css, className, prioritizedOrgani
           isExpanded={isOrganismsExpanded}
           onClickIcon={onClickOrganismExpandIcon}
         />
-      </div>
+      </Header>
       {data.media.map((m) => {
         const organisms = m.organisms.map((taxid) => {
           const organism = data.organisms.find((o) => o.tax_id === taxid);
@@ -60,48 +59,48 @@ export const InfoColumns: FC<Props> = ({ data, css, className, prioritizedOrgani
           />
         );
       })}
-      <div css={spacerRow}>
-        <span
-          css={spacer}
-          className={isMediaExpanded ? "expanded" : "compact"}
-        />
-        <span
-          css={spacer}
-          className={isOrganismsExpanded ? "expanded" : "compact"}
-        />
-      </div>
-    </div>
+      <SpacerRow>
+        <Spacer className={isMediaExpanded ? "expanded" : "compact"} />
+        <Spacer className={isOrganismsExpanded ? "expanded" : "compact"} />
+      </SpacerRow>
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  display: flex;
-  gap: 1px;
-  flex-direction: column;
-  background-color: ${COLOR_GRAY_LINE};
-  width: fit-content;
-  height: 100%;
-  padding: 1px 0 1px 1px;
-  box-sizing: border-box;
-`;
-const header = css`
-  width: fit-content;
-  display: flex;
-  gap: 1px;
-`;
-const spacerRow = css`
-  flex-grow: 1;
-  gap: 1px;
-  display: flex;
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  gap: "1px",
+  flexDirection: "column",
+  backgroundColor: THEME.COLOR.GRAY_LINE,
+  width: "fit-content",
+  height: "100%",
+  padding: "1px 0 1px 1px",
+  boxSizing: "border-box",
+  //
+  position: "absolute",
+  top: 0,
+  left: 0,
+  zIndex: 2,
+});
 
-const spacer = css`
-  background-color: ${COLOR_WHITE};
-  //flex-grow: 1;
-  &.expanded {
-    width: ${WIDTH_EXPANDED};
-  }
-  &.compact {
-    width: ${WIDTH_COMPACT};
-  }
-`;
+const Header = styled("div")({
+  width: "fit-content",
+  display: "flex",
+  gap: "1px",
+});
+
+const SpacerRow = styled("div")({
+  flexGrow: 1,
+  gap: "1px",
+  display: "flex",
+});
+const Spacer = styled("span")({
+  backgroundColor: THEME.COLOR.WHITE,
+  flex: 1,
+  "&.expanded": {
+    width: WIDTH_EXPANDED,
+  },
+  "&.compact": {
+    width: WIDTH_COMPACT,
+  },
+});

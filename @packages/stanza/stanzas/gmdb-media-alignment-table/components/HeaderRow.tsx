@@ -1,17 +1,19 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { HeaderCell } from "./HeaderCell";
-import { COLOR_WHITE, SIZE1 } from "../../../styles/variables";
-import { AcceptsEmotion } from "../../../utils/types";
-import { useIsMediaExpandedMutators, useIsMediaExpendedState } from "../states/isMediaExpanded";
+import { HeaderCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderCell";
+import {
+  useIsMediaExpandedMutators,
+  useIsMediaExpendedState,
+} from "%stanza/stanzas/gmdb-media-alignment-table/states/isMediaExpanded";
 import {
   useIsOrganismsExpandedMutators,
   useIsOrganismsExpendedState,
-} from "../states/isOrganismsExpanded";
+} from "%stanza/stanzas/gmdb-media-alignment-table/states/isOrganismsExpanded";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = {} & AcceptsEmotion;
+type Props = { scrollable?: boolean };
 
-export const HeaderRow: FC<Props> = ({ css, className }) => {
+export const HeaderRow: FC<Props> = ({ scrollable = false }) => {
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
   const { setIsMediaExpanded } = useIsMediaExpandedMutators();
@@ -24,11 +26,10 @@ export const HeaderRow: FC<Props> = ({ css, className }) => {
     setIsOrganismsExpanded(!isOrganismsExpanded);
   };
 
+  const Wrapper = scrollable ? ScrollableWrapper : DefaultWrapper;
+
   return (
-    <div
-      css={[wrapper, css]}
-      className={className}
-    >
+    <Wrapper>
       <HeaderCell
         label={"Media"}
         isExpanded={isMediaExpanded}
@@ -39,25 +40,40 @@ export const HeaderRow: FC<Props> = ({ css, className }) => {
         isExpanded={isOrganismsExpanded}
         onClickIcon={onClickOrganismExpandIcon}
       />
-      <div css={components}>Components</div>
-    </div>
+      <Components>Components</Components>
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  display: flex;
-  gap: 1px;
-  width: 100%;
-  & > * {
-    flex-grow: 0;
-    flex-shrink: 0;
-  }
-`;
+const DefaultWrapper = styled("div")({
+  display: "flex",
+  gap: "1px",
+  width: "100%",
+  "& > *": {
+    flexGrow: 0,
+    flexShrink: 0,
+  },
+});
 
-const components = css`
-  background-color: ${COLOR_WHITE};
-  display: flex;
-  align-items: center;
-  padding: ${SIZE1};
-  flex-grow: 1 !important;
-`;
+const ScrollableWrapper = styled("div")({
+  display: "flex",
+  gap: "1px",
+  width: "100%",
+  "& > *": {
+    flexGrow: 0,
+    flexShrink: 0,
+  },
+  position: "absolute",
+  top: 0,
+  left: 0,
+  border: `1px solid ${THEME.COLOR.GRAY_LINE}`,
+  backgroundColor: THEME.COLOR.GRAY_LINE,
+});
+
+const Components = styled("div")({
+  backgroundColor: THEME.COLOR.WHITE,
+  display: "flex",
+  alignItems: "center",
+  padding: THEME.SIZE.S1,
+  flexGrow: "1 !important",
+});

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { HeaderCell } from "./HeaderCell";
+import { HeaderCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderCell";
 
 const meta: Meta<typeof HeaderCell> = {
   component: HeaderCell,

@@ -1,10 +1,11 @@
-import { css } from "@emotion/react";
+import { SxProps } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { IconBlank, IconCompact, IconExpand } from "../../../components/icons";
-import { COLOR_WHITE, SIZE1, SIZE3, SIZE4 } from "../../../styles/variables";
-import { decodeHTMLEntities } from "../../../utils/string";
-import { WIDTH_ALIGNMENT_CELL } from "../consts";
-import { useComponentTreeMutators } from "../states/componentTree";
+import { IconBlank, IconCompact, IconExpand } from "%stanza/components/icons";
+import { WIDTH_ALIGNMENT_CELL } from "%stanza/stanzas/gmdb-media-alignment-table/consts";
+import { useComponentTreeMutators } from "%stanza/stanzas/gmdb-media-alignment-table/states/componentTree";
+import { THEME } from "%stanza/styles/theme";
+import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
   label: string;
@@ -21,21 +22,21 @@ export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen, id })
   const Icon = hasChildren ? (
     isOpen ? (
       <IconCompact
-        css={icon}
+        sx={clickableIconStyle}
         onClick={() => onClickFooterItem(id)}
       />
     ) : (
       <IconExpand
-        css={icon}
+        sx={clickableIconStyle}
         onClick={() => onClickFooterItem(id)}
       />
     )
   ) : (
-    <IconBlank css={icon} />
+    <IconBlank sx={iconStyle} />
   );
 
   return (
-    <div css={wrapper}>
+    <Wrapper>
       {new Array(level).fill(null).map((r, index) => (
         <span
           key={index}
@@ -44,38 +45,39 @@ export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen, id })
       ))}
       {Icon}
       <span className={"text"}>{decodeHTMLEntities(label)}</span>
-    </div>
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  box-sizing: border-box;
-  width: ${WIDTH_ALIGNMENT_CELL}px;
-  background-color: ${COLOR_WHITE};
-  white-space: nowrap;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: ${SIZE1};
-  padding-bottom: ${SIZE4};
-  & > .text {
-    writing-mode: vertical-rl;
-    transform: translateX(-1px);
-  }
-  & > .spacer {
-    display: block;
-    height: ${SIZE3};
-    flex-grow: 0;
-    flex-shrink: 0;
-  }
-`;
+const Wrapper = styled("div")({
+  boxSizing: "border-box",
+  width: WIDTH_ALIGNMENT_CELL,
+  backgroundColor: THEME.COLOR.WHITE,
+  whiteSpace: "nowrap",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  padding: THEME.SIZE.S1,
+  paddingBottom: THEME.SIZE.S4,
+  "& > .text": {
+    writingMode: "vertical-rl",
+    transform: "translateX(-1px)",
+  },
+  "& > .spacer": {
+    display: "block",
+    height: THEME.SIZE.S3,
+    flexGrow: 0,
+    flexShrink: 0,
+  },
+});
 
-const iconBlank = css`
-  margin-bottom: ${SIZE1};
-`;
-const icon = css`
-  ${iconBlank};
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-`;
+const iconStyle: SxProps = {
+  marginBottom: THEME.SIZE.S1,
+  width: 24,
+  height: 24,
+};
+
+const clickableIconStyle: SxProps = {
+  ...iconStyle,
+  cursor: "pointer",
+};

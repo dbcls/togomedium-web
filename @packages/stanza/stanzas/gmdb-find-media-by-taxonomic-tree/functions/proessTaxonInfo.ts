@@ -1,11 +1,5 @@
 import { isArray } from "yohak-tools/";
-import { API_TAXONOMY_CHILDREN } from "../../../api/paths";
-import {
-  TaxonomyChildrenParams,
-  TaxonomyChildrenResponse,
-} from "../../../api/taxonomy_children/types";
-import { getData } from "../../../utils/getData";
-import { TaxonInfo } from "../states/taxonList";
+import { TaxonInfo } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
 
 type Node = Pick<TaxonInfo, "id" | "children">;
 export const findAscendants = (list: Node[], id: string): string[] => {

@@ -1,14 +1,17 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { ComponentProps, FC, useEffect, useMemo } from "react";
-import { FooterRow } from "./FooterRow";
-import { HeaderRow } from "./HeaderRow";
-import { MediaRow } from "./MediaRow";
-import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { COLOR_GRAY_LINE } from "../../../styles/variables";
-import { makeAlignmentData } from "../functions/makeAlignmentData";
-import { makeComponentTree } from "../functions/makeComponentBranch";
-import { makeFooterComponents } from "../functions/makeFooterComponents";
-import { useComponentTreeMutators, useComponentTreeState } from "../states/componentTree";
+import { MediaAlignmentTableResponse } from "%stanza/api/media-alignment-table/types";
+import { FooterRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/FooterRow";
+import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderRow";
+import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/MediaRow";
+import { makeAlignmentData } from "%stanza/stanzas/gmdb-media-alignment-table/functions/makeAlignmentData";
+import { makeComponentTree } from "%stanza/stanzas/gmdb-media-alignment-table/functions/makeComponentBranch";
+import { makeFooterComponents } from "%stanza/stanzas/gmdb-media-alignment-table/functions/makeFooterComponents";
+import {
+  useComponentTreeMutators,
+  useComponentTreeState,
+} from "%stanza/stanzas/gmdb-media-alignment-table/states/componentTree";
+import { THEME } from "%stanza/styles/theme";
 
 type Props = { data: MediaAlignmentTableResponse; prioritizedOrganism: string[] };
 type RowProps = ComponentProps<typeof MediaRow>[];
@@ -24,7 +27,7 @@ export const AlignmentTable: FC<Props> = ({ data, prioritizedOrganism }) => {
     setComponentTree(makeComponentTree(data.components));
   }, [data]);
   return (
-    <div css={wrapper}>
+    <Wrapper>
       <HeaderRow />
       {rowProps.map((props) => (
         <MediaRow
@@ -34,14 +37,14 @@ export const AlignmentTable: FC<Props> = ({ data, prioritizedOrganism }) => {
         />
       ))}
       <FooterRow {...footerProps} />
-    </div>
+    </Wrapper>
   );
 };
 
-const wrapper = css`
-  display: flex;
-  gap: 1px;
-  flex-direction: column;
-  background-color: ${COLOR_GRAY_LINE};
-  padding: 1px;
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  gap: 1,
+  flexDirection: "column",
+  backgroundColor: THEME.COLOR.GRAY_LINE,
+  padding: 1,
+});
