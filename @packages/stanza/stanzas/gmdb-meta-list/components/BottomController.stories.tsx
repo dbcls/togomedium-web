@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { BottomController } from "./BottomController";
-import { StanzaWrapper } from "../../../components/styled/StanzaWrapper";
+import { BottomController } from "%stanza/stanzas/gmdb-meta-list/components/BottomController";
+import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 
 const meta: Meta<typeof BottomController> = {
   component: BottomController,
   decorators: [
     (Story) => (
-      <StanzaWrapper>
+      <ComponentWrapper>
         <Story />
-      </StanzaWrapper>
+      </ComponentWrapper>
     ),
   ],
 };

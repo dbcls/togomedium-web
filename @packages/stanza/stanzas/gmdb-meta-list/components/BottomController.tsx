@@ -1,30 +1,21 @@
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
 import Slider from "@mui/material/Slider";
+import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useMemo, useState } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { AngleLeftIcon } from "../../../components/svg/AngleLeftIcon";
-import { AngleRightIcon } from "../../../components/svg/AngleRightIcon";
-import { DoubleAngleLeftIcon } from "../../../components/svg/DoubleAngleLeftIcon";
-import { DoubleAngleRightIcon } from "../../../components/svg/DoubleAngleRightIcon";
-import { COLOR_GRAY500, COLOR_PRIMARY, COLOR_WHITE } from "../../../styles/variables";
-import { getPagination } from "../utils/getPagination";
+import { AngleLeftIcon } from "%stanza/components/svg/AngleLeftIcon";
+import { AngleRightIcon } from "%stanza/components/svg/AngleRightIcon";
+import { DoubleAngleLeftIcon } from "%stanza/components/svg/DoubleAngleLeftIcon";
+import { DoubleAngleRightIcon } from "%stanza/components/svg/DoubleAngleRightIcon";
+import { getPagination } from "%stanza/stanzas/gmdb-meta-list/utils/getPagination";
+import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   total: number;
   offset: number;
   limit: number;
   setOffset: (offset: number) => void;
-} & AcceptsEmotion;
+};
 
-export const BottomController: FC<Props> = ({
-  css,
-  className,
-  total,
-  offset,
-  limit,
-  setOffset,
-}) => {
+export const BottomController: FC<Props> = ({ total, offset, limit, setOffset }) => {
   const totalPages = useMemo(() => Math.ceil(total / limit), [total, limit]);
   const currentPage = useMemo(() => Math.ceil(offset / limit) + 1, [offset, limit]);
   const [tempCurrentPage, setTempCurrentPage] = useState(currentPage);
@@ -52,10 +43,7 @@ export const BottomController: FC<Props> = ({
   //
   if (totalPages <= 1) return null;
   return (
-    <div
-      css={[controller, css]}
-      className={className}
-    >
+    <Wrapper>
       <Pagination>
         {!isFirst ? (
           <IconWrapper onClick={() => changePage(1)}>
@@ -138,86 +126,87 @@ export const BottomController: FC<Props> = ({
           <span>of {totalPages}</span>
         </Info>
       </Right>
-    </div>
+    </Wrapper>
   );
 };
 
-const controller = css`
-  margin-top: 12px;
-  display: flex;
-  justify-content: space-between;
-`;
+const Wrapper = styled("div")({
+  marginTop: 12,
+  display: "flex",
+  justifyContent: "space-between",
+});
 
-const CurrentPageInput = styled.input`
-  width: 64px;
-  display: inline-block;
-  margin-inline: 8px;
-  padding-inline: 4px;
-`;
+const CurrentPageInput = styled("input")({
+  width: 64,
+  display: "inline-block",
+  marginInline: 8,
+  paddingInline: 4,
+});
 
-const Right = styled.div`
-  display: flex;
-  gap: 20px;
-`;
+const Right = styled("div")({
+  display: "flex",
+  gap: 20,
+});
 
-const Info = styled.div`
-  font-size: 14px;
-  white-space: nowrap;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const Info = styled("div")({
+  fontSize: "14px",
+  whiteSpace: "nowrap",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
 
-const SliderWrapper = styled.div`
-  width: 240px;
-`;
+const SliderWrapper = styled("div")({
+  width: 240,
+});
 
-const Pagination = styled.div`
-  display: flex;
-  height: 26px;
-`;
+const Pagination = styled("div")({
+  display: "flex",
+  height: 26,
+});
 
-const IconWrapper = styled.div`
-  height: 24px;
-  width: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  svg {
-    fill: ${COLOR_GRAY500};
-    height: 18px;
-    width: auto;
-  }
-`;
-const IconDummy = styled.div`
-  height: 24px;
-  width: 24px;
-`;
+const IconWrapper = styled("div")({
+  height: 24,
+  width: 24,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  cursor: "pointer",
+  svg: {
+    fill: THEME.COLOR.GRAY500,
+    height: 18,
+    width: "auto",
+  },
+});
 
-const PageNums = styled.ul`
-  background-color: ${COLOR_PRIMARY};
-  width: fit-content;
-  display: flex;
-  padding: 1px;
-  gap: 1px;
-  li {
-    background-color: ${COLOR_WHITE};
-    font-size: 14px;
-    min-width: 28px;
-    height: 24px;
-    padding-inline: 2px;
-    box-sizing: border-box;
-    line-height: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    &.active {
-      background-color: ${COLOR_PRIMARY};
-      color: ${COLOR_WHITE};
-      font-weight: bold;
-    }
-  }
-`;
+const IconDummy = styled("div")({
+  height: "24px",
+  width: "24px",
+});
+
+const PageNums = styled("ul")({
+  backgroundColor: THEME.COLOR.PRIMARY,
+  width: "fit-content",
+  display: "flex",
+  padding: "1px",
+  gap: "1px",
+  li: {
+    backgroundColor: THEME.COLOR.WHITE,
+    fontSize: "14px",
+    minWidth: "28px",
+    height: "24px",
+    paddingInline: "2px",
+    boxSizing: "border-box",
+    lineHeight: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+    userSelect: "none",
+    "&.active": {
+      backgroundColor: THEME.COLOR.PRIMARY,
+      color: THEME.COLOR.WHITE,
+      fontWeight: "bold",
+    },
+  },
+});

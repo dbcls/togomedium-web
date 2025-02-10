@@ -1,41 +1,37 @@
-import styled from "@emotion/styled";
 import CircularProgress from "@mui/material/CircularProgress";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_WHITE } from "../../../styles/variables";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = { showLoading: boolean; errorMessage: string } & AcceptsEmotion;
+type Props = { showLoading: boolean; errorMessage: string };
 
-export const LoadingCover: FC<Props> = ({ css, className, showLoading, errorMessage }) => {
+export const LoadingCover: FC<Props> = ({ showLoading, errorMessage }) => {
   const isShow = showLoading || errorMessage !== "";
   return (
-    <Wrapper
-      css={[css]}
-      className={`${className} ${isShow && "active"}`}
-    >
+    <Wrapper className={isShow ? "active" : ""}>
       {showLoading && <CircularProgress />}
       {!!errorMessage && errorMessage}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${COLOR_WHITE};
-  font-size: 18px;
-  font-weight: bold;
-  opacity: 0;
-  pointer-events: none;
-  transition-duration: 0.1s;
-  transition-property: opacity;
-  transition-timing-function: linear;
-  &.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-`;
+const Wrapper = styled("div")({
+  position: "absolute",
+  inset: 0,
+  backgroundColor: "rgba(0, 0, 0, 0.7)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  color: THEME.COLOR.WHITE,
+  fontSize: "18px",
+  fontWeight: "bold",
+  opacity: 0,
+  pointerEvents: "none",
+  transitionDuration: "0.1s",
+  transitionProperty: "opacity",
+  transitionTimingFunction: "linear",
+  "&.active": {
+    opacity: 1,
+    pointerEvents: "auto",
+  },
+});

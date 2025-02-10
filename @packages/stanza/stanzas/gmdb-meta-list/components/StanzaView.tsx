@@ -1,13 +1,11 @@
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { BottomController } from "./BottomController";
-import { ListTable } from "./ListTable";
-import { LoadingCover } from "./LoadingCover";
-import { TopInfo } from "./TopInfo";
-import { StanzaWrapper } from "../../../components/styled/StanzaWrapper";
-import { ListApiBody } from "../types";
+import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
+import { BottomController } from "%stanza/stanzas/gmdb-meta-list/components/BottomController";
+import { ListTable } from "%stanza/stanzas/gmdb-meta-list/components/ListTable";
+import { LoadingCover } from "%stanza/stanzas/gmdb-meta-list/components/LoadingCover";
+import { TopInfo } from "%stanza/stanzas/gmdb-meta-list/components/TopInfo";
+import { ListApiBody } from "%stanza/stanzas/gmdb-meta-list/types";
 
 type Props = {
   data: ListApiBody;
@@ -20,13 +18,11 @@ type Props = {
   setLimit: (limit: number) => void;
   showLoading: boolean;
   errorMessage: string;
-} & AcceptsEmotion;
+};
 
 export type StanzaViewParams = Props;
 
 export const StanzaView: FC<Props> = ({
-  css,
-  className,
   data,
   title,
   showColumnNames,
@@ -39,10 +35,7 @@ export const StanzaView: FC<Props> = ({
   errorMessage,
 }) => {
   return (
-    <div
-      css={[stanzaView, css]}
-      className={className}
-    >
+    <div>
       {title && (
         <Header>
           <h2>{title}</h2>
@@ -60,13 +53,12 @@ export const StanzaView: FC<Props> = ({
   );
 };
 
-const stanzaView = css``;
-const Header = styled.header`
-  h2 {
-    -webkit-font-smoothing: antialiased;
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    padding-left: 8px;
-  }
-`;
+const Header = styled("header")({
+  h2: {
+    WebkitFontSmoothing: "antialiased",
+    fontSize: "24px",
+    fontWeight: 600,
+    marginBottom: "8px",
+    paddingLeft: "8px",
+  },
+});

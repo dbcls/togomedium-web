@@ -1,16 +1,14 @@
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
+import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useState } from "react";
-import { AcceptsEmotion } from "yohak-tools";
 
 type Props = {
   total: number;
   limit: number;
   setLimit: (val: number) => void;
   setOffset: (val: number) => void;
-} & AcceptsEmotion;
+};
 
-export const TopInfo: FC<Props> = ({ css, className, total, limit, setLimit, setOffset }) => {
+export const TopInfo: FC<Props> = ({ total, limit, setLimit, setOffset }) => {
   const [tempLimit, setTempLimit] = useState(limit);
   const onCommitLimit = (val: number) => {
     let newLimit = val;
@@ -30,10 +28,7 @@ export const TopInfo: FC<Props> = ({ css, className, total, limit, setLimit, set
   }, [limit]);
 
   return (
-    <div
-      css={[topInfo, css]}
-      className={className}
-    >
+    <Wrapper>
       <Total>Total: {total} items</Total>
       <span>/</span>
       <p>
@@ -55,28 +50,28 @@ export const TopInfo: FC<Props> = ({ css, className, total, limit, setLimit, set
         />
         <span>items per page</span>
       </p>
-    </div>
+    </Wrapper>
   );
 };
 
-const topInfo = css`
-  display: flex;
-  justify-content: flex-end;
-  font-size: 14px;
-  gap: 8px;
-  padding-bottom: 4px;
-  padding-right: 8px;
-  align-items: baseline;
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  justifyContent: "flex-end",
+  fontSize: "14px",
+  gap: "8px",
+  paddingBottom: "4px",
+  paddingRight: "8px",
+  alignItems: "baseline",
+});
 
-const Total = styled.p`
-  //margin-inline-end: 16px;
-  display: flex;
-  align-items: center;
-`;
-const NumInput = styled.input`
-  width: 48px;
-  display: inline-block;
-  margin-inline: 8px;
-  padding-inline: 4px;
-`;
+const Total = styled("p")({
+  display: "flex",
+  alignItems: "center",
+});
+
+const NumInput = styled("input")({
+  width: "48px",
+  display: "inline-block",
+  marginInline: "8px",
+  paddingInline: "4px",
+});

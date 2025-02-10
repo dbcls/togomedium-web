@@ -1,34 +1,23 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import { nanoid } from "nanoid";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_PRIMARY_DARK } from "../../../styles/variables";
-import { decodeHTMLEntities } from "../../../utils/string";
-import { ListApiBody } from "../types";
+import { ListApiBody } from "%stanza/stanzas/gmdb-meta-list/types";
+import { THEME } from "%stanza/styles/theme";
+import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
   data: ListApiBody;
   showColumnNames: boolean;
   columnSizes: number[];
   limit: number;
-} & AcceptsEmotion;
+};
 
-export const ListTable: FC<Props> = ({
-  css,
-  className,
-  data,
-  columnSizes,
-  showColumnNames,
-  limit,
-}) => {
+export const ListTable: FC<Props> = ({ data, columnSizes, showColumnNames, limit }) => {
   const extraRows = Array(Math.max(0, limit - data.contents.length))
     .fill(null)
     .map(() => nanoid());
   return (
-    <table
-      css={[listTable, css]}
-      className={className}
-    >
+    <Wrapper>
       {showColumnNames && (
         <thead>
           <tr>
@@ -74,7 +63,7 @@ export const ListTable: FC<Props> = ({
           </tr>
         ))}
       </tbody>
-    </table>
+    </Wrapper>
   );
 };
 
@@ -97,26 +86,22 @@ const CellContent: FC<CellContentProps> = ({ item }) => {
   );
 };
 
-const listTable = css`
-  border: 1px solid #ccc;
-  width: 100%;
-  font-size: 16px;
-  border-collapse: collapse;
-
-  td,
-  th {
-    padding: 6px 8px;
-    border-bottom: 1px solid #ccc;
-    text-align: left;
-    line-height: 1.2;
-  }
-
-  tr:nth-of-type(2n) {
-    background-color: #f6f6f6;
-  }
-
-  a {
-    color: ${COLOR_PRIMARY_DARK};
-    text-decoration: none;
-  }
-`;
+const Wrapper = styled("table")({
+  border: "1px solid #ccc",
+  width: "100%",
+  fontSize: "16px",
+  borderCollapse: "collapse",
+  "& td, & th": {
+    padding: "6px 8px",
+    borderBottom: "1px solid #ccc",
+    textAlign: "left",
+    lineHeight: 1.2,
+  },
+  "& tr:nth-of-type(2n)": {
+    backgroundColor: "#f6f6f6",
+  },
+  "& a": {
+    color: THEME.COLOR.PRIMARY_DARK,
+    textDecoration: "none",
+  },
+});

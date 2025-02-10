@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ListTable } from "./ListTable";
-import { data1 } from "../../../api/all-media/data1";
-import { StanzaWrapper } from "../../../components/styled/StanzaWrapper";
+import { data1 } from "%stanza/api/all-media/data1";
+import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
+import { ListTable } from "%stanza/stanzas/gmdb-meta-list/components/ListTable";
 
 const meta: Meta<typeof ListTable> = {
   component: ListTable,
