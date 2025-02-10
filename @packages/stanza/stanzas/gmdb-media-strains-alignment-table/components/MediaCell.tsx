@@ -1,12 +1,11 @@
-import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
-import React, { FC, useEffect, useMemo, useRef, useState } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { COLOR_PRIMARY, COLOR_WHITE } from "../../../styles/variables";
-import { makeCellHeight } from "../functions/processMediaCell";
-import { CellInfo } from "../functions/types";
+import { styled } from "@mui/material/styles";
+import React, { FC, useEffect, useRef, useState } from "react";
+import { makeCellHeight } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
+import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = {} & CellInfo & AcceptsEmotion;
+type Props = {} & CellInfo;
 
 export const useToolTipEnabled = () => {
   const labelRef = useRef<HTMLSpanElement>(null);
@@ -21,14 +20,10 @@ export const useToolTipEnabled = () => {
   return { labelRef, toolTipEnabled };
 };
 
-export const MediaCell: FC<Props> = ({ label, id, size, css, className }) => {
+export const MediaCell: FC<Props> = ({ label, id, size }) => {
   const { labelRef, toolTipEnabled } = useToolTipEnabled();
   return (
-    <div
-      css={[mediaCell, css]}
-      className={className}
-      style={{ height: `${makeCellHeight(size)}px` }}
-    >
+    <Wrapper style={{ height: `${makeCellHeight(size)}px` }}>
       <a href={`/medium/${id}`}>{id}</a>
       <div className={"label-wrapper"}>
         <Tooltip
@@ -45,32 +40,32 @@ export const MediaCell: FC<Props> = ({ label, id, size, css, className }) => {
           </span>
         </Tooltip>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 
-const mediaCell = css`
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  background-color: ${COLOR_WHITE};
-  padding: 8px 8px 0;
-  font-size: 14px;
-
-  a {
-    color: ${COLOR_PRIMARY};
-    text-decoration: none;
-    width: fit-content;
-  }
-  .label-wrapper {
-    position: relative;
-  }
-  .label {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    height: 16px;
-    flex-shrink: 0;
-  }
-`;
+const Wrapper = styled("div")({
+  width: "200px",
+  display: "flex",
+  flexDirection: "column",
+  // backgroundColor: `${COLOR_WHITE}`,
+  backgroundColor: THEME.COLOR.WHITE,
+  padding: "8px 8px 0",
+  fontSize: "14px",
+  a: {
+    color: THEME.COLOR.PRIMARY,
+    textDecoration: "none",
+    width: "fit-content",
+  },
+  ".label-wrapper": {
+    position: "relative",
+  },
+  ".label": {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    display: "block",
+    height: "16px",
+    flexShrink: 0,
+  },
+});

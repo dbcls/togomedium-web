@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { DoubleAngleRightIcon } from "./DoubleAngleRightIcon";
+import { DoubleAngleRightIcon } from "%stanza/components/svg/DoubleAngleRightIcon";
 
 const meta: Meta<typeof DoubleAngleRightIcon> = {
   component: DoubleAngleRightIcon,

@@ -1,18 +1,22 @@
-import { css } from "@emotion/react";
+import { SxProps } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
-import { AcceptsEmotion, Ease } from "yohak-tools";
-import { TaxonCell } from "./TaxonCell";
-import { COLOR_GRAY_LINE, COLOR_WHITE } from "../../../styles/variables";
-import { capitalizeFirstLetter } from "../../../utils/string";
-import { CellInfo, LineageRank } from "../functions/types";
-import { useFilterRankMutators } from "../states/filterRank";
+import { Ease } from "yohak-tools";
+import { TaxonCell } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/TaxonCell";
+import {
+  CellInfo,
+  LineageRank,
+} from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
+import { useFilterRankMutators } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterRank";
+import { THEME } from "%stanza/styles/theme";
+import { capitalizeFirstLetter } from "%stanza/utils/string";
 
 type Props = {
   rank: LineageRank;
   taxonList: CellInfo[][];
-} & AcceptsEmotion;
+};
 
-export const TaxonCol: FC<Props> = ({ css, className, rank, taxonList }) => {
+export const TaxonCol: FC<Props> = ({ rank, taxonList }) => {
   const { changeFilterRank } = useFilterRankMutators();
   const [isFolded, setIsFolded] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -38,27 +42,11 @@ export const TaxonCol: FC<Props> = ({ css, className, rank, taxonList }) => {
     }, 16);
   }, [isFolded]);
   return (
-    <div
-      css={[taxonCol, isFolded ? foldedStyle : null, css]}
-      className={className}
-    >
-      {!isFolded && (
-        <div
-          css={rankCell}
-          onClick={onClickRank}
-        >
-          {capitalizeFirstLetter(rank)}
-        </div>
-      )}
-      <div
-        css={allTaxonWrapper}
-        ref={wrapperRef}
-      >
+    <Wrapper sx={isFolded ? foldedStyle : null}>
+      {!isFolded && <RankCell onClick={onClickRank}>{capitalizeFirstLetter(rank)}</RankCell>}
+      <AllTaxonWrapper ref={wrapperRef}>
         {taxonList.map((list, index) => (
-          <div
-            key={index}
-            css={mediumTaxonWrapper}
-          >
+          <MediumTaxonWrapper key={index}>
             {list.map((info, index) => (
               <TaxonCell
                 key={index}
@@ -67,73 +55,73 @@ export const TaxonCol: FC<Props> = ({ css, className, rank, taxonList }) => {
                 isFolded={isFolded}
               />
             ))}
-          </div>
+          </MediumTaxonWrapper>
         ))}
-      </div>
+      </AllTaxonWrapper>
       {isFolded && (
-        <div
-          css={foldedCover}
-          onClick={onClickRank}
-        >
+        <FoldedCover onClick={onClickRank}>
           <span>{capitalizeFirstLetter(rank)}</span>
-        </div>
+        </FoldedCover>
       )}
-    </div>
+    </Wrapper>
   );
 };
 
-const taxonCol = css`
-  width: 200px;
-  //background-color: ${COLOR_GRAY_LINE};
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  position: relative;
-  height: 100%;
-  min-height: ${48 + 24}px;
-  transition-duration: 0.4s;
-  transition-timing-function: ${Ease._4_IN_OUT_QUART};
-  overflow: hidden;
-`;
-const foldedStyle = css`
-  width: 36px;
-`;
-const foldedCover = css`
-  width: 100%;
-  height: 100%;
-  background-color: ${COLOR_WHITE};
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-top: 8px;
-  padding-right: 8px;
-  cursor: pointer;
+const Wrapper = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  gap: "2px",
+  position: "relative",
+  height: "100%",
+  minHeight: "72px",
+  transitionDuration: "0.4s",
+  transitionTimingFunction: Ease._4_IN_OUT_QUART,
+  overflow: "hidden",
+  width: "200px",
+});
 
-  span {
-    display: block;
-    transform-origin: left top;
-    transform: translateX(24px) rotate(90deg);
-    font-weight: 600;
-  }
-`;
-const rankCell = css`
-  cursor: pointer;
-  background-color: ${COLOR_WHITE};
-  height: 24px;
-  display: flex;
-  align-items: center;
-  padding-left: 8px;
-  font-weight: 600;
-`;
-const allTaxonWrapper = css`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex-shrink: 0;
-`;
-const mediumTaxonWrapper = css`
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  flex-shrink: 0;
-`;
+const foldedStyle: SxProps = {
+  width: "36px",
+};
+
+const FoldedCover = styled("div")({
+  width: "100%",
+  height: "100%",
+  backgroundColor: THEME.COLOR.WHITE,
+  position: "absolute",
+  top: 0,
+  left: 0,
+  paddingTop: "8px",
+  paddingRight: "8px",
+  cursor: "pointer",
+  span: {
+    display: "block",
+    transformOrigin: "left top",
+    transform: "translateX(24px) rotate(90deg)",
+    fontWeight: THEME.FONT_WEIGHT.BOLD,
+  },
+});
+
+const RankCell = styled("div")({
+  cursor: "pointer",
+  backgroundColor: THEME.COLOR.WHITE,
+  height: "24px",
+  display: "flex",
+  alignItems: "center",
+  paddingLeft: "8px",
+  fontWeight: THEME.FONT_WEIGHT.BOLD,
+});
+
+const AllTaxonWrapper = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  gap: "2px",
+  flexShrink: 0,
+});
+
+const MediumTaxonWrapper = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  gap: "1px",
+  flexShrink: 0,
+});

@@ -1,16 +1,21 @@
-import { css } from "@emotion/react";
-import { Tooltip } from "@mui/material";
+import { SxProps, Tooltip } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useMemo } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { useToolTipEnabled } from "./MediaCell";
-import { FilterIcon } from "../../../components/svg/FilterIcon";
-import { COLOR_GRAY400, COLOR_PRIMARY, COLOR_WHITE } from "../../../styles/variables";
-import { makeSpeciesName } from "../../../utils/string";
-import { makeCellHeight } from "../functions/processMediaCell";
-import { CellInfo, LineageRank } from "../functions/types";
-import { useFilterTaxonMutators, useFilterTaxonState } from "../states/filterTaxon";
+import { FilterIcon } from "%stanza/components/svg/FilterIcon";
+import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCell";
+import { makeCellHeight } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
+import {
+  CellInfo,
+  LineageRank,
+} from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
+import {
+  useFilterTaxonMutators,
+  useFilterTaxonState,
+} from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterTaxon";
+import { THEME } from "%stanza/styles/theme";
+import { makeSpeciesName } from "%stanza/utils/string";
 
-type Props = { rank: LineageRank; isFolded: boolean } & CellInfo & AcceptsEmotion;
+type Props = { rank: LineageRank; isFolded: boolean } & CellInfo;
 type ToMemoizeProps = Props & { wrapperRef: React.RefObject<HTMLDivElement | null> };
 
 export const TaxonCell: FC<Props> = (props) => {
@@ -32,7 +37,7 @@ export const TaxonCell: FC<Props> = (props) => {
   );
 };
 
-const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank, css, className }) => {
+const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank }) => {
   const filterId = useFilterTaxonState();
   const pathRoot = rank === "strain" ? "/strain/" : "/taxon/";
   const { setFilterTaxon } = useFilterTaxonMutators();
@@ -42,11 +47,7 @@ const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank, css, class
   const { labelRef, toolTipEnabled } = useToolTipEnabled();
   // console.log("render TaxonCell", rank, size);
   return (
-    <div
-      css={[taxonCell, css]}
-      className={className}
-      ref={wrapperRef}
-    >
+    <Wrapper ref={wrapperRef}>
       {!!label && (
         <>
           <a href={`${pathRoot}${id}`}>{id}</a>
@@ -65,16 +66,13 @@ const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank, css, class
               </span>
             </Tooltip>
           </div>
-          <span
-            css={filterIcon}
-            onClick={onClickFilter}
-          >
-            <FilterIcon css={[id === filterId ? filterIconColorActive : filterIconColorInactive]} />
-          </span>
+          <FilterIconWrapper onClick={onClickFilter}>
+            <FilterIcon sx={id === filterId ? filterIconColorActive : filterIconColorInactive} />
+          </FilterIconWrapper>
         </>
       )}
       {!label && <>{""}</>}
-    </div>
+    </Wrapper>
   );
 };
 
@@ -89,51 +87,50 @@ const makeLabel = (label: string, rank: LineageRank): string => {
   }
 };
 
-const taxonCell = css`
-  position: relative;
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  background-color: ${COLOR_WHITE};
-  padding: 8px 8px 0;
-  font-size: 14px;
+const Wrapper = styled("div")({
+  position: "relative",
+  width: 200,
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: THEME.COLOR.WHITE,
+  padding: "8px 8px 0",
+  fontSize: 14,
+  "& a": {
+    color: THEME.COLOR.PRIMARY,
+    textDecoration: "none",
+    width: "fit-content",
+  },
 
-  a {
-    color: ${COLOR_PRIMARY};
-    text-decoration: none;
-    width: fit-content;
-  }
+  ".label-wrapper": {
+    position: "relative",
+  },
 
-  .label-wrapper {
-    position: relative;
-  }
-  .label {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    height: 16px;
-    flex-shrink: 0;
-  }
-`;
+  ".label": {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    display: "block",
+    height: 16,
+    flexShrink: 0,
+  },
+});
 
-const filterIcon = css`
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  cursor: pointer;
-  svg {
-    display: block;
-    width: 16px;
-    height: 16px;
-  }
-`;
-
-const filterIconColorInactive = css`
-  fill: ${COLOR_GRAY400};
-`;
-const filterIconColorActive = css`
-  fill: ${COLOR_PRIMARY};
-`;
+const FilterIconWrapper = styled("span")({
+  width: 16,
+  height: 16,
+  position: "absolute",
+  top: 8,
+  right: 8,
+  cursor: "pointer",
+  svg: {
+    display: "block",
+    width: 16,
+    height: 16,
+  },
+});
+const filterIconColorInactive: SxProps = {
+  fill: THEME.COLOR.GRAY400,
+};
+const filterIconColorActive: SxProps = {
+  fill: THEME.COLOR.PRIMARY,
+};

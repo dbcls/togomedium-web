@@ -1,11 +1,11 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { AppContainer } from "./components/AppContainer";
-import { MediaStrainsAlimentResponse } from "../../api/media_strains_alignment/types";
-import { API_MEDIA_STRAINS_ALIGNMENT } from "../../api/paths";
-import { COLOR_WHITE, SIZE1 } from "../../styles/variables";
-import { getData } from "../../utils/getData";
+import { MediaStrainsAlimentResponse } from "%stanza/api/media_strains_alignment/types";
+import { API_MEDIA_STRAINS_ALIGNMENT } from "%stanza/api/paths";
+import { AppContainer } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/AppContainer";
+import { THEME } from "%stanza/styles/theme";
+import { getData } from "%stanza/utils/getData";
 
 export type AppProps = {
   gmIds: string[];
@@ -31,16 +31,16 @@ const useData = (gmIds: string[]) => {
 const App = ({ gmIds, hideMedia = false }: AppProps) => {
   const { data, isLoading } = useData(gmIds);
   if (isLoading) return <>Loading...</>;
-  return <div css={wrapper}>{data && <AppContainer {...{ data, hideMedia }} />}</div>;
+  return <Wrapper>{data && <AppContainer {...{ data, hideMedia }} />}</Wrapper>;
 };
 
-const wrapper = css`
-  min-height: 100px;
-  width: fit-content;
-  min-width: 100%;
-  background-color: ${COLOR_WHITE};
-  border-radius: 5px;
-  padding: ${SIZE1};
-`;
+const Wrapper = styled("div")({
+  minHeight: 100,
+  width: "fit-content",
+  minWidth: "100%",
+  backgroundColor: THEME.COLOR.WHITE,
+  borderRadius: 5,
+  padding: THEME.SIZE.S1,
+});
 
 export default App;

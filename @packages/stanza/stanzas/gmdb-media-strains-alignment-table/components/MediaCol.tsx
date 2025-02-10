@@ -1,37 +1,33 @@
-import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
 import { MediaCell } from "./MediaCell";
-import { COLOR_WHITE } from "../../../styles/variables";
-import { CellInfo } from "../functions/types";
+import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = { mediaList: CellInfo[] } & AcceptsEmotion;
+type Props = { mediaList: CellInfo[] };
 
-export const MediaCol: FC<Props> = ({ mediaList, css, className }) => {
+export const MediaCol: FC<Props> = ({ mediaList }) => {
   return (
-    <div
-      css={[mediaCol, css]}
-      className={className}
-    >
-      <div css={emptyCell}></div>
+    <Wrapper>
+      <EmptyCell />
       {mediaList.map((info, index) => (
         <MediaCell
           key={index}
           {...info}
         />
       ))}
-    </div>
+    </Wrapper>
   );
 };
 
-const mediaCol = css`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  width: 200px;
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  gap: "2px",
+  width: "200px",
+});
 
-const emptyCell = css`
-  height: 24px;
-  background-color: ${COLOR_WHITE};
-`;
+const EmptyCell = styled("div")({
+  height: "24px",
+  backgroundColor: THEME.COLOR.WHITE,
+});

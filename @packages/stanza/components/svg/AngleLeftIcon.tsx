@@ -1,12 +1,19 @@
+import { SxProps } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { AcceptsEmotion } from "yohak-tools";
 
-type Props = {} & AcceptsEmotion;
+type Props = { sx?: SxProps };
 
-export const AngleLeftIcon: FC<Props> = ({ css, className }) => {
+export const AngleLeftIcon: FC<Props> = ({ sx }) => {
   return (
-    <svg css={css} className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+    <Wrapper
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 320 512"
+      sx={sx}
+    >
       <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
-    </svg>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled("svg")({});

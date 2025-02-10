@@ -1,7 +1,7 @@
 import React from "react";
-import App from "./App";
-import { TogoMediumReactStanza } from "../../components/StanzaReactProvider";
-import { stringToArray } from "../../utils/string";
+import { TogoMediumReactStanza } from "%stanza/components/StanzaReactProvider";
+import App from "%stanza/stanzas/gmdb-media-strains-alignment-table/App";
+import { stringToArray } from "%stanza/utils/string";
 
 type StanzaParameters = {
   gm_ids: string;

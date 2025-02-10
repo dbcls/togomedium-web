@@ -1,16 +1,15 @@
-import { css } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 import React, { FC, useMemo } from "react";
-import { AcceptsEmotion } from "yohak-tools";
-import { MediaCol } from "./MediaCol";
-import { TaxonCol } from "./TaxonCol";
-import { MediaStrainsAlimentResponse } from "../../../api/media_strains_alignment/types";
-import { COLOR_GRAY_LINE } from "../../../styles/variables";
-import { processDisplayData } from "../functions/processMediaCell";
-import { lineageRanks } from "../functions/types";
-import { useFilterRankState } from "../states/filterRank";
-import { useFilterTaxonState } from "../states/filterTaxon";
+import { MediaStrainsAlimentResponse } from "%stanza/api/media_strains_alignment/types";
+import { MediaCol } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCol";
+import { TaxonCol } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/TaxonCol";
+import { processDisplayData } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
+import { lineageRanks } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
+import { useFilterRankState } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterRank";
+import { useFilterTaxonState } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterTaxon";
+import { THEME } from "%stanza/styles/theme";
 
-type Props = { data: MediaStrainsAlimentResponse; hideMedia?: boolean } & AcceptsEmotion;
+type Props = { data: MediaStrainsAlimentResponse; hideMedia?: boolean };
 
 export const AppContainer: FC<Props> = ({ data, hideMedia = false }) => {
   const filterTaxon = useFilterTaxonState();
@@ -20,9 +19,9 @@ export const AppContainer: FC<Props> = ({ data, hideMedia = false }) => {
     [data, filterTaxon, filterRank]
   );
   return displayData.media.length ? (
-    <div css={appContainer}>
+    <Wrapper>
       {!hideMedia && <MediaCol mediaList={displayData.media} />}
-      <div css={taxonContainer}>
+      <TaxonContainer>
         {lineageRanks
           .concat()
           .reverse()
@@ -33,21 +32,22 @@ export const AppContainer: FC<Props> = ({ data, hideMedia = false }) => {
               key={index}
             />
           ))}
-      </div>
-    </div>
+      </TaxonContainer>
+    </Wrapper>
   ) : (
     <p>NO RESULT FOUND</p>
   );
 };
 
-const appContainer = css`
-  display: flex;
-  gap: 2px;
-  padding: 1px;
-  background-color: ${COLOR_GRAY_LINE};
-  width: fit-content;
-`;
-const taxonContainer = css`
-  display: flex;
-  gap: 1px;
-`;
+const Wrapper = styled("div")({
+  display: "flex",
+  gap: "2px",
+  padding: "1px",
+  backgroundColor: THEME.COLOR.GRAY_LINE,
+  width: "fit-content",
+});
+
+const TaxonContainer = styled("div")({
+  display: "flex",
+  gap: "1px",
+});

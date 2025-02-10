@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { AppContainer } from "./AppContainer";
-import { data1 } from "../../../api/media_strains_alignment/data1";
-import { data2 } from "../../../api/media_strains_alignment/data2";
+import { data1 } from "%stanza/api/media_strains_alignment/data1";
+import { data2 } from "%stanza/api/media_strains_alignment/data2";
 
 const meta: Meta<typeof AppContainer> = {
   component: AppContainer,
