@@ -126,7 +126,11 @@ importers:
         specifier: ^3.0.5
         version: 3.0.5(@types/debug@4.1.12)(@types/node@22.13.1)(jiti@1.21.7)(sass@1.84.0)(tsx@4.19.2)(yaml@2.6.1)
 
-  '@packages/api': {}
+  '@packages/api':
+    dependencies:
+      yohak-tools:
+        specifier: ^0.1.0
+        version: 0.1.18
 
   '@packages/api-doc':
     devDependencies:

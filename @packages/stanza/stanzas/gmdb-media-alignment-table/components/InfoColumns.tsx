@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { MediaAlignmentTableResponse } from "%stanza/api/media-alignment-table/types";
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
 import { HeaderCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderCell";
 import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/MediaRow";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "%stanza/stanzas/gmdb-media-alignment-table/consts";
@@ -14,7 +14,7 @@ import {
 } from "%stanza/stanzas/gmdb-media-alignment-table/states/isOrganismsExpanded";
 import { THEME } from "%stanza/styles/theme";
 
-type Props = { data: MediaAlignmentTableResponse; prioritizedOrganism: string[] };
+type Props = { data: MediaComponentAlignmentTableResponse; prioritizedOrganism: string[] };
 
 export const InfoColumns: FC<Props> = ({ data, prioritizedOrganism = [] }) => {
   const isMediaExpanded = useIsMediaExpendedState();

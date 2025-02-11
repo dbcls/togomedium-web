@@ -1,14 +1,15 @@
 import { Nullable } from "yohak-tools";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 
-export type CellInfo = {
+export type MediaStrainsAlignmentResponse = {
+  gm_id: string;
   label: string;
-  id: string;
-  size: number;
+  organisms: Lineage[];
+}[];
+export type MediaStrainsAlignmentParams = {
+  gm_ids: string;
 };
-export type DisplayData = {
-  media: CellInfo[];
-  taxon: Record<LineageRank, CellInfo[][]>;
-};
+export const mediaStrainsAlignmentURL = makeApiUrl("gmdb_media_strains_alignment_by_gm_ids");
 
 export const lineageRanks = [
   "superkingdom",
@@ -22,13 +23,9 @@ export const lineageRanks = [
 ] as const;
 export type LineageRank = (typeof lineageRanks)[number];
 
-export type Medium = {
-  gm_id: string;
-  label: string;
-  organisms: Lineage[];
-};
 export type Taxon = {
   id: string;
   label: string;
 };
 export type Lineage = Record<LineageRank, Nullable<Taxon>>;
+export type Medium = MediaStrainsAlignmentResponse[0];

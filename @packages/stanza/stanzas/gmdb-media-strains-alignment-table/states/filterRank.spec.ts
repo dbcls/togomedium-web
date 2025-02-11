@@ -1,7 +1,7 @@
-import { __TEST__ } from "./filterRank";
-import { lineageRanks } from "../functions/types";
+import { __TEST__ } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterRank";
 const { findCurrentFilterRank, makeDefaultStatus } = __TEST__;
 import { describe, expect, it, test } from "vitest";
+import { lineageRanks } from "%api/mediaStrainsAlignment/definitions";
 
 describe("findCurrentFilterRank", () => {
   it("should return 'strain' when default", () => {

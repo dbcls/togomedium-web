@@ -1,6 +1,6 @@
-import { MediaStrainsAlimentResponse } from "./types";
+import { MediaStrainsAlignmentResponse } from "%api/mediaStrainsAlignment/definitions";
 
-export const data1: MediaStrainsAlimentResponse = [
+export const data1: MediaStrainsAlignmentResponse = [
   {
     gm_id: "HM_D00001",
     label: "NUTRIENT AGAR",

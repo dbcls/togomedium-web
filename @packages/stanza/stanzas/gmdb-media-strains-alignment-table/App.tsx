@@ -1,11 +1,14 @@
 import { styled } from "@mui/material/styles";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { MediaStrainsAlimentResponse } from "%stanza/api/media_strains_alignment/types";
-import { API_MEDIA_STRAINS_ALIGNMENT } from "%stanza/api/paths";
+import {
+  MediaStrainsAlignmentParams,
+  MediaStrainsAlignmentResponse,
+  mediaStrainsAlignmentURL,
+} from "%api/mediaStrainsAlignment/definitions";
+import { getData } from "%core/network/getData";
 import { AppContainer } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/AppContainer";
 import { THEME } from "%stanza/styles/theme";
-import { getData } from "%stanza/utils/getData";
 
 export type AppProps = {
   gmIds: string[];
@@ -18,9 +21,12 @@ const useData = (gmIds: string[]) => {
   const { data, isLoading } = useQuery({
     queryKey: [...gmIds],
     queryFn: async () => {
-      const result = await getData<MediaStrainsAlimentResponse>(API_MEDIA_STRAINS_ALIGNMENT, {
-        gm_ids: gmIds.join(","),
-      });
+      const result = await getData<MediaStrainsAlignmentResponse, MediaStrainsAlignmentParams>(
+        mediaStrainsAlignmentURL,
+        {
+          gm_ids: gmIds.join(","),
+        }
+      );
       if (!result.body) throw new Error("No data");
       return result.body;
     },

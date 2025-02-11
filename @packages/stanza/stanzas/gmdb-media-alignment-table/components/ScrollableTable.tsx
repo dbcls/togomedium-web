@@ -1,12 +1,12 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { MediaAlignmentTableResponse } from "%stanza/api/media-alignment-table/types";
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
 import { AlignmentTable } from "%stanza/stanzas/gmdb-media-alignment-table/components/AlignmentTable";
 import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderRow";
 import { InfoColumns } from "%stanza/stanzas/gmdb-media-alignment-table/components/InfoColumns";
 import { THEME } from "%stanza/styles/theme";
 
-type Props = { data: MediaAlignmentTableResponse; prioritizedOrganism?: string[] };
+type Props = { data: MediaComponentAlignmentTableResponse; prioritizedOrganism?: string[] };
 
 export const ScrollableTable: FC<Props> = ({ data, prioritizedOrganism = [] }) => {
   return (

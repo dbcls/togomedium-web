@@ -1,6 +1,6 @@
-import { MediaStrainsAlimentResponse } from "./types";
+import { MediaStrainsAlignmentResponse } from "%api/mediaStrainsAlignment/definitions";
 
-export const data2: MediaStrainsAlimentResponse = [
+export const data2: MediaStrainsAlignmentResponse = [
   {
     gm_id: "NBRC_M963",
     label: "IMK (SW)",

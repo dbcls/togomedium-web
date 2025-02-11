@@ -22,10 +22,10 @@ import "./paths/list_similar_media_by_gmid.tsp";
 import "./paths/list_taxons_by_rank.tsp";
 import "./paths/list_media_by_attributes.tsp";
 import "./paths/list_organisms_by_phenotypes.tsp";
-import "./paths/media_alignment_table.tsp";
 import "./paths/media_by_gmoid.tsp";
 import "./paths/media_by_taxid.tsp";
-import "./paths/media_strains_alignment_by_gm_ids.tsp";
+import "./paths/media_component_alignment.tsp";
+import "./paths/media_strains_alignment.tsp";
 import "./paths/medium_by_gmid.tsp";
 import "./paths/organism_by_taxid.tsp";
 import "./paths/organisms_by_gmid.tsp";
@@ -95,19 +95,20 @@ interface _TaxonomicRankByTaxId extends TaxonomicRankByTaxId {}
 interface _TaxonomyAncestors extends TaxonomyAncestors {}
 interface _TaxonomySearchByName extends TaxonomySearchByName {}
 //
-interface _mediaStrainsAlignmentByGmIds extends MediaStrainsAlignmentByGmIds {}
-interface _mediaAlignmentTableByGmIds extends MediaAlignmentTableByGmIds {}
+interface _MediaStrainsAlignment extends MediaStrainsAlignment {}
+interface _MediaComponentAlignment extends MediaComponentAlignment {}
+//
 interface _gmsByKeggTids3 extends GmsByKeggTids3 {}
 interface _gmsKeggCodeTid extends GmsKeggCodeTid {}
 //
 interface _componentWithComponents extends ComponentsWithComponents {}
 interface _taxonomyChildren extends TaxonomyChildren {}
-interface _allComponents extends AllComponents {}
 //
-interface _ListMediaDeprecated extends ListMediaDeprecated {}
-interface _InfraspecificListByTaxId extends InfraspecificListByTaxId {}
-interface _ListTaxonsByRank extends ListTaxonsByRank {}
-
 //
 interface _StatPhylumGm extends StatPhylumGm {}
 interface _CountMediaByCultivableStrainCount extends CountMediaByCultivableStrainCount {}
+//
+interface _allComponents extends AllComponents {}
+interface _ListMediaDeprecated extends ListMediaDeprecated {}
+interface _InfraspecificListByTaxId extends InfraspecificListByTaxId {}
+interface _ListTaxonsByRank extends ListTaxonsByRank {}

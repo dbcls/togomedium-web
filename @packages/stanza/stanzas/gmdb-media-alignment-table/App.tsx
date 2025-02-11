@@ -1,11 +1,14 @@
 import { styled } from "@mui/material/styles";
 import { useQuery } from "@tanstack/react-query";
 import React, { useCallback } from "react";
-import { MediaAlignmentTableResponse } from "%stanza/api/media-alignment-table/types";
-import { API_MEDIA_ALIGNMENT } from "%stanza/api/paths";
+import {
+  MediaComponentAlignmentTableParams,
+  MediaComponentAlignmentTableResponse,
+  mediaComponentAlignmentTableURL,
+} from "%api/mediaComponentAlignment/definitions";
+import { getData } from "%core/network/getData";
 import { ScrollableTable } from "%stanza/stanzas/gmdb-media-alignment-table/components/ScrollableTable";
 import { THEME } from "%stanza/styles/theme";
-import { getData } from "%stanza/utils/getData";
 
 export type AppProps = {
   gm_ids: string[];
@@ -21,7 +24,12 @@ const useDataQuery = (
     queryKey: ["media-alignment", { gm_ids }],
     queryFn: async () => {
       stanzaDispatch("STANZA_ON_QUERY_DATA", gm_ids);
-      const response = await getData<MediaAlignmentTableResponse>(API_MEDIA_ALIGNMENT, { gm_ids });
+      const response = await getData<
+        MediaComponentAlignmentTableResponse,
+        MediaComponentAlignmentTableParams
+      >(mediaComponentAlignmentTableURL, {
+        gm_ids: gm_ids.join(","),
+      });
       if (!response.body) throw new Error("No data");
       stanzaDispatch("STANZA_ON_LOAD_DATA", response.body);
       return response.body;

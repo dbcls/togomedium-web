@@ -1,6 +1,6 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
 import { Optional } from "yohak-tools";
-import { LineageRank, lineageRanks } from "../functions/types";
+import { LineageRank, lineageRanks } from "%api/mediaStrainsAlignment/definitions";
 
 type FilterStatus = Record<LineageRank, boolean>;
 

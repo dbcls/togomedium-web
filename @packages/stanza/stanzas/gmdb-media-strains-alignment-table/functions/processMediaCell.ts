@@ -1,7 +1,13 @@
 import { copy } from "copy-anything";
 import { nanoid } from "nanoid";
-import { CellInfo, DisplayData, Lineage, LineageRank, lineageRanks, Taxon } from "./types";
-import { MediaStrainsAlimentResponse } from "../../../api/media_strains_alignment/types";
+import {
+  Lineage,
+  LineageRank,
+  lineageRanks,
+  MediaStrainsAlignmentResponse,
+  Taxon,
+} from "%api/mediaStrainsAlignment/definitions";
+import { CellInfo, DisplayData } from "%stanza/stanzas/gmdb-media-strains-alignment-table/types";
 
 type TaxonNode = {
   id: string;
@@ -16,20 +22,20 @@ export const makeCellHeight = (size: number): number => {
 };
 
 export const processDisplayData = (
-  data: MediaStrainsAlimentResponse,
+  data: MediaStrainsAlignmentResponse,
   filterTaxon: string = "",
   filterRank: LineageRank = "strain"
 ): DisplayData => {
   // console.log("process", data.length, data[0].organisms.length, filterTaxon, filterRank);
   const nullFilled = fillNullTaxon(data);
-  const filtered: MediaStrainsAlimentResponse = filterData(nullFilled, filterTaxon);
+  const filtered: MediaStrainsAlignmentResponse = filterData(nullFilled, filterTaxon);
   const taxon = processTaxonColList(filtered, filterRank);
   const media = processMediaCell(filtered, taxon, filterRank);
   return { media, taxon };
 };
 
 const processMediaCell = (
-  data: MediaStrainsAlimentResponse,
+  data: MediaStrainsAlignmentResponse,
   taxon: DisplayData["taxon"],
   filterRank: LineageRank
 ): CellInfo[] => {
@@ -42,8 +48,8 @@ const processMediaCell = (
   });
 };
 
-const fillNullTaxon = (data: MediaStrainsAlimentResponse): MediaStrainsAlimentResponse => {
-  const cloned: MediaStrainsAlimentResponse = copy(data);
+const fillNullTaxon = (data: MediaStrainsAlignmentResponse): MediaStrainsAlignmentResponse => {
+  const cloned: MediaStrainsAlignmentResponse = copy(data);
   const nullCells: { id: string; parentId: string; gmId: string }[] = [];
   const findNullId = (gmId: string, parentId: string): string | undefined => {
     return nullCells.find((cell) => parentId === cell.parentId && cell.gmId === gmId)?.id;
@@ -85,7 +91,7 @@ const processTaxonCol = (
 };
 
 const processTaxonColList = (
-  data: MediaStrainsAlimentResponse,
+  data: MediaStrainsAlignmentResponse,
   filterRank: LineageRank
 ): DisplayData["taxon"] => {
   const trees = makeTaxonTreesFromData(data);
@@ -97,9 +103,9 @@ const processTaxonColList = (
 };
 
 const filterData = (
-  data: MediaStrainsAlimentResponse,
+  data: MediaStrainsAlignmentResponse,
   taxId: string = ""
-): MediaStrainsAlimentResponse => {
+): MediaStrainsAlignmentResponse => {
   if (taxId === "") return data;
   const cloned = copy(data);
   cloned.forEach((media) => {
@@ -125,7 +131,7 @@ const getSizeOfCell = (node: TaxonNode, filterRank: LineageRank): number => {
   return total;
 };
 
-const makeTaxonTreesFromData = (data: MediaStrainsAlimentResponse): TaxonNode[][] => {
+const makeTaxonTreesFromData = (data: MediaStrainsAlignmentResponse): TaxonNode[][] => {
   return data.map((medium) => makeTaxonTree(medium.organisms, medium.gm_id));
 };
 

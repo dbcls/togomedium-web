@@ -2,10 +2,10 @@ import { describe, expect, it, test } from "vitest";
 import { makeAlignmentData, __TEST__ } from "./makeAlignmentData";
 import { makeComponentTree } from "./makeComponentBranch";
 import { makeFooterComponents } from "./makeFooterComponents";
-import { mediaAlignmentTableResponse1 } from "../../../api/media-alignment-table/response1";
-import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { makeRawComponent } from "../../../utils/testing";
 import { ComponentTrunk, RawComponent } from "../types";
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
+import { mediaAlignmentTableResponse1 } from "%api/mediaComponentAlignment/response1";
+import { makeRawComponent } from "%stanza/utils/testing";
 describe("makeAlignmentData", () => {
   it("should work", () => {
     const result = makeResult(mediaAlignmentTableResponse1);
@@ -25,7 +25,7 @@ describe("makeAlignmentData", () => {
 });
 
 const makeResult = (
-  data: MediaAlignmentTableResponse,
+  data: MediaComponentAlignmentTableResponse,
   modTree?: (tree: ComponentTrunk) => void
 ) => {
   const tree = makeComponentTree(data.components);

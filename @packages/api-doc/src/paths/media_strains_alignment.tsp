@@ -18,13 +18,13 @@ model SimpleTaxon {
   label: string;
 }
 
-model MediaStrainsAlignmentByGmIdsRequest {
+model MediaStrainsAlignmentRequest {
   @query
   @doc("Comma-separated GM IDs")
   gm_ids: string;
 }
 
-model MediaStrainsAlignmentByGmIdsResponse {
+model MediaStrainsAlignmentResponse {
   @doc("List of media alignment information")
   items: {
     @doc("GM ID")
@@ -50,10 +50,10 @@ model MediaStrainsAlignmentByGmIdsResponse {
   }[];
 }
 
-interface MediaStrainsAlignmentByGmIds {
+interface MediaStrainsAlignment {
   @route("gmdb_media_strains_alignment_by_gm_ids")
   @tag(Tags.Stanza)
   @doc("Find multiple media by GM ID and return alignment information of organisms")
   @get
-  get(...MediaStrainsAlignmentByGmIdsRequest): MediaStrainsAlignmentByGmIdsResponse;
+  get(...MediaStrainsAlignmentRequest): MediaStrainsAlignmentResponse;
 }

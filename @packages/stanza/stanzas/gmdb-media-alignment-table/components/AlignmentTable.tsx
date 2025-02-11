@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { ComponentProps, FC, useEffect, useMemo } from "react";
-import { MediaAlignmentTableResponse } from "%stanza/api/media-alignment-table/types";
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
 import { FooterRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/FooterRow";
 import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderRow";
 import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/MediaRow";
@@ -13,7 +13,7 @@ import {
 } from "%stanza/stanzas/gmdb-media-alignment-table/states/componentTree";
 import { THEME } from "%stanza/styles/theme";
 
-type Props = { data: MediaAlignmentTableResponse; prioritizedOrganism: string[] };
+type Props = { data: MediaComponentAlignmentTableResponse; prioritizedOrganism: string[] };
 type RowProps = ComponentProps<typeof MediaRow>[];
 type FooterProps = ComponentProps<typeof FooterRow>;
 

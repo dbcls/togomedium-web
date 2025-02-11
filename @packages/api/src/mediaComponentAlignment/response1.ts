@@ -1,6 +1,6 @@
-import { MediaAlignmentTableResponse } from "./types";
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
 
-export const mediaAlignmentTableResponse1: MediaAlignmentTableResponse = {
+export const mediaAlignmentTableResponse1: MediaComponentAlignmentTableResponse = {
   media: [
     {
       gm_id: "HM_D00001a",

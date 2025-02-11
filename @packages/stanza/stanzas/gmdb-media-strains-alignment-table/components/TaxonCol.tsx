@@ -2,12 +2,10 @@ import { SxProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
 import { Ease } from "yohak-tools";
+import { LineageRank } from "%api/mediaStrainsAlignment/definitions";
 import { TaxonCell } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/TaxonCell";
-import {
-  CellInfo,
-  LineageRank,
-} from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
 import { useFilterRankMutators } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterRank";
+import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/types";
 import { THEME } from "%stanza/styles/theme";
 import { capitalizeFirstLetter } from "%stanza/utils/string";
 

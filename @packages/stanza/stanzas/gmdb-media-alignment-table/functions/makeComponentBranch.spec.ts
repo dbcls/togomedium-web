@@ -1,9 +1,9 @@
-import { describe, expect, it, test } from "vitest";
+import { describe, expect, it } from "vitest";
 import { makeComponentTree } from "./makeComponentBranch";
-import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
 import { makeRawComponent } from "../../../utils/testing";
 import { ROOT_COMPONENT } from "../consts";
 import { RawComponent } from "../types";
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
 
 describe("makeComponentTree", () => {
   it("should work", () => {
@@ -81,7 +81,7 @@ describe("makeComponentTree", () => {
   });
 });
 
-const dataTemplate: MediaAlignmentTableResponse = {
+const dataTemplate: MediaComponentAlignmentTableResponse = {
   media: [],
   organisms: [],
   components: [],

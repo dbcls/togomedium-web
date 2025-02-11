@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ScrollableTable } from "./ScrollableTable";
-import { mediaAlignmentTableResponse2 } from "%stanza/api/media-alignment-table/response2";
+import { mediaAlignmentTableResponse2 } from "%api/mediaComponentAlignment/response2";
 
 const meta: Meta<typeof ScrollableTable> = {
   component: ScrollableTable,

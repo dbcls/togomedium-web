@@ -10,13 +10,13 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 
-model MediaAlignmentTableByGmIdsRequest {
+model MediaComponentAlignmentRequest {
   @query
   @doc("Single string of GM IDs separated by comma")
   gm_ids: string;
 }
 
-model MediaAlignmentTableByGmIdsResponse {
+model MediaComponentAlignmentResponse {
   @doc("List of media")
   media: {
     gm_id: string;
@@ -46,10 +46,10 @@ model MediaAlignmentTableByGmIdsResponse {
   }[];
 }
 
-interface MediaAlignmentTableByGmIds {
+interface MediaComponentAlignment {
   @route("gmdb_media_alignment_by_gm_ids")
   @tag(Tags.Stanza)
   @doc("Returns the alignment information of components based on GM IDs. Mostly used at 'Compare media' page.")
   @get
-  get(...MediaAlignmentTableByGmIdsRequest): MediaAlignmentTableByGmIdsResponse;
+  get(...MediaComponentAlignmentRequest): MediaComponentAlignmentResponse;
 }

@@ -1,9 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import {
-  LineageRank,
-  lineageRanks,
-} from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
+import { LineageRank, lineageRanks } from "%api/mediaStrainsAlignment/definitions";
 import { THEME } from "%stanza/styles/theme";
 import { capitalizeFirstLetter, makeSpeciesName } from "%stanza/utils/string";
 

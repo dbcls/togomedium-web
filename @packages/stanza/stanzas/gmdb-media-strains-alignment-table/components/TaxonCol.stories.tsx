@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { TaxonCol } from "./TaxonCol";
-import { data1 } from "%stanza/api/media_strains_alignment/data1";
+import { data1 } from "%api/mediaStrainsAlignment/data1";
+import { TaxonCol } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/TaxonCol";
 import { __SB_TEST__ } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
 
 const { processTaxonCol, makeTaxonTreesFromData } = __SB_TEST__;

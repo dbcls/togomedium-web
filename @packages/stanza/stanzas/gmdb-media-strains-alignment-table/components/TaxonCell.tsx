@@ -1,17 +1,15 @@
 import { SxProps, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useMemo } from "react";
+import { LineageRank } from "%api/mediaStrainsAlignment/definitions";
 import { FilterIcon } from "%stanza/components/icons/FilterIcon";
 import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCell";
 import { makeCellHeight } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
 import {
-  CellInfo,
-  LineageRank,
-} from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
-import {
   useFilterTaxonMutators,
   useFilterTaxonState,
 } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterTaxon";
+import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/types";
 import { THEME } from "%stanza/styles/theme";
 import { makeSpeciesName } from "%stanza/utils/string";
 

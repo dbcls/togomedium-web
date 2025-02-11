@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { makeCellHeight } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
-import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
+import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/types";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = {} & CellInfo;

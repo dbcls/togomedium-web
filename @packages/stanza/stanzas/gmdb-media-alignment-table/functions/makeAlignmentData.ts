@@ -1,16 +1,20 @@
 import { ComponentProps } from "react";
-import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { LabelInfo } from "../../../utils/labelInfo";
-import { AlignmentCellState } from "../components/AlignmentCell";
-import { FooterCell } from "../components/FooterCell";
-import { MediaRow } from "../components/MediaRow";
-import { RawComponent, RawMedium, RawOrganism } from "../types";
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
+import { AlignmentCellState } from "%stanza/stanzas/gmdb-media-alignment-table/components/AlignmentCell";
+import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/FooterCell";
+import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/MediaRow";
+import {
+  RawComponent,
+  RawMedium,
+  RawOrganism,
+} from "%stanza/stanzas/gmdb-media-alignment-table/types";
+import { LabelInfo } from "%stanza/utils/labelInfo";
 
 type ComponentInfo = ComponentProps<typeof FooterCell>;
 type CellProps = ComponentProps<typeof MediaRow>["components"][0];
 
 export const makeAlignmentData = (
-  data: MediaAlignmentTableResponse,
+  data: MediaComponentAlignmentTableResponse,
   footerComponents: ComponentInfo[]
 ): ComponentProps<typeof MediaRow>[] => {
   return data.media.map((medium) =>

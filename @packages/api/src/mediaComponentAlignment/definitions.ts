@@ -1,6 +1,7 @@
 import { Nullable } from "yohak-tools";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 
-export type MediaAlignmentTableResponse = {
+export type MediaComponentAlignmentTableResponse = {
   media: {
     gm_id: string;
     name: string;
@@ -18,3 +19,7 @@ export type MediaAlignmentTableResponse = {
     function: Nullable<string>;
   }[];
 };
+export type MediaComponentAlignmentTableParams = {
+  gm_ids: string;
+};
+export const mediaComponentAlignmentTableURL = makeApiUrl("gmdb_media_alignment_by_gm_ids");

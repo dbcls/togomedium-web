@@ -1,6 +1,6 @@
-import { MediaStrainsAlimentResponse } from "./types";
+import { MediaStrainsAlignmentResponse } from "%api/mediaStrainsAlignment/definitions";
 
-export const data3: MediaStrainsAlimentResponse = [
+export const data3: MediaStrainsAlignmentResponse = [
   {
     gm_id: "JCM_M900",
     label: "M13a MEDIUM",

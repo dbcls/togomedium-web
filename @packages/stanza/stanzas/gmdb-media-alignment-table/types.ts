@@ -1,6 +1,6 @@
 import { Nullable } from "yohak-tools";
-import { MediaAlignmentTableResponse } from "../../api/media-alignment-table/types";
-import { TreeBranch } from "../../utils/types";
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
+import { TreeBranch } from "%stanza/utils/types";
 
 export type ComponentTrunk = ComponentBranch[];
 export type ComponentBranch = {
@@ -8,6 +8,6 @@ export type ComponentBranch = {
   isOpen: boolean;
   func: Nullable<string>;
 } & TreeBranch;
-export type RawComponent = MediaAlignmentTableResponse["components"][0];
-export type RawMedium = MediaAlignmentTableResponse["media"][0];
-export type RawOrganism = MediaAlignmentTableResponse["organisms"][0];
+export type RawComponent = MediaComponentAlignmentTableResponse["components"][0];
+export type RawMedium = MediaComponentAlignmentTableResponse["media"][0];
+export type RawOrganism = MediaComponentAlignmentTableResponse["organisms"][0];

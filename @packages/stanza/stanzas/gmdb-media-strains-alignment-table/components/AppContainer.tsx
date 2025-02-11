@@ -1,15 +1,17 @@
 import { styled } from "@mui/material/styles";
 import React, { FC, useMemo } from "react";
-import { MediaStrainsAlimentResponse } from "%stanza/api/media_strains_alignment/types";
+import {
+  lineageRanks,
+  MediaStrainsAlignmentResponse,
+} from "%api/mediaStrainsAlignment/definitions";
 import { MediaCol } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCol";
 import { TaxonCol } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/TaxonCol";
 import { processDisplayData } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
-import { lineageRanks } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/types";
 import { useFilterRankState } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterRank";
 import { useFilterTaxonState } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterTaxon";
 import { THEME } from "%stanza/styles/theme";
 
-type Props = { data: MediaStrainsAlimentResponse; hideMedia?: boolean };
+type Props = { data: MediaStrainsAlignmentResponse; hideMedia?: boolean };
 
 export const AppContainer: FC<Props> = ({ data, hideMedia = false }) => {
   const filterTaxon = useFilterTaxonState();
