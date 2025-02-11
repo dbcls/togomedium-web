@@ -1,6 +1,6 @@
-import { MediaByTaxonResponse } from "./types";
+import { ListMediaByTaxonResponse } from "%api/listMediaByTaxon/definitions";
 
-export const mediaByTaxonResponse4: MediaByTaxonResponse = {
+export const mediaByTaxonResponse4: ListMediaByTaxonResponse = {
   total: 35,
   offset: 30,
   limit: 10,

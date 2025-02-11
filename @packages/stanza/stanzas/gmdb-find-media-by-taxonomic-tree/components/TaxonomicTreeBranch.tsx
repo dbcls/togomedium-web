@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
 import { Optional } from "yohak-tools";
-import { API_TAXONOMY_CHILDREN } from "%stanza/api/paths";
 import {
   TaxonomyChildrenParams,
   TaxonomyChildrenResponse,
-} from "%stanza/api/taxonomy_children/types";
+  taxonomyChildrenURL,
+} from "%api/taxonomyChildren/definitions";
+import { getData } from "%core/network/getData";
 import {
   CheckStatus,
   ToggleIconStatus,
@@ -24,7 +25,6 @@ import {
   useTaxonListMutators,
   useTaxonListState,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
-import { getData } from "%stanza/utils/getData";
 
 type Props = { id: string } & PropsWithChildren;
 
@@ -78,7 +78,7 @@ const useBranchChildren = (info: Optional<TaxonInfo>) => {
       const tax_id = info?.id || "";
       if (!tax_id) return [];
       const response = await getData<TaxonomyChildrenResponse, TaxonomyChildrenParams>(
-        API_TAXONOMY_CHILDREN,
+        taxonomyChildrenURL,
         { tax_id }
       );
       return response.body;

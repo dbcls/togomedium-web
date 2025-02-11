@@ -1,6 +1,6 @@
-import { OrganismsByPhenotypesResponse } from "./types";
+import { ListOrganismsByPhenotypesResponse } from "%api/listOrganismsByPhenotypes/definitions";
 
-export const organismsByAttributesResponse3: OrganismsByPhenotypesResponse = {
+export const organismsByAttributesResponse3: ListOrganismsByPhenotypesResponse = {
   total: 35,
   offset: 20,
   limit: 10,

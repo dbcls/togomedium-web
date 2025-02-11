@@ -3,18 +3,15 @@ import { styled } from "@mui/material/styles";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, useMemo } from "react";
 import { useDebounceValue } from "usehooks-ts";
-import { API_TAXON_BY_NAME } from "%stanza/api/paths";
-import { TaxonomyQueryResponse } from "%stanza/api/taxonomy_children/types";
+import {
+  TaxonomySearchByNameParams,
+  TaxonomySearchByNameResponse,
+  taxonomySearchByNameURL,
+} from "%api/taxonomySearchByName/definitions";
+import { getData } from "%core/network/getData";
 import { THEME } from "%stanza/styles/theme";
-import { getData } from "%stanza/utils/getData";
 
 type Props = {};
-
-type Opts = {
-  tax_id: string;
-  name: string;
-  rank: string;
-}[];
 
 const useTaxonChildrenSearch = () => {
   const [debouncedValue, setValue] = useDebounceValue("", 500);
@@ -22,8 +19,8 @@ const useTaxonChildrenSearch = () => {
     queryKey: ["taxon_children", debouncedValue],
     queryFn: async () => {
       if (debouncedValue.length <= 3) return [];
-      const response = await getData<TaxonomyQueryResponse, { q: string; max: number }>(
-        API_TAXON_BY_NAME,
+      const response = await getData<TaxonomySearchByNameResponse, TaxonomySearchByNameParams>(
+        taxonomySearchByNameURL,
         { q: debouncedValue, max: 100 }
       );
       return response.body ?? [];
