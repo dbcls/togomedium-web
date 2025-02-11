@@ -1,6 +1,6 @@
-import { ListApiBody } from "../../stanzas/gmdb-meta-list/types";
+import { ListMediaResponse } from "%api/listMedia/definitions";
 
-export const data1: ListApiBody = {
+export const data1: ListMediaResponse = {
   total: 2834,
   offset: 0,
   contents: [

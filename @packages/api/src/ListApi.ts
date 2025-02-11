@@ -3,6 +3,12 @@ export type ListApiResponse<T> = {
   total: number;
   offset: number;
   contents: T[];
+  columns: { key: string; label: string }[];
+};
+
+export type ListApiLink = {
+  href: string;
+  label: string;
 };
 
 export type ListApiParams<T> = T & {
@@ -15,4 +21,5 @@ export const nullListResponse: ListApiResponse<any> = {
   contents: [],
   offset: 0,
   limit: 0,
+  columns: [],
 };

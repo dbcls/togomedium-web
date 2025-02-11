@@ -1,11 +1,11 @@
 import React, { ComponentProps, FC } from "react";
+import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { InfoId } from "%stanza/components/styled/InfoId";
 import { InfoTitle } from "%stanza/components/styled/InfoTitle";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { SubHeading } from "%stanza/components/styled/SubHeading";
 import { RecipeComment } from "%stanza/stanzas/gmdb-medium-by-gmid/components/RecipeComment";
 import { RecipeTable } from "%stanza/stanzas/gmdb-medium-by-gmid/components/RecipeTable";
-import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
   id: string | undefined;

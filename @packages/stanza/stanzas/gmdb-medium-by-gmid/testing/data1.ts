@@ -1,5 +1,7 @@
-import { ViewProps } from "../utils/api";
+import { ComponentProps } from "react";
+import { StanzaView } from "%stanza/stanzas/gmdb-medium-by-gmid/components/StanzaView";
 
+type ViewProps = ComponentProps<typeof StanzaView>;
 export const data1: ViewProps = {
   id: "M1470",
   originalId: "NBRC_M249",

@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ListTable } from "./ListTable";
 import { LoadingCover } from "./LoadingCover";
-import { data1 } from "%stanza/api/all-media/data1";
+import { data1 } from "%api/listMedia/data1";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 
 const meta: Meta<typeof LoadingCover> = {

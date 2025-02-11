@@ -2,6 +2,9 @@ import { createTheme } from "@mui/material";
 import { THEME } from "%stanza/styles/theme";
 
 export const muiTheme = createTheme({
+  typography: {
+    fontFamily: "inherit",
+  },
   palette: {
     primary: {
       main: THEME.COLOR.PRIMARY,

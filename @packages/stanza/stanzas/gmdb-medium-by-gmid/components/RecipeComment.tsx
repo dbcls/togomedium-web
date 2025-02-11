@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { decodeHTMLEntities } from "%stanza/utils/string";
+import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 
 type Props = {
   index: number;

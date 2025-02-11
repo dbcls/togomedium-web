@@ -1,28 +1,22 @@
 import { ComponentProps } from "react";
-import { ApiLineage } from "../../../components/styled/LineageList";
-import { getData } from "../../../utils/getData";
-import { unescapeJsonString } from "../../../utils/string";
-import { URL_API } from "../../../utils/variables";
-import { StanzaView } from "../components/StanzaView";
+import {
+  TaxonDetailParams,
+  TaxonDetailResponse,
+  taxonDetailURL,
+} from "%api/taxonDetail/definitions";
+import { getData } from "%core/network/getData";
+import { unescapeJsonString } from "%core/string/unescapeJsonString";
+import { StanzaView } from "%stanza/stanzas/gmdb-taxon-by-taxid/components/StanzaView";
 import { parseLineage } from "%stanza/utils/parseLineage";
 
 export type ViewProps = ComponentProps<typeof StanzaView>;
-export type ApiBody = {
-  scientific_name: string;
-  taxid: number | string;
-  rank: string;
-  authority_name: string;
-  lineage: ApiLineage;
-  type_material: { label: string; name?: string }[];
-  other_type_material: { label: string; name: string }[];
-};
 
 type OtherMaterialParameter = {
   key: string;
   labels: string[];
 };
 
-export const parseData = (body: ApiBody): ViewProps => {
+export const parseData = (body: TaxonDetailResponse): ViewProps => {
   const taxid = body.taxid.toString();
   const scientificName = body.scientific_name;
   const authorityName = unescapeJsonString(body.authority_name);
@@ -32,7 +26,9 @@ export const parseData = (body: ApiBody): ViewProps => {
   return { taxid, scientificName, authorityName, lineage, typeMaterials, otherTypeMaterials };
 };
 
-const parseOtherTypeMaterial = (data: ApiBody["other_type_material"]): OtherMaterialParameter[] => {
+const parseOtherTypeMaterial = (
+  data: TaxonDetailResponse["other_type_material"]
+): OtherMaterialParameter[] => {
   return data
     .map((obj) => obj.name!)
     .reduce<string[]>((a: string[], b: string) => {
@@ -48,8 +44,9 @@ const parseOtherTypeMaterial = (data: ApiBody["other_type_material"]): OtherMate
 };
 
 export const getTaxonData = async (tax_id: string) => {
-  const apiName = "gmdb_organism_by_taxid";
-  const result = await getData<ApiBody>(`${URL_API}${apiName}`, { tax_id });
+  const result = await getData<TaxonDetailResponse, TaxonDetailParams>(taxonDetailURL, {
+    tax_id,
+  });
   if (!result.body) {
     throw new Error("No data found");
   }
