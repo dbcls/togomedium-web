@@ -1,6 +1,6 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
 
-export type ComponentWithComponentsRequest = {
+export type ComponentWithComponentsParams = {
   gmo_ids?: string;
 };
 export type ComponentsWithComponentsResponse = {

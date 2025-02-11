@@ -1,3 +1,6 @@
+/**
+ * @deprecated
+ */
 export type MediaByTaxonResponse = {
   total: number;
   offset: number;
@@ -8,6 +11,9 @@ export type MediaByTaxonResponse = {
   }[];
 };
 
+/**
+ * @deprecated
+ */
 export type MediaByTaxonParams = {
   tax_ids: string[];
   limit: number;

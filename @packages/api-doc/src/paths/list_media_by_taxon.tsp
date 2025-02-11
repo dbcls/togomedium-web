@@ -10,15 +10,15 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 
-model MediaByTaxonRequest {
+model ListMediaByTaxonRequest {
   @doc("comma-separated tax_id")
   @query
-  tax_ids: integer;
+  tax_ids: string;
 
   ...ListRequest;
 }
 
-model MediaByTaxonResponse {
+model ListMediaByTaxonResponse {
   ...ListResponse<{
     tax_id: {
       label: string;
@@ -28,10 +28,10 @@ model MediaByTaxonResponse {
   }>;
 }
 
-interface MediaByTaxon {
+interface ListMediaByTaxon {
   @route("gmdb_media_by_taxon")
   @tag(Tags.ListStanza)
   @doc("Search for media associated with a taxon and return a list")
   @get
-  get(...MediaByTaxonRequest): MediaByTaxonResponse;
+  get(...ListMediaByTaxonRequest): ListMediaByTaxonResponse;
 }

@@ -1,6 +1,5 @@
 import "./models/variables.tsp";
 
-import "./paths/media_by_taxon.tsp";
 import "./paths/_list_media.tsp";
 import "./paths/all_components.tsp";
 import "./paths/component_by_gmoid.tsp";
@@ -8,6 +7,7 @@ import "./paths/components_with_components.tsp";
 import "./paths/gms_by_kegg_tids_3.tsp";
 import "./paths/gms_kegg_code_tid.tsp";
 import "./paths/infraspecific_list_by_taxid.tsp";
+import "./paths/list_media_by_taxon.tsp";
 import "./paths/list_components.tsp";
 import "./paths/list_components_by_gmoids.tsp";
 import "./paths/list_components_by_keyword.tsp";
@@ -21,6 +21,7 @@ import "./paths/list_organisms_by_taxids.tsp";
 import "./paths/list_similar_media_by_gmid.tsp";
 import "./paths/list_taxons_by_rank.tsp";
 import "./paths/list_media_by_attributes.tsp";
+import "./paths/list_organisms_by_phenotypes.tsp";
 import "./paths/media_alignment_table.tsp";
 import "./paths/media_by_gmoid.tsp";
 import "./paths/media_by_taxid.tsp";
@@ -28,7 +29,6 @@ import "./paths/media_strains_alignment_by_gm_ids.tsp";
 import "./paths/medium_by_gmid.tsp";
 import "./paths/organism_by_taxid.tsp";
 import "./paths/organisms_by_gmid.tsp";
-import "./paths/organisms_by_phenotypes.tsp";
 import "./paths/stat_phylum_gm.tsp";
 import "./paths/stat_count_media_by_cultivable_strain_count.tsp";
 import "./paths/taxonomic_rank_by_taxid.tsp";
@@ -70,13 +70,13 @@ using TypeSpec.OpenAPI;
 namespace Root;
 
 //namespace List{}
-interface _MediaByTaxon extends MediaByTaxon {}
-interface _OrganismsByPhenotypes extends OrganismsByPhenotypes {}
+interface _ListMediaByTaxon extends ListMediaByTaxon {}
 interface _ListMediaByAttributes extends ListMediaByAttributes {}
 interface _ListComponentsByGmoIds extends ListComponentsByGmoIds {}
 interface _ListComponentsByKeyword extends ListComponentsByKeyword {}
 interface _ListMediaByGmIds extends ListMediaByGmIds {}
 interface _ListMediaByKeyword extends ListMediaByKeyword {}
+interface _ListOrganismsByPhenotypes extends ListOrganismsByPhenotypes {}
 interface _ListOrganismsByKeyword extends ListOrganismsByKeyword {}
 interface _ListOrganismsByTaxIds extends ListOrganismsByTaxIds {}
 interface _ListSimilarMediaByGmId extends ListSimilarMediaByGmId {}

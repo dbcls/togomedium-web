@@ -4,7 +4,7 @@ import React, { FC, useState } from "react";
 import {
   ComponentsWithComponentsResponse,
   componentsWithComponentsURL,
-  ComponentWithComponentsRequest,
+  ComponentWithComponentsParams,
 } from "%api/componentsWithComponents/definitions";
 import { getData } from "%core/network/getData";
 import { parseLabelInfo } from "%stanza/stanzas/gmdb-find-media-by-components/functions/parseLabelInfo";
@@ -20,7 +20,7 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
       const gmo_ids = selectedIds.join(",");
       const response = await getData<
         ComponentsWithComponentsResponse,
-        ComponentWithComponentsRequest
+        ComponentWithComponentsParams
       >(componentsWithComponentsURL, { gmo_ids });
       if (!response.body) throw new Error("No response body");
       return parseLabelInfo(response.body, selectedIds);

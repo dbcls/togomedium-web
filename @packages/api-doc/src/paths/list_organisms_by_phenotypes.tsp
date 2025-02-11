@@ -10,7 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 
-model OrganismsByPhenotypesRequest {
+model ListOrganismsByPhenotypesRequest {
   @doc("string of 2 numbers separated by comma to represent min and max")
   @example("0,110")
   @query
@@ -59,17 +59,17 @@ model OrganismsByPhenotypesRequest {
   ...ListRequest;
 }
 
-model OrganismsByPhenotypesResponse {
+model ListOrganismsByPhenotypesResponse {
   ...ListResponse<{
     tax_id: string;
     name: string;
   }>;
 }
 
-interface OrganismsByPhenotypes {
+interface ListOrganismsByPhenotypes {
   @route("gmdb_organisms_by_phenotypes")
   @tag(Tags.ListStanza)
   @doc("Mostly used at `Find media by organism phenotype` page. Search organisms by various phenotypes")
   @get
-  get(...OrganismsByPhenotypesRequest): OrganismsByPhenotypesResponse;
+  get(...ListOrganismsByPhenotypesRequest): ListOrganismsByPhenotypesResponse;
 }

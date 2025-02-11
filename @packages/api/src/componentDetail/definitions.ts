@@ -11,7 +11,7 @@ export type ComponentDetailResponse = {
   roles: ComponentClass[];
   links: string[];
 };
-export type ComponentDetailRequest = {
+export type ComponentDetailParams = {
   gmo_id: string;
 };
 export const componentDetailURL = makeApiUrl("gmdb_component_by_gmoid");

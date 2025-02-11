@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 import {
-  ComponentDetailRequest,
+  ComponentDetailParams,
   ComponentDetailResponse,
   componentDetailURL,
 } from "%api/componentDetail/definitions";
@@ -21,7 +21,7 @@ const useComponentDataQuery = (gmo_id: string) => {
   const { data, isLoading } = useQuery({
     queryKey: [{ gmo_id }],
     queryFn: async () => {
-      const result = await getData<ComponentDetailResponse, ComponentDetailRequest>(
+      const result = await getData<ComponentDetailResponse, ComponentDetailParams>(
         componentDetailURL,
         {
           gmo_id,

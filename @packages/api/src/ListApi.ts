@@ -5,7 +5,7 @@ export type ListApiResponse<T> = {
   contents: T[];
 };
 
-export type ListApiRequest<T> = T & {
+export type ListApiParams<T> = T & {
   limit?: number;
   offset?: number;
 };

@@ -1,6 +1,6 @@
-import { MediaByAttributesResponse } from "./types";
+import { ListMediaByAttributesResponse } from "%api/listMediaByAttributes/definitions";
 
-export const mediaByAttributesResponse1: MediaByAttributesResponse = {
+export const mediaByAttributesResponse1: ListMediaByAttributesResponse = {
   total: 35,
   offset: 0,
   limit: 10,
