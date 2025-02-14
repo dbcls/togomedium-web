@@ -23,7 +23,10 @@
     "noUncheckedSideEffectImports": true,
 
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "%api/*": ["../api/src/*"],
+      "%core/*": ["../core/src/*"],
+      "%storybook/*": ["../storybook/src/*"]
     }
   },
   "include": ["src"]

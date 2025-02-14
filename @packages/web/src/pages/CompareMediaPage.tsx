@@ -1,12 +1,12 @@
 import { deepEqual } from "@tanstack/react-router";
 import { FC, useEffect, useRef, useState } from "react";
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions.ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { SearchPane } from "@/components/organisms/SearchPane.tsx";
 import { ComponentAlignmentStanza } from "@/components/stanzas/ComponentAlignmentStanza.tsx";
 import { StrainAlignmentStanza } from "@/components/stanzas/StrainAlignmentStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
-import { MediaAlignmentTableResponse } from "@/types/responses.ts";
 
 export const CompareMediaPage: FC = () => {
   usePageTitle("Compare Media");
@@ -60,7 +60,7 @@ const useCompareMedia = () => {
 
   useEffect(() => {
     const handler = (e: CustomEvent) => {
-      const response: MediaAlignmentTableResponse = e.detail;
+      const response: MediaComponentAlignmentTableResponse = e.detail;
       const { foundLength, notFoundIds } = processMediaAlignmentTableResponse(response, gmIds);
       setIsVisible(foundLength > 0);
       setErrorMsg(notFoundIds.length > 0 ? `Media not found: ${notFoundIds.join(",")}` : "");
@@ -90,7 +90,7 @@ const setSearchParams = (ids: string[]) => {
 };
 
 const processMediaAlignmentTableResponse = (
-  response: MediaAlignmentTableResponse,
+  response: MediaComponentAlignmentTableResponse,
   gmIds: string[]
 ) => {
   const loadedMedia: string[] = [

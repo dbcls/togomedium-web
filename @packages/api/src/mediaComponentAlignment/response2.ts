@@ -4,6 +4,7 @@ export const mediaAlignmentTableResponse2: MediaComponentAlignmentTableResponse 
   media: [
     {
       gm_id: "HM_D00001a",
+      original_media_id: "HM_D00001",
       name: "REACTIVATION WITH LIQUID MEDIUM 1",
       components: [
         "GMO_001001",
@@ -20,6 +21,7 @@ export const mediaAlignmentTableResponse2: MediaComponentAlignmentTableResponse 
     },
     {
       gm_id: "HM_D00065",
+      original_media_id: "HM_D00001",
       name: "GYM STREPTOMYCES MEDIUM",
       components: [
         "GMO_001001",

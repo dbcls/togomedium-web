@@ -13,6 +13,7 @@ import "./paths/list_components_by_gmoids.tsp";
 import "./paths/list_components_by_keyword.tsp";
 import "./paths/list_media.tsp";
 import "./paths/list_media_by_gmids.tsp";
+import "./paths/list_media_of_strain.tsp";
 import "./paths/list_media_by_keyword.tsp";
 import "./paths/list_media_by_cultivable_count.tsp";
 import "./paths/list_organisms.tsp";
@@ -76,6 +77,7 @@ interface _ListComponentsByGmoIds extends ListComponentsByGmoIds {}
 interface _ListComponentsByKeyword extends ListComponentsByKeyword {}
 interface _ListMediaByGmIds extends ListMediaByGmIds {}
 interface _ListMediaByKeyword extends ListMediaByKeyword {}
+interface _ListMediaOfStrain extends ListMediaOfStrain {}
 interface _ListOrganismsByPhenotypes extends ListOrganismsByPhenotypes {}
 interface _ListOrganismsByKeyword extends ListOrganismsByKeyword {}
 interface _ListOrganismsByTaxIds extends ListOrganismsByTaxIds {}

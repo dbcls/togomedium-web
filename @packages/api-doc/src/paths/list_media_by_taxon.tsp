@@ -20,10 +20,7 @@ model ListMediaByTaxonRequest {
 
 model ListMediaByTaxonResponse {
   ...ListResponse<{
-    tax_id: {
-      label: string;
-      href: string;
-    };
+    tax_id: ListLink;
     label: string;
   }>;
 }

@@ -4,6 +4,7 @@ import { makeApiUrl } from "%core/network/makeApiUrl";
 export type MediaComponentAlignmentTableResponse = {
   media: {
     gm_id: string;
+    original_media_id: string;
     name: string;
     components: string[];
     organisms: string[];

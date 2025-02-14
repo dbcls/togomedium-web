@@ -1,5 +1,6 @@
 import { deepEqual } from "@tanstack/react-router";
 import { FC, useEffect, useRef, useState } from "react";
+import { ListMediaByTaxonResponse } from "%api/listMediaByTaxon/definitions.ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { SearchPane } from "@/components/organisms/SearchPane.tsx";
 import { ComponentAlignmentStanza } from "@/components/stanzas/ComponentAlignmentStanza.tsx";
@@ -7,7 +8,6 @@ import { StrainAlignmentStanza } from "@/components/stanzas/StrainAlignmentStanz
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
 import { URL_API } from "@/consts/api.ts";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
-import { MediaByTaxonResponse } from "@/types/responses.ts";
 
 export const CompareMediaByTaxIdsPage: FC = () => {
   usePageTitle("Compare media specified by Tax IDs");
@@ -105,7 +105,7 @@ const fetchMedia = async (tax_ids: string[]): Promise<string[]> => {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   });
-  const data: MediaByTaxonResponse = await response.json();
+  const data: ListMediaByTaxonResponse = await response.json();
   return data.contents.map((item) => item.gm_id);
 };
 const setSearchParams = (taxIds: string[]) => {

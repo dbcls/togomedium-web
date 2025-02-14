@@ -1,4 +1,4 @@
-export type ListApiResponse<T> = {
+export type ListApiResponse<T = unknown> = {
   limit: number;
   total: number;
   offset: number;
