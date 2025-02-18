@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { API_COMPONENT_DETAIL } from "@/consts/api.ts";
+import { componentDetailURL } from "%api/componentDetail/definitions.ts";
 import { ComponentDetailPage } from "@/pages/ComponentDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 
@@ -9,7 +9,7 @@ type APIResponse = {
 
 export const Route = createFileRoute("/component/$gmoId")({
   loader: async ({ params: { gmoId } }) => {
-    const api = API_COMPONENT_DETAIL;
+    const api = componentDetailURL;
     const apiBody = `gmo_id=${gmoId}`;
     const result = await fetchData<APIResponse>(api, apiBody);
     // console.log(result);

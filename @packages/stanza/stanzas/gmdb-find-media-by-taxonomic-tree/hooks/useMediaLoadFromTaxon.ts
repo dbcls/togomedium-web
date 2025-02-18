@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { nullListResponse } from "%api/ListApi";
 import {
-  ListMediaByTaxonParams,
-  ListMediaByTaxonResponse,
-  listMediaByTaxonURL,
-} from "%api/listMediaByTaxon/definitions";
+  ListMediaOfTaxonsParams,
+  ListMediaOfTaxonsResponse,
+  listMediaOfTaxonsURL,
+} from "%api/listMediaOfTaxons/definitions";
 import { getData } from "%core/network/getData";
 import { useSelectedTaxonState } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/selectedTaxon";
 import { useFoundMediaMutators } from "%stanza/state/media-finder/foundMedia";
@@ -30,8 +30,8 @@ export const useMediaLoadFromTaxon = () => {
       const tax_ids = selectedTaxon.join(",");
       if (tax_ids.length === 0) return nullListResponse;
       //
-      const response = await getData<ListMediaByTaxonResponse, ListMediaByTaxonParams>(
-        listMediaByTaxonURL,
+      const response = await getData<ListMediaOfTaxonsResponse, ListMediaOfTaxonsParams>(
+        listMediaOfTaxonsURL,
         {
           tax_ids,
           limit: SHOW_COUNT,

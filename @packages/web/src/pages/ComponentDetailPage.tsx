@@ -1,11 +1,11 @@
 import parse from "html-react-parser";
 import { FC } from "react";
+import { listMediaOfComponentUrl } from "%api/listMediaOfComponent/definitions.ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { ComponentDetailStanza } from "@/components/stanzas/ComponentDetailStanza.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
-import { API_MEDIA_OF_COMPONENT } from "@/consts/api.ts";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/component/$gmoId.tsx";
 
@@ -22,7 +22,7 @@ export const ComponentDetailPage: FC = () => {
       <div>
         <H3>Media including {name}</H3>
         <ListStanza
-          api={`${API_MEDIA_OF_COMPONENT}?gmo_id=${gmoId}`}
+          api={`${listMediaOfComponentUrl}?gmo_id=${gmoId}`}
           columnSizes={[15, 85]}
         />
       </div>

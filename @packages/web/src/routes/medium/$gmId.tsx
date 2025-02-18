@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { API_MEDIUM_DETAIL } from "@/consts/api.ts";
+import { mediumDetailURL } from "%api/mediumDetail/definitions.ts";
 import { MediumDetailPage } from "@/pages/MediumDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 
@@ -10,7 +10,7 @@ type APIResponse = {
 };
 export const Route = createFileRoute("/medium/$gmId")({
   loader: async ({ params: { gmId } }) => {
-    const api = API_MEDIUM_DETAIL;
+    const api = mediumDetailURL;
     const apiBody = `gm_id=${gmId}`;
     const result = await fetchData<APIResponse>(api, apiBody);
     // console.log(result);

@@ -1,6 +1,6 @@
 import { deepEqual } from "@tanstack/react-router";
 import { FC, useEffect, useRef, useState } from "react";
-import { ListMediaByTaxonResponse } from "%api/listMediaByTaxon/definitions.ts";
+import { ListMediaOfTaxonsResponse } from "%api/listMediaOfTaxons/definitions.ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { SearchPane } from "@/components/organisms/SearchPane.tsx";
 import { ComponentAlignmentStanza } from "@/components/stanzas/ComponentAlignmentStanza.tsx";
@@ -105,7 +105,7 @@ const fetchMedia = async (tax_ids: string[]): Promise<string[]> => {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   });
-  const data: ListMediaByTaxonResponse = await response.json();
+  const data: ListMediaOfTaxonsResponse = await response.json();
   return data.contents.map((item) => item.gm_id);
 };
 const setSearchParams = (taxIds: string[]) => {

@@ -1,13 +1,13 @@
 import "./models/variables.tsp";
-
-import "./paths/_list_media.tsp";
-import "./paths/all_components.tsp";
-import "./paths/component_by_gmoid.tsp";
+//
+import "./paths/component_detail.tsp";
+import "./paths/medium_detail.tsp";
+import "./paths/taxon_detail.tsp";
+import "./paths/strain_detail.tsp";
 import "./paths/components_with_components.tsp";
 import "./paths/gms_by_kegg_tids_3.tsp";
 import "./paths/gms_kegg_code_tid.tsp";
-import "./paths/infraspecific_list_by_taxid.tsp";
-import "./paths/list_media_by_taxon.tsp";
+import "./paths/list_children_of_taxon.tsp";
 import "./paths/list_components.tsp";
 import "./paths/list_components_by_gmoids.tsp";
 import "./paths/list_components_by_keyword.tsp";
@@ -16,26 +16,32 @@ import "./paths/list_media_by_gmids.tsp";
 import "./paths/list_media_of_strain.tsp";
 import "./paths/list_media_by_keyword.tsp";
 import "./paths/list_media_by_cultivable_count.tsp";
+import "./paths/list_media_by_attributes.tsp";
+import "./paths/list_media_of_taxons.tsp";
+import "./paths/list_media_of_taxon.tsp";
+import "./paths/list_media_of_component.tsp";
 import "./paths/list_organisms.tsp";
 import "./paths/list_organisms_by_keyword.tsp";
 import "./paths/list_organisms_by_taxids.tsp";
 import "./paths/list_similar_media_by_gmid.tsp";
-import "./paths/list_taxons_by_rank.tsp";
-import "./paths/list_media_by_attributes.tsp";
 import "./paths/list_organisms_by_phenotypes.tsp";
-import "./paths/media_by_gmoid.tsp";
-import "./paths/media_by_taxid.tsp";
+import "./paths/list_phenotype_of_strain.tsp";
+import "./paths/list_strains_of_taxon.tsp";
+import "./paths/list_organisms_of_medium.tsp";
+
 import "./paths/media_component_alignment.tsp";
 import "./paths/media_strains_alignment.tsp";
-import "./paths/medium_by_gmid.tsp";
-import "./paths/organism_by_taxid.tsp";
-import "./paths/organisms_by_gmid.tsp";
 import "./paths/stat_phylum_gm.tsp";
 import "./paths/stat_count_media_by_cultivable_strain_count.tsp";
-import "./paths/taxonomic_rank_by_taxid.tsp";
-import "./paths/taxonomy_children.tsp";
-import "./paths/taxonomy_ancestors.tsp";
-import "./paths/taxonomy_search_by_name.tsp";
+import "./paths/taxon_children.tsp";
+import "./paths/taxon_ancestors.tsp";
+import "./paths/taxon_search_by_name.tsp";
+//
+import "./paths/deprecated/_list_media.tsp";
+import "./paths/deprecated/all_components.tsp";
+import "./paths/deprecated/infraspecific_list_by_taxid.tsp";
+import "./paths/deprecated/list_taxons_by_rank.tsp";
+import "./paths/deprecated/taxonomic_rank_by_taxid.tsp";
 
 import "@typespec/http";
 import "@typespec/rest";
@@ -71,7 +77,8 @@ using TypeSpec.OpenAPI;
 namespace Root;
 
 //namespace List{}
-interface _ListMediaByTaxon extends ListMediaByTaxon {}
+interface _ListMediaOfTaxons extends ListMediaOfTaxons {}
+interface _ListMediaOfTaxon extends ListMediaOfTaxon {}
 interface _ListMediaByAttributes extends ListMediaByAttributes {}
 interface _ListComponentsByGmoIds extends ListComponentsByGmoIds {}
 interface _ListComponentsByKeyword extends ListComponentsByKeyword {}
@@ -83,34 +90,36 @@ interface _ListOrganismsByKeyword extends ListOrganismsByKeyword {}
 interface _ListOrganismsByTaxIds extends ListOrganismsByTaxIds {}
 interface _ListSimilarMediaByGmId extends ListSimilarMediaByGmId {}
 interface _ListMediaByCultivableCount extends ListMediaByCultivableCount {}
-interface _MediaByGmoId extends MediaByGmoId {}
-interface _MediaByTaxId extends MediaByTaxId {}
-interface _OrganismsByGmId extends OrganismsByGmId {}
+interface _ListPhenotypeOfStrain extends ListPhenotypeOfStrain {}
+interface _ListMediaOfComponent extends ListMediaOfComponent {}
 interface _ListComponents extends ListComponents {}
 interface _ListMedia extends ListMedia {}
 interface _ListOrganisms extends ListOrganisms {}
+interface _ListChildrenOfTaxon extends ListChildrenOfTaxon {}
+interface _ListStrainsOfTaxon extends ListStrainsOfTaxon {}
+interface _ListOrganismsOfMedium extends ListOrganismsOfMedium {}
 //
-interface _ComponentByGmoid extends ComponentByGmoid {}
-interface _MediumByGmId extends MediumByGmId {}
-interface _OrganismByTaxId extends OrganismByTaxId {}
-interface _TaxonomicRankByTaxId extends TaxonomicRankByTaxId {}
-interface _TaxonomyAncestors extends TaxonomyAncestors {}
-interface _TaxonomySearchByName extends TaxonomySearchByName {}
+interface _StrainDetail extends StrainDetail {}
+interface _TaxonDetail extends TaxonDetail {}
+interface _ComponentDetail extends ComponentDetail {}
+interface _MediumDetail extends MediumDetail {}
+//
+interface _TaxonAncestors extends TaxonAncestors {}
+interface _TaxonSearchByName extends TaxonSearchByName {}
+interface _TaxonChildren extends TaxonChildren {}
+interface _componentWithComponents extends ComponentsWithComponents {}
 //
 interface _MediaStrainsAlignment extends MediaStrainsAlignment {}
 interface _MediaComponentAlignment extends MediaComponentAlignment {}
 //
-interface _gmsByKeggTids3 extends GmsByKeggTids3 {}
-interface _gmsKeggCodeTid extends GmsKeggCodeTid {}
-//
-interface _componentWithComponents extends ComponentsWithComponents {}
-interface _taxonomyChildren extends TaxonomyChildren {}
-//
-//
 interface _StatPhylumGm extends StatPhylumGm {}
 interface _CountMediaByCultivableStrainCount extends CountMediaByCultivableStrainCount {}
 //
-interface _allComponents extends AllComponents {}
+interface _gmsByKeggTids3 extends GmsByKeggTids3 {}
+interface _gmsKeggCodeTid extends GmsKeggCodeTid {}
+// deprecated
+interface _TaxonomicRankByTaxId extends TaxonomicRankByTaxId {}
+interface _AllComponents extends AllComponents {}
 interface _ListMediaDeprecated extends ListMediaDeprecated {}
 interface _InfraspecificListByTaxId extends InfraspecificListByTaxId {}
 interface _ListTaxonsByRank extends ListTaxonsByRank {}

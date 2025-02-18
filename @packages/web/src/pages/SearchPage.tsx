@@ -1,19 +1,17 @@
 import { RefObject } from "@react-types/shared";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { FC, useRef } from "react";
+import { listComponentsByIdsUrl } from "%api/listComponentsByIds/definitions.ts";
+import { listComponentsByKeywordUrl } from "%api/listComponentsByKeyword/definitions.ts";
+import { listMediaByIdsUrl } from "%api/listMediaByIds/definitions.ts";
+import { listMediaByKeywordUrl } from "%api/listMediaByKeyword/definitions.ts";
+import { listOrganismByIdsUrl } from "%api/listOrganismByIds/definitions.ts";
+import { listOrganismByKeywordUrl } from "%api/listOrganismByKeyword/definitions.ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { SearchPane } from "@/components/organisms/SearchPane.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
-import {
-  API_COMPONENTS_BY_GMO_IDS,
-  API_COMPONENTS_BY_KEYWORD,
-  API_MEDIA_BY_GM_IDS,
-  API_MEDIA_BY_KEYWORD,
-  API_ORGANISMS_BY_KEYWORD,
-  API_ORGANISMS_BY_TAX_IDS,
-} from "@/consts/api.ts";
 import { useListCount } from "@/hooks/useListCount.ts";
 
 export const SearchPage: FC = () => {
@@ -49,7 +47,7 @@ export const SearchPage: FC = () => {
       </section>
       <section className={"flex flex-col gap-12"}>
         {notFound && (
-          <p className={"rounded bg-white px-12 py-8 font-wide text-2xl font-medium"}>
+          <p className={"font-wide rounded bg-white px-12 py-8 text-2xl font-medium"}>
             No result found with {query}
           </p>
         )}
@@ -58,7 +56,7 @@ export const SearchPage: FC = () => {
           <div>
             <H3>Media of {query}</H3>
             <ListStanza
-              api={`${API_MEDIA_BY_GM_IDS}?gm_ids=${query}`}
+              api={`${listMediaByIdsUrl}?gm_ids=${query}`}
               columnSizes={[]}
             />
           </div>
@@ -67,7 +65,7 @@ export const SearchPage: FC = () => {
           <div>
             <H3>Organisms of {query}</H3>
             <ListStanza
-              api={`${API_ORGANISMS_BY_TAX_IDS}?tax_ids=${query}`}
+              api={`${listOrganismByIdsUrl}?tax_ids=${query}`}
               columnSizes={[]}
             />
           </div>
@@ -77,7 +75,7 @@ export const SearchPage: FC = () => {
           <div>
             <H3>Components of {query}</H3>
             <ListStanza
-              api={`${API_COMPONENTS_BY_GMO_IDS}?gmo_ids=${query}`}
+              api={`${listComponentsByIdsUrl}?gmo_ids=${query}`}
               columnSizes={[]}
             />
           </div>
@@ -87,7 +85,7 @@ export const SearchPage: FC = () => {
           <div>
             <H3>Media with {query}</H3>
             <ListStanza
-              api={`${API_MEDIA_BY_KEYWORD}?keyword=${query}`}
+              api={`${listMediaByKeywordUrl}?keyword=${query}`}
               columnSizes={[]}
             />
           </div>
@@ -97,7 +95,7 @@ export const SearchPage: FC = () => {
           <div>
             <H3>Components with {query}</H3>
             <ListStanza
-              api={`${API_COMPONENTS_BY_KEYWORD}?keyword=${query}`}
+              api={`${listComponentsByKeywordUrl}?keyword=${query}`}
               columnSizes={[]}
             />
           </div>
@@ -107,7 +105,7 @@ export const SearchPage: FC = () => {
           <div>
             <H3>Organisms with {query}</H3>
             <ListStanza
-              api={`${API_ORGANISMS_BY_KEYWORD}?keyword=${query}`}
+              api={`${listOrganismByKeywordUrl}?keyword=${query}`}
               columnSizes={[]}
             />
           </div>
@@ -118,12 +116,12 @@ export const SearchPage: FC = () => {
 };
 
 const useSearchQuery = (query: string) => {
-  const mediaById = useListCount(`${API_MEDIA_BY_GM_IDS}?gm_ids=${query}`) > 0;
-  const componentsById = useListCount(`${API_COMPONENTS_BY_GMO_IDS}?gmo_ids=${query}`) > 0;
-  const organismsById = useListCount(`${API_ORGANISMS_BY_TAX_IDS}?tax_ids=${query}`) > 0;
-  const mediaByKeyword = useListCount(`${API_MEDIA_BY_KEYWORD}?keyword=${query}`) > 0;
-  const componentsByKeyword = useListCount(`${API_COMPONENTS_BY_KEYWORD}?keyword=${query}`) > 0;
-  const organismsByKeyword = useListCount(`${API_ORGANISMS_BY_KEYWORD}?keyword=${query}`) > 0;
+  const mediaById = useListCount(`${listMediaByIdsUrl}?gm_ids=${query}`) > 0;
+  const componentsById = useListCount(`${listComponentsByIdsUrl}?gmo_ids=${query}`) > 0;
+  const organismsById = useListCount(`${listOrganismByIdsUrl}?tax_ids=${query}`) > 0;
+  const mediaByKeyword = useListCount(`${listMediaByKeywordUrl}?keyword=${query}`) > 0;
+  const componentsByKeyword = useListCount(`${listComponentsByKeywordUrl}?keyword=${query}`) > 0;
+  const organismsByKeyword = useListCount(`${listOrganismByKeywordUrl}?keyword=${query}`) > 0;
   return {
     mediaById,
     componentsById,

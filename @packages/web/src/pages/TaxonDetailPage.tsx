@@ -1,11 +1,13 @@
 import parse from "html-react-parser";
 import { FC } from "react";
+import { listChildrenOfTaxonUrl } from "%api/listChildrenOfTaxon/definitions.ts";
+import { listMediaOfTaxonURL } from "%api/listMediaOfTaxon/definitions.ts";
+import { listStrainsOfTaxonUrl } from "%api/listStrainsOfTaxon/definitions.ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { TaxonDetailStanza } from "@/components/stanzas/TaxonDetailStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
-import { API_CHILDREN_OF_TAXON, API_MEDIA_OF_TAXON, API_STRAINS_OF_TAXON } from "@/consts/api.ts";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/taxon/$taxId.tsx";
 
@@ -24,7 +26,7 @@ export const TaxonDetailPage: FC = () => {
         <div>
           <H3>Children of {name}</H3>
           <ListStanza
-            api={`${API_CHILDREN_OF_TAXON}?tax_id=${taxId}`}
+            api={`${listChildrenOfTaxonUrl}?tax_id=${taxId}`}
             columnSizes={[10, 65, 10, 15]}
             limit={10}
           />
@@ -34,7 +36,7 @@ export const TaxonDetailPage: FC = () => {
       <div>
         <H3>Strains of {name}</H3>
         <ListStanza
-          api={`${API_STRAINS_OF_TAXON}?tax_id=${taxId}`}
+          api={`${listStrainsOfTaxonUrl}?tax_id=${taxId}`}
           columnSizes={[15, 70, 15]}
           limit={10}
         />
@@ -42,7 +44,7 @@ export const TaxonDetailPage: FC = () => {
       <div>
         <H3>Media of {name}</H3>
         <ListStanza
-          api={`${API_MEDIA_OF_TAXON}?tax_id=${taxId}`}
+          api={`${listMediaOfTaxonURL}?tax_id=${taxId}`}
           columnSizes={[15, 20, 65]}
           limit={10}
         />

@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import React, { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
 import { Optional } from "yohak-tools";
 import {
-  TaxonomyChildrenParams,
-  TaxonomyChildrenResponse,
-  taxonomyChildrenURL,
-} from "%api/taxonomyChildren/definitions";
+  TaxonChildrenParams,
+  TaxonChildrenResponse,
+  taxonChildrenURL,
+} from "%api/taxonChildren/definitions";
 import { getData } from "%core/network/getData";
 import {
   CheckStatus,
@@ -77,10 +77,9 @@ const useBranchChildren = (info: Optional<TaxonInfo>) => {
     queryFn: async () => {
       const tax_id = info?.id || "";
       if (!tax_id) return [];
-      const response = await getData<TaxonomyChildrenResponse, TaxonomyChildrenParams>(
-        taxonomyChildrenURL,
-        { tax_id }
-      );
+      const response = await getData<TaxonChildrenResponse, TaxonChildrenParams>(taxonChildrenURL, {
+        tax_id,
+      });
       return response.body;
     },
     staleTime: Infinity,

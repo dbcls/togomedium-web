@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import { MediaDetailResponse } from "%api/mediaDetail/definitions";
+import { MediumDetailResponse } from "%api/mediumDetail/definitions";
 import {
   RecipeCommentProps,
   RecipeTableProps,
@@ -8,11 +8,11 @@ import {
 } from "%stanza/stanzas/gmdb-medium-by-gmid/components/StanzaView";
 
 type ViewProps = ComponentProps<typeof StanzaView>;
-type ApiComponentComment = MediaDetailResponse["comments"][0];
-type ApiComponentTable = MediaDetailResponse["components"][0];
+type ApiComponentComment = MediumDetailResponse["comments"][0];
+type ApiComponentTable = MediumDetailResponse["components"][0];
 
 export const processData = (
-  body: MediaDetailResponse,
+  body: MediumDetailResponse,
   extraComponents: ReferencingRecipe[] = []
 ): ViewProps => {
   const id = body.meta.gm.split("/").pop()!;

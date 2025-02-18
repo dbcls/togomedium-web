@@ -1,8 +1,8 @@
 import { FC } from "react";
+import { listStrainsUrl } from "%api/listStrains/definitions.ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
-import { API_STRAIN_LIST } from "@/consts/api.ts";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
 
 export const StrainListPage: FC = () => {
@@ -12,7 +12,7 @@ export const StrainListPage: FC = () => {
       <div>
         <H2>All Strains</H2>
         <ListStanza
-          api={API_STRAIN_LIST}
+          api={listStrainsUrl}
           columnSizes={[15, 40, 15, 30]}
         />
       </div>

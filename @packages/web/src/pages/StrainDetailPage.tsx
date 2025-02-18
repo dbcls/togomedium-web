@@ -1,11 +1,12 @@
 import parse from "html-react-parser";
 import { FC } from "react";
+import { listMediaOfStrain } from "%api/listMediaOfStrain/definitions.ts";
+import { listPhenotypeOfStrainUrl } from "%api/listPhenotypeOfStrain/definitions.ts";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
 import { StrainDetailStanza } from "@/components/stanzas/StrainDetailStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
-import { API_MEDIA_OF_STRAIN, API_STRAIN_PHENOTYPES } from "@/consts/api.ts";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/strain/$strainId.tsx";
 
@@ -22,14 +23,14 @@ export const StrainDetailPage: FC = () => {
       <div>
         <H3>Phenotypes of {name}</H3>
         <ListStanza
-          api={`${API_STRAIN_PHENOTYPES}?strain_id=${strainId}`}
+          api={`${listPhenotypeOfStrainUrl}?strain_id=${strainId}`}
           columnSizes={[70, 15, 15]}
         />
       </div>
       <div>
         <H3>Media of {name}</H3>
         <ListStanza
-          api={`${API_MEDIA_OF_STRAIN}?strain_id=${strainId}`}
+          api={`${listMediaOfStrain}?strain_id=${strainId}`}
           columnSizes={[10, 20, 70]}
         />
       </div>

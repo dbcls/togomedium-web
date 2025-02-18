@@ -4,10 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import React, { FC, useMemo } from "react";
 import { useDebounceValue } from "usehooks-ts";
 import {
-  TaxonomySearchByNameParams,
-  TaxonomySearchByNameResponse,
-  taxonomySearchByNameURL,
-} from "%api/taxonomySearchByName/definitions";
+  TaxonSearchByNameParams,
+  TaxonSearchByNameResponse,
+  taxonSearchByNameURL,
+} from "%api/taxonSearchByName/definitions";
 import { getData } from "%core/network/getData";
 import { THEME } from "%stanza/styles/theme";
 
@@ -19,8 +19,8 @@ const useTaxonChildrenSearch = () => {
     queryKey: ["taxon_children", debouncedValue],
     queryFn: async () => {
       if (debouncedValue.length <= 3) return [];
-      const response = await getData<TaxonomySearchByNameResponse, TaxonomySearchByNameParams>(
-        taxonomySearchByNameURL,
+      const response = await getData<TaxonSearchByNameResponse, TaxonSearchByNameParams>(
+        taxonSearchByNameURL,
         { q: debouncedValue, max: 100 }
       );
       return response.body ?? [];
@@ -55,7 +55,7 @@ export const TaxonInput: FC<Props> = () => {
     <Autocomplete
       options={options}
       disablePortal={true}
-      filterOptions={(options, params) => options}
+      filterOptions={(options, _params) => options}
       getOptionLabel={(option) => option.name}
       renderInput={(params) => (
         <TextField

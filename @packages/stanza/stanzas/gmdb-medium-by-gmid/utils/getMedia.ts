@@ -1,15 +1,15 @@
 import { copy } from "copy-anything";
 import {
-  MediaDetailParams,
-  MediaDetailResponse,
-  mediaDetailURL,
-} from "%api/mediaDetail/definitions";
+  MediumDetailParams,
+  MediumDetailResponse,
+  mediumDetailURL,
+} from "%api/mediumDetail/definitions";
 import { getData } from "%core/network/getData";
 import { ReferencingRecipe } from "%stanza/stanzas/gmdb-medium-by-gmid/components/StanzaView";
 import { processData } from "%stanza/stanzas/gmdb-medium-by-gmid/utils/processData";
 
 export const getMedia = async (gm_id: string) => {
-  const result = await getData<MediaDetailResponse, MediaDetailParams>(mediaDetailURL, {
+  const result = await getData<MediumDetailResponse, MediumDetailParams>(mediumDetailURL, {
     gm_id,
   });
   if (!result.body) throw new Error("No data found");
@@ -18,7 +18,7 @@ export const getMedia = async (gm_id: string) => {
 };
 
 const getExternalReferences = async (
-  body: MediaDetailResponse,
+  body: MediumDetailResponse,
   gm_id: string
 ): Promise<ReferencingRecipe[]> => {
   const externalReferences = copy(body)
@@ -37,7 +37,7 @@ const getExternalReferences = async (
   const extraData: ReferencingRecipe[] = [];
 
   for await (const ref of externalReferences) {
-    const result = await getData<MediaDetailResponse, MediaDetailParams>(mediaDetailURL, {
+    const result = await getData<MediumDetailResponse, MediumDetailParams>(mediumDetailURL, {
       gm_id: ref.id,
     });
     if (result.body) {

@@ -1,3 +1,3 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
 
-export const listComponentUrl = makeApiUrl("list_components");
+export const listComponentsUrl = makeApiUrl("list_components");

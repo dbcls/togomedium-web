@@ -28,7 +28,7 @@ interface StatPhylumGm {
   @route("gmdb_stat_phylum_gm")
   @tag(Tags.ListStanza)
   @tag(Tags.Stats)
-  @doc("Statistics number of gm by phylum")
+  @doc("Statistics number of growth media by phylum")
   @get
   get(...StatPhylumGmRequest): StatPhylumGmResponse;
 }
