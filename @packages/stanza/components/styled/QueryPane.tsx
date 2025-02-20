@@ -9,4 +9,5 @@ export const QueryPane = styled("div")({
   backgroundColor: THEME.COLOR.WHITE,
   display: "flex",
   flexDirection: "column",
+  gap: THEME.SIZE.S2,
 });

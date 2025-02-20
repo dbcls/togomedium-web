@@ -25,6 +25,7 @@ type Props = {
   linkURL?: string;
   onClickCheck: (id: string) => void;
   onToggleChildren: (id: string) => void;
+  isHighlighted?: boolean;
 } & PropsWithChildren;
 
 export const TreeBranchView: FC<Props> = ({
@@ -40,10 +41,11 @@ export const TreeBranchView: FC<Props> = ({
   children,
   toolTipLabel = "",
   toggle,
+  isHighlighted = false,
 }) => {
   return (
     <Wrapper>
-      <Inner>
+      <Inner className={isHighlighted ? "highlighted" : ""}>
         <Left>
           <span onClick={() => onToggleChildren(id)}>
             <ToggleIcon status={toggle} />
@@ -105,6 +107,10 @@ const Inner = styled("div")({
   backgroundColor: THEME.COLOR.WHITE,
   padding: "0 8px",
   border: `1px solid ${THEME.COLOR.GRAY_LINE}`,
+
+  ["&.highlighted"]: {
+    backgroundColor: THEME.COLOR.PRIMARY_PALE,
+  },
 });
 
 const Left = styled("div")({

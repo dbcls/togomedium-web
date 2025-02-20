@@ -36,7 +36,10 @@ export const Tree: Story = {
       return (
         <TreeBranchView {...defaultArgs}>
           <TreeBranchView {...defaultArgs}></TreeBranchView>
-          <TreeBranchView {...defaultArgs}>
+          <TreeBranchView
+            {...defaultArgs}
+            isHighlighted={true}
+          >
             <Item />
           </TreeBranchView>
         </TreeBranchView>

@@ -25,9 +25,9 @@ export const useMediaLoadFromTaxon = () => {
   const { setIsMediaLoading } = useIsMediaLoadingMutators();
   const { reset } = useMediaPaginationMutators();
   const query = useQuery({
-    queryKey: [selectedTaxon, { page }],
+    queryKey: ["media_of_taxon", selectedTaxon.sort(), { page }],
     queryFn: async () => {
-      const tax_ids = selectedTaxon.join(",");
+      const tax_ids = selectedTaxon.sort().join(",");
       if (tax_ids.length === 0) return nullListResponse;
       //
       const response = await getData<ListMediaOfTaxonsResponse, ListMediaOfTaxonsParams>(

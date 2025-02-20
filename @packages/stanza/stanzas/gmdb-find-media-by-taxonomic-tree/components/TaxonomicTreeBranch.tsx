@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
+import React, { FC, PropsWithChildren, useEffect, useMemo } from "react";
 import { Optional } from "yohak-tools";
 import {
   TaxonChildrenParams,
@@ -16,6 +16,7 @@ import {
   findAscendants,
   findDescendants,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/functions/proessTaxonInfo";
+import { useSearchResult } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/searchResult";
 import {
   useSelectedTaxonMutators,
   useSelectedTaxonState,
@@ -25,11 +26,17 @@ import {
   useTaxonListMutators,
   useTaxonListState,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
+import {
+  useIsOpen,
+  useTaxonTreeMutators,
+} from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/treeState";
 
 type Props = { id: string } & PropsWithChildren;
 
 export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
   const taxonList = useTaxonListState();
+  const searchResult = useSearchResult();
+  const isHighlighted = useMemo(() => searchResult === id, [searchResult, id]);
   const myInfo: Optional<TaxonInfo> = useMemo(() => {
     return taxonList.find((item) => item.id === id);
   }, [taxonList, id]);
@@ -52,6 +59,7 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
       onClickCheck={() => onClickCheck()}
       onToggleChildren={onToggleChildren}
       toggle={toggleIconStatus}
+      isHighlighted={isHighlighted}
     >
       {isOpen &&
         branchChildren.length &&
@@ -66,14 +74,21 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
 };
 
 const useBranchChildren = (info: Optional<TaxonInfo>) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const onToggleChildren = () => {
-    setIsOpen((prev) => !prev);
-  };
+  // const [isOpen, setIsOpen] = useState<boolean>(false);
+  // const onToggleChildren = () => {
+  //   setIsOpen((prev) => !prev);
+  // };
+  const { toggleOpen } = useTaxonTreeMutators();
+  // const setIsOpen = (value: boolean) => {
+  //   setBranchState(info?.id || "", value);
+  // };
+  const onToggleChildren = () => toggleOpen(info?.id || "");
+  const isOpen = useIsOpen(info?.id || "");
+
   const { addTaxonToList, setTaxonChildren } = useTaxonListMutators();
 
   const query = useQuery({
-    queryKey: [info?.id || ""],
+    queryKey: ["taxon_children", info?.id || ""],
     queryFn: async () => {
       const tax_id = info?.id || "";
       if (!tax_id) return [];

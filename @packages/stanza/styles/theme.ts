@@ -5,6 +5,7 @@ export const THEME = {
     WHITE: "#FFFFFF",
     PRIMARY: "#8FC31F",
     PRIMARY_DARK: "#6FA80C",
+    PRIMARY_PALE: "#eef3d9",
     GRAY: "#CCCCCC",
     GRAY_BG: "#f4f3f2",
     GRAY700: "#374151",

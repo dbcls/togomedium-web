@@ -11,12 +11,14 @@ import {
 import { getData } from "%core/network/getData";
 import { THEME } from "%stanza/styles/theme";
 
-type Props = {};
+type Props = {
+  onChange: (id: string | null) => void;
+};
 
 const useTaxonChildrenSearch = () => {
   const [debouncedValue, setValue] = useDebounceValue("", 500);
   const { data, isFetching, isError } = useQuery({
-    queryKey: ["taxon_children", debouncedValue],
+    queryKey: ["taxon_search", debouncedValue],
     queryFn: async () => {
       if (debouncedValue.length <= 3) return [];
       const response = await getData<TaxonSearchByNameResponse, TaxonSearchByNameParams>(
@@ -49,7 +51,7 @@ const useTaxonChildrenSearch = () => {
   return { options, setValue, optionsText };
 };
 
-export const TaxonInput: FC<Props> = () => {
+export const TaxonInput: FC<Props> = ({ onChange }) => {
   const { options, setValue, optionsText } = useTaxonChildrenSearch();
   return (
     <Autocomplete
@@ -65,6 +67,12 @@ export const TaxonInput: FC<Props> = () => {
       )}
       onInputChange={(e, v) => {
         setValue(v);
+      }}
+      onSelect={(e) => {
+        // console.log("onSelect", e);
+      }}
+      onChange={(e, v) => {
+        onChange(v ? v.tax_id : null);
       }}
       renderTags={() => null}
       renderOption={(props, option, { selected }) => {
