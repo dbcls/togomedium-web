@@ -6,7 +6,9 @@ import {
   TaxonChildrenResponse,
   taxonChildrenURL,
 } from "%api/taxonChildren/definitions";
+import { PATH_TAXON } from "%core/consts";
 import { getData } from "%core/network/getData";
+import { makeLinkPath } from "%core/network/makeLinkPath";
 import {
   CheckStatus,
   ToggleIconStatus,
@@ -143,7 +145,7 @@ const useBranchChildren = (info: Optional<TaxonInfo>) => {
 
 const useLinkString = (id: string, rank: string) => {
   const linkString = useMemo(() => `tax_id:${id}`, [id]);
-  const linkURL = useMemo(() => `/taxon/${id}`, [id]);
+  const linkURL = useMemo(() => makeLinkPath(`${PATH_TAXON}${id}`), [id]);
   return [linkString, linkURL];
 };
 

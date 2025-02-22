@@ -1,5 +1,7 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
+import { PATH_COMPONENT, PATH_MEDIUM } from "%core/consts";
+import { makeLinkPath } from "%core/network/makeLinkPath";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { THEME } from "%stanza/styles/theme";
 
@@ -26,7 +28,7 @@ export const RecipeTable: FC<Props> = ({ name, items, referenceId }) => {
         <h4>{name}</h4>
         {referenceId && (
           <span>
-            (See also <a href={`/medium/${referenceId}`}>{referenceId}</a>)
+            (See also <a href={makeLinkPath(`${PATH_MEDIUM}${referenceId}`)}>{referenceId}</a>)
           </span>
         )}
       </TitleWrapper>
@@ -46,7 +48,7 @@ export const RecipeTable: FC<Props> = ({ name, items, referenceId }) => {
               <tr key={index}>
                 <td className="id">
                   <a
-                    href={`/component/${item.id}`}
+                    href={makeLinkPath(`${PATH_COMPONENT}${item.id}`)}
                     target={"_blank"}
                     rel="noreferrer"
                   >

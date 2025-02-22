@@ -8,6 +8,8 @@
     "web:serve": "pnpm --filter @packages/web start",
     "doc:build": "pnpm --filter @packages/doc bundle",
     "doc:serve": "pnpm --filter @packages/doc dev",
+    "stanza:serve": "pnpm --filter @packages/stanza stanza:server",
+    "stanza:build": "pnpm --filter @packages/stanza stanza:build",
     "storybook:serve": "pnpm --filter @packages/storybook storybook"
   },
   "devDependencies": {
@@ -37,6 +39,7 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
+    "happy-dom": "^17.1.2",
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",

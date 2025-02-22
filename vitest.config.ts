@@ -7,5 +7,6 @@ export default defineConfig({
   test: {
     include: ["**/*.spec.tsx","**/*.spec.ts"],
     globals: true,
+    environment:"happy-dom"
   },
 });

@@ -7,9 +7,7 @@
     "test": "vitest",
     "stanza:server": "togostanza s",
     "stanza:build": "togostanza build",
-    "stanza:generate": "togostanza g stanza",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "stanza:generate": "togostanza g stanza"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",

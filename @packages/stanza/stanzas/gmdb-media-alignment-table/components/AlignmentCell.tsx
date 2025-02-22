@@ -1,7 +1,8 @@
 import { Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { PATH_COMPONENT } from "%stanza/components/consts";
+import { PATH_COMPONENT } from "%core/consts";
+import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%stanza/styles/theme";
 
 export type AlignmentCellState = "grouped" | "available" | "none";
@@ -22,7 +23,7 @@ export const AlignmentCell: FC<Props> = ({ state, label, id }) => {
         slotProps={{ popper: { disablePortal: true } }}
       >
         <a
-          href={`${PATH_COMPONENT}${id}`}
+          href={makeLinkPath(`${PATH_COMPONENT}${id}`)}
           target="_blank"
           className={`icon-${state} icon`}
           rel="noreferrer"

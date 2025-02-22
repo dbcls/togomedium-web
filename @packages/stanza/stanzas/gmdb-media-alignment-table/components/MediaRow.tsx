@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 import React, { ComponentProps, FC } from "react";
 import { AlignmentCell } from "./AlignmentCell";
 import { InfoCell } from "./InfoCell";
-import { PATH_MEDIUM, PATH_TAXON } from "%stanza/components/consts";
+import { PATH_MEDIUM, PATH_TAXON } from "%core/consts";
 import { useIsMediaExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table/states/isMediaExpanded";
 import { useIsOrganismsExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table/states/isOrganismsExpanded";
 import { THEME } from "%stanza/styles/theme";

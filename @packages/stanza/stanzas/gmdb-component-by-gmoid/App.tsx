@@ -17,6 +17,7 @@ type Props = {
   stanzaElement?: ShadowRoot;
   gmo_id: string;
 };
+
 const useComponentDataQuery = (gmo_id: string) => {
   const { data, isLoading } = useQuery({
     queryKey: [{ gmo_id }],

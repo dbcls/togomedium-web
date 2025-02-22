@@ -1,6 +1,8 @@
 import { Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useRef, useState } from "react";
+import { PATH_MEDIUM } from "%core/consts";
+import { makeLinkPath } from "%core/network/makeLinkPath";
 import { makeCellHeight } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
 import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/types";
 import { THEME } from "%stanza/styles/theme";
@@ -24,7 +26,7 @@ export const MediaCell: FC<Props> = ({ label, id, size }) => {
   const { labelRef, toolTipEnabled } = useToolTipEnabled();
   return (
     <Wrapper style={{ height: `${makeCellHeight(size)}px` }}>
-      <a href={`/medium/${id}`}>{id}</a>
+      <a href={makeLinkPath(`${PATH_MEDIUM}${id}`)}>{id}</a>
       <div className={"label-wrapper"}>
         <Tooltip
           slotProps={{ popper: { disablePortal: true } }}

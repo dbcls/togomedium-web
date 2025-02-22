@@ -4,7 +4,7 @@ import App from "%stanza/stanzas/gmdb-component-by-gmoid/App";
 const meta: Meta<typeof App> = {
   component: App,
 };
-export default meta;
+export default meta; 
 
 type Story = StoryObj<typeof App>;
 export const Result1: Story = {

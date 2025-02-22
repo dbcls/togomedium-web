@@ -2,6 +2,7 @@ import { SxProps, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useMemo } from "react";
 import { LineageRank } from "%api/mediaStrainsAlignment/definitions";
+import { makeLinkPath } from "%core/network/makeLinkPath";
 import { FilterIcon } from "%stanza/components/icons/FilterIcon";
 import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCell";
 import { makeCellHeight } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
@@ -48,7 +49,7 @@ const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank }) => {
     <Wrapper ref={wrapperRef}>
       {!!label && (
         <>
-          <a href={`${pathRoot}${id}`}>{id}</a>
+          <a href={makeLinkPath(`${pathRoot}${id}`)}>{id}</a>
           <div className={"label-wrapper"}>
             <Tooltip
               title={makeLabel(label, rank)}

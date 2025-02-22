@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 import { ComponentDetailResponse } from "%api/componentDetail/definitions";
+import { PATH_COMPONENT } from "%core/consts";
+import { makeLinkPath } from "%core/network/makeLinkPath";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { ColorButton } from "%stanza/components/styled/ColorButton";
 import { ColWrapper } from "%stanza/components/styled/ColWrapper";
@@ -89,7 +91,7 @@ export const StanzaView: FC<Props> = ({
                 <LinkList>
                   {superClasses.map((item, i) => (
                     <li key={i}>
-                      <a href={`/component/${item.gmo_id}`}>{item.gmo_id}</a>
+                      <a href={makeLinkPath(`${PATH_COMPONENT}${item.gmo_id}`)}>{item.gmo_id}</a>
                       <span>{decodeHTMLEntities(item.label_en)}</span>
                     </li>
                   ))}
@@ -102,7 +104,7 @@ export const StanzaView: FC<Props> = ({
                 <LinkList>
                   {subClasses.map((item, i) => (
                     <li key={i}>
-                      <a href={`/component/${item.gmo_id}`}>{item.gmo_id}</a>
+                      <a href={makeLinkPath(`${PATH_COMPONENT}${item.gmo_id}`)}>{item.gmo_id}</a>
                       <span>{decodeHTMLEntities(item.label_en)}</span>
                     </li>
                   ))}

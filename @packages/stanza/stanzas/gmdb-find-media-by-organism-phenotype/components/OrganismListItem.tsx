@@ -1,7 +1,8 @@
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { PATH_TAXON } from "%stanza/components/consts";
+import { PATH_TAXON } from "%core/consts";
+import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%stanza/styles/theme";
 import { LabelInfo } from "%stanza/utils/labelInfo";
 
@@ -16,7 +17,7 @@ export const OrganismListItem: FC<Props> = ({ id, label, isChecked, onClick }) =
       <ListInner>
         <LabelCol>{label}</LabelCol>
         <IdCol
-          href={`${PATH_TAXON}${id}`}
+          href={makeLinkPath(`${PATH_TAXON}${id}`)}
           target="_blank"
           rel="noreferrer"
         >

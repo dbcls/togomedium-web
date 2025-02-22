@@ -1,9 +1,10 @@
 import { styled } from "@mui/material/styles";
 import { nanoid } from "nanoid";
 import React, { FC } from "react";
+import { makeLinkPath } from "%core/network/makeLinkPath";
+import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { ListApiBody } from "%stanza/stanzas/gmdb-meta-list/types";
 import { THEME } from "%stanza/styles/theme";
-import { decodeHTMLEntities } from "%stanza/utils/string";
 
 type Props = {
   data: ListApiBody;
@@ -77,7 +78,7 @@ const CellContent: FC<CellContentProps> = ({ item }) => {
   }
   return (
     <a
-      href={item.href}
+      href={makeLinkPath(item.href)}
       target={"_blank"}
       rel="noreferrer"
     >
