@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
+import { NotFound } from "%stanza/components/atoms/NotFound";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { BottomController } from "%stanza/stanzas/gmdb-meta-list/components/BottomController";
 import { ListTable } from "%stanza/stanzas/gmdb-meta-list/components/ListTable";
@@ -42,12 +43,18 @@ export const StanzaView: FC<Props> = ({
         </Header>
       )}
       <StanzaWrapper>
-        <TopInfo {...{ total: data.total, limit, setLimit, setOffset }} />
-        <div style={{ position: "relative" }}>
-          <ListTable {...{ data, showColumnNames, columnSizes, limit }} />
-          <LoadingCover {...{ showLoading, errorMessage }} />
-        </div>
-        <BottomController {...{ total: data.total, offset, limit, setOffset }} />
+        {data.contents.length === 0 ? (
+          <NotFound />
+        ) : (
+          <>
+            <TopInfo {...{ total: data.total, limit, setLimit, setOffset }} />
+            <div style={{ position: "relative" }}>
+              <ListTable {...{ data, showColumnNames, columnSizes, limit }} />
+              <LoadingCover {...{ showLoading, errorMessage }} />
+            </div>
+            <BottomController {...{ total: data.total, offset, limit, setOffset }} />
+          </>
+        )}
       </StanzaWrapper>
     </div>
   );

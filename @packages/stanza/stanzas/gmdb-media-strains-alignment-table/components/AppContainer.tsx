@@ -4,6 +4,7 @@ import {
   lineageRanks,
   MediaStrainsAlignmentResponse,
 } from "%api/mediaStrainsAlignment/definitions";
+import { NotFound } from "%stanza/components/atoms/NotFound";
 import { MediaCol } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCol";
 import { TaxonCol } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/TaxonCol";
 import { processDisplayData } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
@@ -21,7 +22,7 @@ export const AppContainer: FC<Props> = ({ data, hideMedia = false }) => {
     [data, filterTaxon, filterRank]
   );
   return displayData.media.length ? (
-    <Wrapper>
+    <Container>
       {!hideMedia && <MediaCol mediaList={displayData.media} />}
       <TaxonContainer>
         {lineageRanks
@@ -35,13 +36,13 @@ export const AppContainer: FC<Props> = ({ data, hideMedia = false }) => {
             />
           ))}
       </TaxonContainer>
-    </Wrapper>
+    </Container>
   ) : (
-    <p>NO RESULT FOUND</p>
+    <NotFound />
   );
 };
 
-const Wrapper = styled("div")({
+const Container = styled("div")({
   display: "flex",
   gap: "2px",
   padding: "1px",
