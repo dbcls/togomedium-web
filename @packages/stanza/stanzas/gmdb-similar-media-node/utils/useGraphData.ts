@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMedia } from "%stanza/stanzas/gmdb-medium-by-gmid/utils/getMedia";
+import { getMedia } from "%stanza/stanzas/gmdb-medium-detail/utils/getMedia";
 import { haveSameElements } from "%stanza/utils/arr";
 import { clone } from "%stanza/utils/clone";
 import { getData } from "%stanza/utils/getData";

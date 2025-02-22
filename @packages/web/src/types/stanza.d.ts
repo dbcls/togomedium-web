@@ -17,7 +17,7 @@ declare global {
           column_names: BooleanString;
           column_sizes: string;
         } & StanzaProps;
-        "togostanza-gmdb-medium-by-gmid": {
+        "togostanza-gmdb-medium-detail": {
           gm_id: string;
         } & StanzaProps;
         "togostanza-gmdb-media-strains-alignment-table": {
@@ -28,13 +28,13 @@ declare global {
           gm_ids: string;
           prioritized_tax_ids?: string;
         } & StanzaProps;
-        "togostanza-gmdb-strain-by-strainid": {
+        "togostanza-gmdb-strain-detail": {
           strain_id: string;
         } & StanzaProps;
-        "togostanza-gmdb-component-by-gmoid": {
+        "togostanza-gmdb-component-detail": {
           gmo_id: string;
         } & StanzaProps;
-        "togostanza-gmdb-taxon-by-taxid": {
+        "togostanza-gmdb-taxon-detail": {
           tax_id: string;
         } & StanzaProps;
         "togostanza-gmdb-find-media-by-components": {} & StanzaProps;

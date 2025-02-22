@@ -5,7 +5,7 @@ type Props = {
   strainId: string;
 };
 
-const stanzaName = "gmdb-strain-by-strainid";
+const stanzaName = "gmdb-strain-detail";
 const StanzaTag = `togostanza-${stanzaName}`;
 
 export const StrainDetailStanza: FC<Props> = ({ strainId }) => {

@@ -5,7 +5,7 @@ type Props = {
   gmoId: string;
 };
 
-const stanzaName = "gmdb-component-by-gmoid";
+const stanzaName = "gmdb-component-detail";
 const StanzaTag = `togostanza-${stanzaName}`;
 
 export const ComponentDetailStanza: FC<Props> = ({ gmoId }) => {

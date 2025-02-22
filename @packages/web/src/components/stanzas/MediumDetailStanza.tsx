@@ -5,7 +5,7 @@ type Props = {
   gmId: string;
 };
 
-const stanzaName = "gmdb-medium-by-gmid";
+const stanzaName = "gmdb-medium-detail";
 const StanzaTag = `togostanza-${stanzaName}`;
 
 export const MediumDetailStanza: FC<Props> = ({ gmId }) => {

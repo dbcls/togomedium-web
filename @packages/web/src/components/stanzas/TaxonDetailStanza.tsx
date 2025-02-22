@@ -5,7 +5,7 @@ type Props = {
   taxId: string;
 };
 
-const stanzaName = "gmdb-taxon-by-taxid";
+const stanzaName = "gmdb-taxon-detail";
 const StanzaTag = `togostanza-${stanzaName}`;
 
 export const TaxonDetailStanza: FC<Props> = ({ taxId }) => {
