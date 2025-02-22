@@ -13,7 +13,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "types": ["@emotion/react", "d3-drag"],
+    "types": ["@emotion/react", "d3-drag","vitest/globals"],
     "skipLibCheck": true,
 
     "paths": {

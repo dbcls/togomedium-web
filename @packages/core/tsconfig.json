@@ -14,11 +14,13 @@
     "strict": true,
     "skipLibCheck": true,
 
+    "types": ["vitest/globals"],
+
     "paths": {
       "%stanza/*": ["../stanza/*"],
       "%api/*": ["../api/src/*"],
       "%core/*": ["../core/src/*"],
-      "%storybook/*": ["../storybook/src/*"],
+      "%storybook/*": ["../storybook/src/*"]
     }
   }
 }

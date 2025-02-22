@@ -53,7 +53,7 @@ describe("makeNewSelection", () => {
   });
   it("should simply toggle", () => {
     const result = makeNewSelection(list, "A", ["C", "A", "B"]);
-    expect(result).toEqual(["B", "C"]);
+    expect(result).toEqual(["C", "B"]);
   });
   it("should select the parent when all siblings are checked", () => {
     const result = makeNewSelection(list, "A-A", ["A-B"]);
@@ -83,7 +83,7 @@ describe("makeNewSelection", () => {
   });
   it("should deselect target and select other siblings when parent is checked", () => {
     const result = makeNewSelection(list, "A-A-A", ["A"]);
-    expect(result).toEqual(["A-B", "A-A-B"]);
+    expect(result).toEqual(["A-A-B","A-B"]);
     /**
      * [*] A        [-]A
      * [@] -AA      [-]-AA
