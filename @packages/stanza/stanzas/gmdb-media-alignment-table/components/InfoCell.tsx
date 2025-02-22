@@ -58,6 +58,7 @@ const Compact: FC<Omit<Props, "expanded">> = ({ info, linkBase, priority = [] })
                   title={item.label}
                   placement={"top"}
                   arrow
+                  slotProps={{ popper: { disablePortal: true } }}
                 >
                   <a
                     href={`${linkBase}${item.id}`}

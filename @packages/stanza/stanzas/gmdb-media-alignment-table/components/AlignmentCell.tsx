@@ -19,6 +19,7 @@ export const AlignmentCell: FC<Props> = ({ state, label, id }) => {
         title={label}
         placement={"top"}
         arrow
+        slotProps={{ popper: { disablePortal: true } }}
       >
         <a
           href={`${PATH_COMPONENT}${id}`}

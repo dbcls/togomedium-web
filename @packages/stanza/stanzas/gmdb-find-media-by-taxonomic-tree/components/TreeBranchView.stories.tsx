@@ -18,6 +18,7 @@ const defaultArgs: ComponentProps<typeof TreeBranchView> = {
   // isLoading: false,
   tag: "Phylum",
   toggle: "none",
+  toolTipLabel: "Archaea",
   onClickCheck: () => {
     console.log("onClickCheck");
   },

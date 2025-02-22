@@ -28,6 +28,7 @@ export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
           title={label}
           placement={"top"}
           arrow
+          slotProps={{ popper: { disablePortal: true } }}
         >
           <span>{label}</span>
         </Tooltip>

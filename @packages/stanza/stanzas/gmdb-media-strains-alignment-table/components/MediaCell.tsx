@@ -27,6 +27,7 @@ export const MediaCell: FC<Props> = ({ label, id, size }) => {
       <a href={`/medium/${id}`}>{id}</a>
       <div className={"label-wrapper"}>
         <Tooltip
+          slotProps={{ popper: { disablePortal: true } }}
           title={label}
           placement={"top"}
           arrow

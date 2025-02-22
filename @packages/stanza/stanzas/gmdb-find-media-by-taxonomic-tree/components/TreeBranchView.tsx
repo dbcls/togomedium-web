@@ -1,4 +1,4 @@
-import { SxProps, Tooltip } from "@mui/material";
+import { SxProps, Tooltip, tooltipClasses, TooltipProps } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import React, { FC, PropsWithChildren } from "react";
@@ -51,9 +51,10 @@ export const TreeBranchView: FC<Props> = ({
             <ToggleIcon status={toggle} />
           </span>
           <Tooltip
-            title={toolTipLabel}
             arrow
+            title={toolTipLabel}
             placement={"top-start"}
+            slotProps={{ popper: { disablePortal: true } }}
           >
             <span>{label}</span>
           </Tooltip>
