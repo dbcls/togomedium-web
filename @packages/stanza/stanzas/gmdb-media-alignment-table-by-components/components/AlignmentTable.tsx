@@ -1,16 +1,16 @@
 import { styled } from "@mui/material/styles";
 import React, { ComponentProps, FC, useEffect, useMemo } from "react";
 import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
-import { FooterRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/FooterRow";
-import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderRow";
-import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/MediaRow";
-import { makeAlignmentData } from "%stanza/stanzas/gmdb-media-alignment-table/functions/makeAlignmentData";
-import { makeComponentTree } from "%stanza/stanzas/gmdb-media-alignment-table/functions/makeComponentBranch";
-import { makeFooterComponents } from "%stanza/stanzas/gmdb-media-alignment-table/functions/makeFooterComponents";
+import { FooterRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterRow";
+import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/HeaderRow";
+import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/MediaRow";
+import { makeAlignmentData } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/functions/makeAlignmentData";
+import { makeComponentTree } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/functions/makeComponentBranch";
+import { makeFooterComponents } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/functions/makeFooterComponents";
 import {
   useComponentTreeMutators,
   useComponentTreeState,
-} from "%stanza/stanzas/gmdb-media-alignment-table/states/componentTree";
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/componentTree";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = { data: MediaComponentAlignmentTableResponse; prioritizedOrganism: string[] };

@@ -1,14 +1,14 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { HeaderCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderCell";
+import { HeaderCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/HeaderCell";
 import {
   useIsMediaExpandedMutators,
   useIsMediaExpendedState,
-} from "%stanza/stanzas/gmdb-media-alignment-table/states/isMediaExpanded";
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";
 import {
   useIsOrganismsExpandedMutators,
   useIsOrganismsExpendedState,
-} from "%stanza/stanzas/gmdb-media-alignment-table/states/isOrganismsExpanded";
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = { scrollable?: boolean };

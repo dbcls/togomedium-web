@@ -1,9 +1,12 @@
 import { styled } from "@mui/material/styles";
 import React, { ComponentProps, FC } from "react";
-import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/FooterCell";
-import { WIDTH_COMPACT, WIDTH_EXPANDED } from "%stanza/stanzas/gmdb-media-alignment-table/consts";
-import { useIsMediaExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table/states/isMediaExpanded";
-import { useIsOrganismsExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table/states/isOrganismsExpanded";
+import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterCell";
+import {
+  WIDTH_COMPACT,
+  WIDTH_EXPANDED,
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
+import { useIsMediaExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";
+import { useIsOrganismsExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = {

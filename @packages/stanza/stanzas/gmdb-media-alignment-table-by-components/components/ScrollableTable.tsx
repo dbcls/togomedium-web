@@ -1,9 +1,9 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
-import { AlignmentTable } from "%stanza/stanzas/gmdb-media-alignment-table/components/AlignmentTable";
-import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderRow";
-import { InfoColumns } from "%stanza/stanzas/gmdb-media-alignment-table/components/InfoColumns";
+import { AlignmentTable } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/AlignmentTable";
+import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/HeaderRow";
+import { InfoColumns } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/InfoColumns";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = { data: MediaComponentAlignmentTableResponse; prioritizedOrganism?: string[] };

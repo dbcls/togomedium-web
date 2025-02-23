@@ -2,7 +2,7 @@
   "@context": {
     "stanza": "http://togostanza.org/resource/stanza#"
   },
-  "@id": "gmdb-media-alignment-table",
+  "@id": "gmdb-media-alignment-table-by-components",
   "stanza:label": "Media alignment table by components",
   "stanza:definition": "",
   "stanza:license": "MIT",

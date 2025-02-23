@@ -2,7 +2,10 @@ import { Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC, useMemo } from "react";
 import { makeLinkPath } from "%core/network/makeLinkPath";
-import { WIDTH_COMPACT, WIDTH_EXPANDED } from "%stanza/stanzas/gmdb-media-alignment-table/consts";
+import {
+  WIDTH_COMPACT,
+  WIDTH_EXPANDED,
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
 import { THEME } from "%stanza/styles/theme";
 import { LabelInfo } from "%stanza/utils/labelInfo";
 

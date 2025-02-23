@@ -1,4 +1,4 @@
-import { RawComponent } from "../stanzas/gmdb-media-alignment-table/types";
+import { RawComponent } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/types";
 
 export const makeRawComponent = (id: string, parent: string | null = null): RawComponent => {
   return {

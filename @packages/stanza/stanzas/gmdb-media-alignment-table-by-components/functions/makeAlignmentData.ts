@@ -1,13 +1,13 @@
 import { ComponentProps } from "react";
 import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
-import { AlignmentCellState } from "%stanza/stanzas/gmdb-media-alignment-table/components/AlignmentCell";
-import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/FooterCell";
-import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/MediaRow";
+import { AlignmentCellState } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/AlignmentCell";
+import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterCell";
+import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/MediaRow";
 import {
   RawComponent,
   RawMedium,
   RawOrganism,
-} from "%stanza/stanzas/gmdb-media-alignment-table/types";
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-components/types";
 import { LabelInfo } from "%stanza/utils/labelInfo";
 
 type ComponentInfo = ComponentProps<typeof FooterCell>;

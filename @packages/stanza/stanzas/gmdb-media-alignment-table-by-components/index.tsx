@@ -1,6 +1,6 @@
 import React from "react";
 import { TogoMediumReactStanza } from "%stanza/components/providers/StanzaReactProvider";
-import App from "%stanza/stanzas/gmdb-media-alignment-table/App";
+import App from "%stanza/stanzas/gmdb-media-alignment-table-by-components/App";
 import { stringToArray } from "%stanza/utils/string";
 
 type StanzaParameters = {

@@ -1,17 +1,20 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
-import { HeaderCell } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderCell";
-import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/MediaRow";
-import { WIDTH_COMPACT, WIDTH_EXPANDED } from "%stanza/stanzas/gmdb-media-alignment-table/consts";
+import { HeaderCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/HeaderCell";
+import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/MediaRow";
+import {
+  WIDTH_COMPACT,
+  WIDTH_EXPANDED,
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
 import {
   useIsMediaExpandedMutators,
   useIsMediaExpendedState,
-} from "%stanza/stanzas/gmdb-media-alignment-table/states/isMediaExpanded";
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";
 import {
   useIsOrganismsExpandedMutators,
   useIsOrganismsExpendedState,
-} from "%stanza/stanzas/gmdb-media-alignment-table/states/isOrganismsExpanded";
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = { data: MediaComponentAlignmentTableResponse; prioritizedOrganism: string[] };

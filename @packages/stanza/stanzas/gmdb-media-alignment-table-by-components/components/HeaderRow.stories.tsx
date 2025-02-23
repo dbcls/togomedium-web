@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps, useEffect } from "react";
-import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table/components/HeaderRow";
-import { useIsMediaExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table/states/isMediaExpanded";
-import { useIsOrganismsExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table/states/isOrganismsExpanded";
+import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/HeaderRow";
+import { useIsMediaExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";
+import { useIsOrganismsExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
 
 type WithCustomArgs = {
   isMediaExpanded: boolean;

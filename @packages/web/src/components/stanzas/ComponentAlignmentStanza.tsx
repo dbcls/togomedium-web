@@ -7,7 +7,7 @@ type Props = {
   isVisible?: boolean;
   prioritizedTaxIds?: string[];
 };
-const stanzaName = "gmdb-media-alignment-table";
+const stanzaName = "gmdb-media-alignment-table-by-components";
 const StanzaTag = `togostanza-${stanzaName}`;
 
 export const ComponentAlignmentStanza: FC<Props> = ({

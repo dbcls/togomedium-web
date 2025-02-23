@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import App from "%stanza/stanzas/gmdb-media-alignment-table/App";
+import App from "%stanza/stanzas/gmdb-media-alignment-table-by-components/App";
 
 const meta: Meta<typeof App> = {
   component: App,

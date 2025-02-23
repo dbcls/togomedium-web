@@ -24,7 +24,7 @@ declare global {
           gm_ids: string;
           hide_media: BooleanString;
         } & StanzaProps;
-        "togostanza-gmdb-media-alignment-table": {
+        "togostanza-gmdb-media-alignment-table-by-components": {
           gm_ids: string;
           prioritized_tax_ids?: string;
         } & StanzaProps;

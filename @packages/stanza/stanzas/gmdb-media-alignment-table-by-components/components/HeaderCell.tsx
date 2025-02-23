@@ -2,7 +2,10 @@ import { SxProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import { IconCompact, IconExpand } from "%stanza/components/icons/icons";
-import { WIDTH_COMPACT, WIDTH_EXPANDED } from "%stanza/stanzas/gmdb-media-alignment-table/consts";
+import {
+  WIDTH_COMPACT,
+  WIDTH_EXPANDED,
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = {
