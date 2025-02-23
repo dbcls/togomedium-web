@@ -12,22 +12,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # リポジトリをチェックアウト
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Node.js をセットアップ
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      # pnpm をインストール
-      - name: Install pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
-          pnpm --version  # インストール確認
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9  # 必要に応じてバージョンを指定
+
+      - name: Check pnpm version
+        run: pnpm --version
+
 
       # 依存関係をインストール
       - name: Install dependencies
