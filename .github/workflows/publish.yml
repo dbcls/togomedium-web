@@ -35,7 +35,7 @@ jobs:
 
       # 特定のパッケージをビルド
       - name: Build stanza package
-        run: pnpm --filter @packages/stanza build
+        run: pnpm run stanza:build
 
       # GitHub Pages にデプロイ
       - name: Deploy to GitHub Pages
