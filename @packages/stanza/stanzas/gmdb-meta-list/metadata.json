@@ -4,7 +4,7 @@
   },
   "@id": "gmdb-meta-list",
   "stanza:label": "Meta list",
-  "stanza:definition": "general list stanza for TogoMedium",
+  "stanza:definition": "General list stanza for TogoMedium",
   "stanza:type": "Stanza",
   "stanza:display": "Table",
   "stanza:provider": "",

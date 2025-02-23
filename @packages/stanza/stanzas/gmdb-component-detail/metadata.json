@@ -4,7 +4,7 @@
   },
   "@id": "gmdb-component-detail",
   "stanza:label": "Component detail",
-  "stanza:definition": "provides detailed information about a specific component identified by a unique GMO ID.",
+  "stanza:definition": "Provides detailed information about a specific component identified by a unique GMO ID.",
   "stanza:type": "Stanza",
   "stanza:display": "Text",
   "stanza:provider": "",

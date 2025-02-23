@@ -4,7 +4,7 @@
   },
   "@id": "gmdb-taxon-detail",
   "stanza:label": "Taxon detail",
-  "stanza:definition": "provides detailed information about a taxonomic entity, utilizing the provided taxon ID to fetch and display relevant data.",
+  "stanza:definition": "Provides detailed information about a taxonomic entity, utilizing the provided NCBI TaxId",
   "stanza:type": "Stanza",
   "stanza:display": "Text",
   "stanza:provider": "",

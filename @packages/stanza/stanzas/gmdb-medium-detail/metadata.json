@@ -4,7 +4,7 @@
   },
   "@id": "gmdb-medium-detail",
   "stanza:label": "Medium detail",
-  "stanza:definition": "provides detailed information about a specific medium.",
+  "stanza:definition": "Provides detailed information about a specific medium.",
   "stanza:type": "Stanza",
   "stanza:display": "Table",
   "stanza:provider": "",

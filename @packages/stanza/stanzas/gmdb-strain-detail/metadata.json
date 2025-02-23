@@ -4,7 +4,7 @@
   },
   "@id": "gmdb-strain-detail",
   "stanza:label": "Strain detail",
-  "stanza:definition": "provides detailed information about a specific strain.",
+  "stanza:definition": "Provides detailed information about a specific strain.",
   
   "stanza:type": "Stanza",
   "stanza:display": "Text",
