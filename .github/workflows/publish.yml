@@ -1,0 +1,45 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # main ブランチへのプッシュ時に実行
+      - feature/2024-renewal
+      - stanza
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Node.js をセットアップ
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # pnpm をインストール
+      - name: Install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+          pnpm --version  # インストール確認
+
+      # 依存関係をインストール
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      # 特定のパッケージをビルド
+      - name: Build stanza package
+        run: pnpm --filter @packages/stanza build
+
+      # GitHub Pages にデプロイ
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./@packages/stanza/dist/  # 出力先ディレクトリを指定
