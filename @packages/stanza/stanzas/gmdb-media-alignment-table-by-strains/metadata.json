@@ -3,10 +3,11 @@
     "stanza": "http://togostanza.org/resource/stanza#"
   },
   "@id": "gmdb-media-alignment-table-by-strains",
-  "stanza:label": "Media Strains Alignment Table",
-  "stanza:definition": "",
+  "stanza:label": "Media alignment table by strains",
+  "stanza:definition": "Aligns media based on the strains that can be cultivated",
   "stanza:license": "MIT",
   "stanza:author": "Satoshi Onoda (YOHAK)",
+  "stanza:address": "satoshionoda@yohak.design",
   "stanza:contributor": [],
   "stanza:created": "2022-01-01",
   "stanza:updated": "2025-03-22",
