@@ -1,3 +1,3 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
 
-export const listStrainsOfTaxonUrl = makeApiUrl("gmdb_organism_under_rank_by_taxid");
+export const listStrainsOfTaxonUrl = makeApiUrl("gmdb_strain_list_by_taxid");

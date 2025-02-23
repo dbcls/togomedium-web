@@ -37,7 +37,7 @@ export const TaxonDetailPage: FC = () => {
         <H3>Strains of {name}</H3>
         <ListStanza
           api={`${listStrainsOfTaxonUrl}?tax_id=${taxId}`}
-          columnSizes={[15, 70, 15]}
+          columnSizes={[15, 55, 30]}
           limit={10}
         />
       </div>

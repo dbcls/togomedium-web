@@ -1,4 +1,13 @@
-import { Autocomplete, Chip, FormControl, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Chip,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import React, { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from "react";
@@ -19,28 +28,28 @@ export const SelectBox: FC<Props> = ({
   handleEnabledChange,
   handleValueChange,
 }) => {
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState("");
   const [enabled, setEnabled] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("");
 
-  const handleSelectChange = (event: SyntheticEvent, value: [string, string] | null) => {
-    if (value) {
-      const [key, label] = value;
-      setValue(key);
-    } else {
-      setValue("");
-    }
-  };
   const handleCheckChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     setEnabled(checked);
-    setValue("");
+    if (!checked) {
+      setSelectedValue("");
+    }
   };
+
+  const handleSelectChange = (event: SelectChangeEvent) => {
+    setSelectedValue(event.target.value);
+  };
+
   useEffect(() => {
-    if (enabled && value !== "") {
-      handleValueChange(queryKey, value);
+    if (enabled && selectedValue !== "") {
+      handleValueChange(queryKey, selectedValue);
     } else {
       handleEnabledChange(queryKey, false);
     }
-  }, [value, enabled]);
+  }, [selectedValue, enabled]);
 
   return (
     <Wrapper>
@@ -49,31 +58,24 @@ export const SelectBox: FC<Props> = ({
         sx={{ paddingLeft: 0 }}
       />
       <FormControl sx={{ m: 0, minWidth: 200 }}>
-        <Autocomplete
-          filterSelectedOptions
-          onChange={handleSelectChange}
-          disablePortal={true}
-          disableClearable={true}
-          options={items}
+        <InputLabel id={"selectLabel"}>{label}</InputLabel>
+        <Select
+          labelId={"selectLabel"}
+          label={label}
+          value={selectedValue}
           disabled={enabled ? undefined : true}
-          getOptionLabel={(item) => item[1]}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label={label}
-            />
-          )}
-          renderTags={(value, getTagProps) =>
-            value.map((option, index) => (
-              <Chip
-                variant="outlined"
-                {...getTagProps({ index })}
-                label={option[1]}
-                key={option[0]}
-              />
-            ))
-          }
-        />
+          onChange={handleSelectChange}
+          MenuProps={{ disablePortal: true }}
+        >
+          {items.map(([key, label]) => (
+            <MenuItem
+              key={key}
+              value={key}
+            >
+              {label}
+            </MenuItem>
+          ))}
+        </Select>
       </FormControl>
     </Wrapper>
   );
@@ -82,7 +84,7 @@ export const SelectBox: FC<Props> = ({
 const Wrapper = styled("div")({
   display: "flex",
   alignItems: "center",
-  backgroundColor: THEME.COLOR.WHITE,
+  // backgroundColor: THEME.COLOR.WHITE,
   width: "fit-content",
   marginLeft: "-11px",
 });
