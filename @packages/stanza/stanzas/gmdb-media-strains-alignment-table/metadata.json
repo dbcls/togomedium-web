@@ -6,10 +6,10 @@
   "stanza:label": "Media Strains Alignment Table",
   "stanza:definition": "",
   "stanza:license": "MIT",
-  "stanza:author": "Satoshi Onoda",
+  "stanza:author": "Satoshi Onoda (YOHAK)",
   "stanza:contributor": [],
   "stanza:created": "2022-01-01",
-  "stanza:updated": "2022-01-01",
+  "stanza:updated": "2025-03-22",
   "stanza:parameter": [
     {
       "stanza:key": "gm_ids",

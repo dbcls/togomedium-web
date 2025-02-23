@@ -84,7 +84,7 @@ const TitleWrapper = styled("div")({
     paddingTop: 2,
   },
   a: {
-    color: THEME.COLOR.PRIMARY_DARK,
+    color: THEME.STANZA_COLOR.PRIMARY_DARK,
   },
 
   h4: {
@@ -97,7 +97,7 @@ const Table = styled("table")({
   margin: "4px 0 16px",
   border: `1px solid ${THEME.COLOR.GRAY_LINE}`,
   a: {
-    color: THEME.COLOR.PRIMARY_DARK,
+    color: THEME.STANZA_COLOR.PRIMARY_DARK,
   },
   th: {
     border: `1px solid ${THEME.COLOR.GRAY_LINE}`,

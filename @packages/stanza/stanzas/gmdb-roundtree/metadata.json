@@ -3,17 +3,17 @@
     "stanza": "http://togostanza.org/resource/stanza#"
   },
   "@id": "gmdb-roundtree",
-  "stanza:label": "Gmdb roundtree",
+  "stanza:label": "[Deprecated] Gmdb roundtree",
   "stanza:definition": "",
   "stanza:type": "Stanza",
   "stanza:display": "Graph",
   "stanza:provider": "",
   "stanza:license": "MIT",
-  "stanza:author": "Satoshi Onoda",
-  "stanza:address": "satoshionoda@gmail.com",
+  "stanza:author": "Satoshi Onoda (YOHAK)",
+  "stanza:address": "satoshionoda@yohak.design",
   "stanza:contributor": [],
   "stanza:created": "2021-02-20",
-  "stanza:updated": "2021-02-20",
+  "stanza:updated": "2025-03-22",
   "stanza:parameter": [
     {
       "stanza:key": "newick",

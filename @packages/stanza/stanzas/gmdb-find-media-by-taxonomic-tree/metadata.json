@@ -3,10 +3,11 @@
     "stanza": "http://togostanza.org/resource/stanza#"
   },
   "@id": "gmdb-find-media-by-taxonomic-tree",
-  "stanza:label": "Find Media by Taxonomic Tree",
-  "stanza:definition": "",
+  "stanza:label": "Media finder by taxonomic tree",
+  "stanza:definition": "Retrieves media by taxon selected from the taxonomic tree",
   "stanza:license": "MIT",
-  "stanza:author": "Satoshi Onoda",
+  "stanza:author": "Satoshi Onoda (YOHAK)",
+  "stanza:address": "satoshionoda@yohak.design",
   "stanza:contributor": [],
   "stanza:created": "2022-01-01",
   "stanza:updated": "2025-03-22",
@@ -14,5 +15,10 @@
   "stanza:menu-placement": "none",
   "stanza:style": [],
   "stanza:incomingEvent": [],
-  "stanza:outgoingEvent": []
+  "stanza:outgoingEvent": [
+    {
+      "stanza:key":"STANZA_RUN_ACTION",
+      "stanza:description": "dispatches when the action button is clicked"
+    }
+  ]
 }

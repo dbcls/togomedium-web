@@ -4,16 +4,16 @@
   },
   "@id": "gmdb-medium-detail",
   "stanza:label": "Medium detail",
-  "stanza:definition": "",
+  "stanza:definition": "provides detailed information about a specific medium.",
   "stanza:type": "Stanza",
   "stanza:display": "Table",
   "stanza:provider": "",
   "stanza:license": "MIT",
-  "stanza:author": "Satoshi Onoda",
+  "stanza:author": "Satoshi Onoda (YOHAK)",
   "stanza:address": "satoshionoda@yohak.design",
   "stanza:contributor": [],
   "stanza:created": "2021-03-05",
-  "stanza:updated": "2021-03-05",
+  "stanza:updated": "2025-03-22",
   "stanza:parameter": [
     {
       "stanza:key": "gm_id",
@@ -25,17 +25,10 @@
   "stanza:menu-placement": "none",
   "stanza:style": [
     {
-      "stanza:key": "--greeting-color",
+      "stanza:key": "--color-primary",
       "stanza:type": "color",
-      "stanza:default": "#eb7900",
-      "stanza:description": "text color of greeting"
-    },
-    {
-      "stanza:key": "--greeting-align",
-      "stanza:type": "single-choice",
-      "stanza:choice": ["left", "center", "right"],
-      "stanza:default": "center",
-      "stanza:description": "text align of greeting"
+      "stanza:default": "#8FC31F",
+      "stanza:description": "highlighted color of the UI"
     }
   ]
 }

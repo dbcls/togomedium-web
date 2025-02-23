@@ -4,12 +4,12 @@
   },
   "@id": "gmdb-component-detail",
   "stanza:label": "Component detail",
-  "stanza:definition": "",
+  "stanza:definition": "provides detailed information about a specific component identified by a unique GMO ID.",
   "stanza:type": "Stanza",
   "stanza:display": "Text",
   "stanza:provider": "",
   "stanza:license": "MIT",
-  "stanza:author": "Satoshi Onoda",
+  "stanza:author": "Satoshi Onoda (YOHAK)",
   "stanza:address": "satoshionoda@yohak.design",
   "stanza:contributor": [],
   "stanza:created": "2021-03-07",
@@ -28,7 +28,7 @@
       "stanza:key": "--color-primary",
       "stanza:type": "color",
       "stanza:default": "#8FC31F",
-      "stanza:description": "highlighted color of links"
+      "stanza:description": "highlighted color of the UI"
     }
   ]
 }

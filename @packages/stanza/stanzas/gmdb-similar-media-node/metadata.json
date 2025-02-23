@@ -3,17 +3,17 @@
     "stanza": "http://togostanza.org/resource/stanza#"
   },
   "@id": "gmdb-similar-media-node",
-  "stanza:label": "Gmdb similar media node",
+  "stanza:label": "[WIP] Similar media node",
   "stanza:definition": "",
   "stanza:type": "Stanza",
   "stanza:display": "Text",
   "stanza:provider": "",
   "stanza:license": "MIT",
-  "stanza:author": "Satoshi Onoda",
-  "stanza:address": "satoshionoda@gmail.com",
+  "stanza:author": "Satoshi Onoda (YOHAK)",
+  "stanza:address": "satoshionoda@yohak.design",
   "stanza:contributor": [],
   "stanza:created": "2021-03-07",
-  "stanza:updated": "2021-03-07",
+  "stanza:updated": "2025-03-22",
   "stanza:parameter": [
     {
       "stanza:key": "strain_id",
