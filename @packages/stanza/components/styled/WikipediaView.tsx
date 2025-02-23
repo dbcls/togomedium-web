@@ -39,7 +39,7 @@ const WikipediaInfo = styled("div")({
     textAlign: "right",
     marginTop: 8,
     "& a": {
-      color: THEME.COLOR.PRIMARY,
+      color: THEME.STANZA_COLOR.PRIMARY_DARK,
     },
   },
 });

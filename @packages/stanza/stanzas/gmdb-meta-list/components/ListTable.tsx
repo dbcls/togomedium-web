@@ -102,7 +102,7 @@ const Wrapper = styled("table")({
     backgroundColor: "#f6f6f6",
   },
   "& a": {
-    color: THEME.COLOR.PRIMARY_DARK,
+    color: THEME.STANZA_COLOR.PRIMARY_DARK,
     textDecoration: "none",
   },
 });

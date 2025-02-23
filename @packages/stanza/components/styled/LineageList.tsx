@@ -73,7 +73,7 @@ const LineageListWrapper = styled("ul")({
 
     a: {
       padding: "4px 8px",
-      color: THEME.COLOR.PRIMARY,
+      color: THEME.STANZA_COLOR.PRIMARY_DARK,
     },
   },
 });

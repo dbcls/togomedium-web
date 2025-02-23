@@ -91,7 +91,7 @@ export const BottomController: FC<Props> = ({ total, offset, limit, setOffset })
       <Right>
         {totalPages > 5 && (
           <SliderWrapper>
-            <Slider
+            <StyledSlider
               value={tempCurrentPage}
               min={1}
               max={totalPages}
@@ -129,6 +129,10 @@ export const BottomController: FC<Props> = ({ total, offset, limit, setOffset })
     </Wrapper>
   );
 };
+
+const StyledSlider = styled(Slider)({
+  color: THEME.STANZA_COLOR.PRIMARY,
+});
 
 const Wrapper = styled("div")({
   marginTop: 12,
@@ -185,7 +189,7 @@ const IconDummy = styled("div")({
 });
 
 const PageNums = styled("ul")({
-  backgroundColor: THEME.COLOR.PRIMARY,
+  backgroundColor: THEME.STANZA_COLOR.PRIMARY,
   width: "fit-content",
   display: "flex",
   padding: "1px",
@@ -204,7 +208,7 @@ const PageNums = styled("ul")({
     cursor: "pointer",
     userSelect: "none",
     "&.active": {
-      backgroundColor: THEME.COLOR.PRIMARY,
+      backgroundColor: THEME.STANZA_COLOR.PRIMARY,
       color: THEME.COLOR.WHITE,
       fontWeight: "bold",
     },

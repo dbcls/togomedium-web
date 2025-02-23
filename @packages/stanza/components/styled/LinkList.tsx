@@ -7,6 +7,6 @@ export const LinkList = styled("ul")({
     gap: 8,
   },
   a: {
-    color: THEME.COLOR.PRIMARY,
+    color: THEME.STANZA_COLOR.PRIMARY_DARK,
   },
 });

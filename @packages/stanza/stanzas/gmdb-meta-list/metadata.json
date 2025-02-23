@@ -3,8 +3,8 @@
     "stanza": "http://togostanza.org/resource/stanza#"
   },
   "@id": "gmdb-meta-list",
-  "stanza:label": "GMDB meta list",
-  "stanza:definition": "",
+  "stanza:label": "Meta list",
+  "stanza:definition": "general list stanza for TogoMedium",
   "stanza:type": "Stanza",
   "stanza:display": "Table",
   "stanza:provider": "",
@@ -13,7 +13,7 @@
   "stanza:address": "satoshionoda@yohak.design",
   "stanza:contributor": [],
   "stanza:created": "2021-02-19",
-  "stanza:updated": "2024-03-09",
+  "stanza:updated": "2025-03-22",
   "stanza:parameter": [
     {
       "stanza:key": "api_url",
@@ -44,27 +44,15 @@
       "stanza:example": "15,15,70",
       "stanza:description": "column sizes from left. should be separated with comma",
       "stanza:required": false
-    },
-    {
-      "stanza:key": "web_font",
-      "stanza:example": "Fira Sans Condensed",
-      "stanza:description": "google font name",
-      "stanza:required": false
     }
   ],
   "stanza:menu-placement": "none",
   "stanza:style": [
     {
-      "stanza:key": "--link-color",
+      "stanza:key": "--color-primary",
       "stanza:type": "color",
-      "stanza:default": "#6FA80C",
-      "stanza:description": "text color of greeting"
-    },
-    {
-      "stanza:key": "--web-font",
-      "stanza:type": "string",
-      "stanza:default": "Fira Sans Condensed",
-      "stanza:description": "google font name"
+      "stanza:default": "#8FC31F",
+      "stanza:description": "highlight color of the UI"
     }
   ]
 }

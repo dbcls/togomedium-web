@@ -1,10 +1,13 @@
 const sizeBase: number = 8;
 
+const COLOR_PRIMARY = "#8FC31F";
+const COLOR_PRIMARY_DARK = "#698c1f";
+
 export const THEME = {
   COLOR: {
     WHITE: "#FFFFFF",
-    PRIMARY: "#8FC31F",
-    PRIMARY_DARK: "#6FA80C",
+    PRIMARY: COLOR_PRIMARY,
+    PRIMARY_DARK: COLOR_PRIMARY_DARK,
     PRIMARY_PALE: "#eef3d9",
     GRAY: "#CCCCCC",
     GRAY_BG: "#f4f3f2",
@@ -16,6 +19,10 @@ export const THEME = {
     TEXT: "#333333",
     ACCENT: "#F39800",
   } as const,
+  STANZA_COLOR: {
+    PRIMARY: `var(--color-primary, ${COLOR_PRIMARY})`,
+    PRIMARY_DARK: `var(--color-primary-dark, ${COLOR_PRIMARY_DARK})`,
+  },
   SIZE: {
     S05: sizeBase / 2,
     S1: sizeBase,

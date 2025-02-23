@@ -1,4 +1,5 @@
 import { styled } from "@mui/material/styles";
+import { THEME } from "%stanza/styles/theme";
 
 export const InfoId = styled("div")({
   display: "flex",
@@ -10,5 +11,9 @@ export const InfoId = styled("div")({
     display: "flex",
     marginLeft: 20,
     gap: 4,
+  },
+
+  a: {
+    color: THEME.STANZA_COLOR.PRIMARY_DARK,
   },
 });

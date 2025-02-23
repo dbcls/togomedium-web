@@ -17,7 +17,7 @@ const CapsuleListWrapper = styled("ul")({
   flexWrap: "wrap",
 
   li: {
-    border: `1px solid ${THEME.COLOR.PRIMARY}`,
+    border: `1px solid ${THEME.STANZA_COLOR.PRIMARY}`,
     padding: `${THEME.SIZE.S05}px ${THEME.SIZE.S1 * 1.25}px`,
     borderRadius: THEME.ROUND.BASE * 4,
     marginRight: THEME.SIZE.S1,

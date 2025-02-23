@@ -14,7 +14,12 @@ const StanzaReactProvider: FC<{ children: ReactElement }> = ({ children }) => {
       <QueryClientProvider client={queryClient}>
         <JotaiProvider>
           <ThemeProvider theme={muiTheme}>
-            <EmotionCacheProvider>{children}</EmotionCacheProvider>
+            <EmotionCacheProvider>
+              <style>
+                {`:host{--color-primary-dark:color-mix(in srgb, var(--color-primary), black 25%)}`}
+              </style>
+              {children}
+            </EmotionCacheProvider>
           </ThemeProvider>
         </JotaiProvider>
       </QueryClientProvider>
@@ -59,6 +64,7 @@ export abstract class TogoMediumReactStanza<T> extends Stanza {
         childWrapper.style.display = "flex";
         childWrapper.style.flexGrow = "1";
         childWrapper.style.flexDirection = "column";
+        //
       } catch (e) {
         console.log(e);
       }
