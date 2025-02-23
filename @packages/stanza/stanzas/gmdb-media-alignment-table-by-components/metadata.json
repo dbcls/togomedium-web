@@ -4,7 +4,7 @@
   },
   "@id": "gmdb-media-alignment-table-by-components",
   "stanza:label": "Media alignment table by components",
-  "stanza:definition": "",
+  "stanza:definition": "Aligns media based on their included components",
   "stanza:license": "MIT",
   "stanza:author": "Satoshi Onoda (YOHAK)",
   "stanza:contributor": [],
