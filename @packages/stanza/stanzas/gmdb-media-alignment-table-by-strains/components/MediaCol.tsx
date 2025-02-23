@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { MediaCell } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCell";
-import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/types";
+import { MediaCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/MediaCell";
+import { CellInfo } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = { mediaList: CellInfo[] };

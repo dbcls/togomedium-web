@@ -20,7 +20,7 @@ declare global {
         "togostanza-gmdb-medium-detail": {
           gm_id: string;
         } & StanzaProps;
-        "togostanza-gmdb-media-strains-alignment-table": {
+        "togostanza-gmdb-media-alignment-table-by-strains": {
           gm_ids: string;
           hide_media: BooleanString;
         } & StanzaProps;

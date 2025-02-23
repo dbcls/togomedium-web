@@ -7,7 +7,7 @@ import {
   mediaStrainsAlignmentURL,
 } from "%api/mediaStrainsAlignment/definitions";
 import { getData } from "%core/network/getData";
-import { AppContainer } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/AppContainer";
+import { AppContainer } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/AppContainer";
 import { THEME } from "%stanza/styles/theme";
 
 export type AppProps = {

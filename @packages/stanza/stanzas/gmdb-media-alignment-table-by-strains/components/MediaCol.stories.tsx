@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { MediaCol } from "./MediaCol";
 import { data1 } from "%api/mediaStrainsAlignment/data1";
-import { processDisplayData } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
+import { processDisplayData } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
 
 const meta: Meta<typeof MediaCol> = {
   component: MediaCol,

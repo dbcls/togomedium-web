@@ -3,9 +3,9 @@ import { styled } from "@mui/material/styles";
 import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
 import { Ease } from "yohak-tools";
 import { LineageRank } from "%api/mediaStrainsAlignment/definitions";
-import { TaxonCell } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/TaxonCell";
-import { useFilterRankMutators } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterRank";
-import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/types";
+import { TaxonCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/TaxonCell";
+import { useFilterRankMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterRank";
+import { CellInfo } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
 import { THEME } from "%stanza/styles/theme";
 import { capitalizeFirstLetter } from "%stanza/utils/string";
 

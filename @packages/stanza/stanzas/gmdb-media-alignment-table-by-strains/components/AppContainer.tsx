@@ -5,11 +5,11 @@ import {
   MediaStrainsAlignmentResponse,
 } from "%api/mediaStrainsAlignment/definitions";
 import { NotFound } from "%stanza/components/atoms/NotFound";
-import { MediaCol } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCol";
-import { TaxonCol } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/TaxonCol";
-import { processDisplayData } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
-import { useFilterRankState } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterRank";
-import { useFilterTaxonState } from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterTaxon";
+import { MediaCol } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/MediaCol";
+import { TaxonCol } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/TaxonCol";
+import { processDisplayData } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
+import { useFilterRankState } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterRank";
+import { useFilterTaxonState } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterTaxon";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = { data: MediaStrainsAlignmentResponse; hideMedia?: boolean };

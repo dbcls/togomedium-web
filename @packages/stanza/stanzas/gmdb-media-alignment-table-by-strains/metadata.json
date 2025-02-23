@@ -2,7 +2,7 @@
   "@context": {
     "stanza": "http://togostanza.org/resource/stanza#"
   },
-  "@id": "gmdb-media-strains-alignment-table",
+  "@id": "gmdb-media-alignment-table-by-strains",
   "stanza:label": "Media Strains Alignment Table",
   "stanza:definition": "",
   "stanza:license": "MIT",

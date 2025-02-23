@@ -4,7 +4,7 @@ import { data2 } from "%api/mediaStrainsAlignment/data2";
 import {
   __TEST__,
   processDisplayData,
-} from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
 
 const { getNodeListOfRankFromTree, makeTaxonTree, getSizeOfCell, fillNullTaxon } = __TEST__;
 

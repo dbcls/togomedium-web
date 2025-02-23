@@ -8,7 +8,7 @@ type Props = {
   hideMedia?: boolean;
   isVisible?: boolean;
 };
-const stanzaName = "gmdb-media-strains-alignment-table";
+const stanzaName = "gmdb-media-alignment-table-by-strains";
 const StanzaTag = `togostanza-${stanzaName}`;
 
 export const StrainAlignmentStanza: FC<Props> = ({

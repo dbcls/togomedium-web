@@ -3,8 +3,8 @@ import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { PATH_MEDIUM } from "%core/consts";
 import { makeLinkPath } from "%core/network/makeLinkPath";
-import { makeCellHeight } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
-import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/types";
+import { makeCellHeight } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
+import { CellInfo } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = {} & CellInfo;

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps } from "react";
-import { MediaCell } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCell";
+import { MediaCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/MediaCell";
 
 const meta: Meta<typeof MediaCell> = {
   component: MediaCell,

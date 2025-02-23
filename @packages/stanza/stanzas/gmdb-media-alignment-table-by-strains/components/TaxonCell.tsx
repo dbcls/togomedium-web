@@ -4,13 +4,13 @@ import React, { FC, useEffect, useMemo } from "react";
 import { LineageRank } from "%api/mediaStrainsAlignment/definitions";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { FilterIcon } from "%stanza/components/icons/FilterIcon";
-import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-strains-alignment-table/components/MediaCell";
-import { makeCellHeight } from "%stanza/stanzas/gmdb-media-strains-alignment-table/functions/processMediaCell";
+import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/MediaCell";
+import { makeCellHeight } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
 import {
   useFilterTaxonMutators,
   useFilterTaxonState,
-} from "%stanza/stanzas/gmdb-media-strains-alignment-table/states/filterTaxon";
-import { CellInfo } from "%stanza/stanzas/gmdb-media-strains-alignment-table/types";
+} from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterTaxon";
+import { CellInfo } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
 import { THEME } from "%stanza/styles/theme";
 import { makeSpeciesName } from "%stanza/utils/string";
 

@@ -7,7 +7,7 @@ import {
   MediaStrainsAlignmentResponse,
   Taxon,
 } from "%api/mediaStrainsAlignment/definitions";
-import { CellInfo, DisplayData } from "%stanza/stanzas/gmdb-media-strains-alignment-table/types";
+import { CellInfo, DisplayData } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
 
 type TaxonNode = {
   id: string;
