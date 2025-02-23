@@ -48,7 +48,7 @@ export const SelectBox: FC<Props> = ({
         onChange={handleCheckChange}
         sx={{ paddingLeft: 0 }}
       />
-      <FormControl sx={{ m: 1, minWidth: 200 }}>
+      <FormControl sx={{ m: 0, minWidth: 200 }}>
         <Autocomplete
           filterSelectedOptions
           onChange={handleSelectChange}
@@ -83,4 +83,6 @@ const Wrapper = styled("div")({
   display: "flex",
   alignItems: "center",
   backgroundColor: THEME.COLOR.WHITE,
+  width: "fit-content",
+  marginLeft: "-11px",
 });
