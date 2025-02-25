@@ -31,7 +31,7 @@ interface TaxonSearchByName {
   @route("/gmdb_taxonomy_search_by_name")
   @tag(Tags.Stanza)
   @tag(Tags.New)
-  @doc("Search for a taxonomy by name; useful for incremental search.")
+  @doc("Searches for a taxonomy by its name, which is particularly useful for incremental searching.")
   @get
   get(...TaxonSearchByNameRequest): TaxonSearchByNameResponse[];
 }

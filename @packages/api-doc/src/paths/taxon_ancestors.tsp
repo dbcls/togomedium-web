@@ -26,7 +26,7 @@ interface TaxonAncestors {
   @route("/gmdb_taxonomy_ancestors")
   @tag(Tags.Stanza)
   @tag(Tags.New)
-  @doc("Get the ancestors of a taxonomy")
+  @doc("Retrieve the ancestors of a taxonomy, useful for visualizing the taxon's hierarchical tree structure")
   @get
   get(...TaxonAncestorsRequest): TaxonAncestorsResponse[];
 }
