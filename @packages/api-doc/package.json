@@ -6,12 +6,13 @@
   "scripts": {
     "tsp:clean": "run-func scripts/clean.js clean",
     "tsp:build": "npm run tsp:clean && tsp compile src/main.tsp",
+    "tsp:copy-to-web": "run-func scripts/bundle.js bundle",
     "dsp:dev": "npm run tsp:clean && tsp compile src/main.tsp --watch",
     "vite": "vite",
     "vite:build": "vite build",
     "format": "tsp format '**/*.tsp'",
     "dev": "concurrently \"npm run dsp:dev\" \"npm run vite\"",
-    "bundle": "npm run tsp:build && npm run vite:build"
+    "bundle": "npm run tsp:build && npm run vite:build && npm run tsp:copy-to-web"
   },
   "peerDependencies": {
     "@typespec/compiler": "latest",

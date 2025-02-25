@@ -1,28 +1,20 @@
 import { consola } from "consola";
-import { existsSync, rmSync, mkdirSync, cpSync } from "fs";
-import { join } from "path";
+import { copyFileSync, existsSync } from "fs";
+import { join, resolve } from "path";
 
 export const bundle = () => {
   const cwd = process.cwd();
-  const dist = `${cwd}/dist`;
-  const typeSpecDir = join(cwd, "tsp-output", "@typespec");
-  const publicDir = join(cwd, "public");
-  if (existsSync(dist)) {
-    rmSync(dist, { recursive: true });
-    consola.success("Cleaned up the dist directory");
+  const dist = resolve(cwd, "../web/public/assets");
+  if (!existsSync(dist)) {
+    consola.error("dist does not exist");
   }
-  //
-  mkdirSync(dist);
-  if (existsSync(typeSpecDir)) {
-    cpSync(typeSpecDir, `${dist}`, { recursive: true });
-  } else {
-    consola.error("No typespec directory found");
+  const openApiFile = join(cwd, "dist", "openapi3", "openapi.yaml");
+  if (!existsSync(openApiFile)) {
+    consola.error("openApiFile does not exist");
   }
-  if (existsSync(publicDir)) {
-    cpSync(publicDir, `${dist}`, { recursive: true });
-  } else {
-    consola.error("No public directory found");
+  try {
+    copyFileSync(openApiFile, join(dist, "togomedium-api.yaml"));
+  } catch (e) {
+    throw e;
   }
-  //
-  consola.success("Bundled the typespec and public directories into the dist");
 };
