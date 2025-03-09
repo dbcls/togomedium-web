@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { nanoid } from "nanoid";
 import React, { FC } from "react";
+import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { ListApiBody } from "%stanza/stanzas/gmdb-meta-list/types";
@@ -79,7 +80,7 @@ const CellContent: FC<CellContentProps> = ({ item }) => {
   return (
     <a
       href={makeLinkPath(item.href)}
-      target={"_blank"}
+      target={getLinkTarget(item.href)}
       rel="noreferrer"
     >
       {decodeHTMLEntities(item.label)}

@@ -2,6 +2,7 @@ import { SxProps, Tooltip, tooltipClasses, TooltipProps } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import React, { FC, PropsWithChildren } from "react";
+import { getLinkTarget } from "%core/network/getLinkTarget";
 import {
   IconCompact,
   IconExpand,
@@ -62,8 +63,7 @@ export const TreeBranchView: FC<Props> = ({
           {linkString && linkURL && (
             <a
               href={linkURL}
-              target="_blank"
-              rel="noreferrer"
+              target={getLinkTarget(linkURL)}
             >
               [{linkString}]
             </a>

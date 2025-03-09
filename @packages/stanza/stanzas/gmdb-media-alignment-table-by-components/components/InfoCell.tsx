@@ -1,6 +1,7 @@
 import { Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC, useMemo } from "react";
+import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import {
   WIDTH_COMPACT,
@@ -66,8 +67,7 @@ const Compact: FC<Omit<Props, "expanded">> = ({ info, linkBase, priority = [] })
                 >
                   <a
                     href={makeLinkPath(`${linkBase}${item.id}`)}
-                    target="_blank"
-                    rel="noreferrer"
+                    target={getLinkTarget(`${linkBase}${item.id}`)}
                   >
                     {item.id}
                   </a>
@@ -98,9 +98,8 @@ const Expanded: FC<Omit<Props, "expanded">> = ({ info, linkBase, priority = [] }
             className="text"
           >
             <a
-              href={`${linkBase}${item.id}`}
-              target="_blank"
-              rel="noreferrer"
+              href={makeLinkPath(`${linkBase}${item.id}`)}
+              target={getLinkTarget(`${linkBase}${item.id}`)}
             >
               {item.id}
             </a>

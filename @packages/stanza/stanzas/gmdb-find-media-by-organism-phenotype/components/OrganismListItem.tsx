@@ -2,6 +2,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import { PATH_TAXON } from "%core/consts";
+import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%stanza/styles/theme";
 import { LabelInfo } from "%stanza/utils/labelInfo";
@@ -12,14 +13,14 @@ type Props = {
 } & LabelInfo;
 
 export const OrganismListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
+  const url = `${PATH_TAXON}${id}`;
   return (
     <Wrapper>
       <ListInner>
         <LabelCol>{label}</LabelCol>
         <IdCol
-          href={makeLinkPath(`${PATH_TAXON}${id}`)}
-          target="_blank"
-          rel="noreferrer"
+          href={makeLinkPath(url)}
+          target={getLinkTarget(url)}
         >
           [tax_id:{id}]
         </IdCol>

@@ -2,6 +2,7 @@ import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import { LineageRank, lineageRanks } from "%api/mediaStrainsAlignment/definitions";
 import { PATH_TAXON } from "%core/consts";
+import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%stanza/styles/theme";
 import { capitalizeFirstLetter, makeSpeciesName } from "%stanza/utils/string";
@@ -46,7 +47,10 @@ export const LineageList: FC<{
 const LineageItem: FC<{ rank: LineageRank; label: string; id: string }> = ({ rank, label, id }) => (
   <li>
     <span>{capitalizeFirstLetter(rank)}</span>
-    <a href={makeLinkPath(`${PATH_TAXON}${id}`)}>
+    <a
+      href={makeLinkPath(`${PATH_TAXON}${id}`)}
+      target={getLinkTarget(`${PATH_TAXON}${id}`)}
+    >
       {rank === "species" ? makeSpeciesName(label) : label}
     </a>
   </li>

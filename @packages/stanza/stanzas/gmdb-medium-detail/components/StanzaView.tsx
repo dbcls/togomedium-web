@@ -1,4 +1,5 @@
 import React, { ComponentProps, FC } from "react";
+import { getLinkTarget } from "%core/network/getLinkTarget";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { InfoId } from "%stanza/components/styled/InfoId";
 import { InfoTitle } from "%stanza/components/styled/InfoTitle";
@@ -44,7 +45,7 @@ export const StanzaView: FC<Props> = ({
           <span>Information source:&nbsp;</span>
           <a
             href={srcUrl}
-            target={"_blank"}
+            target={getLinkTarget(srcUrl)}
             rel="noreferrer"
           >
             {originalId || srcLabel || id}

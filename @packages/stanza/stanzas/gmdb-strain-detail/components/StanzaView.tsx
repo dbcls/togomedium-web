@@ -1,5 +1,6 @@
 import React, { ComponentProps, FC } from "react";
 import { Nullable } from "yohak-tools";
+import { getLinkTarget } from "%core/network/getLinkTarget";
 import { ColorButton } from "%stanza/components/styled/ColorButton";
 import { ColWrapper } from "%stanza/components/styled/ColWrapper";
 import { InfoId } from "%stanza/components/styled/InfoId";
@@ -41,8 +42,7 @@ export const StanzaView: FC<Props> = ({ strainId, strainName, infoSources, taxon
               <ColorButton
                 key={index}
                 href={source.url}
-                target={"_blank"}
-                rel="noreferrer"
+                target={getLinkTarget(source.url)}
               >
                 {source.label}
               </ColorButton>
