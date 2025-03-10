@@ -96,10 +96,10 @@ const SpacerRow = styled("div")({
   flexGrow: 1,
   gap: "1px",
   display: "flex",
+  borderRight: `1px solid transparent`,
 });
 const Spacer = styled("span")({
   backgroundColor: THEME.COLOR.WHITE,
-  flex: 1,
   "&.expanded": {
     width: WIDTH_EXPANDED,
   },
