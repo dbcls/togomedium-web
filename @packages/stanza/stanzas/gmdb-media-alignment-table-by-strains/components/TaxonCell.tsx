@@ -62,6 +62,7 @@ const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank }) => {
               placement={"top"}
               arrow
               disableHoverListener={!toolTipEnabled}
+              slotProps={{ popper: { disablePortal: true } }}
             >
               <span
                 className={"label"}
