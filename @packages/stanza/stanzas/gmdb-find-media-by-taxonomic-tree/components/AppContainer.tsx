@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { FC, useEffect } from "react";
 import { TaxonAncestorsParams, TaxonAncestorsResponse } from "%api/taxonAncestors.ts/definitions";
 import { getData } from "%core/network/getData";
+import { TaxonomyType } from "%core/types/TaxonomyType";
 import { MediaPane } from "%stanza/components/media-finder/MediaPane";
 import { AppWrapper } from "%stanza/components/styled/AppWrapper";
 import { QueryPane } from "%stanza/components/styled/QueryPane";
@@ -12,9 +13,7 @@ import {
   useSearchResult,
   useSearchResultMutators,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/searchResult";
-import { useTaxonListMutators } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
 import {
-  TaxonomyType,
   useTaxonAncestorsApi,
   useTaxonomyTypeMutators,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";

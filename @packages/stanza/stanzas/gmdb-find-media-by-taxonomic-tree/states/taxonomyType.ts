@@ -3,8 +3,8 @@ import { listMediaOfGtdbTaxonsURL, listMediaOfTaxonsURL } from "%api/listMediaOf
 import { gtdbTaxonAncestorsURL, taxonAncestorsURL } from "%api/taxonAncestors.ts/definitions";
 import { gtdbTaxonChildrenURL, taxonChildrenURL } from "%api/taxonChildren/definitions";
 import { gtdbTaxonSearchByNameUrl, taxonSearchByNameURL } from "%api/taxonSearchByName/definitions";
+import { TaxonomyType } from "%core/types/TaxonomyType";
 
-export type TaxonomyType = "NCBI" | "GTDB";
 type ApiInfo = { type: TaxonomyType; url: string };
 
 const taxonomyTypeAtom = atom<TaxonomyType>("NCBI");

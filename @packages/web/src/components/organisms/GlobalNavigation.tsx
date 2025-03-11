@@ -23,7 +23,7 @@ import { URL_CONTACT } from "@/consts/api.ts";
 
 export const GlobalNavigation: FC = () => {
   return (
-    <div className="relative w-72 shrink-0 grow-0 border-r-small bg-white p-3">
+    <div className="border-r-small relative w-72 shrink-0 grow-0 bg-white p-3">
       <div className="sticky top-[36px] flex flex-col">
         <Link to={"/"}>
           <Logo className={"mt-3 w-[160px]"} />
@@ -63,7 +63,12 @@ export const GlobalNavigation: FC = () => {
             />
             <NavItem
               to={"/find-media-by-taxonomic-tree"}
-              title={"Find media by taxonomic tree"}
+              title={"Find media by NCBI taxonomic tree"}
+              icon={ICON_TREE}
+            />
+            <NavItem
+              to={"/find-media-by-gtdb-taxonomic-tree"}
+              title={"Find media by GTDB taxonomic tree"}
               icon={ICON_TREE}
             />
             <NavItem

@@ -39,7 +39,9 @@ declare global {
         } & StanzaProps;
         "togostanza-gmdb-find-media-by-components": {} & StanzaProps;
         "togostanza-gmdb-find-media-by-organism-phenotype": {} & StanzaProps;
-        "togostanza-gmdb-find-media-by-taxonomic-tree": {} & StanzaProps;
+        "togostanza-gmdb-find-media-by-taxonomic-tree": {
+          taxonomy_type: "NCBI" | "GTDB";
+        } & StanzaProps;
       }
     }
   }

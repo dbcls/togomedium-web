@@ -1,7 +1,10 @@
 import { FC, useEffect } from "react";
+import { TaxonomyType } from "%core/types/TaxonomyType.ts";
 import { URL_STANZA } from "@/consts/api.ts";
 
-type Props = {};
+type Props = {
+  type: TaxonomyType;
+};
 
 const stanzaName = "gmdb-find-media-by-taxonomic-tree";
 const StanzaTag = `togostanza-${stanzaName}`;
@@ -13,7 +16,7 @@ const handleRunAction = (e: CustomEvent) => {
   window.open(`/${target}/?gm_ids=${encodedIds}`);
 };
 
-export const FindMediaByTaxonomicTreeStanza: FC<Props> = () => {
+export const FindMediaByTaxonomicTreeStanza: FC<Props> = ({ type = "NCBI" }) => {
   useEffect(() => {
     document.addEventListener("STANZA_RUN_ACTION", handleRunAction);
     return () => {
@@ -31,6 +34,7 @@ export const FindMediaByTaxonomicTreeStanza: FC<Props> = () => {
       <StanzaTag
         className={"flex grow"}
         togostanza-menu-placement="none"
+        taxonomy_type={type}
       ></StanzaTag>
     </>
   );

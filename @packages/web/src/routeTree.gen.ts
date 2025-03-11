@@ -31,6 +31,9 @@ const FindMediaByTaxonomicTreeLazyImport = createFileRoute(
 const FindMediaByOrganismPhenotypeLazyImport = createFileRoute(
   '/find-media-by-organism-phenotype',
 )()
+const FindMediaByGtdbTaxonomicTreeLazyImport = createFileRoute(
+  '/find-media-by-gtdb-taxonomic-tree',
+)()
 const FindMediaByComponentsLazyImport = createFileRoute(
   '/find-media-by-components',
 )()
@@ -72,6 +75,17 @@ const FindMediaByOrganismPhenotypeLazyRoute =
     getParentRoute: () => rootRoute,
   } as any).lazy(() =>
     import('./routes/find-media-by-organism-phenotype.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const FindMediaByGtdbTaxonomicTreeLazyRoute =
+  FindMediaByGtdbTaxonomicTreeLazyImport.update({
+    id: '/find-media-by-gtdb-taxonomic-tree',
+    path: '/find-media-by-gtdb-taxonomic-tree',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./routes/find-media-by-gtdb-taxonomic-tree.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -204,6 +218,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FindMediaByComponentsLazyImport
       parentRoute: typeof rootRoute
     }
+    '/find-media-by-gtdb-taxonomic-tree': {
+      id: '/find-media-by-gtdb-taxonomic-tree'
+      path: '/find-media-by-gtdb-taxonomic-tree'
+      fullPath: '/find-media-by-gtdb-taxonomic-tree'
+      preLoaderRoute: typeof FindMediaByGtdbTaxonomicTreeLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/find-media-by-organism-phenotype': {
       id: '/find-media-by-organism-phenotype'
       path: '/find-media-by-organism-phenotype'
@@ -293,6 +314,7 @@ export interface FileRoutesByFullPath {
   '/compare-media': typeof CompareMediaLazyRoute
   '/compare-media-by-taxids': typeof CompareMediaByTaxidsLazyRoute
   '/find-media-by-components': typeof FindMediaByComponentsLazyRoute
+  '/find-media-by-gtdb-taxonomic-tree': typeof FindMediaByGtdbTaxonomicTreeLazyRoute
   '/find-media-by-organism-phenotype': typeof FindMediaByOrganismPhenotypeLazyRoute
   '/find-media-by-taxonomic-tree': typeof FindMediaByTaxonomicTreeLazyRoute
   '/search': typeof SearchLazyRoute
@@ -313,6 +335,7 @@ export interface FileRoutesByTo {
   '/compare-media': typeof CompareMediaLazyRoute
   '/compare-media-by-taxids': typeof CompareMediaByTaxidsLazyRoute
   '/find-media-by-components': typeof FindMediaByComponentsLazyRoute
+  '/find-media-by-gtdb-taxonomic-tree': typeof FindMediaByGtdbTaxonomicTreeLazyRoute
   '/find-media-by-organism-phenotype': typeof FindMediaByOrganismPhenotypeLazyRoute
   '/find-media-by-taxonomic-tree': typeof FindMediaByTaxonomicTreeLazyRoute
   '/search': typeof SearchLazyRoute
@@ -334,6 +357,7 @@ export interface FileRoutesById {
   '/compare-media': typeof CompareMediaLazyRoute
   '/compare-media-by-taxids': typeof CompareMediaByTaxidsLazyRoute
   '/find-media-by-components': typeof FindMediaByComponentsLazyRoute
+  '/find-media-by-gtdb-taxonomic-tree': typeof FindMediaByGtdbTaxonomicTreeLazyRoute
   '/find-media-by-organism-phenotype': typeof FindMediaByOrganismPhenotypeLazyRoute
   '/find-media-by-taxonomic-tree': typeof FindMediaByTaxonomicTreeLazyRoute
   '/search': typeof SearchLazyRoute
@@ -356,6 +380,7 @@ export interface FileRouteTypes {
     | '/compare-media'
     | '/compare-media-by-taxids'
     | '/find-media-by-components'
+    | '/find-media-by-gtdb-taxonomic-tree'
     | '/find-media-by-organism-phenotype'
     | '/find-media-by-taxonomic-tree'
     | '/search'
@@ -375,6 +400,7 @@ export interface FileRouteTypes {
     | '/compare-media'
     | '/compare-media-by-taxids'
     | '/find-media-by-components'
+    | '/find-media-by-gtdb-taxonomic-tree'
     | '/find-media-by-organism-phenotype'
     | '/find-media-by-taxonomic-tree'
     | '/search'
@@ -394,6 +420,7 @@ export interface FileRouteTypes {
     | '/compare-media'
     | '/compare-media-by-taxids'
     | '/find-media-by-components'
+    | '/find-media-by-gtdb-taxonomic-tree'
     | '/find-media-by-organism-phenotype'
     | '/find-media-by-taxonomic-tree'
     | '/search'
@@ -415,6 +442,7 @@ export interface RootRouteChildren {
   CompareMediaLazyRoute: typeof CompareMediaLazyRoute
   CompareMediaByTaxidsLazyRoute: typeof CompareMediaByTaxidsLazyRoute
   FindMediaByComponentsLazyRoute: typeof FindMediaByComponentsLazyRoute
+  FindMediaByGtdbTaxonomicTreeLazyRoute: typeof FindMediaByGtdbTaxonomicTreeLazyRoute
   FindMediaByOrganismPhenotypeLazyRoute: typeof FindMediaByOrganismPhenotypeLazyRoute
   FindMediaByTaxonomicTreeLazyRoute: typeof FindMediaByTaxonomicTreeLazyRoute
   SearchLazyRoute: typeof SearchLazyRoute
@@ -435,6 +463,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompareMediaLazyRoute: CompareMediaLazyRoute,
   CompareMediaByTaxidsLazyRoute: CompareMediaByTaxidsLazyRoute,
   FindMediaByComponentsLazyRoute: FindMediaByComponentsLazyRoute,
+  FindMediaByGtdbTaxonomicTreeLazyRoute: FindMediaByGtdbTaxonomicTreeLazyRoute,
   FindMediaByOrganismPhenotypeLazyRoute: FindMediaByOrganismPhenotypeLazyRoute,
   FindMediaByTaxonomicTreeLazyRoute: FindMediaByTaxonomicTreeLazyRoute,
   SearchLazyRoute: SearchLazyRoute,
@@ -464,6 +493,7 @@ export const routeTree = rootRoute
         "/compare-media",
         "/compare-media-by-taxids",
         "/find-media-by-components",
+        "/find-media-by-gtdb-taxonomic-tree",
         "/find-media-by-organism-phenotype",
         "/find-media-by-taxonomic-tree",
         "/search",
@@ -494,6 +524,9 @@ export const routeTree = rootRoute
     },
     "/find-media-by-components": {
       "filePath": "find-media-by-components.lazy.tsx"
+    },
+    "/find-media-by-gtdb-taxonomic-tree": {
+      "filePath": "find-media-by-gtdb-taxonomic-tree.lazy.tsx"
     },
     "/find-media-by-organism-phenotype": {
       "filePath": "find-media-by-organism-phenotype.lazy.tsx"
