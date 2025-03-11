@@ -37,6 +37,11 @@ import "./paths/taxon_children.tsp";
 import "./paths/taxon_ancestors.tsp";
 import "./paths/taxon_search_by_name.tsp";
 //
+import "./paths/list_media_of_gtdb_taxons.tsp";
+import "./paths/gtdb_taxon_children.tsp";
+import "./paths/gtdb_taxon_ancestors.tsp";
+import "./paths/gtdb_taxon_search_by_name.tsp";
+//
 import "./paths/deprecated/_list_media.tsp";
 import "./paths/deprecated/all_components.tsp";
 import "./paths/deprecated/infraspecific_list_by_taxid.tsp";
@@ -108,6 +113,11 @@ interface _TaxonAncestors extends TaxonAncestors {}
 interface _TaxonSearchByName extends TaxonSearchByName {}
 interface _TaxonChildren extends TaxonChildren {}
 interface _componentWithComponents extends ComponentsWithComponents {}
+//
+interface _GTDBListMediaOfTaxons extends GTDBListMediaOfTaxons {}
+interface _GTDBTaxonSearchByName extends GTDBTaxonSearchByName {}
+interface _GTDBTaxonAncestors extends GTDBTaxonAncestors {}
+interface _GTDBTaxonChildren extends GTDBTaxonChildren {}
 //
 interface _MediaStrainsAlignment extends MediaStrainsAlignment {}
 interface _MediaComponentAlignment extends MediaComponentAlignment {}

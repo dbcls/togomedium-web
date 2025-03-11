@@ -5,6 +5,7 @@ info:
   version: 0.0.0
 tags:
   - name: New
+  - name: GTDB
   - name: Stats
   - name: Deprecated
     description: These endpoints have been deprecated.
@@ -65,6 +66,62 @@ paths:
                   $ref: '#/components/schemas/ComponentsWithComponentsResponse'
       tags:
         - Media Finder
+  /gmdb_gtdb_taxonomy_ancestors:
+    get:
+      operationId: _GTDBTaxonAncestors_get
+      description: Retrieve the ancestors of a taxonomy, useful for visualizing the taxon's hierarchical tree structure
+      parameters:
+        - $ref: '#/components/parameters/GTDBTaxonAncestorsRequest'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GTDBTaxonAncestorsResponse'
+      tags:
+        - Stanza
+        - New
+        - GTDB
+  /gmdb_gtdb_taxonomy_children:
+    get:
+      operationId: _GTDBTaxonChildren_get
+      description: Returns the direct children of the given taxonomy ID. Mostly used at 'Find media by taxonomic tree' page.
+      parameters:
+        - $ref: '#/components/parameters/GTDBTaxonChildrenRequest'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GTDBTaxonChildrenResponse'
+      tags:
+        - Media Finder
+        - New
+        - GTDB
+  /gmdb_gtdb_taxonomy_search_by_name:
+    get:
+      operationId: _GTDBTaxonSearchByName_get
+      description: Searches for a taxonomy by its name, which is particularly useful for incremental searching.
+      parameters:
+        - $ref: '#/components/parameters/GTDBTaxonSearchByNameRequest.q'
+        - $ref: '#/components/parameters/GTDBTaxonSearchByNameRequest.max'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GTDBTaxonSearchByNameResponse'
+      tags:
+        - Stanza
+        - New
+        - GTDB
   /gmdb_infraspecific_list_by_taxid:
     get:
       operationId: _InfraspecificListByTaxId_get
@@ -281,6 +338,25 @@ paths:
                 $ref: '#/components/schemas/ListMediaOfComponentResponse'
       tags:
         - List Stanza
+  /gmdb_media_by_gtdb_taxon:
+    get:
+      operationId: _GTDBListMediaOfTaxons_get
+      description: Search for media associated with a taxon and return a list
+      parameters:
+        - $ref: '#/components/parameters/GTDBListMediaOfTaxonsRequest.tax_id'
+        - $ref: '#/components/parameters/ListRequest.limit'
+        - $ref: '#/components/parameters/ListRequest.offset'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GTDBListMediaOfTaxonsResponse'
+      tags:
+        - List Stanza
+        - New
+        - GTDB
   /gmdb_media_by_strainid:
     get:
       operationId: _ListMediaOfStrain_get
@@ -705,6 +781,47 @@ components:
       schema:
         type: integer
         default: 11
+      explode: false
+    GTDBListMediaOfTaxonsRequest.tax_id:
+      name: tax_id
+      in: query
+      required: true
+      description: single tax_id
+      schema:
+        type: string
+      explode: false
+    GTDBTaxonAncestorsRequest:
+      name: tax_id
+      in: query
+      required: true
+      description: Taxonomy ID
+      schema:
+        type: string
+      explode: false
+    GTDBTaxonChildrenRequest:
+      name: tax_id
+      in: query
+      required: true
+      description: Taxonomy ID
+      schema:
+        type: string
+      explode: false
+    GTDBTaxonSearchByNameRequest.max:
+      name: max
+      in: query
+      required: true
+      description: Maximum number of results to return
+      schema:
+        type: integer
+      explode: false
+    GTDBTaxonSearchByNameRequest.q:
+      name: q
+      in: query
+      required: true
+      description: Taxonomy name
+      schema:
+        type: string
+        minLength: 4
       explode: false
     ListChildrenOfTaxonRequest.tax_id:
       name: tax_id
@@ -1157,6 +1274,98 @@ components:
         num_media:
           type: integer
           description: number of media
+    GTDBListMediaOfTaxonsResponse:
+      type: object
+      required:
+        - contents
+        - total
+        - offset
+        - limit
+        - columns
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              original_media_id:
+                type: string
+              media_id:
+                $ref: '#/components/schemas/ListLink'
+            required:
+              - name
+              - original_media_id
+              - media_id
+        total:
+          type: integer
+          example: 100
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 10
+        columns:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              label:
+                type: string
+            required:
+              - key
+              - label
+    GTDBTaxonAncestorsResponse:
+      type: object
+      required:
+        - tax_id
+        - name
+        - rank
+      properties:
+        tax_id:
+          type: string
+        name:
+          type: string
+        rank:
+          type: string
+    GTDBTaxonChildrenResponse:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              tax_id:
+                type: string
+              name:
+                type: string
+              rank:
+                type: string
+            required:
+              - tax_id
+              - name
+              - rank
+          description: List of direct child taxa
+    GTDBTaxonSearchByNameResponse:
+      type: object
+      required:
+        - tax_id
+        - name
+        - rank
+      properties:
+        tax_id:
+          type: string
+        name:
+          type: string
+        rank:
+          type: string
     GmsByKeggTids3Response:
       type: object
       required:

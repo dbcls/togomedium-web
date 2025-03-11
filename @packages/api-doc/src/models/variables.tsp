@@ -6,4 +6,5 @@ union Tags {
   Deprecated: "Deprecated",
   New: "New",
   Stats: "Stats",
+  GTDB: "GTDB",
 }
