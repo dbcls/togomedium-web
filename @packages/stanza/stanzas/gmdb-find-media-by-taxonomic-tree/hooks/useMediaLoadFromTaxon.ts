@@ -8,6 +8,7 @@ import {
 } from "%api/listMediaOfTaxons/definitions";
 import { getData } from "%core/network/getData";
 import { useSelectedTaxonState } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/selectedTaxon";
+import { useListMediaOfTaxonsApi } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
 import { useFoundMediaMutators } from "%stanza/state/media-finder/foundMedia";
 import { useIsMediaLoadingMutators } from "%stanza/state/media-finder/isMediaLoading";
 import {
@@ -24,20 +25,18 @@ export const useMediaLoadFromTaxon = () => {
   const { setFoundMedia } = useFoundMediaMutators();
   const { setIsMediaLoading } = useIsMediaLoadingMutators();
   const { reset } = useMediaPaginationMutators();
+  const { url, type } = useListMediaOfTaxonsApi();
   const query = useQuery({
-    queryKey: ["media_of_taxon", selectedTaxon.sort(), { page }],
+    queryKey: ["media_of_taxon", type, selectedTaxon.sort(), { page }],
     queryFn: async () => {
       const tax_ids = selectedTaxon.sort().join(",");
       if (tax_ids.length === 0) return nullListResponse;
       //
-      const response = await getData<ListMediaOfTaxonsResponse, ListMediaOfTaxonsParams>(
-        listMediaOfTaxonsURL,
-        {
-          tax_ids,
-          limit: SHOW_COUNT,
-          offset: (page - 1) * SHOW_COUNT,
-        }
-      );
+      const response = await getData<ListMediaOfTaxonsResponse, ListMediaOfTaxonsParams>(url, {
+        tax_ids,
+        limit: SHOW_COUNT,
+        offset: (page - 1) * SHOW_COUNT,
+      });
       if (!response.body) throw new Error("No data");
       return response.body;
     },

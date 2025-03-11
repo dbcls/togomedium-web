@@ -1,11 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, PropsWithChildren, useEffect, useMemo } from "react";
 import { Optional } from "yohak-tools";
-import {
-  TaxonChildrenParams,
-  TaxonChildrenResponse,
-  taxonChildrenURL,
-} from "%api/taxonChildren/definitions";
+import { TaxonChildrenParams, TaxonChildrenResponse } from "%api/taxonChildren/definitions";
 import { PATH_TAXON } from "%core/consts";
 import { getData } from "%core/network/getData";
 import { makeLinkPath } from "%core/network/makeLinkPath";
@@ -28,6 +24,7 @@ import {
   useTaxonListMutators,
   useTaxonListState,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
+import { useTreeApi } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
 import {
   useIsOpen,
   useTaxonTreeMutators,
@@ -42,7 +39,8 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
   const myInfo: Optional<TaxonInfo> = useMemo(() => {
     return taxonList.find((item) => item.id === id);
   }, [taxonList, id]);
-  const { branchChildren, isOpen, onToggleChildren, toggleIconStatus } = useBranchChildren(myInfo);
+  const { branchChildren, isOpen, onToggleChildren, toggleIconStatus, taxonType } =
+    useBranchChildren(myInfo);
   const { descendants, ascendants, ascendantsLabel } = useLineages(id, taxonList);
   const { check, onClickCheck } = useChecked(id, taxonList, ascendants, descendants);
   const { label, rank } = useTaxonInfo(myInfo);
@@ -62,6 +60,7 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
       onToggleChildren={onToggleChildren}
       toggle={toggleIconStatus}
       isHighlighted={isHighlighted}
+      showId={taxonType === "NCBI"}
     >
       {isOpen &&
         branchChildren.length &&
@@ -76,25 +75,19 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
 };
 
 const useBranchChildren = (info: Optional<TaxonInfo>) => {
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
-  // const onToggleChildren = () => {
-  //   setIsOpen((prev) => !prev);
-  // };
   const { toggleOpen } = useTaxonTreeMutators();
-  // const setIsOpen = (value: boolean) => {
-  //   setBranchState(info?.id || "", value);
-  // };
   const onToggleChildren = () => toggleOpen(info?.id || "");
   const isOpen = useIsOpen(info?.id || "");
 
+  const { url, type } = useTreeApi();
   const { addTaxonToList, setTaxonChildren } = useTaxonListMutators();
 
   const query = useQuery({
-    queryKey: ["taxon_children", info?.id || ""],
+    queryKey: ["taxon_children", type, info?.id || ""],
     queryFn: async () => {
       const tax_id = info?.id || "";
       if (!tax_id) return [];
-      const response = await getData<TaxonChildrenResponse, TaxonChildrenParams>(taxonChildrenURL, {
+      const response = await getData<TaxonChildrenResponse, TaxonChildrenParams>(url, {
         tax_id,
       });
       return response.body;
@@ -140,7 +133,7 @@ const useBranchChildren = (info: Optional<TaxonInfo>) => {
         return "expand";
     }
   }, [info, isOpen, query.isLoading]);
-  return { branchChildren, onToggleChildren, isOpen, toggleIconStatus };
+  return { branchChildren, onToggleChildren, isOpen, toggleIconStatus, taxonType: type };
 };
 
 const useLinkString = (id: string, rank: string) => {

@@ -7,3 +7,4 @@ export type TaxonChildrenParams = {
 };
 
 export const taxonChildrenURL = makeApiUrl("gmdb_taxonomy_children");
+export const gtdbTaxonChildrenURL = makeApiUrl("gmdb_taxonomy_gtdb_children");

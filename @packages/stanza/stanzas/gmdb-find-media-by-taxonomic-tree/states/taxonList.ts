@@ -7,7 +7,7 @@ export type TaxonInfo = {
   children: string[] | undefined;
 };
 
-const superkingdoms: TaxonInfo[] = [
+export const ncbiSuperkingdoms: TaxonInfo[] = [
   {
     id: "2157",
     label: "Archaea",
@@ -28,7 +28,22 @@ const superkingdoms: TaxonInfo[] = [
   },
 ];
 
-const taxonListAtom = atom<TaxonInfo[]>(superkingdoms);
+export const gtdbSuperkingdoms: TaxonInfo[] = [
+  {
+    id: "d__Bacteria",
+    label: "d__Bacteria",
+    rank: "Domain",
+    children: undefined,
+  },
+  {
+    id: "d__Archaea",
+    label: "d__Archaea",
+    rank: "Domain",
+    children: undefined,
+  },
+];
+
+const taxonListAtom = atom<TaxonInfo[]>([...ncbiSuperkingdoms, ...gtdbSuperkingdoms]);
 
 export const useTaxonListState = () => {
   return useAtomValue(taxonListAtom);
@@ -50,5 +65,6 @@ export const useTaxonListMutators = () => {
       return [...filtered, { ...target, children }];
     });
   };
+
   return { addTaxonToList, setTaxonChildren };
 };

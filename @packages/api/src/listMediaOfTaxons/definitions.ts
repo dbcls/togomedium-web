@@ -14,3 +14,4 @@ export type ListMediaOfTaxonsParams = ListApiParams<{
 }>;
 
 export const listMediaOfTaxonsURL = makeApiUrl("gmdb_media_by_taxon");
+export const listMediaOfGtdbTaxonsURL = makeApiUrl("gmdb_media_by_gtdb_taxon");

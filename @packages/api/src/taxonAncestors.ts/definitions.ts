@@ -7,3 +7,4 @@ export type TaxonAncestorsParams = {
 };
 
 export const taxonAncestorsURL = makeApiUrl("gmdb_taxonomy_ancestors");
+export const gtdbTaxonAncestorsURL = makeApiUrl("gmdb_taxonomy_gtdb_ancestors");

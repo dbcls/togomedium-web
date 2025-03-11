@@ -6,9 +6,12 @@ import { useDebounceValue } from "usehooks-ts";
 import {
   TaxonSearchByNameParams,
   TaxonSearchByNameResponse,
-  taxonSearchByNameURL,
 } from "%api/taxonSearchByName/definitions";
 import { getData } from "%core/network/getData";
+import {
+  useTaxonomyType,
+  useTaxonSearchApi,
+} from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
 import { THEME } from "%stanza/styles/theme";
 
 type Props = {
@@ -17,14 +20,15 @@ type Props = {
 
 const useTaxonChildrenSearch = () => {
   const [debouncedValue, setValue] = useDebounceValue("", 500);
+  const { url, type } = useTaxonSearchApi();
   const { data, isFetching, isError } = useQuery({
-    queryKey: ["taxon_search", debouncedValue],
+    queryKey: ["taxon_search", type, debouncedValue],
     queryFn: async () => {
       if (debouncedValue.length <= 3) return [];
-      const response = await getData<TaxonSearchByNameResponse, TaxonSearchByNameParams>(
-        taxonSearchByNameURL,
-        { q: debouncedValue, max: 100 }
-      );
+      const response = await getData<TaxonSearchByNameResponse, TaxonSearchByNameParams>(url, {
+        q: debouncedValue,
+        max: 100,
+      });
       return response.body ?? [];
     },
     staleTime: Infinity,
@@ -53,6 +57,10 @@ const useTaxonChildrenSearch = () => {
 
 export const TaxonInput: FC<Props> = ({ onChange }) => {
   const { options, setValue, optionsText } = useTaxonChildrenSearch();
+  const taxonomyType = useTaxonomyType();
+  const showId = useMemo(() => {
+    return taxonomyType === "NCBI";
+  }, [taxonomyType]);
   return (
     <Autocomplete
       options={options}
@@ -84,7 +92,7 @@ export const TaxonInput: FC<Props> = ({ onChange }) => {
           >
             <Box sx={{ display: "flex", gap: 1, alignItems: "baseline" }}>
               <TagTip>{option.rank}</TagTip>
-              <TaxId>[tax_id:{option.tax_id}]</TaxId>
+              {showId && <TaxId>[tax_id:{option.tax_id}]</TaxId>}
               <span>{option.name}</span>
             </Box>
           </li>

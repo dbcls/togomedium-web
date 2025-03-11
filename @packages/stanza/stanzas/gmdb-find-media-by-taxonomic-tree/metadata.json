@@ -11,7 +11,14 @@
   "stanza:contributor": [],
   "stanza:created": "2022-01-01",
   "stanza:updated": "2025-03-22",
-  "stanza:parameter": [],
+  "stanza:parameter": [
+    {
+      "stanza:key": "taxonomy_type",
+      "stanza:example": "NCBI",
+      "stanza:description": "NCBI or GTDB",
+      "stanza:required": false
+    }
+  ],
   "stanza:menu-placement": "none",
   "stanza:style": [],
   "stanza:incomingEvent": [],

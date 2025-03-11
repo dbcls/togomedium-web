@@ -9,3 +9,4 @@ export type TaxonSearchByNameParams = {
   max: number;
 };
 export const taxonSearchByNameURL = makeApiUrl("gmdb_taxonomy_search_by_name");
+export const gtdbTaxonSearchByNameUrl = makeApiUrl("gmdb_taxonomy_gtdb_search_by_name");

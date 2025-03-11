@@ -27,6 +27,7 @@ type Props = {
   onClickCheck: (id: string) => void;
   onToggleChildren: (id: string) => void;
   isHighlighted?: boolean;
+  showId?: boolean;
 } & PropsWithChildren;
 
 export const TreeBranchView: FC<Props> = ({
@@ -43,12 +44,18 @@ export const TreeBranchView: FC<Props> = ({
   toolTipLabel = "",
   toggle,
   isHighlighted = false,
+  showId = true,
 }) => {
   return (
     <Wrapper>
       <Inner className={isHighlighted ? "highlighted" : ""}>
         <Left>
-          <span onClick={() => onToggleChildren(id)}>
+          <span
+            onClick={() => {
+              if (toggle === "loading" || toggle === "none") return;
+              onToggleChildren(id);
+            }}
+          >
             <ToggleIcon status={toggle} />
           </span>
           <Tooltip
@@ -60,7 +67,7 @@ export const TreeBranchView: FC<Props> = ({
             <span>{label}</span>
           </Tooltip>
           {tag && <TagTip>{tag}</TagTip>}
-          {linkString && linkURL && (
+          {linkString && linkURL && showId && (
             <a
               href={linkURL}
               target={getLinkTarget(linkURL)}
