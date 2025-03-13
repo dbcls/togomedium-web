@@ -9,6 +9,7 @@ import { QueryPane } from "%stanza/components/styled/QueryPane";
 import { SubPane } from "%stanza/components/styled/SubPane";
 import { TaxonInput } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonInput";
 import { TaxonomicTreeSection } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonomicTreeSection";
+import { useMediaLoadFromTaxon } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/hooks/useMediaLoadFromTaxon";
 import {
   useSearchResult,
   useSearchResultMutators,
@@ -30,6 +31,7 @@ export const AppContainer: FC<Props> = ({ dispatchEvent, taxonomyType }) => {
   const { setApiType } = useTaxonomyTypeMutators();
   const { setSearchResult } = useSearchResultMutators();
   useTaxonSearchResult();
+  useMediaLoadFromTaxon();
   useEffect(() => {
     setApiType(taxonomyType);
   }, [taxonomyType, setApiType]);
