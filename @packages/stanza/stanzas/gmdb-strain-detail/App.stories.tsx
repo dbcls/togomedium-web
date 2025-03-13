@@ -12,3 +12,9 @@ export const Result1: Story = {
     strain_id: "S602",
   },
 };
+
+export const Result2: Story = {
+  args: {
+    strain_id: "S1238",
+  },
+};

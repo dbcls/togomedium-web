@@ -47,8 +47,8 @@ export const convertHTMLEntity = (text: string) => {
 
 export const makeSpeciesName = (str: string) => {
   const arr = str.split(" ");
-  if (arr.length < 1) {
-    return "";
+  if (arr.length <= 1) {
+    return str;
   }
   const first = arr.shift()!.replace("[", "").charAt(0).toUpperCase();
 
@@ -59,8 +59,8 @@ export const makeSpeciesName = (str: string) => {
 
 export const makeStrainName = (str: string) => {
   const arr = str.split(" ");
-  if (arr.length < 2) {
-    return "";
+  if (arr.length <= 2) {
+    return str;
   }
   const first = arr.shift()!.charAt(0).toUpperCase();
   const second = arr.shift()!.charAt(0).toUpperCase();
