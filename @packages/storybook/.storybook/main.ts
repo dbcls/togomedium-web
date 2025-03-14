@@ -10,11 +10,11 @@ const config: StorybookConfig = {
       files: "**/*.stories.@(js|jsx|mjs|ts|tsx)",
       titlePrefix: "Stanza",
     },
-    // {
-    //   directory: "../../viewer/src/",
-    //   files: "**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    //   titlePrefix: "Viewer",
-    // },
+    {
+      directory: "../../web/src/",
+      files: "**/*.stories.@(js|jsx|mjs|ts|tsx)",
+      titlePrefix: "Web",
+    },
     // {
     //   directory: "../../editor/src/",
     //   files: "**/*.stories.@(js|jsx|mjs|ts|tsx)",
@@ -30,5 +30,6 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
+
 };
 export default config;

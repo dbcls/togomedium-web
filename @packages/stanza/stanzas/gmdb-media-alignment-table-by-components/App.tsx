@@ -7,8 +7,8 @@ import {
   mediaComponentAlignmentTableURL,
 } from "%api/mediaComponentAlignment/definitions";
 import { getData } from "%core/network/getData";
+import { THEME } from "%core/theme";
 import { ScrollableTable } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/ScrollableTable";
-import { THEME } from "%stanza/styles/theme";
 
 export type AppProps = {
   gm_ids: string[];

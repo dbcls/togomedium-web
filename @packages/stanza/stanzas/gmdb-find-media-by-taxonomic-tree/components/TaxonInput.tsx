@@ -8,11 +8,11 @@ import {
   TaxonSearchByNameResponse,
 } from "%api/taxonSearchByName/definitions";
 import { getData } from "%core/network/getData";
+import { THEME } from "%core/theme";
 import {
   useTaxonomyType,
   useTaxonSearchApi,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   onChange: (id: string | null) => void;

@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 
 type Props = {
   total: number;

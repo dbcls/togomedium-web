@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import { useQueryDataState } from "../../state/media-finder/queryData";
 import { queryDataToInfoText } from "../../utils/queryDataToInfoText";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 
 type Props = {};
 

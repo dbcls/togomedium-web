@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect } from "react";
+import { THEME } from "%core/theme";
 import { FoundOrganismsList } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/FoundOrganismsList";
 import { OrganismTab } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismTab";
 import { SelectedOrganismsList } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/SelectedOrganismsList";
@@ -9,7 +10,6 @@ import {
   useOrganismTabFocusState,
 } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/organismTabFocus";
 import { usePhenotypeQueryState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/phenotypeQuery";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {};
 

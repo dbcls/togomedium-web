@@ -1,6 +1,7 @@
 import { Badge, SxProps, Tab, Tabs } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
+import { THEME } from "%core/theme";
 import {
   MediaTabName,
   mediaTabNames,
@@ -8,7 +9,6 @@ import {
   useMediaTabFocusState,
 } from "%stanza/state/media-finder/mediaTabFocus";
 import { useSelectedMediaState } from "%stanza/state/media-finder/selectedMedia";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {};
 

@@ -1,8 +1,8 @@
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useRef } from "react";
+import { THEME } from "%core/theme";
 import { drawGraph } from "%stanza/stanzas/gmdb-similar-media-node/utils/drawGraph";
 import { GraphData } from "%stanza/stanzas/gmdb-similar-media-node/utils/useGraphData";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = { data: GraphData };
 

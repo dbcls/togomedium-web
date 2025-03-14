@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 
 export const ColorButton = styled("a")({
   backgroundColor: THEME.STANZA_COLOR.PRIMARY,

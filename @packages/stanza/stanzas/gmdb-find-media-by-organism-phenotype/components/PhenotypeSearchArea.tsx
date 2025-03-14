@@ -1,9 +1,9 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
+import { THEME } from "%core/theme";
 import { RangeSlider } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/RangeSlider";
 import { SelectBox } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/SelectBox";
 import { usePhenotypeQueryMutators } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/phenotypeQuery";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {};
 

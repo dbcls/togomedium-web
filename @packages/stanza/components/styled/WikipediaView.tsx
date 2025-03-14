@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
 
 export const WikipediaView: FC<WikipediaData> = ({ thumb, description, link }) => (

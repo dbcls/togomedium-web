@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect } from "react";
+import { THEME } from "%core/theme";
 import { ActionPane } from "%stanza/components/media-finder/ActionPane";
 import { FoundMediaList } from "%stanza/components/media-finder/FoundMediaList";
 import { MediaTab } from "%stanza/components/media-finder/MediaTab";
@@ -9,7 +10,6 @@ import {
   useMediaTabFocusMutators,
   useMediaTabFocusState,
 } from "%stanza/state/media-finder/mediaTabFocus";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;

@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import { PATH_TAXON } from "%core/consts";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 import { LabelInfo } from "%stanza/utils/labelInfo";
 
 type Props = {

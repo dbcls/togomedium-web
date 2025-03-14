@@ -11,7 +11,7 @@ import {
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import React, { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from "react";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 
 type Props = {
   label: string;

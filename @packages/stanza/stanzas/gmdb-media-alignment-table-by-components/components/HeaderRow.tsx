@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
+import { THEME } from "%core/theme";
 import { HeaderCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/HeaderCell";
 import {
   useIsMediaExpandedMutators,
@@ -9,7 +10,6 @@ import {
   useIsOrganismsExpandedMutators,
   useIsOrganismsExpendedState,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = { scrollable?: boolean };
 

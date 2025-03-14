@@ -1,12 +1,12 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
+import { THEME } from "%core/theme";
 import { Pagination } from "%stanza/components/media-finder/Pagination";
 import { OrganismListItem } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismListItem";
 import { useOrganismList } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/hooks/useOrganismList";
 import { useOrganismQuery } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/hooks/useOrganismQuery";
 import { useOrganismPaginationMutators } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/organismPagination";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {};
 

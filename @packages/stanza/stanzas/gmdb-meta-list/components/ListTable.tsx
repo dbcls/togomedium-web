@@ -4,8 +4,8 @@ import React, { FC } from "react";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
+import { THEME } from "%core/theme";
 import { ListApiBody } from "%stanza/stanzas/gmdb-meta-list/types";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   data: ListApiBody;

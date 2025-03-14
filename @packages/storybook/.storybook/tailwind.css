@@ -1,0 +1,18 @@
+@import "tailwindcss";
+/*noinspection CssInvalidAtRule*/
+@theme {
+  --color-primary:#8FC31F;
+  --color-primary-dark:#6FA80C;
+  --font-wide:"Fira Sans", sans-serif;
+  --font-narrow:"Fira Sans Condensed", sans-serif;
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-300, currentColor);
+  }
+}

@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { SimulationLinkDatum, SimulationNodeDatum } from "d3";
 import { D3DragEvent } from "d3-drag";
 import { GraphData } from "./useGraphData";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 
 extend([mixPlugin]);
 

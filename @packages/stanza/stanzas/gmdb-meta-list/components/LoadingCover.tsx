@@ -1,7 +1,7 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 
 type Props = { showLoading: boolean; errorMessage: string };
 

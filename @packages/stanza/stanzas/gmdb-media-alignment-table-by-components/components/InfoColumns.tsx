@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
+import { THEME } from "%core/theme";
 import { HeaderCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/HeaderCell";
 import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/MediaRow";
 import {
@@ -15,7 +16,6 @@ import {
   useIsOrganismsExpandedMutators,
   useIsOrganismsExpendedState,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = { data: MediaComponentAlignmentTableResponse; prioritizedOrganism: string[] };
 

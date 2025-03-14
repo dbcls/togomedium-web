@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import React, { ComponentProps, FC, useEffect, useMemo } from "react";
 import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
+import { THEME } from "%core/theme";
 import { FooterRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterRow";
 import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/HeaderRow";
 import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/MediaRow";
@@ -11,7 +12,6 @@ import {
   useComponentTreeMutators,
   useComponentTreeState,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/componentTree";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = { data: MediaComponentAlignmentTableResponse; prioritizedOrganism: string[] };
 type RowProps = ComponentProps<typeof MediaRow>[];

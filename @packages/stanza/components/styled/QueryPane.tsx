@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 
 export const QueryPane = styled("div")({
   flex: 1,

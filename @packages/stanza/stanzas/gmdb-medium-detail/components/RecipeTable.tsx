@@ -4,7 +4,7 @@ import { PATH_COMPONENT, PATH_MEDIUM } from "%core/consts";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 
 type Props = {
   index: number;

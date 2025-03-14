@@ -6,6 +6,8 @@ import React from "react";
 import type { Preview } from "@storybook/react";
 import { EmotionGlobalStyles } from "%stanza/styles/EmotionGlobalStyles";
 import { muiTheme } from "%stanza/styles/muiTheme";
+import "./tailwind.css";
+
 const queryClient = new QueryClient();
 const preview: Preview = {
   parameters: {

@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React, { ComponentProps, FC } from "react";
+import { THEME } from "%core/theme";
 import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterCell";
 import {
   WIDTH_COMPACT,
@@ -7,7 +8,6 @@ import {
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
 import { useIsMediaExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";
 import { useIsOrganismsExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   components: ComponentProps<typeof FooterCell>[];

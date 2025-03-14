@@ -1,12 +1,12 @@
 import Slider from "@mui/material/Slider";
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useMemo, useState } from "react";
+import { THEME } from "%core/theme";
 import { AngleLeftIcon } from "%stanza/components/icons/AngleLeftIcon";
 import { AngleRightIcon } from "%stanza/components/icons/AngleRightIcon";
 import { DoubleAngleLeftIcon } from "%stanza/components/icons/DoubleAngleLeftIcon";
 import { DoubleAngleRightIcon } from "%stanza/components/icons/DoubleAngleRightIcon";
 import { getPagination } from "%stanza/stanzas/gmdb-meta-list/utils/getPagination";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   total: number;

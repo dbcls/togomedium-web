@@ -3,13 +3,13 @@ import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import React, { FC, PropsWithChildren } from "react";
 import { getLinkTarget } from "%core/network/getLinkTarget";
+import { THEME } from "%core/theme";
 import {
   IconCompact,
   IconExpand,
   IconLoading,
   IconNoChildren,
 } from "%stanza/components/icons/icons";
-import { THEME } from "%stanza/styles/theme";
 
 export type CheckStatus = "none" | "checked" | "grouped" | "indeterminate";
 export type ToggleIconStatus = "none" | "expand" | "compact" | "loading";

@@ -11,7 +11,8 @@
       "%stanza/*": ["../stanza/*"],
       "%api/*": ["../api/src/*"],
       "%core/*": ["../core/src/*"],
-      "%storybook/*": ["../storybook/src/*"]
+      "%storybook/*": ["../storybook/src/*"],
+      "%web/*": ["../web/src/*"]
     }
   },
   "include": [

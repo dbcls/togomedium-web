@@ -4,9 +4,9 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import { PATH_MEDIUM } from "%core/consts";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
+import { THEME } from "%core/theme";
 import { makeCellHeight } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
 import { CellInfo } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {} & CellInfo;
 

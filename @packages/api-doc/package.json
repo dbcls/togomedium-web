@@ -14,15 +14,6 @@
     "dev": "concurrently \"npm run dsp:dev\" \"npm run vite\"",
     "bundle": "npm run tsp:build && npm run vite:build && npm run tsp:copy-to-web"
   },
-  "peerDependencies": {
-    "@typespec/compiler": "latest",
-    "@typespec/http": "latest",
-    "@typespec/json-schema": "latest",
-    "@typespec/openapi": "latest",
-    "@typespec/openapi3": "latest",
-    "@typespec/rest": "latest",
-    "@typespec/versioning": "latest"
-  },
   "devDependencies": {
     "@typespec/compiler": "latest",
     "@typespec/http": "latest",

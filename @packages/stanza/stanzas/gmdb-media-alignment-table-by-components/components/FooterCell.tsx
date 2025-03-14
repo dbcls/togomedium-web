@@ -2,10 +2,10 @@ import { SxProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
+import { THEME } from "%core/theme";
 import { IconBlank, IconCompact, IconExpand } from "%stanza/components/icons/icons";
 import { WIDTH_ALIGNMENT_CELL } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
 import { useComponentTreeMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/componentTree";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {
   label: string;

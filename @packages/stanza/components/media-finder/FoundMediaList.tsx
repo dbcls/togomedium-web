@@ -1,6 +1,7 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 import React, { FC, useEffect, useState } from "react";
+import { THEME } from "%core/theme";
 import { MediaListItem, MediaListItemInfo } from "%stanza/components/media-finder/MediaListItem";
 import { Pagination } from "%stanza/components/media-finder/Pagination";
 import { QueryInfo } from "%stanza/components/media-finder/QueryInfo";
@@ -11,7 +12,6 @@ import {
   useSelectedMediaMutators,
   useSelectedMediaState,
 } from "%stanza/state/media-finder/selectedMedia";
-import { THEME } from "%stanza/styles/theme";
 import { hasIdOfLabel, LabelInfo } from "%stanza/utils/labelInfo";
 
 type Props = {};

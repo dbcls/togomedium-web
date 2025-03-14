@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 import { PATH_COMPONENT } from "%core/consts";
 import { makeLinkPath } from "%core/network/makeLinkPath";
-import { THEME } from "%stanza/styles/theme";
+import { THEME } from "%core/theme";
 
 export type AlignmentCellState = "grouped" | "available" | "none";
 

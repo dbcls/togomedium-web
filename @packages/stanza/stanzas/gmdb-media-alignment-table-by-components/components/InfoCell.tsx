@@ -3,11 +3,11 @@ import { styled } from "@mui/material/styles";
 import React, { FC, useMemo } from "react";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
+import { THEME } from "%core/theme";
 import {
   WIDTH_COMPACT,
   WIDTH_EXPANDED,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
-import { THEME } from "%stanza/styles/theme";
 import { LabelInfo } from "%stanza/utils/labelInfo";
 
 type Props = {

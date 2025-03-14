@@ -4,6 +4,7 @@ import React, { FC, useEffect, useMemo } from "react";
 import { LineageRank } from "%api/mediaStrainsAlignment/definitions";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
+import { THEME } from "%core/theme";
 import { FilterIcon } from "%stanza/components/icons/FilterIcon";
 import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/MediaCell";
 import { makeCellHeight } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
@@ -12,7 +13,6 @@ import {
   useFilterTaxonState,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterTaxon";
 import { CellInfo } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
-import { THEME } from "%stanza/styles/theme";
 import { makeSpeciesName } from "%stanza/utils/string";
 
 type Props = { rank: LineageRank; isFolded: boolean } & CellInfo;

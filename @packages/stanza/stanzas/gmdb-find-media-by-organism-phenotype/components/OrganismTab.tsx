@@ -1,6 +1,7 @@
 import { Badge, SxProps, Tab, Tabs } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
+import { THEME } from "%core/theme";
 import {
   OrganismTabName,
   organismTabNames,
@@ -8,7 +9,6 @@ import {
   useOrganismTabFocusState,
 } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/organismTabFocus";
 import { useSelectedOrganismsState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/selectedOrganisms";
-import { THEME } from "%stanza/styles/theme";
 
 type Props = {};
 
