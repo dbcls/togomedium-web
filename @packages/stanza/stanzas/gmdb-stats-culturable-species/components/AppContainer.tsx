@@ -9,7 +9,6 @@ import { THEME } from "%core/theme";
 type Props = { data: StatsCountCulturableSpeciesResponse };
 
 export const AppContainer: FC<Props> = ({ data }) => {
-  const color = THEME.COLOR.PRIMARY_DARK;
   const svgRef = useRef<SVGSVGElement>(null);
   const scaleXRef = useRef<SVGGElement>(null);
   const scaleYRef = useRef<SVGGElement>(null);
@@ -114,7 +113,7 @@ const useDrawChart = (
   scaleYRef: RefObject<SVGGElement | null>
 ) => {
   const barHeight: number = 30;
-  const yLabelsWidth: number = 80;
+  const yLabelsWidth: number = 60;
   const xLabelsHeight: number = 30;
   const [wrapperWidth, setWrapperWidth] = useState(0);
 

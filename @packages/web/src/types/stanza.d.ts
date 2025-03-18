@@ -42,6 +42,7 @@ declare global {
         "togostanza-gmdb-find-media-by-taxonomic-tree": {
           taxonomy_type: "NCBI" | "GTDB";
         } & StanzaProps;
+        "togostanza-gmdb-stats-culturable-species": {} & StanzaProps;
       }
     }
   }
