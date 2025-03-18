@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import * as d3 from "d3";
 import { FC, useEffect, useRef } from "react";
 import {
-  StatsMediumSpeciesDistributionParams,
-  StatsMediumSpeciesDistributionResponse,
-  statsMediumSpeciesDistributionURL,
-} from "%api/statsMediumSpeciesDistribution/definitions.ts";
+  StatsCountCulturableSpeciesParams,
+  StatsCountCulturableSpeciesResponse,
+  statsCountCulturableSpeciesURL,
+} from "%api/statsCountCulturableSpecies/definitions.ts";
 import { getData } from "%core/network/getData.ts";
 import { THEME } from "%core/theme.ts";
 
@@ -68,7 +68,7 @@ export const MediumSpeciesDistributionChart: FC<{}> = () => {
 };
 
 const useDrawChart = (
-  data: StatsMediumSpeciesDistributionResponse | undefined,
+  data: StatsCountCulturableSpeciesResponse | undefined,
   svgRef: RefObject<SVGSVGElement | null>,
   scaleXRef: RefObject<SVGGElement | null>,
   scaleYRef: RefObject<SVGGElement | null>
@@ -118,9 +118,9 @@ const useGraphData = () => {
     queryKey: ["speciesDistribution"],
     queryFn: async () => {
       const response = await getData<
-        StatsMediumSpeciesDistributionResponse,
-        StatsMediumSpeciesDistributionParams
-      >(statsMediumSpeciesDistributionURL, {});
+        StatsCountCulturableSpeciesResponse,
+        StatsCountCulturableSpeciesParams
+      >(statsCountCulturableSpeciesURL, {});
       if (!response.body) {
         throw new Error("No data found");
       }

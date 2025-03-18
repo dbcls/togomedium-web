@@ -1,0 +1,19 @@
+{
+  "@context": {
+    "stanza": "http://togostanza.org/resource/stanza#"
+  },
+  "@id": "gmdb-stats-culturable-species",
+  "stanza:label": "Histogram of the number of culturable species per medium",
+  "stanza:definition": "Displays a histogram of the number of culturable species per medium.",
+  "stanza:license": "MIT",
+  "stanza:author": "Satoshi Onoda (YOHAK)",
+  "stanza:address": "satoshionoda@yohak.design",
+  "stanza:contributor": [],
+  "stanza:created": "2022-01-01",
+  "stanza:updated": "2025-03-22",
+  "stanza:parameter": [],
+  "stanza:menu-placement": "none",
+  "stanza:style": [],
+  "stanza:incomingEvent": [],
+  "stanza:outgoingEvent": []
+}
