@@ -2,6 +2,7 @@ import { styled } from "@mui/material/styles";
 import { THEME } from "%core/theme";
 
 export const QueryPane = styled("div")({
+  position: "relative",
   flex: 1,
   overflowY: "auto",
   borderRadius: THEME.ROUND.BASE,

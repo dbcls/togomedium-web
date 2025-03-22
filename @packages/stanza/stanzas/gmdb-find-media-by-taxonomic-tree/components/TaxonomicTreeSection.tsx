@@ -6,16 +6,23 @@ import {
   TaxonInfo,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
 import { useTaxonomyType } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
+import { LoadingCover } from "%stanza/stanzas/gmdb-meta-list/components/LoadingCover";
 
-type Props = {};
+type Props = {
+  showLoading: boolean;
+};
 
-export const TaxonomicTreeSection: FC<Props> = () => {
+export const TaxonomicTreeSection: FC<Props> = ({ showLoading }) => {
   const type = useTaxonomyType();
   const superKingdoms = useMemo<TaxonInfo[]>(() => {
     return type === "GTDB" ? gtdbSuperkingdoms : ncbiSuperkingdoms;
   }, [type]);
   return (
-    <div>
+    <div style={{ position: "relative" }}>
+      <LoadingCover
+        showLoading={showLoading}
+        errorMessage={""}
+      />
       <div>
         {superKingdoms.map((superKingdom) => (
           <TaxonomicTreeBranch

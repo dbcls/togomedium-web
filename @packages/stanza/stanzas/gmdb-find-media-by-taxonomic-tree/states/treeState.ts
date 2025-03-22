@@ -43,5 +43,9 @@ export const useTaxonTreeMutators = () => {
     });
   };
 
-  return { setTreeState, toggleOpen, setOpen, setClosed, setBranchState, margeTreeState };
+  const closeAll = () => {
+    setTreeState([]);
+  };
+
+  return { setTreeState, toggleOpen, setOpen, setClosed, setBranchState, margeTreeState, closeAll };
 };

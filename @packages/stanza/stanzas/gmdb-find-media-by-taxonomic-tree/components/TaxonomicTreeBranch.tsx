@@ -178,6 +178,7 @@ const useChecked = (
 };
 
 const useLineages = (id: string, taxonList: TaxonInfo[]) => {
+  // console.log("useLineages", id);
   const ascendants = useMemo(() => findAscendants(taxonList, id), [taxonList, id]);
   const descendants = useMemo(() => findDescendants(taxonList, id), [taxonList, id]);
   const ascendantsLabel = useMemo(
