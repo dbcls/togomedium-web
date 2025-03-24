@@ -11,7 +11,7 @@ export const Button: FC<Props> = ({ label, type = "submit", className }) => {
     <button
       type={type}
       className={clsx(
-        "bg-primary-dark flex justify-center rounded-md px-8 pb-2.5 pt-3 text-sm/6 font-medium tracking-wider text-white hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+        "bg-primary-dark hover:bg-primary focus-visible:outline-primary flex cursor-pointer justify-center rounded-md px-8 pt-3 pb-2.5 text-sm/6 font-medium tracking-wider text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
         className
       )}
       value={label}
