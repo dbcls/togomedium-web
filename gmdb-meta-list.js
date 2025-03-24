@@ -1,34 +1,36 @@
-import { d as defineStanzaElement } from './stanza-ee9dc64c.js';
-import { s as styled, j as jsx, T as THEME, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-b083349e.js';
-import { m as makeLinkPath, g as getLinkTarget, u as useQuery } from './getLinkTarget-f23444d4.js';
-import { r as reactExports } from './index-ef9d40bc.js';
-import { n as nanoid, N as NotFound } from './index.browser-0883b6be.js';
-import { S as StanzaWrapper } from './StanzaWrapper-1f2bb82c.js';
-import { S as Slider } from './Slider-fa6f7527.js';
+import { d as defineStanzaElement } from './stanza-3bc73db1.js';
+import { s as styled, j as jsx, T as THEME, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
+import { u as useQuery } from './useQuery-8b12d83b.js';
+import { r as reactExports } from './index-7a88ba65.js';
+import { n as nanoid, N as NotFound } from './index.browser-f7e1df53.js';
+import { S as StanzaWrapper } from './StanzaWrapper-34fcc0ed.js';
+import { S as Slider } from './Slider-42efb8a4.js';
+import { m as makeLinkPath, g as getLinkTarget } from './getLinkTarget-54075a13.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
-import { C as CircularProgress } from './isHostComponent-b55b8d7a.js';
-import { m as makeFormBody } from './getData-b994dab1.js';
-import './DefaultPropsProvider-c607464a.js';
+import { L as LoadingCover } from './LoadingCover-79a3edc9.js';
+import { m as makeFormBody } from './getData-3799b4b6.js';
+import './DefaultPropsProvider-37472ed0.js';
+import './isHostComponent-7889d775.js';
 
 const AngleLeftIcon = ({ sx }) => {
-    return (jsx(Wrapper$7, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", sx: sx, children: jsx("path", { d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" }) }));
-};
-const Wrapper$7 = styled("svg")({});
-
-const AngleRightIcon = ({ sx }) => {
-    return (jsx(Wrapper$6, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", sx: sx, children: jsx("path", { d: "M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" }) }));
+    return (jsx(Wrapper$6, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", sx: sx, children: jsx("path", { d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" }) }));
 };
 const Wrapper$6 = styled("svg")({});
 
-const DoubleAngleLeftIcon = ({ sx }) => {
-    return (jsx(Wrapper$5, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", sx: sx, children: jsx("path", { d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0z" }) }));
+const AngleRightIcon = ({ sx }) => {
+    return (jsx(Wrapper$5, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", sx: sx, children: jsx("path", { d: "M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" }) }));
 };
 const Wrapper$5 = styled("svg")({});
 
-const DoubleAngleRightIcon = ({ sx }) => {
-    return (jsx(Wrapper$4, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", sx: sx, children: jsx("path", { d: "M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z" }) }));
+const DoubleAngleLeftIcon = ({ sx }) => {
+    return (jsx(Wrapper$4, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", sx: sx, children: jsx("path", { d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0z" }) }));
 };
 const Wrapper$4 = styled("svg")({});
+
+const DoubleAngleRightIcon = ({ sx }) => {
+    return (jsx(Wrapper$3, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", sx: sx, children: jsx("path", { d: "M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z" }) }));
+};
+const Wrapper$3 = styled("svg")({});
 
 const getPagination = (props) => {
     const { totalPages, currentPage } = props;
@@ -75,7 +77,7 @@ const BottomController = ({ total, offset, limit, setOffset }) => {
     //
     if (totalPages <= 1)
         return null;
-    return (jsxs(Wrapper$3, { children: [jsxs(Pagination, { children: [!isFirst ? (jsx(IconWrapper, { onClick: () => changePage(1), children: jsx(DoubleAngleLeftIcon, {}) })) : (jsx(IconDummy, {})), !isFirst ? (jsx(IconWrapper, { onClick: () => changePage(currentPage - 1), children: jsx(AngleLeftIcon, {}) })) : (jsx(IconDummy, {})), jsx(PageNums, { children: pagination.map((p) => (jsx("li", { onClick: () => {
+    return (jsxs(Wrapper$2, { children: [jsxs(Pagination, { children: [!isFirst ? (jsx(IconWrapper, { onClick: () => changePage(1), children: jsx(DoubleAngleLeftIcon, {}) })) : (jsx(IconDummy, {})), !isFirst ? (jsx(IconWrapper, { onClick: () => changePage(currentPage - 1), children: jsx(AngleLeftIcon, {}) })) : (jsx(IconDummy, {})), jsx(PageNums, { children: pagination.map((p) => (jsx("li", { onClick: () => {
                                 changePage(p);
                             }, className: p === tempCurrentPage ? "active" : "", children: p }, p))) }), !isLast ? (jsx(IconWrapper, { onClick: () => changePage(currentPage + 1), children: jsx(AngleRightIcon, {}) })) : (jsx(IconDummy, {})), !isLast ? (jsx(IconWrapper, { onClick: () => changePage(totalPages), children: jsx(DoubleAngleRightIcon, {}) })) : (jsx(IconDummy, {}))] }), jsxs(Right, { children: [totalPages > 5 && (jsx(SliderWrapper, { children: jsx(StyledSlider, { value: tempCurrentPage, min: 1, max: totalPages, "aria-label": "Default", valueLabelDisplay: "auto", onChange: (e, v) => {
                                 setTempCurrentPage(v);
@@ -94,7 +96,7 @@ const BottomController = ({ total, offset, limit, setOffset }) => {
 const StyledSlider = styled(Slider)({
     color: THEME.STANZA_COLOR.PRIMARY,
 });
-const Wrapper$3 = styled("div")({
+const Wrapper$2 = styled("div")({
     marginTop: 12,
     display: "flex",
     justifyContent: "space-between",
@@ -171,7 +173,7 @@ const ListTable = ({ data, columnSizes, showColumnNames, limit }) => {
     const extraRows = Array(Math.max(0, limit - data.contents.length))
         .fill(null)
         .map(() => nanoid());
-    return (jsxs(Wrapper$2, { children: [showColumnNames && (jsx("thead", { children: jsx("tr", { children: data.columns.map((column, index) => {
+    return (jsxs(Wrapper$1, { children: [showColumnNames && (jsx("thead", { children: jsx("tr", { children: data.columns.map((column, index) => {
                         const size = columnSizes[index];
                         const isSizeEnabled = !!size && data.columns.length === columnSizes.length;
                         return (jsx("th", { style: isSizeEnabled ? { width: `${size}%` } : {}, children: column.label }, column.key));
@@ -194,7 +196,7 @@ const CellContent = ({ item }) => {
     }
     return (jsx("a", { href: makeLinkPath(item.href), target: getLinkTarget(item.href), rel: "noreferrer", children: decodeHTMLEntities(item.label) }));
 };
-const Wrapper$2 = styled("table")({
+const Wrapper$1 = styled("table")({
     border: "1px solid #ccc",
     width: "100%",
     fontSize: "16px",
@@ -211,31 +213,6 @@ const Wrapper$2 = styled("table")({
     "& a": {
         color: THEME.STANZA_COLOR.PRIMARY_DARK,
         textDecoration: "none",
-    },
-});
-
-const LoadingCover = ({ showLoading, errorMessage }) => {
-    const isShow = showLoading || errorMessage !== "";
-    return (jsxs(Wrapper$1, { className: isShow ? "active" : "", children: [showLoading && jsx(CircularProgress, {}), !!errorMessage && errorMessage] }));
-};
-const Wrapper$1 = styled("div")({
-    position: "absolute",
-    inset: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: THEME.COLOR.WHITE,
-    fontSize: "18px",
-    fontWeight: "bold",
-    opacity: 0,
-    pointerEvents: "none",
-    transitionDuration: "0.1s",
-    transitionProperty: "opacity",
-    transitionTimingFunction: "linear",
-    "&.active": {
-        opacity: 1,
-        pointerEvents: "auto",
     },
 });
 

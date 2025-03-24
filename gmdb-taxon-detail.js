@@ -1,16 +1,17 @@
-import { d as defineStanzaElement } from './stanza-ee9dc64c.js';
-import { s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-b083349e.js';
-import { u as useQuery } from './getLinkTarget-f23444d4.js';
-import { C as ColorButton, a as ColWrapper } from './ColWrapper-126c4cd5.js';
-import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-993ed209.js';
-import { L as LineageList } from './LineageList-f97cf503.js';
-import { S as StandardParagraph, W as WikipediaView, f as fetchWikipediaData } from './fetchWikipediaData-3b5ba057.js';
-import { S as StanzaWrapper } from './StanzaWrapper-1f2bb82c.js';
-import { m as makeApiUrl, g as getData } from './getData-1442ae18.js';
-import './index-ef9d40bc.js';
-import './definitions-18b95eec.js';
+import { d as defineStanzaElement } from './stanza-3bc73db1.js';
+import { s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
+import { u as useQuery } from './useQuery-8b12d83b.js';
+import { C as ColorButton, a as ColWrapper } from './ColWrapper-29086544.js';
+import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-37d9b2c1.js';
+import { L as LineageList } from './LineageList-7cdd5db3.js';
+import { S as StandardParagraph, W as WikipediaView, f as fetchWikipediaData } from './fetchWikipediaData-32ce1ccc.js';
+import { S as StanzaWrapper } from './StanzaWrapper-34fcc0ed.js';
+import { m as makeApiUrl, g as getData } from './getData-deef20ca.js';
+import './index-7a88ba65.js';
+import './definitions-2845d052.js';
 import './consts-deffa432.js';
-import './string-cf2ce947.js';
+import './getLinkTarget-54075a13.js';
+import './string-679c835b.js';
 
 const CapsuleList = ({ labels }) => (jsx(CapsuleListWrapper, { children: labels.map((label, index) => (jsx("li", { children: label }, index))) }));
 const CapsuleListWrapper = styled("ul")({

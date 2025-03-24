@@ -1,16 +1,17 @@
-import { d as defineStanzaElement } from './stanza-ee9dc64c.js';
-import { j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-b083349e.js';
-import { g as getLinkTarget, u as useQuery } from './getLinkTarget-f23444d4.js';
-import { a as ColWrapper, C as ColorButton } from './ColWrapper-126c4cd5.js';
-import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-993ed209.js';
-import { L as LineageList } from './LineageList-f97cf503.js';
-import { S as StanzaWrapper } from './StanzaWrapper-1f2bb82c.js';
-import { T as TagList } from './TagList-d9d9e84d.js';
-import { m as makeApiUrl, g as getData } from './getData-1442ae18.js';
-import './index-ef9d40bc.js';
-import './definitions-18b95eec.js';
+import { d as defineStanzaElement } from './stanza-3bc73db1.js';
+import { j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
+import { u as useQuery } from './useQuery-8b12d83b.js';
+import { g as getLinkTarget } from './getLinkTarget-54075a13.js';
+import { a as ColWrapper, C as ColorButton } from './ColWrapper-29086544.js';
+import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-37d9b2c1.js';
+import { L as LineageList } from './LineageList-7cdd5db3.js';
+import { S as StanzaWrapper } from './StanzaWrapper-34fcc0ed.js';
+import { T as TagList } from './TagList-a4b15355.js';
+import { m as makeApiUrl, g as getData } from './getData-deef20ca.js';
+import './index-7a88ba65.js';
+import './definitions-2845d052.js';
 import './consts-deffa432.js';
-import './string-cf2ce947.js';
+import './string-679c835b.js';
 
 const StanzaView = ({ strainId, strainName, infoSources, taxonomy }) => {
     return (jsx(StanzaWrapper, { children: jsx(ColWrapper, { children: jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "Strain Id: " }), jsx("span", { children: strainId })] }), jsx(InfoTitle, { children: strainName }), jsx(SubHeading, { children: infoSources.length === 1 ? "Source strain" : "Source strains" }), jsx(TagList, { children: infoSources.map((source, index) => (jsx(ColorButton, { href: source.url, target: getLinkTarget(source.url), children: source.label }, index))) }), taxonomy && (jsxs("div", { children: [jsx(SubHeading, { children: "Taxonomic Lineage" }), jsx(LineageList, { lineage: taxonomy.lineage })] }))] }) }) }));

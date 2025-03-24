@@ -1,17 +1,18 @@
-import { d as defineStanzaElement } from './stanza-ee9dc64c.js';
-import { s as styled, A as capitalize, q as jsxRuntimeExports, C as rootShouldForwardProp, x as alpha, z as useEnhancedEffect, T as THEME, a as jsxs, j as jsx, l as atom, m as useAtomValue, o as useSetAtom, b as TogoMediumReactStanza } from './StanzaReactProvider-b083349e.js';
-import { q as internal_createExtendSxProp, j as useFormControl, k as formControlState, B as ButtonBase, L as ListContext, C as Checkbox, r as hasInfo, s as filterOutInfo, t as hasIdOfLabel, n as nullListResponse, v as Pagination, T as Tabs, w as Tab, x as Badge, F as FormControl, I as InputLabel, l as Select, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, y as extractLabelIds, Q as QueryPane, S as SubPane, M as MediaPane, A as AppWrapper } from './ListApi-115ba089.js';
-import { r as reactExports } from './index-ef9d40bc.js';
+import { d as defineStanzaElement } from './stanza-3bc73db1.js';
+import { s as styled, A as capitalize, q as jsxRuntimeExports, C as rootShouldForwardProp, x as alpha, z as useEnhancedEffect, T as THEME, a as jsxs, j as jsx, l as atom, m as useAtomValue, o as useSetAtom, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
+import { q as internal_createExtendSxProp, j as useFormControl, k as formControlState, B as ButtonBase, L as ListContext, C as Checkbox, r as hasInfo, s as filterOutInfo, t as hasIdOfLabel, n as nullListResponse, v as Pagination, T as Tabs, w as Tab, x as Badge, F as FormControl, I as InputLabel, l as Select, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, y as extractLabelIds, Q as QueryPane, S as SubPane, M as MediaPane, A as AppWrapper } from './ListApi-c6b8ecbd.js';
+import { r as reactExports } from './index-7a88ba65.js';
 import { b as PATH_TAXON } from './consts-deffa432.js';
-import { m as makeLinkPath, g as getLinkTarget, u as useQuery } from './getLinkTarget-f23444d4.js';
-import { m as makeApiUrl, g as getData } from './getData-1442ae18.js';
+import { m as makeLinkPath, g as getLinkTarget } from './getLinkTarget-54075a13.js';
+import { u as useQuery } from './useQuery-8b12d83b.js';
+import { m as makeApiUrl, g as getData } from './getData-deef20ca.js';
 import { c as clone } from './clone-4533aa20.js';
-import { c as createSimplePaletteValueFilter, C as CircularProgress } from './isHostComponent-b55b8d7a.js';
-import { g as generateUtilityClass, a as generateUtilityClasses, m as memoTheme, u as useDefaultProps, c as clsx, b as composeClasses, d as useForkRef } from './DefaultPropsProvider-c607464a.js';
-import { h as useSlot } from './Tooltip-f4db4da8.js';
-import { S as Slider } from './Slider-fa6f7527.js';
-import { l as listMediaOfTaxonsURL } from './definitions-85d5d955.js';
-import './createSvgIcon-d354a6e3.js';
+import { c as createSimplePaletteValueFilter, C as CircularProgress } from './isHostComponent-7889d775.js';
+import { g as generateUtilityClass, a as generateUtilityClasses, m as memoTheme, u as useDefaultProps, c as clsx, b as composeClasses, d as useForkRef } from './DefaultPropsProvider-37472ed0.js';
+import { h as useSlot } from './Tooltip-16467db2.js';
+import { S as Slider } from './Slider-42efb8a4.js';
+import { l as listMediaOfTaxonsURL } from './definitions-aa0cf228.js';
+import './createSvgIcon-86819ff3.js';
 
 function getTypographyUtilityClass(slot) {
   return generateUtilityClass('MuiTypography', slot);

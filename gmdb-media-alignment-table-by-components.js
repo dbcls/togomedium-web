@@ -1,16 +1,17 @@
-import { d as defineStanzaElement } from './stanza-ee9dc64c.js';
-import { l as atom, m as useAtomValue, o as useSetAtom, s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-b083349e.js';
-import { m as makeLinkPath, g as getLinkTarget, u as useQuery } from './getLinkTarget-f23444d4.js';
-import { j as jsx$1, r as reactExports } from './index-ef9d40bc.js';
-import { m as makeApiUrl, g as getData } from './getData-1442ae18.js';
+import { d as defineStanzaElement } from './stanza-3bc73db1.js';
+import { l as atom, m as useAtomValue, o as useSetAtom, s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
+import { u as useQuery } from './useQuery-8b12d83b.js';
+import { j as jsx$1, r as reactExports } from './index-7a88ba65.js';
+import { m as makeApiUrl, g as getData } from './getData-deef20ca.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
-import { a as IconCompact, b as IconExpand, d as IconBlank } from './icons-c7bf1293.js';
+import { a as IconCompact, b as IconExpand, d as IconBlank } from './icons-495281a4.js';
 import { c as clone } from './clone-4533aa20.js';
 import { P as PATH_COMPONENT, a as PATH_MEDIUM, b as PATH_TAXON } from './consts-deffa432.js';
-import { j as Tooltip } from './Tooltip-f4db4da8.js';
-import { s as stringToArray } from './string-cf2ce947.js';
-import './createSvgIcon-d354a6e3.js';
-import './DefaultPropsProvider-c607464a.js';
+import { m as makeLinkPath, g as getLinkTarget } from './getLinkTarget-54075a13.js';
+import { j as Tooltip } from './Tooltip-16467db2.js';
+import { s as stringToArray } from './string-679c835b.js';
+import './createSvgIcon-86819ff3.js';
+import './DefaultPropsProvider-37472ed0.js';
 
 const mediaComponentAlignmentTableURL = makeApiUrl("gmdb_media_alignment_by_gm_ids");
 

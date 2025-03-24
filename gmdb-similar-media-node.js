@@ -1,13 +1,14 @@
-import { d as defineStanzaElement } from './stanza-ee9dc64c.js';
-import { T as THEME, s as styled, j as jsx, b as TogoMediumReactStanza } from './StanzaReactProvider-b083349e.js';
-import { r as reactExports } from './index-ef9d40bc.js';
-import { S as StanzaWrapper } from './StanzaWrapper-1f2bb82c.js';
-import { s as select, c as creator, d as dispatch, t as timer, U as URL_API } from './variables-8c0bbac7.js';
-import { g as getMedia } from './getMedia-5e5edff4.js';
+import { d as defineStanzaElement } from './stanza-3bc73db1.js';
+import { T as THEME, s as styled, j as jsx, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
+import { r as reactExports } from './index-7a88ba65.js';
+import { S as StanzaWrapper } from './StanzaWrapper-34fcc0ed.js';
+import { s as select, c as creator, d as dispatch, t as timer } from './transform-fa8fb55c.js';
+import { g as getMedia } from './getMedia-b567754c.js';
 import { c as clone } from './clone-4533aa20.js';
-import { g as getData } from './getData-b994dab1.js';
+import { g as getData } from './getData-3799b4b6.js';
+import { U as URL_API } from './variables-f5cb7401.js';
 import './index-b1a62205.js';
-import './getData-1442ae18.js';
+import './getData-deef20ca.js';
 
 function create(name) {
   return select(creator(name).call(document.documentElement));

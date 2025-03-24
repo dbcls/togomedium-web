@@ -1,14 +1,15 @@
-import { d as defineStanzaElement } from './stanza-ee9dc64c.js';
-import { s as styled, j as jsx, T as THEME, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-b083349e.js';
-import { m as makeLinkPath, g as getLinkTarget, u as useQuery } from './getLinkTarget-f23444d4.js';
+import { d as defineStanzaElement } from './stanza-3bc73db1.js';
+import { s as styled, j as jsx, T as THEME, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
+import { u as useQuery } from './useQuery-8b12d83b.js';
+import { m as makeLinkPath, g as getLinkTarget } from './getLinkTarget-54075a13.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
-import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-993ed209.js';
-import { S as StanzaWrapper } from './StanzaWrapper-1f2bb82c.js';
+import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-37d9b2c1.js';
+import { S as StanzaWrapper } from './StanzaWrapper-34fcc0ed.js';
 import { a as PATH_MEDIUM, P as PATH_COMPONENT } from './consts-deffa432.js';
-import { g as getMedia } from './getMedia-5e5edff4.js';
-import './index-ef9d40bc.js';
+import { g as getMedia } from './getMedia-b567754c.js';
+import './index-7a88ba65.js';
 import './index-b1a62205.js';
-import './getData-1442ae18.js';
+import './getData-deef20ca.js';
 
 const RecipeComment = ({ comment }) => {
     return jsx(Wrapper, { children: parseText(comment) });

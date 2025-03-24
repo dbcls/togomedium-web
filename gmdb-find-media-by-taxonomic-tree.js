@@ -1,17 +1,283 @@
-import { l as lodash_debounce, d as defineStanzaElement } from './stanza-ee9dc64c.js';
-import { l as atom, o as useSetAtom, m as useAtomValue, s as styled, T as THEME, j as jsx, a as jsxs, b as TogoMediumReactStanza } from './StanzaReactProvider-b083349e.js';
-import { u as useQuery, g as getLinkTarget, m as makeLinkPath } from './getLinkTarget-f23444d4.js';
-import { r as reactExports, e as dist } from './index-ef9d40bc.js';
-import { m as makeApiUrl, g as getData } from './getData-1442ae18.js';
-import { C as Checkbox, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, n as nullListResponse, Q as QueryPane, M as MediaPane, S as SubPane, A as AppWrapper } from './ListApi-115ba089.js';
-import { a as listMediaOfGtdbTaxonsURL, l as listMediaOfTaxonsURL } from './definitions-85d5d955.js';
-import { T as TextField, A as Autocomplete } from './TextField-ebad9552.js';
-import { B as Box, I as IconLoading, a as IconCompact, b as IconExpand, c as IconNoChildren } from './icons-c7bf1293.js';
+import { l as lodash_debounce, d as defineStanzaElement } from './stanza-3bc73db1.js';
+import { S as Subscribable, k as notifyManager, W as replaceEqualDeep, u as useQueryClient, l as atom, o as useSetAtom, m as useAtomValue, s as styled, T as THEME, j as jsx, a as jsxs, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
+import { r as reactExports, e as dist } from './index-7a88ba65.js';
+import { Q as QueryObserver, a as useIsRestoring, b as useQueryErrorResetBoundary, e as ensureSuspenseTimers, c as ensurePreventErrorBoundaryRetry, d as useClearResetErrorBoundary, n as noop, s as shouldSuspend, f as fetchOptimistic, w as willFetch, g as getHasError, u as useQuery } from './useQuery-8b12d83b.js';
+import { m as makeApiUrl, g as getData } from './getData-deef20ca.js';
+import { C as Checkbox, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, n as nullListResponse, Q as QueryPane, M as MediaPane, S as SubPane, A as AppWrapper } from './ListApi-c6b8ecbd.js';
+import { a as listMediaOfGtdbTaxonsURL, l as listMediaOfTaxonsURL } from './definitions-aa0cf228.js';
+import { T as TextField, A as Autocomplete } from './TextField-e1cb7aca.js';
+import { B as Box, I as IconLoading, a as IconCompact, b as IconExpand, c as IconNoChildren } from './icons-495281a4.js';
 import { b as PATH_TAXON } from './consts-deffa432.js';
-import { j as Tooltip } from './Tooltip-f4db4da8.js';
-import './DefaultPropsProvider-c607464a.js';
-import './isHostComponent-b55b8d7a.js';
-import './createSvgIcon-d354a6e3.js';
+import { g as getLinkTarget, m as makeLinkPath } from './getLinkTarget-54075a13.js';
+import { j as Tooltip } from './Tooltip-16467db2.js';
+import { L as LoadingCover } from './LoadingCover-79a3edc9.js';
+import './DefaultPropsProvider-37472ed0.js';
+import './isHostComponent-7889d775.js';
+import './createSvgIcon-86819ff3.js';
+
+// src/queriesObserver.ts
+function difference(array1, array2) {
+  return array1.filter((x) => !array2.includes(x));
+}
+function replaceAt(array, index, value) {
+  const copy = array.slice(0);
+  copy[index] = value;
+  return copy;
+}
+var QueriesObserver = class extends Subscribable {
+  #client;
+  #result;
+  #queries;
+  #options;
+  #observers;
+  #combinedResult;
+  #lastCombine;
+  #lastResult;
+  #observerMatches = [];
+  constructor(client, queries, options) {
+    super();
+    this.#client = client;
+    this.#options = options;
+    this.#queries = [];
+    this.#observers = [];
+    this.#result = [];
+    this.setQueries(queries);
+  }
+  onSubscribe() {
+    if (this.listeners.size === 1) {
+      this.#observers.forEach((observer) => {
+        observer.subscribe((result) => {
+          this.#onUpdate(observer, result);
+        });
+      });
+    }
+  }
+  onUnsubscribe() {
+    if (!this.listeners.size) {
+      this.destroy();
+    }
+  }
+  destroy() {
+    this.listeners = /* @__PURE__ */ new Set();
+    this.#observers.forEach((observer) => {
+      observer.destroy();
+    });
+  }
+  setQueries(queries, options, notifyOptions) {
+    this.#queries = queries;
+    this.#options = options;
+    notifyManager.batch(() => {
+      const prevObservers = this.#observers;
+      const newObserverMatches = this.#findMatchingObservers(this.#queries);
+      this.#observerMatches = newObserverMatches;
+      newObserverMatches.forEach(
+        (match) => match.observer.setOptions(match.defaultedQueryOptions, notifyOptions)
+      );
+      const newObservers = newObserverMatches.map((match) => match.observer);
+      const newResult = newObservers.map(
+        (observer) => observer.getCurrentResult()
+      );
+      const hasIndexChange = newObservers.some(
+        (observer, index) => observer !== prevObservers[index]
+      );
+      if (prevObservers.length === newObservers.length && !hasIndexChange) {
+        return;
+      }
+      this.#observers = newObservers;
+      this.#result = newResult;
+      if (!this.hasListeners()) {
+        return;
+      }
+      difference(prevObservers, newObservers).forEach((observer) => {
+        observer.destroy();
+      });
+      difference(newObservers, prevObservers).forEach((observer) => {
+        observer.subscribe((result) => {
+          this.#onUpdate(observer, result);
+        });
+      });
+      this.#notify();
+    });
+  }
+  getCurrentResult() {
+    return this.#result;
+  }
+  getQueries() {
+    return this.#observers.map((observer) => observer.getCurrentQuery());
+  }
+  getObservers() {
+    return this.#observers;
+  }
+  getOptimisticResult(queries, combine) {
+    const matches = this.#findMatchingObservers(queries);
+    const result = matches.map(
+      (match) => match.observer.getOptimisticResult(match.defaultedQueryOptions)
+    );
+    return [
+      result,
+      (r) => {
+        return this.#combineResult(r ?? result, combine);
+      },
+      () => {
+        return this.#trackResult(result, matches);
+      }
+    ];
+  }
+  #trackResult(result, matches) {
+    return matches.map((match, index) => {
+      const observerResult = result[index];
+      return !match.defaultedQueryOptions.notifyOnChangeProps ? match.observer.trackResult(observerResult, (accessedProp) => {
+        matches.forEach((m) => {
+          m.observer.trackProp(accessedProp);
+        });
+      }) : observerResult;
+    });
+  }
+  #combineResult(input, combine) {
+    if (combine) {
+      if (!this.#combinedResult || this.#result !== this.#lastResult || combine !== this.#lastCombine) {
+        this.#lastCombine = combine;
+        this.#lastResult = this.#result;
+        this.#combinedResult = replaceEqualDeep(
+          this.#combinedResult,
+          combine(input)
+        );
+      }
+      return this.#combinedResult;
+    }
+    return input;
+  }
+  #findMatchingObservers(queries) {
+    const prevObserversMap = new Map(
+      this.#observers.map((observer) => [observer.options.queryHash, observer])
+    );
+    const observers = [];
+    queries.forEach((options) => {
+      const defaultedOptions = this.#client.defaultQueryOptions(options);
+      const match = prevObserversMap.get(defaultedOptions.queryHash);
+      if (match) {
+        observers.push({
+          defaultedQueryOptions: defaultedOptions,
+          observer: match
+        });
+      } else {
+        observers.push({
+          defaultedQueryOptions: defaultedOptions,
+          observer: new QueryObserver(this.#client, defaultedOptions)
+        });
+      }
+    });
+    return observers;
+  }
+  #onUpdate(observer, result) {
+    const index = this.#observers.indexOf(observer);
+    if (index !== -1) {
+      this.#result = replaceAt(this.#result, index, result);
+      this.#notify();
+    }
+  }
+  #notify() {
+    if (this.hasListeners()) {
+      const previousResult = this.#combinedResult;
+      const newTracked = this.#trackResult(this.#result, this.#observerMatches);
+      const newResult = this.#combineResult(newTracked, this.#options?.combine);
+      if (previousResult !== newResult) {
+        notifyManager.batch(() => {
+          this.listeners.forEach((listener) => {
+            listener(this.#result);
+          });
+        });
+      }
+    }
+  }
+};
+
+function useQueries({
+  queries,
+  ...options
+}, queryClient) {
+  const client = useQueryClient(queryClient);
+  const isRestoring = useIsRestoring();
+  const errorResetBoundary = useQueryErrorResetBoundary();
+  const defaultedQueries = reactExports.useMemo(
+    () => queries.map((opts) => {
+      const defaultedOptions = client.defaultQueryOptions(
+        opts
+      );
+      defaultedOptions._optimisticResults = isRestoring ? "isRestoring" : "optimistic";
+      return defaultedOptions;
+    }),
+    [queries, client, isRestoring]
+  );
+  defaultedQueries.forEach((query) => {
+    ensureSuspenseTimers(query);
+    ensurePreventErrorBoundaryRetry(query, errorResetBoundary);
+  });
+  useClearResetErrorBoundary(errorResetBoundary);
+  const [observer] = reactExports.useState(
+    () => new QueriesObserver(
+      client,
+      defaultedQueries,
+      options
+    )
+  );
+  const [optimisticResult, getCombinedResult, trackResult] = observer.getOptimisticResult(
+    defaultedQueries,
+    options.combine
+  );
+  const shouldSubscribe = !isRestoring && options.subscribed !== false;
+  reactExports.useSyncExternalStore(
+    reactExports.useCallback(
+      (onStoreChange) => shouldSubscribe ? observer.subscribe(notifyManager.batchCalls(onStoreChange)) : noop,
+      [observer, shouldSubscribe]
+    ),
+    () => observer.getCurrentResult(),
+    () => observer.getCurrentResult()
+  );
+  reactExports.useEffect(() => {
+    observer.setQueries(
+      defaultedQueries,
+      options,
+      {
+        listeners: false
+      }
+    );
+  }, [defaultedQueries, options, observer]);
+  const shouldAtLeastOneSuspend = optimisticResult.some(
+    (result, index) => shouldSuspend(defaultedQueries[index], result)
+  );
+  const suspensePromises = shouldAtLeastOneSuspend ? optimisticResult.flatMap((result, index) => {
+    const opts = defaultedQueries[index];
+    if (opts) {
+      const queryObserver = new QueryObserver(client, opts);
+      if (shouldSuspend(opts, result)) {
+        return fetchOptimistic(opts, queryObserver, errorResetBoundary);
+      } else if (willFetch(result, isRestoring)) {
+        void fetchOptimistic(opts, queryObserver, errorResetBoundary);
+      }
+    }
+    return [];
+  }) : [];
+  if (suspensePromises.length > 0) {
+    throw Promise.all(suspensePromises);
+  }
+  const firstSingleResultWhichShouldThrow = optimisticResult.find(
+    (result, index) => {
+      const query = defaultedQueries[index];
+      return query && getHasError({
+        result,
+        errorResetBoundary,
+        throwOnError: query.throwOnError,
+        query: client.getQueryCache().get(query.queryHash),
+        suspense: query.suspense
+      });
+    }
+  );
+  if (firstSingleResultWhichShouldThrow?.error) {
+    throw firstSingleResultWhichShouldThrow.error;
+  }
+  return getCombinedResult(trackResult());
+}
 
 function useUnmount(func) {
   const funcRef = reactExports.useRef(func);
@@ -458,7 +724,10 @@ const useTaxonTreeMutators = () => {
             return [...new Set([...prev, ...newState])];
         });
     };
-    return { setTreeState, toggleOpen, setOpen, setClosed, setBranchState, margeTreeState };
+    const closeAll = () => {
+        setTreeState([]);
+    };
+    return { setTreeState, toggleOpen, setOpen, setClosed, setBranchState, margeTreeState, closeAll };
 };
 
 const TaxonomicTreeBranch = ({ id }) => {
@@ -563,6 +832,7 @@ const useChecked = (id, taxonList, ascendants, descendants) => {
     return { check, onClickCheck };
 };
 const useLineages = (id, taxonList) => {
+    // console.log("useLineages", id);
     const ascendants = reactExports.useMemo(() => findAscendants(taxonList, id), [taxonList, id]);
     const descendants = reactExports.useMemo(() => findDescendants(taxonList, id), [taxonList, id]);
     const ascendantsLabel = reactExports.useMemo(() => ascendants.map((id) => taxonList.find((taxon) => taxon.id === id)?.label).join(" > "), [ascendants]);
@@ -572,12 +842,12 @@ const useLineages = (id, taxonList) => {
     return { ascendants, descendants, ascendantsLabel };
 };
 
-const TaxonomicTreeSection = () => {
+const TaxonomicTreeSection = ({ showLoading }) => {
     const type = useTaxonomyType();
     const superKingdoms = reactExports.useMemo(() => {
         return type === "GTDB" ? gtdbSuperkingdoms : ncbiSuperkingdoms;
     }, [type]);
-    return (jsx("div", { children: jsx("div", { children: superKingdoms.map((superKingdom) => (jsx(TaxonomicTreeBranch, { id: superKingdom.id }, superKingdom.id))) }) }));
+    return (jsxs("div", { style: { position: "relative" }, children: [jsx(LoadingCover, { showLoading: showLoading, errorMessage: "" }), jsx("div", { children: superKingdoms.map((superKingdom) => (jsx(TaxonomicTreeBranch, { id: superKingdom.id }, superKingdom.id))) })] }));
 };
 
 const SHOW_COUNT = 10;
@@ -626,18 +896,19 @@ const useMediaLoadFromTaxon = () => {
 const AppContainer = ({ dispatchEvent, taxonomyType }) => {
     const { setApiType } = useTaxonomyTypeMutators();
     const { setSearchResult } = useSearchResultMutators();
-    useTaxonSearchResult();
+    const { showLoading } = useTaxonSearchResult();
     useMediaLoadFromTaxon();
     reactExports.useEffect(() => {
         setApiType(taxonomyType);
     }, [taxonomyType, setApiType]);
-    return (jsxs(AppWrapper, { children: [jsxs(QueryPane, { children: [jsx(TaxonInput, { onChange: setSearchResult }), jsx(TaxonomicTreeSection, {})] }), jsx(SubPane, { children: jsx(MediaPane, { dispatchEvent: dispatchEvent }) })] }));
+    return (jsxs(AppWrapper, { children: [jsxs(QueryPane, { children: [jsx(TaxonInput, { onChange: setSearchResult }), jsx(TaxonomicTreeSection, { showLoading: showLoading })] }), jsx(SubPane, { children: jsx(MediaPane, { dispatchEvent: dispatchEvent }) })] }));
 };
 const useTaxonSearchResult = () => {
     const searchedTaxon = useSearchResult();
-    const { margeTreeState } = useTaxonTreeMutators();
+    const { margeTreeState, closeAll } = useTaxonTreeMutators();
     const { url, type } = useTaxonAncestorsApi();
-    const query = useQuery({
+    const { url: treApiUrl } = useTreeApi();
+    const firstQuery = useQuery({
         queryKey: ["taxon_ancestors", type, searchedTaxon],
         queryFn: async () => {
             if (searchedTaxon === null)
@@ -652,13 +923,39 @@ const useTaxonSearchResult = () => {
         placeholderData: [],
         staleTime: Infinity,
     });
+    const childrenIds = reactExports.useMemo(() => firstQuery.data?.map((d) => d.tax_id) ?? [], [firstQuery.data]);
+    const { data, isSuccess, isLoading, isPending } = useQueries({
+        queries: childrenIds.map((id) => ({
+            queryKey: ["taxon_children", type, id],
+            queryFn: async () => {
+                const response = await getData(treApiUrl, {
+                    tax_id: id,
+                });
+                return response.body;
+            },
+            staleTime: Infinity,
+        })),
+        combine: (results) => {
+            return {
+                data: results.map((result) => result.data),
+                isLoading: results.some((result) => result.isLoading),
+                isError: results.some((result) => result.isError),
+                isPending: results.some((result) => result.isPending),
+                isSuccess: results.every((result) => result.isSuccess),
+            };
+        },
+    });
     reactExports.useEffect(() => {
-        margeTreeState(query.data
-            ? query.data
-                .filter((taxon) => taxon.rank.toLowerCase() !== "species")
-                .map((taxon) => taxon.tax_id)
-            : []);
-    }, [query.data]);
+        if (data.length === 0) {
+            closeAll();
+        }
+        if (isSuccess && data.length > 0) {
+            margeTreeState(firstQuery.data
+                ?.filter((taxon) => taxon.rank.toLowerCase() !== "species")
+                .map((taxon) => taxon.tax_id) ?? []);
+        }
+    }, [data, isSuccess, firstQuery.data]);
+    return { showLoading: isPending || firstQuery.isPending };
 };
 
 const App = ({ stanzaElement, taxonomyType = "NCBI" }) => {
