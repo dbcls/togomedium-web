@@ -1,6 +1,4 @@
-const HOST_LIVE = "togomedium.org";
-const HOST_STAGING = "togomedium.yohak-lab.com";
-const PORT = 5200;
+import { HOST_LIVE, HOST_STAGING, PORT_LOCAL_WEB } from "%core/consts";
 
 export const makeLinkPath = (str: string) => {
   const [targetHost, targetPath] = getLinkInfo(str);
@@ -10,7 +8,7 @@ export const makeLinkPath = (str: string) => {
     case HOST_STAGING:
       return `https://${HOST_STAGING}${targetPath}`;
     case "localhost":
-      return `http://localhost:${PORT}${targetPath}`;
+      return `http://localhost:${PORT_LOCAL_WEB}${targetPath}`;
     default:
       return `https://${HOST_LIVE}${targetPath}`;
   }
