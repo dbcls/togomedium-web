@@ -28,7 +28,6 @@ jobs:
       - name: Check pnpm version
         run: pnpm --version
 
-
       # 依存関係をインストール
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
