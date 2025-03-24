@@ -1,0 +1,58 @@
+{
+  "@context": {
+    "stanza": "http://togostanza.org/resource/stanza#"
+  },
+  "@id": "gmdb-meta-list",
+  "stanza:label": "Meta list",
+  "stanza:definition": "General list stanza for TogoMedium",
+  "stanza:type": "Stanza",
+  "stanza:display": "Table",
+  "stanza:provider": "",
+  "stanza:license": "MIT",
+  "stanza:author": "Satoshi Onoda (YOHAK)",
+  "stanza:address": "satoshionoda@yohak.design",
+  "stanza:contributor": [],
+  "stanza:created": "2021-02-19",
+  "stanza:updated": "2025-03-22",
+  "stanza:parameter": [
+    {
+      "stanza:key": "api_url",
+      "stanza:example": "https://togomedium.org/sparqlist/api/list_media",
+      "stanza:description": "URL of the SPARQList API with queries",
+      "stanza:required": true
+    },
+    {
+      "stanza:key": "limit",
+      "stanza:example": "10",
+      "stanza:description": "limit",
+      "stanza:required": true
+    },
+    {
+      "stanza:key": "title",
+      "stanza:example": "Media of Glucose",
+      "stanza:description": "title",
+      "stanza:required": false
+    },
+    {
+      "stanza:key": "column_names",
+      "stanza:example": "true",
+      "stanza:description": "whether display column names",
+      "stanza:required": true
+    },
+    {
+      "stanza:key": "column_sizes",
+      "stanza:example": "15,15,70",
+      "stanza:description": "column sizes from left. should be separated with comma",
+      "stanza:required": false
+    }
+  ],
+  "stanza:menu-placement": "none",
+  "stanza:style": [
+    {
+      "stanza:key": "--color-primary",
+      "stanza:type": "color",
+      "stanza:default": "#8FC31F",
+      "stanza:description": "highlight color of the UI"
+    }
+  ]
+}

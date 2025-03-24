@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Taxon detail</title>
+
+    <script type="module" src="./gmdb-taxon-detail.js" async></script>
+
+    <script type="module">
+      import createHelpApp from './-togostanza/help-app.js';
+
+      const metadata = {"@context":{"stanza":"http://togostanza.org/resource/stanza#"},"@id":"gmdb-taxon-detail","stanza:label":"Taxon detail","stanza:definition":"Provides detailed information about a taxonomic entity, utilizing the provided NCBI TaxId","stanza:type":"Stanza","stanza:display":"Text","stanza:provider":"","stanza:license":"MIT","stanza:author":"Satoshi Onoda (YOHAK)","stanza:address":"satoshionoda@yohak.design","stanza:contributor":[],"stanza:created":"2021-03-07","stanza:updated":"2025-03-22","stanza:parameter":[{"stanza:key":"tax_id","stanza:example":"1301","stanza:description":"NCBI TaxId","stanza:required":true}],"stanza:menu-placement":"none","stanza:style":[{"stanza:key":"--color-primary","stanza:type":"color","stanza:default":"#8FC31F","stanza:description":"highlighted color of the UI"}]};
+      const readme   = "<h1>Gmdb component by gmoid</h1>\n<p>Stanza description goes here. Edit <code>stanzas/gmdb-component-by-gmoid/README.md</code> to update.</p>\n";
+
+      createHelpApp({metadata, readme}).mount('body');
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>

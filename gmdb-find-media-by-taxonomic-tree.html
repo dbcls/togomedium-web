@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Media finder by taxonomic tree</title>
+
+    <script type="module" src="./gmdb-find-media-by-taxonomic-tree.js" async></script>
+
+    <script type="module">
+      import createHelpApp from './-togostanza/help-app.js';
+
+      const metadata = {"@context":{"stanza":"http://togostanza.org/resource/stanza#"},"@id":"gmdb-find-media-by-taxonomic-tree","stanza:label":"Media finder by taxonomic tree","stanza:definition":"Retrieves media by taxon selected from the taxonomic tree","stanza:license":"MIT","stanza:author":"Satoshi Onoda (YOHAK)","stanza:address":"satoshionoda@yohak.design","stanza:contributor":[],"stanza:created":"2022-01-01","stanza:updated":"2025-03-22","stanza:parameter":[{"stanza:key":"taxonomy_type","stanza:example":"NCBI","stanza:description":"NCBI or GTDB","stanza:required":false}],"stanza:menu-placement":"none","stanza:style":[],"stanza:incomingEvent":[],"stanza:outgoingEvent":[{"stanza:key":"STANZA_RUN_ACTION","stanza:description":"dispatches when the action button is clicked"}]};
+      const readme   = "<h1>Hello react</h1>\n<p>Stanza description goes here. Edit <code>stanzas/hello-react/README.md</code> to update.</p>\n";
+
+      createHelpApp({metadata, readme}).mount('body');
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>
