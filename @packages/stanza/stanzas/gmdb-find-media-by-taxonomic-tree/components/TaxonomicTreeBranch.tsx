@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, PropsWithChildren, useEffect, useMemo } from "react";
+import { useTimeout } from "usehooks-ts";
 import { Optional } from "yohak-tools";
 import { TaxonChildrenParams, TaxonChildrenResponse } from "%api/taxonChildren/definitions";
 import { PATH_TAXON } from "%core/consts";
 import { getData } from "%core/network/getData";
 import { makeLinkPath } from "%core/network/makeLinkPath";
+import { useShadowRootState } from "%stanza/components/states/shadowRoot";
 import {
   CheckStatus,
   ToggleIconStatus,
@@ -45,6 +47,19 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
   const { check, onClickCheck } = useChecked(id, taxonList, ascendants, descendants);
   const { label, rank } = useTaxonInfo(myInfo);
   const [linkString, linkURL] = useLinkString(id, rank);
+  const shadowRoot = useShadowRootState();
+
+  useEffect(() => {
+    if (isHighlighted && shadowRoot) {
+      setTimeout(() => {
+        const elmId = `branch-${id}`;
+        const elm = shadowRoot.getElementById(elmId);
+        const bound = elm?.getBoundingClientRect();
+        const top = (bound?.top || 0) - 100;
+        window.scrollTo({ top, behavior: "smooth" });
+      }, 500);
+    }
+  }, [isHighlighted, shadowRoot, id]);
 
   return (
     <TreeBranchView

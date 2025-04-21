@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { TaxonomyType } from "%core/types/TaxonomyType";
+import { useShadowRootMutators } from "%stanza/components/states/shadowRoot";
 import { AppContainer } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/AppContainer";
 
 type Props = {
@@ -8,6 +9,9 @@ type Props = {
 };
 
 const App: FC<Props> = ({ stanzaElement, taxonomyType = "NCBI" }) => {
+  const { setShadowRoot } = useShadowRootMutators();
+  setShadowRoot(stanzaElement || null);
+
   const dispatchEvent = (gmIds: string[]) => {
     if (!stanzaElement) return;
     //

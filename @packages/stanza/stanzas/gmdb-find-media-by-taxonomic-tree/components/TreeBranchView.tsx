@@ -47,7 +47,7 @@ export const TreeBranchView: FC<Props> = ({
   showId = true,
 }) => {
   return (
-    <Wrapper>
+    <Wrapper id={"branch-" + id}>
       <Inner className={isHighlighted ? "highlighted" : ""}>
         <Left>
           <span
