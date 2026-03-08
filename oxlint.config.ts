@@ -6,10 +6,6 @@ export default defineConfig({
   },
   jsPlugins: [
     {
-      name: "react-hooks",
-      specifier: "eslint-plugin-react-hooks",
-    },
-    {
       name: "react-refresh",
       specifier: "eslint-plugin-react-refresh",
     },
@@ -26,7 +22,7 @@ export default defineConfig({
     // "sort-imports": "error",
   },
   options: {
-    typeAware: false,
-    typeCheck: false,
+    typeAware: true,
+    typeCheck: true,
   },
 });

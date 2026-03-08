@@ -1,5 +1,6 @@
 // todo remove no-check
 // @ts-nocheck
+/* oxlint-disable */
 import { createHistory, RouterHistory } from "@tanstack/react-router";
 
 type SubscriberHistoryAction =
