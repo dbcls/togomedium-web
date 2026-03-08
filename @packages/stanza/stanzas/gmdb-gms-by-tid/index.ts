@@ -1,6 +1,5 @@
 import * as d3 from "d3";
 import Stanza from "togostanza/stanza";
-import { addClass } from "yohak-tools";
 
 import { getData } from "../../utils/getData";
 import { URL_API } from "../../utils/variables";
@@ -226,7 +225,7 @@ const makeTable = (div: HTMLElement, data: ApiBody, sorted_groups: any) => {
 
 const _makeSubTable = (data: ApiBody) => {
   const subTable: HTMLTableElement = document.createElement("table");
-  addClass(subTable, "sub-table");
+  subTable.classList.add("sub-table");
   //
   const thead: HTMLTableSectionElement = document.createElement("thead");
   subTable.append(thead);

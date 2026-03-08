@@ -7,7 +7,6 @@ import { capitalizeFirstLetter } from "%stanza/utils/string";
 import { SxProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
-import { Ease } from "yohak-tools";
 
 type Props = {
   rank: LineageRank;
@@ -68,7 +67,7 @@ const Wrapper = styled("div")({
   height: "100%",
   minHeight: "72px",
   transitionDuration: "0.4s",
-  transitionTimingFunction: Ease._4_IN_OUT_QUART,
+  // transitionTimingFunction: Ease._4_IN_OUT_QUART,
   overflow: "hidden",
   width: "200px",
 });

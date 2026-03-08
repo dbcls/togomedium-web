@@ -1,4 +1,4 @@
-import { isArray } from "yohak-tools";
+import { isArray } from "is-what";
 
 export const getData = async <ResponseBody, Params extends ParamObject = ParamObject>(
   url: string,

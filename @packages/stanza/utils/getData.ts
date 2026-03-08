@@ -1,4 +1,4 @@
-import { isArray } from "yohak-tools";
+import { isArray } from "is-what";
 
 import { ApiResponse, SimpleObject } from "./types";
 
