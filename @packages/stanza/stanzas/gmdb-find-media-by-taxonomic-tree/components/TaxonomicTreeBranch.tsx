@@ -29,7 +29,6 @@ import {
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/treeState";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, PropsWithChildren, useEffect, useMemo } from "react";
-import { useTimeout } from "usehooks-ts";
 
 type Props = { id: string } & PropsWithChildren;
 
