@@ -25,7 +25,5 @@ const componentDetailParamsSchema = z.object({
   gmo_id: z.string(),
 });
 
-export type ComponentDetailResponse = z.infer<
-  typeof componentDetailResponseSchema
->;
+export type ComponentDetailResponse = z.infer<typeof componentDetailResponseSchema>;
 export type ComponentDetailParams = z.infer<typeof componentDetailParamsSchema>;

@@ -31,9 +31,11 @@ export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen, id })
 
   return (
     <Wrapper>
-      {Array.from({ length: level }).fill(null).map((r, index) => (
-        <span key={index} className="spacer" />
-      ))}
+      {Array.from({ length: level })
+        .fill(null)
+        .map((r, index) => (
+          <span key={index} className="spacer" />
+        ))}
       {Icon}
       <span className={"text"}>{decodeHTMLEntities(label)}</span>
     </Wrapper>

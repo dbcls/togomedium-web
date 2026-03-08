@@ -7,17 +7,13 @@ const componentWithComponentsItemSchema = z.object({
   japanese_name: z.string(),
 });
 
-const componentsWithComponentsResponseSchema = z.array(
-  componentWithComponentsItemSchema,
-);
+const componentsWithComponentsResponseSchema = z.array(componentWithComponentsItemSchema);
 
 const componentWithComponentsParamsSchema = z.object({
   gmo_ids: z.string().optional(),
 });
 
-export type ComponentWithComponentsParams = z.infer<
-  typeof componentWithComponentsParamsSchema
->;
+export type ComponentWithComponentsParams = z.infer<typeof componentWithComponentsParamsSchema>;
 export type ComponentsWithComponentsResponse = z.infer<
   typeof componentsWithComponentsResponseSchema
 >;
