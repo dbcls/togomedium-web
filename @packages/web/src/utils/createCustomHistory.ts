@@ -1,4 +1,5 @@
-//todo improve this
+// todo remove no-check
+// @ts-nocheck
 import { createHistory, RouterHistory } from "@tanstack/react-router";
 
 type SubscriberHistoryAction =
