@@ -1,10 +1,20 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
+import { z } from "zod";
 
-export type TaxonAncestorsResponse = { tax_id: string; name: string; rank: string }[];
+const taxonAncestorsItemSchema = z.object({
+  tax_id: z.string(),
+  name: z.string(),
+  rank: z.string(),
+});
 
-export type TaxonAncestorsParams = {
-  tax_id: string;
-};
+const taxonAncestorsResponseSchema = z.array(taxonAncestorsItemSchema);
+
+const taxonAncestorsParamsSchema = z.object({
+  tax_id: z.string(),
+});
+
+export type TaxonAncestorsResponse = z.infer<typeof taxonAncestorsResponseSchema>;
+export type TaxonAncestorsParams = z.infer<typeof taxonAncestorsParamsSchema>;
 
 export const taxonAncestorsURL = makeApiUrl("gmdb_taxonomy_ancestors");
 export const gtdbTaxonAncestorsURL = makeApiUrl("gmdb_taxonomy_gtdb_ancestors");

@@ -1,25 +1,40 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
+import { z } from "zod";
 
-export type MediaComponentAlignmentTableResponse = {
-  media: {
-    gm_id: string;
-    original_media_id: string;
-    name: string;
-    components: string[];
-    organisms: string[];
-  }[];
-  organisms: {
-    tax_id: string;
-    name: string;
-  }[];
-  components: {
-    gmo_id: string;
-    name: string;
-    parent: string | null;
-    function: string | null;
-  }[];
-};
-export type MediaComponentAlignmentTableParams = {
-  gm_ids: string;
-};
+const mediaComponentAlignmentMediaSchema = z.object({
+  gm_id: z.string(),
+  original_media_id: z.string(),
+  name: z.string(),
+  components: z.array(z.string()),
+  organisms: z.array(z.string()),
+});
+
+const mediaComponentAlignmentOrganismSchema = z.object({
+  tax_id: z.string(),
+  name: z.string(),
+});
+
+const mediaComponentAlignmentComponentSchema = z.object({
+  gmo_id: z.string(),
+  name: z.string(),
+  parent: z.string().nullable(),
+  function: z.string().nullable(),
+});
+
+const mediaComponentAlignmentTableResponseSchema = z.object({
+  media: z.array(mediaComponentAlignmentMediaSchema),
+  organisms: z.array(mediaComponentAlignmentOrganismSchema),
+  components: z.array(mediaComponentAlignmentComponentSchema),
+});
+
+const mediaComponentAlignmentTableParamsSchema = z.object({
+  gm_ids: z.string(),
+});
+
+export type MediaComponentAlignmentTableResponse = z.infer<
+  typeof mediaComponentAlignmentTableResponseSchema
+>;
+export type MediaComponentAlignmentTableParams = z.infer<
+  typeof mediaComponentAlignmentTableParamsSchema
+>;
 export const mediaComponentAlignmentTableURL = makeApiUrl("gmdb_media_alignment_by_gm_ids");

@@ -14,6 +14,9 @@ importers:
       is-what:
         specifier: ^5.5.0
         version: 5.5.0
+      usehooks-ts:
+        specifier: ^3.1.1
+        version: 3.1.1(react@19.0.0)
     devDependencies:
       '@react-types/shared':
         specifier: ^3.33.1
@@ -283,9 +286,6 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
-      usehooks-ts:
-        specifier: ^3.1.1
-        version: 3.1.1(react@19.0.0)
 
 packages:
 

@@ -4,6 +4,5 @@
   "private": true,
   "type": "module",
   "scripts": {},
-  "dependencies": {
-  }
+  "dependencies": {}
 }
