@@ -3,7 +3,7 @@ type BooleanString = "true" | "false";
 type StanzaProps = {
   id?: string;
   className?: string;
-  "togostanza-menu-placement": "none";
+  "togostanza-menu-placement"?: "none";
 };
 
 declare global {
@@ -43,6 +43,10 @@ declare global {
           taxonomy_type: "NCBI" | "GTDB";
         } & StanzaProps;
         "togostanza-gmdb-stats-culturable-species": {} & StanzaProps;
+        "togostanza-pathway-viewer": {
+          tax_ids?: string;
+          variant_id?: string;
+        } & StanzaProps;
       }
     }
   }

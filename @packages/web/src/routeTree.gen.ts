@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PathwayStanzaImport } from './routes/pathway-stanza'
 import { Route as StrainIndexImport } from './routes/strain/index'
 import { Route as MediumIndexImport } from './routes/medium/index'
 import { Route as ComponentIndexImport } from './routes/component/index'
@@ -124,6 +125,12 @@ const AboutLazyRoute = AboutLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
+const PathwayStanzaRoute = PathwayStanzaImport.update({
+  id: '/pathway-stanza',
+  path: '/pathway-stanza',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
@@ -181,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/pathway-stanza': {
+      id: '/pathway-stanza'
+      path: '/pathway-stanza'
+      fullPath: '/pathway-stanza'
+      preLoaderRoute: typeof PathwayStanzaImport
       parentRoute: typeof rootRoute
     }
     '/about': {
@@ -309,6 +323,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
+  '/pathway-stanza': typeof PathwayStanzaRoute
   '/about': typeof AboutLazyRoute
   '/api': typeof ApiLazyRoute
   '/compare-media': typeof CompareMediaLazyRoute
@@ -330,6 +345,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
+  '/pathway-stanza': typeof PathwayStanzaRoute
   '/about': typeof AboutLazyRoute
   '/api': typeof ApiLazyRoute
   '/compare-media': typeof CompareMediaLazyRoute
@@ -352,6 +368,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
+  '/pathway-stanza': typeof PathwayStanzaRoute
   '/about': typeof AboutLazyRoute
   '/api': typeof ApiLazyRoute
   '/compare-media': typeof CompareMediaLazyRoute
@@ -375,6 +392,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/pathway-stanza'
     | '/about'
     | '/api'
     | '/compare-media'
@@ -395,6 +413,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/pathway-stanza'
     | '/about'
     | '/api'
     | '/compare-media'
@@ -415,6 +434,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/pathway-stanza'
     | '/about'
     | '/api'
     | '/compare-media'
@@ -437,6 +457,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
+  PathwayStanzaRoute: typeof PathwayStanzaRoute
   AboutLazyRoute: typeof AboutLazyRoute
   ApiLazyRoute: typeof ApiLazyRoute
   CompareMediaLazyRoute: typeof CompareMediaLazyRoute
@@ -458,6 +479,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  PathwayStanzaRoute: PathwayStanzaRoute,
   AboutLazyRoute: AboutLazyRoute,
   ApiLazyRoute: ApiLazyRoute,
   CompareMediaLazyRoute: CompareMediaLazyRoute,
@@ -488,6 +510,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/pathway-stanza",
         "/about",
         "/api",
         "/compare-media",
@@ -509,6 +532,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/pathway-stanza": {
+      "filePath": "pathway-stanza.tsx"
     },
     "/about": {
       "filePath": "about.lazy.tsx"
