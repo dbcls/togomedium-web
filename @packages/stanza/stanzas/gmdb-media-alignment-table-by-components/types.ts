@@ -1,6 +1,6 @@
-import { Nullable } from "yohak-tools";
 import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
 import { TreeBranch } from "%stanza/utils/types";
+import { Nullable } from "yohak-tools";
 
 export type ComponentTrunk = ComponentBranch[];
 export type ComponentBranch = {

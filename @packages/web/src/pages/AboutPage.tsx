@@ -11,11 +11,7 @@ export const AboutPage = () => {
             "font-wide text-large rounded-xl bg-white p-12 text-justify leading-relaxed font-light hyphens-auto"
           }
         >
-          <img
-            src="/assets/photo2.webp"
-            alt=""
-            className={"float-right mb-4 ml-4 w-1/3 rounded"}
-          />
+          <img src="/assets/photo2.webp" alt="" className={"float-right mb-4 ml-4 w-1/3 rounded"} />
           <p className={"text-primary mb-6 text-left text-2xl font-medium"}>
             TogoMedium is a database of microbial culture media that is based solely on Semantic Web
             technology.{" "}
@@ -33,11 +29,7 @@ export const AboutPage = () => {
             collections, namely JCM and NBRC, have been converted into RDF datasets. Both datasets
             are available on the NBDC RDF portal.
           </p>
-          <img
-            src="/assets/photo3.webp"
-            alt=""
-            className={"float-left mr-4 mb-4 w-1/3 rounded"}
-          />
+          <img src="/assets/photo3.webp" alt="" className={"float-left mr-4 mb-4 w-1/3 rounded"} />
           <p className={"my-6"}>
             Each metadata record includes the minimum data set description defined by the World
             Federation of Culture Collections (WFCC) Global Catalogue of Microorganisms (GCM), which

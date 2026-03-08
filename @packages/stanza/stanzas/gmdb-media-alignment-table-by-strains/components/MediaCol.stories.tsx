@@ -1,7 +1,8 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { MediaCol } from "./MediaCol";
 import { data1 } from "%api/mediaStrainsAlignment/data1";
 import { processDisplayData } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
+import { Meta, StoryObj } from "@storybook/react-vite";
+
+import { MediaCol } from "./MediaCol";
 
 const meta: Meta<typeof MediaCol> = {
   component: MediaCol,

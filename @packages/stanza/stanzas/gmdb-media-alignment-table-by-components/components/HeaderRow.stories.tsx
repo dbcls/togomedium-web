@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { ComponentProps, useEffect } from "react";
 import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/HeaderRow";
 import { useIsMediaExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";
 import { useIsOrganismsExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { ComponentProps, useEffect } from "react";
 
 type WithCustomArgs = {
   isMediaExpanded: boolean;

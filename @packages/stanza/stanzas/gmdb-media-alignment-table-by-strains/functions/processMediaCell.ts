@@ -1,5 +1,3 @@
-import { copy } from "copy-anything";
-import { nanoid } from "nanoid";
 import {
   Lineage,
   LineageRank,
@@ -8,6 +6,8 @@ import {
   Taxon,
 } from "%api/mediaStrainsAlignment/definitions";
 import { CellInfo, DisplayData } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
+import { copy } from "copy-anything";
+import { nanoid } from "nanoid";
 
 type TaxonNode = {
   id: string;
@@ -24,7 +24,7 @@ export const makeCellHeight = (size: number): number => {
 export const processDisplayData = (
   data: MediaStrainsAlignmentResponse,
   filterTaxon: string = "",
-  filterRank: LineageRank = "strain"
+  filterRank: LineageRank = "strain",
 ): DisplayData => {
   // console.log("process", data.length, data[0].organisms.length, filterTaxon, filterRank);
   const nullFilled = fillNullTaxon(data);
@@ -37,7 +37,7 @@ export const processDisplayData = (
 const processMediaCell = (
   data: MediaStrainsAlignmentResponse,
   taxon: DisplayData["taxon"],
-  filterRank: LineageRank
+  filterRank: LineageRank,
 ): CellInfo[] => {
   return data.map((item, i) => {
     return {
@@ -79,20 +79,20 @@ const fillNullTaxon = (data: MediaStrainsAlignmentResponse): MediaStrainsAlignme
 const processTaxonCol = (
   trees: TaxonNode[][],
   rank: LineageRank,
-  filterRank: LineageRank
+  filterRank: LineageRank,
 ): CellInfo[][] => {
   return trees.map((tree) =>
     getNodeListOfRankFromTree(tree, rank).map<CellInfo>((node) => ({
       id: node.id,
       label: node.label,
       size: getSizeOfCell(node, filterRank),
-    }))
+    })),
   );
 };
 
 const processTaxonColList = (
   data: MediaStrainsAlignmentResponse,
-  filterRank: LineageRank
+  filterRank: LineageRank,
 ): DisplayData["taxon"] => {
   const trees = makeTaxonTreesFromData(data);
   return lineageRanks.reduce<any>((accum, rank) => {
@@ -104,7 +104,7 @@ const processTaxonColList = (
 
 const filterData = (
   data: MediaStrainsAlignmentResponse,
-  taxId: string = ""
+  taxId: string = "",
 ): MediaStrainsAlignmentResponse => {
   if (taxId === "") return data;
   const cloned = copy(data);

@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { strainDetailURL } from "%api/strainDetail/definitions.ts";
+import { createFileRoute } from "@tanstack/react-router";
+
 import { StrainDetailPage } from "@/pages/StrainDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 

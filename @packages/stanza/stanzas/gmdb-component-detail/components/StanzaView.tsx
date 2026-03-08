@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import { ComponentDetailResponse } from "%api/componentDetail/definitions";
 import { PATH_COMPONENT } from "%core/consts";
 import { getLinkTarget } from "%core/network/getLinkTarget";
@@ -16,6 +15,7 @@ import { TagList } from "%stanza/components/styled/TagList";
 import { WikipediaView } from "%stanza/components/styled/WikipediaView";
 import { LinkInfo } from "%stanza/stanzas/gmdb-component-detail/functions/LinkLabelInfo";
 import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
+import React, { FC } from "react";
 
 type ComponentClass = ComponentDetailResponse["super_classes"][0];
 
@@ -127,11 +127,7 @@ export const StanzaView: FC<Props> = ({
                 <SubHeading>{links.length === 1 ? "External link" : "External links"}</SubHeading>
                 <TagList>
                   {links.map((item, i) => (
-                    <ColorButton
-                      key={i}
-                      href={item.uri}
-                      target={getLinkTarget(item.uri)}
-                    >
+                    <ColorButton key={i} href={item.uri} target={getLinkTarget(item.uri)}>
                       {item.label}
                     </ColorButton>
                   ))}

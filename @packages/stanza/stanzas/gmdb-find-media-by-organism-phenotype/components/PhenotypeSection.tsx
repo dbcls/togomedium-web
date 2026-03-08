@@ -1,7 +1,7 @@
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { THEME } from "%core/theme";
 import { PhenotypeSearchArea } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/PhenotypeSearchArea";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = {};
 

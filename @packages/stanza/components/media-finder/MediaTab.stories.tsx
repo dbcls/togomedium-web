@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
 import { MediaTab } from "%stanza/components/media-finder/MediaTab";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof MediaTab> = {
   component: MediaTab,

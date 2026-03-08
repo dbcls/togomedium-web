@@ -1,8 +1,9 @@
 import { describe, expect, it, test } from "vitest";
-import { makeComponentTree } from "./makeComponentBranch";
-import { toggleFooterComponent } from "./toggleFooterComponent";
+
 import { makeRawComponent } from "../../../utils/testing";
 import { ComponentTrunk } from "../types";
+import { makeComponentTree } from "./makeComponentBranch";
+import { toggleFooterComponent } from "./toggleFooterComponent";
 
 describe("toggleFooterComponent", () => {
   it("should work", () => {

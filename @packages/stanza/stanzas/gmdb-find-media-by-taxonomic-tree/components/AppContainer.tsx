@@ -1,5 +1,3 @@
-import { useQueries, useQuery } from "@tanstack/react-query";
-import React, { FC, useEffect, useMemo } from "react";
 import { TaxonAncestorsParams, TaxonAncestorsResponse } from "%api/taxonAncestors.ts/definitions";
 import { TaxonChildrenParams, TaxonChildrenResponse } from "%api/taxonChildren/definitions";
 import { getData } from "%core/network/getData";
@@ -22,6 +20,8 @@ import {
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
 import { useTaxonTreeMutators } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/treeState";
 import { LoadingCover } from "%stanza/stanzas/gmdb-meta-list/components/LoadingCover";
+import { useQueries, useQuery } from "@tanstack/react-query";
+import React, { FC, useEffect, useMemo } from "react";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;
@@ -101,7 +101,7 @@ const useTaxonSearchResult = () => {
       margeTreeState(
         firstQuery.data
           ?.filter((taxon) => taxon.rank.toLowerCase() !== "species")
-          .map((taxon) => taxon.tax_id) ?? []
+          .map((taxon) => taxon.tax_id) ?? [],
       );
     }
   }, [data, isSuccess, firstQuery.data]);

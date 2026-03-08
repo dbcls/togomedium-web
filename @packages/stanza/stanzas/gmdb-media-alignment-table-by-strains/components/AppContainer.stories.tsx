@@ -1,8 +1,9 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { AppContainer } from "./AppContainer";
 import { data1 } from "%api/mediaStrainsAlignment/data1";
 import { data2 } from "%api/mediaStrainsAlignment/data2";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { Meta, StoryObj } from "@storybook/react-vite";
+
+import { AppContainer } from "./AppContainer";
 
 const meta: Meta<typeof AppContainer> = {
   component: AppContainer,

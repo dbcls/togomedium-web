@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { FC, useEffect, useState } from "react";
 import { StanzaView } from "%stanza/stanzas/gmdb-meta-list/components/StanzaView";
 import { fetchData } from "%stanza/stanzas/gmdb-meta-list/utils/api";
+import { useQuery } from "@tanstack/react-query";
+import React, { FC, useEffect, useState } from "react";
 
 type Props = {
   stanzaElement?: ShadowRoot;
@@ -39,7 +39,7 @@ const useTableData = (apiUrl: string, initialLimit: number = 100) => {
 const App: FC<Props> = ({ apiUrl, initialLimit, title, showColumnNames, columnSizes, webFont }) => {
   const { offset, setOffset, limit, setLimit, showLoading, data, errorMessage } = useTableData(
     apiUrl,
-    initialLimit
+    initialLimit,
   );
   if (!data) {
     return <>{errorMessage}</>;

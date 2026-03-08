@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
 import { FilterIcon } from "%stanza/components/icons/FilterIcon";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof FilterIcon> = {
   component: FilterIcon,

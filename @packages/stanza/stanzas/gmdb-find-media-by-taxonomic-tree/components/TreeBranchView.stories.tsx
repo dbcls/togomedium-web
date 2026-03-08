@@ -1,6 +1,6 @@
+import { TreeBranchView } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TreeBranchView";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps } from "react";
-import { TreeBranchView } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TreeBranchView";
 
 const meta: Meta<typeof TreeBranchView> = {
   component: TreeBranchView,
@@ -37,10 +37,7 @@ export const Tree: Story = {
       return (
         <TreeBranchView {...defaultArgs}>
           <TreeBranchView {...defaultArgs}></TreeBranchView>
-          <TreeBranchView
-            {...defaultArgs}
-            isHighlighted={true}
-          >
+          <TreeBranchView {...defaultArgs} isHighlighted={true}>
             <Item />
           </TreeBranchView>
         </TreeBranchView>

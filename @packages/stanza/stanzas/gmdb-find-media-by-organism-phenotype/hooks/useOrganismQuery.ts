@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { nullListResponse } from "%api/ListApi";
 import {
   ListOrganismsByPhenotypesParams,
@@ -8,6 +7,7 @@ import {
 import { getData } from "%core/network/getData";
 import { useOrganismPaginationState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/organismPagination";
 import { usePhenotypeQueryState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/phenotypeQuery";
+import { useQuery } from "@tanstack/react-query";
 
 const SHOW_COUNT = 10;
 export const useOrganismQuery = () => {

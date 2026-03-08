@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
 import { StanzaView } from "%stanza/stanzas/gmdb-similar-media-node/components/StanzaView";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof StanzaView> = {
   component: StanzaView,

@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
 import { FoundOrganismsList } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/FoundOrganismsList";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof FoundOrganismsList> = {
   component: FoundOrganismsList,

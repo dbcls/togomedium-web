@@ -1,3 +1,4 @@
+//todo improve this
 import { createHistory, RouterHistory } from "@tanstack/react-router";
 
 type SubscriberHistoryAction =
@@ -33,7 +34,7 @@ export type BlockerFnArgs = {
 };
 
 export type BlockerFn = (
-  args: BlockerFnArgs
+  args: BlockerFnArgs,
 ) => Promise<ShouldAllowNavigation> | ShouldAllowNavigation;
 
 export type NavigationBlocker = {
@@ -59,7 +60,7 @@ function parseHref(href: string, state: ParsedHistoryState | undefined): History
           : hashIndex
         : searchIndex > 0
           ? searchIndex
-          : href.length
+          : href.length,
     ),
     hash: hashIndex > -1 ? href.substring(hashIndex) : "",
     search:
@@ -92,7 +93,7 @@ export function createCustomHistory(opts?: {
     (() =>
       parseHref(
         `${win.location.pathname}${win.location.search}${win.location.hash}`,
-        win.history.state
+        win.history.state,
       ));
 
   // Ensure there is always a key to start
@@ -102,7 +103,7 @@ export function createCustomHistory(opts?: {
         [stateIndexKey]: 0,
         key: createRandomKey(),
       },
-      ""
+      "",
     );
   }
 

@@ -4,9 +4,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "%stanza/*": ["../stanza/*"],
+      "%stanza/*": ["../stanza/*"]
     }
   },
   "exclude": ["node_modules", "**/*.spec.ts"],
-  "references": [{ "path": "./tsconfig.node.json"}]
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

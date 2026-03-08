@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { FC } from "react";
+
 import { URL_STANZA } from "@/consts/api.ts";
 import { booleanToString } from "@/utils/boolean.ts";
 
@@ -19,11 +20,7 @@ export const StrainAlignmentStanza: FC<Props> = ({
   const visibleClass = clsx(isVisible ? "block" : "hidden");
   return (
     <>
-      <script
-        src={`${URL_STANZA}/${stanzaName}.js`}
-        type="module"
-        async
-      ></script>
+      <script src={`${URL_STANZA}/${stanzaName}.js`} type="module" async></script>
       <StanzaTag
         gm_ids={gmIds.join(",")}
         hide_media={booleanToString(hideMedia)}

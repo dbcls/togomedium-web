@@ -1,4 +1,3 @@
-import { ComponentProps, useEffect, useState } from "react";
 import { ListOrganismsByPhenotypesResponse } from "%api/listOrganismsByPhenotypes/definitions";
 import { OrganismListItem } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismListItem";
 import {
@@ -6,6 +5,7 @@ import {
   useSelectedOrganismsState,
 } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/selectedOrganisms";
 import { hasIdOfLabel } from "%stanza/utils/labelInfo";
+import { ComponentProps, useEffect, useState } from "react";
 
 type OrganismListInfo = Omit<ComponentProps<typeof OrganismListItem>, "onClick">;
 // type FoundOrganisms = MediaFinderListApiBody<"tax_id" | "name">;

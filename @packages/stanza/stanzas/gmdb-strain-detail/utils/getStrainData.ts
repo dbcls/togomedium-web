@@ -1,4 +1,3 @@
-import { ComponentProps } from "react";
 import {
   StrainDetailParams,
   StrainDetailResponse,
@@ -7,6 +6,7 @@ import {
 import { getData } from "%core/network/getData";
 import { StanzaView } from "%stanza/stanzas/gmdb-strain-detail/components/StanzaView";
 import { parseData } from "%stanza/stanzas/gmdb-strain-detail/utils/parseData";
+import { ComponentProps } from "react";
 
 type ViewProps = ComponentProps<typeof StanzaView>;
 export const getStrainData = async (strain_id: string): Promise<ViewProps> => {

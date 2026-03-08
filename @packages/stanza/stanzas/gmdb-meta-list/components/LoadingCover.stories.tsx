@@ -1,8 +1,9 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { ListTable } from "./ListTable";
-import { LoadingCover } from "./LoadingCover";
 import { data1 } from "%api/listMedia/data1";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
+import { Meta, StoryObj } from "@storybook/react-vite";
+
+import { ListTable } from "./ListTable";
+import { LoadingCover } from "./LoadingCover";
 
 const meta: Meta<typeof LoadingCover> = {
   component: LoadingCover,
@@ -10,12 +11,7 @@ const meta: Meta<typeof LoadingCover> = {
     (Story) => (
       <StanzaWrapper>
         <div style={{ position: "relative" }}>
-          <ListTable
-            data={data1}
-            showColumnNames={true}
-            columnSizes={[]}
-            limit={20}
-          />
+          <ListTable data={data1} showColumnNames={true} columnSizes={[]} limit={20} />
           <Story />
         </div>
       </StanzaWrapper>

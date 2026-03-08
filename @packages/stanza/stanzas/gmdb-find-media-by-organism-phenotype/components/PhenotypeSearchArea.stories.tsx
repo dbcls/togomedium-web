@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
 import { PhenotypeSearchArea } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/PhenotypeSearchArea";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof PhenotypeSearchArea> = {
   component: PhenotypeSearchArea,

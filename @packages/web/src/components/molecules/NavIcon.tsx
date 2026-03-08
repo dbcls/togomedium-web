@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { FC } from "react";
+
 import { ApiIcon } from "@/components/atoms/svg/ApiIcon.tsx";
 import { ComponentIcon } from "@/components/atoms/svg/ComponentIcon.tsx";
 import { DocIcon } from "@/components/atoms/svg/DocIcon.tsx";
@@ -50,7 +51,7 @@ type Props = {
 export const NavIcon: FC<Props> = ({ type, isActive }) => {
   const classes = clsx(
     "size-5 shrink-0 grow-0",
-    isActive ? "text-primary-dark" : "group-hover:text-primary-dark text-gray-400"
+    isActive ? "text-primary-dark" : "group-hover:text-primary-dark text-gray-400",
   );
   switch (type) {
     case ICON_HOME:

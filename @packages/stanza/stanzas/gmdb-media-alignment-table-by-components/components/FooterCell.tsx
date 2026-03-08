@@ -1,11 +1,11 @@
-import { SxProps } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { THEME } from "%core/theme";
 import { IconBlank, IconCompact, IconExpand } from "%stanza/components/icons/icons";
 import { WIDTH_ALIGNMENT_CELL } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
 import { useComponentTreeMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/componentTree";
+import { SxProps } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = {
   label: string;
@@ -21,15 +21,9 @@ export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen, id })
 
   const Icon = hasChildren ? (
     isOpen ? (
-      <IconCompact
-        sx={clickableIconStyle}
-        onClick={() => onClickFooterItem(id)}
-      />
+      <IconCompact sx={clickableIconStyle} onClick={() => onClickFooterItem(id)} />
     ) : (
-      <IconExpand
-        sx={clickableIconStyle}
-        onClick={() => onClickFooterItem(id)}
-      />
+      <IconExpand sx={clickableIconStyle} onClick={() => onClickFooterItem(id)} />
     )
   ) : (
     <IconBlank sx={iconStyle} />
@@ -38,10 +32,7 @@ export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen, id })
   return (
     <Wrapper>
       {new Array(level).fill(null).map((r, index) => (
-        <span
-          key={index}
-          className="spacer"
-        />
+        <span key={index} className="spacer" />
       ))}
       {Icon}
       <span className={"text"}>{decodeHTMLEntities(label)}</span>

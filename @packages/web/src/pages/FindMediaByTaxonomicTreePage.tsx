@@ -1,5 +1,6 @@
-import { FC, useMemo } from "react";
 import { TaxonomyType } from "%core/types/TaxonomyType.ts";
+import { FC, useMemo } from "react";
+
 import { H2 } from "@/components/atoms/H2.tsx";
 import { FindMediaByTaxonomicTreeStanza } from "@/components/stanzas/FindMediaByTaxonomicTreeStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";

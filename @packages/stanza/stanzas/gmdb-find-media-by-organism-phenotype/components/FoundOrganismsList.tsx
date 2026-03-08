@@ -1,12 +1,12 @@
-import CircularProgress from "@mui/material/CircularProgress";
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { THEME } from "%core/theme";
 import { Pagination } from "%stanza/components/media-finder/Pagination";
 import { OrganismListItem } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismListItem";
 import { useOrganismList } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/hooks/useOrganismList";
 import { useOrganismQuery } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/hooks/useOrganismQuery";
 import { useOrganismPaginationMutators } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/organismPagination";
+import CircularProgress from "@mui/material/CircularProgress";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = {};
 
@@ -20,20 +20,13 @@ export const FoundOrganismsList: FC<Props> = () => {
       <div>
         {(isLoading || isPlaceholderData) && (
           <LoadingIndicator>
-            <CircularProgress
-              color="inherit"
-              size={40}
-            />
+            <CircularProgress color="inherit" size={40} />
           </LoadingIndicator>
         )}
         <InfoText>{getInfoText(data?.total, isLoading)}</InfoText>
         <Inner>
           {(list ?? []).map((item) => (
-            <OrganismListItem
-              key={item.id}
-              {...item}
-              onClick={toggleOrganismSelection}
-            />
+            <OrganismListItem key={item.id} {...item} onClick={toggleOrganismSelection} />
           ))}
         </Inner>
         {!!data?.total && !isLoading && (

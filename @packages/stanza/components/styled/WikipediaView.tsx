@@ -1,25 +1,16 @@
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { THEME } from "%core/theme";
 import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 export const WikipediaView: FC<WikipediaData> = ({ thumb, description, link }) => (
   <WikipediaInfo>
     <p>
-      {thumb && (
-        <img
-          src={thumb}
-          alt={""}
-        />
-      )}
+      {thumb && <img src={thumb} alt={""} />}
       {description}
     </p>
     <cite>
-      <a
-        href={link}
-        target={"_blank"}
-        rel="noreferrer"
-      >
+      <a href={link} target={"_blank"} rel="noreferrer">
         From Wikipedia
       </a>
     </cite>

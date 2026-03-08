@@ -1,12 +1,13 @@
+import { join } from "path";
+
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
-import { join } from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   root: "src/",
-  plugins: [tailwindcss(),react()],
+  plugins: [tailwindcss(), react()],
   resolve: {
     alias: [
       {

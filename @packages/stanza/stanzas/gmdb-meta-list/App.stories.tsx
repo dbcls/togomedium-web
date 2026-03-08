@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
 import App from "%stanza/stanzas/gmdb-meta-list/App";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 // export default {
 //   title: "Stanzas/MetaList",

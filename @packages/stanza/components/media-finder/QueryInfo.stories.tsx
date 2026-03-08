@@ -1,8 +1,9 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { ComponentProps, useEffect } from "react";
-import { QueryInfo } from "./QueryInfo";
 import { QueryData, useQueryDataMutators } from "%stanza/state/media-finder/queryData";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { ComponentProps, useEffect } from "react";
+
+import { QueryInfo } from "./QueryInfo";
 
 type WithCustomArgs = { queryData: QueryData } & ComponentProps<typeof QueryInfo>;
 const meta: Meta<WithCustomArgs> = {

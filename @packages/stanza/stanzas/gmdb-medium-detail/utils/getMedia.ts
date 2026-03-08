@@ -1,4 +1,3 @@
-import { copy } from "copy-anything";
 import {
   MediumDetailParams,
   MediumDetailResponse,
@@ -7,6 +6,7 @@ import {
 import { getData } from "%core/network/getData";
 import { ReferencingRecipe } from "%stanza/stanzas/gmdb-medium-detail/components/StanzaView";
 import { processData } from "%stanza/stanzas/gmdb-medium-detail/utils/processData";
+import { copy } from "copy-anything";
 
 export const getMedia = async (gm_id: string) => {
   const result = await getData<MediumDetailResponse, MediumDetailParams>(mediumDetailURL, {
@@ -19,13 +19,13 @@ export const getMedia = async (gm_id: string) => {
 
 const getExternalReferences = async (
   body: MediumDetailResponse,
-  gm_id: string
+  gm_id: string,
 ): Promise<ReferencingRecipe[]> => {
   const externalReferences = copy(body)
     .components.map((component) =>
       component.items.filter(
-        (item) => !!item.reference_media_id && item.reference_media_id !== gm_id
-      )
+        (item) => !!item.reference_media_id && item.reference_media_id !== gm_id,
+      ),
     )
     .filter((item) => item.length > 0)
     .flat()

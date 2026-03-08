@@ -1,7 +1,8 @@
-import parse from "html-react-parser";
-import { FC } from "react";
 import { listMediaOfStrain } from "%api/listMediaOfStrain/definitions.ts";
 import { listPhenotypeOfStrainUrl } from "%api/listPhenotypeOfStrain/definitions.ts";
+import parse from "html-react-parser";
+import { FC } from "react";
+
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
@@ -29,10 +30,7 @@ export const StrainDetailPage: FC = () => {
       </div>
       <div>
         <H3>Media of {name}</H3>
-        <ListStanza
-          api={`${listMediaOfStrain}?strain_id=${strainId}`}
-          columnSizes={[10, 20, 70]}
-        />
+        <ListStanza api={`${listMediaOfStrain}?strain_id=${strainId}`} columnSizes={[10, 20, 70]} />
       </div>
     </PageWrapper>
   );

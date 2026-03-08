@@ -1,9 +1,10 @@
-import { Link } from "@tanstack/react-router";
-import clsx from "clsx";
-import { FC } from "react";
 import { listComponentsUrl } from "%api/listComponents/definitions.ts";
 import { listMediaURL } from "%api/listMedia/definitions.ts";
 import { listStrainsUrl } from "%api/listStrains/definitions.ts";
+import { Link } from "@tanstack/react-router";
+import clsx from "clsx";
+import { FC } from "react";
+
 import { H2 } from "@/components/atoms/H2.tsx";
 import { ComponentIcon } from "@/components/atoms/svg/ComponentIcon.tsx";
 import { MediumIcon } from "@/components/atoms/svg/MediumIcon.tsx";
@@ -21,19 +22,9 @@ export const StatsSection: FC = () => {
     <section>
       <H2>In our database:</H2>
       <ul className={"grid grid-cols-3 justify-between gap-4"}>
-        <StatsCard
-          to={"/medium"}
-          label={"media"}
-          count={mediumCount}
-          icon={<MediumIcon />}
-        />
+        <StatsCard to={"/medium"} label={"media"} count={mediumCount} icon={<MediumIcon />} />
 
-        <StatsCard
-          to={"/strain"}
-          label={"strains"}
-          count={strainCount}
-          icon={<OrganismIcon />}
-        />
+        <StatsCard to={"/strain"} label={"strains"} count={strainCount} icon={<OrganismIcon />} />
         <StatsCard
           to={"/component"}
           label={"components"}
@@ -41,11 +32,8 @@ export const StatsSection: FC = () => {
           icon={<ComponentIcon />}
         />
       </ul>
-      <p className={"flex w-full justify-end pr-10 pt-4"}>
-        <Link
-          to={"/statistics"}
-          className={clsx(basicTextLink, ["text-large", "font-wide"])}
-        >
+      <p className={"flex w-full justify-end pt-4 pr-10"}>
+        <Link to={"/statistics"} className={clsx(basicTextLink, ["text-large", "font-wide"])}>
           More about the database &gt;
         </Link>
       </p>

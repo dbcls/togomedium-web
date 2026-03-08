@@ -1,7 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { FC, PropsWithChildren, useEffect, useMemo } from "react";
-import { useTimeout } from "usehooks-ts";
-import { Optional } from "yohak-tools";
 import { TaxonChildrenParams, TaxonChildrenResponse } from "%api/taxonChildren/definitions";
 import { PATH_TAXON } from "%core/consts";
 import { getData } from "%core/network/getData";
@@ -31,6 +27,10 @@ import {
   useIsOpen,
   useTaxonTreeMutators,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/treeState";
+import { useQuery } from "@tanstack/react-query";
+import React, { FC, PropsWithChildren, useEffect, useMemo } from "react";
+import { useTimeout } from "usehooks-ts";
+import { Optional } from "yohak-tools";
 
 type Props = { id: string } & PropsWithChildren;
 
@@ -79,12 +79,7 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
     >
       {isOpen &&
         branchChildren.length &&
-        branchChildren.map((childId) => (
-          <TaxonomicTreeBranch
-            key={childId}
-            id={childId}
-          />
-        ))}
+        branchChildren.map((childId) => <TaxonomicTreeBranch key={childId} id={childId} />)}
     </TreeBranchView>
   );
 };
@@ -126,14 +121,14 @@ const useBranchChildren = (info: Optional<TaxonInfo>) => {
     if (query.data?.length) {
       setTaxonChildren(
         info?.id || "",
-        query.data.map((item) => item.tax_id)
+        query.data.map((item) => item.tax_id),
       );
     }
   }, [query.data]);
 
   const branchChildren: string[] = useMemo(
     () => (query.data ?? []).map((item) => item.tax_id),
-    [query.data]
+    [query.data],
   );
 
   const toggleIconStatus: ToggleIconStatus = useMemo(() => {
@@ -167,7 +162,7 @@ const useChecked = (
   id: string,
   taxonList: TaxonInfo[],
   ascendants: string[],
-  descendants: string[]
+  descendants: string[],
 ) => {
   const selectedTaxon = useSelectedTaxonState();
   const { updateSelection } = useSelectedTaxonMutators();
@@ -198,7 +193,7 @@ const useLineages = (id: string, taxonList: TaxonInfo[]) => {
   const descendants = useMemo(() => findDescendants(taxonList, id), [taxonList, id]);
   const ascendantsLabel = useMemo(
     () => ascendants.map((id) => taxonList.find((taxon) => taxon.id === id)?.label).join(" > "),
-    [ascendants]
+    [ascendants],
   );
   // useEffect(() => {
   //   console.log({ id: id, ascendants: ascendants, descendants: descendants });

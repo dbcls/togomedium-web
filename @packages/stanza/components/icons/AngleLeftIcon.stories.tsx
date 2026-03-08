@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
 import { AngleLeftIcon } from "%stanza/components/icons/AngleLeftIcon";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof AngleLeftIcon> = {
   component: AngleLeftIcon,

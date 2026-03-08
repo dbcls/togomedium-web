@@ -3,11 +3,11 @@ import { isArray, Optional, Nullable } from "yohak-tools";
 export const getData = async <ResponseBody, Params extends ParamObject = ParamObject>(
   url: string,
   params: Params,
-  abortController?: AbortController
+  abortController?: AbortController,
 ): Promise<ApiResponse<ResponseBody>> => {
   const response = await fetch(
     url,
-    makeOptions(params, abortController ? abortController.signal : null)
+    makeOptions(params, abortController ? abortController.signal : null),
   );
 
   if (response.status !== 200) {
@@ -34,7 +34,7 @@ type ParamObject = { [key: string]: string | number | string[] | number[] };
 
 const makeFormBody = (params: ParamObject) => {
   const formBody = Object.entries(params).map(
-    ([key, value]) => `${key}=${encodeURIComponent(isArray(value) ? value.join(",") : value)}`
+    ([key, value]) => `${key}=${encodeURIComponent(isArray(value) ? value.join(",") : value)}`,
   );
   return formBody.join("&");
 };

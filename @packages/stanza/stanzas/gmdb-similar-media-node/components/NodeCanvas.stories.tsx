@@ -1,7 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { NodeCanvas } from "./NodeCanvas";
+
 import { data1 } from "../utils/data1";
 import { data2 } from "../utils/data2";
+import { NodeCanvas } from "./NodeCanvas";
 
 const meta: Meta<typeof NodeCanvas> = {
   component: NodeCanvas,

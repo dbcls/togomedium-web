@@ -1,6 +1,6 @@
+import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 
 type Props = {
   index: number;

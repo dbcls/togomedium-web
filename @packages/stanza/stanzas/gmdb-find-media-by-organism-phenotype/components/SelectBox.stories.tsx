@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { userEvent, within } from "storybook/test";
 import { SelectBox } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/SelectBox";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { userEvent, within } from "storybook/test";
 
 const meta: Meta<typeof SelectBox> = {
   component: SelectBox,

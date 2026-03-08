@@ -1,7 +1,7 @@
 {
   "name": "vite-project",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "web:build": "pnpm --filter @packages/web build",
@@ -10,13 +10,19 @@
     "doc:serve": "pnpm --filter @packages/doc dev",
     "stanza:serve": "pnpm --filter @packages/stanza stanza:server",
     "stanza:build": "pnpm --filter @packages/stanza stanza:build",
-    "storybook:serve": "pnpm --filter @packages/storybook storybook"
+    "storybook:serve": "pnpm --filter @packages/storybook storybook",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
+  },
+  "dependencies": {
+    "oxlint-tsgolint": "^0.16.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",
     "@eslint/compat": "^1.2.6",
     "@eslint/js": "^9.19.0",
     "@react-types/shared": "^3.33.1",
+    "@storybook/addon-docs": "^10.2.16",
     "@storybook/addon-links": "^10.2.16",
     "@storybook/addon-onboarding": "^10.2.16",
     "@storybook/blocks": "^8.5.0",
@@ -39,7 +45,10 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
+    "eslint-plugin-storybook": "10.2.16",
     "globals": "^16.0.0",
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0",
     "postcss": "^8.5.8",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
@@ -52,9 +61,7 @@
     "vite-multiple-assets": "^2.2.6",
     "vite-plugin-full-reload": "^1.2.0",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.0.18",
-    "eslint-plugin-storybook": "10.2.16",
-    "@storybook/addon-docs": "^10.2.16"
+    "vitest": "^4.0.18"
   },
   "resolutions": {
     "esbuild": "0.24.0"

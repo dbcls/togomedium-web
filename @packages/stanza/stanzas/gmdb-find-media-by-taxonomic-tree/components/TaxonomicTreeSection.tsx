@@ -1,4 +1,3 @@
-import React, { FC, useMemo } from "react";
 import { TaxonomicTreeBranch } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonomicTreeBranch";
 import {
   gtdbSuperkingdoms,
@@ -7,6 +6,7 @@ import {
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
 import { useTaxonomyType } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
 import { LoadingCover } from "%stanza/stanzas/gmdb-meta-list/components/LoadingCover";
+import React, { FC, useMemo } from "react";
 
 type Props = {
   showLoading: boolean;
@@ -19,16 +19,10 @@ export const TaxonomicTreeSection: FC<Props> = ({ showLoading }) => {
   }, [type]);
   return (
     <div style={{ position: "relative" }}>
-      <LoadingCover
-        showLoading={showLoading}
-        errorMessage={""}
-      />
+      <LoadingCover showLoading={showLoading} errorMessage={""} />
       <div>
         {superKingdoms.map((superKingdom) => (
-          <TaxonomicTreeBranch
-            key={superKingdom.id}
-            id={superKingdom.id}
-          />
+          <TaxonomicTreeBranch key={superKingdom.id} id={superKingdom.id} />
         ))}
       </div>
     </div>

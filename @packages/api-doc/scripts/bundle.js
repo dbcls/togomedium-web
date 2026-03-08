@@ -1,6 +1,7 @@
-import { consola } from "consola";
 import { copyFileSync, existsSync } from "fs";
 import { join, resolve } from "path";
+
+import { consola } from "consola";
 
 export const bundle = () => {
   const cwd = process.cwd();

@@ -1,6 +1,6 @@
+import { THEME } from "%core/theme";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { THEME } from "%core/theme";
 
 export const CapsuleList: FC<{ labels: string[] }> = ({ labels }) => (
   <CapsuleListWrapper>

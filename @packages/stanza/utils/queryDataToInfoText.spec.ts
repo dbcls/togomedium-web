@@ -1,6 +1,7 @@
 import { describe, expect, it, test } from "vitest";
-import { queryDataToInfoText } from "./queryDataToInfoText";
+
 import { QueryData } from "../state/media-finder/queryData";
+import { queryDataToInfoText } from "./queryDataToInfoText";
 
 describe("queryDataToInfoText", () => {
   it("should return null when data is empty", () => {

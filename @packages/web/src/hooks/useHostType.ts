@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { HOST_LIVE, HOST_STAGING } from "%core/consts.ts";
+import { useEffect, useState } from "react";
 
 type HostType = "production" | "staging" | "local" | "";
 

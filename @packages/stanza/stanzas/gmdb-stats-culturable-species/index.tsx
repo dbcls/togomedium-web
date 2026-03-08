@@ -1,6 +1,6 @@
-import React from "react";
 import { TogoMediumReactStanza } from "%stanza/components/providers/StanzaReactProvider";
 import App from "%stanza/stanzas/gmdb-stats-culturable-species/App";
+import React from "react";
 
 type StanzaParameters = {};
 

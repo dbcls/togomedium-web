@@ -1,5 +1,3 @@
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { NotFound } from "%stanza/components/atoms/NotFound";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { BottomController } from "%stanza/stanzas/gmdb-meta-list/components/BottomController";
@@ -7,6 +5,8 @@ import { ListTable } from "%stanza/stanzas/gmdb-meta-list/components/ListTable";
 import { LoadingCover } from "%stanza/stanzas/gmdb-meta-list/components/LoadingCover";
 import { TopInfo } from "%stanza/stanzas/gmdb-meta-list/components/TopInfo";
 import { ListApiBody } from "%stanza/stanzas/gmdb-meta-list/types";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = {
   data: ListApiBody;

@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import Stanza from "togostanza/stanza";
 import { addClass } from "yohak-tools";
+
 import { getData } from "../../utils/getData";
 import { URL_API } from "../../utils/variables";
 

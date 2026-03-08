@@ -1,10 +1,10 @@
-import React, { FC, useMemo, useState } from "react";
 import { MediaListItem } from "%stanza/components/media-finder/MediaListItem";
 import { Pagination } from "%stanza/components/media-finder/Pagination";
 import {
   useSelectedMediaMutators,
   useSelectedMediaState,
 } from "%stanza/state/media-finder/selectedMedia";
+import React, { FC, useMemo, useState } from "react";
 
 type Props = {};
 
@@ -21,7 +21,7 @@ export const SelectedMediaList: FC<Props> = () => {
   };
   const data = useMemo(
     () => selectedMedia.filter((_, i) => i >= current).filter((_, i) => i < SHOW_COUNT),
-    [selectedMedia, current]
+    [selectedMedia, current],
   );
 
   return (

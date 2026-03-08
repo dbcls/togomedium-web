@@ -3,7 +3,7 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # main ブランチへのプッシュ時に実行
+      - main # main ブランチへのプッシュ時に実行
       - feature/2024-renewal
       - stanza
 
@@ -23,7 +23,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 9  # 必要に応じてバージョンを指定
+          version: 9 # 必要に応じてバージョンを指定
 
       - name: Check pnpm version
         run: pnpm --version
@@ -41,4 +41,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./@packages/stanza/dist/  # 出力先ディレクトリを指定
+          publish_dir: ./@packages/stanza/dist/ # 出力先ディレクトリを指定

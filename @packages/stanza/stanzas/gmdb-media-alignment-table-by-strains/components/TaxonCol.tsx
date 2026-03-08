@@ -1,13 +1,13 @@
-import { SxProps } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
-import { Ease } from "yohak-tools";
 import { LineageRank } from "%api/mediaStrainsAlignment/definitions";
 import { THEME } from "%core/theme";
 import { TaxonCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/TaxonCell";
 import { useFilterRankMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterRank";
 import { CellInfo } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
 import { capitalizeFirstLetter } from "%stanza/utils/string";
+import { SxProps } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
+import { Ease } from "yohak-tools";
 
 type Props = {
   rank: LineageRank;
@@ -46,12 +46,7 @@ export const TaxonCol: FC<Props> = ({ rank, taxonList }) => {
         {taxonList.map((list, index) => (
           <MediumTaxonWrapper key={index}>
             {list.map((info, index) => (
-              <TaxonCell
-                key={index}
-                {...info}
-                rank={rank}
-                isFolded={isFolded}
-              />
+              <TaxonCell key={index} {...info} rank={rank} isFolded={isFolded} />
             ))}
           </MediumTaxonWrapper>
         ))}

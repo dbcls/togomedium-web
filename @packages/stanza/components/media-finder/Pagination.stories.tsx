@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
-import React, { ComponentProps } from "react";
 import { Pagination } from "%stanza/components/media-finder/Pagination";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import React, { ComponentProps } from "react";
 
 const meta: Meta<typeof Pagination> = {
   component: Pagination,

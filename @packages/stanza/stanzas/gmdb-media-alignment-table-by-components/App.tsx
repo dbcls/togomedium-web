@@ -1,6 +1,3 @@
-import { styled } from "@mui/material/styles";
-import { useQuery } from "@tanstack/react-query";
-import React, { useCallback } from "react";
 import {
   MediaComponentAlignmentTableParams,
   MediaComponentAlignmentTableResponse,
@@ -9,6 +6,9 @@ import {
 import { getData } from "%core/network/getData";
 import { THEME } from "%core/theme";
 import { ScrollableTable } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/ScrollableTable";
+import { styled } from "@mui/material/styles";
+import { useQuery } from "@tanstack/react-query";
+import React, { useCallback } from "react";
 
 export type AppProps = {
   gm_ids: string[];
@@ -18,7 +18,7 @@ export type AppProps = {
 
 const useDataQuery = (
   gm_ids: string[],
-  stanzaDispatch: (eventName: string, detail: any) => void
+  stanzaDispatch: (eventName: string, detail: any) => void,
 ) => {
   return useQuery({
     queryKey: ["media-alignment", { gm_ids }],
@@ -46,16 +46,13 @@ const App = ({ gm_ids, stanzaElement, prioritizedOrganism = [] }: AppProps) => {
       const e = new CustomEvent(eventName, { bubbles: true, composed: true, detail });
       stanzaElement.dispatchEvent(e);
     },
-    [stanzaElement]
+    [stanzaElement],
   );
   const dataQuery = useDataQuery(gm_ids, dispatchStanzaEvent);
   if (!dataQuery.data) return <Wrapper>Loading...</Wrapper>;
   return (
     <Wrapper>
-      <ScrollableTable
-        data={dataQuery.data}
-        prioritizedOrganism={prioritizedOrganism}
-      />
+      <ScrollableTable data={dataQuery.data} prioritizedOrganism={prioritizedOrganism} />
     </Wrapper>
   );
 };

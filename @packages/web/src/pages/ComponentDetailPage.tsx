@@ -1,6 +1,7 @@
+import { listMediaOfComponentUrl } from "%api/listMediaOfComponent/definitions.ts";
 import parse from "html-react-parser";
 import { FC } from "react";
-import { listMediaOfComponentUrl } from "%api/listMediaOfComponent/definitions.ts";
+
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { ComponentDetailStanza } from "@/components/stanzas/ComponentDetailStanza.tsx";
@@ -21,10 +22,7 @@ export const ComponentDetailPage: FC = () => {
       </div>
       <div>
         <H3>Media including {name}</H3>
-        <ListStanza
-          api={`${listMediaOfComponentUrl}?gmo_id=${gmoId}`}
-          columnSizes={[15, 85]}
-        />
+        <ListStanza api={`${listMediaOfComponentUrl}?gmo_id=${gmoId}`} columnSizes={[15, 85]} />
       </div>
     </PageWrapper>
   );

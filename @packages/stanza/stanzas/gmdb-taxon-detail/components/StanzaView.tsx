@@ -1,5 +1,3 @@
-import React, { ComponentProps, FC } from "react";
-import { Optional } from "yohak-tools";
 import { CapsuleList } from "%stanza/components/styled/CapsuleList";
 import { ColorButton } from "%stanza/components/styled/ColorButton";
 import { ColWrapper } from "%stanza/components/styled/ColWrapper";
@@ -11,6 +9,8 @@ import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { SubHeading } from "%stanza/components/styled/SubHeading";
 import { WikipediaView } from "%stanza/components/styled/WikipediaView";
 import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
+import React, { ComponentProps, FC } from "react";
+import { Optional } from "yohak-tools";
 
 const linkNCBI = "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=";
 const linkTogoGenome = "http://togogenome.org/organism/";
@@ -42,18 +42,10 @@ export const StanzaView: FC<Props> = ({
             <span>Taxonomy ID: </span>
             <span>{taxid}</span>
             <div className={"tag-list"}>
-              <ColorButton
-                target="_blank"
-                href={`${linkNCBI}${taxid}`}
-                rel="noreferrer"
-              >
+              <ColorButton target="_blank" href={`${linkNCBI}${taxid}`} rel="noreferrer">
                 NCBI
               </ColorButton>
-              <ColorButton
-                target="_blank"
-                href={`${linkTogoGenome}${taxid}`}
-                rel="noreferrer"
-              >
+              <ColorButton target="_blank" href={`${linkTogoGenome}${taxid}`} rel="noreferrer">
                 TogoGenome
               </ColorButton>
             </div>

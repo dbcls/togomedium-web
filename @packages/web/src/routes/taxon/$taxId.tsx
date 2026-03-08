@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { taxonDetailURL } from "%api/taxonDetail/definitions.ts";
+import { createFileRoute } from "@tanstack/react-router";
+
 import { TaxonDetailPage } from "@/pages/TaxonDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 

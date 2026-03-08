@@ -14,7 +14,7 @@ export const makeComponentTree = (components: RawComponent[]): ComponentTrunk =>
 
   const result = items.filter((item) => !item.parent || item.parent === ROOT_COMPONENT);
   items.forEach(
-    (item) => (item.children = items.filter((filtering) => filtering.parent === item.id))
+    (item) => (item.children = items.filter((filtering) => filtering.parent === item.id)),
   );
   items.forEach((item) => (item.level = getItemLevel(item, items)));
   return result;

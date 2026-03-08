@@ -1,7 +1,7 @@
-import React, { FC, useEffect } from "react";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { NodeCanvas } from "%stanza/stanzas/gmdb-similar-media-node/components/NodeCanvas";
 import { useGraphData } from "%stanza/stanzas/gmdb-similar-media-node/utils/useGraphData";
+import React, { FC, useEffect } from "react";
 
 type Props = {
   gmId: string;

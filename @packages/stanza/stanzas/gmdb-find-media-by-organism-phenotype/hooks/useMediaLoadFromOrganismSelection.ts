@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 import { nullListResponse } from "%api/ListApi";
 import {
   ListMediaOfTaxonsParams,
@@ -16,6 +14,8 @@ import {
 } from "%stanza/state/media-finder/mediaPagination";
 import { useQueryDataMutators } from "%stanza/state/media-finder/queryData";
 import { extractLabelIds } from "%stanza/utils/labelInfo";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const SHOW_COUNT = 10;
 export const useMediaLoadFromOrganismSelection = () => {
@@ -37,7 +37,7 @@ export const useMediaLoadFromOrganismSelection = () => {
           tax_ids,
           limit: SHOW_COUNT,
           offset: (page - 1) * SHOW_COUNT,
-        }
+        },
       );
       if (!response.body) throw new Error("No data");
       return response.body;

@@ -5,7 +5,7 @@ import { describe, expect, it, test } from "vitest";
 describe("separateURL", () => {
   test("it should work", () => {
     const result = separateURL(
-      "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword?keyword=AGAR"
+      "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword?keyword=AGAR",
     );
     expect(result).toEqual([
       "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword",

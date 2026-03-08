@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { FC } from "react";
-import { Optional } from "yohak-tools";
 import { StanzaView } from "%stanza/stanzas/gmdb-taxon-detail/components/StanzaView";
 import { getTaxonData } from "%stanza/stanzas/gmdb-taxon-detail/utils/getTaxonData";
 import { fetchWikipediaData } from "%stanza/utils/fetchWikipediaData";
+import { useQuery } from "@tanstack/react-query";
+import React, { FC } from "react";
+import { Optional } from "yohak-tools";
 
 type Props = {
   stanzaElement?: ShadowRoot;
@@ -33,12 +33,7 @@ const App: FC<Props> = ({ tax_id }) => {
   const { taxonData, isLoading } = useTaxonDataQuery(tax_id);
   const wikipediaData = useWikipediaQuery(taxonData?.scientificName);
   if (isLoading || !taxonData) return <>Loading...</>;
-  return (
-    <StanzaView
-      {...taxonData}
-      wikipediaData={wikipediaData}
-    />
-  );
+  return <StanzaView {...taxonData} wikipediaData={wikipediaData} />;
 };
 
 export default App;

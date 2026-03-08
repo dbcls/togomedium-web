@@ -1,10 +1,10 @@
-import { describe, expect, it, test } from "vitest";
 import { data1 } from "%api/mediaStrainsAlignment/data1";
 import { data2 } from "%api/mediaStrainsAlignment/data2";
 import {
   __TEST__,
   processDisplayData,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
+import { describe, expect, it, test } from "vitest";
 
 const { getNodeListOfRankFromTree, makeTaxonTree, getSizeOfCell, fillNullTaxon } = __TEST__;
 

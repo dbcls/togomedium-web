@@ -1,5 +1,5 @@
-import { ComponentProps } from "react";
 import { ApiLineage, LineageList } from "%stanza/components/styled/LineageList";
+import { ComponentProps } from "react";
 
 export const parseLineage = (lineage: ApiLineage): ComponentProps<typeof LineageList>["lineage"] =>
   lineage.reduce((accum, current) => {

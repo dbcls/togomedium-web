@@ -1,5 +1,5 @@
-import { Nullable } from "yohak-tools";
 import { makeApiUrl } from "%core/network/makeApiUrl";
+import { Nullable } from "yohak-tools";
 
 export type MediaStrainsAlignmentResponse = {
   gm_id: string;

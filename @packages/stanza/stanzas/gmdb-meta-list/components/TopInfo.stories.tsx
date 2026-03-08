@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
 import { TopInfo } from "%stanza/stanzas/gmdb-meta-list/components/TopInfo";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof TopInfo> = {
   component: TopInfo,

@@ -5,7 +5,7 @@ import { LabelInfo } from "%stanza/utils/labelInfo";
 export type ComponentLabelInfo = LabelInfo & { japaneseName: string };
 export const parseLabelInfo = (
   res: ComponentsWithComponentsResponse,
-  selectedIds: string[]
+  selectedIds: string[],
 ): ComponentLabelInfo[] => {
   return res
     .map<ComponentLabelInfo>((item) => ({

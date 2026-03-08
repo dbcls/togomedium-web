@@ -1,4 +1,5 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
+
 import { toggleFooterComponent } from "../functions/toggleFooterComponent";
 import { ComponentTrunk } from "../types";
 

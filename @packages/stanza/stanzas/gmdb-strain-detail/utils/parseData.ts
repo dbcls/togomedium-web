@@ -1,6 +1,6 @@
-import { ComponentProps } from "react";
 import { StrainDetailResponse } from "%api/strainDetail/definitions";
 import { StanzaView } from "%stanza/stanzas/gmdb-strain-detail/components/StanzaView";
+import { ComponentProps } from "react";
 
 type ViewProps = ComponentProps<typeof StanzaView>;
 export const parseData = (body: StrainDetailResponse): ViewProps => {

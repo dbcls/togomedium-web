@@ -1,10 +1,11 @@
+import { THEME } from "%core/theme";
 import { colord, extend } from "colord";
 import mixPlugin from "colord/plugins/mix";
 import * as d3 from "d3";
 import { SimulationLinkDatum, SimulationNodeDatum } from "d3";
 import { D3DragEvent } from "d3-drag";
+
 import { GraphData } from "./useGraphData";
-import { THEME } from "%core/theme";
 
 extend([mixPlugin]);
 
@@ -79,7 +80,7 @@ class GraphManager {
       .attr("stroke", (d) =>
         colord(THEME.COLOR.ACCENT)
           .mix(THEME.COLOR.WHITE, 1 - d.score / 100)
-          .toHex()
+          .toHex(),
       );
     newLinks.transition().duration(300).style("opacity", 1);
     links.exit().remove();
@@ -126,7 +127,7 @@ class GraphManager {
     this.force = this.force
       .force(
         "link",
-        d3.forceLink(linksData).strength((d) => d.score / 100)
+        d3.forceLink(linksData).strength((d) => d.score / 100),
       )
       .nodes(nodesData);
     // this.force.alphaTarget(0.3).restart();
@@ -175,10 +176,10 @@ class GraphManager {
 
   private changeColor(active: boolean, id: string) {
     const relatedLinkData = this.linksData.filter(
-      (d) => (d.source as NodeDatum).id === id || (d.target as NodeDatum).id === id
+      (d) => (d.source as NodeDatum).id === id || (d.target as NodeDatum).id === id,
     );
     const relatedNodeData = this.nodesData.filter((node) =>
-      relatedLinkData.some((link) => link.source === node || link.target === node)
+      relatedLinkData.some((link) => link.source === node || link.target === node),
     );
 
     const nodes = this.nodeWrapper.selectAll("g").data(this.nodesData);
@@ -226,24 +227,24 @@ const setCircleStrokeWidth = (active: boolean) => (active ? 1.5 : 1);
 const includesAllData = (
   data: GraphData,
   currentNodes: NodeDatum[],
-  currentLinks: LinkDatum[]
+  currentLinks: LinkDatum[],
 ): boolean =>
   currentNodes.every((node) => data.nodes.find((n) => n.id === node.id)) &&
   currentLinks.every(
     (link) =>
       data.links.find(
         (l) =>
-          l.source === (link.source as NodeDatum).id && l.target === (link.target as NodeDatum).id
-      ) !== undefined
+          l.source === (link.source as NodeDatum).id && l.target === (link.target as NodeDatum).id,
+      ) !== undefined,
   );
 
 const parseNodeData = (
   data: GraphData,
   currentNodes: NodeDatum[],
-  currentLinks: LinkDatum[]
+  currentLinks: LinkDatum[],
 ): [NodeDatum[], LinkDatum[]] => {
   currentNodes.forEach(
-    (node) => (node.status = data.nodes.find((n) => n.id === node.id)!.status || false)
+    (node) => (node.status = data.nodes.find((n) => n.id === node.id)!.status || false),
   );
   const nodesData: NodeDatum[] = [
     ...currentNodes,
@@ -260,7 +261,7 @@ const parseNodeData = (
         score: link.score,
       }))
       .filter(
-        (link) => !currentLinks.find((l) => l.source === link.source && l.target === link.target)
+        (link) => !currentLinks.find((l) => l.source === link.source && l.target === link.target),
       ),
   ];
   return [nodesData, linksData];

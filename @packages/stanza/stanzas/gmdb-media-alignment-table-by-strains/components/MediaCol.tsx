@@ -1,8 +1,8 @@
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { THEME } from "%core/theme";
 import { MediaCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/MediaCell";
 import { CellInfo } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = { mediaList: CellInfo[] };
 
@@ -11,10 +11,7 @@ export const MediaCol: FC<Props> = ({ mediaList }) => {
     <Wrapper>
       <EmptyCell />
       {mediaList.map((info, index) => (
-        <MediaCell
-          key={index}
-          {...info}
-        />
+        <MediaCell key={index} {...info} />
       ))}
     </Wrapper>
   );

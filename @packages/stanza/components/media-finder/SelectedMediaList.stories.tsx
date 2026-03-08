@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { ComponentProps, useEffect } from "react";
 import { SelectedMediaList } from "%stanza/components/media-finder/SelectedMediaList";
 import { useSelectedMediaMutators } from "%stanza/state/media-finder/selectedMedia";
 import { LabelInfo } from "%stanza/utils/labelInfo";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { ComponentProps, useEffect } from "react";
 
 type WithCustomArgs = { media: LabelInfo[] } & ComponentProps<typeof SelectedMediaList>;
 const meta: Meta<WithCustomArgs> = {

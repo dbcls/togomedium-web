@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
 import { BottomController } from "%stanza/stanzas/gmdb-meta-list/components/BottomController";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof BottomController> = {
   component: BottomController,
