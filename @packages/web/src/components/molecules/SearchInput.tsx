@@ -43,7 +43,7 @@ const useSubmit = (inputRef: RefObject<HTMLInputElement | null>) => {
   const onSubmit = () => {
     const query = encodeURIComponent(inputRef.current?.value ?? "");
     if (query !== "") {
-      navigate({ to: "/search", search: { query } });
+      void navigate({ to: "/search", search: { query } });
     }
     (document.activeElement as HTMLElement).blur();
   };

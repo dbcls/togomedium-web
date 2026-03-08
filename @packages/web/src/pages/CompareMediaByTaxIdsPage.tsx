@@ -42,7 +42,7 @@ const useCompareMediaByTaxIds = () => {
   const [errorMsg, setErrorMsg] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
   const onSubmit = () => {
-    execute();
+    void execute();
   };
   const execute = async () => {
     const queryStr = inputRef.current?.value ?? "";
@@ -68,7 +68,7 @@ const useCompareMediaByTaxIds = () => {
     const queriedIds = url.searchParams.get("tax_ids");
     if (queriedIds) {
       inputRef.current!.value = queriedIds;
-      execute();
+      void execute();
     }
   }, [execute]);
 

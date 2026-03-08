@@ -79,7 +79,7 @@ export const useGraphData = (
     return result;
   };
   const processNext = () => {
-    (async () => {
+    void (async () => {
       if (iterationCount >= maxIterationCount) return;
       const clonedQueue = [...getQueue()];
       const nextId = clonedQueue.shift();
@@ -104,7 +104,7 @@ export const useGraphData = (
   //
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const initialData = await getInitialData(initialId);
       setGraphData(initialData);
       setIsInit(true);
@@ -113,7 +113,7 @@ export const useGraphData = (
 
   useEffect(() => {
     if (!isInit) return;
-    (async () => {
+    void (async () => {
       if (iterationCount >= maxIterationCount) return;
       await sleep(iterationCount === 0 ? 16 : INTERVAL);
       setIterationCount(iterationCount + 1);
