@@ -12,7 +12,8 @@ expect.extend({
       received.length === expected.length && received.every((item: any) => expected.includes(item));
     return {
       pass,
-      message: () => `${received} is${isNot ? " not" : ""} equal to ${expected}`,
+      message: () =>
+        `${received.toString()} is${isNot ? " not" : ""} equal to ${expected.toString()}`,
     };
   },
 });
