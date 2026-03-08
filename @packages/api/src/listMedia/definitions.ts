@@ -6,5 +6,5 @@ export type ListMediaResponse = ListApiResponse<{
   original_media_id: string;
   label: string;
 }>;
-export type ListMediaParams = ListApiParams<never>;
+export type ListMediaParams = ListApiParams<unknown>;
 export const listMediaURL = makeApiUrl("list_media");

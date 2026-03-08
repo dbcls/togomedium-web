@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {},
   "dependencies": {
-    "yohak-tools": "^0.1.0"
+    "yohak-tools": "^0.1.0",
+    "zod": "^4.3.6"
   }
 }
