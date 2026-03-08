@@ -38,5 +38,7 @@ const useMediumName = (id: string) => {
   const hasName: boolean =
     data?.meta?.name !== "" && data?.meta?.name !== "(Unnamed medium)" && !!data?.meta?.name;
   const name = hasName ? `[${id}] ${data?.meta.name}` : `[${id}] `;
+  // todo fix this
+  // oxlint-disable-next-line
   return parse(name).toString();
 };

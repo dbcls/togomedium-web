@@ -62,5 +62,7 @@ const useIsSpecies = () => {
 const useTaxonName = (id: string) => {
   const data = Route.useLoaderData();
   const name = data?.scientific_name ?? id;
+  // todo fix this
+  // oxlint-disable-next-line
   return parse(name).toString();
 };

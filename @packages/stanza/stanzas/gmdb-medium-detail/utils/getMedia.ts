@@ -36,7 +36,7 @@ const getExternalReferences = async (
 
   const extraData: ReferencingRecipe[] = [];
 
-  for await (const ref of externalReferences) {
+  for (const ref of externalReferences) {
     const result = await getData<MediumDetailResponse, MediumDetailParams>(mediumDetailURL, {
       gm_id: ref.id,
     });

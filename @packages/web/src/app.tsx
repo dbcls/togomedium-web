@@ -5,7 +5,7 @@ import { FC } from "react";
 import { routeTree } from "./routeTree.gen";
 
 const queryClient = new QueryClient();
-const originalReplaceState = window.history.replaceState;
+// const originalReplaceState = window.history.replaceState;
 const router = createRouter({
   routeTree,
   context: {
@@ -14,7 +14,7 @@ const router = createRouter({
   defaultPreload: "intent",
   defaultPreloadStaleTime: 0,
 });
-window.history.replaceState = originalReplaceState;
+// window.history.replaceState = originalReplaceState;
 
 // router.subscribe("onResolved", (e) => {
 //   console.log({ e });

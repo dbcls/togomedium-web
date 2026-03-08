@@ -3,8 +3,8 @@ import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%core/theme";
 import { FilterIcon } from "%stanza/components/icons/FilterIcon";
-import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/MediaCell";
 import { makeCellHeight } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
+import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/useToolTipEnabled";
 import {
   useFilterTaxonMutators,
   useFilterTaxonState,

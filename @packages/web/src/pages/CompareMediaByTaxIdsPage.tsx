@@ -80,7 +80,7 @@ const filterTaxIds = async (taxIds: string[]): Promise<string[]> => {
   const response = await fetch(API, {
     method: "POST",
     mode: "cors",
-    body: `tax_ids=${taxIds}`,
+    body: `tax_ids=${taxIds.join(",")}`,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",

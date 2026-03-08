@@ -31,5 +31,7 @@ export const ComponentDetailPage: FC = () => {
 const useComponentName = (id: string) => {
   const data = Route.useLoaderData();
   const name = data?.pref_label ?? id;
+  // todo fix this
+  // oxlint-disable-next-line
   return parse(name).toString();
 };

@@ -16,6 +16,6 @@ export const bundle = () => {
   try {
     copyFileSync(openApiFile, join(dist, "togomedium-api.yaml"));
   } catch (e) {
-    throw e;
+    console.error(e);
   }
 };

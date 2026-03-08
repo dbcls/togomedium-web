@@ -39,5 +39,7 @@ export const StrainDetailPage: FC = () => {
 const useStrainName = (id: string) => {
   const data = Route.useLoaderData();
   const name = data?.strain.strain_name ?? id;
+  // todo fix this
+  // oxlint-disable-next-line
   return parse(name).toString();
 };

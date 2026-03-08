@@ -3,25 +3,13 @@ import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%core/theme";
 import { makeCellHeight } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
+import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/useToolTipEnabled";
 import { CellInfo } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
 import { Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC } from "react";
 
 type Props = {} & CellInfo;
-
-export const useToolTipEnabled = () => {
-  const labelRef = useRef<HTMLSpanElement>(null);
-  // cannot use useMemo as it depends on the ref;
-  // instead, use useEffect to update the state
-  const [toolTipEnabled, setToolTipEnabled] = useState(false);
-  useEffect(() => {
-    const offsetWidth = labelRef.current?.offsetWidth;
-    const scrollWidth = labelRef.current?.scrollWidth;
-    setToolTipEnabled(!!scrollWidth && !!offsetWidth && scrollWidth > offsetWidth);
-  }, [labelRef]);
-  return { labelRef, toolTipEnabled };
-};
 
 export const MediaCell: FC<Props> = ({ label, id, size }) => {
   const { labelRef, toolTipEnabled } = useToolTipEnabled();
