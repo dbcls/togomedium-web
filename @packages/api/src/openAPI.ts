@@ -1,6 +1,7 @@
 import { componentDetailDoc } from "%api/componentDetail/definitions";
 import { componentsWithComponentsDoc } from "%api/componentsWithComponents/definitions";
 import { extendZod } from "%api/extendZod";
+import { listChildrenOfTaxonDoc } from "%api/listChildrenOfTaxon/definitions";
 import { mediaComponentAlignmentTableDoc } from "%api/mediaComponentAlignment/definitions";
 import { mediaStrainsAlignmentDoc } from "%api/mediaStrainsAlignment/definitions";
 import { mediumDetailDoc } from "%api/mediumDetail/definitions";
@@ -28,6 +29,7 @@ registry.registerPath(taxonAncestorsDoc);
 registry.registerPath(taxonChildrenDoc);
 registry.registerPath(taxonDetailDoc);
 registry.registerPath(taxonSearchByNameDoc);
+registry.registerPath(listChildrenOfTaxonDoc);
 
 export const getDocs = () => {
   const generator = new OpenApiGeneratorV31(registry.definitions);
