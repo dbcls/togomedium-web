@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { PATH_MEDIUM, PATH_TAXON } from "%core/consts";
 import { InfoCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/InfoCell";
 

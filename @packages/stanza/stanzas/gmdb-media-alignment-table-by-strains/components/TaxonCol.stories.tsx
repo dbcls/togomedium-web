@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { data1 } from "%api/mediaStrainsAlignment/data1";
 import { TaxonCol } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/TaxonCol";
 import { __SB_TEST__ } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 import { ActionPane } from "%stanza/components/media-finder/ActionPane";
 import { useSelectedMediaMutators } from "%stanza/state/media-finder/selectedMedia";

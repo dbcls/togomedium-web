@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 import { FoundMediaList } from "%stanza/components/media-finder/FoundMediaList";
 import { FoundMedia, useFoundMediaMutators } from "%stanza/state/media-finder/foundMedia";

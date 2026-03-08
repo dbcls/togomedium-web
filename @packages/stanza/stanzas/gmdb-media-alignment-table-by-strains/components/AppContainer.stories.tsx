@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { AppContainer } from "./AppContainer";
 import { data1 } from "%api/mediaStrainsAlignment/data1";
 import { data2 } from "%api/mediaStrainsAlignment/data2";

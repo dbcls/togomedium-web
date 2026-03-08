@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { BottomController } from "%stanza/stanzas/gmdb-meta-list/components/BottomController";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 

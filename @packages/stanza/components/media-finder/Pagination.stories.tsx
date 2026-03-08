@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import React, { ComponentProps } from "react";
 import { Pagination } from "%stanza/components/media-finder/Pagination";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";

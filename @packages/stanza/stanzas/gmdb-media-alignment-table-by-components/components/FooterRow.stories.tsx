@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 import { FooterRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterRow";
 import { useIsMediaExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";

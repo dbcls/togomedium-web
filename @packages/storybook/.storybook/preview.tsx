@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider } from "jotai";
 import React from "react";
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react-vite";
 import { EmotionGlobalStyles } from "%stanza/styles/EmotionGlobalStyles";
 import { muiTheme } from "%stanza/styles/muiTheme";
 import "./tailwind.css";
@@ -18,19 +18,20 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: "dark",
-      values: [
-        {
+      options: {
+        dark: {
           name: "dark",
           value: "#2A6A6F",
         },
-        {
+
+        white: {
           name: "white",
           value: "#ffffff",
-        },
-      ],
+        }
+      }
     },
   },
+
   decorators: [
     (Story) => (
       <QueryClientProvider client={queryClient}>
@@ -44,6 +45,12 @@ const preview: Preview = {
       </QueryClientProvider>
     ),
   ],
+
+  initialGlobals: {
+    backgrounds: {
+      value: "dark"
+    }
+  }
 };
 
 export default preview;

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { data1 } from "%api/listMedia/data1";
 import { StanzaView } from "%stanza/stanzas/gmdb-meta-list/components/StanzaView";
 

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps } from "react";
 import { TreeBranchView } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TreeBranchView";
 

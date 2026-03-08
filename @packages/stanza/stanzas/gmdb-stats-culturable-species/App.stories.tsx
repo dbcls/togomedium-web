@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import App from "%stanza/stanzas/gmdb-stats-culturable-species/App";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 

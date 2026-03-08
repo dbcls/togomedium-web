@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ListTable } from "./ListTable";
 import { LoadingCover } from "./LoadingCover";
 import { data1 } from "%api/listMedia/data1";

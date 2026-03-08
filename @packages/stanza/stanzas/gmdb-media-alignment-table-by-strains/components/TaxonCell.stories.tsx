@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 import { TaxonCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/TaxonCell";
 import { useFilterTaxonMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterTaxon";

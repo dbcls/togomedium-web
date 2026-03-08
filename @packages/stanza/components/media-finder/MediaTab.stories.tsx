@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { MediaTab } from "%stanza/components/media-finder/MediaTab";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 

@@ -13,17 +13,15 @@
     "storybook:serve": "pnpm --filter @packages/storybook storybook"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^3.2.5",
+    "@chromatic-com/storybook": "^5.0.1",
     "@eslint/compat": "^1.2.6",
     "@eslint/js": "^9.19.0",
     "@react-types/shared": "^3.33.1",
-    "@storybook/addon-essentials": "^8.5.0",
-    "@storybook/addon-interactions": "^8.5.0",
-    "@storybook/addon-links": "^8.5.0",
-    "@storybook/addon-onboarding": "^8.5.0",
+    "@storybook/addon-links": "^10.2.16",
+    "@storybook/addon-onboarding": "^10.2.16",
     "@storybook/blocks": "^8.5.0",
-    "@storybook/react": "^8.5.0",
-    "@storybook/react-vite": "^8.5.0",
+    "@storybook/react": "^10.2.16",
+    "@storybook/react-vite": "^10.2.16",
     "@storybook/test": "^8.5.0",
     "@tailwindcss/vite": "^4.2.1",
     "@tanstack/router-plugin": "^1.99.3",
@@ -46,7 +44,7 @@
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "run-func": "^3.0.0",
-    "storybook": "^8.5.0",
+    "storybook": "^10.2.16",
     "tailwindcss": "^4.2.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.22.0",
@@ -54,7 +52,9 @@
     "vite-multiple-assets": "^2.2.6",
     "vite-plugin-full-reload": "^1.2.0",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.0.18"
+    "vitest": "^4.0.18",
+    "eslint-plugin-storybook": "10.2.16",
+    "@storybook/addon-docs": "^10.2.16"
   },
   "resolutions": {
     "esbuild": "0.24.0"

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps } from "react";
 import { MediaCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/MediaCell";
 

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { RangeSlider } from "./RangeSlider";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { AlignmentCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/AlignmentCell";
 
 const meta: Meta<typeof AlignmentCell> = {

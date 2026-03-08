@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import App from "%stanza/stanzas/gmdb-taxon-detail/App";
 
 const meta: Meta<typeof App> = {

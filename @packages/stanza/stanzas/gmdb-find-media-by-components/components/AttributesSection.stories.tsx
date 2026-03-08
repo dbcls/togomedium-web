@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { AttributesSection } from "%stanza/stanzas/gmdb-find-media-by-components/components/AttributesSection";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 

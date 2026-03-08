@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 import { QueryInfo } from "./QueryInfo";
 import { QueryData, useQueryDataMutators } from "%stanza/state/media-finder/queryData";
