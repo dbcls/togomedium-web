@@ -17,9 +17,5 @@ export const Route = createFileRoute("/strain/$strainId")({
     // console.log(result);
     return result;
   },
-  component: RouteComponent,
+  component: () => <StrainDetailPage />,
 });
-
-function RouteComponent() {
-  return <StrainDetailPage />;
-}

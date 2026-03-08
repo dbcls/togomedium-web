@@ -17,9 +17,5 @@ export const Route = createFileRoute("/medium/$gmId")({
     // console.log(result);
     return result;
   },
-  component: RouteComponent,
+  component: () => <MediumDetailPage />,
 });
-
-function RouteComponent() {
-  return <MediumDetailPage />;
-}

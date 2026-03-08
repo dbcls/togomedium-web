@@ -16,9 +16,5 @@ export const Route = createFileRoute("/component/$gmoId")({
     // console.log(result);
     return result;
   },
-  component: RouteComponent,
+  component: () => <ComponentDetailPage />,
 });
-
-function RouteComponent() {
-  return <ComponentDetailPage />;
-}

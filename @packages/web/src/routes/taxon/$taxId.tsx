@@ -16,9 +16,5 @@ export const Route = createFileRoute("/taxon/$taxId")({
     const result = await fetchData<APIResponse>(api, apiBody);
     return result;
   },
-  component: RouteComponent,
+  component: () => <TaxonDetailPage />,
 });
-
-function RouteComponent() {
-  return <TaxonDetailPage />;
-}

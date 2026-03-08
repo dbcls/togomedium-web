@@ -94,7 +94,7 @@ const fetchMedia = async (tax_ids: string[]): Promise<string[]> => {
   const response = await fetch(API, {
     method: "POST",
     mode: "cors",
-    body: `tax_ids=${tax_ids}&limit=${100}`,
+    body: `tax_ids=${tax_ids.join(",")}&limit=${100}`,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
