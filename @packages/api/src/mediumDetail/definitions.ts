@@ -1,4 +1,5 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
+import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
 const metaSchema = z.object({
@@ -50,4 +51,29 @@ const mediumDetailParamsSchema = z.object({
 
 export type MediumDetailResponse = z.infer<typeof mediumDetailResponseSchema>;
 export type MediumDetailParams = z.infer<typeof mediumDetailParamsSchema>;
+/**
+ * @deprecated
+ */
 export const mediumDetailURL = makeApiUrl("gmdb_medium_by_gmid");
+export const PATH_MEDIUM_DETAIL = "gmdb_medium_by_gmid";
+
+export const mediumDetailDoc: RouteConfig = {
+  path: PATH_MEDIUM_DETAIL,
+  method: "get",
+  summary: PATH_MEDIUM_DETAIL,
+  description: "Get medium detail by GM ID",
+  tags: [],
+  request: {
+    params: mediumDetailParamsSchema,
+  },
+  responses: {
+    200: {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: mediumDetailResponseSchema,
+        },
+      },
+    },
+  },
+};

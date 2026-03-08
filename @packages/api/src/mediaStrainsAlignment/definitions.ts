@@ -1,4 +1,5 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
+import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
 const taxonSchema = z.object({
@@ -31,7 +32,32 @@ const mediaStrainsAlignmentParamsSchema = z.object({
 
 export type MediaStrainsAlignmentResponse = z.infer<typeof mediaStrainsAlignmentResponseSchema>;
 export type MediaStrainsAlignmentParams = z.infer<typeof mediaStrainsAlignmentParamsSchema>;
+/**
+ * @deprecated
+ */
 export const mediaStrainsAlignmentURL = makeApiUrl("gmdb_media_strains_alignment_by_gm_ids");
+export const PATH_MEDIA_STRAINS_ALIGNMENT = "gmdb_media_strains_alignment_by_gm_ids";
+
+export const mediaStrainsAlignmentDoc: RouteConfig = {
+  path: PATH_MEDIA_STRAINS_ALIGNMENT,
+  method: "get",
+  summary: PATH_MEDIA_STRAINS_ALIGNMENT,
+  description: "Get media strains alignment by GM IDs",
+  tags: [],
+  request: {
+    params: mediaStrainsAlignmentParamsSchema,
+  },
+  responses: {
+    200: {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: mediaStrainsAlignmentResponseSchema,
+        },
+      },
+    },
+  },
+};
 
 export const lineageRanks = [
   "superkingdom",

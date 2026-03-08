@@ -1,4 +1,5 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
+import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
 const mediaComponentAlignmentMediaSchema = z.object({
@@ -37,4 +38,29 @@ export type MediaComponentAlignmentTableResponse = z.infer<
 export type MediaComponentAlignmentTableParams = z.infer<
   typeof mediaComponentAlignmentTableParamsSchema
 >;
+/**
+ * @deprecated
+ */
 export const mediaComponentAlignmentTableURL = makeApiUrl("gmdb_media_alignment_by_gm_ids");
+export const PATH_MEDIA_COMPONENT_ALIGNMENT_TABLE = "gmdb_media_alignment_by_gm_ids";
+
+export const mediaComponentAlignmentTableDoc: RouteConfig = {
+  path: PATH_MEDIA_COMPONENT_ALIGNMENT_TABLE,
+  method: "get",
+  summary: PATH_MEDIA_COMPONENT_ALIGNMENT_TABLE,
+  description: "Get media-component alignment table by GM IDs",
+  tags: [],
+  request: {
+    params: mediaComponentAlignmentTableParamsSchema,
+  },
+  responses: {
+    200: {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: mediaComponentAlignmentTableResponseSchema,
+        },
+      },
+    },
+  },
+};

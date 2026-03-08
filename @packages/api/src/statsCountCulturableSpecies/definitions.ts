@@ -1,4 +1,5 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
+import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
 const statsCountCulturableSpeciesItemSchema = z.object({
@@ -17,4 +18,29 @@ export type StatsCountCulturableSpeciesParams = z.infer<
   typeof statsCountCulturableSpeciesParamsSchema
 >;
 
+/**
+ * @deprecated
+ */
 export const statsCountCulturableSpeciesURL = makeApiUrl("gmdb_stat_media_tax_histgram");
+export const PATH_STATS_COUNT_CULTURABLE_SPECIES = "gmdb_stat_media_tax_histgram";
+
+export const statsCountCulturableSpeciesDoc: RouteConfig = {
+  path: PATH_STATS_COUNT_CULTURABLE_SPECIES,
+  method: "get",
+  summary: PATH_STATS_COUNT_CULTURABLE_SPECIES,
+  description: "Statistics count of culturable species",
+  tags: [],
+  request: {
+    params: statsCountCulturableSpeciesParamsSchema,
+  },
+  responses: {
+    200: {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: statsCountCulturableSpeciesResponseSchema,
+        },
+      },
+    },
+  },
+};

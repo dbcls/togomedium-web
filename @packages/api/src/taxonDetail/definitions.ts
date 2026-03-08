@@ -1,4 +1,5 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
+import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
 const lineageItemSchema = z.object({
@@ -36,4 +37,29 @@ const taxonDetailParamsSchema = z.object({
 
 export type TaxonDetailResponse = z.infer<typeof taxonDetailResponseSchema>;
 export type TaxonDetailParams = z.infer<typeof taxonDetailParamsSchema>;
+/**
+ * @deprecated
+ */
 export const taxonDetailURL = makeApiUrl("gmdb_organism_by_taxid");
+export const PATH_TAXON_DETAIL = "gmdb_organism_by_taxid";
+
+export const taxonDetailDoc: RouteConfig = {
+  path: PATH_TAXON_DETAIL,
+  method: "get",
+  summary: PATH_TAXON_DETAIL,
+  description: "Get taxon detail by taxon ID",
+  tags: [],
+  request: {
+    params: taxonDetailParamsSchema,
+  },
+  responses: {
+    200: {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: taxonDetailResponseSchema,
+        },
+      },
+    },
+  },
+};
