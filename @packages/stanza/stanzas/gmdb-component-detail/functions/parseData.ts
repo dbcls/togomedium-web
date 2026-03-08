@@ -1,7 +1,6 @@
 import { ComponentDetailResponse } from "%api/componentDetail/definitions";
 import { ViewProps } from "%stanza/stanzas/gmdb-component-detail/components/StanzaView";
 import { LinkLabel } from "%stanza/stanzas/gmdb-component-detail/functions/LinkLabelInfo";
-import { Nullable } from "yohak-tools";
 
 export const parseData = (res: ComponentDetailResponse): ViewProps => {
   return {
@@ -21,7 +20,7 @@ export const parseData = (res: ComponentDetailResponse): ViewProps => {
   };
 };
 
-const getLinkLabel = (link: string): Nullable<LinkLabel> => {
+const getLinkLabel = (link: string): LinkLabel | null => {
   switch (true) {
     case /pccompound\/.+/.test(link):
       return "PubChem";

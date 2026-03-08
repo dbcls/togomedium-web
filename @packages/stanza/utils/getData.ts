@@ -1,5 +1,4 @@
-import { Nullable } from "yohak-tools";
-import { isArray } from "yohak-tools/";
+import { isArray } from "yohak-tools";
 
 import { ApiResponse, SimpleObject } from "./types";
 
@@ -37,7 +36,7 @@ export const makeFormBody = (params: SimpleObject) => {
   return formBody.join("&");
 };
 
-const makeOptions = (params: SimpleObject, signal: Nullable<AbortSignal> = null): RequestInit => {
+const makeOptions = (params: SimpleObject, signal: AbortSignal | null = null): RequestInit => {
   const body = makeFormBody(params);
   return {
     method: "POST",

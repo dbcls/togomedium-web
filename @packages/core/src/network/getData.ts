@@ -1,4 +1,4 @@
-import { isArray, Optional, Nullable } from "yohak-tools";
+import { isArray } from "yohak-tools";
 
 export const getData = async <ResponseBody, Params extends ParamObject = ParamObject>(
   url: string,
@@ -27,7 +27,7 @@ export const getData = async <ResponseBody, Params extends ParamObject = ParamOb
 type ApiResponse<T> = {
   status: number;
   message?: string;
-  body: Optional<T>;
+  body: T | undefined;
 };
 
 type ParamObject = { [key: string]: string | number | string[] | number[] };
@@ -39,7 +39,7 @@ const makeFormBody = (params: ParamObject) => {
   return formBody.join("&");
 };
 
-const makeOptions = (params: ParamObject, signal: Nullable<AbortSignal> = null): RequestInit => {
+const makeOptions = (params: ParamObject, signal: AbortSignal | null = null): RequestInit => {
   const body = makeFormBody(params);
   return {
     method: "POST",

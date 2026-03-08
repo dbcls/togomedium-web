@@ -1,5 +1,4 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
-import { Nullable } from "yohak-tools";
 
 export type MediaStrainsAlignmentResponse = {
   gm_id: string;
@@ -27,5 +26,5 @@ export type Taxon = {
   id: string;
   label: string;
 };
-export type Lineage = Record<LineageRank, Nullable<Taxon>>;
+export type Lineage = Record<LineageRank, Taxon | null>;
 export type Medium = MediaStrainsAlignmentResponse[0];

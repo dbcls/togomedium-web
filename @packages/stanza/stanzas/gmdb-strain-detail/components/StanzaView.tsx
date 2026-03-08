@@ -8,7 +8,6 @@ import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { SubHeading } from "%stanza/components/styled/SubHeading";
 import { TagList } from "%stanza/components/styled/TagList";
 import React, { ComponentProps, FC } from "react";
-import { Nullable } from "yohak-tools";
 
 type Props = {
   strainId: string;
@@ -17,13 +16,13 @@ type Props = {
     label: string;
     url: string;
   }[];
-  taxonomy: Nullable<{
+  taxonomy: {
     name: string;
     taxId: string;
     rank: string;
     authorityName: string;
     lineage: ComponentProps<typeof LineageList>["lineage"];
-  }>;
+  } | null;
 };
 
 export const StanzaView: FC<Props> = ({ strainId, strainName, infoSources, taxonomy }) => {

@@ -1,5 +1,4 @@
 import { makeApiUrl } from "%core/network/makeApiUrl";
-import { Nullable } from "yohak-tools";
 
 export type MediaComponentAlignmentTableResponse = {
   media: {
@@ -16,8 +15,8 @@ export type MediaComponentAlignmentTableResponse = {
   components: {
     gmo_id: string;
     name: string;
-    parent: Nullable<string>;
-    function: Nullable<string>;
+    parent: string | null;
+    function: string | null;
   }[];
 };
 export type MediaComponentAlignmentTableParams = {

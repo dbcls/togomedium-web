@@ -30,7 +30,6 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, PropsWithChildren, useEffect, useMemo } from "react";
 import { useTimeout } from "usehooks-ts";
-import { Optional } from "yohak-tools";
 
 type Props = { id: string } & PropsWithChildren;
 
@@ -38,7 +37,7 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
   const taxonList = useTaxonListState();
   const searchResult = useSearchResult();
   const isHighlighted = useMemo(() => searchResult === id, [searchResult, id]);
-  const myInfo: Optional<TaxonInfo> = useMemo(() => {
+  const myInfo: TaxonInfo | undefined = useMemo(() => {
     return taxonList.find((item) => item.id === id);
   }, [taxonList, id]);
   const { branchChildren, isOpen, onToggleChildren, toggleIconStatus, taxonType } =
@@ -84,7 +83,7 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
   );
 };
 
-const useBranchChildren = (info: Optional<TaxonInfo>) => {
+const useBranchChildren = (info: TaxonInfo | undefined) => {
   const { toggleOpen } = useTaxonTreeMutators();
   const onToggleChildren = () => toggleOpen(info?.id || "");
   const isOpen = useIsOpen(info?.id || "");
@@ -152,7 +151,7 @@ const useLinkString = (id: string, rank: string) => {
   return [linkString, linkURL];
 };
 
-const useTaxonInfo = (myInfo: Optional<TaxonInfo>) => {
+const useTaxonInfo = (myInfo: TaxonInfo | undefined) => {
   const rank = useMemo(() => myInfo?.rank || "", [myInfo]);
   const label = useMemo(() => myInfo?.label || "", [myInfo]);
   return { rank, label };

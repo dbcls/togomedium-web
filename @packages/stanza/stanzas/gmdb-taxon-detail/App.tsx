@@ -3,7 +3,6 @@ import { getTaxonData } from "%stanza/stanzas/gmdb-taxon-detail/utils/getTaxonDa
 import { fetchWikipediaData } from "%stanza/utils/fetchWikipediaData";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
-import { Optional } from "yohak-tools";
 
 type Props = {
   stanzaElement?: ShadowRoot;
@@ -18,7 +17,7 @@ const useTaxonDataQuery = (tax_id: string) => {
   });
   return { taxonData: data, isLoading };
 };
-const useWikipediaQuery = (scientificName: Optional<string>) => {
+const useWikipediaQuery = (scientificName: string | undefined) => {
   const wikipediaLink = `https://en.wikipedia.org/wiki/${scientificName}`;
   const { data } = useQuery({
     queryKey: ["wikipedia", scientificName],

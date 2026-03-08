@@ -1,6 +1,5 @@
 import { LineageRank, lineageRanks } from "%api/mediaStrainsAlignment/definitions";
 import { atom, useAtomValue, useSetAtom } from "jotai";
-import { Optional } from "yohak-tools";
 
 type FilterStatus = Record<LineageRank, boolean>;
 
@@ -27,7 +26,7 @@ export const useFilterRankMutators = () => {
 };
 
 const findCurrentFilterRank = (status: FilterStatus): LineageRank => {
-  let found: Optional<LineageRank> = undefined;
+  let found: LineageRank | undefined = undefined;
   const arr = lineageRanks.concat().reverse();
   for (let i = 0; i < arr.length; i++) {
     const key = arr[i];

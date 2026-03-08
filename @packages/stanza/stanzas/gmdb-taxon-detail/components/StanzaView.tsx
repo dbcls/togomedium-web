@@ -10,7 +10,6 @@ import { SubHeading } from "%stanza/components/styled/SubHeading";
 import { WikipediaView } from "%stanza/components/styled/WikipediaView";
 import { WikipediaData } from "%stanza/utils/fetchWikipediaData";
 import React, { ComponentProps, FC } from "react";
-import { Optional } from "yohak-tools";
 
 const linkNCBI = "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=";
 const linkTogoGenome = "http://togogenome.org/organism/";
@@ -18,7 +17,7 @@ const linkTogoGenome = "http://togogenome.org/organism/";
 type Props = {
   taxid: string;
   scientificName: string;
-  authorityName: Optional<string>;
+  authorityName: string | undefined;
   lineage: ComponentProps<typeof LineageList>["lineage"];
   typeMaterials: string[];
   otherTypeMaterials: { key: string; labels: string[] }[];
