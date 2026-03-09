@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -29,7 +30,7 @@ export const taxonChildrenDoc: RouteConfig = {
   method: "get",
   summary: PATH_TAXON_CHILDREN,
   description: "Get taxon children by taxon ID",
-  tags: [],
+  tags: [tags.mediaFinder],
   request: {
     params: taxonChildrenParamsSchema,
   },

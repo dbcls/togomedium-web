@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -18,7 +19,7 @@ export const gmsKeggCodeTidDoc: RouteConfig = {
   method: "get",
   summary: "GMS KEGG code TID",
   description: "Mostly used at the alignment page.",
-  tags: [],
+  tags: [tags.stanza],
   request: {
     params: gmsKeggCodeTidParamsSchema,
   },

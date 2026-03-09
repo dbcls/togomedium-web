@@ -29,7 +29,7 @@ export const statsGmCountByPhylumDoc: RouteConfig = {
   method: "get",
   summary: "Stats growth media count by phylum",
   description: "Statistics number of growth media by phylum",
-  tags: [tags.list],
+  tags: [tags.list, tags.stats],
   request: {
     params: statsGmCountByPhylumParamsSchema,
   },

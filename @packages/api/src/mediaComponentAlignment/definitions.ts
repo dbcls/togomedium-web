@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -49,7 +50,7 @@ export const mediaComponentAlignmentTableDoc: RouteConfig = {
   method: "get",
   summary: PATH_MEDIA_COMPONENT_ALIGNMENT_TABLE,
   description: "Get media-component alignment table by GM IDs",
-  tags: [],
+  tags: [tags.stanza],
   request: {
     params: mediaComponentAlignmentTableParamsSchema,
   },

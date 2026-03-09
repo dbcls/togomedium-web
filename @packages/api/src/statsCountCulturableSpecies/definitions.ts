@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -29,7 +30,7 @@ export const statsCountCulturableSpeciesDoc: RouteConfig = {
   method: "get",
   summary: PATH_STATS_COUNT_CULTURABLE_SPECIES,
   description: "Statistics count of culturable species",
-  tags: [],
+  tags: [tags.stats],
   request: {
     params: statsCountCulturableSpeciesParamsSchema,
   },

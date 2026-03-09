@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -43,7 +44,7 @@ export const mediaStrainsAlignmentDoc: RouteConfig = {
   method: "get",
   summary: PATH_MEDIA_STRAINS_ALIGNMENT,
   description: "Get media strains alignment by GM IDs",
-  tags: [],
+  tags: [tags.stanza],
   request: {
     params: mediaStrainsAlignmentParamsSchema,
   },

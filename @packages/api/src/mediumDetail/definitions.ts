@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -62,7 +63,7 @@ export const mediumDetailDoc: RouteConfig = {
   method: "get",
   summary: PATH_MEDIUM_DETAIL,
   description: "Get medium detail by GM ID",
-  tags: [],
+  tags: [tags.stanza],
   request: {
     params: mediumDetailParamsSchema,
   },

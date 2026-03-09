@@ -1,4 +1,6 @@
 {
+  "deprecated": true,
+  "description": "This package is deprecated. Please use @packages/api instead.",
   "name": "@packages/doc",
   "version": "0.1.0",
   "private": true,

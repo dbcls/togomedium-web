@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -39,7 +40,7 @@ export const componentDetailDoc: RouteConfig = {
   method: "get",
   summary: PATH_COMPONENT_DETAIL,
   description: "Get component detail by GMDB ID",
-  tags: [],
+  tags: [tags.stanza],
   request: {
     params: componentDetailParamsSchema,
   },

@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -26,7 +27,7 @@ export const gtdbTaxonSearchByNameDoc: RouteConfig = {
   summary: "GTDB taxon search by name",
   description:
     "Searches for a taxonomy by its name, which is particularly useful for incremental searching.",
-  tags: [],
+  tags: [tags.stanza, tags.gtdb],
   request: {
     params: gtdbTaxonSearchByNameParamsSchema,
   },

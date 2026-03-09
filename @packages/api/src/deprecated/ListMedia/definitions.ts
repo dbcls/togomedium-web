@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -19,7 +20,7 @@ export const deprecatedListMediaDoc: RouteConfig = {
   method: "get",
   summary: "Deprecated list media",
   description: "This endpoint is deprecated. Use `/list_media` instead.",
-  tags: [],
+  tags: [tags.deprecated],
   request: {
     params: deprecatedListMediaParamsSchema,
   },

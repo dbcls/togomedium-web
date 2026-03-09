@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -50,7 +51,7 @@ export const strainDetailDoc: RouteConfig = {
   method: "get",
   summary: PATH_STRAIN_DETAIL,
   description: "Get strain detail by strain ID",
-  tags: [],
+  tags: [tags.stanza],
   request: {
     params: strainDetailParamsSchema,
   },

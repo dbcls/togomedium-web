@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -28,7 +29,7 @@ export const statsCountMediaByCultivableStrainCountDoc: RouteConfig = {
   method: "get",
   summary: "Stats count media by cultivable strain count",
   description: "",
-  tags: [],
+  tags: [tags.stats],
   request: {
     params: statsCountMediaByCultivableStrainCountParamsSchema,
   },

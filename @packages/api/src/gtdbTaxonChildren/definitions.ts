@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -27,7 +28,7 @@ export const gtdbTaxonChildrenDoc: RouteConfig = {
   summary: "GTDB taxon children",
   description:
     "Returns the direct children of the given taxonomy ID. Mostly used at 'Find media by taxonomic tree' page.",
-  tags: [],
+  tags: [tags.mediaFinder, tags.gtdb],
   request: {
     params: gtdbTaxonChildrenParamsSchema,
   },

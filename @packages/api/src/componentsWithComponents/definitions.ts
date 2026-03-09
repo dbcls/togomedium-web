@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -29,7 +30,7 @@ export const componentsWithComponentsDoc: RouteConfig = {
   method: "get",
   summary: PATH_COMPONENTS_WITH_COMPONENTS,
   description: "Get components with components by GMDB IDs",
-  tags: [],
+  tags: [tags.mediaFinder],
   request: {
     params: componentWithComponentsParamsSchema,
   },

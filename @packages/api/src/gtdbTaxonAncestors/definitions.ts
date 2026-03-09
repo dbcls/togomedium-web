@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -25,7 +26,7 @@ export const gtdbTaxonAncestorsDoc: RouteConfig = {
   summary: "GTDB taxon ancestors",
   description:
     "Retrieve the ancestors of a taxonomy, useful for visualizing the taxon's hierarchical tree structure",
-  tags: [],
+  tags: [tags.stanza, tags.gtdb],
   request: {
     params: gtdbTaxonAncestorsParamsSchema,
   },

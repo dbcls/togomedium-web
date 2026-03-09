@@ -28,7 +28,7 @@ export const deprecatedAllComponentsDoc: RouteConfig = {
   summary: "Deprecated all components",
   description:
     "Deprecated, in favor of `components_with_components`. This endpoint returns a list of all components in the GMDB.",
-  tags: [tags.list],
+  tags: [tags.deprecated],
   request: {
     params: deprecatedAllComponentsParamsSchema,
   },

@@ -34,7 +34,7 @@ export const deprecatedInfraspecificListByTaxIdDoc: RouteConfig = {
   method: "get",
   summary: "Deprecated infraspecific list by tax ID",
   description: "Listing up organisms of taxonomy",
-  tags: [tags.list],
+  tags: [tags.deprecated],
   request: {
     params: deprecatedInfraspecificListByTaxIdParamsSchema,
   },

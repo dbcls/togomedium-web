@@ -34,7 +34,7 @@ export const listMediaByAttributesDoc: RouteConfig = {
   method: "get",
   summary: "List media by attributes",
   description: "Search media by attributes",
-  tags: [tags.list],
+  tags: [tags.mediaFinder, tags.list],
   request: {
     params: listMediaByAttributesParamsSchema,
   },

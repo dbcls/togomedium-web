@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -23,7 +24,7 @@ export const deprecatedListTaxonsByRankDoc: RouteConfig = {
   method: "get",
   summary: "Deprecated list taxons by rank",
   description: "Historically used at the top page for displaying the taxon hierarchy",
-  tags: [],
+  tags: [tags.deprecated],
   request: {
     params: deprecatedListTaxonsByRankParamsSchema,
   },

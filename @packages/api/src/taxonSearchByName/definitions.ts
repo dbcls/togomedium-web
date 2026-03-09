@@ -1,3 +1,4 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
@@ -29,7 +30,7 @@ export const taxonSearchByNameDoc: RouteConfig = {
   method: "get",
   summary: PATH_TAXON_SEARCH_BY_NAME,
   description: "Search taxon by name",
-  tags: [],
+  tags: [tags.stanza],
   request: {
     params: taxonSearchByNameParamsSchema,
   },
