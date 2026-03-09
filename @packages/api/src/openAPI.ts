@@ -107,7 +107,7 @@ export const getDocs = () => {
     },
     servers: [
       {
-        url: "https://",
+        url: "https://togomedium.org/sparqlist/api",
         description: "",
       },
     ],
