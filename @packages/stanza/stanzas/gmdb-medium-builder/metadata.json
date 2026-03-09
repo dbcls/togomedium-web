@@ -1,0 +1,19 @@
+{
+  "@context": {
+    "stanza": "http://togostanza.org/resource/stanza#"
+  },
+  "@id": "gmdb-medium-builder",
+  "stanza:label": "Medium Builder",
+  "stanza:definition": "",
+  "stanza:license": "MIT",
+  "stanza:author": "Satoshi Onoda (YOHAK)",
+  "stanza:address": "satoshionoda@yohak.design",
+  "stanza:contributor": [],
+  "stanza:created": "2022-01-01",
+  "stanza:updated": "2026-03-22",
+  "stanza:parameter": [],
+  "stanza:menu-placement": "none",
+  "stanza:style": [],
+  "stanza:incomingEvent": [],
+  "stanza:outgoingEvent": []
+}
