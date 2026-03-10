@@ -1,5 +1,14 @@
+import {
+  ComponentsWithComponentsResponse,
+  componentsWithComponentsURL,
+  ComponentWithComponentsParams,
+} from "%api/componentsWithComponents/definitions";
+import { fetchAllComponents } from "%core/fetch/fetchAllComponents";
+import { getData } from "%core/network/getData";
+import { parseLabelInfo } from "%stanza/stanzas/gmdb-find-media-by-components/functions/parseLabelInfo";
 import { TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { Autocomplete, TextField } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
 
 type Props = {};
@@ -22,6 +31,12 @@ const units = [
 ];
 
 export const InputRow: FC<Props> = () => {
+  const { data, isPending, isSuccess } = useQuery({
+    queryKey: ["allComponents"],
+    queryFn: fetchAllComponents,
+    placeholderData: [],
+  });
+  const components = (data ?? []).map((c) => ({ label: c.name }));
   return (
     <TableRow>
       <div></div>
@@ -29,7 +44,8 @@ export const InputRow: FC<Props> = () => {
         <Autocomplete
           size={"small"}
           disablePortal
-          options={top100Films}
+          disabled={!isSuccess}
+          options={components}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} />}
         />

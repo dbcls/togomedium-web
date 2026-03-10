@@ -1,6 +1,7 @@
 import { InputRow } from "%stanza/stanzas/gmdb-medium-builder/components/InputRow";
 import { Block, TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { TextField } from "@mui/material";
+import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 
@@ -16,7 +17,7 @@ export const InputBlock: FC<Props> = () => {
         <TableRow>
           <div></div>
           <div>Component</div>
-          <div>volume</div>
+          <div>Volume</div>
           <div>Unit</div>
           <div>Note</div>
         </TableRow>
@@ -24,6 +25,16 @@ export const InputBlock: FC<Props> = () => {
           <InputRow />
           <InputRow />
         </ComponentTableBody>
+        <ComponentTableFooter>
+          <Button
+            variant={"contained"}
+            size={"small"}
+            disableElevation={true}
+            sx={{ textTransform: "none" }}
+          >
+            Add component row
+          </Button>
+        </ComponentTableFooter>
       </ComponentTable>
     </Block>
   );
@@ -40,6 +51,14 @@ const ComponentTableBody = styled("div")({
   gridTemplateColumns: "subgrid",
   gridColumn: "span 5",
   rowGap: "10px",
+});
+const ComponentTableFooter = styled("div")({
+  // display: "grid",
+  // gridTemplateColumns: "subgrid",
+  display: "flex",
+  justifyContent: "flex-end",
+  gridColumn: "span 5",
+  paddingTop: "10px",
 });
 
 const TitleRow = styled("div")({
