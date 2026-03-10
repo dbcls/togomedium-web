@@ -1,9 +1,8 @@
 {
-  "deprecated": true,
-  "description": "This package is deprecated. Please use @packages/api instead.",
   "name": "@packages/doc",
   "version": "0.1.0",
   "private": true,
+  "description": "This package is deprecated. Please use @packages/api instead.",
   "type": "module",
   "scripts": {
     "tsp:clean": "run-func scripts/clean.js clean",
@@ -26,5 +25,6 @@
     "@typespec/rest": "latest",
     "@typespec/versioning": "latest",
     "concurrently": "^9.1.0"
-  }
+  },
+  "deprecated": true
 }
