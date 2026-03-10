@@ -43,6 +43,7 @@ declare global {
           taxonomy_type: "NCBI" | "GTDB";
         } & StanzaProps;
         "togostanza-gmdb-stats-culturable-species": {} & StanzaProps;
+        "togostanza-gmdb-medium-builder": {} & StanzaProps;
       }
     }
   }
