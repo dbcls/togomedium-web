@@ -22,14 +22,34 @@ const App = ({}: AppProps) => {
         <InputBlock />
         <InputBlock />
         <FooterRow>
-          <Button
-            variant={"contained"}
-            size={"small"}
-            disableElevation={true}
-            sx={{ textTransform: "none" }}
-          >
-            Add solution block
-          </Button>
+          <FooterLeft>
+            <Button
+              variant={"contained"}
+              size={"small"}
+              disableElevation={true}
+              sx={{ textTransform: "none" }}
+            >
+              Save as .json
+            </Button>
+            <Button
+              variant={"contained"}
+              size={"small"}
+              disableElevation={true}
+              sx={{ textTransform: "none" }}
+            >
+              Upload .json
+            </Button>
+          </FooterLeft>
+          <FooterRight>
+            <Button
+              variant={"contained"}
+              size={"small"}
+              disableElevation={true}
+              sx={{ textTransform: "none" }}
+            >
+              Add solution block
+            </Button>
+          </FooterRight>
         </FooterRow>
       </Sheet>
     </Wrapper>
@@ -45,8 +65,16 @@ const Wrapper = styled("div")({
 const FooterRow = styled("div")({
   gridColumn: "span 5",
   display: "flex",
-  justifyContent: "flex-end",
+  justifyContent: "space-between",
   paddingInline: THEME.SIZE.S1,
+});
+
+const FooterLeft = styled("div")({
+  display: "flex",
+  gap: THEME.SIZE.S1,
+});
+const FooterRight = styled("div")({
+  display: "flex",
 });
 
 export default App;

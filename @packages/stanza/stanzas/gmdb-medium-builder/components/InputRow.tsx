@@ -1,20 +1,12 @@
-import {
-  ComponentsWithComponentsResponse,
-  componentsWithComponentsURL,
-  ComponentWithComponentsParams,
-} from "%api/componentsWithComponents/definitions";
 import { fetchAllComponents } from "%core/fetch/fetchAllComponents";
-import { getData } from "%core/network/getData";
-import { parseLabelInfo } from "%stanza/stanzas/gmdb-find-media-by-components/functions/parseLabelInfo";
+import { VerticalEllipsisIcon } from "%stanza/components/icons/VerticalEllipsisIcon";
 import { TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
 
 type Props = {};
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const top100Films = [{ label: "The Shawshank Redemption", year: 1994 }];
 const units = [
   {
     label: "mg",
@@ -37,9 +29,44 @@ export const InputRow: FC<Props> = () => {
     placeholderData: [],
   });
   const components = (data ?? []).map((c) => ({ label: c.name }));
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
   return (
     <TableRow>
-      <div></div>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <IconButton
+          size={"small"}
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+        >
+          <VerticalEllipsisIcon sx={{ fill: "black", width: "16px" }} />
+        </IconButton>
+        <Menu
+          id="basic-menu"
+          disablePortal
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          slotProps={{
+            list: {
+              "aria-labelledby": "basic-button",
+            },
+          }}
+        >
+          <MenuItem onClick={handleClose}>Delete row</MenuItem>
+          <MenuItem onClick={handleClose}>Move row up</MenuItem>
+          <MenuItem onClick={handleClose}>Move row down</MenuItem>
+        </Menu>
+      </div>
       <div>
         <Autocomplete
           size={"small"}
