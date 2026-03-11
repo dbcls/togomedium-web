@@ -1,6 +1,7 @@
 import { data1 } from "%api/mediaStrainsAlignment/data1";
 import { data2 } from "%api/mediaStrainsAlignment/data2";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { AppContainer } from "./AppContainer";
@@ -8,6 +9,11 @@ import { AppContainer } from "./AppContainer";
 const meta: Meta<typeof AppContainer> = {
   component: AppContainer,
   decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
     (Story) => (
       <ComponentWrapper>
         <Story />

@@ -1,8 +1,16 @@
 import { AppContainer } from "%stanza/stanzas/gmdb-find-media-by-components/components/AppContainer";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof AppContainer> = {
   component: AppContainer,
+  decorators: [
+    (Story) => (
+      <StoryProvider reactQuery mui>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
   parameters: {
     // msw: makeMswParameter([
     //   ...mediaByAttributesMocks,

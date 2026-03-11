@@ -1,6 +1,7 @@
 import { ActionPane } from "%stanza/components/media-finder/ActionPane";
 import { useSelectedMediaMutators } from "%stanza/state/media-finder/selectedMedia";
 import { LabelInfo } from "%stanza/utils/labelInfo";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 
@@ -8,6 +9,11 @@ type WithCustomArgs = { selectedMedia: LabelInfo[] } & ComponentProps<typeof Act
 const meta: Meta<WithCustomArgs> = {
   component: ActionPane,
   decorators: [
+    (Story) => (
+      <StoryProvider mui>
+        <Story />
+      </StoryProvider>
+    ),
     (StoryItem, { args }) => {
       const { selectedMedia } = args;
       const { setSelectedMedia } = useSelectedMediaMutators();

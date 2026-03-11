@@ -2,12 +2,18 @@ import { TaxonInput } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/co
 import { useTaxonomyTypeMutators } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
 import { sleep } from "%stanza/utils/promise";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within } from "storybook/test";
 
 const meta: Meta<typeof TaxonInput> = {
   component: TaxonInput,
   decorators: [
+    (Story) => (
+      <StoryProvider reactQuery mui>
+        <Story />
+      </StoryProvider>
+    ),
     (Story) => (
       <ComponentWrapper>
         <Story />

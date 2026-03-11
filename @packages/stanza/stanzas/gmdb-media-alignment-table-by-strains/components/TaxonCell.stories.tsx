@@ -1,5 +1,6 @@
 import { TaxonCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/TaxonCell";
 import { useFilterTaxonMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterTaxon";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 
@@ -7,6 +8,11 @@ type WithCustomArgs = ComponentProps<typeof TaxonCell> & { filterId: string };
 const meta: Meta<WithCustomArgs> = {
   component: TaxonCell,
   decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
     (StoryItem, { args }) => {
       const { filterId } = args;
       const { setFilterTaxon } = useFilterTaxonMutators();

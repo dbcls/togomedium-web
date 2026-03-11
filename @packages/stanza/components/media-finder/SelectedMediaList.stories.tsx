@@ -2,6 +2,7 @@ import { SelectedMediaList } from "%stanza/components/media-finder/SelectedMedia
 import { useSelectedMediaMutators } from "%stanza/state/media-finder/selectedMedia";
 import { LabelInfo } from "%stanza/utils/labelInfo";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 
@@ -9,6 +10,11 @@ type WithCustomArgs = { media: LabelInfo[] } & ComponentProps<typeof SelectedMed
 const meta: Meta<WithCustomArgs> = {
   component: SelectedMediaList,
   decorators: [
+    (Story) => (
+      <StoryProvider mui>
+        <Story />
+      </StoryProvider>
+    ),
     (StoryItem, { args }) => {
       const { media } = args;
       const { setSelectedMedia } = useSelectedMediaMutators();

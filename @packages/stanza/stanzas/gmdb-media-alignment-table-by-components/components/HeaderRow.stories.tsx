@@ -1,6 +1,7 @@
 import { HeaderRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/HeaderRow";
 import { useIsMediaExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";
 import { useIsOrganismsExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 
@@ -11,6 +12,11 @@ type WithCustomArgs = {
 const meta: Meta<WithCustomArgs> = {
   component: HeaderRow,
   decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
     (StoryItem, { args }) => {
       const { isMediaExpanded, isOrganismsExpanded } = args;
       const { setIsMediaExpanded } = useIsMediaExpandedMutators();

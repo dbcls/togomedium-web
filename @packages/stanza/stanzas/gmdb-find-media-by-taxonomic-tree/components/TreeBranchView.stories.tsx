@@ -1,9 +1,17 @@
 import { TreeBranchView } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TreeBranchView";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps } from "react";
 
 const meta: Meta<typeof TreeBranchView> = {
   component: TreeBranchView,
+  decorators: [
+    (Story) => (
+      <StoryProvider mui>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
 };
 export default meta;
 

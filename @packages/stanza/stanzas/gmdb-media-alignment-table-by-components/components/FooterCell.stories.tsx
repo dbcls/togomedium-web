@@ -1,8 +1,16 @@
 import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterCell";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof FooterCell> = {
   component: FooterCell,
+  decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
 };
 export default meta;
 

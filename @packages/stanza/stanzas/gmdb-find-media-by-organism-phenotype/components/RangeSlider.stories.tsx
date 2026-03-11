@@ -1,4 +1,5 @@
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { RangeSlider } from "./RangeSlider";
@@ -6,6 +7,11 @@ import { RangeSlider } from "./RangeSlider";
 const meta: Meta<typeof RangeSlider> = {
   component: RangeSlider,
   decorators: [
+    (Story) => (
+      <StoryProvider mui>
+        <Story />
+      </StoryProvider>
+    ),
     (Story) => (
       <ComponentWrapper>
         <Story />

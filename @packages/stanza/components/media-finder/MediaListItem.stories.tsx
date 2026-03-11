@@ -1,4 +1,5 @@
 import { MediaListItem } from "%stanza/components/media-finder/MediaListItem";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof MediaListItem> = {
@@ -27,6 +28,11 @@ export const List: Story = {
     label: "TRYPTICASE SOY BROTH AGAR",
   },
   decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
     (StoryItem) => (
       <div>
         <StoryItem />

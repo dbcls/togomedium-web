@@ -1,5 +1,6 @@
 import { data1 } from "%api/listMedia/data1";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { ListTable } from "./ListTable";
@@ -8,6 +9,11 @@ import { LoadingCover } from "./LoadingCover";
 const meta: Meta<typeof LoadingCover> = {
   component: LoadingCover,
   decorators: [
+    (Story) => (
+      <StoryProvider mui>
+        <Story />
+      </StoryProvider>
+    ),
     (Story) => (
       <StanzaWrapper>
         <div style={{ position: "relative" }}>

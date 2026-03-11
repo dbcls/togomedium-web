@@ -1,3 +1,4 @@
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { data1 } from "../utils/data1";
@@ -6,6 +7,13 @@ import { NodeCanvas } from "./NodeCanvas";
 
 const meta: Meta<typeof NodeCanvas> = {
   component: NodeCanvas,
+  decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
 };
 export default meta;
 

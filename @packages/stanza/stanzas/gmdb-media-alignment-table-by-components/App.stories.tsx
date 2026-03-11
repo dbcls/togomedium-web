@@ -1,8 +1,16 @@
 import App from "%stanza/stanzas/gmdb-media-alignment-table-by-components/App";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof App> = {
   component: App,
+  decorators: [
+    (Story) => (
+      <StoryProvider reactQuery mui>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
   // parameters: {
   //   msw: makeMswParameter(mediaAlignmentTableMocks),
   // },

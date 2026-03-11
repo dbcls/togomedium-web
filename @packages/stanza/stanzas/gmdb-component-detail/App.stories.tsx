@@ -6,7 +6,7 @@ const meta: Meta<typeof App> = {
   component: App,
   decorators: [
     (Story) => (
-      <StoryProvider>
+      <StoryProvider reactQuery>
         <Story />
       </StoryProvider>
     ),

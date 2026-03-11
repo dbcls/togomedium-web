@@ -1,6 +1,7 @@
 import { data1 } from "%api/mediaStrainsAlignment/data1";
 import { TaxonCol } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/TaxonCol";
 import { __SB_TEST__ } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 const { processTaxonCol, makeTaxonTreesFromData } = __SB_TEST__;
@@ -8,6 +9,13 @@ const data = makeTaxonTreesFromData(data1);
 
 const meta: Meta<typeof TaxonCol> = {
   component: TaxonCol,
+  decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
 };
 export default meta;
 

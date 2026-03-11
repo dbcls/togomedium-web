@@ -1,10 +1,18 @@
 import { data1 } from "%api/listMedia/data1";
 import { StanzaView } from "%stanza/stanzas/gmdb-meta-list/components/StanzaView";
+import { StoryProvider } from "%storybook/StoryProvider";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof StanzaView> = {
   component: StanzaView,
-  decorators: [(Story) => <Story />],
+  decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
+    (Story) => <Story />,
+  ],
 };
 export default meta;
 
