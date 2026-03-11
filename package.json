@@ -17,10 +17,26 @@
     "fmt:check": "oxfmt --check"
   },
   "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.9",
+    "@mui/material": "^7.3.9",
+    "@tanstack/react-query": "^5.90.21",
+    "@tanstack/react-query-devtools": "^5.91.3",
+    "copy-anything": "^4.0.5",
     "is-what": "^5.5.0",
+    "jotai": "^2.18.0",
+    "nanoid": "^5.1.2",
+    "pluralize": "^8.0.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "usehooks-ts": "^3.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.9",
+    "@emotion/babel-plugin": "^11.11.0",
+    "@emotion/babel-preset-css-prop": "^11.11.0",
     "@react-types/shared": "^3.33.1",
     "@storybook/addon-docs": "^10.2.16",
     "@storybook/addon-links": "^10.2.16",
