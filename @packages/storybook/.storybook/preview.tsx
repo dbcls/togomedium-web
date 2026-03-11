@@ -33,19 +33,19 @@ const preview: Preview = {
     },
   },
 
-  decorators: [
-    (Story) => (
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <Provider>
-          <ThemeProvider theme={muiTheme}>
-            <EmotionGlobalStyles />
-            <Story />
-          </ThemeProvider>
-        </Provider>
-      </QueryClientProvider>
-    ),
-  ],
+  // decorators: [
+  //   (Story) => (
+  //     <QueryClientProvider client={queryClient}>
+  //       <ReactQueryDevtools initialIsOpen={false} />
+  //       <Provider>
+  //         <ThemeProvider theme={muiTheme}>
+  //           <EmotionGlobalStyles />
+  //           <Story />
+  //         </ThemeProvider>
+  //       </Provider>
+  //     </QueryClientProvider>
+  //   ),
+  // ],
 
   initialGlobals: {
     backgrounds: {
