@@ -1,9 +1,9 @@
 import { TaxonomicTreeBranch } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonomicTreeBranch";
 import { useTaxonomyTypeMutators } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof TaxonomicTreeBranch> = {
+const meta = {
   component: TaxonomicTreeBranch,
   decorators: [
     (Story) => (
@@ -14,11 +14,11 @@ const meta: Meta<typeof TaxonomicTreeBranch> = {
     (Story) => <Story />,
   ],
   parameters: {},
-};
+} satisfies Meta<typeof TaxonomicTreeBranch>;
 export default meta;
 
-type Story = StoryObj<typeof TaxonomicTreeBranch>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     id: "2157",
   },
@@ -29,9 +29,9 @@ export const Primary: Story = {
       return <Story />;
     },
   ],
-};
+} satisfies Story;
 
-export const GTDB: Story = {
+export const GTDB = {
   args: {
     id: "d__Bacteria",
   },
@@ -42,4 +42,4 @@ export const GTDB: Story = {
       return <Story />;
     },
   ],
-};
+} satisfies Story;

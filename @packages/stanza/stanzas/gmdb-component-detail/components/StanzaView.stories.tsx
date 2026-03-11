@@ -1,8 +1,8 @@
 import { StanzaView } from "%stanza/stanzas/gmdb-component-detail/components/StanzaView";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof StanzaView> = {
+const meta = {
   component: StanzaView,
   decorators: [
     (Story) => (
@@ -11,11 +11,11 @@ const meta: Meta<typeof StanzaView> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof StanzaView>;
 export default meta;
 
-type Story = StoryObj<typeof StanzaView>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     prefLabel: "Hexahydro-1H-1,4-diazepine-1,4-bis(2-ethanesulfonic acid) solution",
     gmoId: "GMO_001925",
@@ -54,9 +54,9 @@ export const Primary: Story = {
     subClasses: [],
     links: [],
   },
-};
+} satisfies Story;
 
-export const Water: Story = {
+export const Water = {
   args: {
     prefLabel: "Distilled water",
     gmoId: "GMO_001001",
@@ -112,4 +112,4 @@ export const Water: Story = {
       },
     ],
   },
-};
+} satisfies Story;

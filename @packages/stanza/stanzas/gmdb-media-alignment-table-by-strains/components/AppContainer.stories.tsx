@@ -2,11 +2,11 @@ import { data1 } from "%api/mediaStrainsAlignment/data1";
 import { data2 } from "%api/mediaStrainsAlignment/data2";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { AppContainer } from "./AppContainer";
 
-const meta: Meta<typeof AppContainer> = {
+const meta = {
   component: AppContainer,
   decorators: [
     (Story) => (
@@ -20,15 +20,15 @@ const meta: Meta<typeof AppContainer> = {
       </ComponentWrapper>
     ),
   ],
-};
+} satisfies Meta<typeof AppContainer>;
 export default meta;
 
-type Story = StoryObj<typeof AppContainer>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: { data: data1 },
-};
-export const WithNull: Story = {
+} satisfies Story;
+export const WithNull = {
   args: { data: data2 },
-};
+} satisfies Story;
 
-export const NotFound: Story = { args: { data: [] } };
+export const NotFound = { args: { data: [] } } satisfies Story;

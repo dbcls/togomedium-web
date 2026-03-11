@@ -1,9 +1,12 @@
 import { AlignmentCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/AlignmentCell";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof AlignmentCell> = {
+const meta = {
   component: AlignmentCell,
+  args: {
+    id: "GMO_0000001",
+  },
   decorators: [
     (Story) => (
       <StoryProvider>
@@ -11,25 +14,25 @@ const meta: Meta<typeof AlignmentCell> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof AlignmentCell>;
 export default meta;
 
-type Story = StoryObj<typeof AlignmentCell>;
-export const Available: Story = {
+type Story = StoryObj<typeof meta>;
+export const Available = {
   args: {
     state: "available",
     label: "Sodium chloride",
   },
-};
-export const None: Story = {
+} satisfies Story;
+export const None = {
   args: {
     state: "none",
     label: "Sodium chloride",
   },
-};
-export const Grouped: Story = {
+} satisfies Story;
+export const Grouped = {
   args: {
     state: "grouped",
     label: "Sodium chloride",
   },
-};
+} satisfies Story;

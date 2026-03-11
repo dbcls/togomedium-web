@@ -1,8 +1,8 @@
 import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterCell";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof FooterCell> = {
+const meta = {
   component: FooterCell,
   decorators: [
     (Story) => (
@@ -11,11 +11,11 @@ const meta: Meta<typeof FooterCell> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof FooterCell>;
 export default meta;
 
-type Story = StoryObj<typeof FooterCell>;
-export const Level0: Story = {
+type Story = StoryObj<typeof meta>;
+export const Level0 = {
   args: {
     label: "Distilled Water",
     level: 0,
@@ -23,8 +23,8 @@ export const Level0: Story = {
     isOpen: false,
     id: "id",
   },
-};
-export const Level1: Story = {
+} satisfies Story;
+export const Level1 = {
   args: {
     label: "Distilled Water",
     level: 1,
@@ -32,4 +32,4 @@ export const Level1: Story = {
     isOpen: true,
     id: "id",
   },
-};
+} satisfies Story;

@@ -1,8 +1,8 @@
 import App from "%stanza/stanzas/gmdb-component-detail/App";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof App> = {
+const meta = {
   component: App,
   decorators: [
     (Story) => (
@@ -11,27 +11,27 @@ const meta: Meta<typeof App> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof App>;
 export default meta;
 
-type Story = StoryObj<typeof App>;
-export const Result1: Story = {
+type Story = StoryObj<typeof meta>;
+export const Result1 = {
   args: {
     gmo_id: "GMO_001001",
   },
-};
-export const Result2: Story = {
+} satisfies Story;
+export const Result2 = {
   args: {
     gmo_id: "GMO_001018",
   },
-};
-export const Result3: Story = {
+} satisfies Story;
+export const Result3 = {
   args: {
     gmo_id: "GMO_001113",
   },
-};
-export const Result4: Story = {
+} satisfies Story;
+export const Result4 = {
   args: {
     gmo_id: "GMO_001010",
   },
-};
+} satisfies Story;

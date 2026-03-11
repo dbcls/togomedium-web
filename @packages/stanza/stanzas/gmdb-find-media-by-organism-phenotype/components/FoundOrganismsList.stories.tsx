@@ -1,8 +1,8 @@
 import { FoundOrganismsList } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/FoundOrganismsList";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof FoundOrganismsList> = {
+const meta = {
   component: FoundOrganismsList,
   decorators: [
     (Story) => (
@@ -11,8 +11,8 @@ const meta: Meta<typeof FoundOrganismsList> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof FoundOrganismsList>;
 export default meta;
 
-type Story = StoryObj<typeof FoundOrganismsList>;
-export const Primary: Story = {};
+type Story = StoryObj<typeof meta>;
+export const Primary = {} satisfies Story;

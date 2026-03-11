@@ -1,8 +1,8 @@
 import { FilterIcon } from "%stanza/components/icons/FilterIcon";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof FilterIcon> = {
+const meta = {
   component: FilterIcon,
   decorators: [
     (Story) => (
@@ -18,8 +18,8 @@ const meta: Meta<typeof FilterIcon> = {
       );
     },
   ],
-};
+} satisfies Meta<typeof FilterIcon>;
 export default meta;
 
-type Story = StoryObj<typeof FilterIcon>;
-export const Primary: Story = {};
+type Story = StoryObj<typeof meta>;
+export const Primary = {} satisfies Story;

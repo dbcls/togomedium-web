@@ -1,15 +1,18 @@
 import { TaxonomicTreeSection } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonomicTreeSection";
 import { useTaxonomyTypeMutators } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof TaxonomicTreeSection> = {
+const meta = {
   component: TaxonomicTreeSection,
-};
+  args: {
+    showLoading: false,
+  },
+} satisfies Meta<typeof TaxonomicTreeSection>;
 export default meta;
 
-type Story = StoryObj<typeof TaxonomicTreeSection>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   decorators: [
     (Story) => (
       <StoryProvider reactQuery mui>
@@ -22,10 +25,9 @@ export const Primary: Story = {
       return <Story />;
     },
   ],
-  args: {},
-};
+} satisfies Story;
 
-export const GTDB: Story = {
+export const GTDB = {
   decorators: [
     (Story) => {
       const { setApiType } = useTaxonomyTypeMutators();
@@ -33,4 +35,4 @@ export const GTDB: Story = {
       return <Story />;
     },
   ],
-};
+} satisfies Story;

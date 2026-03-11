@@ -1,8 +1,8 @@
 import App from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/App";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof App> = {
+const meta = {
   component: App,
   parameters: {
     layout: "fullscreen",
@@ -19,8 +19,8 @@ const meta: Meta<typeof App> = {
       </div>
     ),
   ],
-};
+} satisfies Meta<typeof App>;
 export default meta;
 
-type Story = StoryObj<typeof App>;
-export const Primary: Story = {};
+type Story = StoryObj<typeof meta>;
+export const Primary = {} satisfies Story;

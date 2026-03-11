@@ -1,28 +1,32 @@
 import { MediaListItem } from "%stanza/components/media-finder/MediaListItem";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof MediaListItem> = {
+const meta = {
   component: MediaListItem,
-};
+  args: {
+    isChecked: false,
+    onClick: () => {},
+  },
+} satisfies Meta<typeof MediaListItem>;
 export default meta;
 
-type Story = StoryObj<typeof MediaListItem>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     id: "HM_D00535",
     label: "TRYPTICASE SOY BROTH AGAR",
   },
-};
-export const Long: Story = {
+} satisfies Story;
+export const Long = {
   args: {
     id: "HM_D00535",
     label:
       "This is very long label, This is very long label, This is very long label, This is very long label, This is very long label, This is very long label, This is very long label, This is very long label, This is very long label, ",
   },
-};
+} satisfies Story;
 
-export const List: Story = {
+export const List = {
   args: {
     id: "HM_D00535",
     label: "TRYPTICASE SOY BROTH AGAR",
@@ -41,4 +45,4 @@ export const List: Story = {
       </div>
     ),
   ],
-};
+} satisfies Story;

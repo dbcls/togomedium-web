@@ -1,8 +1,8 @@
 import { DoubleAngleRightIcon } from "%stanza/components/icons/DoubleAngleRightIcon";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof DoubleAngleRightIcon> = {
+const meta = {
   component: DoubleAngleRightIcon,
   decorators: [
     (Story) => (
@@ -18,8 +18,8 @@ const meta: Meta<typeof DoubleAngleRightIcon> = {
       );
     },
   ],
-};
+} satisfies Meta<typeof DoubleAngleRightIcon>;
 export default meta;
 
-type Story = StoryObj<typeof DoubleAngleRightIcon>;
-export const Primary: Story = {};
+type Story = StoryObj<typeof meta>;
+export const Primary = {} satisfies Story;

@@ -1,10 +1,10 @@
 import { mediaAlignmentTableResponse2 } from "%api/mediaComponentAlignment/response2";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { ScrollableTable } from "./ScrollableTable";
 
-const meta: Meta<typeof ScrollableTable> = {
+const meta = {
   component: ScrollableTable,
   decorators: [
     (Story) => (
@@ -13,12 +13,12 @@ const meta: Meta<typeof ScrollableTable> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof ScrollableTable>;
 export default meta;
 
-type Story = StoryObj<typeof ScrollableTable>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     data: mediaAlignmentTableResponse2,
   },
-};
+} satisfies Story;

@@ -2,14 +2,14 @@ import { MediaRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-componen
 import { useIsMediaExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";
 import { useIsOrganismsExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 
 type WithCustomArgs = {
   isMediaExpanded: boolean;
   isOrganismsExpanded: boolean;
 } & ComponentProps<typeof MediaRow>;
-const meta: Meta<WithCustomArgs> = {
+const meta = {
   component: MediaRow,
   decorators: [
     (Story) => (
@@ -34,11 +34,11 @@ const meta: Meta<WithCustomArgs> = {
       );
     },
   ],
-};
+} satisfies Meta<WithCustomArgs>;
 export default meta;
 
-type Story = StoryObj<WithCustomArgs>;
-export const Type1: Story = {
+type Story = StoryObj<typeof meta>;
+export const Type1 = {
   args: {
     isMediaExpanded: false,
     isOrganismsExpanded: false,
@@ -65,8 +65,8 @@ export const Type1: Story = {
       },
     ],
   },
-};
-export const NoOrganism: Story = {
+} satisfies Story;
+export const NoOrganism = {
   args: {
     isMediaExpanded: false,
     isOrganismsExpanded: false,
@@ -90,4 +90,4 @@ export const NoOrganism: Story = {
       },
     ],
   },
-};
+} satisfies Story;

@@ -1,9 +1,9 @@
 import { NotFound } from "%stanza/components/atoms/NotFound";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof NotFound> = {
+const meta = {
   component: NotFound,
   decorators: [
     (Story) => (
@@ -17,11 +17,11 @@ const meta: Meta<typeof NotFound> = {
       </ComponentWrapper>
     ),
   ],
-};
+} satisfies Meta<typeof NotFound>;
 
 export default meta;
 
-type Story = StoryObj<typeof NotFound>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {},
-};
+} satisfies Story;

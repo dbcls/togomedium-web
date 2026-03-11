@@ -3,11 +3,11 @@ import { useSelectedMediaMutators } from "%stanza/state/media-finder/selectedMed
 import { LabelInfo } from "%stanza/utils/labelInfo";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 
 type WithCustomArgs = { media: LabelInfo[] } & ComponentProps<typeof SelectedMediaList>;
-const meta: Meta<WithCustomArgs> = {
+const meta = {
   component: SelectedMediaList,
   decorators: [
     (Story) => (
@@ -28,11 +28,11 @@ const meta: Meta<WithCustomArgs> = {
       );
     },
   ],
-};
+} satisfies Meta<WithCustomArgs>;
 export default meta;
 
-type Story = StoryObj<WithCustomArgs>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     media: [
       { label: "AAA", id: "AAA" },
@@ -59,4 +59,4 @@ export const Primary: Story = {
       { label: "VVV", id: "VVV" },
     ],
   },
-};
+} satisfies Story;

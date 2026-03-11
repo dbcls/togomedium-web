@@ -1,8 +1,8 @@
 import App from "%stanza/stanzas/gmdb-media-alignment-table-by-components/App";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof App> = {
+const meta = {
   component: App,
   decorators: [
     (Story) => (
@@ -14,16 +14,16 @@ const meta: Meta<typeof App> = {
   // parameters: {
   //   msw: makeMswParameter(mediaAlignmentTableMocks),
   // },
-};
+} satisfies Meta<typeof App>;
 export default meta;
 
-type Story = StoryObj<typeof App>;
-export const Result1: Story = {
+type Story = StoryObj<typeof meta>;
+export const Result1 = {
   args: { gm_ids: ["HM_D00001a", "HM_D00065"] },
-};
-export const Priority: Story = {
+} satisfies Story;
+export const Priority = {
   args: {
     gm_ids: ["HM_D00001a", "HM_D00065"],
     prioritizedOrganism: ["1124983", "446421"],
   },
-};
+} satisfies Story;

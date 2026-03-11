@@ -1,7 +1,7 @@
 import { OrganismPane } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismPane";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
-const meta: Meta<typeof OrganismPane> = {
+import type { Meta, StoryObj } from "@storybook/react-vite";
+const meta = {
   component: OrganismPane,
   decorators: [
     (Story) => (
@@ -10,8 +10,8 @@ const meta: Meta<typeof OrganismPane> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof OrganismPane>;
 export default meta;
 
-type Story = StoryObj<typeof OrganismPane>;
-export const Primary: Story = {};
+type Story = StoryObj<typeof meta>;
+export const Primary = {} satisfies Story;

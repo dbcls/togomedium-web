@@ -1,8 +1,8 @@
 import { VerticalEllipsisIcon } from "%stanza/components/icons/VerticalEllipsisIcon";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof VerticalEllipsisIcon> = {
+const meta = {
   component: VerticalEllipsisIcon,
   decorators: [
     (Story) => (
@@ -18,8 +18,8 @@ const meta: Meta<typeof VerticalEllipsisIcon> = {
       );
     },
   ],
-};
+} satisfies Meta<typeof VerticalEllipsisIcon>;
 export default meta;
 
-type Story = StoryObj<typeof VerticalEllipsisIcon>;
-export const Primary: Story = {};
+type Story = StoryObj<typeof meta>;
+export const Primary = {} satisfies Story;

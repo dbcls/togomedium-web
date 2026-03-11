@@ -1,10 +1,13 @@
 import { mediaAlignmentTableResponse1 } from "%api/mediaComponentAlignment/response1";
 import { InfoColumns } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/InfoColumns";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof InfoColumns> = {
+const meta = {
   component: InfoColumns,
+  args: {
+    prioritizedOrganism: [],
+  },
   decorators: [
     (Story) => (
       <StoryProvider>
@@ -12,12 +15,12 @@ const meta: Meta<typeof InfoColumns> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof InfoColumns>;
 export default meta;
 
-type Story = StoryObj<typeof InfoColumns>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     data: mediaAlignmentTableResponse1,
   },
-};
+} satisfies Story;

@@ -1,13 +1,13 @@
 import { QueryData, useQueryDataMutators } from "%stanza/state/media-finder/queryData";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 
 import { QueryInfo } from "./QueryInfo";
 
 type WithCustomArgs = { queryData: QueryData } & ComponentProps<typeof QueryInfo>;
-const meta: Meta<WithCustomArgs> = {
+const meta = {
   component: QueryInfo,
   decorators: [
     (Story) => (
@@ -28,14 +28,14 @@ const meta: Meta<WithCustomArgs> = {
       );
     },
   ],
-};
+} satisfies Meta<WithCustomArgs>;
 export default meta;
 
-type Story = StoryObj<WithCustomArgs>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     queryData: {
       "tax-id": ["123456", "725851", "447413"],
     },
   },
-};
+} satisfies Story;

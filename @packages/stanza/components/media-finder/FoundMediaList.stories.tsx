@@ -1,8 +1,8 @@
 import { FoundMediaList } from "%stanza/components/media-finder/FoundMediaList";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof FoundMediaList> = {
+const meta = {
   component: FoundMediaList,
   decorators: [
     (Story) => (
@@ -11,10 +11,10 @@ const meta: Meta<typeof FoundMediaList> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof FoundMediaList>;
 export default meta;
 
-type Story = StoryObj<typeof FoundMediaList>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {},
-};
+} satisfies Story;

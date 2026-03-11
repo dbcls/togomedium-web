@@ -1,9 +1,9 @@
 import { AttributesSection } from "%stanza/stanzas/gmdb-find-media-by-components/components/AttributesSection";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof AttributesSection> = {
+const meta = {
   component: AttributesSection,
   decorators: [
     (Story) => (
@@ -20,10 +20,10 @@ const meta: Meta<typeof AttributesSection> = {
   parameters: {
     // msw: makeMswParameter(allComponentsMocks),
   },
-};
+} satisfies Meta<typeof AttributesSection>;
 export default meta;
 
-type Story = StoryObj<typeof AttributesSection>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {},
-};
+} satisfies Story;

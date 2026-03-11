@@ -1,8 +1,8 @@
 import { StanzaView } from "%stanza/stanzas/gmdb-taxon-detail/components/StanzaView";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof StanzaView> = {
+const meta = {
   component: StanzaView,
   decorators: [
     (Story) => (
@@ -11,12 +11,12 @@ const meta: Meta<typeof StanzaView> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof StanzaView>;
 export default meta;
 
-type Story = StoryObj<typeof StanzaView>;
+type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Primary = {
   args: {
     taxid: "315405",
     scientificName: "Streptococcus gallolyticus",
@@ -69,4 +69,4 @@ export const Primary: Story = {
       },
     ],
   },
-};
+} satisfies Story;

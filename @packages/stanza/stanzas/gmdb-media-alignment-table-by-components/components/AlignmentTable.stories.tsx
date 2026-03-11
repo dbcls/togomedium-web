@@ -1,11 +1,14 @@
 import { mediaAlignmentTableResponse1 } from "%api/mediaComponentAlignment/response1";
 import { StoryProvider } from "%storybook/StoryProvider";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { AlignmentTable } from "./AlignmentTable";
 
-const meta: Meta<typeof AlignmentTable> = {
+const meta = {
   component: AlignmentTable,
+  args: {
+    prioritizedOrganism: [],
+  },
   decorators: [
     (Story) => (
       <StoryProvider>
@@ -13,12 +16,12 @@ const meta: Meta<typeof AlignmentTable> = {
       </StoryProvider>
     ),
   ],
-};
+} satisfies Meta<typeof AlignmentTable>;
 export default meta;
 
-type Story = StoryObj<typeof AlignmentTable>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     data: mediaAlignmentTableResponse1,
   },
-};
+} satisfies Story;
