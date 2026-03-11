@@ -25,4 +25,5 @@ export default defineConfig({
     typeAware: true,
     typeCheck: true,
   },
+  ignorePatterns: ["@packages/web/src/routeTree.gen.ts"],
 });
