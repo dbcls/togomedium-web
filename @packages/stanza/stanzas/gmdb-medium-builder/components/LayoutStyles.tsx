@@ -1,3 +1,6 @@
+// disable react-refresh as this file contains shared styled components
+/* oxlint-disable react-refresh/only-export-components */
+
 import { THEME } from "%core/theme";
 import App from "%stanza/stanzas/gmdb-medium-builder/App";
 import { styled } from "@mui/material/styles";
@@ -15,6 +18,7 @@ export const Sheet = styled("div")({
   columnGap: THEME.SIZE.S2,
   rowGap: THEME.SIZE.S2,
 });
+
 export const Block = styled("div")({
   display: "grid",
   gridTemplateColumns: "subgrid",

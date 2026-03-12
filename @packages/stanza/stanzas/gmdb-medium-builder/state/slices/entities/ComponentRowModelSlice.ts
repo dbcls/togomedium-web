@@ -17,10 +17,10 @@ const slice = createSlice({
   name: "entities/componentRow",
   initialState: adapter.getInitialState(),
   reducers: {
-    addComponentRow: adapter.addOne,
-    removeComponentRow: adapter.removeOne,
-    updateComponentRow: adapter.updateOne,
-    setComponentRows: adapter.setAll,
+    addComponentRow: (state, action) => adapter.addOne(state, action),
+    removeComponentRow: (state, action) => adapter.removeOne(state, action),
+    updateComponentRow: (state, action) => adapter.updateOne(state, action),
+    setComponentRows: (state, action) => adapter.setAll(state, action),
   },
 });
 

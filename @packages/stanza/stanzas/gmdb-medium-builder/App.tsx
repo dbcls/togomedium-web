@@ -2,7 +2,6 @@ import { THEME } from "%core/theme";
 import { InputBlock } from "%stanza/stanzas/gmdb-medium-builder/components/InputBlock";
 import { Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { useAppDispatch } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
-import { DocumentActions } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
 import { addSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/addSolutionThunk";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -12,7 +11,7 @@ export type AppProps = {
   stanzaElement?: ShadowRoot;
 };
 
-const App = ({}: AppProps) => {
+const App = (_props: AppProps) => {
   const dispatch = useAppDispatch();
   const onClickAdd = () => {
     dispatch(addSolutionThunk());

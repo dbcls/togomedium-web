@@ -16,10 +16,10 @@ const slice = createSlice({
   name: "entities/solutionBlock",
   initialState: adapter.getInitialState(),
   reducers: {
-    addSolutionBlock: adapter.addOne,
-    removeSolutionBlock: adapter.removeOne,
-    updateSolutionBlock: adapter.updateOne,
-    setSolutionBlocks: adapter.setAll,
+    addSolutionBlock: (state, action) => adapter.addOne(state, action),
+    removeSolutionBlock: (state, action) => adapter.removeOne(state, action),
+    updateSolutionBlock: (state, action) => adapter.updateOne(state, action),
+    setSolutionBlocks: (state, action) => adapter.setAll(state, action),
   },
 });
 
