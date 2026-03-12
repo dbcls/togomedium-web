@@ -7,6 +7,7 @@ import {
   ComponentRowSelectors,
 } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import { deleteComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/deleteComponentRowThunk";
+import { moveComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/moveComponentRowThunk";
 import { Autocomplete, IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
@@ -105,6 +106,14 @@ export const InputRow: FC<Props> = ({ id, solutionBlockId }) => {
     dispatch(deleteComponentRowThunk(solutionBlockId, id));
     handleClose();
   };
+  const handleClickMoveRowUp = () => {
+    dispatch(moveComponentRowThunk(solutionBlockId, id, "up"));
+    handleClose();
+  };
+  const handleClickMoveRowDown = () => {
+    dispatch(moveComponentRowThunk(solutionBlockId, id, "down"));
+    handleClose();
+  };
 
   return (
     <TableRow>
@@ -132,8 +141,8 @@ export const InputRow: FC<Props> = ({ id, solutionBlockId }) => {
           }}
         >
           <MenuItem onClick={handleClickDeleteRow}>Delete row</MenuItem>
-          <MenuItem onClick={handleClose}>Move row up</MenuItem>
-          <MenuItem onClick={handleClose}>Move row down</MenuItem>
+          <MenuItem onClick={handleClickMoveRowUp}>Move row up</MenuItem>
+          <MenuItem onClick={handleClickMoveRowDown}>Move row down</MenuItem>
         </Menu>
       </div>
       <div>
