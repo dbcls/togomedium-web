@@ -4,7 +4,7 @@ import { solutionBlockModelReducer } from "%stanza/stanzas/gmdb-medium-builder/s
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-export const store = configureStore({
+export const appStore = configureStore({
   reducer: {
     entities: combineReducers({
       componentRows: componentRowModelReducer,
@@ -14,8 +14,8 @@ export const store = configureStore({
   },
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof appStore.getState>;
+export type AppDispatch = typeof appStore.dispatch;
 
 type DispatchFunc = () => AppDispatch;
 export const useAppDispatch: DispatchFunc = useDispatch;

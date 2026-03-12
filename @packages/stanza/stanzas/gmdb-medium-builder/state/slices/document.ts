@@ -12,7 +12,10 @@ const slice = createSlice({
   name: "document",
   initialState,
   reducers: {
-    addSolution: () => {},
+    addSolution: (state) => {
+      console.log("addSolution Dispatched");
+      state.solutions.push("new solution");
+    },
     removeSolution: () => {},
   },
 });

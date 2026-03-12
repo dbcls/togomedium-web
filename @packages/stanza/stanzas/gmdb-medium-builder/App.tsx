@@ -1,6 +1,8 @@
 import { THEME } from "%core/theme";
 import { InputBlock } from "%stanza/stanzas/gmdb-medium-builder/components/InputBlock";
 import { Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
+import { useAppDispatch } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import { DocumentActions } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import React from "react";
@@ -10,6 +12,10 @@ export type AppProps = {
 };
 
 const App = ({}: AppProps) => {
+  const dispatch = useAppDispatch();
+  const onClickAdd = () => {
+    dispatch(DocumentActions.addSolution());
+  };
   return (
     <Wrapper>
       <Sheet>
@@ -40,6 +46,7 @@ const App = ({}: AppProps) => {
               size={"small"}
               disableElevation={true}
               sx={{ textTransform: "none" }}
+              onClick={onClickAdd}
             >
               Add solution block
             </Button>
