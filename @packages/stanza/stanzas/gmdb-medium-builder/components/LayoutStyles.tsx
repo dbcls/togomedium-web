@@ -2,15 +2,7 @@
 /* oxlint-disable react-refresh/only-export-components */
 
 import { THEME } from "%core/theme";
-import App from "%stanza/stanzas/gmdb-medium-builder/App";
 import { styled } from "@mui/material/styles";
-import type { FC } from "react";
-
-type Props = {};
-
-export const LayoutStyles: FC<Props> = () => {
-  return <div>LayoutStyles</div>;
-};
 
 export const Sheet = styled("div")({
   display: "grid",
@@ -25,7 +17,9 @@ export const Block = styled("div")({
   gridColumn: "span 5",
   rowGap: THEME.SIZE.S2,
   backgroundColor: THEME.COLOR.WHITE,
-  padding: THEME.SIZE.S1,
+  paddingInline: THEME.SIZE.S1,
+  paddingTop: THEME.SIZE.S3,
+  paddingBottom: THEME.SIZE.S1,
   borderRadius: THEME.ROUND.BASE,
 });
 
