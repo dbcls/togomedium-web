@@ -34,96 +34,27 @@ const units = [
 ];
 
 export const InputRow: FC<Props> = ({ id, solutionBlockId }) => {
-  const dispatch = useAppDispatch();
   const componentRow = useAppSelector((state) => ComponentRowSelectors.selectById(state, id));
-  const solutionBlock = useAppSelector((state) =>
-    SolutionBlockSelectors.selectById(state, solutionBlockId),
-  );
-  const { data, isSuccess } = useQuery({
-    queryKey: ["allComponents"],
-    queryFn: fetchAllComponents,
-    placeholderData: [],
-  });
-  const components = (data ?? []).map((c) => ({ label: c.name }));
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const componentRowIds = solutionBlock?.components ?? [];
-  const componentRowIndex = componentRowIds.indexOf(id);
-  const disableDelete = componentRowIds.length <= 1;
-  const disableMoveRowUp = componentRowIndex <= 0;
-  const disableMoveRowDown =
-    componentRowIndex < 0 || componentRowIndex >= componentRowIds.length - 1;
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const { components, isSuccess } = useComponentsData();
+  const { handleChangeComponent, handleChangeVolume, handleChangeUnit, handleChangeNote } =
+    useInputHandlers(id);
+  const {
+    solutionBlock,
+    anchorEl,
+    open,
+    handleClose,
+    handleClick,
+    handleClickDeleteRow,
+    handleClickMoveRowUp,
+    handleClickMoveRowDown,
+    disableDelete,
+    disableMoveRowUp,
+    disableMoveRowDown,
+  } = useMenu(id, solutionBlockId);
 
   if (!componentRow || !solutionBlock) {
     return null;
   }
-
-  const handleChangeComponent = (_event: React.SyntheticEvent, value: { label: string } | null) => {
-    dispatch(
-      ComponentRowModelActions.updateComponentRow({
-        id,
-        changes: {
-          component: value?.label ?? "",
-        },
-      }),
-    );
-  };
-
-  const handleChangeVolume = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const nextVolume = event.target.value === "" ? 0 : Number(event.target.value);
-    dispatch(
-      ComponentRowModelActions.updateComponentRow({
-        id,
-        changes: {
-          volume: Number.isNaN(nextVolume) ? 0 : nextVolume,
-        },
-      }),
-    );
-  };
-
-  const handleChangeUnit = (
-    _event: React.SyntheticEvent,
-    value: { label: string; value: string } | null,
-  ) => {
-    dispatch(
-      ComponentRowModelActions.updateComponentRow({
-        id,
-        changes: {
-          unit: value?.value ?? "",
-        },
-      }),
-    );
-  };
-
-  const handleChangeNote = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(
-      ComponentRowModelActions.updateComponentRow({
-        id,
-        changes: {
-          note: event.target.value,
-        },
-      }),
-    );
-  };
-
-  const handleClickDeleteRow = () => {
-    dispatch(deleteComponentRowThunk(solutionBlockId, id));
-    handleClose();
-  };
-  const handleClickMoveRowUp = () => {
-    dispatch(moveComponentRowThunk(solutionBlockId, id, "up"));
-    handleClose();
-  };
-  const handleClickMoveRowDown = () => {
-    dispatch(moveComponentRowThunk(solutionBlockId, id, "down"));
-    handleClose();
-  };
 
   return (
     <TableRow>
@@ -202,4 +133,113 @@ export const InputRow: FC<Props> = ({ id, solutionBlockId }) => {
       </div>
     </TableRow>
   );
+};
+
+const useComponentsData = () => {
+  const { data, isSuccess } = useQuery({
+    queryKey: ["allComponents"],
+    queryFn: fetchAllComponents,
+    placeholderData: [],
+  });
+  const components = (data ?? []).map((c) => ({ label: c.name }));
+  return { components, isSuccess };
+};
+
+const useInputHandlers = (id: string) => {
+  const dispatch = useAppDispatch();
+  const handleChangeComponent = (_event: React.SyntheticEvent, value: { label: string } | null) => {
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          component: value?.label ?? "",
+        },
+      }),
+    );
+  };
+
+  const handleChangeVolume = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextVolume = event.target.value === "" ? 0 : Number(event.target.value);
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          volume: Number.isNaN(nextVolume) ? 0 : nextVolume,
+        },
+      }),
+    );
+  };
+
+  const handleChangeUnit = (
+    _event: React.SyntheticEvent,
+    value: { label: string; value: string } | null,
+  ) => {
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          unit: value?.value ?? "",
+        },
+      }),
+    );
+  };
+
+  const handleChangeNote = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          note: event.target.value,
+        },
+      }),
+    );
+  };
+
+  return { handleChangeComponent, handleChangeVolume, handleChangeUnit, handleChangeNote };
+};
+const useMenu = (id: string, solutionBlockId: string) => {
+  const dispatch = useAppDispatch();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const solutionBlock = useAppSelector((state) =>
+    SolutionBlockSelectors.selectById(state, solutionBlockId),
+  );
+  const open = Boolean(anchorEl);
+  const componentRowIds = solutionBlock?.components ?? [];
+  const componentRowIndex = componentRowIds.indexOf(id);
+  const disableDelete = componentRowIds.length <= 1;
+  const disableMoveRowUp = componentRowIndex <= 0;
+  const disableMoveRowDown =
+    componentRowIndex < 0 || componentRowIndex >= componentRowIds.length - 1;
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClickDeleteRow = () => {
+    dispatch(deleteComponentRowThunk(solutionBlockId, id));
+    handleClose();
+  };
+  const handleClickMoveRowUp = () => {
+    dispatch(moveComponentRowThunk(solutionBlockId, id, "up"));
+    handleClose();
+  };
+  const handleClickMoveRowDown = () => {
+    dispatch(moveComponentRowThunk(solutionBlockId, id, "down"));
+    handleClose();
+  };
+  return {
+    solutionBlock,
+    anchorEl,
+    open,
+    handleClose,
+    handleClick,
+    handleClickDeleteRow,
+    handleClickMoveRowUp,
+    handleClickMoveRowDown,
+    disableDelete,
+    disableMoveRowUp,
+    disableMoveRowDown,
+  };
 };
