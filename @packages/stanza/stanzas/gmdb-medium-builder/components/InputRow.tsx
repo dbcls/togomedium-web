@@ -6,11 +6,15 @@ import {
   ComponentRowModelActions,
   ComponentRowSelectors,
 } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
+import { deleteComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/deleteComponentRowThunk";
 import { Autocomplete, IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
 
-type Props = { id: string };
+type Props = {
+  id: string;
+  solutionBlockId: string;
+};
 
 const units = [
   {
@@ -27,7 +31,7 @@ const units = [
   },
 ];
 
-export const InputRow: FC<Props> = ({ id }) => {
+export const InputRow: FC<Props> = ({ id, solutionBlockId }) => {
   const dispatch = useAppDispatch();
   const componentRow = useAppSelector((state) => ComponentRowSelectors.selectById(state, id));
   const { data, isSuccess } = useQuery({
@@ -97,6 +101,11 @@ export const InputRow: FC<Props> = ({ id }) => {
     );
   };
 
+  const handleClickDeleteRow = () => {
+    dispatch(deleteComponentRowThunk(solutionBlockId, id));
+    handleClose();
+  };
+
   return (
     <TableRow>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -122,7 +131,7 @@ export const InputRow: FC<Props> = ({ id }) => {
             },
           }}
         >
-          <MenuItem onClick={handleClose}>Delete row</MenuItem>
+          <MenuItem onClick={handleClickDeleteRow}>Delete row</MenuItem>
           <MenuItem onClick={handleClose}>Move row up</MenuItem>
           <MenuItem onClick={handleClose}>Move row down</MenuItem>
         </Menu>

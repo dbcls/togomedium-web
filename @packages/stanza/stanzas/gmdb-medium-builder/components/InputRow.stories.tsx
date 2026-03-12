@@ -7,6 +7,7 @@ const meta = {
   component: InputRow,
   args: {
     id: "123",
+    solutionBlockId: "solution-123",
   },
   decorators: [
     (Story) => (

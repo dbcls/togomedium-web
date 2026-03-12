@@ -96,7 +96,7 @@ export const InputBlock: FC<Props> = ({ id }) => {
         </TableRow>
         <ComponentTableBody>
           {componentRows.map((componentRow) => (
-            <InputRow key={componentRow.id} id={componentRow.id} />
+            <InputRow key={componentRow.id} id={componentRow.id} solutionBlockId={id} />
           ))}
         </ComponentTableBody>
         <ComponentTableFooter>
