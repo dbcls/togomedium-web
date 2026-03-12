@@ -1,12 +1,6 @@
 import { THEME } from "%core/theme";
 import { InputBlock } from "%stanza/stanzas/gmdb-medium-builder/components/InputBlock";
-import { InputRow } from "%stanza/stanzas/gmdb-medium-builder/components/InputRow";
-import {
-  Block,
-  Sheet,
-  TableRow,
-} from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
-import { Autocomplete, TextField } from "@mui/material";
+import { Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import React from "react";
