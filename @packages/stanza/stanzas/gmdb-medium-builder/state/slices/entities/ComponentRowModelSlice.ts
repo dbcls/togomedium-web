@@ -1,4 +1,6 @@
+import { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { nanoid } from "nanoid";
 
 export type ComponentRowModel = {
   id: string;
@@ -26,3 +28,19 @@ const slice = createSlice({
 
 export const ComponentRowModelActions = slice.actions;
 export const componentRowModelReducer = slice.reducer;
+
+const selectors = adapter.getSelectors<AppState>((state) => state.entities.componentRows);
+export const ComponentRowSelectors = selectors;
+
+export const createBlankComponentRow = (
+  params: Partial<ComponentRowModel> = {},
+): ComponentRowModel => {
+  const id = params.id ?? nanoid();
+  return {
+    id,
+    component: params.component ?? "",
+    volume: params.volume ?? 0,
+    unit: params.unit ?? "",
+    note: params.note ?? "",
+  };
+};

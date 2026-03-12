@@ -5,7 +5,9 @@ import { InputRow } from "./InputRow";
 
 const meta = {
   component: InputRow,
-  args: {},
+  args: {
+    id: "123",
+  },
   decorators: [
     (Story) => (
       <StoryProvider reactQuery mui>

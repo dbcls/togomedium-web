@@ -1,8 +1,10 @@
 import { VerticalEllipsisIcon } from "%stanza/components/icons/VerticalEllipsisIcon";
 import { InputRow } from "%stanza/stanzas/gmdb-medium-builder/components/InputRow";
 import { Block, TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
-import { useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import { selectSolutionComponentRows } from "%stanza/stanzas/gmdb-medium-builder/state/selectors/selectSolutionComponentRows";
 import { SolutionBlockSelectors } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
+import { addComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/addComponentRowThunk";
 import { IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -11,7 +13,9 @@ import React, { FC } from "react";
 type Props = { id: string };
 
 export const InputBlock: FC<Props> = ({ id }) => {
+  const dispatch = useAppDispatch();
   const solution = useAppSelector((state) => SolutionBlockSelectors.selectById(state, id));
+  const componentRows = useAppSelector((state) => selectSolutionComponentRows(state, id));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClose = () => {
@@ -20,6 +24,13 @@ export const InputBlock: FC<Props> = ({ id }) => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleClickAddComponentRow = () => {
+    dispatch(addComponentRowThunk(id));
+  };
+
+  if (!solution) {
+    return null;
+  }
 
   return (
     <Block>
@@ -65,8 +76,9 @@ export const InputBlock: FC<Props> = ({ id }) => {
           <div>Note</div>
         </TableRow>
         <ComponentTableBody>
-          <InputRow />
-          <InputRow />
+          {componentRows.map((componentRow) => (
+            <InputRow key={componentRow.id} id={componentRow.id} />
+          ))}
         </ComponentTableBody>
         <ComponentTableFooter>
           <Button
@@ -74,6 +86,7 @@ export const InputBlock: FC<Props> = ({ id }) => {
             size={"small"}
             disableElevation={true}
             sx={{ textTransform: "none" }}
+            onClick={handleClickAddComponentRow}
           >
             Add component row
           </Button>
