@@ -3,6 +3,7 @@ import { InputBlock } from "%stanza/stanzas/gmdb-medium-builder/components/Input
 import { Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { useAppDispatch } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { DocumentActions } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
+import { addSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/addSolutionThunk";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import React from "react";
@@ -14,7 +15,7 @@ export type AppProps = {
 const App = ({}: AppProps) => {
   const dispatch = useAppDispatch();
   const onClickAdd = () => {
-    dispatch(DocumentActions.addSolution());
+    dispatch(addSolutionThunk());
   };
   return (
     <Wrapper>

@@ -1,4 +1,5 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { nanoid } from "nanoid";
 
 export type SolutionBlockModel = {
   id: string;
@@ -24,3 +25,13 @@ const slice = createSlice({
 
 export const SolutionBlockModelActions = slice.actions;
 export const solutionBlockModelReducer = slice.reducer;
+
+export const createBlankSolutionBlock = (): SolutionBlockModel => {
+  const id = nanoid();
+  return {
+    id,
+    title: "",
+    description: "",
+    components: [],
+  };
+};

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type DocumentModel = {
   solutions: string[];
@@ -12,9 +12,8 @@ const slice = createSlice({
   name: "document",
   initialState,
   reducers: {
-    addSolution: (state) => {
-      console.log("addSolution Dispatched");
-      state.solutions.push("new solution");
+    addSolution: (state, action: PayloadAction<string>) => {
+      state.solutions.push(action.payload);
     },
     removeSolution: () => {},
   },
