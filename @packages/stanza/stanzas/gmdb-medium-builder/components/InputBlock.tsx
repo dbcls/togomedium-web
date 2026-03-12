@@ -19,47 +19,21 @@ import React, { FC } from "react";
 type Props = { id: string };
 
 export const InputBlock: FC<Props> = ({ id }) => {
-  const dispatch = useAppDispatch();
   const solution = useAppSelector((state) => SolutionBlockSelectors.selectById(state, id));
   const componentRows = useAppSelector((state) => selectSolutionComponentRows(state, id));
-  const solutionIds = useAppSelector(DocumentSelectors.selectSolutions);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const solutionIndex = solutionIds.indexOf(id);
-  const disableDelete = solutionIds.length <= 1;
-  const disableMoveBlockUp = solutionIndex <= 0;
-  const disableMoveBlockDown = solutionIndex < 0 || solutionIndex >= solutionIds.length - 1;
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClickAddComponentRow = () => {
-    dispatch(addComponentRowThunk(id));
-  };
-  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(
-      SolutionBlockModelActions.updateSolutionBlock({
-        id,
-        changes: {
-          title: event.target.value,
-        },
-      }),
-    );
-  };
-  const handleClickDeleteBlock = () => {
-    dispatch(deleteSolutionThunk(id));
-    handleClose();
-  };
-  const handleClickMoveBlockUp = () => {
-    dispatch(moveSolutionThunk(id, "up"));
-    handleClose();
-  };
-  const handleClickMoveBlockDown = () => {
-    dispatch(moveSolutionThunk(id, "down"));
-    handleClose();
-  };
+  const { handleClickAddComponentRow, handleChangeTitle } = useInputHandlers(id);
+  const {
+    anchorEl,
+    open,
+    handleClose,
+    handleClick,
+    handleClickDeleteBlock,
+    handleClickMoveBlockUp,
+    handleClickMoveBlockDown,
+    disableDelete,
+    disableMoveBlockUp,
+    disableMoveBlockDown,
+  } = useMenu(id);
 
   if (!solution) {
     return null;
@@ -167,3 +141,69 @@ const TitleRow = styled("div")({
   gridColumn: "span 5",
   gridTemplateColumns: "subgrid",
 });
+
+const useInputHandlers = (id: string) => {
+  const dispatch = useAppDispatch();
+
+  const handleClickAddComponentRow = () => {
+    dispatch(addComponentRowThunk(id));
+  };
+  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      SolutionBlockModelActions.updateSolutionBlock({
+        id,
+        changes: {
+          title: event.target.value,
+        },
+      }),
+    );
+  };
+
+  return {
+    handleClickAddComponentRow,
+    handleChangeTitle,
+  };
+};
+
+const useMenu = (id: string) => {
+  const dispatch = useAppDispatch();
+  const solutionIds = useAppSelector(DocumentSelectors.selectSolutions);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const solutionIndex = solutionIds.indexOf(id);
+  const disableDelete = solutionIds.length <= 1;
+  const disableMoveBlockUp = solutionIndex <= 0;
+  const disableMoveBlockDown = solutionIndex < 0 || solutionIndex >= solutionIds.length - 1;
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClickDeleteBlock = () => {
+    dispatch(deleteSolutionThunk(id));
+    handleClose();
+  };
+  const handleClickMoveBlockUp = () => {
+    dispatch(moveSolutionThunk(id, "up"));
+    handleClose();
+  };
+  const handleClickMoveBlockDown = () => {
+    dispatch(moveSolutionThunk(id, "down"));
+    handleClose();
+  };
+
+  return {
+    anchorEl,
+    open,
+    handleClose,
+    handleClick,
+    handleClickDeleteBlock,
+    handleClickMoveBlockUp,
+    handleClickMoveBlockDown,
+    disableDelete,
+    disableMoveBlockUp,
+    disableMoveBlockDown,
+  };
+};
