@@ -9,7 +9,7 @@ export const deleteComponentRowThunk = (solutionBlockId: string, componentRowId:
   return (dispatch: AppDispatch, getState: () => AppState) => {
     const solutionBlock = SolutionBlockSelectors.selectById(getState(), solutionBlockId);
 
-    if (!solutionBlock) {
+    if (!solutionBlock || solutionBlock.components.length <= 1) {
       return;
     }
 

@@ -6,6 +6,7 @@ import {
   ComponentRowModelActions,
   ComponentRowSelectors,
 } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
+import { SolutionBlockSelectors } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 import { deleteComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/deleteComponentRowThunk";
 import { moveComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/moveComponentRowThunk";
 import { Autocomplete, IconButton, Menu, MenuItem, TextField } from "@mui/material";
@@ -35,6 +36,9 @@ const units = [
 export const InputRow: FC<Props> = ({ id, solutionBlockId }) => {
   const dispatch = useAppDispatch();
   const componentRow = useAppSelector((state) => ComponentRowSelectors.selectById(state, id));
+  const solutionBlock = useAppSelector((state) =>
+    SolutionBlockSelectors.selectById(state, solutionBlockId),
+  );
   const { data, isSuccess } = useQuery({
     queryKey: ["allComponents"],
     queryFn: fetchAllComponents,
@@ -43,6 +47,12 @@ export const InputRow: FC<Props> = ({ id, solutionBlockId }) => {
   const components = (data ?? []).map((c) => ({ label: c.name }));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const componentRowIds = solutionBlock?.components ?? [];
+  const componentRowIndex = componentRowIds.indexOf(id);
+  const disableDelete = componentRowIds.length <= 1;
+  const disableMoveRowUp = componentRowIndex <= 0;
+  const disableMoveRowDown =
+    componentRowIndex < 0 || componentRowIndex >= componentRowIds.length - 1;
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -50,7 +60,7 @@ export const InputRow: FC<Props> = ({ id, solutionBlockId }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  if (!componentRow) {
+  if (!componentRow || !solutionBlock) {
     return null;
   }
 
@@ -140,9 +150,15 @@ export const InputRow: FC<Props> = ({ id, solutionBlockId }) => {
             },
           }}
         >
-          <MenuItem onClick={handleClickDeleteRow}>Delete row</MenuItem>
-          <MenuItem onClick={handleClickMoveRowUp}>Move row up</MenuItem>
-          <MenuItem onClick={handleClickMoveRowDown}>Move row down</MenuItem>
+          <MenuItem onClick={handleClickDeleteRow} disabled={disableDelete}>
+            Delete row
+          </MenuItem>
+          <MenuItem onClick={handleClickMoveRowUp} disabled={disableMoveRowUp}>
+            Move row up
+          </MenuItem>
+          <MenuItem onClick={handleClickMoveRowDown} disabled={disableMoveRowDown}>
+            Move row down
+          </MenuItem>
         </Menu>
       </div>
       <div>
