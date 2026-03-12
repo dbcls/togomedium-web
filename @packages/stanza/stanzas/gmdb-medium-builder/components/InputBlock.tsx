@@ -3,6 +3,7 @@ import { InputRow } from "%stanza/stanzas/gmdb-medium-builder/components/InputRo
 import { Block, TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { selectSolutionComponentRows } from "%stanza/stanzas/gmdb-medium-builder/state/selectors/selectSolutionComponentRows";
+import { DocumentSelectors } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
 import {
   SolutionBlockModelActions,
   SolutionBlockSelectors,
@@ -21,8 +22,13 @@ export const InputBlock: FC<Props> = ({ id }) => {
   const dispatch = useAppDispatch();
   const solution = useAppSelector((state) => SolutionBlockSelectors.selectById(state, id));
   const componentRows = useAppSelector((state) => selectSolutionComponentRows(state, id));
+  const solutionIds = useAppSelector(DocumentSelectors.selectSolutions);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const solutionIndex = solutionIds.indexOf(id);
+  const disableDelete = solutionIds.length <= 1;
+  const disableMoveBlockUp = solutionIndex <= 0;
+  const disableMoveBlockDown = solutionIndex < 0 || solutionIndex >= solutionIds.length - 1;
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -85,9 +91,15 @@ export const InputBlock: FC<Props> = ({ id }) => {
               },
             }}
           >
-            <MenuItem onClick={handleClickDeleteBlock}>Delete Block</MenuItem>
-            <MenuItem onClick={handleClickMoveBlockUp}>Move Block up</MenuItem>
-            <MenuItem onClick={handleClickMoveBlockDown}>Move Block down</MenuItem>
+            <MenuItem onClick={handleClickDeleteBlock} disabled={disableDelete}>
+              Delete Block
+            </MenuItem>
+            <MenuItem onClick={handleClickMoveBlockUp} disabled={disableMoveBlockUp}>
+              Move Block up
+            </MenuItem>
+            <MenuItem onClick={handleClickMoveBlockDown} disabled={disableMoveBlockDown}>
+              Move Block down
+            </MenuItem>
           </Menu>
         </div>
         <div style={{ gridColumn: "span 4" }}>
