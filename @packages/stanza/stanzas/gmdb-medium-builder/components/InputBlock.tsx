@@ -8,6 +8,8 @@ import {
   SolutionBlockSelectors,
 } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 import { addComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/addComponentRowThunk";
+import { deleteSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/deleteSolutionThunk";
+import { moveSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/moveSolutionThunk";
 import { IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -40,6 +42,18 @@ export const InputBlock: FC<Props> = ({ id }) => {
       }),
     );
   };
+  const handleClickDeleteBlock = () => {
+    dispatch(deleteSolutionThunk(id));
+    handleClose();
+  };
+  const handleClickMoveBlockUp = () => {
+    dispatch(moveSolutionThunk(id, "up"));
+    handleClose();
+  };
+  const handleClickMoveBlockDown = () => {
+    dispatch(moveSolutionThunk(id, "down"));
+    handleClose();
+  };
 
   if (!solution) {
     return null;
@@ -71,9 +85,9 @@ export const InputBlock: FC<Props> = ({ id }) => {
               },
             }}
           >
-            <MenuItem onClick={handleClose}>Delete Block</MenuItem>
-            <MenuItem onClick={handleClose}>Move Block up</MenuItem>
-            <MenuItem onClick={handleClose}>Move Block down</MenuItem>
+            <MenuItem onClick={handleClickDeleteBlock}>Delete Block</MenuItem>
+            <MenuItem onClick={handleClickMoveBlockUp}>Move Block up</MenuItem>
+            <MenuItem onClick={handleClickMoveBlockDown}>Move Block down</MenuItem>
           </Menu>
         </div>
         <div style={{ gridColumn: "span 4" }}>

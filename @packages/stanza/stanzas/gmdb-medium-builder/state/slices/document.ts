@@ -16,7 +16,12 @@ const slice = createSlice({
     addSolution: (state, action: PayloadAction<string>) => {
       state.solutions.push(action.payload);
     },
-    removeSolution: () => {},
+    removeSolution: (state, action: PayloadAction<string>) => {
+      state.solutions = state.solutions.filter((id) => id !== action.payload);
+    },
+    setSolutions: (state, action: PayloadAction<string[]>) => {
+      state.solutions = action.payload;
+    },
   },
 });
 

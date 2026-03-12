@@ -21,6 +21,7 @@ const slice = createSlice({
   reducers: {
     addComponentRow: (state, action) => adapter.addOne(state, action),
     removeComponentRow: (state, action) => adapter.removeOne(state, action),
+    removeComponentRows: (state, action) => adapter.removeMany(state, action),
     updateComponentRow: (state, action) => adapter.updateOne(state, action),
     setComponentRows: (state, action) => adapter.setAll(state, action),
   },
