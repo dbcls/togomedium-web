@@ -1,14 +1,17 @@
 import { VerticalEllipsisIcon } from "%stanza/components/icons/VerticalEllipsisIcon";
 import { InputRow } from "%stanza/stanzas/gmdb-medium-builder/components/InputRow";
 import { Block, TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
+import { useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import { SolutionBlockSelectors } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 import { IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
 
-type Props = {};
+type Props = { id: string };
 
-export const InputBlock: FC<Props> = () => {
+export const InputBlock: FC<Props> = ({ id }) => {
+  const solution = useAppSelector((state) => SolutionBlockSelectors.selectById(state, id));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClose = () => {

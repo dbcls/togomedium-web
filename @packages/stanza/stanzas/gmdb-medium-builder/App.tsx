@@ -1,7 +1,8 @@
 import { THEME } from "%core/theme";
 import { InputBlock } from "%stanza/stanzas/gmdb-medium-builder/components/InputBlock";
 import { Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
-import { useAppDispatch } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import { selectDocumentSolutions } from "%stanza/stanzas/gmdb-medium-builder/state/selectors/selectDocumentSolutions";
 import { addSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/addSolutionThunk";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -16,11 +17,15 @@ const App = (_props: AppProps) => {
   const onClickAdd = () => {
     dispatch(addSolutionThunk());
   };
+
+  const solutions = useAppSelector(selectDocumentSolutions);
+
   return (
     <Wrapper>
       <Sheet>
-        <InputBlock />
-        <InputBlock />
+        {solutions.map((solution) => (
+          <InputBlock key={solution.id} id={solution.id} />
+        ))}
         <FooterRow>
           <FooterLeft>
             <Button

@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type DocumentModel = {
   solutions: string[];
@@ -21,3 +22,8 @@ const slice = createSlice({
 
 export const documentReducer = slice.reducer;
 export const DocumentActions = slice.actions;
+
+const documentState = (state: AppState) => state.document;
+export const DocumentSelectors = {
+  selectSolutions: createSelector(documentState, (document) => document.solutions),
+};

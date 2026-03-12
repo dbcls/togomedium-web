@@ -1,3 +1,4 @@
+import { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
@@ -26,12 +27,17 @@ const slice = createSlice({
 export const SolutionBlockModelActions = slice.actions;
 export const solutionBlockModelReducer = slice.reducer;
 
-export const createBlankSolutionBlock = (): SolutionBlockModel => {
-  const id = nanoid();
+const selectors = adapter.getSelectors<AppState>((state) => state.entities.solutionBlocks);
+export const SolutionBlockSelectors = selectors;
+
+export const createBlankSolutionBlock = (
+  params: Partial<SolutionBlockModel> = {},
+): SolutionBlockModel => {
+  const id = params.id ?? nanoid();
   return {
     id,
-    title: "",
-    description: "",
-    components: [],
+    title: params.title ?? "",
+    description: params.description ?? "",
+    components: params.components ?? [],
   };
 };

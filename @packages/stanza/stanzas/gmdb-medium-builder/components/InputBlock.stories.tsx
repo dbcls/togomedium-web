@@ -5,7 +5,9 @@ import { InputBlock } from "./InputBlock";
 
 const meta = {
   component: InputBlock,
-  args: {},
+  args: {
+    id: "123",
+  },
   decorators: [
     (Story) => (
       <StoryProvider reactQuery mui>
