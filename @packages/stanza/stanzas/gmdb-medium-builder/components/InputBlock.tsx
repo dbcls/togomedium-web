@@ -3,7 +3,10 @@ import { InputRow } from "%stanza/stanzas/gmdb-medium-builder/components/InputRo
 import { Block, TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { selectSolutionComponentRows } from "%stanza/stanzas/gmdb-medium-builder/state/selectors/selectSolutionComponentRows";
-import { SolutionBlockSelectors } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
+import {
+  SolutionBlockModelActions,
+  SolutionBlockSelectors,
+} from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 import { addComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/addComponentRowThunk";
 import { IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -26,6 +29,16 @@ export const InputBlock: FC<Props> = ({ id }) => {
   };
   const handleClickAddComponentRow = () => {
     dispatch(addComponentRowThunk(id));
+  };
+  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      SolutionBlockModelActions.updateSolutionBlock({
+        id,
+        changes: {
+          title: event.target.value,
+        },
+      }),
+    );
   };
 
   if (!solution) {
@@ -64,7 +77,13 @@ export const InputBlock: FC<Props> = ({ id }) => {
           </Menu>
         </div>
         <div style={{ gridColumn: "span 4" }}>
-          <TextField sx={{ width: "100%" }} placeholder={"Solution name"} size={"small"} />
+          <TextField
+            sx={{ width: "100%" }}
+            placeholder={"Solution name"}
+            size={"small"}
+            value={solution.title}
+            onChange={handleChangeTitle}
+          />
         </div>
       </TitleRow>
       <ComponentTable>

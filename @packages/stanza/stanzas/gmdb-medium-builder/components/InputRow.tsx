@@ -1,8 +1,11 @@
 import { fetchAllComponents } from "%core/fetch/fetchAllComponents";
 import { VerticalEllipsisIcon } from "%stanza/components/icons/VerticalEllipsisIcon";
 import { TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
-import { useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
-import { ComponentRowSelectors } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
+import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import {
+  ComponentRowModelActions,
+  ComponentRowSelectors,
+} from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import { Autocomplete, IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
@@ -25,6 +28,7 @@ const units = [
 ];
 
 export const InputRow: FC<Props> = ({ id }) => {
+  const dispatch = useAppDispatch();
   const componentRow = useAppSelector((state) => ComponentRowSelectors.selectById(state, id));
   const { data, isSuccess } = useQuery({
     queryKey: ["allComponents"],
@@ -40,6 +44,59 @@ export const InputRow: FC<Props> = ({ id }) => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  if (!componentRow) {
+    return null;
+  }
+
+  const handleChangeComponent = (_event: React.SyntheticEvent, value: { label: string } | null) => {
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          component: value?.label ?? "",
+        },
+      }),
+    );
+  };
+
+  const handleChangeVolume = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextVolume = event.target.value === "" ? 0 : Number(event.target.value);
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          volume: Number.isNaN(nextVolume) ? 0 : nextVolume,
+        },
+      }),
+    );
+  };
+
+  const handleChangeUnit = (
+    _event: React.SyntheticEvent,
+    value: { label: string; value: string } | null,
+  ) => {
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          unit: value?.value ?? "",
+        },
+      }),
+    );
+  };
+
+  const handleChangeNote = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          note: event.target.value,
+        },
+      }),
+    );
+  };
+
   return (
     <TableRow>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -77,12 +134,18 @@ export const InputRow: FC<Props> = ({ id }) => {
           disabled={!isSuccess}
           options={components}
           sx={{ width: 300 }}
-          value={componentRow ? { label: componentRow.component } : null}
+          value={components.find((component) => component.label === componentRow.component) ?? null}
+          onChange={handleChangeComponent}
           renderInput={(params) => <TextField {...params} />}
         />
       </div>
       <div>
-        <TextField sx={{ width: 80 }} size={"small"} value={componentRow?.volume ?? ""} />
+        <TextField
+          sx={{ width: 80 }}
+          size={"small"}
+          value={componentRow.volume}
+          onChange={handleChangeVolume}
+        />
       </div>
       <div>
         <Autocomplete
@@ -90,12 +153,18 @@ export const InputRow: FC<Props> = ({ id }) => {
           disablePortal
           options={units}
           sx={{ width: 80 }}
-          value={units.find((unit) => unit.value === componentRow?.unit) ?? null}
+          value={units.find((unit) => unit.value === componentRow.unit) ?? null}
+          onChange={handleChangeUnit}
           renderInput={(params) => <TextField {...params} />}
         />
       </div>
       <div>
-        <TextField sx={{ width: "100%" }} size={"small"} value={componentRow?.note ?? ""} />
+        <TextField
+          sx={{ width: "100%" }}
+          size={"small"}
+          value={componentRow.note}
+          onChange={handleChangeNote}
+        />
       </div>
     </TableRow>
   );
