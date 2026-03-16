@@ -1,4 +1,4 @@
-import { d as defineComponent, h as ref, i as octicons, b as createElementBlock, F as Fragment, a as createBaseVNode, j as createTextVNode, m as mergeProps, o as openBlock, k as computed, l as watch, c as createBlock, n as normalizeProps, p as guardReactiveProps, q as resolveDynamicComponent, u as createVNode, t as toDisplayString, r as resolveComponent, e as renderList, v as n, f as createCommentVNode, x as normalizeClass, y as unref, z as normalizeStyle, s as script$8, A as onMounted, w as withCtx, g as createApp } from './Layout-d410c464.js';
+import { d as defineComponent, h as ref, i as octicons, b as createElementBlock, F as Fragment, a as createBaseVNode, j as createTextVNode, m as mergeProps, o as openBlock, k as computed, l as watch, c as createBlock, n as normalizeProps, p as guardReactiveProps, q as resolveDynamicComponent, u as createVNode, t as toDisplayString, r as resolveComponent, e as renderList, v as n, f as createCommentVNode, x as normalizeClass, y as unref, z as normalizeStyle, s as script$8, A as onMounted, w as withCtx, g as createApp } from './Layout-3a24bb67.js';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -1716,7 +1716,7 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
           createBaseVNode("span", {
             innerHTML: _ctx.checkIcon.toSVG({height: 19})
           }, null, 8 /* PROPS */, _hoisted_1$7),
-          _cache[1] || (_cache[1] = createTextVNode(" Copied "))
+          _cache[1] || (_cache[1] = createTextVNode(" Copied ", -1 /* CACHED */))
         ], 64 /* STABLE_FRAGMENT */))
       : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
           createTextVNode(" Copy to clipboard ")
@@ -3464,13 +3464,13 @@ return (_ctx, _cache) => {
     createBaseVNode("table", _hoisted_1$5, [
       createBaseVNode("tbody", null, [
         createBaseVNode("tr", null, [
-          _cache[0] || (_cache[0] = createBaseVNode("th", null, "Author", -1 /* HOISTED */)),
+          _cache[0] || (_cache[0] = createBaseVNode("th", null, "Author", -1 /* CACHED */)),
           createBaseVNode("td", null, [
             createBaseVNode("address", _hoisted_2$5, toDisplayString(__props.metadata['stanza:author'] || '-'), 1 /* TEXT */)
           ])
         ]),
         createBaseVNode("tr", null, [
-          _cache[1] || (_cache[1] = createBaseVNode("th", null, "Contributors", -1 /* HOISTED */)),
+          _cache[1] || (_cache[1] = createBaseVNode("th", null, "Contributors", -1 /* CACHED */)),
           createBaseVNode("td", null, [
             (
               __props.metadata['stanza:contributor'] &&
@@ -3487,15 +3487,15 @@ return (_ctx, _cache) => {
           ])
         ]),
         createBaseVNode("tr", null, [
-          _cache[2] || (_cache[2] = createBaseVNode("th", null, "License", -1 /* HOISTED */)),
+          _cache[2] || (_cache[2] = createBaseVNode("th", null, "License", -1 /* CACHED */)),
           createBaseVNode("td", null, toDisplayString(__props.metadata['stanza:license'] || '-'), 1 /* TEXT */)
         ]),
         createBaseVNode("tr", null, [
-          _cache[3] || (_cache[3] = createBaseVNode("th", null, "Created", -1 /* HOISTED */)),
+          _cache[3] || (_cache[3] = createBaseVNode("th", null, "Created", -1 /* CACHED */)),
           createBaseVNode("td", null, toDisplayString(__props.metadata['stanza:created'] || '-'), 1 /* TEXT */)
         ]),
         createBaseVNode("tr", null, [
-          _cache[4] || (_cache[4] = createBaseVNode("th", null, "Updated", -1 /* HOISTED */)),
+          _cache[4] || (_cache[4] = createBaseVNode("th", null, "Updated", -1 /* CACHED */)),
           createBaseVNode("td", null, toDisplayString(__props.metadata['stanza:updated'] || '-'), 1 /* TEXT */)
         ])
       ])
@@ -3886,7 +3886,7 @@ const incomingEvents = (__props.metadata['stanza:incomingEvent'] || []).map((eve
 
 return (_ctx, _cache) => {
   return (openBlock(), createElementBlock(Fragment, null, [
-    _cache[0] || (_cache[0] = createBaseVNode("h2", { class: "my-3" }, "Outgoing Events", -1 /* HOISTED */)),
+    _cache[0] || (_cache[0] = createBaseVNode("h2", { class: "my-3" }, "Outgoing Events", -1 /* CACHED */)),
     createBaseVNode("div", _hoisted_1$1, [
       (openBlock(true), createElementBlock(Fragment, null, renderList(unref(outgoingEvents), ({ name, description }) => {
         return (openBlock(), createElementBlock("div", {
@@ -3901,7 +3901,7 @@ return (_ctx, _cache) => {
     (unref(outgoingEvents).length === 0)
       ? (openBlock(), createElementBlock("p", _hoisted_3$1, " No events defined. "))
       : createCommentVNode("v-if", true),
-    _cache[1] || (_cache[1] = createBaseVNode("h2", { class: "my-3" }, "Incoming Events", -1 /* HOISTED */)),
+    _cache[1] || (_cache[1] = createBaseVNode("h2", { class: "my-3" }, "Incoming Events", -1 /* CACHED */)),
     createBaseVNode("div", _hoisted_4$1, [
       (openBlock(true), createElementBlock(Fragment, null, renderList(unref(incomingEvents), ({ name, description }) => {
         return (openBlock(), createElementBlock("div", {
@@ -4242,7 +4242,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               "data-bs-toggle": "tab",
               role: "tab"
             }, "About")
-          ], -1 /* HOISTED */)),
+          ], -1 /* CACHED */)),
           createBaseVNode("div", _hoisted_5, [
             createBaseVNode("div", _hoisted_6, [
               createVNode(_component_HelpAboutPane, {
@@ -4262,7 +4262,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           ])
         ]),
         createBaseVNode("div", _hoisted_10, [
-          _cache[1] || (_cache[1] = createBaseVNode("hr", { class: "d-lg-none mb-4" }, null, -1 /* HOISTED */)),
+          _cache[1] || (_cache[1] = createBaseVNode("hr", { class: "d-lg-none mb-4" }, null, -1 /* CACHED */)),
           createVNode(_component_StanzaPreviewer, {
             metadata: _ctx.metadata,
             params: _ctx.params,

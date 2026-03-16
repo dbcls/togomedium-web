@@ -1,19 +1,20 @@
-import { d as defineStanzaElement } from './stanza-3bc73db1.js';
-import { j as jsx, l as atom, m as useAtomValue, o as useSetAtom, a as jsxs, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
-import { u as useMediaPaginationState, a as useFoundMediaMutators, b as useQueryDataMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, n as nullListResponse, Q as QueryPane, M as MediaPane, S as SubPane, A as AppWrapper } from './ListApi-c6b8ecbd.js';
-import { r as reactExports, j as jsx$1 } from './index-7a88ba65.js';
-import { u as useQuery } from './useQuery-8b12d83b.js';
-import { m as makeApiUrl, g as getData } from './getData-deef20ca.js';
+import { d as defineStanzaElement } from './stanza-0294ba58.js';
+import { m as reactExports, j as jsx, q as jsx$1, v as atom, w as useAtomValue, x as useSetAtom, a as jsxs, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
+import { c as createListApiResponseSchema, a as createListApiParamsSchema, u as useMediaPaginationState, b as useFoundMediaMutators, d as useQueryDataMutators, e as useIsMediaLoadingMutators, f as useMediaPaginationMutators, n as nullListResponse, Q as QueryPane, M as MediaPane, S as SubPane, A as AppWrapper } from './ListApi-c3bc90be.js';
+import { c as componentsWithComponentsURL } from './definitions-989b5e5a.js';
+import { g as getData } from './getData-4200eb91.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
-import { T as TextField, C as Chip, A as Autocomplete } from './TextField-e1cb7aca.js';
-import './DefaultPropsProvider-37472ed0.js';
-import './isHostComponent-7889d775.js';
-import './Tooltip-16467db2.js';
-import './createSvgIcon-86819ff3.js';
-import './consts-deffa432.js';
-import './getLinkTarget-54075a13.js';
-
-const componentsWithComponentsURL = makeApiUrl("gmdb_components_with_components");
+import { u as useQuery } from './useQuery-e63f1f9b.js';
+import { T as TextField, C as Chip, A as Autocomplete } from './TextField-9a5ae552.js';
+import { m as makeApiUrl, o as object, s as string } from './schemas-d468dcf7.js';
+import './Select-05682d11.js';
+import './useSlotProps-e0be0a1d.js';
+import './CircularProgress-790be7e7.js';
+import './Grow-d098dd8a.js';
+import './createSvgIcon-cd17d0e7.js';
+import './getLinkTarget-9ee27b52.js';
+import './Tooltip-f3002260.js';
+import './isArray-56c7d056.js';
 
 const parseLabelInfo = (res, selectedIds) => {
     return res
@@ -48,7 +49,7 @@ const ComponentSelect = ({ onChangeSelection }) => {
             const ids = v.map((v) => v.id);
             setSelectedIds(ids);
             onChangeSelection(ids);
-        }, disablePortal: true, options: data || [], loading: isPending, getOptionLabel: (option) => option.label, renderInput: (params) => (jsx(TextField, { ...params, label: "Components" })), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, { variant: "outlined", ...getTagProps({ index }), label: option.label, key: option.id }))) }));
+        }, disablePortal: true, options: data || [], loading: isPending, getOptionLabel: (option) => option.label, renderInput: (params) => jsx(TextField, { ...params, label: "Components" }), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, { variant: "outlined", ...getTagProps({ index }), label: option.label, key: option.id }))) }));
 };
 
 const selectedAttributes = atom({ gmo_ids: [] });
@@ -69,6 +70,15 @@ const AttributesSection = () => {
 };
 
 const listMediaByAttributesURL = makeApiUrl("gmdb_media_by_attributes");
+createListApiResponseSchema(object({
+    gm_id: string(),
+    name: string(),
+    // NOTE: TypeSpec also documents `original_media_id` and `exact_match`,
+    // but current TS usage only includes `gm_id` and `name`.
+}));
+createListApiParamsSchema({
+    gmo_ids: string(),
+});
 
 const SHOW_COUNT = 10;
 const useMediaLoadFromComponents = () => {
@@ -178,7 +188,7 @@ var templates = [
 
   return "<p class=\"greeting\">"
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"greeting") || (depth0 != null ? lookupProperty(depth0,"greeting") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"greeting","hash":{},"data":data,"loc":{"start":{"line":1,"column":20},"end":{"line":1,"column":32}}}) : helper)))
-    + "!!!</p>\n";
+    + "!!!</p>";
 },"useData":true}]
 ];
 

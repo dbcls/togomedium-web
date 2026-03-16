@@ -1,14 +1,15 @@
-import { d as defineStanzaElement } from './stanza-3bc73db1.js';
-import { T as THEME, s as styled, j as jsx, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
-import { r as reactExports } from './index-7a88ba65.js';
-import { S as StanzaWrapper } from './StanzaWrapper-34fcc0ed.js';
+import { d as defineStanzaElement } from './stanza-0294ba58.js';
+import { T as THEME, s as styled, m as reactExports, j as jsx, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
+import { S as StanzaWrapper } from './StanzaWrapper-69f29275.js';
 import { s as select, c as creator, d as dispatch, t as timer } from './transform-fa8fb55c.js';
-import { g as getMedia } from './getMedia-b567754c.js';
+import { g as getMedia } from './getMedia-0af2354d.js';
 import { c as clone } from './clone-4533aa20.js';
-import { g as getData } from './getData-3799b4b6.js';
+import { g as getData } from './getData-e9cb8ad8.js';
 import { U as URL_API } from './variables-f5cb7401.js';
-import './index-b1a62205.js';
-import './getData-deef20ca.js';
+import './schemas-d468dcf7.js';
+import './getData-4200eb91.js';
+import './isArray-56c7d056.js';
+import './index-58d55e2c.js';
 
 function create(name) {
   return select(creator(name).call(document.documentElement));
@@ -1535,7 +1536,7 @@ const useGraphData = (initialId, maxLevel = Infinity, ignoreExactMatch = true) =
         return result;
     };
     const processNext = () => {
-        (async () => {
+        void (async () => {
             if (iterationCount >= maxIterationCount)
                 return;
             const clonedQueue = [...getQueue()];
@@ -1559,7 +1560,7 @@ const useGraphData = (initialId, maxLevel = Infinity, ignoreExactMatch = true) =
     };
     //
     reactExports.useEffect(() => {
-        (async () => {
+        void (async () => {
             const initialData = await getInitialData(initialId);
             setGraphData(initialData);
             setIsInit(true);
@@ -1568,7 +1569,7 @@ const useGraphData = (initialId, maxLevel = Infinity, ignoreExactMatch = true) =
     reactExports.useEffect(() => {
         if (!isInit)
             return;
-        (async () => {
+        void (async () => {
             if (iterationCount >= maxIterationCount)
                 return;
             await sleep(iterationCount === 0 ? 16 : INTERVAL);
@@ -1662,7 +1663,7 @@ const App = ({ gmId }) => {
 class ReactStanza extends TogoMediumReactStanza {
     makeApp() {
         const gmId = this.params.gm_id;
-        return (jsx(App, { stanzaElement: this.root, gmId: gmId }));
+        return jsx(App, { stanzaElement: this.root, gmId: gmId });
     }
 }
 
@@ -1712,7 +1713,7 @@ var templates = [
 
   return "<p class=\"greeting\">"
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"greeting") || (depth0 != null ? lookupProperty(depth0,"greeting") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"greeting","hash":{},"data":data,"loc":{"start":{"line":1,"column":20},"end":{"line":1,"column":32}}}) : helper)))
-    + "!!!</p>\n";
+    + "!!!</p>";
 },"useData":true}]
 ];
 

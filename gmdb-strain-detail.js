@@ -1,22 +1,54 @@
-import { d as defineStanzaElement } from './stanza-3bc73db1.js';
-import { j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
-import { u as useQuery } from './useQuery-8b12d83b.js';
-import { g as getLinkTarget } from './getLinkTarget-54075a13.js';
-import { a as ColWrapper, C as ColorButton } from './ColWrapper-29086544.js';
-import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-37d9b2c1.js';
-import { L as LineageList } from './LineageList-7cdd5db3.js';
-import { S as StanzaWrapper } from './StanzaWrapper-34fcc0ed.js';
-import { T as TagList } from './TagList-a4b15355.js';
-import { m as makeApiUrl, g as getData } from './getData-deef20ca.js';
-import './index-7a88ba65.js';
-import './definitions-2845d052.js';
-import './consts-deffa432.js';
+import { d as defineStanzaElement } from './stanza-0294ba58.js';
+import { j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
+import { g as getLinkTarget } from './getLinkTarget-9ee27b52.js';
+import { a as ColWrapper, C as ColorButton } from './ColWrapper-e44f4ea8.js';
+import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-8665dfe5.js';
+import { L as LineageList } from './LineageList-144064a3.js';
+import { S as StanzaWrapper } from './StanzaWrapper-69f29275.js';
+import { T as TagList } from './TagList-11b68696.js';
+import { o as object, s as string, a as array, n as number, m as makeApiUrl } from './schemas-d468dcf7.js';
+import { g as getData } from './getData-4200eb91.js';
+import { u as useQuery } from './useQuery-e63f1f9b.js';
+import './definitions-061f383b.js';
 import './string-679c835b.js';
+import './isArray-56c7d056.js';
 
 const StanzaView = ({ strainId, strainName, infoSources, taxonomy }) => {
     return (jsx(StanzaWrapper, { children: jsx(ColWrapper, { children: jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "Strain Id: " }), jsx("span", { children: strainId })] }), jsx(InfoTitle, { children: strainName }), jsx(SubHeading, { children: infoSources.length === 1 ? "Source strain" : "Source strains" }), jsx(TagList, { children: infoSources.map((source, index) => (jsx(ColorButton, { href: source.url, target: getLinkTarget(source.url), children: source.label }, index))) }), taxonomy && (jsxs("div", { children: [jsx(SubHeading, { children: "Taxonomic Lineage" }), jsx(LineageList, { lineage: taxonomy.lineage })] }))] }) }) }));
 };
 
+const strainDetailOtherStrainSchema = object({
+    other_strain_id: string(),
+    other_strain_link: string(),
+});
+const strainDetailStrainSchema = object({
+    strain_id: string(),
+    strain_name: string(),
+    other_strain_id_list: array(strainDetailOtherStrainSchema),
+});
+const strainDetailLineageItemSchema = object({
+    uri: string(),
+    taxid: number(),
+    label: string(),
+    rank: string(),
+});
+const strainDetailTaxonomySchema = object({
+    scientific_name: string(),
+    taxid: number(),
+    rank: string(),
+    authority_name: string(),
+    lineage: array(strainDetailLineageItemSchema),
+});
+object({
+    strain: strainDetailStrainSchema,
+    taxonomy: strainDetailTaxonomySchema,
+});
+object({
+    strain_id: string(),
+});
+/**
+ * @deprecated
+ */
 const strainDetailURL = makeApiUrl("gmdb_strain_by_strainid");
 
 const parseData = (body) => {
@@ -81,7 +113,7 @@ const App = ({ strain_id }) => {
 class ReactStanza extends TogoMediumReactStanza {
     makeApp() {
         const strain_id = this.params.strain_id;
-        return (jsx(App, { stanzaElement: this.root, strain_id: strain_id }));
+        return jsx(App, { stanzaElement: this.root, strain_id: strain_id });
     }
 }
 
@@ -137,7 +169,7 @@ var templates = [
 
   return "<p class=\"greeting\">"
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"greeting") || (depth0 != null ? lookupProperty(depth0,"greeting") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"greeting","hash":{},"data":data,"loc":{"start":{"line":1,"column":20},"end":{"line":1,"column":32}}}) : helper)))
-    + "!!!</p>\n";
+    + "!!!</p>";
 },"useData":true}]
 ];
 

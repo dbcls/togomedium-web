@@ -1,18 +1,41 @@
-import { d as defineStanzaElement } from './stanza-3bc73db1.js';
-import { s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
-import { u as useQuery } from './useQuery-8b12d83b.js';
-import { m as makeApiUrl, g as getData } from './getData-deef20ca.js';
-import { P as PATH_COMPONENT } from './consts-deffa432.js';
-import { m as makeLinkPath, g as getLinkTarget } from './getLinkTarget-54075a13.js';
+import { d as defineStanzaElement } from './stanza-0294ba58.js';
+import { s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
+import { m as makeApiUrl, o as object, s as string, a as array } from './schemas-d468dcf7.js';
+import { g as getData } from './getData-4200eb91.js';
+import { m as makeLinkPath, P as PATH_COMPONENT, g as getLinkTarget } from './getLinkTarget-9ee27b52.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
-import { C as ColorButton, a as ColWrapper } from './ColWrapper-29086544.js';
-import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-37d9b2c1.js';
-import { S as StandardParagraph, W as WikipediaView, f as fetchWikipediaData } from './fetchWikipediaData-32ce1ccc.js';
-import { S as StanzaWrapper } from './StanzaWrapper-34fcc0ed.js';
-import { T as TagList } from './TagList-a4b15355.js';
-import './index-7a88ba65.js';
+import { C as ColorButton, a as ColWrapper } from './ColWrapper-e44f4ea8.js';
+import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-8665dfe5.js';
+import { S as StandardParagraph, W as WikipediaView, f as fetchWikipediaData } from './fetchWikipediaData-eb0593d7.js';
+import { S as StanzaWrapper } from './StanzaWrapper-69f29275.js';
+import { T as TagList } from './TagList-11b68696.js';
+import { u as useQuery } from './useQuery-e63f1f9b.js';
+import './isArray-56c7d056.js';
 
+/**
+ * @deprecated
+ */
 const componentDetailURL = makeApiUrl("gmdb_component_by_gmoid");
+const componentClassSchema = object({
+    gmo_id: string(),
+    uri: string(),
+    label_en: string(),
+});
+object({
+    pref_label: string(),
+    id: string(),
+    label_ja: string(),
+    alt_labels_en: array(string()),
+    alt_labels_ja: array(string()),
+    super_classes: array(componentClassSchema),
+    sub_classes: array(componentClassSchema),
+    properties: array(componentClassSchema),
+    roles: array(componentClassSchema),
+    links: array(string()),
+});
+object({
+    gmo_id: string(),
+});
 
 const LinkList = styled("ul")({
     li: {
@@ -98,13 +121,13 @@ const App = ({ gmo_id }) => {
     const wikipediaData = useWikipediaQuery(componentData);
     if (isLoading || !componentData)
         return jsx(Fragment, { children: "Loading..." });
-    return (jsx(StanzaView, { ...componentData, wikipediaData: wikipediaData }));
+    return jsx(StanzaView, { ...componentData, wikipediaData: wikipediaData });
 };
 
 class ReactStanza extends TogoMediumReactStanza {
     makeApp() {
         const gmo_id = this.params.gmo_id;
-        return (jsx(App, { stanzaElement: this.root, gmo_id: gmo_id }));
+        return jsx(App, { stanzaElement: this.root, gmo_id: gmo_id });
     }
 }
 
@@ -160,7 +183,7 @@ var templates = [
 
   return "<p class=\"greeting\">"
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"greeting") || (depth0 != null ? lookupProperty(depth0,"greeting") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"greeting","hash":{},"data":data,"loc":{"start":{"line":1,"column":20},"end":{"line":1,"column":32}}}) : helper)))
-    + "!!!</p>\n";
+    + "!!!</p>";
 },"useData":true}]
 ];
 

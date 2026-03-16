@@ -1,11 +1,13 @@
-import { d as defineStanzaElement } from './stanza-3bc73db1.js';
-import { s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
-import { u as useQuery } from './useQuery-8b12d83b.js';
-import { m as makeApiUrl, g as getData } from './getData-deef20ca.js';
+import { d as defineStanzaElement } from './stanza-0294ba58.js';
+import { s as styled, T as THEME, m as reactExports, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
+import { o as object$1, s as string, n as number$3, a as array, m as makeApiUrl } from './schemas-d468dcf7.js';
+import { g as getData } from './getData-4200eb91.js';
 import { a as constant, i as interpolateNumber, b as color, e as interpolateRgb, f as interpolateString, s as select } from './transform-fa8fb55c.js';
-import { r as reactExports } from './index-7a88ba65.js';
-import { j as Tooltip } from './Tooltip-16467db2.js';
-import './DefaultPropsProvider-37472ed0.js';
+import { T as Tooltip } from './Tooltip-f3002260.js';
+import { u as useQuery } from './useQuery-e63f1f9b.js';
+import './isArray-56c7d056.js';
+import './Grow-d098dd8a.js';
+import './useSlotProps-e0be0a1d.js';
 
 function ascending(a, b) {
   return a == null || b == null ? NaN : a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
@@ -1150,6 +1152,15 @@ function linear() {
   return linearish(scale);
 }
 
+const statsCountCulturableSpeciesItemSchema = object$1({
+    bin: string(),
+    frequency: number$3(),
+});
+array(statsCountCulturableSpeciesItemSchema);
+object$1({});
+/**
+ * @deprecated
+ */
 const statsCountCulturableSpeciesURL = makeApiUrl("gmdb_stat_media_tax_histgram");
 
 const AppContainer = ({ data }) => {

@@ -1,4 +1,4 @@
-import { S as Stanza, d as defineStanzaElement } from './stanza-3bc73db1.js';
+import { S as Stanza, d as defineStanzaElement } from './stanza-0294ba58.js';
 import { s as select } from './transform-fa8fb55c.js';
 import { U as URL_API } from './variables-f5cb7401.js';
 
@@ -1267,7 +1267,7 @@ var metadata = {
 
 var templates = [
   ["stanza.html.hbs", {"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<style>\n  #renderDiv {\n    text-align: center;\n    padding: 12px;\n    border-radius: 5px;\n    background-color: #fff;\n    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);\n  }\n\n  .node circle {\n    fill: #fff;\n    stroke: #cccccc;\n    stroke-width: 1.5px;\n  }\n\n  .node text {\n    font: 10px sans-serif;\n  }\n\n  .branchNode, .leafNode {\n    cursor: pointer;\n  }\n\n\n  .aeNode circle {\n    stroke: #89c4ff;\n  }\n\n  .anNode circle {\n    stroke: #ff8989;\n  }\n\n  .faNode circle {\n    stroke: #8989ff;\n  }\n\n  .oaNode circle {\n    stroke: #ffff89;\n  }\n\n  .maNode circle {\n    stroke: #ff89ff;\n  }\n\n  .onNode circle {\n    stroke: #89ff89;\n  }\n\n  circle.active {\n    fill: #FFFF00;\n  }\n\n  .edge {\n    fill: none;\n    stroke: #ccc;\n    stroke-width: 1.5px;\n  }\n\n  input.downloadButton {\n    color: #4ea0c9;\n    font-weight: bold;\n    border: solid 2px #4ea0c9;\n    background-color: transparent;\n    cursor: pointer;\n    margin-left: 10px;\n  }\n\n  div#gm_stanza {\n    /*overflow: scroll;*/\n    overflow: hidden;\n    margin-top: 20px;\n  }\n\n</style>\n\n<div id=\"renderDiv\"></div>\n";
+    return "<style>\n  #renderDiv {\n    text-align: center;\n    padding: 12px;\n    border-radius: 5px;\n    background-color: #fff;\n    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);\n  }\n\n  .node circle {\n    fill: #fff;\n    stroke: #cccccc;\n    stroke-width: 1.5px;\n  }\n\n  .node text {\n    font: 10px sans-serif;\n  }\n\n  .branchNode,\n  .leafNode {\n    cursor: pointer;\n  }\n\n  .aeNode circle {\n    stroke: #89c4ff;\n  }\n\n  .anNode circle {\n    stroke: #ff8989;\n  }\n\n  .faNode circle {\n    stroke: #8989ff;\n  }\n\n  .oaNode circle {\n    stroke: #ffff89;\n  }\n\n  .maNode circle {\n    stroke: #ff89ff;\n  }\n\n  .onNode circle {\n    stroke: #89ff89;\n  }\n\n  circle.active {\n    fill: #ffff00;\n  }\n\n  .edge {\n    fill: none;\n    stroke: #ccc;\n    stroke-width: 1.5px;\n  }\n\n  input.downloadButton {\n    color: #4ea0c9;\n    font-weight: bold;\n    border: solid 2px #4ea0c9;\n    background-color: transparent;\n    cursor: pointer;\n    margin-left: 10px;\n  }\n\n  div#gm_stanza {\n    /*overflow: scroll;*/\n    overflow: hidden;\n    margin-top: 20px;\n  }\n</style>\n\n<div id=\"renderDiv\"></div>";
 },"useData":true}]
 ];
 

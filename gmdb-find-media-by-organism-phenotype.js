@@ -1,18 +1,21 @@
-import { d as defineStanzaElement } from './stanza-3bc73db1.js';
-import { s as styled, A as capitalize, q as jsxRuntimeExports, C as rootShouldForwardProp, x as alpha, z as useEnhancedEffect, T as THEME, a as jsxs, j as jsx, l as atom, m as useAtomValue, o as useSetAtom, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
-import { q as internal_createExtendSxProp, j as useFormControl, k as formControlState, B as ButtonBase, L as ListContext, C as Checkbox, r as hasInfo, s as filterOutInfo, t as hasIdOfLabel, n as nullListResponse, v as Pagination, T as Tabs, w as Tab, x as Badge, F as FormControl, I as InputLabel, l as Select, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, y as extractLabelIds, Q as QueryPane, S as SubPane, M as MediaPane, A as AppWrapper } from './ListApi-c6b8ecbd.js';
-import { r as reactExports } from './index-7a88ba65.js';
-import { b as PATH_TAXON } from './consts-deffa432.js';
-import { m as makeLinkPath, g as getLinkTarget } from './getLinkTarget-54075a13.js';
-import { u as useQuery } from './useQuery-8b12d83b.js';
-import { m as makeApiUrl, g as getData } from './getData-deef20ca.js';
+import { d as defineStanzaElement } from './stanza-0294ba58.js';
+import { s as styled, y as capitalize, m as reactExports, A as jsxRuntimeExports, z as clsx, T as THEME, a as jsxs, j as jsx, v as atom, w as useAtomValue, x as useSetAtom, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
+import { C as Checkbox, h as hasInfo, g as filterOutInfo, i as hasIdOfLabel, c as createListApiResponseSchema, a as createListApiParamsSchema, n as nullListResponse, P as Pagination, T as Tabs, j as Tab, B as Badge, u as useMediaPaginationState, d as useQueryDataMutators, b as useFoundMediaMutators, e as useIsMediaLoadingMutators, f as useMediaPaginationMutators, k as extractLabelIds, Q as QueryPane, S as SubPane, M as MediaPane, A as AppWrapper } from './ListApi-c3bc90be.js';
+import { m as makeLinkPath, g as getLinkTarget, b as PATH_TAXON } from './getLinkTarget-9ee27b52.js';
+import { m as makeApiUrl, o as object, s as string } from './schemas-d468dcf7.js';
+import { g as getData } from './getData-4200eb91.js';
 import { c as clone } from './clone-4533aa20.js';
-import { c as createSimplePaletteValueFilter, C as CircularProgress } from './isHostComponent-7889d775.js';
-import { g as generateUtilityClass, a as generateUtilityClasses, m as memoTheme, u as useDefaultProps, c as clsx, b as composeClasses, d as useForkRef } from './DefaultPropsProvider-37472ed0.js';
-import { h as useSlot } from './Tooltip-16467db2.js';
-import { S as Slider } from './Slider-42efb8a4.js';
-import { l as listMediaOfTaxonsURL } from './definitions-aa0cf228.js';
-import './createSvgIcon-86819ff3.js';
+import { u as useQuery } from './useQuery-e63f1f9b.js';
+import { c as createSimplePaletteValueFilter, C as CircularProgress } from './CircularProgress-790be7e7.js';
+import { a as generateUtilityClass, g as generateUtilityClasses, m as memoTheme, u as useDefaultProps, c as composeClasses } from './useSlotProps-e0be0a1d.js';
+import { l as internal_createExtendSxProp, a as useFormControl, h as formControlState, F as FormControl, I as InputLabel, S as Select } from './Select-05682d11.js';
+import { u as useSlot } from './Grow-d098dd8a.js';
+import { S as Slider } from './Slider-65c6a1cf.js';
+import { M as MenuItem } from './MenuItem-b9047f09.js';
+import { l as listMediaOfTaxonsURL } from './definitions-d74daef9.js';
+import './Tooltip-f3002260.js';
+import './createSvgIcon-cd17d0e7.js';
+import './isArray-56c7d056.js';
 
 function getTypographyUtilityClass(slot) {
   return generateUtilityClass('MuiTypography', slot);
@@ -31,7 +34,7 @@ const v6Colors = {
   textDisabled: true
 };
 const extendSxProp = internal_createExtendSxProp();
-const useUtilityClasses$2 = ownerState => {
+const useUtilityClasses$1 = ownerState => {
   const {
     align,
     gutterBottom,
@@ -172,7 +175,7 @@ const Typography = /*#__PURE__*/reactExports.forwardRef(function Typography(inPr
     variantMapping
   };
   const Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
-  const classes = useUtilityClasses$2(ownerState);
+  const classes = useUtilityClasses$1(ownerState);
   return /*#__PURE__*/jsxRuntimeExports.jsx(TypographyRoot, {
     as: Component,
     ref: ref,
@@ -189,16 +192,13 @@ const Typography = /*#__PURE__*/reactExports.forwardRef(function Typography(inPr
 });
 var Typography$1 = Typography;
 
-const dividerClasses = generateUtilityClasses('MuiDivider', ['root', 'absolute', 'fullWidth', 'inset', 'middle', 'flexItem', 'light', 'vertical', 'withChildren', 'withChildrenVertical', 'textAlignRight', 'textAlignLeft', 'wrapper', 'wrapperVertical']);
-var dividerClasses$1 = dividerClasses;
-
 function getFormControlLabelUtilityClasses(slot) {
   return generateUtilityClass('MuiFormControlLabel', slot);
 }
 const formControlLabelClasses = generateUtilityClasses('MuiFormControlLabel', ['root', 'labelPlacementStart', 'labelPlacementTop', 'labelPlacementBottom', 'disabled', 'label', 'error', 'required', 'asterisk']);
 var formControlLabelClasses$1 = formControlLabelClasses;
 
-const useUtilityClasses$1 = ownerState => {
+const useUtilityClasses = ownerState => {
   const {
     classes,
     disabled,
@@ -277,8 +277,7 @@ const FormControlLabelRoot = styled('label', {
 })));
 const AsteriskComponent = styled('span', {
   name: 'MuiFormControlLabel',
-  slot: 'Asterisk',
-  overridesResolver: (props, styles) => styles.asterisk
+  slot: 'Asterisk'
 })(memoTheme(({
   theme
 }) => ({
@@ -338,7 +337,7 @@ const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormContr
     required,
     error: fcs.error
   };
-  const classes = useUtilityClasses$1(ownerState);
+  const classes = useUtilityClasses(ownerState);
   const externalForwardedProps = {
     slots,
     slotProps: {
@@ -376,205 +375,6 @@ const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormContr
   });
 });
 var FormControlLabel$1 = FormControlLabel;
-
-const listItemIconClasses = generateUtilityClasses('MuiListItemIcon', ['root', 'alignItemsFlexStart']);
-var listItemIconClasses$1 = listItemIconClasses;
-
-const listItemTextClasses = generateUtilityClasses('MuiListItemText', ['root', 'multiline', 'dense', 'inset', 'primary', 'secondary']);
-var listItemTextClasses$1 = listItemTextClasses;
-
-function getMenuItemUtilityClass(slot) {
-  return generateUtilityClass('MuiMenuItem', slot);
-}
-const menuItemClasses = generateUtilityClasses('MuiMenuItem', ['root', 'focusVisible', 'dense', 'disabled', 'divider', 'gutters', 'selected']);
-var menuItemClasses$1 = menuItemClasses;
-
-const overridesResolver = (props, styles) => {
-  const {
-    ownerState
-  } = props;
-  return [styles.root, ownerState.dense && styles.dense, ownerState.divider && styles.divider, !ownerState.disableGutters && styles.gutters];
-};
-const useUtilityClasses = ownerState => {
-  const {
-    disabled,
-    dense,
-    divider,
-    disableGutters,
-    selected,
-    classes
-  } = ownerState;
-  const slots = {
-    root: ['root', dense && 'dense', disabled && 'disabled', !disableGutters && 'gutters', divider && 'divider', selected && 'selected']
-  };
-  const composedClasses = composeClasses(slots, getMenuItemUtilityClass, classes);
-  return {
-    ...classes,
-    ...composedClasses
-  };
-};
-const MenuItemRoot = styled(ButtonBase, {
-  shouldForwardProp: prop => rootShouldForwardProp(prop) || prop === 'classes',
-  name: 'MuiMenuItem',
-  slot: 'Root',
-  overridesResolver
-})(memoTheme(({
-  theme
-}) => ({
-  ...theme.typography.body1,
-  display: 'flex',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  position: 'relative',
-  textDecoration: 'none',
-  minHeight: 48,
-  paddingTop: 6,
-  paddingBottom: 6,
-  boxSizing: 'border-box',
-  whiteSpace: 'nowrap',
-  '&:hover': {
-    textDecoration: 'none',
-    backgroundColor: (theme.vars || theme).palette.action.hover,
-    // Reset on touch devices, it doesn't add specificity
-    '@media (hover: none)': {
-      backgroundColor: 'transparent'
-    }
-  },
-  [`&.${menuItemClasses$1.selected}`]: {
-    backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
-    [`&.${menuItemClasses$1.focusVisible}`]: {
-      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.focusOpacity}))` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
-    }
-  },
-  [`&.${menuItemClasses$1.selected}:hover`]: {
-    backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
-    // Reset on touch devices, it doesn't add specificity
-    '@media (hover: none)': {
-      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
-    }
-  },
-  [`&.${menuItemClasses$1.focusVisible}`]: {
-    backgroundColor: (theme.vars || theme).palette.action.focus
-  },
-  [`&.${menuItemClasses$1.disabled}`]: {
-    opacity: (theme.vars || theme).palette.action.disabledOpacity
-  },
-  [`& + .${dividerClasses$1.root}`]: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  },
-  [`& + .${dividerClasses$1.inset}`]: {
-    marginLeft: 52
-  },
-  [`& .${listItemTextClasses$1.root}`]: {
-    marginTop: 0,
-    marginBottom: 0
-  },
-  [`& .${listItemTextClasses$1.inset}`]: {
-    paddingLeft: 36
-  },
-  [`& .${listItemIconClasses$1.root}`]: {
-    minWidth: 36
-  },
-  variants: [{
-    props: ({
-      ownerState
-    }) => !ownerState.disableGutters,
-    style: {
-      paddingLeft: 16,
-      paddingRight: 16
-    }
-  }, {
-    props: ({
-      ownerState
-    }) => ownerState.divider,
-    style: {
-      borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
-      backgroundClip: 'padding-box'
-    }
-  }, {
-    props: ({
-      ownerState
-    }) => !ownerState.dense,
-    style: {
-      [theme.breakpoints.up('sm')]: {
-        minHeight: 'auto'
-      }
-    }
-  }, {
-    props: ({
-      ownerState
-    }) => ownerState.dense,
-    style: {
-      minHeight: 32,
-      // https://m2.material.io/components/menus#specs > Dense
-      paddingTop: 4,
-      paddingBottom: 4,
-      ...theme.typography.body2,
-      [`& .${listItemIconClasses$1.root} svg`]: {
-        fontSize: '1.25rem'
-      }
-    }
-  }]
-})));
-const MenuItem = /*#__PURE__*/reactExports.forwardRef(function MenuItem(inProps, ref) {
-  const props = useDefaultProps({
-    props: inProps,
-    name: 'MuiMenuItem'
-  });
-  const {
-    autoFocus = false,
-    component = 'li',
-    dense = false,
-    divider = false,
-    disableGutters = false,
-    focusVisibleClassName,
-    role = 'menuitem',
-    tabIndex: tabIndexProp,
-    className,
-    ...other
-  } = props;
-  const context = reactExports.useContext(ListContext);
-  const childContext = reactExports.useMemo(() => ({
-    dense: dense || context.dense || false,
-    disableGutters
-  }), [context.dense, dense, disableGutters]);
-  const menuItemRef = reactExports.useRef(null);
-  useEnhancedEffect(() => {
-    if (autoFocus) {
-      if (menuItemRef.current) {
-        menuItemRef.current.focus();
-      }
-    }
-  }, [autoFocus]);
-  const ownerState = {
-    ...props,
-    dense: childContext.dense,
-    divider,
-    disableGutters
-  };
-  const classes = useUtilityClasses(props);
-  const handleRef = useForkRef(menuItemRef, ref);
-  let tabIndex;
-  if (!props.disabled) {
-    tabIndex = tabIndexProp !== undefined ? tabIndexProp : -1;
-  }
-  return /*#__PURE__*/jsxRuntimeExports.jsx(ListContext.Provider, {
-    value: childContext,
-    children: /*#__PURE__*/jsxRuntimeExports.jsx(MenuItemRoot, {
-      ref: handleRef,
-      role: role,
-      tabIndex: tabIndex,
-      component: component,
-      focusVisibleClassName: clsx(classes.focusVisible, focusVisibleClassName),
-      className: clsx(classes.root, className),
-      ...other,
-      ownerState: ownerState,
-      classes: classes
-    })
-  });
-});
-var MenuItem$1 = MenuItem;
 
 const OrganismListItem = ({ id, label, isChecked, onClick }) => {
     const url = `${PATH_TAXON}${id}`;
@@ -652,6 +452,21 @@ const useOrganismList = (response) => {
 };
 
 const listOrganismsByPhenotypesURL = makeApiUrl("gmdb_organisms_by_phenotypes");
+createListApiResponseSchema(object({
+    tax_id: string(),
+    name: string(),
+}));
+createListApiParamsSchema({
+    growth_temp: string().optional(),
+    growth_ph: string().optional(),
+    growth_salinity: string().optional(),
+    MPO_10002: string().optional(),
+    MPO_07001: string().optional(),
+    MPO_02000: string().optional(),
+    MPO_01001: string().optional(),
+    MPO_03006: string().optional(),
+    MPO_04053: string().optional(),
+});
 
 const organismPagination = atom(1);
 const useOrganismPaginationState = () => {
@@ -783,7 +598,7 @@ const OrganismTab = () => {
                 if (label === "Selected organisms") {
                     return (jsx(Tab, { label: jsx(Badge, { badgeContent: selected.length, color: "primary", children: label }), value: label, sx: tabStyles }, label));
                 }
-                return (jsx(Tab, { label: label, value: label, sx: tabStyles }, label));
+                return jsx(Tab, { label: label, value: label, sx: tabStyles }, label);
             }) }) }));
 };
 const Wrapper$4 = styled("div")({
@@ -888,7 +703,7 @@ const SelectBox = ({ label, items, queryKey, handleEnabledChange, handleValueCha
             handleEnabledChange(queryKey, false);
         }
     }, [selectedValue, enabled]);
-    return (jsxs(Wrapper$2, { children: [jsx(Checkbox, { onChange: handleCheckChange, sx: { paddingLeft: 0 } }), jsxs(FormControl, { sx: { m: 0, minWidth: 200 }, children: [jsx(InputLabel, { id: "selectLabel", children: label }), jsx(Select, { labelId: "selectLabel", label: label, value: selectedValue, disabled: enabled ? undefined : true, onChange: handleSelectChange, MenuProps: { disablePortal: true }, children: items.map(([key, label]) => (jsx(MenuItem$1, { value: key, children: label }, key))) })] })] }));
+    return (jsxs(Wrapper$2, { children: [jsx(Checkbox, { onChange: handleCheckChange, sx: { paddingLeft: 0 } }), jsxs(FormControl, { sx: { m: 0, minWidth: 200 }, children: [jsx(InputLabel, { id: "selectLabel", children: label }), jsx(Select, { labelId: "selectLabel", label: label, value: selectedValue, disabled: enabled ? undefined : true, onChange: handleSelectChange, MenuProps: { disablePortal: true }, children: items.map(([key, label]) => (jsx(MenuItem, { value: key, children: label }, key))) })] })] }));
 };
 const Wrapper$2 = styled("div")({
     display: "flex",
@@ -1105,7 +920,7 @@ var templates = [
 
   return "<p class=\"greeting\">"
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"greeting") || (depth0 != null ? lookupProperty(depth0,"greeting") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"greeting","hash":{},"data":data,"loc":{"start":{"line":1,"column":20},"end":{"line":1,"column":32}}}) : helper)))
-    + "!!!</p>\n";
+    + "!!!</p>";
 },"useData":true}]
 ];
 

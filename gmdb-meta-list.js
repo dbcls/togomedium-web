@@ -1,16 +1,17 @@
-import { d as defineStanzaElement } from './stanza-3bc73db1.js';
-import { s as styled, j as jsx, T as THEME, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
-import { u as useQuery } from './useQuery-8b12d83b.js';
-import { r as reactExports } from './index-7a88ba65.js';
-import { n as nanoid, N as NotFound } from './index.browser-f7e1df53.js';
-import { S as StanzaWrapper } from './StanzaWrapper-34fcc0ed.js';
-import { S as Slider } from './Slider-42efb8a4.js';
-import { m as makeLinkPath, g as getLinkTarget } from './getLinkTarget-54075a13.js';
+import { d as defineStanzaElement } from './stanza-0294ba58.js';
+import { s as styled, j as jsx, T as THEME, m as reactExports, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
+import { N as NotFound } from './NotFound-87306622.js';
+import { S as StanzaWrapper } from './StanzaWrapper-69f29275.js';
+import { S as Slider } from './Slider-65c6a1cf.js';
+import { m as makeLinkPath, g as getLinkTarget } from './getLinkTarget-9ee27b52.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
-import { L as LoadingCover } from './LoadingCover-79a3edc9.js';
-import { m as makeFormBody } from './getData-3799b4b6.js';
-import './DefaultPropsProvider-37472ed0.js';
-import './isHostComponent-7889d775.js';
+import { n as nanoid } from './index.browser-9dccf6b2.js';
+import { L as LoadingCover } from './LoadingCover-190650c9.js';
+import { m as makeFormBody } from './getData-e9cb8ad8.js';
+import { u as useQuery } from './useQuery-e63f1f9b.js';
+import './useSlotProps-e0be0a1d.js';
+import './CircularProgress-790be7e7.js';
+import './isArray-56c7d056.js';
 
 const AngleLeftIcon = ({ sx }) => {
     return (jsx(Wrapper$6, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", sx: sx, children: jsx("path", { d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" }) }));
@@ -479,7 +480,7 @@ var templates = [
 
   return "<p class=\"greeting\">"
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"greeting") || (depth0 != null ? lookupProperty(depth0,"greeting") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"greeting","hash":{},"data":data,"loc":{"start":{"line":1,"column":20},"end":{"line":1,"column":32}}}) : helper)))
-    + "!!!</p>\n";
+    + "!!!</p>";
 },"useData":true}]
 ];
 

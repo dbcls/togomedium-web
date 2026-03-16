@@ -1,8 +1,8 @@
-import { S as Stanza, d as defineStanzaElement } from './stanza-3bc73db1.js';
+import { S as Stanza, d as defineStanzaElement } from './stanza-0294ba58.js';
 import { s as select } from './transform-fa8fb55c.js';
-import './index-7a88ba65.js';
-import { g as getData } from './getData-3799b4b6.js';
+import { g as getData } from './getData-e9cb8ad8.js';
 import { U as URL_API } from './variables-f5cb7401.js';
+import './isArray-56c7d056.js';
 
 let mouseX = 0;
 let mouseY = 0;
@@ -349,7 +349,7 @@ var metadata = {
 
 var templates = [
   ["stanza.html.hbs", {"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"wrapper\">\n  <div class=\"inner\">\n    <div id=\"table_area\"></div>\n  </div>\n</div>\n";
+    return "<div class=\"wrapper\">\n  <div class=\"inner\">\n    <div id=\"table_area\"></div>\n  </div>\n</div>";
 },"useData":true}]
 ];
 

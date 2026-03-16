@@ -1,16 +1,18 @@
-import { d as defineStanzaElement } from './stanza-3bc73db1.js';
-import { s as styled, T as THEME, a as jsxs, j as jsx, l as atom, m as useAtomValue, o as useSetAtom, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6984324a.js';
-import { u as useQuery } from './useQuery-8b12d83b.js';
-import { l as lineageRanks, m as mediaStrainsAlignmentURL } from './definitions-2845d052.js';
-import { g as getData } from './getData-deef20ca.js';
-import { r as reactExports, R as React, e as dist } from './index-7a88ba65.js';
-import { n as nanoid, N as NotFound } from './index.browser-f7e1df53.js';
-import { a as PATH_MEDIUM } from './consts-deffa432.js';
-import { m as makeLinkPath, g as getLinkTarget } from './getLinkTarget-54075a13.js';
-import { c as copy } from './index-b1a62205.js';
-import { j as Tooltip } from './Tooltip-16467db2.js';
+import { d as defineStanzaElement } from './stanza-0294ba58.js';
+import { m as reactExports, s as styled, T as THEME, a as jsxs, j as jsx, v as atom, w as useAtomValue, x as useSetAtom, R as React, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
+import { l as lineageRanks, m as mediaStrainsAlignmentURL } from './definitions-061f383b.js';
+import { g as getData } from './getData-4200eb91.js';
+import { N as NotFound } from './NotFound-87306622.js';
+import { m as makeLinkPath, a as PATH_MEDIUM, g as getLinkTarget } from './getLinkTarget-9ee27b52.js';
+import { c as copy } from './index-58d55e2c.js';
+import { n as nanoid } from './index.browser-9dccf6b2.js';
+import { T as Tooltip } from './Tooltip-f3002260.js';
 import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-679c835b.js';
-import './DefaultPropsProvider-37472ed0.js';
+import { u as useQuery } from './useQuery-e63f1f9b.js';
+import './schemas-d468dcf7.js';
+import './isArray-56c7d056.js';
+import './Grow-d098dd8a.js';
+import './useSlotProps-e0be0a1d.js';
 
 const makeCellHeight = (size) => {
     return 48 * size + size - 1;
@@ -177,6 +179,7 @@ const useToolTipEnabled = () => {
     }, [labelRef]);
     return { labelRef, toolTipEnabled };
 };
+
 const MediaCell = ({ label, id, size }) => {
     const { labelRef, toolTipEnabled } = useToolTipEnabled();
     return (jsxs(Wrapper$5, { style: { height: `${makeCellHeight(size)}px` }, children: [jsx("a", { href: makeLinkPath(`${PATH_MEDIUM}${id}`), target: getLinkTarget(`${PATH_MEDIUM}${id}`), children: id }), jsx("div", { className: "label-wrapper", children: jsx(Tooltip, { slotProps: { popper: { disablePortal: true } }, title: label, placement: "top", arrow: true, disableHoverListener: !toolTipEnabled, children: jsx("span", { ref: labelRef, className: "label", children: label }) }) })] }));
@@ -245,7 +248,7 @@ const TaxonCell = (props) => {
         wrapperRef.current.style.height = makeCellHeight(size) + "px";
         // console.log("set height", size, props.id, props.isFolded);
     }, [props.size, props.isFolded]);
-    return reactExports.useMemo(() => (jsx(ToMemoize, { ...props, wrapperRef: wrapperRef })), [props.id]);
+    return reactExports.useMemo(() => jsx(ToMemoize, { ...props, wrapperRef: wrapperRef }), [props.id]);
 };
 const ToMemoize = ({ wrapperRef, label, id, rank }) => {
     const filterId = useFilterTaxonState();
@@ -385,7 +388,7 @@ const Wrapper$1 = styled("div")({
     height: "100%",
     minHeight: "72px",
     transitionDuration: "0.4s",
-    transitionTimingFunction: dist.Ease._4_IN_OUT_QUART,
+    // transitionTimingFunction: Ease._4_IN_OUT_QUART,
     overflow: "hidden",
     width: "200px",
 });
@@ -544,7 +547,7 @@ var templates = [
 
   return "<p class=\"greeting\">"
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"greeting") || (depth0 != null ? lookupProperty(depth0,"greeting") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"greeting","hash":{},"data":data,"loc":{"start":{"line":1,"column":20},"end":{"line":1,"column":32}}}) : helper)))
-    + "!!!</p>\n";
+    + "!!!</p>";
 },"useData":true}]
 ];
 
