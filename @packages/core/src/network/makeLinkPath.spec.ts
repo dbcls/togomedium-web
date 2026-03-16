@@ -1,94 +1,90 @@
+/// <reference types="vitest/jsdom" />
+
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { describe } from "vitest";
 
 describe("makeLinkPath", () => {
-  const originalHost = window.location.host;
-  const originalPort = window.location.port;
+  const originalHref = window.location.href;
   afterEach(() => {
-    window.location.host = originalHost;
-    window.location.port = originalPort;
+    jsdom.reconfigure({ url: originalHref });
   });
-  describe("when the host is live (togomedium.org)", () => {
+  describe("when the current host is the production site", () => {
     beforeEach(() => {
-      window.location.host = "togomedium.org";
-      window.location.port = "";
+      jsdom.reconfigure({ url: "https://togomedium.org" });
     });
-    test("When the arg is URI and an external link, it should just return the arg", () => {
+    test("returns the original URL for an external link", () => {
       const result = makeLinkPath("https://ncbi.nlm.nih.gov");
       expect(result).toBe("https://ncbi.nlm.nih.gov");
     });
 
-    test("When the arg is URI and an internal link, it should return the URI", () => {
+    test("keeps an internal URL on the production host", () => {
       const result = makeLinkPath("https://togomedium.org/medium/M3013");
       expect(result).toBe("https://togomedium.org/medium/M3013");
     });
 
-    test("When the arg is string, it should treat the arg as path and return the normalized URI", () => {
+    test("builds a production URL from an internal path", () => {
       const result = makeLinkPath("/medium/M3013");
       console.log(result);
       expect(result).toBe("https://togomedium.org/medium/M3013");
     });
   });
 
-  describe("when host is localhost", () => {
+  describe("when the current host is localhost", () => {
     beforeEach(() => {
-      window.location.host = "localhost";
-      window.location.port = "5100";
+      jsdom.reconfigure({ url: "http://localhost:5100" });
     });
-    test("When the arg URI and external link, it should just return the arg", () => {
+    test("returns the original URL for an external link", () => {
       const result = makeLinkPath("https://ncbi.nlm.nih.gov");
       expect(result).toBe("https://ncbi.nlm.nih.gov");
     });
 
-    test("When the arg is URI and internal link, it should return the URI with the correct port", () => {
+    test("rewrites an internal URL to the local web port", () => {
       const result = makeLinkPath("https://togomedium.org/medium/M3013");
       expect(result).toBe("http://localhost:5200/medium/M3013");
     });
 
-    test("When the arg is an absolute path from the server, it should return the URI with the correct port", () => {
+    test("builds a local web URL from an internal path", () => {
       const result = makeLinkPath("/medium/M3013");
       expect(result).toBe("http://localhost:5200/medium/M3013");
     });
   });
 
-  describe("when the host is staging (togomedium.yohak-lab.com)", () => {
+  describe("when the current host is the staging site", () => {
     beforeEach(() => {
-      window.location.host = "togomedium.yohak-lab.com";
-      window.location.port = "";
+      jsdom.reconfigure({ url: "https://togomedium.yohak-lab.com" });
     });
-    test("When the arg is URI and an external link, it should just return the arg", () => {
+    test("returns the original URL for an external link", () => {
       const result = makeLinkPath("https://ncbi.nlm.nih.gov");
       expect(result).toBe("https://ncbi.nlm.nih.gov");
     });
 
-    test("When the arg is URI and an internal link, it should return the URI", () => {
+    test("rewrites an internal URL to the staging host", () => {
       const result = makeLinkPath("https://togomedium.org/medium/M3013");
       expect(result).toBe("https://togomedium.yohak-lab.com/medium/M3013");
     });
 
-    test("When the arg is string, it should treat the arg as path and return the normalized URI", () => {
+    test("builds a staging URL from an internal path", () => {
       const result = makeLinkPath("/medium/M3013");
       console.log(result);
       expect(result).toBe("https://togomedium.yohak-lab.com/medium/M3013");
     });
   });
 
-  describe("when the host is elsewhere", () => {
+  describe("when the current host is neither production, staging, nor localhost", () => {
     beforeEach(() => {
-      window.location.host = "www.nite.go.jp";
-      window.location.port = "";
+      jsdom.reconfigure({ url: "https://www.nite.go.jp" });
     });
-    test("When the arg is URI and an external link, it should just return the arg", () => {
+    test("returns the original URL for an external link", () => {
       const result = makeLinkPath("https://ncbi.nlm.nih.gov");
       expect(result).toBe("https://ncbi.nlm.nih.gov");
     });
 
-    test("When the arg is URI and an internal link, it should return the URI", () => {
+    test("rewrites an internal URL to the production host", () => {
       const result = makeLinkPath("https://togomedium.org/medium/M3013");
       expect(result).toBe("https://togomedium.org/medium/M3013");
     });
 
-    test("When the arg is string, it should treat the arg as path and return the normalized URI", () => {
+    test("builds a production URL from an internal path", () => {
       const result = makeLinkPath("/medium/M3013");
       console.log(result);
       expect(result).toBe("https://togomedium.org/medium/M3013");

@@ -19,10 +19,9 @@ export default defineConfig({
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-    // "sort-imports": "error",
   },
   options: {
-    typeAware: true,
+    typeAware: false,
     typeCheck: true,
   },
   ignorePatterns: ["@packages/web/src/routeTree.gen.ts"],

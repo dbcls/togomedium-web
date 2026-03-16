@@ -1,17 +1,16 @@
+/// <reference types="vitest/jsdom" />
+
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { describe } from "vitest";
 
 describe("getLinkTarget", () => {
-  const originalHost = window.location.host;
-  const originalPort = window.location.port;
+  const originalHref = window.location.href;
   afterEach(() => {
-    window.location.host = originalHost;
-    window.location.port = originalPort;
+    jsdom.reconfigure({ url: originalHref });
   });
   describe("then the host is localhost", () => {
     beforeEach(() => {
-      window.location.host = "localhost";
-      window.location.port = "5100";
+      jsdom.reconfigure({ url: "http://localhost:5100" });
     });
     it("should return the correct target for a link", () => {
       const ebi = "https://www.ebi.ac.uk/pathways/webservices/rest/1.0/pathway/12345";
