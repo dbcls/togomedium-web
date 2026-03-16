@@ -1,5 +1,3 @@
-import { styled } from "@mui/material/styles";
-import React, { FC, useEffect } from "react";
 import { THEME } from "%core/theme";
 import { ActionPane } from "%stanza/components/media-finder/ActionPane";
 import { FoundMediaList } from "%stanza/components/media-finder/FoundMediaList";
@@ -10,6 +8,8 @@ import {
   useMediaTabFocusMutators,
   useMediaTabFocusState,
 } from "%stanza/state/media-finder/mediaTabFocus";
+import { styled } from "@mui/material/styles";
+import React, { FC, useEffect } from "react";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;
@@ -27,10 +27,7 @@ export const MediaPane: FC<Props> = ({ dispatchEvent }) => {
         </Contents>
       </Media>
       {tabFocus === "Selected media" && (
-        <ActionPane
-          actionLabel={"Compare media"}
-          dispatchEvent={dispatchEvent}
-        />
+        <ActionPane actionLabel={"Compare media"} dispatchEvent={dispatchEvent} />
       )}
     </Wrapper>
   );

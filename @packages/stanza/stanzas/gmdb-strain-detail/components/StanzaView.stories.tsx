@@ -1,13 +1,21 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { StanzaView } from "%stanza/stanzas/gmdb-strain-detail/components/StanzaView";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof StanzaView> = {
+const meta = {
   component: StanzaView,
-};
+  decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
+} satisfies Meta<typeof StanzaView>;
 export default meta;
 
-type Story = StoryObj<typeof StanzaView>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     strainId: "S602",
     strainName: "Streptomyces nodosus Trejo 1961",
@@ -54,4 +62,4 @@ export const Primary: Story = {
       },
     },
   },
-};
+} satisfies Story;

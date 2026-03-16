@@ -1,42 +1,80 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
+import { RouteConfig } from "@asteasolutions/zod-to-openapi";
+import { z } from "zod";
 
-export type MediumDetailResponse = {
-  meta: Meta;
-  components: ComponentTable[];
-  comments: ComponentComment[];
-};
-export type MediumDetailParams = { gm_id: string };
+const metaSchema = z.object({
+  gm: z.string(),
+  name: z.string(),
+  src_url: z.string(),
+  ph: z.string(),
+  original_media_id: z.string().optional(),
+});
+
+const recipeItemSchema = z.object({
+  paragraph_index: z.number(),
+});
+
+const componentSchema = z.object({
+  component_name: z.string(),
+  volume: z.number().optional(),
+  unit: z.string().optional(),
+  gmo: z.string().optional(),
+  gmo_id: z.string().optional(),
+  label: z.string().optional(),
+  conc_value: z.number().optional(),
+  conc_unit: z.string().optional(),
+  reference_media_id: z.string().optional(),
+});
+
+const componentTableSchema = recipeItemSchema.and(
+  z.object({
+    subcomponent_name: z.string(),
+    items: z.array(componentSchema),
+  }),
+);
+
+const componentCommentSchema = recipeItemSchema.and(
+  z.object({
+    comment: z.string(),
+  }),
+);
+
+const mediumDetailResponseSchema = z.object({
+  meta: metaSchema,
+  components: z.array(componentTableSchema),
+  comments: z.array(componentCommentSchema),
+});
+
+const mediumDetailParamsSchema = z.object({
+  gm_id: z.string(),
+});
+
+export type MediumDetailResponse = z.infer<typeof mediumDetailResponseSchema>;
+export type MediumDetailParams = z.infer<typeof mediumDetailParamsSchema>;
+/**
+ * @deprecated
+ */
 export const mediumDetailURL = makeApiUrl("gmdb_medium_by_gmid");
+export const PATH_MEDIUM_DETAIL = "gmdb_medium_by_gmid";
 
-type Meta = {
-  gm: string;
-  name: string;
-  src_url: string;
-  ph: string;
-  original_media_id?: string;
-};
-
-type ComponentTable = {
-  subcomponent_name: string;
-  items: Component[];
-} & RecipeItem;
-
-type ComponentComment = {
-  comment: string;
-} & RecipeItem;
-
-type RecipeItem = {
-  paragraph_index: number;
-};
-
-type Component = {
-  component_name: string;
-  volume?: number;
-  unit?: string;
-  gmo?: string;
-  gmo_id?: string;
-  label?: string;
-  conc_value?: number;
-  conc_unit?: string;
-  reference_media_id?: string;
+export const mediumDetailDoc: RouteConfig = {
+  path: PATH_MEDIUM_DETAIL,
+  method: "get",
+  summary: PATH_MEDIUM_DETAIL,
+  description: "Get medium detail by GM ID",
+  tags: [tags.stanza],
+  request: {
+    params: mediumDetailParamsSchema,
+  },
+  responses: {
+    200: {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: mediumDetailResponseSchema,
+        },
+      },
+    },
+  },
 };

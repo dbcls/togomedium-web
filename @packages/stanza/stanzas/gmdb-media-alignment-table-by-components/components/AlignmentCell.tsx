@@ -1,9 +1,9 @@
-import { Tooltip } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { PATH_COMPONENT } from "%core/consts";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%core/theme";
+import { Tooltip } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 export type AlignmentCellState = "grouped" | "available" | "none";
 

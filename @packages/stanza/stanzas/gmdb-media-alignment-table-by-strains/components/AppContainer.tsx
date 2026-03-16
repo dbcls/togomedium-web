@@ -1,5 +1,3 @@
-import { styled } from "@mui/material/styles";
-import React, { FC, useMemo } from "react";
 import {
   lineageRanks,
   MediaStrainsAlignmentResponse,
@@ -11,6 +9,8 @@ import { TaxonCol } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/
 import { processDisplayData } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
 import { useFilterRankState } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterRank";
 import { useFilterTaxonState } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterTaxon";
+import { styled } from "@mui/material/styles";
+import React, { FC, useMemo } from "react";
 
 type Props = { data: MediaStrainsAlignmentResponse; hideMedia?: boolean };
 
@@ -19,7 +19,7 @@ export const AppContainer: FC<Props> = ({ data, hideMedia = false }) => {
   const filterRank = useFilterRankState();
   const displayData = useMemo(
     () => processDisplayData(data, filterTaxon, filterRank),
-    [data, filterTaxon, filterRank]
+    [data, filterTaxon, filterRank],
   );
   return displayData.media.length ? (
     <Container>
@@ -29,11 +29,7 @@ export const AppContainer: FC<Props> = ({ data, hideMedia = false }) => {
           .concat()
           .reverse()
           .map((rank, index) => (
-            <TaxonCol
-              rank={rank}
-              taxonList={displayData.taxon[rank]}
-              key={index}
-            />
+            <TaxonCol rank={rank} taxonList={displayData.taxon[rank]} key={index} />
           ))}
       </TaxonContainer>
     </Container>

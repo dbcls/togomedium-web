@@ -1,10 +1,10 @@
+import { StatsCountCulturableSpeciesResponse } from "%api/statsCountCulturableSpecies/definitions";
+import { THEME } from "%core/theme";
 import { Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { RefObject } from "@react-types/shared";
 import * as d3 from "d3";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
-import { StatsCountCulturableSpeciesResponse } from "%api/statsCountCulturableSpecies/definitions";
-import { THEME } from "%core/theme";
 
 type Props = { data: StatsCountCulturableSpeciesResponse };
 
@@ -23,25 +23,10 @@ export const AppContainer: FC<Props> = ({ data }) => {
       followCursor={true}
       open={isToolTipOpen}
     >
-      <Container
-        ref={svgRef}
-        width={wrapperWidth}
-        height={wrapperHeight}
-      >
-        <g
-          id="scaleX"
-          ref={scaleXRef}
-          transform={`translate(${yLabelsWidth}, ${graphHeight})`}
-        ></g>
-        <g
-          id="scaleY"
-          ref={scaleYRef}
-          transform={`translate(${yLabelsWidth}, 0)`}
-        ></g>
-        <g
-          id="graph"
-          transform={`translate(${yLabelsWidth}, 1)`}
-        >
+      <Container ref={svgRef} width={wrapperWidth} height={wrapperHeight}>
+        <g id="scaleX" ref={scaleXRef} transform={`translate(${yLabelsWidth}, ${graphHeight})`}></g>
+        <g id="scaleY" ref={scaleYRef} transform={`translate(${yLabelsWidth}, 0)`}></g>
+        <g id="graph" transform={`translate(${yLabelsWidth}, 1)`}>
           {(data ?? []).map((d, i) => {
             return (
               <Bar
@@ -55,11 +40,7 @@ export const AppContainer: FC<Props> = ({ data }) => {
                   handleMouseLeave();
                 }}
               >
-                <rect
-                  width={graphWidth}
-                  height={scaleY.bandwidth()}
-                  fill={"transparent"}
-                ></rect>
+                <rect width={graphWidth} height={scaleY.bandwidth()} fill={"transparent"}></rect>
                 <rect
                   width={scaleX(d.frequency)}
                   height={scaleY.bandwidth() - 1}
@@ -110,7 +91,7 @@ const useDrawChart = (
   data: StatsCountCulturableSpeciesResponse | undefined,
   svgRef: RefObject<SVGSVGElement | null>,
   scaleXRef: RefObject<SVGGElement | null>,
-  scaleYRef: RefObject<SVGGElement | null>
+  scaleYRef: RefObject<SVGGElement | null>,
 ) => {
   const barHeight: number = 30;
   const yLabelsWidth: number = 60;

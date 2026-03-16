@@ -1,9 +1,9 @@
-import { atom, useAtomValue, useSetAtom } from "jotai";
 import { listMediaOfGtdbTaxonsURL, listMediaOfTaxonsURL } from "%api/listMediaOfTaxons/definitions";
 import { gtdbTaxonAncestorsURL, taxonAncestorsURL } from "%api/taxonAncestors.ts/definitions";
 import { gtdbTaxonChildrenURL, taxonChildrenURL } from "%api/taxonChildren/definitions";
 import { gtdbTaxonSearchByNameUrl, taxonSearchByNameURL } from "%api/taxonSearchByName/definitions";
 import { TaxonomyType } from "%core/types/TaxonomyType";
+import { atom, useAtomValue, useSetAtom } from "jotai";
 
 type ApiInfo = { type: TaxonomyType; url: string };
 

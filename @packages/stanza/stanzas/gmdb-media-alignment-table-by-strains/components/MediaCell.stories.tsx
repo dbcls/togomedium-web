@@ -1,10 +1,18 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { ComponentProps } from "react";
 import { MediaCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/MediaCell";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { ComponentProps } from "react";
 
-const meta: Meta<typeof MediaCell> = {
+const meta = {
   component: MediaCell,
-};
+  decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
+} satisfies Meta<typeof MediaCell>;
 export default meta;
 
 const defaultArgs: ComponentProps<typeof MediaCell> = {
@@ -12,14 +20,14 @@ const defaultArgs: ComponentProps<typeof MediaCell> = {
   id: "JCM_333",
   size: 1,
 };
-type Story = StoryObj<typeof MediaCell>;
+type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Primary = {
   args: { ...defaultArgs },
-};
-export const LargeItem: Story = {
+} satisfies Story;
+export const LargeItem = {
   args: { ...defaultArgs, size: 4 },
-};
-export const LongItem: Story = {
+} satisfies Story;
+export const LongItem = {
   args: { ...defaultArgs, label: "Long long long text long long long text" },
-};
+} satisfies Story;

@@ -1,20 +1,66 @@
+import { tags } from "%api/consts";
 import { makeApiUrl } from "%core/network/makeApiUrl";
+import { RouteConfig } from "@asteasolutions/zod-to-openapi";
+import { z } from "zod";
 
-export type TaxonDetailResponse = {
-  scientific_name: string;
-  taxid: number | string;
-  rank: string;
-  authority_name: string;
-  lineage: Lineage;
-  type_material: { label: string; name?: string }[];
-  other_type_material: { label: string; name: string }[];
-};
-export type TaxonDetailParams = { tax_id: string };
+const lineageItemSchema = z.object({
+  uri: z.string(),
+  taxid: z.number(),
+  label: z.string(),
+  rank: z.string(),
+});
+
+const lineageSchema = z.array(lineageItemSchema);
+
+const taxonDetailTypeMaterialSchema = z.object({
+  label: z.string(),
+  name: z.string().optional(),
+});
+
+const taxonDetailOtherTypeMaterialSchema = z.object({
+  label: z.string(),
+  name: z.string(),
+});
+
+const taxonDetailResponseSchema = z.object({
+  scientific_name: z.string(),
+  taxid: z.union([z.number(), z.string()]),
+  rank: z.string(),
+  authority_name: z.string(),
+  lineage: lineageSchema,
+  type_material: z.array(taxonDetailTypeMaterialSchema),
+  other_type_material: z.array(taxonDetailOtherTypeMaterialSchema),
+});
+
+const taxonDetailParamsSchema = z.object({
+  tax_id: z.string(),
+});
+
+export type TaxonDetailResponse = z.infer<typeof taxonDetailResponseSchema>;
+export type TaxonDetailParams = z.infer<typeof taxonDetailParamsSchema>;
+/**
+ * @deprecated
+ */
 export const taxonDetailURL = makeApiUrl("gmdb_organism_by_taxid");
+export const PATH_TAXON_DETAIL = "gmdb_organism_by_taxid";
 
-type Lineage = {
-  uri: string;
-  taxid: number;
-  label: string;
-  rank: string;
-}[];
+export const taxonDetailDoc: RouteConfig = {
+  path: PATH_TAXON_DETAIL,
+  method: "get",
+  summary: PATH_TAXON_DETAIL,
+  description: "Get taxon detail by taxon ID",
+  tags: [tags.stanza],
+  request: {
+    params: taxonDetailParamsSchema,
+  },
+  responses: {
+    200: {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: taxonDetailResponseSchema,
+        },
+      },
+    },
+  },
+};

@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import { MediaPane } from "%stanza/components/media-finder/MediaPane";
 import { AppWrapper } from "%stanza/components/styled/AppWrapper";
 import { QueryPane } from "%stanza/components/styled/QueryPane";
@@ -6,6 +5,7 @@ import { SubPane } from "%stanza/components/styled/SubPane";
 import { OrganismPane } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismPane";
 import { PhenotypeSection } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/PhenotypeSection";
 import { useMediaLoadFromOrganismSelection } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/hooks/useMediaLoadFromOrganismSelection";
+import React, { FC } from "react";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;

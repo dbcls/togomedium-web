@@ -1,16 +1,25 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { MediaCol } from "./MediaCol";
 import { data1 } from "%api/mediaStrainsAlignment/data1";
 import { processDisplayData } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof MediaCol> = {
+import { MediaCol } from "./MediaCol";
+
+const meta = {
   component: MediaCol,
-};
+  decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
+} satisfies Meta<typeof MediaCol>;
 export default meta;
 
-type Story = StoryObj<typeof MediaCol>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     mediaList: processDisplayData(data1).media,
   },
-};
+} satisfies Story;

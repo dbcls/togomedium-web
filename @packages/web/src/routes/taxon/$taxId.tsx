@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { taxonDetailURL } from "%api/taxonDetail/definitions.ts";
+import { createFileRoute } from "@tanstack/react-router";
+
 import { TaxonDetailPage } from "@/pages/TaxonDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 
@@ -15,9 +16,5 @@ export const Route = createFileRoute("/taxon/$taxId")({
     const result = await fetchData<APIResponse>(api, apiBody);
     return result;
   },
-  component: RouteComponent,
+  component: () => <TaxonDetailPage />,
 });
-
-function RouteComponent() {
-  return <TaxonDetailPage />;
-}

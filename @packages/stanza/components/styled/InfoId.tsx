@@ -1,5 +1,5 @@
-import { styled } from "@mui/material/styles";
 import { THEME } from "%core/theme";
+import { styled } from "@mui/material/styles";
 
 export const InfoId = styled("div")({
   display: "flex",

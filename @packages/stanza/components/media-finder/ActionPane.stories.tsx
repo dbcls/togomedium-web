@@ -1,13 +1,19 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { ComponentProps, useEffect } from "react";
 import { ActionPane } from "%stanza/components/media-finder/ActionPane";
 import { useSelectedMediaMutators } from "%stanza/state/media-finder/selectedMedia";
 import { LabelInfo } from "%stanza/utils/labelInfo";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { ComponentProps, useEffect } from "react";
 
 type WithCustomArgs = { selectedMedia: LabelInfo[] } & ComponentProps<typeof ActionPane>;
-const meta: Meta<WithCustomArgs> = {
+const meta = {
   component: ActionPane,
   decorators: [
+    (Story) => (
+      <StoryProvider mui>
+        <Story />
+      </StoryProvider>
+    ),
     (StoryItem, { args }) => {
       const { selectedMedia } = args;
       const { setSelectedMedia } = useSelectedMediaMutators();
@@ -19,22 +25,23 @@ const meta: Meta<WithCustomArgs> = {
   ],
   args: {
     actionLabel: "compare media",
+    dispatchEvent: () => {},
   },
-};
+} satisfies Meta<WithCustomArgs>;
 export default meta;
 
-type Story = StoryObj<WithCustomArgs>;
-export const NoSelection: Story = {
+type Story = StoryObj<typeof meta>;
+export const NoSelection = {
   args: {
     selectedMedia: [],
   },
-};
-export const OneSelection: Story = {
+} satisfies Story;
+export const OneSelection = {
   args: {
     selectedMedia: [{ id: "aa", label: "aa" }],
   },
-};
-export const MultipleSelection: Story = {
+} satisfies Story;
+export const MultipleSelection = {
   args: {
     selectedMedia: [
       { id: "aa", label: "aa" },
@@ -42,4 +49,4 @@ export const MultipleSelection: Story = {
       { id: "cc", label: "cc" },
     ],
   },
-};
+} satisfies Story;

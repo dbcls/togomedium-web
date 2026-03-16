@@ -1,6 +1,3 @@
-import { Badge, SxProps, Tab, Tabs } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { THEME } from "%core/theme";
 import {
   OrganismTabName,
@@ -9,6 +6,9 @@ import {
   useOrganismTabFocusState,
 } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/organismTabFocus";
 import { useSelectedOrganismsState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/selectedOrganisms";
+import { Badge, SxProps, Tab, Tabs } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = {};
 
@@ -21,20 +21,14 @@ export const OrganismTab: FC<Props> = () => {
   };
   return (
     <Wrapper>
-      <Tabs
-        value={tabFocus}
-        onChange={handleChange}
-      >
+      <Tabs value={tabFocus} onChange={handleChange}>
         {organismTabNames.map((label) => {
           if (label === "Selected organisms") {
             return (
               <Tab
                 key={label}
                 label={
-                  <Badge
-                    badgeContent={selected.length}
-                    color="primary"
-                  >
+                  <Badge badgeContent={selected.length} color="primary">
                     {label}
                   </Badge>
                 }
@@ -43,14 +37,7 @@ export const OrganismTab: FC<Props> = () => {
               />
             );
           }
-          return (
-            <Tab
-              key={label}
-              label={label}
-              value={label}
-              sx={tabStyles}
-            />
-          );
+          return <Tab key={label} label={label} value={label} sx={tabStyles} />;
         })}
       </Tabs>
     </Wrapper>

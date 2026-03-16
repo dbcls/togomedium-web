@@ -1,21 +1,27 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { userEvent, within } from "@storybook/test";
 import { SelectBox } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/SelectBox";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { userEvent, within } from "storybook/test";
 
-const meta: Meta<typeof SelectBox> = {
+const meta = {
   component: SelectBox,
   decorators: [
+    (Story) => (
+      <StoryProvider mui>
+        <Story />
+      </StoryProvider>
+    ),
     (Story) => (
       <ComponentWrapper>
         <Story />
       </ComponentWrapper>
     ),
   ],
-};
+} satisfies Meta<typeof SelectBox>;
 export default meta;
 
-type Story = StoryObj<typeof SelectBox>;
+type Story = StoryObj<typeof meta>;
 const args: Story["args"] = {
   label: "Oxygen requirement",
   queryKey: "MPO_10002",
@@ -32,15 +38,15 @@ const args: Story["args"] = {
   handleValueChange: () => {},
 };
 
-export const Primary: Story = {
+export const Primary = {
   args: { ...args },
-};
+} satisfies Story;
 
-export const Enabled: Story = {
+export const Enabled = {
   args: { ...args },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const checkbox = canvas.getByRole("checkbox");
     await userEvent.click(checkbox, { delay: 100 });
   },
-};
+} satisfies Story;

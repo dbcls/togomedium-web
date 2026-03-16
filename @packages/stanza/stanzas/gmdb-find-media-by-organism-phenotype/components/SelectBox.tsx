@@ -1,3 +1,4 @@
+import { THEME } from "%core/theme";
 import {
   Autocomplete,
   Chip,
@@ -11,7 +12,6 @@ import {
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import React, { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from "react";
-import { THEME } from "%core/theme";
 
 type Props = {
   label: string;
@@ -53,10 +53,7 @@ export const SelectBox: FC<Props> = ({
 
   return (
     <Wrapper>
-      <Checkbox
-        onChange={handleCheckChange}
-        sx={{ paddingLeft: 0 }}
-      />
+      <Checkbox onChange={handleCheckChange} sx={{ paddingLeft: 0 }} />
       <FormControl sx={{ m: 0, minWidth: 200 }}>
         <InputLabel id={"selectLabel"}>{label}</InputLabel>
         <Select
@@ -68,10 +65,7 @@ export const SelectBox: FC<Props> = ({
           MenuProps={{ disablePortal: true }}
         >
           {items.map(([key, label]) => (
-            <MenuItem
-              key={key}
-              value={key}
-            >
+            <MenuItem key={key} value={key}>
               {label}
             </MenuItem>
           ))}

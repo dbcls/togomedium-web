@@ -1,6 +1,6 @@
+import { THEME } from "%core/theme";
 import { styled } from "@mui/material/styles";
 import React, { FC } from "react";
-import { THEME } from "%core/theme";
 
 type Props = {
   total: number;
@@ -20,19 +20,9 @@ export const Pagination: FC<Props> = ({
   return (
     <Wrapper>
       <div>
-        {current > 0 && (
-          <input
-            type="button"
-            value={"PREV"}
-            onClick={onClickPrev}
-          />
-        )}
+        {current > 0 && <input type="button" value={"PREV"} onClick={onClickPrev} />}
         {current + displayLength < total && (
-          <input
-            type="button"
-            value={"NEXT"}
-            onClick={onClickNext}
-          />
+          <input type="button" value={"NEXT"} onClick={onClickNext} />
         )}
       </div>
       <div>{makeDisplayMessage(total, current, displayLength)}</div>

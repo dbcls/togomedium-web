@@ -1,6 +1,7 @@
+import { ListMediaOfTaxonsResponse } from "%api/listMediaOfTaxons/definitions.ts";
 import { deepEqual } from "@tanstack/react-router";
 import { FC, useEffect, useRef, useState } from "react";
-import { ListMediaOfTaxonsResponse } from "%api/listMediaOfTaxons/definitions.ts";
+
 import { H2 } from "@/components/atoms/H2.tsx";
 import { SearchPane } from "@/components/organisms/SearchPane.tsx";
 import { ComponentAlignmentStanza } from "@/components/stanzas/ComponentAlignmentStanza.tsx";
@@ -28,14 +29,8 @@ export const CompareMediaByTaxIdsPage: FC = () => {
         />
       </div>
 
-      <ComponentAlignmentStanza
-        gmIds={gmIds}
-        isVisible={isVisible}
-      />
-      <StrainAlignmentStanza
-        gmIds={gmIds}
-        isVisible={isVisible}
-      />
+      <ComponentAlignmentStanza gmIds={gmIds} isVisible={isVisible} />
+      <StrainAlignmentStanza gmIds={gmIds} isVisible={isVisible} />
     </PageWrapper>
   );
 };
@@ -47,7 +42,7 @@ const useCompareMediaByTaxIds = () => {
   const [errorMsg, setErrorMsg] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
   const onSubmit = () => {
-    execute();
+    void execute();
   };
   const execute = async () => {
     const queryStr = inputRef.current?.value ?? "";
@@ -73,7 +68,7 @@ const useCompareMediaByTaxIds = () => {
     const queriedIds = url.searchParams.get("tax_ids");
     if (queriedIds) {
       inputRef.current!.value = queriedIds;
-      execute();
+      void execute();
     }
   }, [execute]);
 
@@ -85,7 +80,7 @@ const filterTaxIds = async (taxIds: string[]): Promise<string[]> => {
   const response = await fetch(API, {
     method: "POST",
     mode: "cors",
-    body: `tax_ids=${taxIds}`,
+    body: `tax_ids=${taxIds.join(",")}`,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
@@ -99,7 +94,7 @@ const fetchMedia = async (tax_ids: string[]): Promise<string[]> => {
   const response = await fetch(API, {
     method: "POST",
     mode: "cors",
-    body: `tax_ids=${tax_ids}&limit=${100}`,
+    body: `tax_ids=${tax_ids.join(",")}&limit=${100}`,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",

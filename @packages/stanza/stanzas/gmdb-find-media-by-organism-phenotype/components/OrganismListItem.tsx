@@ -1,11 +1,11 @@
-import Checkbox from "@mui/material/Checkbox";
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { PATH_TAXON } from "%core/consts";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%core/theme";
 import { LabelInfo } from "%stanza/utils/labelInfo";
+import Checkbox from "@mui/material/Checkbox";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = {
   isChecked: boolean;
@@ -18,18 +18,12 @@ export const OrganismListItem: FC<Props> = ({ id, label, isChecked, onClick }) =
     <Wrapper>
       <ListInner>
         <LabelCol>{label}</LabelCol>
-        <IdCol
-          href={makeLinkPath(url)}
-          target={getLinkTarget(url)}
-        >
+        <IdCol href={makeLinkPath(url)} target={getLinkTarget(url)}>
           [tax_id:{id}]
         </IdCol>
       </ListInner>
       <CheckCol>
-        <Checkbox
-          checked={isChecked}
-          onClick={() => onClick({ id, label })}
-        />
+        <Checkbox checked={isChecked} onClick={() => onClick({ id, label })} />
       </CheckCol>
     </Wrapper>
   );

@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { FC, ReactNode } from "react";
+
 import { LinkTo } from "@/types/router.ts";
 
 type Props = {
@@ -16,8 +17,8 @@ export const ToolsCard: FC<Props> = ({ title, to, icon }) => {
           "flex h-full items-center gap-[clamp(8px,1.2vw,32px)] px-[clamp(8px,1.5vw,24px)] py-[clamp(8px,1.2vw,16px)]"
         }
       >
-        <figure className={"w-1/8 min-w-8 max-w-16 shrink-0 grow-0 text-primary"}>{icon}</figure>
-        <span className={"font-wide text-xl font-medium leading-tight"}>{title}</span>
+        <figure className={"text-primary w-1/8 max-w-16 min-w-8 shrink-0 grow-0"}>{icon}</figure>
+        <span className={"font-wide text-xl leading-tight font-medium"}>{title}</span>
       </Link>
     </li>
   );

@@ -4,6 +4,7 @@ export const mediaByAttributesResponse2: ListMediaByAttributesResponse = {
   total: 35,
   offset: 10,
   limit: 10,
+  columns: [],
   contents: [
     {
       gm_id: "SY31a",

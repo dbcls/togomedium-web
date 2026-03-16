@@ -1,5 +1,7 @@
-import { ApiReferenceReact } from "@scalar/api-reference-react";
+import { getDocs } from "%api/openAPI.ts";
+
 import "@scalar/api-reference-react/style.css";
+import { ApiReferenceReact } from "@scalar/api-reference-react";
 
 export const ApiPage = () => {
   return (
@@ -8,9 +10,7 @@ export const ApiPage = () => {
         configuration={{
           theme: "default",
           forceDarkModeState: "light",
-          spec: {
-            url: "/assets/togomedium-api.yaml",
-          },
+          content: getDocs(),
           hideModels: true,
           tagsSorter: (a, b) => {
             const first = "New";

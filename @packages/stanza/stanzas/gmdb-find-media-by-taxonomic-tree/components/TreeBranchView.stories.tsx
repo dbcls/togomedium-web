@@ -1,10 +1,18 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { ComponentProps } from "react";
 import { TreeBranchView } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TreeBranchView";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { ComponentProps } from "react";
 
-const meta: Meta<typeof TreeBranchView> = {
+const meta = {
   component: TreeBranchView,
-};
+  decorators: [
+    (Story) => (
+      <StoryProvider mui>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
+} satisfies Meta<typeof TreeBranchView>;
 export default meta;
 
 const defaultArgs: ComponentProps<typeof TreeBranchView> = {
@@ -27,20 +35,17 @@ const defaultArgs: ComponentProps<typeof TreeBranchView> = {
   },
 };
 
-type Story = StoryObj<typeof TreeBranchView>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: { ...defaultArgs },
-};
-export const Tree: Story = {
+} satisfies Story;
+export const Tree = {
   decorators: [
     (Item) => {
       return (
         <TreeBranchView {...defaultArgs}>
           <TreeBranchView {...defaultArgs}></TreeBranchView>
-          <TreeBranchView
-            {...defaultArgs}
-            isHighlighted={true}
-          >
+          <TreeBranchView {...defaultArgs} isHighlighted={true}>
             <Item />
           </TreeBranchView>
         </TreeBranchView>
@@ -48,4 +53,4 @@ export const Tree: Story = {
     },
   ],
   args: { ...defaultArgs },
-};
+} satisfies Story;

@@ -1,5 +1,3 @@
-import { Optional } from "yohak-tools";
-
-export const unescapeJsonString = (str: Optional<string>): Optional<string> => {
+export const unescapeJsonString = (str: string | undefined): string | undefined => {
   return str?.replace(/\\/g, "");
 };

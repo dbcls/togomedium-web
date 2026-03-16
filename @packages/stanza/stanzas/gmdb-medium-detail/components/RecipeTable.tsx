@@ -1,10 +1,10 @@
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { PATH_COMPONENT, PATH_MEDIUM } from "%core/consts";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { THEME } from "%core/theme";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = {
   index: number;
@@ -49,10 +49,7 @@ export const RecipeTable: FC<Props> = ({ name, items, referenceId }) => {
             return (
               <tr key={index}>
                 <td className="id">
-                  <a
-                    href={makeLinkPath(url)}
-                    target={getLinkTarget(url)}
-                  >
+                  <a href={makeLinkPath(url)} target={getLinkTarget(url)}>
                     {item.id}
                   </a>
                 </td>

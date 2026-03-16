@@ -24,12 +24,12 @@ paths:
       description: Deprecated, in favor of `components_with_components`. This endpoint returns a list of all components in the GMDB.
       parameters: []
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AllComponentsResponse'
+                $ref: "#/components/schemas/AllComponentsResponse"
       tags:
         - Deprecated
       deprecated: true
@@ -38,14 +38,14 @@ paths:
       operationId: _ComponentDetail_get
       description: Returns detailed information of a component based on gmo_id.
       parameters:
-        - $ref: '#/components/parameters/ComponentDetailRequest'
+        - $ref: "#/components/parameters/ComponentDetailRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ComponentDetailResponse'
+                $ref: "#/components/schemas/ComponentDetailResponse"
       tags:
         - Stanza
         - Detail
@@ -54,16 +54,16 @@ paths:
       operationId: _componentWithComponents_get
       description: Find media with the given components, then return all components in the media. Mostly used at 'Find media by components' page.
       parameters:
-        - $ref: '#/components/parameters/ComponentsWithComponentsRequest'
+        - $ref: "#/components/parameters/ComponentsWithComponentsRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ComponentsWithComponentsResponse'
+                  $ref: "#/components/schemas/ComponentsWithComponentsResponse"
       tags:
         - Media Finder
   /gmdb_gtdb_taxonomy_ancestors:
@@ -71,16 +71,16 @@ paths:
       operationId: _GTDBTaxonAncestors_get
       description: Retrieve the ancestors of a taxonomy, useful for visualizing the taxon's hierarchical tree structure
       parameters:
-        - $ref: '#/components/parameters/GTDBTaxonAncestorsRequest'
+        - $ref: "#/components/parameters/GTDBTaxonAncestorsRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GTDBTaxonAncestorsResponse'
+                  $ref: "#/components/schemas/GTDBTaxonAncestorsResponse"
       tags:
         - Stanza
         - New
@@ -90,14 +90,14 @@ paths:
       operationId: _GTDBTaxonChildren_get
       description: Returns the direct children of the given taxonomy ID. Mostly used at 'Find media by taxonomic tree' page.
       parameters:
-        - $ref: '#/components/parameters/GTDBTaxonChildrenRequest'
+        - $ref: "#/components/parameters/GTDBTaxonChildrenRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GTDBTaxonChildrenResponse'
+                $ref: "#/components/schemas/GTDBTaxonChildrenResponse"
       tags:
         - Media Finder
         - New
@@ -107,17 +107,17 @@ paths:
       operationId: _GTDBTaxonSearchByName_get
       description: Searches for a taxonomy by its name, which is particularly useful for incremental searching.
       parameters:
-        - $ref: '#/components/parameters/GTDBTaxonSearchByNameRequest.q'
-        - $ref: '#/components/parameters/GTDBTaxonSearchByNameRequest.max'
+        - $ref: "#/components/parameters/GTDBTaxonSearchByNameRequest.q"
+        - $ref: "#/components/parameters/GTDBTaxonSearchByNameRequest.max"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GTDBTaxonSearchByNameResponse'
+                  $ref: "#/components/schemas/GTDBTaxonSearchByNameResponse"
       tags:
         - Stanza
         - New
@@ -128,12 +128,12 @@ paths:
       description: Listing up organisms of taxonomy
       parameters: []
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InfraspecificListByTaxIdResponse'
+                $ref: "#/components/schemas/InfraspecificListByTaxIdResponse"
       tags:
         - Deprecated
       deprecated: true
@@ -142,16 +142,16 @@ paths:
       operationId: _ListComponentsByGmoIds_get
       description: List growth media components with the given GMO IDs
       parameters:
-        - $ref: '#/components/parameters/ListComponentsByGmoIdsRequest.gmo_ids'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListComponentsByGmoIdsRequest.gmo_ids"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListComponentsByGmoIdsResponse'
+                $ref: "#/components/schemas/ListComponentsByGmoIdsResponse"
       tags:
         - List Stanza
   /gmdb_list_components_by_keyword:
@@ -159,16 +159,16 @@ paths:
       operationId: _ListComponentsByKeyword_get
       description: List growth media components with the given keyword
       parameters:
-        - $ref: '#/components/parameters/ListComponentsByKeywordRequest.keyword'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListComponentsByKeywordRequest.keyword"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListComponentsByKeywordResponse'
+                $ref: "#/components/schemas/ListComponentsByKeywordResponse"
       tags:
         - List Stanza
   /gmdb_list_media:
@@ -177,7 +177,7 @@ paths:
       description: This endpoint is deprecated. Use `/list_media` instead.
       parameters: []
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
@@ -190,16 +190,16 @@ paths:
       operationId: _ListMediaByCultivableCount_get
       description: List media by cultivable count
       parameters:
-        - $ref: '#/components/parameters/ListMediaByCultivableCountRequest.cultivable_count'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListMediaByCultivableCountRequest.cultivable_count"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListMediaByCultivableCountResponse'
+                $ref: "#/components/schemas/ListMediaByCultivableCountResponse"
       tags:
         - List Stanza
         - New
@@ -208,16 +208,16 @@ paths:
       operationId: _ListMediaByGmIds_get
       description: List growth media with the given GMIDs
       parameters:
-        - $ref: '#/components/parameters/ListMediaByGmIdsRequest.gm_ids'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListMediaByGmIdsRequest.gm_ids"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListMediaByGmIdsResponse'
+                $ref: "#/components/schemas/ListMediaByGmIdsResponse"
       tags:
         - List Stanza
   /gmdb_list_media_by_keyword:
@@ -225,16 +225,16 @@ paths:
       operationId: _ListMediaByKeyword_get
       description: List growth media with the given keyword
       parameters:
-        - $ref: '#/components/parameters/ListMediaByKeywordRequest.keyword'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListMediaByKeywordRequest.keyword"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListMediaByKeywordResponse'
+                $ref: "#/components/schemas/ListMediaByKeywordResponse"
       tags:
         - List Stanza
   /gmdb_list_organisms_by_keyword:
@@ -242,16 +242,16 @@ paths:
       operationId: _ListOrganismsByKeyword_get
       description: List organisms with the given keyword
       parameters:
-        - $ref: '#/components/parameters/ListOrganismsByKeywordRequest.keyword'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListOrganismsByKeywordRequest.keyword"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListOrganismsByKeywordResponse'
+                $ref: "#/components/schemas/ListOrganismsByKeywordResponse"
       tags:
         - List Stanza
   /gmdb_list_organisms_by_taxids:
@@ -259,16 +259,16 @@ paths:
       operationId: _ListOrganismsByTaxIds_get
       description: List organisms with the given tax IDs
       parameters:
-        - $ref: '#/components/parameters/ListOrganismsByTaxIdsRequest.tax_ids'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListOrganismsByTaxIdsRequest.tax_ids"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListOrganismsByTaxIdsResponse'
+                $ref: "#/components/schemas/ListOrganismsByTaxIdsResponse"
       tags:
         - List Stanza
   /gmdb_list_similar_media_by_gmid:
@@ -276,16 +276,16 @@ paths:
       operationId: _ListSimilarMediaByGmId_get
       description: Get similar growth media by GM ID
       parameters:
-        - $ref: '#/components/parameters/ListSimilarMediaByGmIdRequest.gm_id'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListSimilarMediaByGmIdRequest.gm_id"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListSimilarMediaByGmIdResponse'
+                $ref: "#/components/schemas/ListSimilarMediaByGmIdResponse"
       tags:
         - List Stanza
   /gmdb_media_alignment_by_gm_ids:
@@ -293,14 +293,14 @@ paths:
       operationId: _MediaComponentAlignment_get
       description: Returns the alignment information of components based on GM IDs. Mostly used at 'Compare media' page.
       parameters:
-        - $ref: '#/components/parameters/MediaComponentAlignmentRequest'
+        - $ref: "#/components/parameters/MediaComponentAlignmentRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MediaComponentAlignmentResponse'
+                $ref: "#/components/schemas/MediaComponentAlignmentResponse"
       tags:
         - Stanza
   /gmdb_media_by_attributes:
@@ -308,16 +308,16 @@ paths:
       operationId: _ListMediaByAttributes_get
       description: Search media by attributes. Currently, only component(gmo_id) is supported. Mostly used at 'Find media by components' page.
       parameters:
-        - $ref: '#/components/parameters/ListMediaByAttributesRequest.gmo_ids'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListMediaByAttributesRequest.gmo_ids"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListMediaByAttributesResponse'
+                $ref: "#/components/schemas/ListMediaByAttributesResponse"
       tags:
         - Media Finder
         - List Stanza
@@ -326,16 +326,16 @@ paths:
       operationId: _ListMediaOfComponent_get
       description: Get growth media by a component's GMO ID
       parameters:
-        - $ref: '#/components/parameters/ListMediaOfComponentRequest.gmo_id'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListMediaOfComponentRequest.gmo_id"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListMediaOfComponentResponse'
+                $ref: "#/components/schemas/ListMediaOfComponentResponse"
       tags:
         - List Stanza
   /gmdb_media_by_gtdb_taxon:
@@ -343,16 +343,16 @@ paths:
       operationId: _GTDBListMediaOfTaxons_get
       description: Search for media associated with a taxon and return a list
       parameters:
-        - $ref: '#/components/parameters/GTDBListMediaOfTaxonsRequest.tax_id'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/GTDBListMediaOfTaxonsRequest.tax_id"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GTDBListMediaOfTaxonsResponse'
+                $ref: "#/components/schemas/GTDBListMediaOfTaxonsResponse"
       tags:
         - List Stanza
         - New
@@ -362,16 +362,16 @@ paths:
       operationId: _ListMediaOfStrain_get
       description: Search for media associated with a strain and return a list
       parameters:
-        - $ref: '#/components/parameters/ListMediaOfStrainRequest.strain_id'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListMediaOfStrainRequest.strain_id"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListMediaOfStrainResponse'
+                $ref: "#/components/schemas/ListMediaOfStrainResponse"
       tags:
         - List Stanza
   /gmdb_media_by_taxid:
@@ -379,16 +379,16 @@ paths:
       operationId: _ListMediaOfTaxon_get
       description: Search for media associated with a taxon and return a list
       parameters:
-        - $ref: '#/components/parameters/ListMediaOfTaxonRequest.tax_id'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListMediaOfTaxonRequest.tax_id"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListMediaOfTaxonResponse'
+                $ref: "#/components/schemas/ListMediaOfTaxonResponse"
       tags:
         - List Stanza
   /gmdb_media_by_taxon:
@@ -396,16 +396,16 @@ paths:
       operationId: _ListMediaOfTaxons_get
       description: Search for media associated with a taxon and return a list
       parameters:
-        - $ref: '#/components/parameters/ListMediaOfTaxonsRequest.tax_ids'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListMediaOfTaxonsRequest.tax_ids"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListMediaOfTaxonsResponse'
+                $ref: "#/components/schemas/ListMediaOfTaxonsResponse"
       tags:
         - List Stanza
   /gmdb_media_strains_alignment_by_gm_ids:
@@ -413,14 +413,14 @@ paths:
       operationId: _MediaStrainsAlignment_get
       description: Find multiple media by GM ID and return alignment information of organisms
       parameters:
-        - $ref: '#/components/parameters/MediaStrainsAlignmentRequest'
+        - $ref: "#/components/parameters/MediaStrainsAlignmentRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MediaStrainsAlignmentResponse'
+                $ref: "#/components/schemas/MediaStrainsAlignmentResponse"
       tags:
         - Stanza
   /gmdb_medium_by_gmid:
@@ -428,14 +428,14 @@ paths:
       operationId: _MediumDetail_get
       description: Returns the detailed information of a medium by its GMID
       parameters:
-        - $ref: '#/components/parameters/MediumDetailRequest'
+        - $ref: "#/components/parameters/MediumDetailRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MediumDetailResponse'
+                $ref: "#/components/schemas/MediumDetailResponse"
       tags:
         - Stanza
         - Detail
@@ -444,14 +444,14 @@ paths:
       operationId: _TaxonDetail_get
       description: Returns the detailed information of taxon by its tax ID
       parameters:
-        - $ref: '#/components/parameters/TaxonDetailRequest'
+        - $ref: "#/components/parameters/TaxonDetailRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TaxonDetailResponse'
+                $ref: "#/components/schemas/TaxonDetailResponse"
       tags:
         - Stanza
         - Detail
@@ -460,16 +460,16 @@ paths:
       operationId: _ListChildrenOfTaxon_get
       description: List direct children of a taxon. Do not confuse with `gmdb_taxonomy_children` which is not a list type API
       parameters:
-        - $ref: '#/components/parameters/ListChildrenOfTaxonRequest.tax_id'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListChildrenOfTaxonRequest.tax_id"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListChildrenOfTaxonResponse'
+                $ref: "#/components/schemas/ListChildrenOfTaxonResponse"
       tags:
         - List Stanza
   /gmdb_organisms_by_gmid:
@@ -477,16 +477,16 @@ paths:
       operationId: _ListOrganismsOfMedium_get
       description: Get organisms by a growth medium ID
       parameters:
-        - $ref: '#/components/parameters/ListOrganismsOfMediumRequest.gm_id'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListOrganismsOfMediumRequest.gm_id"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListOrganismsOfMediumResponse'
+                $ref: "#/components/schemas/ListOrganismsOfMediumResponse"
       tags:
         - List Stanza
   /gmdb_organisms_by_phenotypes:
@@ -494,24 +494,24 @@ paths:
       operationId: _ListOrganismsByPhenotypes_get
       description: Mostly used at `Find media by organism phenotype` page. Search organisms by various phenotypes
       parameters:
-        - $ref: '#/components/parameters/ListOrganismsByPhenotypesRequest.growth_temp'
-        - $ref: '#/components/parameters/ListOrganismsByPhenotypesRequest.growth_ph'
-        - $ref: '#/components/parameters/ListOrganismsByPhenotypesRequest.growth_salinity'
-        - $ref: '#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_10002'
-        - $ref: '#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_07001'
-        - $ref: '#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_02000'
-        - $ref: '#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_01001'
-        - $ref: '#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_03006'
-        - $ref: '#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_04053'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListOrganismsByPhenotypesRequest.growth_temp"
+        - $ref: "#/components/parameters/ListOrganismsByPhenotypesRequest.growth_ph"
+        - $ref: "#/components/parameters/ListOrganismsByPhenotypesRequest.growth_salinity"
+        - $ref: "#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_10002"
+        - $ref: "#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_07001"
+        - $ref: "#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_02000"
+        - $ref: "#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_01001"
+        - $ref: "#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_03006"
+        - $ref: "#/components/parameters/ListOrganismsByPhenotypesRequest.MPO_04053"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListOrganismsByPhenotypesResponse'
+                $ref: "#/components/schemas/ListOrganismsByPhenotypesResponse"
       tags:
         - List Stanza
   /gmdb_phenotype_by_strainid:
@@ -519,31 +519,31 @@ paths:
       operationId: _ListPhenotypeOfStrain_get
       description: List phenotypes of the given strain
       parameters:
-        - $ref: '#/components/parameters/ListPhenotypeOfStrainRequest.strain_id'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListPhenotypeOfStrainRequest.strain_id"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListPhenotypeOfStrainResponse'
+                $ref: "#/components/schemas/ListPhenotypeOfStrainResponse"
       tags:
         - List Stanza
   /gmdb_stat_count_media_by_cultivable_strain_count:
     get:
       operationId: _CountMediaByCultivableStrainCount_get
-      description: ''
+      description: ""
       parameters:
-        - $ref: '#/components/parameters/CountMediaByCultivableStrainCountRequest'
+        - $ref: "#/components/parameters/CountMediaByCultivableStrainCountRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CountMediaByCultivableStrainCountResponse'
+                $ref: "#/components/schemas/CountMediaByCultivableStrainCountResponse"
       tags:
         - Stats
         - New
@@ -552,15 +552,15 @@ paths:
       operationId: _StatPhylumGm_get
       description: Statistics number of growth media by phylum
       parameters:
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StatPhylumGmResponse'
+                $ref: "#/components/schemas/StatPhylumGmResponse"
       tags:
         - List Stanza
         - Stats
@@ -569,14 +569,14 @@ paths:
       operationId: _StrainDetail_get
       description: Returns the detailed information of a strain by its strain ID
       parameters:
-        - $ref: '#/components/parameters/StrainDetailRequest'
+        - $ref: "#/components/parameters/StrainDetailRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StrainDetailResponse'
+                $ref: "#/components/schemas/StrainDetailResponse"
       tags:
         - Stanza
         - Detail
@@ -585,16 +585,16 @@ paths:
       operationId: _ListStrainsOfTaxon_get
       description: List organisms with the given tax IDs
       parameters:
-        - $ref: '#/components/parameters/ListStrainsOfTaxonRequest.tax_id'
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListStrainsOfTaxonRequest.tax_id"
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListStrainsOfTaxonResponse'
+                $ref: "#/components/schemas/ListStrainsOfTaxonResponse"
       tags:
         - List Stanza
   /gmdb_taxonomic_rank_by_taxid:
@@ -602,14 +602,14 @@ paths:
       operationId: _TaxonomicRankByTaxId_get
       description: Deprecated, in favor of `organism_by_taxid`, Returns detailed information of a taxonomic rank based on tax ID
       parameters:
-        - $ref: '#/components/parameters/TaxonomicRankByTaxIdRequest'
+        - $ref: "#/components/parameters/TaxonomicRankByTaxIdRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TaxonomicRankByTaxIdResponse'
+                $ref: "#/components/schemas/TaxonomicRankByTaxIdResponse"
       tags:
         - Deprecated
       deprecated: true
@@ -618,16 +618,16 @@ paths:
       operationId: _TaxonAncestors_get
       description: Retrieve the ancestors of a taxonomy, useful for visualizing the taxon's hierarchical tree structure
       parameters:
-        - $ref: '#/components/parameters/TaxonAncestorsRequest'
+        - $ref: "#/components/parameters/TaxonAncestorsRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/TaxonAncestorsResponse'
+                  $ref: "#/components/schemas/TaxonAncestorsResponse"
       tags:
         - Stanza
         - New
@@ -636,14 +636,14 @@ paths:
       operationId: _TaxonChildren_get
       description: Returns the direct children of the given taxonomy ID. Mostly used at 'Find media by taxonomic tree' page.
       parameters:
-        - $ref: '#/components/parameters/TaxonChildrenRequest'
+        - $ref: "#/components/parameters/TaxonChildrenRequest"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TaxonChildrenResponse'
+                $ref: "#/components/schemas/TaxonChildrenResponse"
       tags:
         - Media Finder
   /gmdb_taxonomy_search_by_name:
@@ -651,17 +651,17 @@ paths:
       operationId: _TaxonSearchByName_get
       description: Searches for a taxonomy by its name, which is particularly useful for incremental searching.
       parameters:
-        - $ref: '#/components/parameters/TaxonSearchByNameRequest.q'
-        - $ref: '#/components/parameters/TaxonSearchByNameRequest.max'
+        - $ref: "#/components/parameters/TaxonSearchByNameRequest.q"
+        - $ref: "#/components/parameters/TaxonSearchByNameRequest.max"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/TaxonSearchByNameResponse'
+                  $ref: "#/components/schemas/TaxonSearchByNameResponse"
       tags:
         - Stanza
         - New
@@ -671,12 +671,12 @@ paths:
       description: Mostly used at the Alignment page.
       parameters: []
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GmsByKeggTids3Response'
+                $ref: "#/components/schemas/GmsByKeggTids3Response"
       tags:
         - Stanza
   /gms_kegg_code_tid:
@@ -685,12 +685,12 @@ paths:
       description: Mostly used at the alignment page.
       parameters: []
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GmsKeggCodeTidResponse'
+                $ref: "#/components/schemas/GmsKeggCodeTidResponse"
       tags:
         - Stanza
   /list_components:
@@ -698,15 +698,15 @@ paths:
       operationId: _ListComponents_get
       description: List all components
       parameters:
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListComponentsResponse'
+                $ref: "#/components/schemas/ListComponentsResponse"
       tags:
         - List Stanza
   /list_media:
@@ -714,15 +714,15 @@ paths:
       operationId: _ListMedia_get
       description: List all growth media
       parameters:
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListMediaResponse'
+                $ref: "#/components/schemas/ListMediaResponse"
       tags:
         - List Stanza
   /list_organisms:
@@ -730,15 +730,15 @@ paths:
       operationId: _ListOrganisms_get
       description: List all organisms
       parameters:
-        - $ref: '#/components/parameters/ListRequest.limit'
-        - $ref: '#/components/parameters/ListRequest.offset'
+        - $ref: "#/components/parameters/ListRequest.limit"
+        - $ref: "#/components/parameters/ListRequest.offset"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListOrganismsResponse'
+                $ref: "#/components/schemas/ListOrganismsResponse"
       tags:
         - List Stanza
   /list_taxons_by_rank:
@@ -747,7 +747,7 @@ paths:
       description: Historically used at the top page for displaying the taxon hierarchy
       parameters: []
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           content:
             application/json:
@@ -777,7 +777,7 @@ components:
       name: threshold
       in: query
       required: false
-      description: ''
+      description: ""
       schema:
         type: integer
         default: 11
@@ -1293,7 +1293,7 @@ components:
               original_media_id:
                 type: string
               media_id:
-                $ref: '#/components/schemas/ListLink'
+                $ref: "#/components/schemas/ListLink"
             required:
               - name
               - original_media_id
@@ -1452,7 +1452,7 @@ components:
             type: object
             properties:
               tax_id:
-                $ref: '#/components/schemas/ListLink'
+                $ref: "#/components/schemas/ListLink"
               name:
                 type: string
               rank:
@@ -1501,7 +1501,7 @@ components:
             properties:
               gmo_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: GMO ID link object
               name:
                 type: string
@@ -1546,7 +1546,7 @@ components:
             properties:
               gmo_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: GMO ID link object
               name:
                 type: string
@@ -1591,7 +1591,7 @@ components:
             properties:
               gmo_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: GMO ID link object
               name:
                 type: string
@@ -1700,7 +1700,7 @@ components:
             properties:
               media_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: gm id
               original_media_id:
                 type: string
@@ -1749,7 +1749,7 @@ components:
             properties:
               media_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: Media ID link object
               original_media_id:
                 type: string
@@ -1798,7 +1798,7 @@ components:
             properties:
               media_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: Media ID link object
               original_media_id:
                 type: string
@@ -1894,7 +1894,7 @@ components:
             type: object
             properties:
               media_id:
-                $ref: '#/components/schemas/ListLink'
+                $ref: "#/components/schemas/ListLink"
               name:
                 type: string
               original_media_id:
@@ -1943,7 +1943,7 @@ components:
               original_media_id:
                 type: string
               media_id:
-                $ref: '#/components/schemas/ListLink'
+                $ref: "#/components/schemas/ListLink"
             required:
               - name
               - original_media_id
@@ -2030,7 +2030,7 @@ components:
             properties:
               media_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: media id link object
               original_media_id:
                 type: string
@@ -2079,7 +2079,7 @@ components:
             properties:
               tax_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: Taxonomy ID link object
               label:
                 type: string
@@ -2166,7 +2166,7 @@ components:
             properties:
               tax_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: Taxonomy ID link object
               label:
                 type: string
@@ -2255,7 +2255,7 @@ components:
             properties:
               tax_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: Taxonomy ID link object
               label:
                 type: string
@@ -2299,7 +2299,7 @@ components:
             type: object
             properties:
               source:
-                $ref: '#/components/schemas/ListLink'
+                $ref: "#/components/schemas/ListLink"
               property:
                 type: string
               value:
@@ -2345,7 +2345,7 @@ components:
             properties:
               gm_id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: GM ID link object
               name:
                 type: string
@@ -2394,7 +2394,7 @@ components:
             properties:
               id:
                 allOf:
-                  - $ref: '#/components/schemas/ListLink'
+                  - $ref: "#/components/schemas/ListLink"
                 description: ID link object
               name:
                 type: string
@@ -2522,21 +2522,21 @@ components:
                   type: object
                   properties:
                     superkingdom:
-                      $ref: '#/components/schemas/SimpleTaxon'
+                      $ref: "#/components/schemas/SimpleTaxon"
                     phylum:
-                      $ref: '#/components/schemas/SimpleTaxon'
+                      $ref: "#/components/schemas/SimpleTaxon"
                     class:
-                      $ref: '#/components/schemas/SimpleTaxon'
+                      $ref: "#/components/schemas/SimpleTaxon"
                     order:
-                      $ref: '#/components/schemas/SimpleTaxon'
+                      $ref: "#/components/schemas/SimpleTaxon"
                     family:
-                      $ref: '#/components/schemas/SimpleTaxon'
+                      $ref: "#/components/schemas/SimpleTaxon"
                     genus:
-                      $ref: '#/components/schemas/SimpleTaxon'
+                      $ref: "#/components/schemas/SimpleTaxon"
                     species:
-                      $ref: '#/components/schemas/SimpleTaxon'
+                      $ref: "#/components/schemas/SimpleTaxon"
                     strain:
-                      $ref: '#/components/schemas/SimpleTaxon'
+                      $ref: "#/components/schemas/SimpleTaxon"
                   required:
                     - superkingdom
                     - phylum

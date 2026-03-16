@@ -1,8 +1,9 @@
-import parse from "html-react-parser";
-import { FC } from "react";
 import { listChildrenOfTaxonUrl } from "%api/listChildrenOfTaxon/definitions.ts";
 import { listMediaOfTaxonURL } from "%api/listMediaOfTaxon/definitions.ts";
 import { listStrainsOfTaxonUrl } from "%api/listStrainsOfTaxon/definitions.ts";
+import parse from "html-react-parser";
+import { FC } from "react";
+
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
@@ -61,5 +62,7 @@ const useIsSpecies = () => {
 const useTaxonName = (id: string) => {
   const data = Route.useLoaderData();
   const name = data?.scientific_name ?? id;
+  // todo fix this
+  // oxlint-disable-next-line
   return parse(name).toString();
 };

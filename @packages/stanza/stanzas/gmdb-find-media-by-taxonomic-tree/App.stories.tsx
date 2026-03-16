@@ -1,20 +1,26 @@
-import { Meta, StoryObj } from "@storybook/react";
 import App from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/App";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof App> = {
+const meta = {
   component: App,
   parameters: {
     layout: "fullscreen",
   },
   decorators: [
+    (Story) => (
+      <StoryProvider reactQuery mui>
+        <Story />
+      </StoryProvider>
+    ),
     (S) => (
       <div style={{ backgroundColor: "aqua", height: "100vh" }}>
         <S />
       </div>
     ),
   ],
-};
+} satisfies Meta<typeof App>;
 export default meta;
 
-type Story = StoryObj<typeof App>;
-export const Primary: Story = {};
+type Story = StoryObj<typeof meta>;
+export const Primary = {} satisfies Story;

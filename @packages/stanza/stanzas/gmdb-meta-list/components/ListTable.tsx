@@ -1,11 +1,11 @@
-import { styled } from "@mui/material/styles";
-import { nanoid } from "nanoid";
-import React, { FC } from "react";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { THEME } from "%core/theme";
 import { ListApiBody } from "%stanza/stanzas/gmdb-meta-list/types";
+import { styled } from "@mui/material/styles";
+import { nanoid } from "nanoid";
+import React, { FC } from "react";
 
 type Props = {
   data: ListApiBody;
@@ -27,10 +27,7 @@ export const ListTable: FC<Props> = ({ data, columnSizes, showColumnNames, limit
               const size = columnSizes[index];
               const isSizeEnabled = !!size && data.columns.length === columnSizes.length;
               return (
-                <th
-                  style={isSizeEnabled ? { width: `${size}%` } : {}}
-                  key={column.key}
-                >
+                <th style={isSizeEnabled ? { width: `${size}%` } : {}} key={column.key}>
                   {column.label}
                 </th>
               );
@@ -46,10 +43,7 @@ export const ListTable: FC<Props> = ({ data, columnSizes, showColumnNames, limit
               const item = row[key];
               const noWrap: boolean = !!column.nowrap;
               return (
-                <td
-                  key={key}
-                  style={noWrap ? { whiteSpace: "nowrap" } : {}}
-                >
+                <td key={key} style={noWrap ? { whiteSpace: "nowrap" } : {}}>
                   <CellContent item={item} />
                 </td>
               );
@@ -78,11 +72,7 @@ const CellContent: FC<CellContentProps> = ({ item }) => {
     return <>{item}</>;
   }
   return (
-    <a
-      href={makeLinkPath(item.href)}
-      target={getLinkTarget(item.href)}
-      rel="noreferrer"
-    >
+    <a href={makeLinkPath(item.href)} target={getLinkTarget(item.href)} rel="noreferrer">
       {decodeHTMLEntities(item.label)}
     </a>
   );

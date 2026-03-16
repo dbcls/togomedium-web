@@ -1,4 +1,3 @@
-import React, { ComponentProps, FC } from "react";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { decodeHTMLEntities } from "%core/string/decodeHtmlEntities";
 import { InfoId } from "%stanza/components/styled/InfoId";
@@ -7,6 +6,7 @@ import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { SubHeading } from "%stanza/components/styled/SubHeading";
 import { RecipeComment } from "%stanza/stanzas/gmdb-medium-detail/components/RecipeComment";
 import { RecipeTable } from "%stanza/stanzas/gmdb-medium-detail/components/RecipeTable";
+import React, { ComponentProps, FC } from "react";
 
 type Props = {
   id: string | undefined;
@@ -43,11 +43,7 @@ export const StanzaView: FC<Props> = ({
       {srcUrl && (
         <InfoId>
           <span>Information source:&nbsp;</span>
-          <a
-            href={srcUrl}
-            target={getLinkTarget(srcUrl)}
-            rel="noreferrer"
-          >
+          <a href={srcUrl} target={getLinkTarget(srcUrl)} rel="noreferrer">
             {originalId || srcLabel || id}
           </a>
         </InfoId>
@@ -61,19 +57,9 @@ export const StanzaView: FC<Props> = ({
           <SubHeading>Components</SubHeading>
           {components.map((component, index) => {
             if ("comment" in component) {
-              return (
-                <RecipeComment
-                  key={index}
-                  {...component}
-                />
-              );
+              return <RecipeComment key={index} {...component} />;
             } else {
-              return (
-                <RecipeTable
-                  key={index}
-                  {...component}
-                />
-              );
+              return <RecipeTable key={index} {...component} />;
             }
           })}
         </>
@@ -85,20 +71,9 @@ export const StanzaView: FC<Props> = ({
             {item.components.map((component, index) => {
               if (!component) return <></>;
               if ("comment" in component) {
-                return (
-                  <RecipeComment
-                    key={index}
-                    {...component}
-                  />
-                );
+                return <RecipeComment key={index} {...component} />;
               } else {
-                return (
-                  <RecipeTable
-                    key={index}
-                    {...component}
-                    referenceId={item.id}
-                  />
-                );
+                return <RecipeTable key={index} {...component} referenceId={item.id} />;
               }
             })}
           </div>

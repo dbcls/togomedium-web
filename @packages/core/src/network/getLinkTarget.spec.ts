@@ -1,5 +1,5 @@
-import { describe } from "vitest";
 import { getLinkTarget } from "%core/network/getLinkTarget";
+import { describe } from "vitest";
 
 describe("getLinkTarget", () => {
   const originalHost = window.location.host;

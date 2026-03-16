@@ -1,7 +1,3 @@
-import { SxProps, Tooltip, tooltipClasses, TooltipProps } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
-import { styled } from "@mui/material/styles";
-import React, { FC, PropsWithChildren } from "react";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { THEME } from "%core/theme";
 import {
@@ -10,6 +6,10 @@ import {
   IconLoading,
   IconNoChildren,
 } from "%stanza/components/icons/icons";
+import { SxProps, Tooltip, tooltipClasses, TooltipProps } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+import { styled } from "@mui/material/styles";
+import React, { FC, PropsWithChildren } from "react";
 
 export type CheckStatus = "none" | "checked" | "grouped" | "indeterminate";
 export type ToggleIconStatus = "none" | "expand" | "compact" | "loading";
@@ -47,7 +47,7 @@ export const TreeBranchView: FC<Props> = ({
   showId = true,
 }) => {
   return (
-    <Wrapper>
+    <Wrapper id={"branch-" + id}>
       <Inner className={isHighlighted ? "highlighted" : ""}>
         <Left>
           <span
@@ -68,10 +68,7 @@ export const TreeBranchView: FC<Props> = ({
           </Tooltip>
           {tag && <TagTip>{tag}</TagTip>}
           {linkString && linkURL && showId && (
-            <a
-              href={linkURL}
-              target={getLinkTarget(linkURL)}
-            >
+            <a href={linkURL} target={getLinkTarget(linkURL)}>
               [{linkString}]
             </a>
           )}

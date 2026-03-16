@@ -1,26 +1,35 @@
-import { ThemeProvider } from "@mui/material/styles";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Provider as JotaiProvider } from "jotai";
-import React, { FC, ReactElement, StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import Stanza from "togostanza/stanza";
 import { EmotionCacheProvider } from "%stanza/components/providers/EmotionCacheProvider";
 import { muiTheme } from "%stanza/styles/muiTheme";
+import { ThemeProvider } from "@mui/material/styles";
+import { Store } from "@reduxjs/toolkit";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Provider as JotaiProvider } from "jotai";
+import React, { FC, PropsWithChildren, ReactElement, StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { Provider as ReduxProvider } from "react-redux";
+import Stanza from "togostanza/stanza";
 
 const queryClient = new QueryClient();
-const StanzaReactProvider: FC<{ children: ReactElement }> = ({ children }) => {
+const StanzaReactProvider: FC<{ children: ReactElement; reduxStore?: Store }> = ({
+  children,
+  reduxStore,
+}) => {
+  const ReduxWrapper: FC<PropsWithChildren> = ({ children }) =>
+    reduxStore ? <ReduxProvider store={reduxStore}>{children}</ReduxProvider> : <>{children}</>;
   return (
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <JotaiProvider>
-          <ThemeProvider theme={muiTheme}>
-            <EmotionCacheProvider>
-              <style>
-                {`:host{--color-primary-dark:color-mix(in srgb, var(--color-primary), black 25%)}`}
-              </style>
-              {children}
-            </EmotionCacheProvider>
-          </ThemeProvider>
+          <ReduxWrapper>
+            <ThemeProvider theme={muiTheme}>
+              <EmotionCacheProvider>
+                <style>
+                  {`:host{--color-primary-dark:color-mix(in srgb, var(--color-primary), black 25%)}`}
+                </style>
+                {children}
+              </EmotionCacheProvider>
+            </ThemeProvider>
+          </ReduxWrapper>
         </JotaiProvider>
       </QueryClientProvider>
     </StrictMode>
@@ -34,6 +43,7 @@ const importWebFontForTogoMedium = (stanza: Stanza, name: string = "Fira Sans Co
 export abstract class TogoMediumReactStanza<T> extends Stanza {
   reactElm = this.root.querySelector("main")!;
   reactRoot = createRoot(this.reactElm as HTMLElement);
+  reduxStore?: Store;
   //
 
   abstract makeApp(): React.ReactElement;
@@ -48,7 +58,9 @@ export abstract class TogoMediumReactStanza<T> extends Stanza {
   _render() {
     const children = this.makeApp();
     const main = this.reactElm;
-    this.reactRoot.render(<StanzaReactProvider>{children}</StanzaReactProvider>);
+    this.reactRoot.render(
+      <StanzaReactProvider reduxStore={this.reduxStore}>{children}</StanzaReactProvider>,
+    );
     main.style.visibility = "hidden";
     setTimeout(() => {
       try {

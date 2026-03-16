@@ -1,9 +1,15 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { AngleLeftIcon } from "%stanza/components/icons/AngleLeftIcon";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof AngleLeftIcon> = {
+const meta = {
   component: AngleLeftIcon,
   decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
     (StoryItem) => {
       return (
         <div style={{ width: 64 }}>
@@ -12,8 +18,8 @@ const meta: Meta<typeof AngleLeftIcon> = {
       );
     },
   ],
-};
+} satisfies Meta<typeof AngleLeftIcon>;
 export default meta;
 
-type Story = StoryObj<typeof AngleLeftIcon>;
-export const Primary: Story = {};
+type Story = StoryObj<typeof meta>;
+export const Primary = {} satisfies Story;

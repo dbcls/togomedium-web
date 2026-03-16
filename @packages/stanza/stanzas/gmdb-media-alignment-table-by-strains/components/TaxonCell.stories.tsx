@@ -1,12 +1,18 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { ComponentProps, useEffect } from "react";
 import { TaxonCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/TaxonCell";
 import { useFilterTaxonMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterTaxon";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { ComponentProps, useEffect } from "react";
 
 type WithCustomArgs = ComponentProps<typeof TaxonCell> & { filterId: string };
-const meta: Meta<WithCustomArgs> = {
+const meta = {
   component: TaxonCell,
   decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
     (StoryItem, { args }) => {
       const { filterId } = args;
       const { setFilterTaxon } = useFilterTaxonMutators();
@@ -16,7 +22,7 @@ const meta: Meta<WithCustomArgs> = {
       return <StoryItem />;
     },
   ],
-};
+} satisfies Meta<WithCustomArgs>;
 export default meta;
 
 const defaultArgs: WithCustomArgs = {
@@ -28,11 +34,11 @@ const defaultArgs: WithCustomArgs = {
   isFolded: false,
 };
 
-type Story = StoryObj<WithCustomArgs>;
+type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Primary = {
   args: { ...defaultArgs },
-};
-export const Filtered: Story = {
+} satisfies Story;
+export const Filtered = {
   args: { ...defaultArgs, filterId: "201224" },
-};
+} satisfies Story;

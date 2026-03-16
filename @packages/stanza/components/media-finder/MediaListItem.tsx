@@ -1,12 +1,12 @@
-import { Tooltip } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { PATH_MEDIUM } from "%core/consts";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%core/theme";
 import { LabelInfo } from "%stanza/utils/labelInfo";
+import { Tooltip } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = {
   isChecked: boolean;
@@ -19,10 +19,7 @@ export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
   const url = `${PATH_MEDIUM}${id}`;
   return (
     <Wrapper>
-      <IdCol
-        href={makeLinkPath(url)}
-        target={getLinkTarget(url)}
-      >
+      <IdCol href={makeLinkPath(url)} target={getLinkTarget(url)}>
         {id}
       </IdCol>
       <LabelCol>

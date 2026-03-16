@@ -1,15 +1,23 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { data1 } from "%api/listMedia/data1";
 import { StanzaView } from "%stanza/stanzas/gmdb-meta-list/components/StanzaView";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof StanzaView> = {
+const meta = {
   component: StanzaView,
-  decorators: [(Story) => <Story />],
-};
+  decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
+    (Story) => <Story />,
+  ],
+} satisfies Meta<typeof StanzaView>;
 export default meta;
 
-type Story = StoryObj<typeof StanzaView>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     data: data1,
     title: "Title",
@@ -22,9 +30,9 @@ export const Primary: Story = {
     showLoading: false,
     errorMessage: "",
   },
-};
+} satisfies Story;
 
-export const NotFound: Story = {
+export const NotFound = {
   args: {
     data: {
       contents: [],
@@ -43,4 +51,4 @@ export const NotFound: Story = {
     showLoading: false,
     errorMessage: "",
   },
-};
+} satisfies Story;

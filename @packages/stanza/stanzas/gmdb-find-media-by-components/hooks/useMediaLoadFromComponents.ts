@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 import { nullListResponse } from "%api/ListApi";
 import {
   ListMediaByAttributesParams,
@@ -15,6 +13,8 @@ import {
   useMediaPaginationState,
 } from "%stanza/state/media-finder/mediaPagination";
 import { useQueryDataMutators } from "%stanza/state/media-finder/queryData";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const SHOW_COUNT = 10;
 export const useMediaLoadFromComponents = () => {
@@ -36,7 +36,7 @@ export const useMediaLoadFromComponents = () => {
           gmo_ids,
           limit: SHOW_COUNT,
           offset: (page - 1) * SHOW_COUNT,
-        }
+        },
       );
       if (!response.body) throw new Error("No data");
       return response.body;

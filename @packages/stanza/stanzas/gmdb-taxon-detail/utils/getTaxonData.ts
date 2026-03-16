@@ -1,4 +1,3 @@
-import { ComponentProps } from "react";
 import {
   TaxonDetailParams,
   TaxonDetailResponse,
@@ -8,6 +7,7 @@ import { getData } from "%core/network/getData";
 import { unescapeJsonString } from "%core/string/unescapeJsonString";
 import { StanzaView } from "%stanza/stanzas/gmdb-taxon-detail/components/StanzaView";
 import { parseLineage } from "%stanza/utils/parseLineage";
+import { ComponentProps } from "react";
 
 export type ViewProps = ComponentProps<typeof StanzaView>;
 
@@ -27,7 +27,7 @@ export const parseData = (body: TaxonDetailResponse): ViewProps => {
 };
 
 const parseOtherTypeMaterial = (
-  data: TaxonDetailResponse["other_type_material"]
+  data: TaxonDetailResponse["other_type_material"],
 ): OtherMaterialParameter[] => {
   return data
     .map((obj) => obj.name!)

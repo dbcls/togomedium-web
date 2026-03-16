@@ -14,20 +14,18 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
 
-
     "types": ["vitest/globals"],
     "paths": {
       "%stanza/*": ["./stanza/*"],
       "%api/*": ["./api/src/*"],
       "%core/*": ["./core/src/*"],
-      "%storybook/*": ["./storybook/src/*"],
+      "%storybook/*": ["./storybook/src/*"]
     }
   }
 }

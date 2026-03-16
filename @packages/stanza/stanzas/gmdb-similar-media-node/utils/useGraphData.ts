@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
 import { getMedia } from "%stanza/stanzas/gmdb-medium-detail/utils/getMedia";
 import { haveSameElements } from "%stanza/utils/arr";
 import { clone } from "%stanza/utils/clone";
 import { getData } from "%stanza/utils/getData";
 import { sleep } from "%stanza/utils/promise";
 import { URL_API } from "%stanza/utils/variables";
+import { useEffect, useState } from "react";
 
 type ProcessStatus = "processing" | "done" | "ready";
 const MAX_ITERATION_COUNT = 999999;
@@ -42,7 +42,7 @@ export type GraphDataResponse = {
 export const useGraphData = (
   initialId: string,
   maxLevel: number = Infinity,
-  ignoreExactMatch: boolean = true
+  ignoreExactMatch: boolean = true,
 ) => {
   const [maxIterationCount, setMaxIterationCount] = useState(MAX_ITERATION_COUNT);
   const [graphData, setGraphData] = useState<GraphData>({
@@ -79,7 +79,7 @@ export const useGraphData = (
     return result;
   };
   const processNext = () => {
-    (async () => {
+    void (async () => {
       if (iterationCount >= maxIterationCount) return;
       const clonedQueue = [...getQueue()];
       const nextId = clonedQueue.shift();
@@ -96,7 +96,7 @@ export const useGraphData = (
         mergeData(data, processedData, maxLevel, {
           currentId: nextId,
           nextId: getQueue()[0],
-        })
+        }),
       );
       console.log(iterationCount, newQueue);
     })();
@@ -104,7 +104,7 @@ export const useGraphData = (
   //
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const initialData = await getInitialData(initialId);
       setGraphData(initialData);
       setIsInit(true);
@@ -113,7 +113,7 @@ export const useGraphData = (
 
   useEffect(() => {
     if (!isInit) return;
-    (async () => {
+    void (async () => {
       if (iterationCount >= maxIterationCount) return;
       await sleep(iterationCount === 0 ? 16 : INTERVAL);
       setIterationCount(iterationCount + 1);
@@ -132,7 +132,7 @@ const makeNewQueue = (queue: string[], data: GraphData, processed: string[]) => 
 
 const makeLoadingData = (data: GraphData, id: string): GraphData => {
   const nodes = data.nodes.map<NodeObj>((item) =>
-    item.id === id ? { ...item, status: "processing" } : item
+    item.id === id ? { ...item, status: "processing" } : item,
   );
   return { ...data, nodes };
 };
@@ -146,7 +146,7 @@ const mergeData = (
   data1: GraphData,
   data2: GraphData,
   maxLevel: number,
-  { currentId, nextId }: { currentId: string; nextId: string }
+  { currentId, nextId }: { currentId: string; nextId: string },
 ): GraphData => {
   const nodes: NodeObj[] = [...data1.nodes, ...data2.nodes]
     .reduce<NodeObj[]>((acc, item) => {
@@ -167,14 +167,14 @@ const mergeData = (
   const links = [...data1.links, ...data2.links]
     .reduce<Link[]>((acc, item) => {
       const hasSameItem = acc.find((i) =>
-        haveSameElements([i.source, i.target], [item.source, item.target])
+        haveSameElements([i.source, i.target], [item.source, item.target]),
       );
       return hasSameItem ? acc : [...acc, item];
     }, [])
     .filter(
       (item) =>
         nodes.find((node) => node.id === item.source) &&
-        nodes.find((node) => node.id === item.target)
+        nodes.find((node) => node.id === item.target),
     );
 
   return { links, nodes };
@@ -183,7 +183,7 @@ const mergeData = (
 const processData = (
   data: GraphDataResponse["contents"],
   source: string,
-  level: number
+  level: number,
 ): GraphData => {
   const links: Link[] = data.map((item) => ({
     source,

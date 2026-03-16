@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import { H2 } from "@/components/atoms/H2.tsx";
 import { FridgeIcon } from "@/components/atoms/svg/FridgeIcon.tsx";
 import { GridIcon } from "@/components/atoms/svg/GridIcon.tsx";
@@ -27,11 +28,7 @@ export const ToolsSection: FC<Props> = () => {
           to={"/find-media-by-organism-phenotype"}
           icon={<SlidersIcon />}
         />
-        <ToolsCard
-          title={"Compare media"}
-          to={"/compare-media"}
-          icon={<GridIcon />}
-        />
+        <ToolsCard title={"Compare media"} to={"/compare-media"} icon={<GridIcon />} />
         <ToolsCard
           title={"Compare media by TAX IDs"}
           to={"/compare-media-by-taxids"}

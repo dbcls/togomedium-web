@@ -1,5 +1,3 @@
-import { styled } from "@mui/material/styles";
-import { useQuery } from "@tanstack/react-query";
 import {
   StatsCountCulturableSpeciesParams,
   StatsCountCulturableSpeciesResponse,
@@ -8,6 +6,8 @@ import {
 import { getData } from "%core/network/getData";
 import { THEME } from "%core/theme";
 import { AppContainer } from "%stanza/stanzas/gmdb-stats-culturable-species/components/AppContainer";
+import { styled } from "@mui/material/styles";
+import { useQuery } from "@tanstack/react-query";
 
 export type AppProps = {
   stanzaElement?: ShadowRoot;

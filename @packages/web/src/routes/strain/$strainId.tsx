@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { strainDetailURL } from "%api/strainDetail/definitions.ts";
+import { createFileRoute } from "@tanstack/react-router";
+
 import { StrainDetailPage } from "@/pages/StrainDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 
@@ -16,9 +17,5 @@ export const Route = createFileRoute("/strain/$strainId")({
     // console.log(result);
     return result;
   },
-  component: RouteComponent,
+  component: () => <StrainDetailPage />,
 });
-
-function RouteComponent() {
-  return <StrainDetailPage />;
-}

@@ -1,10 +1,10 @@
 @import "tailwindcss";
 /*noinspection CssInvalidAtRule*/
 @theme {
-  --color-primary:#8FC31F;
-  --color-primary-dark:#6FA80C;
-  --font-wide:"Fira Sans", sans-serif;
-  --font-narrow:"Fira Sans Condensed", sans-serif;
+  --color-primary: #8fc31f;
+  --color-primary-dark: #6fa80c;
+  --font-wide: "Fira Sans", sans-serif;
+  --font-narrow: "Fira Sans Condensed", sans-serif;
 }
 
 @layer base {

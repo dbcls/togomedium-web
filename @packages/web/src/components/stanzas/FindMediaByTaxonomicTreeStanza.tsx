@@ -1,5 +1,6 @@
-import { FC, useEffect } from "react";
 import { TaxonomyType } from "%core/types/TaxonomyType.ts";
+import { FC, useEffect } from "react";
+
 import { URL_STANZA } from "@/consts/api.ts";
 
 type Props = {
@@ -26,11 +27,7 @@ export const FindMediaByTaxonomicTreeStanza: FC<Props> = ({ type = "NCBI" }) => 
 
   return (
     <>
-      <script
-        src={`${URL_STANZA}/${stanzaName}.js`}
-        type="module"
-        async
-      ></script>
+      <script src={`${URL_STANZA}/${stanzaName}.js`} type="module" async></script>
       <StanzaTag
         className={"flex grow"}
         togostanza-menu-placement="none"

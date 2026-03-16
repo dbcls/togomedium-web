@@ -1,8 +1,19 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { AppContainer } from "%stanza/stanzas/gmdb-find-media-by-components/components/AppContainer";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof AppContainer> = {
+const meta = {
   component: AppContainer,
+  args: {
+    dispatchEvent: () => {},
+  },
+  decorators: [
+    (Story) => (
+      <StoryProvider reactQuery mui>
+        <Story />
+      </StoryProvider>
+    ),
+  ],
   parameters: {
     // msw: makeMswParameter([
     //   ...mediaByAttributesMocks,
@@ -10,8 +21,8 @@ const meta: Meta<typeof AppContainer> = {
     //   ...organismsByPhenotypesMocks,
     // ]),
   },
-};
+} satisfies Meta<typeof AppContainer>;
 export default meta;
 
-type Story = StoryObj<typeof AppContainer>;
-export const Primary: Story = {};
+type Story = StoryObj<typeof meta>;
+export const Primary = {} satisfies Story;

@@ -1,6 +1,7 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
-import { TaxonInfo } from "./taxonList";
+
 import { makeNewSelection } from "../functions/proessTaxonInfo";
+import { TaxonInfo } from "./taxonList";
 
 const selectedTaxon = atom<string[]>([]);
 

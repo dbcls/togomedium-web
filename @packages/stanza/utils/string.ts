@@ -1,14 +1,12 @@
-import { Optional } from "yohak-tools";
-
 /**
  *
  * @deprecated
  */
-export const unescapeJsonString = (str: Optional<string>): Optional<string> => {
+export const unescapeJsonString = (str: string | undefined): string | undefined => {
   return str?.replace(/\\/g, "");
 };
 
-export const capitalizeFirstLetter = (str: Optional<string>): Optional<string> => {
+export const capitalizeFirstLetter = (str: string | undefined): string | undefined => {
   if (!str) {
     return str;
   }
@@ -17,14 +15,14 @@ export const capitalizeFirstLetter = (str: Optional<string>): Optional<string> =
   return `${reg![1].toUpperCase()}${reg![2]}`;
 };
 
-export const makeTogoGenomeOrganismLink = (taxid: Optional<string>): Optional<string> => {
+export const makeTogoGenomeOrganismLink = (taxid: string | undefined): string | undefined => {
   if (!taxid) {
     return taxid;
   }
   return `http://togogenome.org/organism/${taxid}`;
 };
 
-export const makeNcbiOrganismLink = (taxid: Optional<string>): Optional<string> => {
+export const makeNcbiOrganismLink = (taxid: string | undefined): string | undefined => {
   if (!taxid) {
     return taxid;
   }

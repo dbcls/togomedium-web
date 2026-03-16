@@ -5,7 +5,7 @@ import { ListApiBody } from "../types";
 export const fetchData = async (
   url: string,
   offset: number,
-  limit: number
+  limit: number,
 ): Promise<ApiResponse<ListApiBody>> => {
   // return fetchDummy(query, offset, limit);
   return fetchLive(url, offset, limit);
@@ -14,7 +14,7 @@ export const fetchData = async (
 const fetchLive = async (
   url: string,
   offset: number,
-  limit: number
+  limit: number,
 ): Promise<ApiResponse<ListApiBody>> => {
   const [uri, query]: [string, string] = separateURL(url);
   const response = await fetch(uri, makeOptions({ offset, limit }, query));

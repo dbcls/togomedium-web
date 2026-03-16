@@ -1,11 +1,17 @@
-import { Meta, StoryObj } from "@storybook/react";
-import React, { ComponentProps } from "react";
 import { Pagination } from "%stanza/components/media-finder/Pagination";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import React, { ComponentProps } from "react";
 
-const meta: Meta<typeof Pagination> = {
+const meta = {
   component: Pagination,
   decorators: [
+    (Story) => (
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
+    ),
     (StoryItem) => {
       return (
         <ComponentWrapper>
@@ -14,10 +20,10 @@ const meta: Meta<typeof Pagination> = {
       );
     },
   ],
-};
+} satisfies Meta<typeof Pagination>;
 export default meta;
 
-type Story = StoryObj<typeof Pagination>;
+type Story = StoryObj<typeof meta>;
 const defaultArgs: ComponentProps<typeof Pagination> = {
   total: 35,
   current: 0,
@@ -25,12 +31,12 @@ const defaultArgs: ComponentProps<typeof Pagination> = {
   onClickNext: () => {},
   onClickPrev: () => {},
 };
-export const Primary: Story = {
+export const Primary = {
   args: { ...defaultArgs },
-};
-export const Type1: Story = {
+} satisfies Story;
+export const Type1 = {
   args: { ...defaultArgs, current: 10 },
-};
-export const Type2: Story = {
+} satisfies Story;
+export const Type2 = {
   args: { ...defaultArgs, current: 25 },
-};
+} satisfies Story;

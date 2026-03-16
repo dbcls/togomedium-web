@@ -1,7 +1,7 @@
+import { EmotionGlobalStyles } from "%stanza/styles/EmotionGlobalStyles";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import React, { FC, PropsWithChildren, useEffect, useRef, useState } from "react";
-import { EmotionGlobalStyles } from "%stanza/styles/EmotionGlobalStyles";
 
 export type EmotionCacheProviderProps = {} & PropsWithChildren;
 

@@ -1,5 +1,6 @@
-import { FC } from "react";
 import { statsGmCountByPhylum } from "%api/statsGmCountByPhylum/definitions.ts";
+import { FC } from "react";
+
 import { H2 } from "@/components/atoms/H2.tsx";
 import { CulturableSpeciesStatsStanza } from "@/components/stanzas/CulturableSpeciesStatsStanza.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
@@ -19,11 +20,7 @@ export const StatisticsPage: FC = () => {
 
       <div>
         <H2>The number of growth media per phylum</H2>
-        <ListStanza
-          api={statsGmCountByPhylum}
-          columnSizes={[50, 50]}
-          limit={999}
-        />
+        <ListStanza api={statsGmCountByPhylum} columnSizes={[50, 50]} limit={999} />
       </div>
     </PageWrapper>
   );

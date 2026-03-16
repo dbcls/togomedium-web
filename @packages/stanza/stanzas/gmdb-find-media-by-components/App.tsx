@@ -1,5 +1,5 @@
-import React, { FC } from "react";
 import { AppContainer } from "%stanza/stanzas/gmdb-find-media-by-components/components/AppContainer";
+import React, { FC } from "react";
 
 type Props = {
   stanzaElement?: ShadowRoot;
@@ -10,7 +10,7 @@ const App: FC<Props> = ({ stanzaElement }) => {
     if (!stanzaElement) return;
     //
     stanzaElement.dispatchEvent(
-      new CustomEvent("STANZA_RUN_ACTION", { bubbles: true, composed: true, detail: gmIds })
+      new CustomEvent("STANZA_RUN_ACTION", { bubbles: true, composed: true, detail: gmIds }),
     );
     // console.log("dispatch", { detail: gmIds });
   };

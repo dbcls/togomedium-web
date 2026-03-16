@@ -1,12 +1,13 @@
-import { RefObject } from "@react-types/shared";
-import { useLocation, useNavigate } from "@tanstack/react-router";
-import { FC, useRef } from "react";
 import { listComponentsByIdsUrl } from "%api/listComponentsByIds/definitions.ts";
 import { listComponentsByKeywordUrl } from "%api/listComponentsByKeyword/definitions.ts";
 import { listMediaByIdsUrl } from "%api/listMediaByIds/definitions.ts";
 import { listMediaByKeywordUrl } from "%api/listMediaByKeyword/definitions.ts";
 import { listOrganismByIdsUrl } from "%api/listOrganismByIds/definitions.ts";
 import { listOrganismByKeywordUrl } from "%api/listOrganismByKeyword/definitions.ts";
+import { RefObject } from "@react-types/shared";
+import { useLocation, useNavigate } from "@tanstack/react-router";
+import { FC, useRef } from "react";
+
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { SearchPane } from "@/components/organisms/SearchPane.tsx";
@@ -55,59 +56,41 @@ export const SearchPage: FC = () => {
         {mediaById && (
           <div>
             <H3>Media of {query}</H3>
-            <ListStanza
-              api={`${listMediaByIdsUrl}?gm_ids=${query}`}
-              columnSizes={[]}
-            />
+            <ListStanza api={`${listMediaByIdsUrl}?gm_ids=${query}`} columnSizes={[]} />
           </div>
         )}
         {organismsById && (
           <div>
             <H3>Organisms of {query}</H3>
-            <ListStanza
-              api={`${listOrganismByIdsUrl}?tax_ids=${query}`}
-              columnSizes={[]}
-            />
+            <ListStanza api={`${listOrganismByIdsUrl}?tax_ids=${query}`} columnSizes={[]} />
           </div>
         )}
 
         {componentsById && (
           <div>
             <H3>Components of {query}</H3>
-            <ListStanza
-              api={`${listComponentsByIdsUrl}?gmo_ids=${query}`}
-              columnSizes={[]}
-            />
+            <ListStanza api={`${listComponentsByIdsUrl}?gmo_ids=${query}`} columnSizes={[]} />
           </div>
         )}
 
         {mediaByKeyword && (
           <div>
             <H3>Media with {query}</H3>
-            <ListStanza
-              api={`${listMediaByKeywordUrl}?keyword=${query}`}
-              columnSizes={[]}
-            />
+            <ListStanza api={`${listMediaByKeywordUrl}?keyword=${query}`} columnSizes={[]} />
           </div>
         )}
 
         {componentsByKeyword && (
           <div>
             <H3>Components with {query}</H3>
-            <ListStanza
-              api={`${listComponentsByKeywordUrl}?keyword=${query}`}
-              columnSizes={[]}
-            />
+            <ListStanza api={`${listComponentsByKeywordUrl}?keyword=${query}`} columnSizes={[]} />
           </div>
         )}
 
         {organismsByKeyword && (
           <div>
             <H3>Organisms with {query}</H3>
-            <ListStanza
-              api={`${listOrganismByKeywordUrl}?keyword=${query}`}
-              columnSizes={[]}
-            />
+            <ListStanza api={`${listOrganismByKeywordUrl}?keyword=${query}`} columnSizes={[]} />
           </div>
         )}
       </section>
@@ -137,7 +120,7 @@ const useSubmit = (inputRef: RefObject<HTMLInputElement | null>) => {
   const onSubmit = () => {
     const query = encodeURIComponent(inputRef.current?.value ?? "");
     if (query !== "") {
-      navigate({ to: "/search", search: { query } });
+      void navigate({ to: "/search", search: { query } });
     }
     (document.activeElement as HTMLElement).blur();
   };
