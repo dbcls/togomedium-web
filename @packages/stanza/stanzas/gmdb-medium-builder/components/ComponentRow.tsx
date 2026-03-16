@@ -8,6 +8,7 @@ import {
 } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import { SolutionBlockSelectors } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 import { deleteComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/deleteComponentRowThunk";
+import { duplicateComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/duplicateComponentRowThunk";
 import { moveComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/moveComponentRowThunk";
 import { Autocomplete, IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
@@ -45,6 +46,7 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
     handleClose,
     handleClick,
     handleClickDeleteRow,
+    handleClickDuplicateRow,
     handleClickMoveRowUp,
     handleClickMoveRowDown,
     disableDelete,
@@ -81,6 +83,7 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
             },
           }}
         >
+          <MenuItem onClick={handleClickDuplicateRow}>Duplicate row</MenuItem>
           <MenuItem onClick={handleClickDeleteRow} disabled={disableDelete}>
             Delete row
           </MenuItem>
@@ -221,6 +224,10 @@ const useMenu = (id: string, solutionBlockId: string) => {
     dispatch(deleteComponentRowThunk(solutionBlockId, id));
     handleClose();
   };
+  const handleClickDuplicateRow = () => {
+    dispatch(duplicateComponentRowThunk(solutionBlockId, id));
+    handleClose();
+  };
   const handleClickMoveRowUp = () => {
     dispatch(moveComponentRowThunk(solutionBlockId, id, "up"));
     handleClose();
@@ -236,6 +243,7 @@ const useMenu = (id: string, solutionBlockId: string) => {
     handleClose,
     handleClick,
     handleClickDeleteRow,
+    handleClickDuplicateRow,
     handleClickMoveRowUp,
     handleClickMoveRowDown,
     disableDelete,
