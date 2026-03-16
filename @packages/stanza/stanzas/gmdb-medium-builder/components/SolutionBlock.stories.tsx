@@ -3,13 +3,13 @@ import { appStore } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { InputBlock } from "./InputBlock";
+import { SolutionBlock } from "./SolutionBlock";
 
 const state = appStore.getState();
 const solutionBlockId = state.entities.solutionBlocks.ids[0];
 
 const meta = {
-  component: InputBlock,
+  component: SolutionBlock,
   args: {
     id: solutionBlockId,
   },
@@ -25,7 +25,7 @@ const meta = {
       </Sheet>
     ),
   ],
-} satisfies Meta<typeof InputBlock>;
+} satisfies Meta<typeof SolutionBlock>;
 
 export default meta;
 

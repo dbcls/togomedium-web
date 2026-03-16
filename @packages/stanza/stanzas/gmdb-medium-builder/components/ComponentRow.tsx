@@ -33,7 +33,7 @@ const units = [
   },
 ];
 
-export const InputRow: FC<Props> = ({ id, solutionBlockId }) => {
+export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
   const componentRow = useAppSelector((state) => ComponentRowSelectors.selectById(state, id));
   const { components, isSuccess } = useComponentsData();
   const { handleChangeComponent, handleChangeVolume, handleChangeUnit, handleChangeNote } =

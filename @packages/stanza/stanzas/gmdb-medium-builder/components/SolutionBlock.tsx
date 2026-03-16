@@ -1,5 +1,5 @@
 import { VerticalEllipsisIcon } from "%stanza/components/icons/VerticalEllipsisIcon";
-import { InputRow } from "%stanza/stanzas/gmdb-medium-builder/components/InputRow";
+import { ComponentRow } from "%stanza/stanzas/gmdb-medium-builder/components/ComponentRow";
 import { Block, TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { selectSolutionComponentRows } from "%stanza/stanzas/gmdb-medium-builder/state/selectors/selectSolutionComponentRows";
@@ -18,7 +18,7 @@ import React, { FC } from "react";
 
 type Props = { id: string };
 
-export const InputBlock: FC<Props> = ({ id }) => {
+export const SolutionBlock: FC<Props> = ({ id }) => {
   const solution = useAppSelector((state) => SolutionBlockSelectors.selectById(state, id));
   const componentRows = useAppSelector((state) => selectSolutionComponentRows(state, id));
   const { handleClickAddComponentRow, handleChangeTitle } = useInputHandlers(id);
@@ -96,7 +96,7 @@ export const InputBlock: FC<Props> = ({ id }) => {
         </TableRow>
         <ComponentTableBody>
           {componentRows.map((componentRow) => (
-            <InputRow key={componentRow.id} id={componentRow.id} solutionBlockId={id} />
+            <ComponentRow key={componentRow.id} id={componentRow.id} solutionBlockId={id} />
           ))}
         </ComponentTableBody>
         <ComponentTableFooter>

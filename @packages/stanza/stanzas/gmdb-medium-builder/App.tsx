@@ -1,6 +1,6 @@
 import { THEME } from "%core/theme";
-import { InputBlock } from "%stanza/stanzas/gmdb-medium-builder/components/InputBlock";
 import { Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
+import { SolutionBlock } from "%stanza/stanzas/gmdb-medium-builder/components/SolutionBlock";
 import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { selectDocumentSolutions } from "%stanza/stanzas/gmdb-medium-builder/state/selectors/selectDocumentSolutions";
 import { addSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/addSolutionThunk";
@@ -24,7 +24,7 @@ const App = (_props: AppProps) => {
     <Wrapper>
       <Sheet>
         {solutions.map((solution) => (
-          <InputBlock key={solution.id} id={solution.id} />
+          <SolutionBlock key={solution.id} id={solution.id} />
         ))}
         <FooterRow>
           <FooterLeft>

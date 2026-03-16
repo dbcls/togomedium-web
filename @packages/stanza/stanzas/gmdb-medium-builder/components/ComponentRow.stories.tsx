@@ -3,14 +3,14 @@ import { appStore } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { InputRow } from "./InputRow";
+import { ComponentRow } from "./ComponentRow";
 
 const state = appStore.getState();
 const componentRowId = state.entities.componentRows.ids[0];
 const solutionBlockId = state.entities.solutionBlocks.ids[0];
 
 const meta = {
-  component: InputRow,
+  component: ComponentRow,
   args: {
     id: componentRowId,
     solutionBlockId,
@@ -29,7 +29,7 @@ const meta = {
       </Sheet>
     ),
   ],
-} satisfies Meta<typeof InputRow>;
+} satisfies Meta<typeof ComponentRow>;
 
 export default meta;
 
