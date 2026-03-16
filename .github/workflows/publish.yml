@@ -3,9 +3,9 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # main ブランチへのプッシュ時に実行
-      - feature/2024-renewal
+      - main
       - stanza
+      - staging
 
 jobs:
   build-and-deploy:
