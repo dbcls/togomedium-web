@@ -10,6 +10,7 @@ import {
 } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 import { addComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/addComponentRowThunk";
 import { deleteSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/deleteSolutionThunk";
+import { duplicateSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/duplicateSolutionThunk";
 import { moveSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/moveSolutionThunk";
 import { IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -28,6 +29,7 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
     handleClose,
     handleClick,
     handleClickDeleteBlock,
+    handleClickDuplicateBlock,
     handleClickMoveBlockUp,
     handleClickMoveBlockDown,
     disableDelete,
@@ -65,6 +67,7 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
               },
             }}
           >
+            <MenuItem onClick={handleClickDuplicateBlock}>Duplicate Block</MenuItem>
             <MenuItem onClick={handleClickDeleteBlock} disabled={disableDelete}>
               Delete Block
             </MenuItem>
@@ -185,6 +188,10 @@ const useMenu = (id: string) => {
     dispatch(deleteSolutionThunk(id));
     handleClose();
   };
+  const handleClickDuplicateBlock = () => {
+    dispatch(duplicateSolutionThunk(id));
+    handleClose();
+  };
   const handleClickMoveBlockUp = () => {
     dispatch(moveSolutionThunk(id, "up"));
     handleClose();
@@ -200,6 +207,7 @@ const useMenu = (id: string) => {
     handleClose,
     handleClick,
     handleClickDeleteBlock,
+    handleClickDuplicateBlock,
     handleClickMoveBlockUp,
     handleClickMoveBlockDown,
     disableDelete,
