@@ -2,15 +2,23 @@
 
 ## このパッケージについて
 
-- `@packages/web` は Vite ベースの React フロントエンドです。
-- TanStack Router を使っており、Route ファイルでは `function RouteComponent()` を使う例外ルールがあります。
+- `@packages/web` は TogoMedium の公開用 Web サイトを構成するパッケージです。
+- Vite ベースの React フロントエンドで、TanStack Router、React Query、Tailwind CSS 4 系統を使って構成されています。
+- 複雑な機能は、あらかじめ Stanza として実装された WebComponent を Web 側に組み込む形で実現しています。
 
 ## 作業時の方針
 
-- 画面実装では `src/pages/` と `src/routes/` の責務を分け、ページ本体とルーティング設定を混ぜないでください。
-- 自動生成物の可能性がある `src/routeTree.gen.ts` は手編集する前に生成フローを確認してください。
+- ルーティング、画面構成、コンポーネント配置、データ取得、スタイリングの詳細な指針は `@packages/web/docs/coding-guidelines.md` を参照してください。
+- Web で Stanza を組み込む時は `@packages/web/docs/stanza-integration.md` を参照してください。
+- ルート追加や画面改修では、まず `src/routes/` と `src/pages/` のどちらが責務の中心かを切り分けてから編集してください。
+- Stanza 連携の変更では、page 側で直接 custom element を触らず、既存の `src/components/stanzas/` を起点に影響範囲を確認してください。
+- `src/routeTree.gen.ts` は TanStack Router の自動生成ファイルです。手動編集せず、必要な変更は `src/routes/` 側で行ってください。
+
+### 関連ガイド
+
+- Web 固有のコード規約は `@packages/web/docs/coding-guidelines.md` を確認してください。
+- Web での Stanza 組み込み手順は `@packages/web/docs/stanza-integration.md` を確認してください。
 - SVG アイコン関連の作業では `docs/agents/task-guides/svgIcon.md` を確認してください。
-- Stanza と Web で似た UI があっても、依存や配置ルールが違う可能性があるためそのまま流用しないでください。
 
 ## よく使うコマンド
 
@@ -24,5 +32,11 @@
 - `src/routes/`
 - `src/pages/`
 - `src/components/`
+- `src/components/stanzas/`
+- `src/types/stanza.d.ts`
 - `src/hooks/`
+- `src/utils/`
+- `src/consts/`
+- `src/app.tsx`
+- `src/main.tsx`
 - `vite.config.ts`
