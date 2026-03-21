@@ -1,3 +1,4 @@
+import { THEME } from "%core/theme";
 import { VerticalEllipsisIcon } from "%stanza/components/icons/VerticalEllipsisIcon";
 import { ComponentRow } from "%stanza/stanzas/gmdb-medium-builder/components/ComponentRow";
 import { Block, TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
@@ -12,17 +13,21 @@ import { addComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/
 import { deleteSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/deleteSolutionThunk";
 import { duplicateSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/duplicateSolutionThunk";
 import { moveSolutionThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/moveSolutionThunk";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 type Props = { id: string };
 
 export const SolutionBlock: FC<Props> = ({ id }) => {
   const solution = useAppSelector((state) => SolutionBlockSelectors.selectById(state, id));
   const componentRows = useAppSelector((state) => selectSolutionComponentRows(state, id));
-  const { handleClickAddComponentRow, handleChangeTitle } = useInputHandlers(id);
+  const { handleClickAddComponentRow, handleChangeTitle, handleChangeDescription } =
+    useInputHandlers(id);
+  const [isNoteOpen, setIsNoteOpen] = useState(false);
   const {
     anchorEl,
     open,
@@ -103,15 +108,41 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
           ))}
         </ComponentTableBody>
         <ComponentTableFooter>
-          <Button
-            variant={"contained"}
-            size={"small"}
-            disableElevation={true}
-            sx={{ textTransform: "none" }}
-            onClick={handleClickAddComponentRow}
+          <AddButtonWrapper>
+            <Button
+              variant={"contained"}
+              size={"small"}
+              disableElevation={true}
+              sx={{ textTransform: "none" }}
+              onClick={handleClickAddComponentRow}
+            >
+              Add component row
+            </Button>
+          </AddButtonWrapper>
+          <NoteLabelWrapper
+            type="button"
+            aria-expanded={isNoteOpen}
+            aria-controls={`solution-note-${id}`}
+            onClick={() => setIsNoteOpen((prev) => !prev)}
           >
-            Add component row
-          </Button>
+            {isNoteOpen ? (
+              <ArrowDropDownIcon fontSize="small" />
+            ) : (
+              <ArrowRightIcon fontSize="small" />
+            )}
+            <span>Note</span>
+          </NoteLabelWrapper>
+          {isNoteOpen ? (
+            <NoteTextWrapper id={`solution-note-${id}`}>
+              <TextField
+                multiline={true}
+                fullWidth={true}
+                rows={3}
+                value={solution.description}
+                onChange={handleChangeDescription}
+              />
+            </NoteTextWrapper>
+          ) : null}
         </ComponentTableFooter>
       </ComponentTable>
     </Block>
@@ -131,12 +162,38 @@ const ComponentTableBody = styled("div")({
   rowGap: "10px",
 });
 const ComponentTableFooter = styled("div")({
-  // display: "grid",
-  // gridTemplateColumns: "subgrid",
-  display: "flex",
-  justifyContent: "flex-end",
+  display: "grid",
+  gridTemplateColumns: "subgrid",
   gridColumn: "span 5",
   paddingTop: "10px",
+  rowGap: THEME.SIZE.S1,
+  gridAutoFlow: "dense",
+});
+
+const AddButtonWrapper = styled("div")({
+  gridColumn: "5/6",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+});
+
+const NoteLabelWrapper = styled("button")({
+  gridColumn: "2/3",
+  display: "flex",
+  alignItems: "center",
+  gap: "4px",
+  whiteSpace: "nowrap",
+  width: "fit-content",
+  padding: 0,
+  border: "none",
+  background: "transparent",
+  color: "inherit",
+  font: "inherit",
+  cursor: "pointer",
+});
+
+const NoteTextWrapper = styled("div")({
+  gridColumn: "2/6",
 });
 
 const TitleRow = styled("div")({
@@ -161,10 +218,23 @@ const useInputHandlers = (id: string) => {
       }),
     );
   };
+  const handleChangeDescription = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    dispatch(
+      SolutionBlockModelActions.updateSolutionBlock({
+        id,
+        changes: {
+          description: event.target.value,
+        },
+      }),
+    );
+  };
 
   return {
     handleClickAddComponentRow,
     handleChangeTitle,
+    handleChangeDescription,
   };
 };
 
