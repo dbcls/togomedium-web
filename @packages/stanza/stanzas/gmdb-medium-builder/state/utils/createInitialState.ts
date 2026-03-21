@@ -23,6 +23,8 @@ export const createInitialState = () => {
       },
     },
     document: {
+      title: "",
+      description: "",
       solutions: [solutionBlock.id],
     },
   };

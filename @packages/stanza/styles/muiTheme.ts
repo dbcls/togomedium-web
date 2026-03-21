@@ -12,6 +12,18 @@ export const muiTheme = createTheme({
     },
   },
   components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          borderColor: THEME.COLOR.GRAY_LINE,
+        },
+        root: {
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: THEME.COLOR.GRAY_LINE,
+          },
+        },
+      },
+    },
     MuiTab: {
       styleOverrides: {
         root: {

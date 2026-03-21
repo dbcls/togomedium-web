@@ -86,7 +86,7 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
         </div>
         <div style={{ gridColumn: "span 4" }}>
           <TextField
-            sx={{ width: "100%" }}
+            fullWidth={true}
             placeholder={"Solution name"}
             size={"small"}
             value={solution.title}
@@ -125,12 +125,12 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
             aria-controls={`solution-note-${id}`}
             onClick={() => setIsNoteOpen((prev) => !prev)}
           >
+            <span>Note</span>
             {isNoteOpen ? (
               <ArrowDropDownIcon fontSize="small" />
             ) : (
               <ArrowRightIcon fontSize="small" />
             )}
-            <span>Note</span>
           </NoteLabelWrapper>
           {isNoteOpen ? (
             <NoteTextWrapper id={`solution-note-${id}`}>
@@ -140,6 +140,7 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
                 rows={3}
                 value={solution.description}
                 onChange={handleChangeDescription}
+                size={"small"}
               />
             </NoteTextWrapper>
           ) : null}

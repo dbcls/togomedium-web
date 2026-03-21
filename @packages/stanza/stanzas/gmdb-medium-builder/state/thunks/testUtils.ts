@@ -59,6 +59,8 @@ export const createThunkTestStore = () => {
         },
       },
       document: {
+        title: "Test medium",
+        description: "Test medium description",
         solutions: ["solution-1", "solution-2"],
       },
     },

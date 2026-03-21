@@ -39,6 +39,7 @@ export const THEME = {
     MEDIUM: 500,
     REGULAR: 400,
   } as const,
+  BORDER: "1px solid #E5E7EB",
 } as const;
 
 export const S3 = sizeBase * 3;

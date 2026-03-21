@@ -1,5 +1,6 @@
 import { THEME } from "%core/theme";
 import { Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
+import { MediumInfo } from "%stanza/stanzas/gmdb-medium-builder/components/MediumInfo";
 import { SolutionBlock } from "%stanza/stanzas/gmdb-medium-builder/components/SolutionBlock";
 import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { selectDocumentSolutions } from "%stanza/stanzas/gmdb-medium-builder/state/selectors/selectDocumentSolutions";
@@ -22,40 +23,22 @@ const App = (_props: AppProps) => {
 
   return (
     <Wrapper>
+      <MediumInfo />
+
       <Sheet>
         {solutions.map((solution) => (
           <SolutionBlock key={solution.id} id={solution.id} />
         ))}
         <FooterRow>
-          <FooterLeft>
-            <Button
-              variant={"contained"}
-              size={"small"}
-              disableElevation={true}
-              sx={{ textTransform: "none" }}
-            >
-              Save as .json
-            </Button>
-            <Button
-              variant={"contained"}
-              size={"small"}
-              disableElevation={true}
-              sx={{ textTransform: "none" }}
-            >
-              Upload .json
-            </Button>
-          </FooterLeft>
-          <FooterRight>
-            <Button
-              variant={"contained"}
-              size={"small"}
-              disableElevation={true}
-              sx={{ textTransform: "none" }}
-              onClick={onClickAdd}
-            >
-              Add solution block
-            </Button>
-          </FooterRight>
+          <Button
+            variant={"contained"}
+            size={"small"}
+            disableElevation={true}
+            sx={{ textTransform: "none" }}
+            onClick={onClickAdd}
+          >
+            Add solution block
+          </Button>
         </FooterRow>
       </Sheet>
     </Wrapper>
@@ -66,21 +49,18 @@ const Wrapper = styled("div")({
   minHeight: 100,
   width: "fit-content",
   minWidth: "100%",
+  // backgroundColor: "white",
+  padding: THEME.SIZE.S2,
+  borderRadius: THEME.ROUND.BASE,
+  display: "grid",
+  gap: THEME.SIZE.S2,
 });
 
 const FooterRow = styled("div")({
   gridColumn: "span 5",
   display: "flex",
-  justifyContent: "space-between",
+  justifyContent: "end",
   paddingInline: THEME.SIZE.S1,
-});
-
-const FooterLeft = styled("div")({
-  display: "flex",
-  gap: THEME.SIZE.S1,
-});
-const FooterRight = styled("div")({
-  display: "flex",
 });
 
 export default App;

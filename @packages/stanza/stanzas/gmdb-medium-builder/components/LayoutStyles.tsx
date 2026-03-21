@@ -21,6 +21,7 @@ export const Block = styled("div")({
   paddingTop: THEME.SIZE.S3,
   paddingBottom: THEME.SIZE.S1,
   borderRadius: THEME.ROUND.BASE,
+  // border: THEME.BORDER,
 });
 
 export const TableRow = styled("div")({
