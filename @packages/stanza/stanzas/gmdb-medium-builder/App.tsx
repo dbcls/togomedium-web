@@ -50,7 +50,6 @@ const Wrapper = styled("div")({
   width: "fit-content",
   minWidth: "100%",
   // backgroundColor: "white",
-  padding: THEME.SIZE.S2,
   borderRadius: THEME.ROUND.BASE,
   display: "grid",
   gap: THEME.SIZE.S2,
