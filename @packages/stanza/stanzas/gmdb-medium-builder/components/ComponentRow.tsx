@@ -29,7 +29,11 @@ const units = [
     value: "g",
   },
   {
-    label: "L",
+    label: "ml",
+    value: "ml",
+  },
+  {
+    label: "l",
     value: "l",
   },
 ];
