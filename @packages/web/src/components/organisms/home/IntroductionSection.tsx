@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { FC } from "react";
-
 import { Logo } from "@/components/atoms/svg/logo.tsx";
 import { basicTextLink } from "@/consts/styles.ts";
 

@@ -1,5 +1,4 @@
 import { describe, expect, it, test } from "vitest";
-
 import { QueryData } from "../state/media-finder/queryData";
 import { queryDataToInfoText } from "./queryDataToInfoText";
 

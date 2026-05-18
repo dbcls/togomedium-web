@@ -1,5 +1,4 @@
 import { describe, expect, it, test } from "vitest";
-
 import { getPagination } from "./getPagination";
 describe("pagination", () => {
   it("should work", () => {

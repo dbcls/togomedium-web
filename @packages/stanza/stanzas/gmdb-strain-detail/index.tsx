@@ -1,5 +1,4 @@
 import React from "react";
-
 import { TogoMediumReactStanza } from "../../components/providers/StanzaReactProvider";
 import App from "./App";
 

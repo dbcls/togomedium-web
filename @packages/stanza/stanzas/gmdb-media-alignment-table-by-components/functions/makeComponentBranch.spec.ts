@@ -1,6 +1,5 @@
 import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
 import { describe, expect, it } from "vitest";
-
 import { makeRawComponent } from "../../../utils/testing";
 import { ROOT_COMPONENT } from "../consts";
 import { RawComponent } from "../types";

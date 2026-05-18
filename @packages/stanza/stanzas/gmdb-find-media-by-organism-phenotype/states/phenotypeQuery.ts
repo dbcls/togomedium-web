@@ -1,5 +1,4 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
-
 import { clone } from "../../../utils/clone";
 
 type QueryObj = { [key: string]: string };

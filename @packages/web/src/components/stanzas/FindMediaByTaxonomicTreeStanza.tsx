@@ -1,6 +1,5 @@
 import { TaxonomyType } from "%core/types/TaxonomyType.ts";
 import { FC, useEffect } from "react";
-
 import { URL_STANZA } from "@/consts/api.ts";
 
 type Props = {

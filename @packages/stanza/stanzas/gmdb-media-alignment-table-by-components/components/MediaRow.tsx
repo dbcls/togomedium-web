@@ -5,7 +5,6 @@ import { useIsOrganismsExpendedState } from "%stanza/stanzas/gmdb-media-alignmen
 import { LabelInfo } from "%stanza/utils/labelInfo";
 import { styled } from "@mui/material/styles";
 import React, { ComponentProps, FC } from "react";
-
 import { AlignmentCell } from "./AlignmentCell";
 import { InfoCell } from "./InfoCell";
 

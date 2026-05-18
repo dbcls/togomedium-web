@@ -1,5 +1,4 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
-
 import { makeNewSelection } from "../functions/proessTaxonInfo";
 import { TaxonInfo } from "./taxonList";
 

@@ -1,7 +1,6 @@
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-
 import { RangeSlider } from "./RangeSlider";
 
 const meta = {

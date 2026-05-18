@@ -1,5 +1,4 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
-
 import { filterOutInfo, hasInfo, LabelInfo } from "../../utils/labelInfo";
 
 const selectedMedia = atom<LabelInfo[]>([]);

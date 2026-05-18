@@ -1,5 +1,4 @@
 import { rmSync, existsSync } from "fs";
-
 import { consola } from "consola";
 
 export function clean() {

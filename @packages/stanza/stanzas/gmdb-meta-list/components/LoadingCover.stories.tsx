@@ -2,7 +2,6 @@ import { data1 } from "%api/listMedia/data1";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-
 import { ListTable } from "./ListTable";
 import { LoadingCover } from "./LoadingCover";
 

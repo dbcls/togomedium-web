@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { FC, ReactNode } from "react";
-
 import { LinkTo } from "@/types/router.ts";
 
 type Props = {

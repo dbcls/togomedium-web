@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { FC } from "react";
-
 import { NavDivider } from "@/components/atoms/NavDivider.tsx";
 import { Logo } from "@/components/atoms/svg/logo.tsx";
 import {

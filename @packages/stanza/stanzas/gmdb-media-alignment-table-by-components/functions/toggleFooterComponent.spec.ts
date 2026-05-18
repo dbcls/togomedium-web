@@ -1,5 +1,4 @@
 import { describe, expect, it, test } from "vitest";
-
 import { makeRawComponent } from "../../../utils/testing";
 import { ComponentTrunk } from "../types";
 import { makeComponentTree } from "./makeComponentBranch";

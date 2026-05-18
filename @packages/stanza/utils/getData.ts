@@ -1,5 +1,4 @@
 import { isArray } from "is-what";
-
 import { ApiResponse, SimpleObject } from "./types";
 
 /**

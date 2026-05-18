@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import { H2 } from "@/components/atoms/H2.tsx";
 import { FridgeIcon } from "@/components/atoms/svg/FridgeIcon.tsx";
 import { GridIcon } from "@/components/atoms/svg/GridIcon.tsx";

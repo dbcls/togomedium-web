@@ -21,7 +21,7 @@ export default defineConfig({
     "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
   },
   options: {
-    typeAware: false,
+    typeAware: true,
     typeCheck: true,
   },
   ignorePatterns: ["@packages/web/src/routeTree.gen.ts"],

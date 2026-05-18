@@ -1,7 +1,6 @@
 import { RefObject } from "@react-types/shared";
 import clsx from "clsx";
 import { FC, PropsWithChildren } from "react";
-
 import { Button } from "@/components/atoms/Button.tsx";
 
 type Props = {
@@ -26,7 +25,7 @@ export const SearchPane: FC<Props> = ({
   children,
 }) => {
   return (
-    <div className={clsx("flex gap-8 rounded-small bg-white px-4 pb-5 pt-6 font-wide", className)}>
+    <div className={clsx("rounded-small font-wide flex gap-8 bg-white px-4 pt-6 pb-5", className)}>
       <div className={"flex-col gap-2"}>
         <form
           className="flex gap-4"

@@ -2,7 +2,6 @@ import { Block, Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/Lay
 import { appStore } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-
 import { ComponentRow } from "./ComponentRow";
 
 const state = appStore.getState();

@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { ComponentProps, FC } from "react";
-
 import { NavIcon } from "@/components/molecules/NavIcon.tsx";
 import { LinkTo } from "@/types/router.ts";
 

@@ -1,6 +1,5 @@
 import { componentDetailURL } from "%api/componentDetail/definitions.ts";
 import { createFileRoute } from "@tanstack/react-router";
-
 import { ComponentDetailPage } from "@/pages/ComponentDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 

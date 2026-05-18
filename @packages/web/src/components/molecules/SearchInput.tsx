@@ -2,7 +2,6 @@ import { RefObject } from "@react-types/shared";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import clsx from "clsx";
 import { FC, useRef } from "react";
-
 import { SearchIcon } from "@/components/atoms/svg/SearchiIcon.tsx";
 
 type Props = {
@@ -17,7 +16,7 @@ export const SearchInput: FC<Props> = ({ className }) => {
   return (
     <form
       className={clsx(
-        "flex w-full items-center rounded pl-2 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary",
+        "focus-within:outline-primary flex w-full items-center rounded pl-2 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2",
         className,
       )}
       onSubmit={(e) => {

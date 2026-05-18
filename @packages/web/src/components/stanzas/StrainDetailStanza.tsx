@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import { URL_STANZA } from "@/consts/api.ts";
 
 type Props = {

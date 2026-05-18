@@ -1,6 +1,5 @@
 import { ListApiResponse } from "%api/ListApi.ts";
 import { useQuery } from "@tanstack/react-query";
-
 import { fetchData } from "@/utils/fetch.ts";
 
 export const useListCount = (apiUrl: string): number => {

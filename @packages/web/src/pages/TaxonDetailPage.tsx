@@ -3,7 +3,6 @@ import { listMediaOfTaxonURL } from "%api/listMediaOfTaxon/definitions.ts";
 import { listStrainsOfTaxonUrl } from "%api/listStrainsOfTaxon/definitions.ts";
 import parse from "html-react-parser";
 import { FC } from "react";
-
 import { H2 } from "@/components/atoms/H2.tsx";
 import { H3 } from "@/components/atoms/H3.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";

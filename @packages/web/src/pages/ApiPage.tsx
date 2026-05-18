@@ -1,5 +1,4 @@
 import { getDocs } from "%api/openAPI.ts";
-
 import "@scalar/api-reference-react/style.css";
 import { ApiReferenceReact } from "@scalar/api-reference-react";
 

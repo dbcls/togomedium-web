@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import { IntroductionSection } from "@/components/organisms/home/IntroductionSection.tsx";
 import { SearchSection } from "@/components/organisms/home/SearchSection.tsx";
 import { StatsSection } from "@/components/organisms/home/StatsSection.tsx";

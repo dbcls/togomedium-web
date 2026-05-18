@@ -4,7 +4,6 @@ import { listStrainsUrl } from "%api/listStrains/definitions.ts";
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { FC } from "react";
-
 import { H2 } from "@/components/atoms/H2.tsx";
 import { ComponentIcon } from "@/components/atoms/svg/ComponentIcon.tsx";
 import { MediumIcon } from "@/components/atoms/svg/MediumIcon.tsx";

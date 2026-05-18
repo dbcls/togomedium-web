@@ -2,7 +2,6 @@ import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignme
 import { mediaAlignmentTableResponse1 } from "%api/mediaComponentAlignment/response1";
 import { makeRawComponent } from "%stanza/utils/testing";
 import { describe, expect, it, test } from "vitest";
-
 import { ComponentTrunk, RawComponent } from "../types";
 import { makeAlignmentData, __TEST__ } from "./makeAlignmentData";
 import { makeComponentTree } from "./makeComponentBranch";

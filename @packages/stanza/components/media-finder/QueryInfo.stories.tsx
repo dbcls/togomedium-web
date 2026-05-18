@@ -3,7 +3,6 @@ import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
 import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
-
 import { QueryInfo } from "./QueryInfo";
 
 type WithCustomArgs = { queryData: QueryData } & ComponentProps<typeof QueryInfo>;

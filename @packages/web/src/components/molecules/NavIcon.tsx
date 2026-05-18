@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { FC } from "react";
-
 import { ApiIcon } from "@/components/atoms/svg/ApiIcon.tsx";
 import { ComponentIcon } from "@/components/atoms/svg/ComponentIcon.tsx";
 import { DocIcon } from "@/components/atoms/svg/DocIcon.tsx";

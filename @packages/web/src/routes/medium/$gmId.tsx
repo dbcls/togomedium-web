@@ -1,6 +1,5 @@
 import { mediumDetailURL } from "%api/mediumDetail/definitions.ts";
 import { createFileRoute } from "@tanstack/react-router";
-
 import { MediumDetailPage } from "@/pages/MediumDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 

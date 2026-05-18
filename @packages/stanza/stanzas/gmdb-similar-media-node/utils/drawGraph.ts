@@ -4,7 +4,6 @@ import mixPlugin from "colord/plugins/mix";
 import * as d3 from "d3";
 import { SimulationLinkDatum, SimulationNodeDatum } from "d3";
 import { D3DragEvent } from "d3-drag";
-
 import { GraphData } from "./useGraphData";
 
 extend([mixPlugin]);
