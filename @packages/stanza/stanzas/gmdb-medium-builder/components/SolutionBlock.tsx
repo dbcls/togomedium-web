@@ -95,13 +95,15 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
         </div>
       </TitleRow>
       <ComponentTable>
-        <TableRow>
+        <ComponentHeaderRow>
           <div></div>
           <div>Component</div>
           <div>Volume</div>
           <div>Unit</div>
+          <div>Conc.</div>
+          <div>Conc. unit</div>
           <div>Note</div>
-        </TableRow>
+        </ComponentHeaderRow>
         <ComponentTableBody>
           {componentRows.map((componentRow) => (
             <ComponentRow key={componentRow.id} id={componentRow.id} solutionBlockId={id} />
@@ -141,6 +143,11 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
                 value={solution.description}
                 onChange={handleChangeDescription}
                 size={"small"}
+                slotProps={{
+                  htmlInput: {
+                    "aria-label": "Solution note",
+                  },
+                }}
               />
             </NoteTextWrapper>
           ) : null}
@@ -153,26 +160,30 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
 const ComponentTable = styled("div")({
   display: "grid",
   gridColumn: "span 5",
-  gridTemplateColumns: "subgrid",
+  gridTemplateColumns: "20px minmax(240px, 1.4fr) 80px 110px 100px 110px minmax(180px, 1fr)",
+  columnGap: THEME.SIZE.S2,
   rowGap: "0px",
+});
+const ComponentHeaderRow = styled(TableRow)({
+  gridColumn: "span 7",
 });
 const ComponentTableBody = styled("div")({
   display: "grid",
   gridTemplateColumns: "subgrid",
-  gridColumn: "span 5",
+  gridColumn: "span 7",
   rowGap: "10px",
 });
 const ComponentTableFooter = styled("div")({
   display: "grid",
   gridTemplateColumns: "subgrid",
-  gridColumn: "span 5",
+  gridColumn: "span 7",
   paddingTop: "10px",
   rowGap: THEME.SIZE.S1,
   gridAutoFlow: "dense",
 });
 
 const AddButtonWrapper = styled("div")({
-  gridColumn: "5/6",
+  gridColumn: "7/8",
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
@@ -194,7 +205,7 @@ const NoteLabelWrapper = styled("button")({
 });
 
 const NoteTextWrapper = styled("div")({
-  gridColumn: "2/6",
+  gridColumn: "2/8",
 });
 
 const TitleRow = styled("div")({

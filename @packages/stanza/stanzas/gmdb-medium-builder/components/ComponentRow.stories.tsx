@@ -1,4 +1,4 @@
-import { Block, Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
+import { Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { appStore } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
@@ -22,9 +22,18 @@ const meta = {
     ),
     (Story) => (
       <Sheet>
-        <Block>
+        <div
+          style={{
+            display: "grid",
+            gridColumn: "span 5",
+            gridTemplateColumns:
+              "20px minmax(240px, 1.4fr) 80px 110px 100px 110px minmax(180px, 1fr)",
+            columnGap: "8px",
+            minWidth: "920px",
+          }}
+        >
           <Story />
-        </Block>
+        </div>
       </Sheet>
     ),
   ],

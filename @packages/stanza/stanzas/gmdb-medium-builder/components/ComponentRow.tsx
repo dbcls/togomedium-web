@@ -25,7 +25,12 @@ type ComponentOption = {
   gmoId: string;
 };
 
-const units = [
+type UnitOption = {
+  label: string;
+  value: string;
+};
+
+const units: UnitOption[] = [
   {
     label: "mg",
     value: "mg",
@@ -44,6 +49,25 @@ const units = [
   },
 ];
 
+const concentrationUnits: UnitOption[] = [
+  {
+    label: "mM",
+    value: "mM",
+  },
+  {
+    label: "uM",
+    value: "uM",
+  },
+  {
+    label: "%",
+    value: "%",
+  },
+  {
+    label: "x",
+    value: "x",
+  },
+];
+
 export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
   const componentRow = useAppSelector((state) => ComponentRowSelectors.selectById(state, id));
   const { components, isSuccess } = useComponentsData();
@@ -52,6 +76,10 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
     handleInputComponent,
     handleChangeVolume,
     handleChangeUnit,
+    handleInputUnit,
+    handleChangeConcentrationValue,
+    handleChangeConcentrationUnit,
+    handleInputConcentrationUnit,
     handleChangeNote,
   } = useInputHandlers(id);
   const {
@@ -74,7 +102,7 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
   }
 
   return (
-    <TableRow>
+    <ComponentTableRow>
       <div style={{ display: "flex", alignItems: "center" }}>
         <IconButton
           size={"small"}
@@ -127,26 +155,95 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
           }
           onChange={handleChangeComponent}
           onInputChange={handleInputComponent}
-          renderInput={(params) => <TextField {...params} />}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              slotProps={{
+                htmlInput: {
+                  ...params.inputProps,
+                  "aria-label": "Component",
+                },
+              }}
+            />
+          )}
         />
       </ComponentInputCell>
       <div>
         <TextField
           sx={{ width: 80 }}
           size={"small"}
-          value={componentRow.volume}
+          type="number"
+          value={formatNullableNumberInput(componentRow.volume)}
           onChange={handleChangeVolume}
+          slotProps={{
+            htmlInput: {
+              "aria-label": "Volume",
+            },
+          }}
         />
       </div>
       <div>
-        <Autocomplete
+        <Autocomplete<UnitOption, false, false, true>
+          freeSolo
           size={"small"}
           disablePortal
           options={units}
-          sx={{ width: 80 }}
-          value={units.find((unit) => unit.value === componentRow.unit) ?? null}
+          sx={{ width: 110 }}
+          inputValue={componentRow.unit}
+          value={componentRow.unit}
           onChange={handleChangeUnit}
-          renderInput={(params) => <TextField {...params} />}
+          onInputChange={handleInputUnit}
+          getOptionLabel={getUnitOptionLabel}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              slotProps={{
+                htmlInput: {
+                  ...params.inputProps,
+                  "aria-label": "Unit",
+                },
+              }}
+            />
+          )}
+        />
+      </div>
+      <div>
+        <TextField
+          sx={{ width: 100 }}
+          size={"small"}
+          type="number"
+          value={formatNullableNumberInput(componentRow.concentrationValue ?? null)}
+          onChange={handleChangeConcentrationValue}
+          slotProps={{
+            htmlInput: {
+              "aria-label": "Concentration",
+            },
+          }}
+        />
+      </div>
+      <div>
+        <Autocomplete<UnitOption, false, false, true>
+          freeSolo
+          size={"small"}
+          disablePortal
+          options={concentrationUnits}
+          sx={{ width: 110 }}
+          inputValue={componentRow.concentrationUnit ?? ""}
+          value={componentRow.concentrationUnit ?? ""}
+          onChange={handleChangeConcentrationUnit}
+          onInputChange={handleInputConcentrationUnit}
+          getOptionLabel={getUnitOptionLabel}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              slotProps={{
+                htmlInput: {
+                  ...params.inputProps,
+                  "aria-label": "Concentration unit",
+                },
+              }}
+            />
+          )}
         />
       </div>
       <div>
@@ -155,9 +252,14 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
           size={"small"}
           value={componentRow.note}
           onChange={handleChangeNote}
+          slotProps={{
+            htmlInput: {
+              "aria-label": "Component note",
+            },
+          }}
         />
       </div>
-    </TableRow>
+    </ComponentTableRow>
   );
 };
 
@@ -206,7 +308,7 @@ const useInputHandlers = (id: string) => {
   };
 
   const handleChangeVolume = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const nextVolume = event.target.value === "" ? 0 : Number(event.target.value);
+    const nextVolume = parseNullableNumberInput(event.target.value);
     dispatch(
       ComponentRowModelActions.updateComponentRow({
         id,
@@ -217,15 +319,64 @@ const useInputHandlers = (id: string) => {
     );
   };
 
-  const handleChangeUnit = (
-    _event: React.SyntheticEvent,
-    value: { label: string; value: string } | null,
-  ) => {
+  const handleChangeUnit = (_event: React.SyntheticEvent, value: UnitOption | string | null) => {
+    updateUnit(getUnitValue(value));
+  };
+
+  const handleInputUnit = (_event: React.SyntheticEvent, value: string, reason: string) => {
+    if (reason === "reset") {
+      return;
+    }
+    updateUnit(value);
+  };
+
+  const updateUnit = (unit: string) => {
     dispatch(
       ComponentRowModelActions.updateComponentRow({
         id,
         changes: {
-          unit: value?.value ?? "",
+          unit,
+        },
+      }),
+    );
+  };
+
+  const handleChangeConcentrationValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextConcentrationValue = parseNullableNumberInput(event.target.value);
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          concentrationValue: nextConcentrationValue,
+        },
+      }),
+    );
+  };
+
+  const handleChangeConcentrationUnit = (
+    _event: React.SyntheticEvent,
+    value: UnitOption | string | null,
+  ) => {
+    updateConcentrationUnit(getUnitValue(value));
+  };
+
+  const handleInputConcentrationUnit = (
+    _event: React.SyntheticEvent,
+    value: string,
+    reason: string,
+  ) => {
+    if (reason === "reset") {
+      return;
+    }
+    updateConcentrationUnit(value);
+  };
+
+  const updateConcentrationUnit = (concentrationUnit: string) => {
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          concentrationUnit,
         },
       }),
     );
@@ -247,6 +398,10 @@ const useInputHandlers = (id: string) => {
     handleInputComponent,
     handleChangeVolume,
     handleChangeUnit,
+    handleInputUnit,
+    handleChangeConcentrationValue,
+    handleChangeConcentrationUnit,
+    handleInputConcentrationUnit,
     handleChangeNote,
   };
 };
@@ -301,6 +456,26 @@ const useMenu = (id: string, solutionBlockId: string) => {
     disableMoveRowDown,
   };
 };
+
+const formatNullableNumberInput = (value: number | null) => (value === null ? "" : String(value));
+
+const parseNullableNumberInput = (value: string) => {
+  if (value.trim() === "") {
+    return null;
+  }
+  const numericValue = Number(value);
+  return Number.isFinite(numericValue) ? numericValue : null;
+};
+
+const getUnitOptionLabel = (option: UnitOption | string) =>
+  typeof option === "string" ? option : option.label;
+
+const getUnitValue = (value: UnitOption | string | null) =>
+  typeof value === "string" ? value : (value?.value ?? "");
+
+const ComponentTableRow = styled(TableRow)({
+  gridColumn: "span 7",
+});
 
 const ComponentInputCell = styled("div")({
   display: "flex",
