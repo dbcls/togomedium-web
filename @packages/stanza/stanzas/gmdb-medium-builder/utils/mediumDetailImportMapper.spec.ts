@@ -21,12 +21,12 @@ describe("mapMediumDetailResponseToAppState", () => {
 
     expect(state.document).toEqual({
       title: "Imported NBRC medium",
-      description: [
-        "GM ID: GM_000001",
-        "Original medium ID: NBRC 123",
-        "pH: 7.2",
-        "Source URL: https://example.org/medium/GM_000001",
-      ].join("\n"),
+      description: "pH: 7.2",
+      provenance: {
+        importSourceGmId: "GM_000001",
+        originalMediaId: "NBRC 123",
+        sourceUrl: "https://example.org/medium/GM_000001",
+      },
       solutions: ["imported-solution-1", "imported-solution-2"],
     });
     expect(state.entities.solutionBlocks).toEqual({
@@ -35,13 +35,13 @@ describe("mapMediumDetailResponseToAppState", () => {
         "imported-solution-1": {
           id: "imported-solution-1",
           title: "Main solution",
-          description: "",
+          description: "Autoclave main solution separately.",
           components: ["imported-component-1-1", "imported-component-1-2"],
         },
         "imported-solution-2": {
           id: "imported-solution-2",
           title: "Trace elements",
-          description: "",
+          description: "Add trace elements after sterilization.",
           components: ["imported-component-2-1"],
         },
       },
@@ -61,6 +61,9 @@ describe("mapMediumDetailResponseToAppState", () => {
           component: "Glucose",
           volume: 10,
           unit: "g/L",
+          concentrationValue: 55.5,
+          concentrationUnit: "mM",
+          note: "",
         },
         "imported-component-1-2": {
           id: "imported-component-1-2",
@@ -68,29 +71,41 @@ describe("mapMediumDetailResponseToAppState", () => {
           component: "Yeast extract",
           volume: 2,
           unit: "g/L",
+          concentrationValue: null,
+          concentrationUnit: "",
+          note: "",
         },
       },
     });
   });
 
-  it("keeps source component name, concentration, and reference medium ID in row notes", () => {
-    const state = mapMediumDetailResponseToAppState(mediumDetailImportFixture, { createId });
-
-    expect(state.entities.componentRows.entities["imported-component-1-1"]?.note).toBe(
-      ["Component name: D-Glucose", "Concentration: 55.5 mM"].join("\n"),
-    );
-    expect(state.entities.componentRows.entities["imported-component-1-2"]?.note).toBe("");
-    expect(state.entities.componentRows.entities["imported-component-2-1"]).toMatchObject({
-      component: "Trace solution",
-      note: ["Component name: Trace element solution", "Reference medium ID: GM_000999"].join("\n"),
-    });
-  });
-
-  it("does not import comments into builder document, solutions, or component notes", () => {
+  it("does not persist source component name, original label, or reference medium ID", () => {
     const state = mapMediumDetailResponseToAppState(mediumDetailImportFixture, { createId });
     const serializedState = JSON.stringify(state);
 
-    expect(serializedState).not.toContain("Keep this comment out of the builder state in v1.");
-    expect(state.document.description).not.toContain("Keep this comment out");
+    expect(state.entities.componentRows.entities["imported-component-1-1"]?.note).toBe("");
+    expect(state.entities.componentRows.entities["imported-component-1-2"]?.note).toBe("");
+    expect(state.entities.componentRows.entities["imported-component-2-1"]).toMatchObject({
+      component: "Trace solution",
+      note: "",
+    });
+    expect(serializedState).not.toContain("D-Glucose");
+    expect(serializedState).not.toContain("Trace element solution");
+    expect(serializedState).not.toContain("GM_000999");
+  });
+
+  it("imports comments as solution notes instead of document or component notes", () => {
+    const state = mapMediumDetailResponseToAppState(mediumDetailImportFixture, { createId });
+
+    expect(state.document.description).not.toContain("Autoclave main solution");
+    expect(state.entities.componentRows.entities["imported-component-1-1"]?.note).not.toContain(
+      "Autoclave main solution",
+    );
+    expect(state.entities.solutionBlocks.entities["imported-solution-1"]?.description).toBe(
+      "Autoclave main solution separately.",
+    );
+    expect(state.entities.solutionBlocks.entities["imported-solution-2"]?.description).toBe(
+      "Add trace elements after sterilization.",
+    );
   });
 });

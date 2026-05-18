@@ -1,6 +1,7 @@
 import type { MediumDetailResponse } from "%api/mediumDetail/definitions";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createInitialFeedbackState } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
+import { createBlankDocumentProvenance } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
 import type { ComponentRowModel } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import type { SolutionBlockModel } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 import { nanoid } from "nanoid";
@@ -34,6 +35,7 @@ export const mapMediumDetailResponseToAppState = (
   const solutionBlockEntities: Record<string, SolutionBlockModel> = {};
   const componentRowIds: string[] = [];
   const componentRowEntities: Record<string, ComponentRowModel> = {};
+  const commentMap = createSolutionCommentMap(response);
 
   response.components.forEach((table, tableIndex) => {
     const solutionId = createId({ kind: "solution", tableIndex });
@@ -52,7 +54,12 @@ export const mapMediumDetailResponseToAppState = (
     });
 
     solutionIds.push(solutionId);
-    solutionBlockEntities[solutionId] = mapTableToSolutionBlock(table, solutionId, componentIds);
+    solutionBlockEntities[solutionId] = mapTableToSolutionBlock(
+      table,
+      solutionId,
+      componentIds,
+      commentMap.get(table.paragraph_index) ?? "",
+    );
   });
 
   return {
@@ -69,6 +76,11 @@ export const mapMediumDetailResponseToAppState = (
     document: {
       title: response.meta.name,
       description: createDocumentDescription(response.meta),
+      provenance: createBlankDocumentProvenance({
+        importSourceGmId: response.meta.gm,
+        originalMediaId: response.meta.original_media_id ?? "",
+        sourceUrl: response.meta.src_url,
+      }),
       solutions: solutionIds,
     },
     feedback: createInitialFeedbackState(),
@@ -83,11 +95,12 @@ const mapTableToSolutionBlock = (
   table: MediumDetailTable,
   id: string,
   components: string[],
+  description: string,
 ): SolutionBlockModel => {
   return {
     id,
     title: table.subcomponent_name,
-    description: "",
+    description,
     components,
   };
 };
@@ -99,9 +112,11 @@ const mapComponentToRow = (component: MediumDetailComponent, id: string): Compon
     id,
     gmoId: component.gmo_id ?? "",
     component: displayComponent,
-    volume: component.volume ?? 0,
+    volume: component.volume ?? null,
     unit: component.unit ?? "",
-    note: createComponentNote(component, displayComponent),
+    concentrationValue: component.conc_value ?? null,
+    concentrationUnit: component.conc_unit ?? "",
+    note: "",
   };
 };
 
@@ -113,40 +128,49 @@ const getComponentDisplayName = (component: MediumDetailComponent): string => {
   return component.component_name;
 };
 
-const createComponentNote = (
-  component: MediumDetailComponent,
-  displayComponent: string,
-): string => {
-  const notes: string[] = [];
-
-  if (component.component_name !== displayComponent) {
-    notes.push(`Component name: ${component.component_name}`);
-  }
-
-  if (component.conc_value !== undefined || component.conc_unit !== undefined) {
-    notes.push(`Concentration: ${formatConcentration(component)}`);
-  }
-
-  if (component.reference_media_id && component.reference_media_id !== "") {
-    notes.push(`Reference medium ID: ${component.reference_media_id}`);
-  }
-
-  return notes.join("\n");
-};
-
-const formatConcentration = (component: MediumDetailComponent): string => {
-  return [component.conc_value?.toString() ?? "", component.conc_unit ?? ""]
-    .filter((value) => value !== "")
-    .join(" ");
-};
-
 const createDocumentDescription = (meta: MediumDetailResponse["meta"]): string => {
-  const descriptionLines = [
-    `GM ID: ${meta.gm}`,
-    meta.original_media_id ? `Original medium ID: ${meta.original_media_id}` : "",
-    meta.ph ? `pH: ${meta.ph}` : "",
-    meta.src_url ? `Source URL: ${meta.src_url}` : "",
-  ];
+  const descriptionLines = [meta.ph ? `pH: ${meta.ph}` : ""];
 
   return descriptionLines.filter((line) => line !== "").join("\n");
+};
+
+const createSolutionCommentMap = (response: MediumDetailResponse): Map<number, string> => {
+  const sortedTables = [...response.components].sort(
+    (a, b) => a.paragraph_index - b.paragraph_index,
+  );
+  const commentsByTableParagraphIndex = new Map<number, string[]>();
+
+  response.comments.forEach((comment) => {
+    const table = findPreviousTable(sortedTables, comment.paragraph_index);
+
+    if (!table || comment.comment === "") {
+      return;
+    }
+
+    const comments = commentsByTableParagraphIndex.get(table.paragraph_index) ?? [];
+    comments.push(comment.comment);
+    commentsByTableParagraphIndex.set(table.paragraph_index, comments);
+  });
+
+  return new Map(
+    [...commentsByTableParagraphIndex.entries()].map(([paragraphIndex, comments]) => [
+      paragraphIndex,
+      comments.join("\n"),
+    ]),
+  );
+};
+
+const findPreviousTable = (
+  tables: MediumDetailTable[],
+  paragraphIndex: number,
+): MediumDetailTable | undefined => {
+  let previousTable: MediumDetailTable | undefined;
+
+  tables.forEach((table) => {
+    if (table.paragraph_index < paragraphIndex) {
+      previousTable = table;
+    }
+  });
+
+  return previousTable;
 };

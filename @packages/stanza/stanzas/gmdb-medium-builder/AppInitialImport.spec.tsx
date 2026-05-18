@@ -50,9 +50,16 @@ describe("App initial medium import", () => {
 
     const state = store.getState();
     expect(state.document.title).toBe("Imported NBRC medium");
+    expect(state.document.description).toBe("pH: 7.2");
+    expect(state.document.provenance).toEqual({
+      importSourceGmId: "GM_000001",
+      originalMediaId: "NBRC 123",
+      sourceUrl: "https://example.org/medium/GM_000001",
+    });
     expect(state.document.solutions).toHaveLength(3);
     expect(state.entities.solutionBlocks.entities[state.document.solutions[2]]).toMatchObject({
       title: "Trace element solution",
+      description: "Filter-sterilize referenced trace solution.",
     });
     expect(Object.values(state.entities.componentRows.entities)).toEqual(
       expect.arrayContaining([
@@ -60,6 +67,15 @@ describe("App initial medium import", () => {
           component: "ZnSO4",
           volume: 0.1,
           unit: "g/L",
+          concentrationValue: null,
+          concentrationUnit: "",
+          note: "",
+        }),
+        expect.objectContaining({
+          component: "Glucose",
+          concentrationValue: 55.5,
+          concentrationUnit: "mM",
+          note: "",
         }),
       ]),
     );

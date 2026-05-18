@@ -2,6 +2,7 @@ import type { MediumDetailResponse } from "%api/mediumDetail/definitions";
 
 type MediumDetailTable = MediumDetailResponse["components"][number];
 type MediumDetailComponent = MediumDetailTable["items"][number];
+type MediumDetailComment = MediumDetailResponse["comments"][number];
 
 type ReferenceMediumLoader = (gmId: string) => Promise<MediumDetailResponse>;
 
@@ -37,7 +38,9 @@ export const expandReferenceMediumTables = async (
 ): Promise<ReferenceExpansionResult> => {
   const requests = collectReferenceRequests(response);
   const appendedTables: MediumDetailTable[] = [];
+  const appendedComments: MediumDetailComment[] = [];
   const loadedReferences = new Map<string, MediumDetailResponse>();
+  let nextParagraphIndex = getNextParagraphIndex(response);
 
   for (const request of requests) {
     const referenceResponse = await getReferenceResponse(
@@ -65,7 +68,14 @@ export const expandReferenceMediumTables = async (
       };
     }
 
-    appendedTables.push(table);
+    const reindexed = createReindexedReferencedRecipeItems(
+      referenceResponse.response,
+      table,
+      nextParagraphIndex,
+    );
+    nextParagraphIndex = reindexed.nextParagraphIndex;
+    appendedTables.push(reindexed.table);
+    appendedComments.push(...reindexed.comments);
   }
 
   return {
@@ -73,6 +83,7 @@ export const expandReferenceMediumTables = async (
     response: {
       ...response,
       components: [...response.components, ...appendedTables],
+      comments: [...response.comments, ...appendedComments],
     },
   };
 };
@@ -173,6 +184,57 @@ const findReferencedTable = (
   return response.components.find(
     (table) => normalizeReferenceTableName(table.subcomponent_name) === tableName,
   );
+};
+
+const createReindexedReferencedRecipeItems = (
+  response: MediumDetailResponse,
+  table: MediumDetailTable,
+  startParagraphIndex: number,
+): {
+  table: MediumDetailTable;
+  comments: MediumDetailComment[];
+  nextParagraphIndex: number;
+} => {
+  const comments = findCommentsForTable(response, table);
+  const reindexedTable = {
+    ...table,
+    paragraph_index: startParagraphIndex,
+  };
+  const reindexedComments = comments.map((comment, index) => ({
+    ...comment,
+    paragraph_index: startParagraphIndex + index + 1,
+  }));
+
+  return {
+    table: reindexedTable,
+    comments: reindexedComments,
+    nextParagraphIndex: startParagraphIndex + reindexedComments.length + 1,
+  };
+};
+
+const findCommentsForTable = (
+  response: MediumDetailResponse,
+  table: MediumDetailTable,
+): MediumDetailComment[] => {
+  const nextTable = response.components
+    .filter((candidate) => candidate.paragraph_index > table.paragraph_index)
+    .sort((a, b) => a.paragraph_index - b.paragraph_index)[0];
+
+  return response.comments.filter((comment) => {
+    return (
+      comment.paragraph_index > table.paragraph_index &&
+      (!nextTable || comment.paragraph_index < nextTable.paragraph_index)
+    );
+  });
+};
+
+const getNextParagraphIndex = (response: MediumDetailResponse): number => {
+  const maxParagraphIndex = [...response.components, ...response.comments].reduce(
+    (max, item) => Math.max(max, item.paragraph_index),
+    0,
+  );
+
+  return maxParagraphIndex + 1;
 };
 
 const normalizeReferenceTableName = (value: string): string => {

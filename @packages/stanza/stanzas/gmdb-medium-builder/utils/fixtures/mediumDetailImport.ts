@@ -32,7 +32,7 @@ export const mediumDetailImportFixture = {
       ],
     },
     {
-      paragraph_index: 2,
+      paragraph_index: 3,
       subcomponent_name: "Trace elements",
       items: [
         {
@@ -48,8 +48,12 @@ export const mediumDetailImportFixture = {
   ],
   comments: [
     {
-      paragraph_index: 3,
-      comment: "Keep this comment out of the builder state in v1.",
+      paragraph_index: 2,
+      comment: "Autoclave main solution separately.",
+    },
+    {
+      paragraph_index: 4,
+      comment: "Add trace elements after sterilization.",
     },
   ],
 } satisfies MediumDetailResponse;
@@ -100,7 +104,7 @@ export const referencedMediumDetailImportFixture = {
   comments: [
     {
       paragraph_index: 3,
-      comment: "Referenced medium comments should not be imported.",
+      comment: "Filter-sterilize referenced trace solution.",
     },
   ],
 } satisfies MediumDetailResponse;

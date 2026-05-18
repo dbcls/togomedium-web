@@ -27,6 +27,12 @@ describe("importMediumDetailByGmId", () => {
 
     expect(result.state.document).toMatchObject({
       title: "Imported NBRC medium",
+      description: "pH: 7.2",
+      provenance: {
+        importSourceGmId: "GM_000001",
+        originalMediaId: "NBRC 123",
+        sourceUrl: "https://example.org/medium/GM_000001",
+      },
       solutions: expect.arrayContaining([
         expect.stringMatching(/^solution-/),
         expect.stringMatching(/^solution-/),
@@ -37,6 +43,7 @@ describe("importMediumDetailByGmId", () => {
       expect.arrayContaining([
         expect.objectContaining({
           title: "Trace element solution",
+          description: "Filter-sterilize referenced trace solution.",
         }),
       ]),
     );
@@ -46,6 +53,9 @@ describe("importMediumDetailByGmId", () => {
           component: "ZnSO4",
           volume: 0.1,
           unit: "g/L",
+          concentrationValue: null,
+          concentrationUnit: "",
+          note: "",
         }),
       ]),
     );

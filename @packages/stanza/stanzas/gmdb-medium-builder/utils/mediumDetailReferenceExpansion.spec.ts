@@ -45,6 +45,7 @@ describe("expandReferenceMediumTables", () => {
     ]);
     expect(mappedState.entities.solutionBlocks.entities["imported-solution-3"]).toMatchObject({
       title: "Trace element solution",
+      description: "Filter-sterilize referenced trace solution.",
       components: ["imported-component-3-1", "imported-component-3-2"],
     });
     expect(mappedState.entities.componentRows.entities["imported-component-3-2"]).toMatchObject({
@@ -82,6 +83,11 @@ describe("expandReferenceMediumTables", () => {
       "Main solution",
       "Trace elements",
       "Trace element solution",
+    ]);
+    expect(result.response.comments.map((comment) => comment.comment)).toEqual([
+      "Autoclave main solution separately.",
+      "Add trace elements after sterilization.",
+      "Filter-sterilize referenced trace solution.",
     ]);
   });
 
@@ -129,7 +135,7 @@ describe("expandReferenceMediumTables", () => {
     });
   });
 
-  it("does not import main or referenced medium comments into the mapped state", async () => {
+  it("imports main and referenced medium comments as solution notes", async () => {
     const result = await expandReferenceMediumTables(
       mediumDetailImportFixture,
       createReferenceLoader(),
@@ -142,10 +148,24 @@ describe("expandReferenceMediumTables", () => {
     }
 
     const mappedState = mapMediumDetailResponseToAppState(result.response);
-    const serializedState = JSON.stringify(mappedState);
+    const solutions = Object.values(mappedState.entities.solutionBlocks.entities);
 
-    expect(serializedState).not.toContain("Keep this comment out of the builder state in v1.");
-    expect(serializedState).not.toContain("Referenced medium comments should not be imported.");
+    expect(solutions).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          title: "Main solution",
+          description: "Autoclave main solution separately.",
+        }),
+        expect.objectContaining({
+          title: "Trace elements",
+          description: "Add trace elements after sterilization.",
+        }),
+        expect.objectContaining({
+          title: "Trace element solution",
+          description: "Filter-sterilize referenced trace solution.",
+        }),
+      ]),
+    );
   });
 });
 
