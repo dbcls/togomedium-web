@@ -3,7 +3,11 @@
   "include": ["src", ".storybook/preview.tsx"],
   "compilerOptions": {
     "paths": {
-      "%stanza/*": ["../stanza/*"]
+      "%stanza/*": ["../stanza/*"],
+      "%api/*": ["../api/src/*"],
+      "%core/*": ["../core/src/*"],
+      "%storybook/*": ["../storybook/src/*"],
+      "%web/*": ["../web/src/*"]
     }
   },
   "exclude": ["node_modules", "**/*.spec.ts"],
