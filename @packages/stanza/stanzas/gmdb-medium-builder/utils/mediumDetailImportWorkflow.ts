@@ -15,12 +15,12 @@ type MediumDetailLoader = (
   abortController?: AbortController,
 ) => Promise<MediumDetailResponse>;
 
-export type MediumDetailImportWorkflowOptions = {
+type MediumDetailImportWorkflowOptions = {
   loadMediumDetail?: MediumDetailLoader;
   abortController?: AbortController;
 };
 
-export type MediumDetailImportWorkflowResult =
+type MediumDetailImportWorkflowResult =
   | {
       success: true;
       state: ImportedAppState;

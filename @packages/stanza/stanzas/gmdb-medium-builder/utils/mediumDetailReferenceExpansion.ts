@@ -3,11 +3,11 @@ import type { MediumDetailResponse } from "%api/mediumDetail/definitions";
 type MediumDetailTable = MediumDetailResponse["components"][number];
 type MediumDetailComponent = MediumDetailTable["items"][number];
 
-export type ReferenceMediumLoader = (gmId: string) => Promise<MediumDetailResponse>;
+type ReferenceMediumLoader = (gmId: string) => Promise<MediumDetailResponse>;
 
-export type ReferenceExpansionErrorCode = "reference-fetch-failed" | "reference-table-missing";
+type ReferenceExpansionErrorCode = "reference-fetch-failed" | "reference-table-missing";
 
-export type ReferenceExpansionError = {
+type ReferenceExpansionError = {
   code: ReferenceExpansionErrorCode;
   message: string;
   detail: string;
@@ -16,7 +16,7 @@ export type ReferenceExpansionError = {
   cause?: unknown;
 };
 
-export type ReferenceExpansionResult =
+type ReferenceExpansionResult =
   | {
       success: true;
       response: MediumDetailResponse;

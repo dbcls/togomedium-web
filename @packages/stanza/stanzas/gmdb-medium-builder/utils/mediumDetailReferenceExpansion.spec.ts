@@ -5,11 +5,10 @@ import {
 } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImport";
 import { cloneMediumDetailResponse } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImportTestHelpers";
 import { mapMediumDetailResponseToAppState } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailImportMapper";
-import {
-  expandReferenceMediumTables,
-  type ReferenceMediumLoader,
-} from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailReferenceExpansion";
+import { expandReferenceMediumTables } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailReferenceExpansion";
 import { describe, expect, it, vi } from "vitest";
+
+type ReferenceMediumLoader = (gmId: string) => Promise<MediumDetailResponse>;
 
 describe("expandReferenceMediumTables", () => {
   it("appends the matching reference table after main medium tables", async () => {

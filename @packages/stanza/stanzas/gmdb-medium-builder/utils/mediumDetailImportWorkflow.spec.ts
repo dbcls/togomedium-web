@@ -1,10 +1,15 @@
-import { referencedMediumDetailImportFixture } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImport";
+import type { MediumDetailResponse } from "%api/mediumDetail/definitions";
 import {
-  createMediumDetailFixtureLoader,
-  cloneMediumDetailResponse,
-} from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImportTestHelpers";
+  mediumDetailImportFixture,
+  referencedMediumDetailImportFixture,
+} from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImport";
+import { cloneMediumDetailResponse } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImportTestHelpers";
 import { importMediumDetailByGmId } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailImportWorkflow";
 import { describe, expect, it, vi } from "vitest";
+
+type MediumDetailFixtureMap = Record<string, MediumDetailResponse | undefined>;
+
+type MediumDetailFixtureLoader = (gmId: string) => Promise<MediumDetailResponse>;
 
 describe("importMediumDetailByGmId", () => {
   it("imports a medium detail response and referenced tables through fixture loaders", async () => {
@@ -89,3 +94,23 @@ describe("importMediumDetailByGmId", () => {
     });
   });
 });
+
+const createMediumDetailFixtureLoader = (
+  overrides: MediumDetailFixtureMap = {},
+): MediumDetailFixtureLoader => {
+  const fixtures: MediumDetailFixtureMap = {
+    GM_000001: mediumDetailImportFixture,
+    GM_000999: referencedMediumDetailImportFixture,
+    ...overrides,
+  };
+
+  return async (gmId) => {
+    const fixture = fixtures[gmId];
+
+    if (!fixture) {
+      throw new Error(`Unexpected medium detail fixture request: ${gmId}`);
+    }
+
+    return cloneMediumDetailResponse(fixture);
+  };
+};

@@ -15,7 +15,7 @@ import { styled } from "@mui/material/styles";
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useMemo } from "react";
 
-export type AppProps = {
+type AppProps = {
   gmId?: string;
   stanzaElement?: ShadowRoot;
 };

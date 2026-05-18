@@ -1,12 +1,13 @@
 import { createInitialFeedbackState } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
 import { mediumDetailImportFixture } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImport";
-import {
-  type MediumDetailIdFactory,
-  mapMediumDetailResponseToAppState,
-} from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailImportMapper";
+import { mapMediumDetailResponseToAppState } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailImportMapper";
 import { describe, expect, it } from "vitest";
 
-const createId: MediumDetailIdFactory = (params) => {
+type MediumDetailCreateId = NonNullable<
+  NonNullable<Parameters<typeof mapMediumDetailResponseToAppState>[1]>["createId"]
+>;
+
+const createId: MediumDetailCreateId = (params) => {
   if (params.kind === "solution") {
     return `imported-solution-${params.tableIndex + 1}`;
   }

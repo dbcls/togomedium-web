@@ -19,7 +19,7 @@ type MediumDetailIdFactoryParams =
       componentIndex: number;
     };
 
-export type MediumDetailIdFactory = (params: MediumDetailIdFactoryParams) => string;
+type MediumDetailIdFactory = (params: MediumDetailIdFactoryParams) => string;
 
 type MediumDetailImportOptions = {
   createId?: MediumDetailIdFactory;
