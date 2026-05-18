@@ -1,3 +1,4 @@
+import { createInitialFeedbackState } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
 import { createBlankComponentRow } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import { createBlankSolutionBlock } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 
@@ -27,5 +28,6 @@ export const createInitialState = () => {
       description: "",
       solutions: [solutionBlock.id],
     },
+    feedback: createInitialFeedbackState(),
   };
 };

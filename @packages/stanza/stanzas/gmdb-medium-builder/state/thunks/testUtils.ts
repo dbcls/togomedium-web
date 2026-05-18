@@ -1,3 +1,7 @@
+import {
+  createInitialFeedbackState,
+  feedbackReducer,
+} from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
 import { documentReducer } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
 import { componentRowModelReducer } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import { solutionBlockModelReducer } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
@@ -11,6 +15,7 @@ export const createThunkTestStore = () => {
         solutionBlocks: solutionBlockModelReducer,
       }),
       document: documentReducer,
+      feedback: feedbackReducer,
     },
     preloadedState: {
       entities: {
@@ -66,6 +71,7 @@ export const createThunkTestStore = () => {
         description: "Test medium description",
         solutions: ["solution-1", "solution-2"],
       },
+      feedback: createInitialFeedbackState(),
     },
   });
 };
