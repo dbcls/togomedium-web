@@ -11,6 +11,7 @@ import { styled } from "@mui/material/styles";
 import React from "react";
 
 export type AppProps = {
+  gmId?: string;
   stanzaElement?: ShadowRoot;
 };
 

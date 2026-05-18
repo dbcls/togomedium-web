@@ -3,11 +3,14 @@ import App from "%stanza/stanzas/gmdb-medium-builder/App";
 import { appStore } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import React from "react";
 
-type StanzaParameters = {};
+type StanzaParameters = {
+  gm_id?: string;
+};
 
 export default class ReactStanza extends TogoMediumReactStanza<StanzaParameters> {
   makeApp() {
     this.reduxStore = appStore;
-    return <App />;
+    const gmId = this.params.gm_id;
+    return <App gmId={gmId} />;
   }
 }

@@ -10,8 +10,15 @@
   "stanza:address": "satoshionoda@yohak.design",
   "stanza:contributor": [],
   "stanza:created": "2022-01-01",
-  "stanza:updated": "2026-03-22",
-  "stanza:parameter": [],
+  "stanza:updated": "2026-05-18",
+  "stanza:parameter": [
+    {
+      "stanza:key": "gm_id",
+      "stanza:example": "NBRC_M249",
+      "stanza:description": "Medium ID to use as the initial import target.",
+      "stanza:required": false
+    }
+  ],
   "stanza:menu-placement": "none",
   "stanza:style": [],
   "stanza:incomingEvent": [],
