@@ -3,13 +3,12 @@ import {
   mapAppStateToDraftAppData,
   mapDraftAppDataToAppState,
 } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
-import type { DraftIdFactory } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createInitialFeedbackState } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
 import { createThunkTestStore } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/testUtils";
 import { describe, expect, it } from "vitest";
 
-const createId: DraftIdFactory = (params) => {
+const createId: Parameters<typeof mapDraftAppDataToAppState>[1]["createId"] = (params) => {
   if (params.kind === "solution") {
     return `imported-solution-${params.solutionIndex + 1}`;
   }

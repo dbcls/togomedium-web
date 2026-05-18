@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import type { ChangeEvent, DragEvent, FC } from "react";
 import { useId, useState } from "react";
 
-export type ImportDialogProps = {
+type ImportDialogProps = {
   open: boolean;
   selectedFile: File | null;
   onClose: () => void;

@@ -1,12 +1,12 @@
 import { mapAppStateToDraftAppData } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 
-export type DraftDownload = {
+type DraftDownload = {
   filename: string;
   json: string;
 };
 
-export type DraftDownloadOptions = {
+type DraftDownloadOptions = {
   now?: Date;
   document?: Document;
   url?: Pick<typeof URL, "createObjectURL" | "revokeObjectURL">;

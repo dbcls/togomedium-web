@@ -1,15 +1,15 @@
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export type FeedbackSeverity = "success" | "error";
+type FeedbackSeverity = "success" | "error";
 
-export type FeedbackInput = {
+type FeedbackInput = {
   message: string;
   detail?: string;
   autoHideDuration?: number;
 };
 
-export type FeedbackState = {
+type FeedbackState = {
   open: boolean;
   severity: FeedbackSeverity;
   message: string;
@@ -18,7 +18,7 @@ export type FeedbackState = {
   key: number;
 };
 
-export const DEFAULT_FEEDBACK_AUTO_HIDE_DURATION = 6000;
+const DEFAULT_FEEDBACK_AUTO_HIDE_DURATION = 6000;
 
 export const createInitialFeedbackState = (): FeedbackState => ({
   open: false,
@@ -73,4 +73,8 @@ export const FeedbackActions = slice.actions;
 
 export const FeedbackSelectors = {
   selectFeedback: (state: AppState) => state.feedback,
+};
+
+export const __TEST__ = {
+  DEFAULT_FEEDBACK_AUTO_HIDE_DURATION,
 };

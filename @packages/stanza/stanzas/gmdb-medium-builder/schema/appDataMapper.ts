@@ -2,19 +2,21 @@ import {
   appDataSchema,
   DRAFT_SCHEMA_VERSION,
 } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
-import type { DraftAppData } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createInitialFeedbackState } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
 import type { ComponentRowModel } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import type { SolutionBlockModel } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 import type { ZodError } from "zod";
+import type { z } from "zod";
 
-export type ComponentCandidate = {
+type DraftAppData = z.infer<typeof appDataSchema>;
+
+type ComponentCandidate = {
   gmoId: string;
   name: string;
 };
 
-export type DraftIdFactoryParams =
+type DraftIdFactoryParams =
   | {
       kind: "solution";
       solutionIndex: number;
@@ -25,26 +27,26 @@ export type DraftIdFactoryParams =
       componentIndex: number;
     };
 
-export type DraftIdFactory = (params: DraftIdFactoryParams) => string;
+type DraftIdFactory = (params: DraftIdFactoryParams) => string;
 
-export type DraftMapperWarningCode =
+type DraftMapperWarningCode =
   | "null-normalized"
   | "gmo-id-validation-skipped"
   | "invalid-gmo-id"
   | "component-name-normalized";
 
-export type DraftMapperWarning = {
+type DraftMapperWarning = {
   code: DraftMapperWarningCode;
   path: (string | number)[];
   message: string;
 };
 
-export type DraftImportOptions = {
+type DraftImportOptions = {
   createId: DraftIdFactory;
   componentCandidates?: readonly ComponentCandidate[];
 };
 
-export type DraftImportResult =
+type DraftImportResult =
   | {
       success: true;
       state: AppState;

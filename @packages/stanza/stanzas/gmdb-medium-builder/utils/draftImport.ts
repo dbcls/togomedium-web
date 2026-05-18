@@ -8,29 +8,32 @@ import {
   appDataSchema,
   DRAFT_SCHEMA_VERSION,
 } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
-import {
-  mapDraftAppDataToAppState,
-  type DraftIdFactory,
-  type DraftMapperWarning,
-} from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
+import { mapDraftAppDataToAppState } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { nanoid } from "nanoid";
 import type { ZodError } from "zod";
 
-export type ImportErrorCode =
+type DraftImportOptions = Parameters<typeof mapDraftAppDataToAppState>[1];
+type DraftIdFactory = DraftImportOptions["createId"];
+type DraftMapperWarning = Extract<
+  ReturnType<typeof mapDraftAppDataToAppState>,
+  { success: true }
+>["warnings"][number];
+
+type ImportErrorCode =
   | "file-read-failed"
   | "invalid-json"
   | "unsupported-schema-version"
   | "schema-validation-failed"
   | "mapper-failed";
 
-export type ImportError = {
+type ImportError = {
   code: ImportErrorCode;
   message: string;
   detail?: string;
 };
 
-export type ImportWarning =
+type ImportWarning =
   | DraftMapperWarning
   | {
       code: "component-candidates-fetch-failed";
@@ -39,7 +42,7 @@ export type ImportWarning =
       error: unknown;
     };
 
-export type ImportResult =
+type ImportResult =
   | {
       success: true;
       state: AppState;
@@ -51,7 +54,7 @@ export type ImportResult =
       warnings: ImportWarning[];
     };
 
-export type ImportDependencies = {
+type ImportDependencies = {
   readFileText?: (file: File) => Promise<string>;
   fetchComponents?: () => Promise<ComponentsWithComponentsResponse>;
   createId?: DraftIdFactory;

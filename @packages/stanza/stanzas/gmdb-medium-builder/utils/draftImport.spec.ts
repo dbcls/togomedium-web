@@ -1,12 +1,22 @@
 import { DRAFT_SCHEMA_VERSION } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
-import type { DraftIdFactory } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
 import {
   importDraftJson,
   logImportWarnings,
 } from "%stanza/stanzas/gmdb-medium-builder/utils/draftImport";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-const createId: DraftIdFactory = (params) => {
+const createId = (
+  params:
+    | {
+        kind: "solution";
+        solutionIndex: number;
+      }
+    | {
+        kind: "component";
+        solutionIndex: number;
+        componentIndex: number;
+      },
+) => {
   if (params.kind === "solution") {
     return `imported-solution-${(params.solutionIndex ?? 0) + 1}`;
   }

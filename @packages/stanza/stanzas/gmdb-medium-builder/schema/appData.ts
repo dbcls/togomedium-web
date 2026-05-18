@@ -21,5 +21,3 @@ export const appDataSchema = z.object({
   description: z.string().nullable(),
   solutions: z.array(solutionSchema),
 });
-
-export type DraftAppData = z.infer<typeof appDataSchema>;

@@ -1,9 +1,8 @@
 import { useAppDispatch } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
-import {
-  FeedbackActions,
-  type FeedbackInput,
-} from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
+import { FeedbackActions } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
 import { useMemo } from "react";
+
+type FeedbackInput = Parameters<typeof FeedbackActions.showSuccess>[0];
 
 export const useFeedback = () => {
   const dispatch = useAppDispatch();

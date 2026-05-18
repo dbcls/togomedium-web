@@ -1,9 +1,8 @@
-import {
-  DEFAULT_FEEDBACK_AUTO_HIDE_DURATION,
-  FeedbackActions,
-} from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
+import { __TEST__, FeedbackActions } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
 import { createThunkTestStore } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/testUtils";
 import { describe, expect, it } from "vitest";
+
+const { DEFAULT_FEEDBACK_AUTO_HIDE_DURATION } = __TEST__;
 
 describe("feedback state", () => {
   it("shows success feedback", () => {
