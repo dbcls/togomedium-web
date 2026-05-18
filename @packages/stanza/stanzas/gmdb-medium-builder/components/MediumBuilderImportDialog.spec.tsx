@@ -104,6 +104,7 @@ describe("MediumBuilderImportDialog", () => {
 
   it("rejects multiple files with a visible message", () => {
     const onFileSelect = vi.fn();
+    const onImport = vi.fn();
     const firstFile = new File(["{}"], "first.json", { type: "application/json" });
     const secondFile = new File(["{}"], "second.json", { type: "application/json" });
 
@@ -113,7 +114,7 @@ describe("MediumBuilderImportDialog", () => {
         selectedFile={null}
         onClose={vi.fn()}
         onFileSelect={onFileSelect}
-        onImport={vi.fn()}
+        onImport={onImport}
       />,
     );
 
@@ -130,5 +131,9 @@ describe("MediumBuilderImportDialog", () => {
     expect(
       screen.queryByText("Select a single JSON file. Multiple files cannot be imported at once."),
     ).not.toBeNull();
+    expect((screen.getByRole("button", { name: "Import" }) as HTMLButtonElement).disabled).toBe(
+      true,
+    );
+    expect(onImport).not.toHaveBeenCalled();
   });
 });

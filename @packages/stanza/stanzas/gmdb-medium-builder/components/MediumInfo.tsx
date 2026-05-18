@@ -10,7 +10,12 @@ import {
   DocumentActions,
   DocumentSelectors,
 } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
+import { replaceImportedAppStateThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/replaceImportedAppStateThunk";
 import { downloadMediumBuilderDraft } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumBuilderExport";
+import {
+  importMediumBuilderDraftJson,
+  logMediumBuilderImportWarnings,
+} from "%stanza/stanzas/gmdb-medium-builder/utils/mediumBuilderImport";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -26,6 +31,7 @@ export const MediumInfo: FC = () => {
   const { showSuccess, showError } = useMediumBuilderFeedback();
   const [isImportDialogOpen, setIsImportDialogOpen] = useState(false);
   const [selectedImportFile, setSelectedImportFile] = useState<File | null>(null);
+  const [isImporting, setIsImporting] = useState(false);
 
   const handleChangeTitle = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     dispatch(DocumentActions.setTitle(event.target.value));
@@ -55,6 +61,33 @@ export const MediumInfo: FC = () => {
   const handleCloseImportDialog = () => {
     setIsImportDialogOpen(false);
     setSelectedImportFile(null);
+  };
+
+  const handleImportDraftJson = async (file: File) => {
+    if (isImporting) {
+      return;
+    }
+
+    setIsImporting(true);
+
+    try {
+      const result = await importMediumBuilderDraftJson(file);
+      logMediumBuilderImportWarnings(result.warnings);
+
+      if (!result.success) {
+        showError({
+          message: result.error.message,
+          detail: result.error.detail,
+        });
+        return;
+      }
+
+      dispatch(replaceImportedAppStateThunk(result.state));
+      handleCloseImportDialog();
+      showSuccess(`Imported ${file.name}.`);
+    } finally {
+      setIsImporting(false);
+    }
   };
 
   return (
@@ -102,6 +135,7 @@ export const MediumInfo: FC = () => {
         selectedFile={selectedImportFile}
         onClose={handleCloseImportDialog}
         onFileSelect={setSelectedImportFile}
+        onImport={handleImportDraftJson}
       />
     </Wrapper>
   );
