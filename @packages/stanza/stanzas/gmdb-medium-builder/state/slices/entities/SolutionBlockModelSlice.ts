@@ -1,5 +1,5 @@
 import { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice, EntityState, PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
 export type SolutionBlockModel = {
@@ -21,6 +21,12 @@ const slice = createSlice({
     removeSolutionBlock: (state, action) => adapter.removeOne(state, action),
     updateSolutionBlock: (state, action) => adapter.updateOne(state, action),
     setSolutionBlocks: (state, action) => adapter.setAll(state, action),
+    replaceSolutionBlocks: (
+      _state,
+      action: PayloadAction<EntityState<SolutionBlockModel, string>>,
+    ) => {
+      return action.payload;
+    },
   },
 });
 

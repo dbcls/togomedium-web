@@ -1,5 +1,5 @@
 import { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice, EntityState, PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
 export type ComponentRowModel = {
@@ -24,6 +24,12 @@ const slice = createSlice({
     removeComponentRow: (state, action) => adapter.removeOne(state, action),
     removeComponentRows: (state, action) => adapter.removeMany(state, action),
     updateComponentRow: (state, action) => adapter.updateOne(state, action),
+    replaceComponentRows: (
+      _state,
+      action: PayloadAction<EntityState<ComponentRowModel, string>>,
+    ) => {
+      return action.payload;
+    },
   },
 });
 

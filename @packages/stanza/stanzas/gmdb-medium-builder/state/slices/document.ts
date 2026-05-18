@@ -1,7 +1,7 @@
 import { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type DocumentModel = {
+export type DocumentModel = {
   title: string;
   description: string;
   solutions: string[];
@@ -31,6 +31,9 @@ const slice = createSlice({
     },
     setDescription: (state, action: PayloadAction<string>) => {
       state.description = action.payload;
+    },
+    replaceDocument: (_state, action: PayloadAction<DocumentModel>) => {
+      return action.payload;
     },
   },
 });
