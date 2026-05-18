@@ -18,6 +18,7 @@
 ## 実装規約
 
 - `docs/development/coding-guidelines.md`: リポジトリ全体の基本的なコード規約
+- `docs/naming-convention.md`: 型名、変数名、ファイル名、API、Stanzaなどの命名規約
 - `@packages/web/docs/coding-guidelines.md`: Webパッケージ固有のルーティング、page、component、data fetching、stylingの方針
 - `@packages/web/docs/stanza-integration.md`: Web側でStanzaを組み込むときの実装パターン
 - `@packages/stanza/docs/development-guide.md`: Stanza本体の実装、MUI、metadata、確認方針
@@ -25,6 +26,7 @@
 ## 仕様・機能
 
 - `docs/contents.md`: 公開サイトの画面、Stanza、APIの対応表
+- `docs/domain-terms.md`: TogoMediumで使うドメイン用語、ID、略語の作業用語集
 
 ## 設計判断
 
