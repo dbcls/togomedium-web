@@ -3,6 +3,7 @@ import {
   mediumDetailImportFixture,
   referencedMediumDetailImportFixture,
 } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImport";
+import { cloneMediumDetailResponse } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImportTestHelpers";
 import { mapMediumDetailResponseToAppState } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailImportMapper";
 import {
   expandReferenceMediumTables,
@@ -162,8 +163,4 @@ const createReferenceLoader = (
 
     return response;
   });
-};
-
-const cloneMediumDetailResponse = (response: MediumDetailResponse): MediumDetailResponse => {
-  return structuredClone(response);
 };
