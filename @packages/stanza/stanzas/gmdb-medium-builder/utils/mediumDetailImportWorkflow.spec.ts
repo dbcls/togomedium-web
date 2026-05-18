@@ -3,7 +3,6 @@ import {
   mediumDetailImportFixture,
   referencedMediumDetailImportFixture,
 } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImport";
-import { cloneMediumDetailResponse } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImportTestHelpers";
 import { importMediumDetailByGmId } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailImportWorkflow";
 import { describe, expect, it, vi } from "vitest";
 
@@ -68,9 +67,7 @@ describe("importMediumDetailByGmId", () => {
   });
 
   it("returns a fixture-based reference error when the referenced table is missing", async () => {
-    const referenceWithoutTargetTable = cloneMediumDetailResponse(
-      referencedMediumDetailImportFixture,
-    );
+    const referenceWithoutTargetTable = structuredClone(referencedMediumDetailImportFixture);
     referenceWithoutTargetTable.components = referenceWithoutTargetTable.components.filter(
       (table) => table.subcomponent_name !== "Trace element solution",
     );
@@ -111,6 +108,6 @@ const createMediumDetailFixtureLoader = (
       throw new Error(`Unexpected medium detail fixture request: ${gmId}`);
     }
 
-    return cloneMediumDetailResponse(fixture);
+    return structuredClone(fixture);
   };
 };

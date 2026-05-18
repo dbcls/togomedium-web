@@ -3,7 +3,6 @@ import {
   mediumDetailImportFixture,
   referencedMediumDetailImportFixture,
 } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImport";
-import { cloneMediumDetailResponse } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImportTestHelpers";
 import { mapMediumDetailResponseToAppState } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailImportMapper";
 import { expandReferenceMediumTables } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailReferenceExpansion";
 import { describe, expect, it, vi } from "vitest";
@@ -56,7 +55,7 @@ describe("expandReferenceMediumTables", () => {
   });
 
   it("deduplicates repeated references to the same medium table", async () => {
-    const responseWithDuplicateReference = cloneMediumDetailResponse(mediumDetailImportFixture);
+    const responseWithDuplicateReference = structuredClone(mediumDetailImportFixture);
     responseWithDuplicateReference.components[0].items.push({
       component_name: "Trace element solution",
       label: "Trace solution duplicate",
@@ -108,9 +107,7 @@ describe("expandReferenceMediumTables", () => {
   });
 
   it("returns an import failure result when the reference table is missing", async () => {
-    const referenceWithoutTargetTable = cloneMediumDetailResponse(
-      referencedMediumDetailImportFixture,
-    );
+    const referenceWithoutTargetTable = structuredClone(referencedMediumDetailImportFixture);
     referenceWithoutTargetTable.components = referenceWithoutTargetTable.components.filter(
       (table) => table.subcomponent_name !== "Trace element solution",
     );
