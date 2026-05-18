@@ -1,7 +1,11 @@
 import { THEME } from "%core/theme";
 import { VerticalEllipsisIcon } from "%stanza/components/icons/VerticalEllipsisIcon";
 import { ComponentRow } from "%stanza/stanzas/gmdb-medium-builder/components/ComponentRow";
-import { Block, TableRow } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
+import {
+  Block,
+  COMPONENT_TABLE_GRID_TEMPLATE_COLUMNS,
+  TableRow,
+} from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { selectSolutionComponentRows } from "%stanza/stanzas/gmdb-medium-builder/state/selectors/selectSolutionComponentRows";
 import { DocumentSelectors } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
@@ -160,9 +164,10 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
 const ComponentTable = styled("div")({
   display: "grid",
   gridColumn: "span 5",
-  gridTemplateColumns: "20px minmax(240px, 1.4fr) 80px 110px 100px 110px minmax(180px, 1fr)",
+  gridTemplateColumns: COMPONENT_TABLE_GRID_TEMPLATE_COLUMNS,
   columnGap: THEME.SIZE.S2,
   rowGap: "0px",
+  minWidth: "max-content",
 });
 const ComponentHeaderRow = styled(TableRow)({
   gridColumn: "span 7",

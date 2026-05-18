@@ -4,6 +4,9 @@
 import { THEME } from "%core/theme";
 import { styled } from "@mui/material/styles";
 
+export const COMPONENT_TABLE_GRID_TEMPLATE_COLUMNS =
+  "20px minmax(384px, 1.4fr) 80px 110px 100px 110px minmax(180px, 1fr)";
+
 export const Sheet = styled("div")({
   display: "grid",
   gridTemplateColumns: "20px auto auto auto 1fr",
