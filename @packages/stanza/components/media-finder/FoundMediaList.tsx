@@ -1,6 +1,3 @@
-import CircularProgress from "@mui/material/CircularProgress";
-import { styled } from "@mui/material/styles";
-import React, { FC, useEffect, useState } from "react";
 import { THEME } from "%core/theme";
 import { MediaListItem, MediaListItemInfo } from "%stanza/components/media-finder/MediaListItem";
 import { Pagination } from "%stanza/components/media-finder/Pagination";
@@ -13,6 +10,9 @@ import {
   useSelectedMediaState,
 } from "%stanza/state/media-finder/selectedMedia";
 import { hasIdOfLabel, LabelInfo } from "%stanza/utils/labelInfo";
+import CircularProgress from "@mui/material/CircularProgress";
+import { styled } from "@mui/material/styles";
+import React, { FC, useEffect, useState } from "react";
 
 type Props = {};
 
@@ -26,19 +26,12 @@ export const FoundMediaList: FC<Props> = () => {
       <ListWrapper>
         {isLoading && (
           <LoadingIndicator>
-            <CircularProgress
-              color="inherit"
-              size={40}
-            />
+            <CircularProgress color="inherit" size={40} />
           </LoadingIndicator>
         )}
         <div>
           {data.map((item) => (
-            <MediaListItem
-              key={item.id}
-              {...item}
-              onClick={toggleChecked}
-            />
+            <MediaListItem key={item.id} {...item} onClick={toggleChecked} />
           ))}
         </div>
         {!!response.total && !isLoading && (

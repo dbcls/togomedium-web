@@ -1,12 +1,12 @@
-import { SxProps } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { THEME } from "%core/theme";
 import { IconCompact, IconExpand } from "%stanza/components/icons/icons";
 import {
   WIDTH_COMPACT,
   WIDTH_EXPANDED,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
+import { SxProps } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = {
   label: string;
@@ -19,15 +19,9 @@ export const HeaderCell: FC<Props> = ({ label, onClickIcon, isExpanded }) => {
     <Wrapper className={isExpanded ? "expanded" : "compact"}>
       <span>{label}</span>
       {isExpanded ? (
-        <IconCompact
-          sx={iconStyle}
-          onClick={onClickIcon}
-        />
+        <IconCompact sx={iconStyle} onClick={onClickIcon} />
       ) : (
-        <IconExpand
-          sx={iconStyle}
-          onClick={onClickIcon}
-        />
+        <IconExpand sx={iconStyle} onClick={onClickIcon} />
       )}
     </Wrapper>
   );

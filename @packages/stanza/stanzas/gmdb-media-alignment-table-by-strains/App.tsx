@@ -1,6 +1,3 @@
-import { styled } from "@mui/material/styles";
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import {
   MediaStrainsAlignmentParams,
   MediaStrainsAlignmentResponse,
@@ -9,6 +6,9 @@ import {
 import { getData } from "%core/network/getData";
 import { THEME } from "%core/theme";
 import { AppContainer } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/AppContainer";
+import { styled } from "@mui/material/styles";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
 
 export type AppProps = {
   gmIds: string[];
@@ -25,7 +25,7 @@ const useData = (gmIds: string[]) => {
         mediaStrainsAlignmentURL,
         {
           gm_ids: gmIds.join(","),
-        }
+        },
       );
       if (!result.body) throw new Error("No data");
       return result.body;

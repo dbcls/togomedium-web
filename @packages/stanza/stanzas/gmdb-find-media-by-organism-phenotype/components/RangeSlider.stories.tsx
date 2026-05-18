@@ -1,21 +1,28 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { RangeSlider } from "./RangeSlider";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof RangeSlider> = {
+import { RangeSlider } from "./RangeSlider";
+
+const meta = {
   component: RangeSlider,
   decorators: [
+    (Story) => (
+      <StoryProvider mui>
+        <Story />
+      </StoryProvider>
+    ),
     (Story) => (
       <ComponentWrapper>
         <Story />
       </ComponentWrapper>
     ),
   ],
-};
+} satisfies Meta<typeof RangeSlider>;
 export default meta;
 
-type Story = StoryObj<typeof RangeSlider>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   args: {
     min: 0,
     max: 110,
@@ -29,4 +36,4 @@ export const Primary: Story = {
     handleValueChange: () => {},
     handleEnabledChange: () => {},
   },
-};
+} satisfies Story;

@@ -1,5 +1,3 @@
-import { styled } from "@mui/material/styles";
-import React, { ComponentProps, FC, useEffect, useMemo } from "react";
 import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
 import { THEME } from "%core/theme";
 import { FooterRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterRow";
@@ -12,6 +10,8 @@ import {
   useComponentTreeMutators,
   useComponentTreeState,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/componentTree";
+import { styled } from "@mui/material/styles";
+import React, { ComponentProps, FC, useEffect, useMemo } from "react";
 
 type Props = { data: MediaComponentAlignmentTableResponse; prioritizedOrganism: string[] };
 type RowProps = ComponentProps<typeof MediaRow>[];
@@ -30,11 +30,7 @@ export const AlignmentTable: FC<Props> = ({ data, prioritizedOrganism }) => {
     <Wrapper>
       <HeaderRow />
       {rowProps.map((props) => (
-        <MediaRow
-          {...props}
-          key={props.medium.id}
-          prioritizedOrganism={prioritizedOrganism}
-        />
+        <MediaRow {...props} key={props.medium.id} prioritizedOrganism={prioritizedOrganism} />
       ))}
       <FooterRow {...footerProps} />
     </Wrapper>

@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { FC } from "react";
+
 import { NavDivider } from "@/components/atoms/NavDivider.tsx";
 import { Logo } from "@/components/atoms/svg/logo.tsx";
 import {
@@ -31,28 +32,12 @@ export const GlobalNavigation: FC = () => {
         <SearchInput className={"mt-6"} />
 
         <ul className="mt-4 flex flex-col gap-0.5">
-          <NavItem
-            to={"/"}
-            title={"Home"}
-            icon={ICON_HOME}
-          />
+          <NavItem to={"/"} title={"Home"} icon={ICON_HOME} />
           <NavDivider />
           <NavItemGroup title={"Data"}>
-            <NavItem
-              to={"/medium"}
-              title={"All media"}
-              icon={ICON_MEDIUM}
-            />
-            <NavItem
-              to={"/strain"}
-              title={"All strains"}
-              icon={ICON_ORGANISM}
-            />
-            <NavItem
-              to={"/component"}
-              title={"All components"}
-              icon={ICON_COMPONENT}
-            />
+            <NavItem to={"/medium"} title={"All media"} icon={ICON_MEDIUM} />
+            <NavItem to={"/strain"} title={"All strains"} icon={ICON_ORGANISM} />
+            <NavItem to={"/component"} title={"All components"} icon={ICON_COMPONENT} />
           </NavItemGroup>
           <NavDivider />
           <NavItemGroup title={"Tools"}>
@@ -91,28 +76,12 @@ export const GlobalNavigation: FC = () => {
           </NavItemGroup>
           <NavDivider />
           <NavItemGroup title={"About"}>
-            <NavItem
-              to={"/about"}
-              title={"About this site"}
-              icon={ICON_DOC}
-            />
-            <NavItem
-              to={"/statistics"}
-              title={"Statistics"}
-              icon={ICON_STATS}
-            />
-            <NavItem
-              to={"/api"}
-              title={"API"}
-              icon={ICON_API}
-            />
+            <NavItem to={"/about"} title={"About this site"} icon={ICON_DOC} />
+            <NavItem to={"/statistics"} title={"Statistics"} icon={ICON_STATS} />
+            <NavItem to={"/api"} title={"API"} icon={ICON_API} />
           </NavItemGroup>
           <NavDivider />
-          <NavItem
-            href={URL_CONTACT}
-            title={"Contact"}
-            icon={ICON_MAIL}
-          />
+          <NavItem href={URL_CONTACT} title={"Contact"} icon={ICON_MAIL} />
         </ul>
       </div>
     </div>

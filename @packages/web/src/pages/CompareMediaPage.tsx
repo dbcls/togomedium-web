@@ -1,6 +1,7 @@
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions.ts";
 import { deepEqual } from "@tanstack/react-router";
 import { FC, useEffect, useRef, useState } from "react";
-import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions.ts";
+
 import { H2 } from "@/components/atoms/H2.tsx";
 import { SearchPane } from "@/components/organisms/SearchPane.tsx";
 import { ComponentAlignmentStanza } from "@/components/stanzas/ComponentAlignmentStanza.tsx";
@@ -27,14 +28,8 @@ export const CompareMediaPage: FC = () => {
         />
       </div>
 
-      <ComponentAlignmentStanza
-        gmIds={gmIds}
-        isVisible={isVisible}
-      />
-      <StrainAlignmentStanza
-        gmIds={gmIds}
-        isVisible={isVisible}
-      />
+      <ComponentAlignmentStanza gmIds={gmIds} isVisible={isVisible} />
+      <StrainAlignmentStanza gmIds={gmIds} isVisible={isVisible} />
     </PageWrapper>
   );
 };
@@ -91,7 +86,7 @@ const setSearchParams = (ids: string[]) => {
 
 const processMediaAlignmentTableResponse = (
   response: MediaComponentAlignmentTableResponse,
-  gmIds: string[]
+  gmIds: string[],
 ) => {
   const loadedMedia: string[] = [
     ...response.media.map((m) => m.gm_id),

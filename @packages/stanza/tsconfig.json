@@ -13,14 +13,14 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "types": ["@emotion/react", "d3-drag","vitest/globals"],
+    "types": ["@emotion/react", "d3-drag", "vitest/globals"],
     "skipLibCheck": true,
 
     "paths": {
       "%stanza/*": ["../stanza/*"],
       "%api/*": ["../api/src/*"],
       "%core/*": ["../core/src/*"],
-      "%storybook/*": ["../storybook/src/*"],
+      "%storybook/*": ["../storybook/src/*"]
     }
   }
 }

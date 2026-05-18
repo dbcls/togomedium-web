@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import Stanza from "togostanza/stanza";
+
 import { URL_API } from "../../utils/variables";
 
 type D3Selection = d3.Selection<any, any, any, any>;
@@ -139,7 +140,7 @@ const renderD3 = (
   stanza: Stanza,
   newicTree: NewicObj,
   codeList: any,
-  leafList: { [key: string]: string }
+  leafList: { [key: string]: string },
 ) => {
   const div = stanza.root.querySelector<HTMLDivElement>("#renderDiv")!;
   const d3Canvas = d3.select(div);
@@ -155,7 +156,7 @@ const renderD3 = (
   const onClickItem = (d: any) => {
     // console.log(d);
     const taxIds: string[] = (d.children ? getChildrenIDs(d, false) : [d.data.name]).map(
-      (str) => leafList[str]
+      (str) => leafList[str],
     );
     // console.log(taxIds);
     stanza.root.dispatchEvent(
@@ -165,7 +166,7 @@ const renderD3 = (
         detail: {
           taxIds,
         },
-      })
+      }),
     );
   };
 

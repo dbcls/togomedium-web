@@ -1,5 +1,3 @@
-import React, { ComponentProps, FC } from "react";
-import { Nullable } from "yohak-tools";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { ColorButton } from "%stanza/components/styled/ColorButton";
 import { ColWrapper } from "%stanza/components/styled/ColWrapper";
@@ -9,6 +7,7 @@ import { LineageList } from "%stanza/components/styled/LineageList";
 import { StanzaWrapper } from "%stanza/components/styled/StanzaWrapper";
 import { SubHeading } from "%stanza/components/styled/SubHeading";
 import { TagList } from "%stanza/components/styled/TagList";
+import React, { ComponentProps, FC } from "react";
 
 type Props = {
   strainId: string;
@@ -17,13 +16,13 @@ type Props = {
     label: string;
     url: string;
   }[];
-  taxonomy: Nullable<{
+  taxonomy: {
     name: string;
     taxId: string;
     rank: string;
     authorityName: string;
     lineage: ComponentProps<typeof LineageList>["lineage"];
-  }>;
+  } | null;
 };
 
 export const StanzaView: FC<Props> = ({ strainId, strainName, infoSources, taxonomy }) => {
@@ -39,11 +38,7 @@ export const StanzaView: FC<Props> = ({ strainId, strainName, infoSources, taxon
           <SubHeading>{infoSources.length === 1 ? "Source strain" : "Source strains"}</SubHeading>
           <TagList>
             {infoSources.map((source, index) => (
-              <ColorButton
-                key={index}
-                href={source.url}
-                target={getLinkTarget(source.url)}
-              >
+              <ColorButton key={index} href={source.url} target={getLinkTarget(source.url)}>
                 {source.label}
               </ColorButton>
             ))}

@@ -1,10 +1,10 @@
-import { describe, expect, it, test } from "vitest";
 import {
   findAscendants,
   findDescendants,
   makeNewSelection,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/functions/proessTaxonInfo";
 import { TaxonInfo } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
+import { describe, expect, it, test } from "vitest";
 expect.extend({
   toIncludeSameMembers(received: any[], expected: any[]) {
     const { isNot } = this;
@@ -12,7 +12,8 @@ expect.extend({
       received.length === expected.length && received.every((item: any) => expected.includes(item));
     return {
       pass,
-      message: () => `${received} is${isNot ? " not" : ""} equal to ${expected}`,
+      message: () =>
+        `${received.toString()} is${isNot ? " not" : ""} equal to ${expected.toString()}`,
     };
   },
 });
@@ -83,7 +84,7 @@ describe("makeNewSelection", () => {
   });
   it("should deselect target and select other siblings when parent is checked", () => {
     const result = makeNewSelection(list, "A-A-A", ["A"]);
-    expect(result).toEqual(["A-A-B","A-B"]);
+    expect(result).toEqual(["A-A-B", "A-B"]);
     /**
      * [*] A        [-]A
      * [@] -AA      [-]-AA

@@ -1,4 +1,3 @@
-import { ComponentProps } from "react";
 import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
 import { AlignmentCellState } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/AlignmentCell";
 import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterCell";
@@ -9,16 +8,17 @@ import {
   RawOrganism,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/types";
 import { LabelInfo } from "%stanza/utils/labelInfo";
+import { ComponentProps } from "react";
 
 type ComponentInfo = ComponentProps<typeof FooterCell>;
 type CellProps = ComponentProps<typeof MediaRow>["components"][0];
 
 export const makeAlignmentData = (
   data: MediaComponentAlignmentTableResponse,
-  footerComponents: ComponentInfo[]
+  footerComponents: ComponentInfo[],
 ): ComponentProps<typeof MediaRow>[] => {
   return data.media.map((medium) =>
-    makeMediaRowProp(medium, data.organisms, data.components, footerComponents)
+    makeMediaRowProp(medium, data.organisms, data.components, footerComponents),
   );
 };
 
@@ -26,7 +26,7 @@ const makeMediaRowProp = (
   mediumData: RawMedium,
   organismsData: RawOrganism[],
   componentsData: RawComponent[],
-  footerList: ComponentInfo[]
+  footerList: ComponentInfo[],
 ): ComponentProps<typeof MediaRow> => {
   const medium: LabelInfo = {
     id: mediumData.gm_id,
@@ -36,7 +36,7 @@ const makeMediaRowProp = (
     (taxid) =>
       organismsData
         .filter((organism) => organism.tax_id === taxid)
-        .map((organism) => ({ id: organism.tax_id, label: organism.name }))[0]
+        .map((organism) => ({ id: organism.tax_id, label: organism.name }))[0],
   );
   const components: CellProps[] = footerList.map((data) => {
     return {
@@ -56,14 +56,14 @@ const findComponentState = (
   id: string,
   mediumComponents: string[],
   allComponents: RawComponent[],
-  footerList: ComponentInfo[]
+  footerList: ComponentInfo[],
 ): AlignmentCellState => {
   if (mediumComponents.find((candidate) => candidate === id)) {
     return "available";
   }
 
   const groupedId = listChildComponents(id, allComponents).find((child) =>
-    mediumComponents.find((candidate) => candidate === child)
+    mediumComponents.find((candidate) => candidate === child),
   );
   if (groupedId) {
     const isOpen = footerList.find((item) => item.id === id)?.isOpen === true;

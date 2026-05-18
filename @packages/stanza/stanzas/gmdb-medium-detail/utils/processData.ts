@@ -1,4 +1,3 @@
-import { ComponentProps } from "react";
 import { MediumDetailResponse } from "%api/mediumDetail/definitions";
 import {
   RecipeCommentProps,
@@ -6,6 +5,7 @@ import {
   ReferencingRecipe,
   StanzaView,
 } from "%stanza/stanzas/gmdb-medium-detail/components/StanzaView";
+import { ComponentProps } from "react";
 
 type ViewProps = ComponentProps<typeof StanzaView>;
 type ApiComponentComment = MediumDetailResponse["comments"][0];
@@ -13,7 +13,7 @@ type ApiComponentTable = MediumDetailResponse["components"][0];
 
 export const processData = (
   body: MediumDetailResponse,
-  extraComponents: ReferencingRecipe[] = []
+  extraComponents: ReferencingRecipe[] = [],
 ): ViewProps => {
   const id = body.meta.gm.split("/").pop()!;
   return {
@@ -31,10 +31,10 @@ export const processData = (
 const processComponents = (
   myId: string,
   tables: ApiComponentTable[],
-  comments: ApiComponentComment[]
+  comments: ApiComponentComment[],
 ): ViewProps["components"] => {
   return [...processComponentTables(tables, myId), ...processComponentComments(comments)].sort(
-    (a, b) => a.index - b.index
+    (a, b) => a.index - b.index,
   );
 };
 

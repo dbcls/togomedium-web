@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { componentDetailURL } from "%api/componentDetail/definitions.ts";
+import { createFileRoute } from "@tanstack/react-router";
+
 import { ComponentDetailPage } from "@/pages/ComponentDetailPage.tsx";
 import { fetchData } from "@/utils/fetch.ts";
 
@@ -15,9 +16,5 @@ export const Route = createFileRoute("/component/$gmoId")({
     // console.log(result);
     return result;
   },
-  component: RouteComponent,
+  component: () => <ComponentDetailPage />,
 });
-
-function RouteComponent() {
-  return <ComponentDetailPage />;
-}

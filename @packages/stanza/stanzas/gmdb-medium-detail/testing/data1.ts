@@ -1,5 +1,5 @@
-import { ComponentProps } from "react";
 import { StanzaView } from "%stanza/stanzas/gmdb-medium-detail/components/StanzaView";
+import { ComponentProps } from "react";
 
 type ViewProps = ComponentProps<typeof StanzaView>;
 export const data1: ViewProps = {

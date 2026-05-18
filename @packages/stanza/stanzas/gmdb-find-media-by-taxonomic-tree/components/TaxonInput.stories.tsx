@@ -1,13 +1,22 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { userEvent, within } from "@storybook/test";
 import { TaxonInput } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonInput";
 import { useTaxonomyTypeMutators } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
 import { sleep } from "%stanza/utils/promise";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { userEvent, within } from "storybook/test";
 
-const meta: Meta<typeof TaxonInput> = {
+const meta = {
   component: TaxonInput,
+  args: {
+    onChange: () => {},
+  },
   decorators: [
+    (Story) => (
+      <StoryProvider reactQuery mui>
+        <Story />
+      </StoryProvider>
+    ),
     (Story) => (
       <ComponentWrapper>
         <Story />
@@ -15,11 +24,11 @@ const meta: Meta<typeof TaxonInput> = {
     ),
   ],
   parameters: {},
-};
+} satisfies Meta<typeof TaxonInput>;
 export default meta;
 
-type Story = StoryObj<typeof TaxonInput>;
-export const Primary: Story = {
+type Story = StoryObj<typeof meta>;
+export const Primary = {
   decorators: [
     (Story) => {
       const { setApiType } = useTaxonomyTypeMutators();
@@ -27,9 +36,9 @@ export const Primary: Story = {
       return <Story />;
     },
   ],
-};
+} satisfies Story;
 
-export const GTDB: Story = {
+export const GTDB = {
   decorators: [
     (Story) => {
       const { setApiType } = useTaxonomyTypeMutators();
@@ -37,9 +46,9 @@ export const GTDB: Story = {
       return <Story />;
     },
   ],
-};
+} satisfies Story;
 
-export const Play_NCBI: Story = {
+export const Play_NCBI = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByRole("combobox");
@@ -57,9 +66,9 @@ export const Play_NCBI: Story = {
       return <Story />;
     },
   ],
-};
+} satisfies Story;
 
-export const Play_GTDB: Story = {
+export const Play_GTDB = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByRole("combobox");
@@ -77,4 +86,4 @@ export const Play_GTDB: Story = {
       return <Story />;
     },
   ],
-};
+} satisfies Story;

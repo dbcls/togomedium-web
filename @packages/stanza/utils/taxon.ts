@@ -1,5 +1,3 @@
-import { Optional } from "yohak-tools";
-
 export enum TAXON_RANK {
   _0_KINGDOM = "Kingdom",
   _1_PHYLUM = "Phylum",
@@ -29,7 +27,7 @@ export const getRankLevel = (rank: TAXON_RANK): number => {
   return availableRanks.indexOf(rank);
 };
 
-export const getNextTaxon = (rank: TAXON_RANK): Optional<TAXON_RANK> => {
+export const getNextTaxon = (rank: TAXON_RANK): TAXON_RANK | undefined => {
   const rankLevel = getRankLevel(rank);
   if (rankLevel === -1) {
     return undefined;

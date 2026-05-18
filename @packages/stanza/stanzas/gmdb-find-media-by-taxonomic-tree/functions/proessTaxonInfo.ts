@@ -1,5 +1,5 @@
-import { isArray } from "yohak-tools/";
 import { TaxonInfo } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
+import { isArray } from "is-what";
 
 type Node = Pick<TaxonInfo, "id" | "children">;
 export const findAscendants = (list: Node[], id: string): string[] => {

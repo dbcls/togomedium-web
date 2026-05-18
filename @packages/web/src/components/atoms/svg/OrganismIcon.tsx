@@ -6,12 +6,7 @@ type Props = {
 
 export const OrganismIcon: FC<Props> = ({ className }) => {
   return (
-    <svg
-      role="img"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 512 512"
-      className={className}
-    >
+    <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className={className}>
       <path
         fill="currentColor"
         d="M95.4,196.7c-44.2,0-80.1-35.9-80.1-80.1s35.9-80.1,80.1-80.1s80.1,35.9,80.1,80.1S139.6,196.7,95.4,196.7z M95.4,66.5

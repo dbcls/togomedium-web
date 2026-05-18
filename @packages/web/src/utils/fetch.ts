@@ -1,6 +1,6 @@
 export async function fetchData<T = unknown>(
   api: string,
-  body: string = ""
+  body: string = "",
 ): Promise<T | undefined> {
   try {
     const res = await fetch(api, {

@@ -2,7 +2,7 @@ import { TreeBranch } from "./types";
 
 export const findBranchFromTrunk = <Branch extends TreeBranch>(
   id: string,
-  tree: Branch[]
+  tree: Branch[],
 ): Branch | undefined => {
   return tree.map((branch) => findNode(id, branch)).find((r) => !!r);
 };

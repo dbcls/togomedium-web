@@ -1,6 +1,3 @@
-import { Tooltip } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import React, { FC, useMemo } from "react";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%core/theme";
@@ -9,6 +6,9 @@ import {
   WIDTH_EXPANDED,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
 import { LabelInfo } from "%stanza/utils/labelInfo";
+import { Tooltip } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import React, { FC, useMemo } from "react";
 
 type Props = {
   info: LabelInfo[];
@@ -35,11 +35,11 @@ const sortInfo = (info: LabelInfo[], priority: string[]): LabelInfo[] => {
 const Compact: FC<Omit<Props, "expanded">> = ({ info, linkBase, priority = [] }) => {
   const myPriorityItems: string[] = useMemo(
     () => info.map((item) => item.id).filter((str) => priority.includes(str)),
-    [info, priority]
+    [info, priority],
   );
   const items = useMemo(
     () => (myPriorityItems.length ? info.filter((item) => priority.includes(item.id)) : [info[0]]),
-    [myPriorityItems, info]
+    [myPriorityItems, info],
   );
   const restText = useMemo(() => {
     const remain = myPriorityItems.length ? info.length - myPriorityItems.length : info.length - 1;
@@ -93,10 +93,7 @@ const Expanded: FC<Omit<Props, "expanded">> = ({ info, linkBase, priority = [] }
           ...info.filter((item) => priority.includes(item.id)),
           ...info.filter((item) => !priority.includes(item.id)),
         ].map((item) => (
-          <div
-            key={item.id}
-            className="text"
-          >
+          <div key={item.id} className="text">
             <a
               href={makeLinkPath(`${linkBase}${item.id}`)}
               target={getLinkTarget(`${linkBase}${item.id}`)}

@@ -1,7 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { FC, PropsWithChildren, useEffect, useMemo } from "react";
-import { useTimeout } from "usehooks-ts";
-import { Optional } from "yohak-tools";
 import { TaxonChildrenParams, TaxonChildrenResponse } from "%api/taxonChildren/definitions";
 import { PATH_TAXON } from "%core/consts";
 import { getData } from "%core/network/getData";
@@ -31,6 +27,8 @@ import {
   useIsOpen,
   useTaxonTreeMutators,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/treeState";
+import { useQuery } from "@tanstack/react-query";
+import React, { FC, PropsWithChildren, useEffect, useMemo } from "react";
 
 type Props = { id: string } & PropsWithChildren;
 
@@ -38,7 +36,7 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
   const taxonList = useTaxonListState();
   const searchResult = useSearchResult();
   const isHighlighted = useMemo(() => searchResult === id, [searchResult, id]);
-  const myInfo: Optional<TaxonInfo> = useMemo(() => {
+  const myInfo: TaxonInfo | undefined = useMemo(() => {
     return taxonList.find((item) => item.id === id);
   }, [taxonList, id]);
   const { branchChildren, isOpen, onToggleChildren, toggleIconStatus, taxonType } =
@@ -79,17 +77,12 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id }) => {
     >
       {isOpen &&
         branchChildren.length &&
-        branchChildren.map((childId) => (
-          <TaxonomicTreeBranch
-            key={childId}
-            id={childId}
-          />
-        ))}
+        branchChildren.map((childId) => <TaxonomicTreeBranch key={childId} id={childId} />)}
     </TreeBranchView>
   );
 };
 
-const useBranchChildren = (info: Optional<TaxonInfo>) => {
+const useBranchChildren = (info: TaxonInfo | undefined) => {
   const { toggleOpen } = useTaxonTreeMutators();
   const onToggleChildren = () => toggleOpen(info?.id || "");
   const isOpen = useIsOpen(info?.id || "");
@@ -126,14 +119,14 @@ const useBranchChildren = (info: Optional<TaxonInfo>) => {
     if (query.data?.length) {
       setTaxonChildren(
         info?.id || "",
-        query.data.map((item) => item.tax_id)
+        query.data.map((item) => item.tax_id),
       );
     }
   }, [query.data]);
 
   const branchChildren: string[] = useMemo(
     () => (query.data ?? []).map((item) => item.tax_id),
-    [query.data]
+    [query.data],
   );
 
   const toggleIconStatus: ToggleIconStatus = useMemo(() => {
@@ -157,7 +150,7 @@ const useLinkString = (id: string, rank: string) => {
   return [linkString, linkURL];
 };
 
-const useTaxonInfo = (myInfo: Optional<TaxonInfo>) => {
+const useTaxonInfo = (myInfo: TaxonInfo | undefined) => {
   const rank = useMemo(() => myInfo?.rank || "", [myInfo]);
   const label = useMemo(() => myInfo?.label || "", [myInfo]);
   return { rank, label };
@@ -167,7 +160,7 @@ const useChecked = (
   id: string,
   taxonList: TaxonInfo[],
   ascendants: string[],
-  descendants: string[]
+  descendants: string[],
 ) => {
   const selectedTaxon = useSelectedTaxonState();
   const { updateSelection } = useSelectedTaxonMutators();
@@ -198,7 +191,7 @@ const useLineages = (id: string, taxonList: TaxonInfo[]) => {
   const descendants = useMemo(() => findDescendants(taxonList, id), [taxonList, id]);
   const ascendantsLabel = useMemo(
     () => ascendants.map((id) => taxonList.find((taxon) => taxon.id === id)?.label).join(" > "),
-    [ascendants]
+    [ascendants],
   );
   // useEffect(() => {
   //   console.log({ id: id, ascendants: ascendants, descendants: descendants });

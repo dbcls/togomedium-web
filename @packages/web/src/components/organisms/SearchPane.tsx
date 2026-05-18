@@ -1,6 +1,7 @@
 import { RefObject } from "@react-types/shared";
 import clsx from "clsx";
 import { FC, PropsWithChildren } from "react";
+
 import { Button } from "@/components/atoms/Button.tsx";
 
 type Props = {
@@ -47,7 +48,7 @@ export const SearchPane: FC<Props> = ({
               placeholder={placeHolder}
               defaultValue={defaultWithPlaceHolder ? placeHolder : undefined}
               ref={inputRef}
-              className="text-xl4 block h-full w-full rounded-md bg-white px-3 py-1.5 text-large text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
+              className="text-xl4 text-large focus:outline-primary block h-full w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2"
             />
           </div>
           <Button label={buttonLabel} />

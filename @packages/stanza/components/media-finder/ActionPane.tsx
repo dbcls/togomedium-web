@@ -1,11 +1,11 @@
-import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
-import React, { FC } from "react";
 import { THEME } from "%core/theme";
 import {
   useSelectedMediaMutators,
   useSelectedMediaState,
 } from "%stanza/state/media-finder/selectedMedia";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+import React, { FC } from "react";
 
 type Props = { actionLabel: string; dispatchEvent: (gmIds: string[]) => void };
 
@@ -29,11 +29,7 @@ export const ActionPane: FC<Props> = ({ actionLabel, dispatchEvent }) => {
         >
           {actionLabel}
         </Button>
-        <Button
-          variant="outlined"
-          onClick={clearSelectedMedia}
-          sx={{ textTransform: "none" }}
-        >
+        <Button variant="outlined" onClick={clearSelectedMedia} sx={{ textTransform: "none" }}>
           Clear selection
         </Button>
       </ButtonWrapper>

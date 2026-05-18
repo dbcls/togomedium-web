@@ -39,7 +39,7 @@ export const RangeSlider: FC<Props> = ({
   };
   const handleChangeCommitted = (
     event: React.SyntheticEvent | Event,
-    newValue: number | number[]
+    newValue: number | number[],
   ) => {
     handleValueChange(queryKey, (newValue as number[]).join(","));
   };
@@ -57,12 +57,7 @@ export const RangeSlider: FC<Props> = ({
         <span>
           <FormControlLabel
             label={label}
-            control={
-              <Checkbox
-                onChange={handleCheckChange}
-                sx={{ paddingLeft: 0 }}
-              />
-            }
+            control={<Checkbox onChange={handleCheckChange} sx={{ paddingLeft: 0 }} />}
           />
         </span>
       </div>

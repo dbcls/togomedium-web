@@ -1,5 +1,3 @@
-import { styled } from "@mui/material/styles";
-import React, { ComponentProps, FC } from "react";
 import { THEME } from "%core/theme";
 import { FooterCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterCell";
 import {
@@ -8,6 +6,8 @@ import {
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/consts";
 import { useIsMediaExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";
 import { useIsOrganismsExpendedState } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
+import { styled } from "@mui/material/styles";
+import React, { ComponentProps, FC } from "react";
 
 type Props = {
   components: ComponentProps<typeof FooterCell>[];
@@ -21,10 +21,7 @@ export const FooterRow: FC<Props> = ({ components }) => {
       <InfoSpacer className={isMediaExpanded ? "expand" : "compact"} />
       <InfoSpacer className={isOrganismsExpanded ? "expand" : "compact"} />
       {components.map((component) => (
-        <FooterCell
-          {...component}
-          key={component.id}
-        />
+        <FooterCell {...component} key={component.id} />
       ))}
       <ComponentSpacer />
     </Wrapper>

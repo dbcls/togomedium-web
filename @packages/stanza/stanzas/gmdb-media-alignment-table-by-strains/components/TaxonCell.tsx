@@ -1,19 +1,19 @@
-import { SxProps, Tooltip } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import React, { FC, useEffect, useMemo } from "react";
 import { LineageRank } from "%api/mediaStrainsAlignment/definitions";
 import { getLinkTarget } from "%core/network/getLinkTarget";
 import { makeLinkPath } from "%core/network/makeLinkPath";
 import { THEME } from "%core/theme";
 import { FilterIcon } from "%stanza/components/icons/FilterIcon";
-import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/MediaCell";
 import { makeCellHeight } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/processMediaCell";
+import { useToolTipEnabled } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/functions/useToolTipEnabled";
 import {
   useFilterTaxonMutators,
   useFilterTaxonState,
 } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/states/filterTaxon";
 import { CellInfo } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/types";
 import { makeSpeciesName } from "%stanza/utils/string";
+import { SxProps, Tooltip } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import React, { FC, useEffect, useMemo } from "react";
 
 type Props = { rank: LineageRank; isFolded: boolean } & CellInfo;
 type ToMemoizeProps = Props & { wrapperRef: React.RefObject<HTMLDivElement | null> };
@@ -26,15 +26,7 @@ export const TaxonCell: FC<Props> = (props) => {
     wrapperRef.current.style.height = makeCellHeight(size) + "px";
     // console.log("set height", size, props.id, props.isFolded);
   }, [props.size, props.isFolded]);
-  return useMemo(
-    () => (
-      <ToMemoize
-        {...props}
-        wrapperRef={wrapperRef}
-      />
-    ),
-    [props.id]
-  );
+  return useMemo(() => <ToMemoize {...props} wrapperRef={wrapperRef} />, [props.id]);
 };
 
 const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank }) => {
@@ -50,10 +42,7 @@ const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank }) => {
     <Wrapper ref={wrapperRef}>
       {!!label && (
         <>
-          <a
-            href={makeLinkPath(`${pathRoot}${id}`)}
-            target={getLinkTarget(`${pathRoot}${id}`)}
-          >
+          <a href={makeLinkPath(`${pathRoot}${id}`)} target={getLinkTarget(`${pathRoot}${id}`)}>
             {id}
           </a>
           <div className={"label-wrapper"}>
@@ -64,10 +53,7 @@ const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank }) => {
               disableHoverListener={!toolTipEnabled}
               slotProps={{ popper: { disablePortal: true } }}
             >
-              <span
-                className={"label"}
-                ref={labelRef}
-              >
+              <span className={"label"} ref={labelRef}>
                 {makeLabel(label, rank)}
               </span>
             </Tooltip>

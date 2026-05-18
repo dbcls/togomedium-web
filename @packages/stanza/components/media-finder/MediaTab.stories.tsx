@@ -1,18 +1,24 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { MediaTab } from "%stanza/components/media-finder/MediaTab";
 import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
+import { StoryProvider } from "%storybook/StoryProvider";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const meta: Meta<typeof MediaTab> = {
+const meta = {
   component: MediaTab,
   decorators: [
+    (Story) => (
+      <StoryProvider mui>
+        <Story />
+      </StoryProvider>
+    ),
     (Story) => (
       <ComponentWrapper>
         <Story />
       </ComponentWrapper>
     ),
   ],
-};
+} satisfies Meta<typeof MediaTab>;
 export default meta;
 
-type Story = StoryObj<typeof MediaTab>;
-export const Primary: Story = {};
+type Story = StoryObj<typeof meta>;
+export const Primary = {} satisfies Story;

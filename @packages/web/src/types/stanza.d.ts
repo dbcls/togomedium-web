@@ -47,6 +47,7 @@ declare global {
           tax_ids?: string;
           variant_id?: string;
         } & StanzaProps;
+        "togostanza-gmdb-medium-builder": {} & StanzaProps;
       }
     }
   }

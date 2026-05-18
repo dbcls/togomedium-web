@@ -4,6 +4,7 @@ export const mediaByTaxonResponse3: ListMediaOfTaxonsResponse = {
   total: 35,
   offset: 20,
   limit: 10,
+  columns: [],
   contents: [
     {
       gm_id: "SY41",

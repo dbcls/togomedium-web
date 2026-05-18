@@ -1,9 +1,10 @@
+import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
 import { describe, expect, it } from "vitest";
-import { makeComponentTree } from "./makeComponentBranch";
+
 import { makeRawComponent } from "../../../utils/testing";
 import { ROOT_COMPONENT } from "../consts";
 import { RawComponent } from "../types";
-import { MediaComponentAlignmentTableResponse } from "%api/mediaComponentAlignment/definitions";
+import { makeComponentTree } from "./makeComponentBranch";
 
 describe("makeComponentTree", () => {
   it("should work", () => {

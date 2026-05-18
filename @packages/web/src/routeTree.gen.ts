@@ -42,6 +42,7 @@ const CompareMediaByTaxidsLazyImport = createFileRoute(
   '/compare-media-by-taxids',
 )()
 const CompareMediaLazyImport = createFileRoute('/compare-media')()
+const BuilderLazyImport = createFileRoute('/builder')()
 const ApiLazyImport = createFileRoute('/api')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
@@ -112,6 +113,12 @@ const CompareMediaLazyRoute = CompareMediaLazyImport.update({
   path: '/compare-media',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/compare-media.lazy').then((d) => d.Route))
+
+const BuilderLazyRoute = BuilderLazyImport.update({
+  id: '/builder',
+  path: '/builder',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/builder.lazy').then((d) => d.Route))
 
 const ApiLazyRoute = ApiLazyImport.update({
   id: '/api',
@@ -209,6 +216,13 @@ declare module '@tanstack/react-router' {
       path: '/api'
       fullPath: '/api'
       preLoaderRoute: typeof ApiLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/builder': {
+      id: '/builder'
+      path: '/builder'
+      fullPath: '/builder'
+      preLoaderRoute: typeof BuilderLazyImport
       parentRoute: typeof rootRoute
     }
     '/compare-media': {
@@ -326,6 +340,7 @@ export interface FileRoutesByFullPath {
   '/pathway-stanza': typeof PathwayStanzaRoute
   '/about': typeof AboutLazyRoute
   '/api': typeof ApiLazyRoute
+  '/builder': typeof BuilderLazyRoute
   '/compare-media': typeof CompareMediaLazyRoute
   '/compare-media-by-taxids': typeof CompareMediaByTaxidsLazyRoute
   '/find-media-by-components': typeof FindMediaByComponentsLazyRoute
@@ -348,6 +363,7 @@ export interface FileRoutesByTo {
   '/pathway-stanza': typeof PathwayStanzaRoute
   '/about': typeof AboutLazyRoute
   '/api': typeof ApiLazyRoute
+  '/builder': typeof BuilderLazyRoute
   '/compare-media': typeof CompareMediaLazyRoute
   '/compare-media-by-taxids': typeof CompareMediaByTaxidsLazyRoute
   '/find-media-by-components': typeof FindMediaByComponentsLazyRoute
@@ -371,6 +387,7 @@ export interface FileRoutesById {
   '/pathway-stanza': typeof PathwayStanzaRoute
   '/about': typeof AboutLazyRoute
   '/api': typeof ApiLazyRoute
+  '/builder': typeof BuilderLazyRoute
   '/compare-media': typeof CompareMediaLazyRoute
   '/compare-media-by-taxids': typeof CompareMediaByTaxidsLazyRoute
   '/find-media-by-components': typeof FindMediaByComponentsLazyRoute
@@ -395,6 +412,7 @@ export interface FileRouteTypes {
     | '/pathway-stanza'
     | '/about'
     | '/api'
+    | '/builder'
     | '/compare-media'
     | '/compare-media-by-taxids'
     | '/find-media-by-components'
@@ -416,6 +434,7 @@ export interface FileRouteTypes {
     | '/pathway-stanza'
     | '/about'
     | '/api'
+    | '/builder'
     | '/compare-media'
     | '/compare-media-by-taxids'
     | '/find-media-by-components'
@@ -437,6 +456,7 @@ export interface FileRouteTypes {
     | '/pathway-stanza'
     | '/about'
     | '/api'
+    | '/builder'
     | '/compare-media'
     | '/compare-media-by-taxids'
     | '/find-media-by-components'
@@ -460,6 +480,7 @@ export interface RootRouteChildren {
   PathwayStanzaRoute: typeof PathwayStanzaRoute
   AboutLazyRoute: typeof AboutLazyRoute
   ApiLazyRoute: typeof ApiLazyRoute
+  BuilderLazyRoute: typeof BuilderLazyRoute
   CompareMediaLazyRoute: typeof CompareMediaLazyRoute
   CompareMediaByTaxidsLazyRoute: typeof CompareMediaByTaxidsLazyRoute
   FindMediaByComponentsLazyRoute: typeof FindMediaByComponentsLazyRoute
@@ -482,6 +503,7 @@ const rootRouteChildren: RootRouteChildren = {
   PathwayStanzaRoute: PathwayStanzaRoute,
   AboutLazyRoute: AboutLazyRoute,
   ApiLazyRoute: ApiLazyRoute,
+  BuilderLazyRoute: BuilderLazyRoute,
   CompareMediaLazyRoute: CompareMediaLazyRoute,
   CompareMediaByTaxidsLazyRoute: CompareMediaByTaxidsLazyRoute,
   FindMediaByComponentsLazyRoute: FindMediaByComponentsLazyRoute,
@@ -513,6 +535,7 @@ export const routeTree = rootRoute
         "/pathway-stanza",
         "/about",
         "/api",
+        "/builder",
         "/compare-media",
         "/compare-media-by-taxids",
         "/find-media-by-components",
@@ -541,6 +564,9 @@ export const routeTree = rootRoute
     },
     "/api": {
       "filePath": "api.lazy.tsx"
+    },
+    "/builder": {
+      "filePath": "builder.lazy.tsx"
     },
     "/compare-media": {
       "filePath": "compare-media.lazy.tsx"

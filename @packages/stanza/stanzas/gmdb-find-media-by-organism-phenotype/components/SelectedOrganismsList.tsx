@@ -1,10 +1,10 @@
-import React, { FC, useMemo, useState } from "react";
 import { Pagination } from "%stanza/components/media-finder/Pagination";
 import { OrganismListItem } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismListItem";
 import {
   useSelectedOrganismsMutators,
   useSelectedOrganismsState,
 } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/selectedOrganisms";
+import React, { FC, useMemo, useState } from "react";
 
 type Props = {};
 
@@ -21,7 +21,7 @@ export const SelectedOrganismsList: FC<Props> = () => {
   };
   const data = useMemo(
     () => selectedOrganisms.filter((item, i) => i >= current).filter((item, i) => i < SHOW_COUNT),
-    [selectedOrganisms, current]
+    [selectedOrganisms, current],
   );
   return (
     <div>

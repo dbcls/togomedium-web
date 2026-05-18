@@ -1,8 +1,3 @@
-import { Autocomplete, Box, TextField } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { useQuery } from "@tanstack/react-query";
-import React, { FC, useMemo } from "react";
-import { useDebounceValue } from "usehooks-ts";
 import {
   TaxonSearchByNameParams,
   TaxonSearchByNameResponse,
@@ -13,6 +8,11 @@ import {
   useTaxonomyType,
   useTaxonSearchApi,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
+import { Autocomplete, Box, TextField } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { useQuery } from "@tanstack/react-query";
+import React, { FC, useMemo } from "react";
+import { useDebounceValue } from "usehooks-ts";
 
 type Props = {
   onChange: (id: string | null) => void;
@@ -67,12 +67,7 @@ export const TaxonInput: FC<Props> = ({ onChange }) => {
       disablePortal={true}
       filterOptions={(options, _params) => options}
       getOptionLabel={(option) => option.name}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Search taxon by name"
-        />
-      )}
+      renderInput={(params) => <TextField {...params} label="Search taxon by name" />}
       onInputChange={(e, v) => {
         setValue(v);
       }}
@@ -86,10 +81,7 @@ export const TaxonInput: FC<Props> = ({ onChange }) => {
       renderOption={(props, option, { selected }) => {
         const { key, ...optionProps } = props;
         return (
-          <li
-            key={key}
-            {...optionProps}
-          >
+          <li key={key} {...optionProps}>
             <Box sx={{ display: "flex", gap: 1, alignItems: "baseline" }}>
               <TagTip>{option.rank}</TagTip>
               {showId && <TaxId>[tax_id:{option.tax_id}]</TaxId>}

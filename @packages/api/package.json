@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
-    "yohak-tools": "^0.1.0"
+    "@asteasolutions/zod-to-openapi": "^8.4.3",
+    "zod": "^4.3.6"
   }
 }

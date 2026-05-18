@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { FC } from "react";
+
 import { Logo } from "@/components/atoms/svg/logo.tsx";
 import { basicTextLink } from "@/consts/styles.ts";
 
@@ -10,21 +11,17 @@ export const IntroductionSection: FC = () => {
       <div className={"flex justify-start gap-6"}>
         <div className={"flex w-1/3 max-w-96 shrink-0 grow-0 items-center"}>
           <figure className={"overflow-clip rounded"}>
-            <img
-              className={"block"}
-              src="/assets/photo1.webp"
-              alt=""
-            />
+            <img className={"block"} src="/assets/photo1.webp" alt="" />
           </figure>
         </div>
         <div className={"flex flex-col justify-center gap-2"}>
           <Logo className={"w-[240px]"} />
-          <p className={"rounded p-2 text-4xl font-medium text-primary"}>
+          <p className={"text-primary rounded p-2 text-4xl font-medium"}>
             Culture media database aggregated from various resources.{" "}
           </p>
         </div>
       </div>
-      <p className={"hyphens-auto text-justify text-large font-light"}>
+      <p className={"text-large text-justify font-light hyphens-auto"}>
         TogoMedium is a comprehensive knowledge base focused on culture media for microorganisms.
         The media available in TogoMedium have been compiled from information provided by diverse
         bioresource centers and research papers. All information in TogoMedium is described as RDF
@@ -33,10 +30,7 @@ export const IntroductionSection: FC = () => {
         facilitating a deeper understanding of their relationships.{" "}
       </p>
       <p className={"flex w-full justify-end"}>
-        <Link
-          to={"/about"}
-          className={clsx(basicTextLink, "text-large")}
-        >
+        <Link to={"/about"} className={clsx(basicTextLink, "text-large")}>
           More about us &gt;
         </Link>
       </p>

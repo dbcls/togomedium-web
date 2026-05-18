@@ -1,13 +1,13 @@
-import { isArray, Optional, Nullable } from "yohak-tools";
+import { isArray } from "is-what";
 
 export const getData = async <ResponseBody, Params extends ParamObject = ParamObject>(
   url: string,
   params: Params,
-  abortController?: AbortController
+  abortController?: AbortController,
 ): Promise<ApiResponse<ResponseBody>> => {
   const response = await fetch(
     url,
-    makeOptions(params, abortController ? abortController.signal : null)
+    makeOptions(params, abortController ? abortController.signal : null),
   );
 
   if (response.status !== 200) {
@@ -27,19 +27,19 @@ export const getData = async <ResponseBody, Params extends ParamObject = ParamOb
 type ApiResponse<T> = {
   status: number;
   message?: string;
-  body: Optional<T>;
+  body: T | undefined;
 };
 
 type ParamObject = { [key: string]: string | number | string[] | number[] };
 
 const makeFormBody = (params: ParamObject) => {
   const formBody = Object.entries(params).map(
-    ([key, value]) => `${key}=${encodeURIComponent(isArray(value) ? value.join(",") : value)}`
+    ([key, value]) => `${key}=${encodeURIComponent(isArray(value) ? value.join(",") : value)}`,
   );
   return formBody.join("&");
 };
 
-const makeOptions = (params: ParamObject, signal: Nullable<AbortSignal> = null): RequestInit => {
+const makeOptions = (params: ParamObject, signal: AbortSignal | null = null): RequestInit => {
   const body = makeFormBody(params);
   return {
     method: "POST",

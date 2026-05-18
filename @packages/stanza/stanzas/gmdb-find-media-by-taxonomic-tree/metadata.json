@@ -24,7 +24,7 @@
   "stanza:incomingEvent": [],
   "stanza:outgoingEvent": [
     {
-      "stanza:key":"STANZA_RUN_ACTION",
+      "stanza:key": "STANZA_RUN_ACTION",
       "stanza:description": "dispatches when the action button is clicked"
     }
   ]

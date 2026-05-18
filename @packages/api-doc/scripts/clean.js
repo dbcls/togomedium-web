@@ -1,5 +1,6 @@
-import { consola } from "consola";
 import { rmSync, existsSync } from "fs";
+
+import { consola } from "consola";
 
 export function clean() {
   const cwd = process.cwd();

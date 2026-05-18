@@ -1,4 +1,5 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
+
 import { MediaFinderListApiBody } from "../../utils/types";
 
 export type FoundMedia = MediaFinderListApiBody<"gm_id" | "name">;

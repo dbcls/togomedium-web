@@ -21,15 +21,10 @@ const config: StorybookConfig = {
     //   titlePrefix: "Editor",
     // },
   ],
-  addons: [
-    "@storybook/addon-essentials",
-    "@chromatic-com/storybook",
-    "@storybook/addon-interactions",
-  ],
+  addons: ["@storybook/addon-docs"],
   framework: {
     name: "@storybook/react-vite",
     options: {},
   },
-
 };
 export default config;

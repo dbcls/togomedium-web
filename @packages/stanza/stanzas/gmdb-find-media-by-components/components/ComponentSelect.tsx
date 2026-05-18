@@ -1,6 +1,3 @@
-import { Autocomplete, Chip, TextField } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import React, { FC, useState } from "react";
 import {
   ComponentsWithComponentsResponse,
   componentsWithComponentsURL,
@@ -8,6 +5,9 @@ import {
 } from "%api/componentsWithComponents/definitions";
 import { getData } from "%core/network/getData";
 import { parseLabelInfo } from "%stanza/stanzas/gmdb-find-media-by-components/functions/parseLabelInfo";
+import { Autocomplete, Chip, TextField } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import React, { FC, useState } from "react";
 
 type Props = {
   onChangeSelection: (ids: string[]) => void;
@@ -48,12 +48,7 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
       options={data || []}
       loading={isPending}
       getOptionLabel={(option) => option.label}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Components"
-        />
-      )}
+      renderInput={(params) => <TextField {...params} label="Components" />}
       renderTags={(value, getTagProps) =>
         value.map((option, index) => (
           <Chip

@@ -4,6 +4,7 @@ export const organismsByAttributesResponse2: ListOrganismsByPhenotypesResponse =
   total: 35,
   offset: 10,
   limit: 10,
+  columns: [],
   contents: [
     {
       tax_id: "209654",
