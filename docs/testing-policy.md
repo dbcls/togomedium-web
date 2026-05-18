@@ -19,6 +19,7 @@
 
 - 整形は `oxfmt` で行う
 - lintは `oxlint.config.ts` を基準に `oxlint` で実行する
+- 型チェックは `oxlint --type-aware --type-check` で実行する
 - テストはVitestで書く
 - テストファイル名は `*.spec.ts` または `*.spec.tsx` とする
 - ロジックは、ユニットテストしやすい形へ分離する
@@ -38,9 +39,7 @@
 最低限、次の確認を実行する。
 
 ```bash
-pnpm format
-pnpm lint
-pnpm test
+pnpm check-all
 ```
 
 - 変更が特定packageに閉じる場合でも、共有ロジックや型へ影響する可能性を確認する
@@ -76,18 +75,15 @@ pnpm test
 ## type-check
 
 - `pnpm type-check` はTypeScriptの型チェック用scriptとして用意している
-- ただし現時点では、`@packages/api` のZod / OpenAPI定義まわりに既存型エラーがある
-- そのため、`type-check` は当面 `check-all` に含めない
-- 型エラーの既存状態を確認する場合は `pnpm type-check` を実行し、失敗内容を個別に確認する
-- package別の影響を切り分ける場合は、`type-check:web` などのpackage別scriptを使う
-
-この扱いの判断理由は `docs/decisions/2026-05-18-type-check-non-gating.md` に残している。
+- 実行実体は `oxlint -c oxlint.config.ts . --type-aware --type-check`
+- quiet指定は付けず、通常出力で診断情報を確認できるようにする
+- 型エラーは `check-all` の失敗として扱う
+- `tsc` によるpackage別scriptは標準導線としては用意しない
 
 ## check-all
 
-- `pnpm check-all` は `format` / `lint` / `test` をまとめて実行する
-- 現時点では `type-check` を含めない
-- `type-check` を追加する判断は、既存型エラーの解消後に見直す
+- `pnpm check-all` は `format` / `lint` / `type-check` / `test` をまとめて実行する
+- コード変更を含む作業では、原則として `pnpm check-all` を完了前確認に使う
 
 ## ignore系コメントの扱い
 
@@ -100,4 +96,3 @@ pnpm test
 - `docs/development-guide.md`: 日常開発の手順と検証方針
 - `docs/development/coding-guidelines.md`: 実装時のコード規約
 - `docs/agent-browser.md`: `agent-browser` による画面確認と一時成果物の扱い
-- `docs/decisions/2026-05-18-type-check-non-gating.md`: `type-check` をnon-gatingにする判断

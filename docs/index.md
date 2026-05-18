@@ -30,7 +30,6 @@
 
 - `docs/decisions/README.md`: 設計判断ログの役割、運用ルール、ひな形を示す入口
 - `docs/decisions/2026-05-18-mise-source-of-truth.md`: Node.js / pnpmの基準を `mise.toml` に寄せる判断
-- `docs/decisions/2026-05-18-type-check-non-gating.md`: 既存型エラーがあるため、`type-check` を当面non-gatingにする判断
 
 ## エージェント向け
 

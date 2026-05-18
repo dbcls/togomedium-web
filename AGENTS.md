@@ -94,7 +94,7 @@
   - `mise exec -- pnpm run format`
   - `mise exec -- pnpm run lint`
   - `mise exec -- pnpm run test`
-- `type-check` は現時点では既存のAPI型エラーがあるため、`check-all` には含めていません。詳細は `docs/testing-policy.md` と `docs/decisions/2026-05-18-type-check-non-gating.md` を参照してください。
+- `type-check` は Oxlint の type-aware / type-check で実行しており、`check-all` に含めています。詳細は `docs/testing-policy.md` を参照してください。
 - ドキュメントのみの変更では、上記の実行は不要です
 - ただし、ユーザーが明示的に希望した場合は実行してください
 

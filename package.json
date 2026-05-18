@@ -20,13 +20,7 @@
     "fmt:check": "pnpm run format:check",
     "test": "vitest run",
     "test:watch": "vitest run --watch",
-    "type-check": "oxlint -c oxlint.config.ts . --type-aware --type-check --quiet",
-    "type-check:tsc": "pnpm run type-check:tsc:web && pnpm run type-check:tsc:stanza && pnpm run type-check:tsc:api && pnpm run type-check:tsc:core && pnpm run type-check:tsc:storybook",
-    "type-check:tsc:web": "tsc -p @packages/web/tsconfig.json --noEmit --pretty",
-    "type-check:tsc:stanza": "tsc -p @packages/stanza/tsconfig.json --noEmit --pretty",
-    "type-check:tsc:api": "tsc -p @packages/api/tsconfig.json --noEmit --pretty",
-    "type-check:tsc:core": "tsc -p @packages/core/tsconfig.json --noEmit --pretty",
-    "type-check:tsc:storybook": "tsc -p @packages/storybook/tsconfig.json --noEmit --pretty",
+    "type-check": "oxlint -c oxlint.config.ts . --type-aware --type-check",
     "check-all": "pnpm run format && pnpm run lint && pnpm run type-check && pnpm run test"
   },
   "dependencies": {

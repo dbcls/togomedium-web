@@ -63,10 +63,10 @@ mise exec -- pnpm install
 - `pnpm lint`: lintを実行する
 - `pnpm lint:debug`: quiet指定なしでlintを実行する
 - `pnpm test`: ユニットテストを実行する
-- `pnpm type-check`: TypeScriptの型チェックを実行する
-- `pnpm check-all`: format / lint / testをまとめて実行する
+- `pnpm type-check`: Oxlintのtype-aware / type-checkでTypeScriptの型チェックを実行する
+- `pnpm check-all`: format / lint / type-check / testをまとめて実行する
 
-`type-check` は現時点では既存のAPI型エラーがあるため、`check-all` には含めない。詳細は `docs/testing-policy.md` と `docs/decisions/2026-05-18-type-check-non-gating.md` を参照する。
+`type-check` は `tsc --noEmit` ではなく、`oxlint.config.ts` を基準に `oxlint --type-aware --type-check` で実行する。詳細は `docs/testing-policy.md` を参照する。
 
 ## 作業開始時の確認
 
@@ -76,6 +76,7 @@ mise exec -- pnpm install
 
 ```bash
 pnpm lint
+pnpm type-check
 pnpm test
 ```
 
@@ -101,16 +102,13 @@ pnpm test
 最低限、次の確認を実行する。
 
 ```bash
-pnpm format
-pnpm lint
-pnpm test
+pnpm check-all
 ```
 
 必要に応じて追加する確認:
 
 - `pnpm web:build`: Webアプリの本番ビルドへの影響を確認する
 - `pnpm stanza:build`: Stanza配布物への影響を確認する
-- `pnpm type-check`: 型の影響範囲を確認する。ただし当面はnon-gating扱い
 - `pnpm storybook:serve`: Storybook上の表示確認が必要な場合に起動する
 
 画面確認が必要な場合は、対象の開発サーバーを起動し、必要に応じて `agent-browser` などで表示を確認する。
