@@ -28,6 +28,11 @@ const createDraft = () => ({
   schemaVersion: DRAFT_SCHEMA_VERSION,
   title: "Imported medium",
   description: "Imported description",
+  provenance: {
+    importSourceGmId: "GM_000001",
+    originalMediaId: "NBRC 123",
+    sourceUrl: "https://example.org/medium/GM_000001",
+  },
   solutions: [
     {
       title: "Imported solution",
@@ -38,7 +43,18 @@ const createDraft = () => ({
           component: "Wrong name",
           volume: 10,
           unit: "g",
+          concentrationValue: 55.5,
+          concentrationUnit: "mM",
           note: "primary",
+        },
+        {
+          gmoId: "",
+          component: "Trace element",
+          volume: 0,
+          unit: "ml",
+          concentrationValue: 0,
+          concentrationUnit: "%",
+          note: "zero values",
         },
       ],
     },
@@ -73,12 +89,26 @@ describe("importDraftJson", () => {
     expect(result.state.document).toEqual({
       title: "Imported medium",
       description: "Imported description",
+      provenance: {
+        importSourceGmId: "GM_000001",
+        originalMediaId: "NBRC 123",
+        sourceUrl: "https://example.org/medium/GM_000001",
+      },
       solutions: ["imported-solution-1"],
     });
     expect(result.state.entities.componentRows.entities["imported-component-1-1"]).toMatchObject({
       gmoId: "GMO_000001",
       component: "Glucose",
       volume: 10,
+      unit: "g",
+      concentrationValue: 55.5,
+      concentrationUnit: "mM",
+    });
+    expect(result.state.entities.componentRows.entities["imported-component-1-2"]).toMatchObject({
+      gmoId: "",
+      component: "Trace element",
+      volume: 0,
+      concentrationValue: 0,
     });
     expect(result.warnings.map((warning) => warning.code)).toEqual(["component-name-normalized"]);
   });

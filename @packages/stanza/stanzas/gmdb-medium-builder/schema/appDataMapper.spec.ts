@@ -120,6 +120,112 @@ describe("mapAppStateToDraftAppData", () => {
       ],
     });
   });
+
+  it("round-trips exported draft JSON back to state values", () => {
+    const state = createThunkTestStore().getState();
+    const draft = mapAppStateToDraftAppData(state);
+    const result = mapDraftAppDataToAppState(draft, {
+      createId,
+      componentCandidates: [
+        { gmoId: "GMO_000001", name: "Glucose" },
+        { gmoId: "GMO_000002", name: "NaCl" },
+      ],
+    });
+
+    expect(result.success).toBe(true);
+    if (!result.success) {
+      return;
+    }
+    expect(result.state.document).toEqual({
+      title: state.document.title,
+      description: state.document.description,
+      provenance: state.document.provenance,
+      solutions: ["imported-solution-1", "imported-solution-2"],
+    });
+    expect(result.state.entities.componentRows.entities["imported-component-1-1"]).toMatchObject({
+      gmoId: "GMO_000001",
+      component: "Glucose",
+      volume: 10,
+      unit: "g",
+      concentrationValue: 55.5,
+      concentrationUnit: "mM",
+      note: "primary",
+    });
+    expect(result.state.entities.componentRows.entities["imported-component-1-2"]).toMatchObject({
+      gmoId: "GMO_000002",
+      component: "NaCl",
+      volume: 5,
+      unit: "mg",
+      concentrationValue: null,
+      concentrationUnit: "",
+      note: "secondary",
+    });
+    expect(result.state.entities.componentRows.entities["imported-component-2-1"]).toMatchObject({
+      gmoId: "",
+      component: "Agar",
+      volume: 15,
+      unit: "g",
+      concentrationValue: 0,
+      concentrationUnit: "x",
+      note: "other block",
+    });
+  });
+
+  it("keeps null and zero amount values distinct in export and import", () => {
+    const state = createThunkTestStore().getState();
+    const draft = mapAppStateToDraftAppData({
+      ...state,
+      entities: {
+        ...state.entities,
+        componentRows: {
+          ...state.entities.componentRows,
+          entities: {
+            ...state.entities.componentRows.entities,
+            "component-row-1": {
+              ...state.entities.componentRows.entities["component-row-1"]!,
+              volume: null,
+              concentrationValue: null,
+            },
+            "component-row-2": {
+              ...state.entities.componentRows.entities["component-row-2"]!,
+              volume: 0,
+              concentrationValue: 0,
+            },
+          },
+        },
+      },
+    });
+
+    expect(draft.solutions[0].components[0]).toMatchObject({
+      volume: null,
+      concentrationValue: null,
+    });
+    expect(draft.solutions[0].components[1]).toMatchObject({
+      volume: 0,
+      concentrationValue: 0,
+    });
+
+    const result = mapDraftAppDataToAppState(draft, {
+      createId,
+      componentCandidates: [
+        { gmoId: "GMO_000001", name: "Glucose" },
+        { gmoId: "GMO_000002", name: "NaCl" },
+      ],
+    });
+
+    expect(result.success).toBe(true);
+    if (!result.success) {
+      return;
+    }
+    expect(result.state.entities.componentRows.entities["imported-component-1-1"]).toMatchObject({
+      volume: null,
+      concentrationValue: null,
+    });
+    expect(result.state.entities.componentRows.entities["imported-component-1-2"]).toMatchObject({
+      volume: 0,
+      concentrationValue: 0,
+    });
+  });
 });
 
 describe("mapDraftAppDataToAppState", () => {

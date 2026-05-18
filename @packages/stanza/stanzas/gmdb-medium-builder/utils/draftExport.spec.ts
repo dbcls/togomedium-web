@@ -33,6 +33,11 @@ describe("createDraftJson", () => {
           schemaVersion: "2026-05-18",
           title: "Test medium",
           description: "Test medium description",
+          provenance: {
+            importSourceGmId: "GM_000001",
+            originalMediaId: "NBRC 123",
+            sourceUrl: "https://example.org/medium/GM_000001",
+          },
           solutions: [
             {
               title: "Medium A",
@@ -43,6 +48,8 @@ describe("createDraftJson", () => {
                   component: "Glucose",
                   volume: 10,
                   unit: "g",
+                  concentrationValue: 55.5,
+                  concentrationUnit: "mM",
                   note: "primary",
                 },
                 {
@@ -50,6 +57,8 @@ describe("createDraftJson", () => {
                   component: "NaCl",
                   volume: 5,
                   unit: "mg",
+                  concentrationValue: null,
+                  concentrationUnit: "",
                   note: "secondary",
                 },
               ],
@@ -63,6 +72,8 @@ describe("createDraftJson", () => {
                   component: "Agar",
                   volume: 15,
                   unit: "g",
+                  concentrationValue: 0,
+                  concentrationUnit: "x",
                   note: "other block",
                 },
               ],

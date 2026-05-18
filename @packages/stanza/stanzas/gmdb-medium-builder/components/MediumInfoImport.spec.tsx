@@ -42,6 +42,11 @@ describe("MediumInfo JSON import", () => {
     const state = store.getState();
     expect(state.document.title).toBe("Imported medium");
     expect(state.document.description).toBe("Imported description");
+    expect(state.document.provenance).toEqual({
+      importSourceGmId: "GM_000001",
+      originalMediaId: "NBRC 123",
+      sourceUrl: "https://example.org/medium/GM_000001",
+    });
     expect(state.document.solutions).toHaveLength(1);
     expect(state.entities.solutionBlocks.ids).toHaveLength(1);
     expect(state.entities.componentRows.ids).toHaveLength(1);
@@ -50,6 +55,8 @@ describe("MediumInfo JSON import", () => {
       component: "Glucose",
       volume: 10,
       unit: "g",
+      concentrationValue: 55.5,
+      concentrationUnit: "mM",
       note: "primary",
     });
     expect(state.feedback).toMatchObject({
@@ -149,6 +156,11 @@ const createDraft = () => ({
   schemaVersion: DRAFT_SCHEMA_VERSION,
   title: "Imported medium",
   description: "Imported description",
+  provenance: {
+    importSourceGmId: "GM_000001",
+    originalMediaId: "NBRC 123",
+    sourceUrl: "https://example.org/medium/GM_000001",
+  },
   solutions: [
     {
       title: "Imported solution",
@@ -159,6 +171,8 @@ const createDraft = () => ({
           component: "Wrong name",
           volume: 10,
           unit: "g",
+          concentrationValue: 55.5,
+          concentrationUnit: "mM",
           note: "primary",
         },
       ],
