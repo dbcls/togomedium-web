@@ -10,7 +10,9 @@ import {
   mediumDetailImportFixture,
   referencedMediumDetailImportFixture,
 } from "%stanza/stanzas/gmdb-medium-builder/utils/fixtures/mediumDetailImport";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import type { ReactElement } from "react";
 import { Provider } from "react-redux";
 import { afterEach, describe, expect, it } from "vitest";
 
@@ -25,11 +27,7 @@ describe("App initial medium import", () => {
     const store = createThunkTestStore();
     const previousBuilderState = cloneBuilderState(store.getState());
 
-    render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-    );
+    renderWithProviders(<App />, store);
 
     expect(screen.queryByText("Importing medium...")).toBeNull();
     expect(cloneBuilderState(store.getState())).toEqual(previousBuilderState);
@@ -40,14 +38,14 @@ describe("App initial medium import", () => {
     installMediumDetailFetchMock();
     const store = createThunkTestStore();
 
-    render(
-      <Provider store={store}>
-        <App gmId={"GM_000001"} />
-      </Provider>,
-    );
+    renderWithProviders(<App gmId={"GM_000001"} />, store);
 
     await waitFor(() => {
-      expect(store.getState().feedback.severity).toBe("success");
+      expect(store.getState().feedback).toMatchObject({
+        open: true,
+        severity: "success",
+        message: "Imported GM_000001.",
+      });
     });
 
     const state = store.getState();
@@ -79,11 +77,7 @@ describe("App initial medium import", () => {
     fetchMock.mockReturnValue(mainMedium.promise);
     const store = createThunkTestStore();
 
-    render(
-      <Provider store={store}>
-        <App gmId={"GM_000001"} />
-      </Provider>,
-    );
+    renderWithProviders(<App gmId={"GM_000001"} />, store);
 
     expect(await screen.findByText("Importing medium...")).not.toBeNull();
     expect(screen.queryByRole("progressbar")).not.toBeNull();
@@ -97,11 +91,7 @@ describe("App initial medium import", () => {
     const store = createThunkTestStore();
     const previousBuilderState = cloneBuilderState(store.getState());
 
-    render(
-      <Provider store={store}>
-        <App gmId={"GM_000001"} />
-      </Provider>,
-    );
+    renderWithProviders(<App gmId={"GM_000001"} />, store);
 
     await waitFor(() => {
       expect(store.getState().feedback.severity).toBe("error");
@@ -123,11 +113,7 @@ describe("App initial medium import", () => {
     const store = createThunkTestStore();
     const previousBuilderState = cloneBuilderState(store.getState());
 
-    render(
-      <Provider store={store}>
-        <App gmId={"GM_000001"} />
-      </Provider>,
-    );
+    renderWithProviders(<App gmId={"GM_000001"} />, store);
 
     await waitFor(() => {
       expect(store.getState().feedback.severity).toBe("error");
@@ -153,11 +139,7 @@ describe("App initial medium import", () => {
     const store = createThunkTestStore();
     const previousBuilderState = cloneBuilderState(store.getState());
 
-    render(
-      <Provider store={store}>
-        <App gmId={"GM_000001"} />
-      </Provider>,
-    );
+    renderWithProviders(<App gmId={"GM_000001"} />, store);
 
     await waitFor(() => {
       expect(store.getState().feedback.severity).toBe("error");
@@ -172,6 +154,25 @@ describe("App initial medium import", () => {
     });
   });
 });
+
+const renderWithProviders = (
+  children: ReactElement,
+  store: ReturnType<typeof createThunkTestStore>,
+) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>{children}</Provider>
+    </QueryClientProvider>,
+  );
+};
 
 const installMediumDetailFetchMock = (overrides: Record<string, Response> = {}) => {
   const fetchMock = installFetchMock();
