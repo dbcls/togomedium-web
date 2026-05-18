@@ -6,8 +6,10 @@ export type ComponentRowModel = {
   id: string;
   gmoId: string;
   component: string;
-  volume: number;
+  volume: number | null;
   unit: string;
+  concentrationValue?: number | null;
+  concentrationUnit?: string;
   note: string;
 };
 
@@ -47,8 +49,10 @@ export const createBlankComponentRow = (
     id,
     gmoId: params.gmoId ?? "",
     component: params.component ?? "",
-    volume: params.volume ?? 0,
+    volume: params.volume ?? null,
     unit: params.unit ?? "",
+    concentrationValue: params.concentrationValue ?? null,
+    concentrationUnit: params.concentrationUnit ?? "",
     note: params.note ?? "",
   };
 };

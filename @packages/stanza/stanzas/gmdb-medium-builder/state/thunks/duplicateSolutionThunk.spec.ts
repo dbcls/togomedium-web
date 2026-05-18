@@ -48,6 +48,8 @@ describe("duplicateSolutionThunk", () => {
       component: "Glucose",
       volume: 10,
       unit: "g",
+      concentrationValue: 55.5,
+      concentrationUnit: "mM",
       note: "primary",
     });
     expect(duplicatedSecondComponent).toEqual({
@@ -56,6 +58,8 @@ describe("duplicateSolutionThunk", () => {
       component: "NaCl",
       volume: 5,
       unit: "mg",
+      concentrationValue: null,
+      concentrationUnit: "",
       note: "secondary",
     });
   });

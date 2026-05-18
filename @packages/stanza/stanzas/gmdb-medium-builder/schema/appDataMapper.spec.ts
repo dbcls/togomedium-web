@@ -20,6 +20,11 @@ const createBaseDraft = () => ({
   schemaVersion: DRAFT_SCHEMA_VERSION,
   title: "Imported medium",
   description: "Imported description",
+  provenance: {
+    importSourceGmId: "GM_000001",
+    originalMediaId: "NBRC 123",
+    sourceUrl: "https://example.org/medium/GM_000001",
+  },
   solutions: [
     {
       title: "Imported solution",
@@ -30,6 +35,8 @@ const createBaseDraft = () => ({
           component: "Glucose",
           volume: 10,
           unit: "g",
+          concentrationValue: 55.5,
+          concentrationUnit: "mM",
           note: "primary",
         },
       ],
@@ -65,6 +72,11 @@ describe("mapAppStateToDraftAppData", () => {
       schemaVersion: DRAFT_SCHEMA_VERSION,
       title: "Test medium",
       description: "Test medium description",
+      provenance: {
+        importSourceGmId: "GM_000001",
+        originalMediaId: "NBRC 123",
+        sourceUrl: "https://example.org/medium/GM_000001",
+      },
       solutions: [
         {
           title: "Medium B",
@@ -75,6 +87,8 @@ describe("mapAppStateToDraftAppData", () => {
               component: "Agar",
               volume: 15,
               unit: "g",
+              concentrationValue: 0,
+              concentrationUnit: "x",
               note: "other block",
             },
           ],
@@ -88,6 +102,8 @@ describe("mapAppStateToDraftAppData", () => {
               component: "NaCl",
               volume: 5,
               unit: "mg",
+              concentrationValue: null,
+              concentrationUnit: "",
               note: "secondary",
             },
             {
@@ -95,6 +111,8 @@ describe("mapAppStateToDraftAppData", () => {
               component: "Glucose",
               volume: 10,
               unit: "g",
+              concentrationValue: 55.5,
+              concentrationUnit: "mM",
               note: "primary",
             },
           ],
@@ -163,6 +181,11 @@ describe("mapDraftAppDataToAppState", () => {
         schemaVersion: DRAFT_SCHEMA_VERSION,
         title: null,
         description: null,
+        provenance: {
+          importSourceGmId: null,
+          originalMediaId: null,
+          sourceUrl: null,
+        },
         solutions: [
           {
             title: null,
@@ -178,6 +201,8 @@ describe("mapDraftAppDataToAppState", () => {
                 component: null,
                 volume: null,
                 unit: null,
+                concentrationValue: null,
+                concentrationUnit: null,
                 note: null,
               },
             ],
@@ -200,8 +225,10 @@ describe("mapDraftAppDataToAppState", () => {
               id: "imported-component-2-1",
               gmoId: "",
               component: "",
-              volume: 0,
+              volume: null,
               unit: "",
+              concentrationValue: null,
+              concentrationUnit: "",
               note: "",
             },
           },
@@ -227,12 +254,17 @@ describe("mapDraftAppDataToAppState", () => {
       document: {
         title: "",
         description: "",
+        provenance: {
+          importSourceGmId: "",
+          originalMediaId: "",
+          sourceUrl: "",
+        },
         solutions: ["imported-solution-1", "imported-solution-2"],
       },
       feedback: createInitialFeedbackState(),
     });
     expect(result.warnings.map((warning) => warning.code)).toEqual(
-      Array.from({ length: 10 }, () => "null-normalized"),
+      Array.from({ length: 13 }, () => "null-normalized"),
     );
   });
 

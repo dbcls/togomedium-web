@@ -1,4 +1,5 @@
 import { createInitialFeedbackState } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
+import { createBlankDocumentProvenance } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
 import { createBlankComponentRow } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import { createBlankSolutionBlock } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 
@@ -26,6 +27,7 @@ export const createInitialState = () => {
     document: {
       title: "",
       description: "",
+      provenance: createBlankDocumentProvenance(),
       solutions: [solutionBlock.id],
     },
     feedback: createInitialFeedbackState(),

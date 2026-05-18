@@ -28,6 +28,8 @@ export const createThunkTestStore = () => {
               component: "Glucose",
               volume: 10,
               unit: "g",
+              concentrationValue: 55.5,
+              concentrationUnit: "mM",
               note: "primary",
             },
             "component-row-2": {
@@ -36,6 +38,8 @@ export const createThunkTestStore = () => {
               component: "NaCl",
               volume: 5,
               unit: "mg",
+              concentrationValue: null,
+              concentrationUnit: "",
               note: "secondary",
             },
             "component-row-3": {
@@ -44,6 +48,8 @@ export const createThunkTestStore = () => {
               component: "Agar",
               volume: 15,
               unit: "g",
+              concentrationValue: 0,
+              concentrationUnit: "x",
               note: "other block",
             },
           },
@@ -69,6 +75,11 @@ export const createThunkTestStore = () => {
       document: {
         title: "Test medium",
         description: "Test medium description",
+        provenance: {
+          importSourceGmId: "GM_000001",
+          originalMediaId: "NBRC 123",
+          sourceUrl: "https://example.org/medium/GM_000001",
+        },
         solutions: ["solution-1", "solution-2"],
       },
       feedback: createInitialFeedbackState(),

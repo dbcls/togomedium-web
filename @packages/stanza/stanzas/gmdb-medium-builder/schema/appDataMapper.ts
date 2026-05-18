@@ -4,6 +4,7 @@ import {
 } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createInitialFeedbackState } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
+import { createBlankDocumentProvenance } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
 import type { ComponentRowModel } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import type { SolutionBlockModel } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 import type { ZodError } from "zod";
@@ -64,6 +65,7 @@ export const mapAppStateToDraftAppData = (state: AppState): DraftAppData => {
     schemaVersion: DRAFT_SCHEMA_VERSION,
     title: state.document.title,
     description: state.document.description,
+    provenance: mapDocumentProvenanceToDraft(state.document.provenance),
     solutions: state.document.solutions.flatMap((solutionId) => {
       const solution = state.entities.solutionBlocks.entities[solutionId];
       if (!solution) {
@@ -86,6 +88,8 @@ export const mapAppStateToDraftAppData = (state: AppState): DraftAppData => {
                 component: component.component,
                 volume: component.volume,
                 unit: component.unit,
+                concentrationValue: component.concentrationValue ?? null,
+                concentrationUnit: component.concentrationUnit ?? "",
                 note: component.note,
               },
             ];
@@ -158,14 +162,28 @@ export const mapDraftAppDataToAppState = (
         id: componentId,
         gmoId: normalizedGmoComponent.gmoId,
         component: normalizedGmoComponent.component,
-        volume: normalizeNumber(
-          component.volume,
-          ["solutions", solutionIndex, "components", componentIndex, "volume"],
-          warnings,
-        ),
+        volume: normalizeNumber(component.volume, [
+          "solutions",
+          solutionIndex,
+          "components",
+          componentIndex,
+          "volume",
+        ]),
         unit: normalizeString(
           component.unit,
           ["solutions", solutionIndex, "components", componentIndex, "unit"],
+          warnings,
+        ),
+        concentrationValue: normalizeNumber(component.concentrationValue, [
+          "solutions",
+          solutionIndex,
+          "components",
+          componentIndex,
+          "concentrationValue",
+        ]),
+        concentrationUnit: normalizeString(
+          component.concentrationUnit,
+          ["solutions", solutionIndex, "components", componentIndex, "concentrationUnit"],
           warnings,
         ),
         note: normalizeString(
@@ -207,6 +225,23 @@ export const mapDraftAppDataToAppState = (
       document: {
         title: normalizeString(draft.title, ["title"], warnings),
         description: normalizeString(draft.description, ["description"], warnings),
+        provenance: {
+          importSourceGmId: normalizeString(
+            draft.provenance.importSourceGmId,
+            ["provenance", "importSourceGmId"],
+            warnings,
+          ),
+          originalMediaId: normalizeString(
+            draft.provenance.originalMediaId,
+            ["provenance", "originalMediaId"],
+            warnings,
+          ),
+          sourceUrl: normalizeString(
+            draft.provenance.sourceUrl,
+            ["provenance", "sourceUrl"],
+            warnings,
+          ),
+        },
         solutions: solutionIds,
       },
       feedback: createInitialFeedbackState(),
@@ -231,21 +266,23 @@ const normalizeString = (
   return "";
 };
 
-const normalizeNumber = (
-  value: number | null,
-  path: (string | number)[],
-  warnings: DraftMapperWarning[],
-): number => {
-  if (value !== null) {
-    return value;
+const normalizeNumber = (value: number | null, _path: (string | number)[]): number | null => value;
+
+const mapDocumentProvenanceToDraft = (provenance: AppState["document"]["provenance"]) => {
+  if (!provenance) {
+    return {
+      importSourceGmId: null,
+      originalMediaId: null,
+      sourceUrl: null,
+    };
   }
 
-  warnings.push({
-    code: "null-normalized",
-    path,
-    message: `Null at ${formatPath(path)} was normalized to 0.`,
-  });
-  return 0;
+  const normalizedProvenance = createBlankDocumentProvenance(provenance);
+  return {
+    importSourceGmId: normalizedProvenance.importSourceGmId,
+    originalMediaId: normalizedProvenance.originalMediaId,
+    sourceUrl: normalizedProvenance.sourceUrl,
+  };
 };
 
 const normalizeGmoComponent = ({

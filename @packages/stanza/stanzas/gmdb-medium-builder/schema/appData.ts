@@ -7,17 +7,27 @@ const componentSchema = z.object({
   component: z.string().nullable(),
   volume: z.number().finite().nullable(),
   unit: z.string().nullable(),
+  concentrationValue: z.number().finite().nullable(),
+  concentrationUnit: z.string().nullable(),
   note: z.string().nullable(),
 });
+
 const solutionSchema = z.object({
   title: z.string().nullable(),
   description: z.string().nullable(),
   components: z.array(componentSchema),
 });
 
+const provenanceSchema = z.object({
+  importSourceGmId: z.string().nullable(),
+  originalMediaId: z.string().nullable(),
+  sourceUrl: z.string().nullable(),
+});
+
 export const appDataSchema = z.object({
   schemaVersion: z.literal(DRAFT_SCHEMA_VERSION),
   title: z.string().nullable(),
   description: z.string().nullable(),
+  provenance: provenanceSchema,
   solutions: z.array(solutionSchema),
 });

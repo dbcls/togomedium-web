@@ -33,8 +33,10 @@ describe("addSolutionThunk", () => {
       id: addedComponentRowId,
       gmoId: "",
       component: "",
-      volume: 0,
+      volume: null,
       unit: "",
+      concentrationValue: null,
+      concentrationUnit: "",
       note: "",
     });
   });

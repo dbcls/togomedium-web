@@ -8,6 +8,11 @@ const createValidDraft = () => ({
   schemaVersion: DRAFT_SCHEMA_VERSION,
   title: "GM12878 medium",
   description: null,
+  provenance: {
+    importSourceGmId: "GM_000001",
+    originalMediaId: "NBRC 123",
+    sourceUrl: "https://example.org/medium/GM_000001",
+  },
   solutions: [
     {
       title: null,
@@ -18,6 +23,8 @@ const createValidDraft = () => ({
           component: "NaCl",
           volume: 1.5,
           unit: "g/L",
+          concentrationValue: 25,
+          concentrationUnit: "mM",
           note: null,
         },
       ],
@@ -59,6 +66,8 @@ describe("appDataSchema", () => {
               component: "NaCl",
               volume: 1.5,
               note: null,
+              concentrationValue: 25,
+              concentrationUnit: "mM",
             },
           ],
         },
@@ -94,6 +103,11 @@ describe("appDataSchema", () => {
       schemaVersion: DRAFT_SCHEMA_VERSION,
       title: null,
       description: null,
+      provenance: {
+        importSourceGmId: null,
+        originalMediaId: null,
+        sourceUrl: null,
+      },
       solutions: [
         {
           title: null,
@@ -104,7 +118,59 @@ describe("appDataSchema", () => {
               component: null,
               volume: null,
               unit: null,
+              concentrationValue: null,
+              concentrationUnit: null,
               note: null,
+            },
+          ],
+        },
+      ],
+    };
+
+    expect(appDataSchema.parse(draft)).toEqual(draft);
+  });
+
+  it("keeps zero distinct from null for nullable number fields", () => {
+    const draft = {
+      ...createValidDraft(),
+      solutions: [
+        {
+          ...createValidDraft().solutions[0],
+          components: [
+            {
+              ...createValidDraft().solutions[0].components[0],
+              volume: 0,
+              concentrationValue: 0,
+            },
+            {
+              ...createValidDraft().solutions[0].components[0],
+              volume: null,
+              concentrationValue: null,
+            },
+          ],
+        },
+      ],
+    };
+
+    expect(appDataSchema.parse(draft)).toEqual(draft);
+  });
+
+  it("accepts arbitrary nullable unit strings", () => {
+    const draft = {
+      ...createValidDraft(),
+      solutions: [
+        {
+          ...createValidDraft().solutions[0],
+          components: [
+            {
+              ...createValidDraft().solutions[0].components[0],
+              unit: "custom plating spoon",
+              concentrationUnit: "custom molarity",
+            },
+            {
+              ...createValidDraft().solutions[0].components[0],
+              unit: null,
+              concentrationUnit: null,
             },
           ],
         },
@@ -118,6 +184,14 @@ describe("appDataSchema", () => {
     const draft = createValidDraft();
 
     draft.solutions[0].components[0].volume = Infinity;
+
+    expect(appDataSchema.safeParse(draft).success).toBe(false);
+  });
+
+  it("rejects non-finite concentration values", () => {
+    const draft = createValidDraft();
+
+    draft.solutions[0].components[0].concentrationValue = Infinity;
 
     expect(appDataSchema.safeParse(draft).success).toBe(false);
   });

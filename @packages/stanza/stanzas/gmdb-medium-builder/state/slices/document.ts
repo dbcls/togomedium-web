@@ -4,12 +4,30 @@ import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 export type DocumentModel = {
   title: string;
   description: string;
+  provenance?: DocumentProvenanceModel;
   solutions: string[];
+};
+
+export type DocumentProvenanceModel = {
+  importSourceGmId: string;
+  originalMediaId: string;
+  sourceUrl: string;
+};
+
+export const createBlankDocumentProvenance = (
+  params: Partial<DocumentProvenanceModel> = {},
+): DocumentProvenanceModel => {
+  return {
+    importSourceGmId: params.importSourceGmId ?? "",
+    originalMediaId: params.originalMediaId ?? "",
+    sourceUrl: params.sourceUrl ?? "",
+  };
 };
 
 const initialState: DocumentModel = {
   title: "",
   description: "",
+  provenance: createBlankDocumentProvenance(),
   solutions: [],
 };
 
@@ -32,6 +50,12 @@ const slice = createSlice({
     setDescription: (state, action: PayloadAction<string>) => {
       state.description = action.payload;
     },
+    setProvenance: (state, action: PayloadAction<Partial<DocumentProvenanceModel>>) => {
+      state.provenance = createBlankDocumentProvenance({
+        ...state.provenance,
+        ...action.payload,
+      });
+    },
     replaceDocument: (_state, action: PayloadAction<DocumentModel>) => {
       return action.payload;
     },
@@ -45,5 +69,9 @@ const documentState = (state: AppState) => state.document;
 export const DocumentSelectors = {
   selectTitle: createSelector(documentState, (document) => document.title),
   selectDescription: createSelector(documentState, (document) => document.description),
+  selectProvenance: createSelector(
+    documentState,
+    (document) => document.provenance ?? createBlankDocumentProvenance(),
+  ),
   selectSolutions: createSelector(documentState, (document) => document.solutions),
 };

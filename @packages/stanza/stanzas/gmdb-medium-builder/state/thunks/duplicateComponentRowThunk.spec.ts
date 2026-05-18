@@ -30,6 +30,8 @@ describe("duplicateComponentRowThunk", () => {
       component: "Glucose",
       volume: 10,
       unit: "g",
+      concentrationValue: 55.5,
+      concentrationUnit: "mM",
       note: "primary",
     });
   });

@@ -38,6 +38,8 @@ export const duplicateSolutionThunk = (solutionBlockId: string) => {
           component: componentRow.component,
           volume: componentRow.volume,
           unit: componentRow.unit,
+          concentrationValue: componentRow.concentrationValue,
+          concentrationUnit: componentRow.concentrationUnit,
           note: componentRow.note,
         }),
       );
