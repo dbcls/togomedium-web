@@ -1,12 +1,12 @@
-import { GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
-import type { GmdbMediumBuilderDraftIdFactory } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
+import { DRAFT_SCHEMA_VERSION } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
+import type { DraftIdFactory } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
 import {
-  importMediumBuilderDraftJson,
-  logMediumBuilderImportWarnings,
-} from "%stanza/stanzas/gmdb-medium-builder/utils/mediumBuilderImport";
+  importDraftJson,
+  logImportWarnings,
+} from "%stanza/stanzas/gmdb-medium-builder/utils/draftImport";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-const createId: GmdbMediumBuilderDraftIdFactory = (params) => {
+const createId: DraftIdFactory = (params) => {
   if (params.kind === "solution") {
     return `imported-solution-${(params.solutionIndex ?? 0) + 1}`;
   }
@@ -15,7 +15,7 @@ const createId: GmdbMediumBuilderDraftIdFactory = (params) => {
 };
 
 const createDraft = () => ({
-  schemaVersion: GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+  schemaVersion: DRAFT_SCHEMA_VERSION,
   title: "Imported medium",
   description: "Imported description",
   solutions: [
@@ -39,13 +39,13 @@ const createFile = (content: string) => {
   return new File([content], "medium-builder-draft.json", { type: "application/json" });
 };
 
-describe("importMediumBuilderDraftJson", () => {
+describe("importDraftJson", () => {
   afterEach(() => {
     vi.unstubAllGlobals();
   });
 
   it("reads, parses, validates, fetches candidates, and maps a draft to app state", async () => {
-    const result = await importMediumBuilderDraftJson(createFile(JSON.stringify(createDraft())), {
+    const result = await importDraftJson(createFile(JSON.stringify(createDraft())), {
       createId,
       fetchComponents: async () => [
         {
@@ -75,7 +75,7 @@ describe("importMediumBuilderDraftJson", () => {
 
   it("fails before mapping when JSON cannot be parsed", async () => {
     const fetchComponents = vi.fn();
-    const result = await importMediumBuilderDraftJson(createFile("{"), {
+    const result = await importDraftJson(createFile("{"), {
       createId,
       fetchComponents,
     });
@@ -90,7 +90,7 @@ describe("importMediumBuilderDraftJson", () => {
 
   it("rejects unsupported schemaVersion before fetching component candidates", async () => {
     const fetchComponents = vi.fn();
-    const result = await importMediumBuilderDraftJson(
+    const result = await importDraftJson(
       createFile(JSON.stringify({ ...createDraft(), schemaVersion: "2026-05-17" })),
       {
         createId,
@@ -108,7 +108,7 @@ describe("importMediumBuilderDraftJson", () => {
 
   it("rejects schema validation failures before replacing state", async () => {
     const fetchComponents = vi.fn();
-    const result = await importMediumBuilderDraftJson(
+    const result = await importDraftJson(
       createFile(JSON.stringify({ ...createDraft(), solutions: "not an array" })),
       {
         createId,
@@ -126,7 +126,7 @@ describe("importMediumBuilderDraftJson", () => {
   });
 
   it("continues without GMO ID validation when component candidates cannot be fetched", async () => {
-    const result = await importMediumBuilderDraftJson(createFile(JSON.stringify(createDraft())), {
+    const result = await importDraftJson(createFile(JSON.stringify(createDraft())), {
       createId,
       fetchComponents: async () => {
         throw new Error("Network unavailable.");
@@ -153,7 +153,7 @@ describe("importMediumBuilderDraftJson", () => {
       vi.fn(async () => new Response("Server error.", { status: 500 })),
     );
 
-    const result = await importMediumBuilderDraftJson(createFile(JSON.stringify(createDraft())), {
+    const result = await importDraftJson(createFile(JSON.stringify(createDraft())), {
       createId,
     });
 
@@ -168,11 +168,11 @@ describe("importMediumBuilderDraftJson", () => {
   });
 });
 
-describe("logMediumBuilderImportWarnings", () => {
+describe("logImportWarnings", () => {
   it("writes mapper warnings and fetch warnings to console.warn", () => {
     const warn = vi.fn();
 
-    logMediumBuilderImportWarnings(
+    logImportWarnings(
       [
         {
           code: "component-name-normalized",
@@ -191,10 +191,10 @@ describe("logMediumBuilderImportWarnings", () => {
 
     expect(warn).toHaveBeenCalledTimes(2);
     expect(warn).toHaveBeenCalledWith(
-      "[MediumBuilderImport] component-name-normalized at solutions.0.components.0.component: Component name was normalized.",
+      "[Import] component-name-normalized at solutions.0.components.0.component: Component name was normalized.",
     );
     expect(warn).toHaveBeenCalledWith(
-      "[MediumBuilderImport] Component candidates could not be fetched.",
+      "[Import] Component candidates could not be fetched.",
       expect.any(Error),
     );
   });

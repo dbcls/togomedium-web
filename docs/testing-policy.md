@@ -72,6 +72,14 @@ pnpm check-all
 - package固有のテストscriptがある場合は、対象packageの `AGENTS.md` を確認する
 - 新しいロジックを追加する場合は、pure functionとして切り出せる範囲を優先してテストする
 
+## `__TEST__` exportの扱い
+
+- production module間で使うものだけを通常の `export` とする
+- テストからだけ参照する内部実装は、まずfile localに戻せないか検討する
+- Reactコンポーネントなど、同じファイルに置く内部ロジックをユニットテストから参照する必要がある場合は、`__TEST__` で始まるオブジェクトにまとめて `export` する
+- 通常利用向けの `export` とテスト補助用の `export` を分け、内部実装を必要以上に公開しない
+- `react-refresh/only-export-components` などのlint例外が必要な場合は、`__TEST__` exportに限定し、理由を短くコメントで残す
+
 ## type-check
 
 - `pnpm type-check` はTypeScriptの型チェック用scriptとして用意している

@@ -1,14 +1,14 @@
 import { useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { FeedbackSelectors } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
-import { useMediumBuilderFeedback } from "%stanza/stanzas/gmdb-medium-builder/state/feedbackHooks";
+import { useFeedback } from "%stanza/stanzas/gmdb-medium-builder/state/feedbackHooks";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import type { SnackbarCloseReason } from "@mui/material/Snackbar";
 import type React from "react";
 
-export const MediumBuilderFeedbackSnackbar = () => {
+export const FeedbackSnackbar = () => {
   const feedback = useAppSelector(FeedbackSelectors.selectFeedback);
-  const { closeFeedback } = useMediumBuilderFeedback();
+  const { closeFeedback } = useFeedback();
 
   const handleClose = (_event?: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
     if (reason === "clickaway") {

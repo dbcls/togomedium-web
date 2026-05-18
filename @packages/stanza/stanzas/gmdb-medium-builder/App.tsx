@@ -1,6 +1,6 @@
 import { THEME } from "%core/theme";
+import { FeedbackSnackbar } from "%stanza/stanzas/gmdb-medium-builder/components/FeedbackSnackbar";
 import { Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
-import { MediumBuilderFeedbackSnackbar } from "%stanza/stanzas/gmdb-medium-builder/components/MediumBuilderFeedbackSnackbar";
 import { MediumInfo } from "%stanza/stanzas/gmdb-medium-builder/components/MediumInfo";
 import { SolutionBlock } from "%stanza/stanzas/gmdb-medium-builder/components/SolutionBlock";
 import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
@@ -42,7 +42,7 @@ const App = (_props: AppProps) => {
           </Button>
         </FooterRow>
       </Sheet>
-      <MediumBuilderFeedbackSnackbar />
+      <FeedbackSnackbar />
     </Wrapper>
   );
 };

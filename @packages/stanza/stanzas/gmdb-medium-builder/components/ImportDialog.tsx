@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import type { ChangeEvent, DragEvent, FC } from "react";
 import { useId, useState } from "react";
 
-export type MediumBuilderImportDialogProps = {
+export type ImportDialogProps = {
   open: boolean;
   selectedFile: File | null;
   onClose: () => void;
@@ -20,7 +20,7 @@ export type MediumBuilderImportDialogProps = {
   onImport?: (file: File) => void;
 };
 
-export const MediumBuilderImportDialog: FC<MediumBuilderImportDialogProps> = ({
+export const ImportDialog: FC<ImportDialogProps> = ({
   open,
   selectedFile,
   onClose,

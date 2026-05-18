@@ -1,14 +1,14 @@
 import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import { MediumBuilderImportDialog } from "./MediumBuilderImportDialog";
+import { ImportDialog } from "./ImportDialog";
 
 const selectedFile = new File(["{}"], "medium-builder-draft.json", {
   type: "application/json",
 });
 
 const meta = {
-  component: MediumBuilderImportDialog,
+  component: ImportDialog,
   decorators: [
     (Story) => (
       <StoryProvider mui>
@@ -23,7 +23,7 @@ const meta = {
     onFileSelect: fn(),
     onImport: fn(),
   },
-} satisfies Meta<typeof MediumBuilderImportDialog>;
+} satisfies Meta<typeof ImportDialog>;
 
 export default meta;
 

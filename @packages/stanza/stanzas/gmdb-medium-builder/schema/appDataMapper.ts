@@ -1,20 +1,20 @@
 import {
   appDataSchema,
-  GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+  DRAFT_SCHEMA_VERSION,
 } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
-import type { GmdbMediumBuilderDraftAppData } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
+import type { DraftAppData } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createInitialFeedbackState } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
 import type { ComponentRowModel } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import type { SolutionBlockModel } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
 import type { ZodError } from "zod";
 
-export type GmdbMediumBuilderComponentCandidate = {
+export type ComponentCandidate = {
   gmoId: string;
   name: string;
 };
 
-export type GmdbMediumBuilderDraftIdFactoryParams =
+export type DraftIdFactoryParams =
   | {
       kind: "solution";
       solutionIndex: number;
@@ -25,43 +25,41 @@ export type GmdbMediumBuilderDraftIdFactoryParams =
       componentIndex: number;
     };
 
-export type GmdbMediumBuilderDraftIdFactory = (
-  params: GmdbMediumBuilderDraftIdFactoryParams,
-) => string;
+export type DraftIdFactory = (params: DraftIdFactoryParams) => string;
 
-export type GmdbMediumBuilderDraftMapperWarningCode =
+export type DraftMapperWarningCode =
   | "null-normalized"
   | "gmo-id-validation-skipped"
   | "invalid-gmo-id"
   | "component-name-normalized";
 
-export type GmdbMediumBuilderDraftMapperWarning = {
-  code: GmdbMediumBuilderDraftMapperWarningCode;
+export type DraftMapperWarning = {
+  code: DraftMapperWarningCode;
   path: (string | number)[];
   message: string;
 };
 
-export type GmdbMediumBuilderDraftImportOptions = {
-  createId: GmdbMediumBuilderDraftIdFactory;
-  componentCandidates?: readonly GmdbMediumBuilderComponentCandidate[];
+export type DraftImportOptions = {
+  createId: DraftIdFactory;
+  componentCandidates?: readonly ComponentCandidate[];
 };
 
-export type GmdbMediumBuilderDraftImportResult =
+export type DraftImportResult =
   | {
       success: true;
       state: AppState;
-      draft: GmdbMediumBuilderDraftAppData;
-      warnings: GmdbMediumBuilderDraftMapperWarning[];
+      draft: DraftAppData;
+      warnings: DraftMapperWarning[];
     }
   | {
       success: false;
       error: ZodError;
-      warnings: GmdbMediumBuilderDraftMapperWarning[];
+      warnings: DraftMapperWarning[];
     };
 
-export const mapAppStateToDraftAppData = (state: AppState): GmdbMediumBuilderDraftAppData => {
+export const mapAppStateToDraftAppData = (state: AppState): DraftAppData => {
   return {
-    schemaVersion: GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+    schemaVersion: DRAFT_SCHEMA_VERSION,
     title: state.document.title,
     description: state.document.description,
     solutions: state.document.solutions.flatMap((solutionId) => {
@@ -98,8 +96,8 @@ export const mapAppStateToDraftAppData = (state: AppState): GmdbMediumBuilderDra
 
 export const mapDraftAppDataToAppState = (
   input: unknown,
-  options: GmdbMediumBuilderDraftImportOptions,
-): GmdbMediumBuilderDraftImportResult => {
+  options: DraftImportOptions,
+): DraftImportResult => {
   const parseResult = appDataSchema.safeParse(input);
   if (!parseResult.success) {
     return {
@@ -109,7 +107,7 @@ export const mapDraftAppDataToAppState = (
     };
   }
 
-  const warnings: GmdbMediumBuilderDraftMapperWarning[] = [];
+  const warnings: DraftMapperWarning[] = [];
   const draft = parseResult.data;
   const componentCandidateByGmoId = createComponentCandidateMap(options.componentCandidates);
 
@@ -217,7 +215,7 @@ export const mapDraftAppDataToAppState = (
 const normalizeString = (
   value: string | null,
   path: (string | number)[],
-  warnings: GmdbMediumBuilderDraftMapperWarning[],
+  warnings: DraftMapperWarning[],
 ): string => {
   if (value !== null) {
     return value;
@@ -234,7 +232,7 @@ const normalizeString = (
 const normalizeNumber = (
   value: number | null,
   path: (string | number)[],
-  warnings: GmdbMediumBuilderDraftMapperWarning[],
+  warnings: DraftMapperWarning[],
 ): number => {
   if (value !== null) {
     return value;
@@ -257,9 +255,9 @@ const normalizeGmoComponent = ({
 }: {
   gmoId: string;
   component: string;
-  componentCandidateByGmoId: Map<string, GmdbMediumBuilderComponentCandidate> | undefined;
+  componentCandidateByGmoId: Map<string, ComponentCandidate> | undefined;
   path: (string | number)[];
-  warnings: GmdbMediumBuilderDraftMapperWarning[];
+  warnings: DraftMapperWarning[];
 }): Pick<ComponentRowModel, "gmoId" | "component"> => {
   if (!componentCandidateByGmoId || gmoId === "") {
     return { gmoId, component };
@@ -288,13 +286,13 @@ const normalizeGmoComponent = ({
 };
 
 const createComponentCandidateMap = (
-  componentCandidates: readonly GmdbMediumBuilderComponentCandidate[] | undefined,
+  componentCandidates: readonly ComponentCandidate[] | undefined,
 ) => {
   if (!componentCandidates) {
     return undefined;
   }
 
-  const componentCandidateByGmoId = new Map<string, GmdbMediumBuilderComponentCandidate>();
+  const componentCandidateByGmoId = new Map<string, ComponentCandidate>();
   for (const candidate of componentCandidates) {
     if (candidate.gmoId !== "" && !componentCandidateByGmoId.has(candidate.gmoId)) {
       componentCandidateByGmoId.set(candidate.gmoId, candidate);
@@ -303,7 +301,7 @@ const createComponentCandidateMap = (
   return componentCandidateByGmoId;
 };
 
-const hasAnyGmoId = (draft: GmdbMediumBuilderDraftAppData): boolean => {
+const hasAnyGmoId = (draft: DraftAppData): boolean => {
   return draft.solutions.some((solution) =>
     solution.components.some((component) => component.gmoId !== null && component.gmoId !== ""),
   );

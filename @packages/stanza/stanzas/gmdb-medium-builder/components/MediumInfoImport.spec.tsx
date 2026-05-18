@@ -1,5 +1,5 @@
 import { MediumInfo } from "%stanza/stanzas/gmdb-medium-builder/components/MediumInfo";
-import { GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
+import { DRAFT_SCHEMA_VERSION } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
 import { createThunkTestStore } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/testUtils";
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
@@ -112,11 +112,11 @@ describe("MediumInfo JSON import", () => {
       component: "Wrong name",
     });
     expect(warn).toHaveBeenCalledWith(
-      "[MediumBuilderImport] Component candidates could not be fetched. GMO ID validation was skipped.",
+      "[Import] Component candidates could not be fetched. GMO ID validation was skipped.",
       expect.any(Error),
     );
     expect(warn).toHaveBeenCalledWith(
-      "[MediumBuilderImport] gmo-id-validation-skipped at solutions: GMO ID validation was skipped because component candidates were not provided.",
+      "[Import] gmo-id-validation-skipped at solutions: GMO ID validation was skipped because component candidates were not provided.",
     );
   });
 });
@@ -146,7 +146,7 @@ const createDraftFile = () => {
 };
 
 const createDraft = () => ({
-  schemaVersion: GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+  schemaVersion: DRAFT_SCHEMA_VERSION,
   title: "Imported medium",
   description: "Imported description",
   solutions: [

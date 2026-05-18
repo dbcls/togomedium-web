@@ -1,11 +1,11 @@
-import { MediumBuilderImportDialog } from "%stanza/stanzas/gmdb-medium-builder/components/MediumBuilderImportDialog";
+import { ImportDialog } from "%stanza/stanzas/gmdb-medium-builder/components/ImportDialog";
 import { MediumInfo } from "%stanza/stanzas/gmdb-medium-builder/components/MediumInfo";
 import { createThunkTestStore } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/testUtils";
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-describe("MediumBuilderImportDialog", () => {
+describe("ImportDialog", () => {
   afterEach(() => {
     cleanup();
   });
@@ -39,7 +39,7 @@ describe("MediumBuilderImportDialog", () => {
       type: "application/json",
     });
     const { rerender } = render(
-      <MediumBuilderImportDialog
+      <ImportDialog
         open={true}
         selectedFile={null}
         onClose={vi.fn()}
@@ -61,7 +61,7 @@ describe("MediumBuilderImportDialog", () => {
     expect(onFileSelect).toHaveBeenCalledWith(file);
 
     rerender(
-      <MediumBuilderImportDialog
+      <ImportDialog
         open={true}
         selectedFile={file}
         onClose={vi.fn()}
@@ -81,7 +81,7 @@ describe("MediumBuilderImportDialog", () => {
     });
 
     render(
-      <MediumBuilderImportDialog
+      <ImportDialog
         open={true}
         selectedFile={null}
         onClose={vi.fn()}
@@ -109,7 +109,7 @@ describe("MediumBuilderImportDialog", () => {
     const secondFile = new File(["{}"], "second.json", { type: "application/json" });
 
     render(
-      <MediumBuilderImportDialog
+      <ImportDialog
         open={true}
         selectedFile={null}
         onClose={vi.fn()}

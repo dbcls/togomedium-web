@@ -1,12 +1,12 @@
 import { mapAppStateToDraftAppData } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 
-export type MediumBuilderDraftDownload = {
+export type DraftDownload = {
   filename: string;
   json: string;
 };
 
-export type MediumBuilderDraftDownloadOptions = {
+export type DraftDownloadOptions = {
   now?: Date;
   document?: Document;
   url?: Pick<typeof URL, "createObjectURL" | "revokeObjectURL">;
@@ -15,22 +15,22 @@ export type MediumBuilderDraftDownloadOptions = {
 const FALLBACK_FILENAME_PREFIX = "medium-builder-draft";
 const JSON_MIME_TYPE = "application/json";
 
-export const createMediumBuilderDraftFilename = (title: string, now = new Date()): string => {
+const createDraftFilename = (title: string, now = new Date()): string => {
   const basename = createFilenameBasename(title) || FALLBACK_FILENAME_PREFIX;
 
   return `${basename}-${formatLocalDate(now)}.json`;
 };
 
-export const createMediumBuilderDraftJson = (state: AppState): string => {
+const createDraftJson = (state: AppState): string => {
   return JSON.stringify(mapAppStateToDraftAppData(state), null, 2);
 };
 
-export const downloadMediumBuilderDraft = (
+export const downloadDraft = (
   state: AppState,
-  options: MediumBuilderDraftDownloadOptions = {},
-): MediumBuilderDraftDownload => {
-  const json = createMediumBuilderDraftJson(state);
-  const filename = createMediumBuilderDraftFilename(state.document.title, options.now);
+  options: DraftDownloadOptions = {},
+): DraftDownload => {
+  const json = createDraftJson(state);
+  const filename = createDraftFilename(state.document.title, options.now);
 
   downloadTextFile({
     content: json,
@@ -41,6 +41,11 @@ export const downloadMediumBuilderDraft = (
   });
 
   return { filename, json };
+};
+
+export const __TEST__ = {
+  createDraftFilename,
+  createDraftJson,
 };
 
 const createFilenameBasename = (title: string): string => {

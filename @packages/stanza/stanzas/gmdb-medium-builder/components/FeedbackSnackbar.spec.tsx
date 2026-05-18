@@ -1,11 +1,11 @@
-import { MediumBuilderFeedbackSnackbar } from "%stanza/stanzas/gmdb-medium-builder/components/MediumBuilderFeedbackSnackbar";
+import { FeedbackSnackbar } from "%stanza/stanzas/gmdb-medium-builder/components/FeedbackSnackbar";
 import { FeedbackActions } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
 import { createThunkTestStore } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/testUtils";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-describe("MediumBuilderFeedbackSnackbar", () => {
+describe("FeedbackSnackbar", () => {
   afterEach(() => {
     cleanup();
     vi.useRealTimers();
@@ -17,7 +17,7 @@ describe("MediumBuilderFeedbackSnackbar", () => {
 
     render(
       <Provider store={store}>
-        <MediumBuilderFeedbackSnackbar />
+        <FeedbackSnackbar />
       </Provider>,
     );
 
@@ -36,7 +36,7 @@ describe("MediumBuilderFeedbackSnackbar", () => {
 
     render(
       <Provider store={store}>
-        <MediumBuilderFeedbackSnackbar />
+        <FeedbackSnackbar />
       </Provider>,
     );
 
@@ -50,7 +50,7 @@ describe("MediumBuilderFeedbackSnackbar", () => {
 
     render(
       <Provider store={store}>
-        <MediumBuilderFeedbackSnackbar />
+        <FeedbackSnackbar />
       </Provider>,
     );
 
@@ -72,7 +72,7 @@ describe("MediumBuilderFeedbackSnackbar", () => {
 
     render(
       <Provider store={store}>
-        <MediumBuilderFeedbackSnackbar />
+        <FeedbackSnackbar />
       </Provider>,
     );
 

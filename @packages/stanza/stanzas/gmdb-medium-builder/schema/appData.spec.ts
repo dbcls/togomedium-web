@@ -1,11 +1,11 @@
 import {
   appDataSchema,
-  GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+  DRAFT_SCHEMA_VERSION,
 } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
 import { describe, expect, it } from "vitest";
 
 const createValidDraft = () => ({
-  schemaVersion: GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+  schemaVersion: DRAFT_SCHEMA_VERSION,
   title: "GM12878 medium",
   description: null,
   solutions: [
@@ -91,7 +91,7 @@ describe("appDataSchema", () => {
 
   it("keeps nullable fields nullable", () => {
     const draft = {
-      schemaVersion: GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+      schemaVersion: DRAFT_SCHEMA_VERSION,
       title: null,
       description: null,
       solutions: [

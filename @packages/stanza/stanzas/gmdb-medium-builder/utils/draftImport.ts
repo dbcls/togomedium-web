@@ -6,32 +6,32 @@ import {
 import { makeApiUrl } from "%core/network/makeApiUrl";
 import {
   appDataSchema,
-  GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+  DRAFT_SCHEMA_VERSION,
 } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
 import {
   mapDraftAppDataToAppState,
-  type GmdbMediumBuilderDraftIdFactory,
-  type GmdbMediumBuilderDraftMapperWarning,
+  type DraftIdFactory,
+  type DraftMapperWarning,
 } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { nanoid } from "nanoid";
 import type { ZodError } from "zod";
 
-export type MediumBuilderImportErrorCode =
+export type ImportErrorCode =
   | "file-read-failed"
   | "invalid-json"
   | "unsupported-schema-version"
   | "schema-validation-failed"
   | "mapper-failed";
 
-export type MediumBuilderImportError = {
-  code: MediumBuilderImportErrorCode;
+export type ImportError = {
+  code: ImportErrorCode;
   message: string;
   detail?: string;
 };
 
-export type MediumBuilderImportWarning =
-  | GmdbMediumBuilderDraftMapperWarning
+export type ImportWarning =
+  | DraftMapperWarning
   | {
       code: "component-candidates-fetch-failed";
       path: [];
@@ -39,32 +39,32 @@ export type MediumBuilderImportWarning =
       error: unknown;
     };
 
-export type MediumBuilderImportResult =
+export type ImportResult =
   | {
       success: true;
       state: AppState;
-      warnings: MediumBuilderImportWarning[];
+      warnings: ImportWarning[];
     }
   | {
       success: false;
-      error: MediumBuilderImportError;
-      warnings: MediumBuilderImportWarning[];
+      error: ImportError;
+      warnings: ImportWarning[];
     };
 
-export type MediumBuilderImportDependencies = {
+export type ImportDependencies = {
   readFileText?: (file: File) => Promise<string>;
   fetchComponents?: () => Promise<ComponentsWithComponentsResponse>;
-  createId?: GmdbMediumBuilderDraftIdFactory;
+  createId?: DraftIdFactory;
 };
 
-export const importMediumBuilderDraftJson = async (
+export const importDraftJson = async (
   file: File,
-  dependencies: MediumBuilderImportDependencies = {},
-): Promise<MediumBuilderImportResult> => {
+  dependencies: ImportDependencies = {},
+): Promise<ImportResult> => {
   const readFileText = dependencies.readFileText ?? ((targetFile) => targetFile.text());
-  const createId = dependencies.createId ?? createMediumBuilderImportId;
-  const fetchComponents = dependencies.fetchComponents ?? fetchMediumBuilderComponentCandidates;
-  const warnings: MediumBuilderImportWarning[] = [];
+  const createId = dependencies.createId ?? createImportId;
+  const fetchComponents = dependencies.fetchComponents ?? fetchComponentCandidatesFromApi;
+  const warnings: ImportWarning[] = [];
 
   let fileText: string;
   try {
@@ -95,14 +95,14 @@ export const importMediumBuilderDraftJson = async (
   }
 
   const schemaVersion = getSchemaVersion(parseResult.value);
-  if (schemaVersion !== GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION) {
+  if (schemaVersion !== DRAFT_SCHEMA_VERSION) {
     return {
       success: false,
       warnings,
       error: {
         code: "unsupported-schema-version",
         message: "Import failed.",
-        detail: `Unsupported schemaVersion. Expected ${GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION}.`,
+        detail: `Unsupported schemaVersion. Expected ${DRAFT_SCHEMA_VERSION}.`,
       },
     };
   }
@@ -147,23 +147,23 @@ export const importMediumBuilderDraftJson = async (
   };
 };
 
-export const logMediumBuilderImportWarnings = (
-  warnings: readonly MediumBuilderImportWarning[],
+export const logImportWarnings = (
+  warnings: readonly ImportWarning[],
   warn: (...data: unknown[]) => void = console.warn,
 ) => {
   for (const warning of warnings) {
     const location = warning.path.length > 0 ? ` at ${formatPath(warning.path)}` : "";
 
     if (warning.code === "component-candidates-fetch-failed") {
-      warn(`[MediumBuilderImport] ${warning.message}`, warning.error);
+      warn(`[Import] ${warning.message}`, warning.error);
       continue;
     }
 
-    warn(`[MediumBuilderImport] ${warning.code}${location}: ${warning.message}`);
+    warn(`[Import] ${warning.code}${location}: ${warning.message}`);
   }
 };
 
-const createMediumBuilderImportId: GmdbMediumBuilderDraftIdFactory = (params) => {
+const createImportId: DraftIdFactory = (params) => {
   return `${params.kind}-${nanoid()}`;
 };
 
@@ -198,7 +198,7 @@ const getSchemaVersion = (value: unknown): unknown => {
 
 const fetchComponentCandidates = async (
   fetchComponents: () => Promise<ComponentsWithComponentsResponse>,
-  warnings: MediumBuilderImportWarning[],
+  warnings: ImportWarning[],
 ) => {
   try {
     const components = await fetchComponents();
@@ -217,18 +217,17 @@ const fetchComponentCandidates = async (
   }
 };
 
-const fetchMediumBuilderComponentCandidates =
-  async (): Promise<ComponentsWithComponentsResponse> => {
-    const params: ComponentWithComponentsParams = { gmo_ids: "" };
-    const url = makeApiUrl(PATH_COMPONENTS_WITH_COMPONENTS, new URLSearchParams(params));
-    const response = await fetch(url);
+const fetchComponentCandidatesFromApi = async (): Promise<ComponentsWithComponentsResponse> => {
+  const params: ComponentWithComponentsParams = { gmo_ids: "" };
+  const url = makeApiUrl(PATH_COMPONENTS_WITH_COMPONENTS, new URLSearchParams(params));
+  const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(`Component candidates request failed with HTTP ${response.status}.`);
-    }
+  if (!response.ok) {
+    throw new Error(`Component candidates request failed with HTTP ${response.status}.`);
+  }
 
-    return response.json() as Promise<ComponentsWithComponentsResponse>;
-  };
+  return response.json() as Promise<ComponentsWithComponentsResponse>;
+};
 
 const formatZodError = (error: ZodError): string => {
   const firstIssue = error.issues[0];

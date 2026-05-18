@@ -1,38 +1,33 @@
 import { createThunkTestStore } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/testUtils";
-import {
-  createMediumBuilderDraftFilename,
-  createMediumBuilderDraftJson,
-  downloadMediumBuilderDraft,
-} from "%stanza/stanzas/gmdb-medium-builder/utils/mediumBuilderExport";
+import { __TEST__, downloadDraft } from "%stanza/stanzas/gmdb-medium-builder/utils/draftExport";
 import { describe, expect, it, vi } from "vitest";
 
+const { createDraftFilename, createDraftJson } = __TEST__;
 const exportDate = new Date(2026, 4, 18);
 
-describe("createMediumBuilderDraftFilename", () => {
+describe("createDraftFilename", () => {
   it("creates a filename from the medium title and local date", () => {
-    expect(createMediumBuilderDraftFilename("Marine Broth 2216", exportDate)).toBe(
+    expect(createDraftFilename("Marine Broth 2216", exportDate)).toBe(
       "Marine-Broth-2216-2026-05-18.json",
     );
   });
 
   it("sanitizes filename separators from the medium title", () => {
-    expect(createMediumBuilderDraftFilename("  A/B: test medium?  ", exportDate)).toBe(
+    expect(createDraftFilename("  A/B: test medium?  ", exportDate)).toBe(
       "AB-test-medium-2026-05-18.json",
     );
   });
 
   it("uses the fallback filename when the medium title is empty", () => {
-    expect(createMediumBuilderDraftFilename("   ", exportDate)).toBe(
-      "medium-builder-draft-2026-05-18.json",
-    );
+    expect(createDraftFilename("   ", exportDate)).toBe("medium-builder-draft-2026-05-18.json");
   });
 });
 
-describe("createMediumBuilderDraftJson", () => {
+describe("createDraftJson", () => {
   it("creates pretty printed draft JSON from the current app state", () => {
     const state = createThunkTestStore().getState();
 
-    expect(createMediumBuilderDraftJson(state)).toBe(
+    expect(createDraftJson(state)).toBe(
       `${JSON.stringify(
         {
           schemaVersion: "2026-05-18",
@@ -81,7 +76,7 @@ describe("createMediumBuilderDraftJson", () => {
   });
 });
 
-describe("downloadMediumBuilderDraft", () => {
+describe("downloadDraft", () => {
   it("downloads the pretty printed draft JSON with the generated filename", async () => {
     const state = createThunkTestStore().getState();
     const objectUrl = "blob:medium-builder-draft";
@@ -101,7 +96,7 @@ describe("downloadMediumBuilderDraft", () => {
       return element;
     });
 
-    const result = downloadMediumBuilderDraft(state, {
+    const result = downloadDraft(state, {
       now: exportDate,
       document,
       url: {
@@ -111,7 +106,7 @@ describe("downloadMediumBuilderDraft", () => {
     });
 
     expect(result.filename).toBe("Test-medium-2026-05-18.json");
-    expect(result.json).toBe(createMediumBuilderDraftJson(state));
+    expect(result.json).toBe(createDraftJson(state));
     expect(createObjectURL).toHaveBeenCalledOnce();
     const blob = createObjectURL.mock.calls[0]![0];
     expect(blob).toBeInstanceOf(Blob);

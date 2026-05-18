@@ -1,15 +1,15 @@
-import { GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
+import { DRAFT_SCHEMA_VERSION } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
 import {
   mapAppStateToDraftAppData,
   mapDraftAppDataToAppState,
 } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
-import type { GmdbMediumBuilderDraftIdFactory } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
+import type { DraftIdFactory } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createInitialFeedbackState } from "%stanza/stanzas/gmdb-medium-builder/state/feedback";
 import { createThunkTestStore } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/testUtils";
 import { describe, expect, it } from "vitest";
 
-const createId: GmdbMediumBuilderDraftIdFactory = (params) => {
+const createId: DraftIdFactory = (params) => {
   if (params.kind === "solution") {
     return `imported-solution-${params.solutionIndex + 1}`;
   }
@@ -18,7 +18,7 @@ const createId: GmdbMediumBuilderDraftIdFactory = (params) => {
 };
 
 const createBaseDraft = () => ({
-  schemaVersion: GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+  schemaVersion: DRAFT_SCHEMA_VERSION,
   title: "Imported medium",
   description: "Imported description",
   solutions: [
@@ -63,7 +63,7 @@ describe("mapAppStateToDraftAppData", () => {
     };
 
     expect(mapAppStateToDraftAppData(reorderedState)).toEqual({
-      schemaVersion: GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+      schemaVersion: DRAFT_SCHEMA_VERSION,
       title: "Test medium",
       description: "Test medium description",
       solutions: [
@@ -161,7 +161,7 @@ describe("mapDraftAppDataToAppState", () => {
   it("normalizes null values to state values and preserves empty arrays", () => {
     const result = mapDraftAppDataToAppState(
       {
-        schemaVersion: GMDB_MEDIUM_BUILDER_DRAFT_SCHEMA_VERSION,
+        schemaVersion: DRAFT_SCHEMA_VERSION,
         title: null,
         description: null,
         solutions: [

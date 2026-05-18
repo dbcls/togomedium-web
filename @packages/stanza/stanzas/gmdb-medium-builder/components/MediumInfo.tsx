@@ -1,21 +1,21 @@
 import { THEME } from "%core/theme";
-import { MediumBuilderImportDialog } from "%stanza/stanzas/gmdb-medium-builder/components/MediumBuilderImportDialog";
+import { ImportDialog } from "%stanza/stanzas/gmdb-medium-builder/components/ImportDialog";
 import {
   type AppState,
   useAppDispatch,
   useAppSelector,
 } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
-import { useMediumBuilderFeedback } from "%stanza/stanzas/gmdb-medium-builder/state/feedbackHooks";
+import { useFeedback } from "%stanza/stanzas/gmdb-medium-builder/state/feedbackHooks";
 import {
   DocumentActions,
   DocumentSelectors,
 } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
 import { replaceImportedAppStateThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/replaceImportedAppStateThunk";
-import { downloadMediumBuilderDraft } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumBuilderExport";
+import { downloadDraft } from "%stanza/stanzas/gmdb-medium-builder/utils/draftExport";
 import {
-  importMediumBuilderDraftJson,
-  logMediumBuilderImportWarnings,
-} from "%stanza/stanzas/gmdb-medium-builder/utils/mediumBuilderImport";
+  importDraftJson,
+  logImportWarnings,
+} from "%stanza/stanzas/gmdb-medium-builder/utils/draftImport";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -28,7 +28,7 @@ export const MediumInfo: FC = () => {
   const store = useStore<AppState>();
   const title = useAppSelector(DocumentSelectors.selectTitle);
   const description = useAppSelector(DocumentSelectors.selectDescription);
-  const { showSuccess, showError } = useMediumBuilderFeedback();
+  const { showSuccess, showError } = useFeedback();
   const [isImportDialogOpen, setIsImportDialogOpen] = useState(false);
   const [selectedImportFile, setSelectedImportFile] = useState<File | null>(null);
   const [isImporting, setIsImporting] = useState(false);
@@ -47,7 +47,7 @@ export const MediumInfo: FC = () => {
 
   const handleSaveDraftJson = () => {
     try {
-      const { filename } = downloadMediumBuilderDraft(store.getState());
+      const { filename } = downloadDraft(store.getState());
 
       showSuccess(`Saved ${filename}.`);
     } catch (error) {
@@ -71,8 +71,8 @@ export const MediumInfo: FC = () => {
     setIsImporting(true);
 
     try {
-      const result = await importMediumBuilderDraftJson(file);
-      logMediumBuilderImportWarnings(result.warnings);
+      const result = await importDraftJson(file);
+      logImportWarnings(result.warnings);
 
       if (!result.success) {
         showError({
@@ -130,7 +130,7 @@ export const MediumInfo: FC = () => {
           Upload .json
         </Button>
       </Actions>
-      <MediumBuilderImportDialog
+      <ImportDialog
         open={isImportDialogOpen}
         selectedFile={selectedImportFile}
         onClose={handleCloseImportDialog}

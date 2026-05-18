@@ -1,17 +1,17 @@
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export type MediumBuilderFeedbackSeverity = "success" | "error";
+export type FeedbackSeverity = "success" | "error";
 
-export type MediumBuilderFeedbackInput = {
+export type FeedbackInput = {
   message: string;
   detail?: string;
   autoHideDuration?: number;
 };
 
-export type MediumBuilderFeedbackState = {
+export type FeedbackState = {
   open: boolean;
-  severity: MediumBuilderFeedbackSeverity;
+  severity: FeedbackSeverity;
   message: string;
   detail?: string;
   autoHideDuration: number;
@@ -20,7 +20,7 @@ export type MediumBuilderFeedbackState = {
 
 export const DEFAULT_FEEDBACK_AUTO_HIDE_DURATION = 6000;
 
-export const createInitialFeedbackState = (): MediumBuilderFeedbackState => ({
+export const createInitialFeedbackState = (): FeedbackState => ({
   open: false,
   severity: "success",
   message: "",
@@ -29,9 +29,7 @@ export const createInitialFeedbackState = (): MediumBuilderFeedbackState => ({
   key: 0,
 });
 
-const normalizePayload = (
-  payload: string | MediumBuilderFeedbackInput,
-): MediumBuilderFeedbackInput => {
+const normalizePayload = (payload: string | FeedbackInput): FeedbackInput => {
   if (typeof payload === "string") {
     return { message: payload };
   }
@@ -40,9 +38,9 @@ const normalizePayload = (
 };
 
 const showFeedback = (
-  state: MediumBuilderFeedbackState,
-  severity: MediumBuilderFeedbackSeverity,
-  payload: string | MediumBuilderFeedbackInput,
+  state: FeedbackState,
+  severity: FeedbackSeverity,
+  payload: string | FeedbackInput,
 ) => {
   const input = normalizePayload(payload);
 
@@ -58,10 +56,10 @@ const slice = createSlice({
   name: "feedback",
   initialState: createInitialFeedbackState(),
   reducers: {
-    showSuccess: (state, action: PayloadAction<string | MediumBuilderFeedbackInput>) => {
+    showSuccess: (state, action: PayloadAction<string | FeedbackInput>) => {
       showFeedback(state, "success", action.payload);
     },
-    showError: (state, action: PayloadAction<string | MediumBuilderFeedbackInput>) => {
+    showError: (state, action: PayloadAction<string | FeedbackInput>) => {
       showFeedback(state, "error", action.payload);
     },
     closeFeedback: (state) => {
