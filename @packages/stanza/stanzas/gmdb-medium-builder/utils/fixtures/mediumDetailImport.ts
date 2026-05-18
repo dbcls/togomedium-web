@@ -53,3 +53,54 @@ export const mediumDetailImportFixture = {
     },
   ],
 } satisfies MediumDetailResponse;
+
+export const referencedMediumDetailImportFixture = {
+  meta: {
+    gm: "GM_000999",
+    name: "Referenced trace elements medium",
+    src_url: "https://example.org/medium/GM_000999",
+    ph: "",
+    original_media_id: "REF 999",
+  },
+  components: [
+    {
+      paragraph_index: 1,
+      subcomponent_name: "Unrelated solution",
+      items: [
+        {
+          component_name: "Sodium chloride",
+          label: "",
+          volume: 5,
+          unit: "g/L",
+          gmo_id: "GMO_000010",
+        },
+      ],
+    },
+    {
+      paragraph_index: 2,
+      subcomponent_name: "Trace element solution",
+      items: [
+        {
+          component_name: "EDTA",
+          label: "",
+          volume: 0.5,
+          unit: "g/L",
+          gmo_id: "GMO_000011",
+        },
+        {
+          component_name: "Zinc sulfate",
+          label: "ZnSO4",
+          volume: 0.1,
+          unit: "g/L",
+          gmo_id: "GMO_000012",
+        },
+      ],
+    },
+  ],
+  comments: [
+    {
+      paragraph_index: 3,
+      comment: "Referenced medium comments should not be imported.",
+    },
+  ],
+} satisfies MediumDetailResponse;
