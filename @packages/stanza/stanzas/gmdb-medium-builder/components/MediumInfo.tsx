@@ -1,20 +1,29 @@
 import { THEME } from "%core/theme";
 import { MediumBuilderImportDialog } from "%stanza/stanzas/gmdb-medium-builder/components/MediumBuilderImportDialog";
-import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import {
+  type AppState,
+  useAppDispatch,
+  useAppSelector,
+} from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import { useMediumBuilderFeedback } from "%stanza/stanzas/gmdb-medium-builder/state/feedbackHooks";
 import {
   DocumentActions,
   DocumentSelectors,
 } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
+import { downloadMediumBuilderDraft } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumBuilderExport";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import type { ChangeEvent, FC } from "react";
 import { useState } from "react";
+import { useStore } from "react-redux";
 
 export const MediumInfo: FC = () => {
   const dispatch = useAppDispatch();
+  const store = useStore<AppState>();
   const title = useAppSelector(DocumentSelectors.selectTitle);
   const description = useAppSelector(DocumentSelectors.selectDescription);
+  const { showSuccess, showError } = useMediumBuilderFeedback();
   const [isImportDialogOpen, setIsImportDialogOpen] = useState(false);
   const [selectedImportFile, setSelectedImportFile] = useState<File | null>(null);
 
@@ -28,6 +37,19 @@ export const MediumInfo: FC = () => {
 
   const handleOpenImportDialog = () => {
     setIsImportDialogOpen(true);
+  };
+
+  const handleSaveDraftJson = () => {
+    try {
+      const { filename } = downloadMediumBuilderDraft(store.getState());
+
+      showSuccess(`Saved ${filename}.`);
+    } catch (error) {
+      showError({
+        message: "Export failed.",
+        detail: error instanceof Error ? error.message : "The draft JSON could not be downloaded.",
+      });
+    }
   };
 
   const handleCloseImportDialog = () => {
@@ -61,6 +83,7 @@ export const MediumInfo: FC = () => {
           size={"small"}
           disableElevation={true}
           sx={{ textTransform: "none" }}
+          onClick={handleSaveDraftJson}
         >
           Save as .json
         </Button>
