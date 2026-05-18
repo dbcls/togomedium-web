@@ -22,6 +22,7 @@ describe("addComponentRowThunk", () => {
       addedComponentRowId ? state.entities.componentRows.entities[addedComponentRowId] : undefined,
     ).toEqual({
       id: addedComponentRowId,
+      gmoId: "",
       component: "",
       volume: 0,
       unit: "",

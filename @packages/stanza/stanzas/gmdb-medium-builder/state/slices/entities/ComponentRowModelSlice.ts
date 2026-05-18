@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 
 export type ComponentRowModel = {
   id: string;
+  gmoId: string;
   component: string;
   volume: number;
   unit: string;
@@ -38,6 +39,7 @@ export const createBlankComponentRow = (
   const id = params.id ?? nanoid();
   return {
     id,
+    gmoId: params.gmoId ?? "",
     component: params.component ?? "",
     volume: params.volume ?? 0,
     unit: params.unit ?? "",

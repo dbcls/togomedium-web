@@ -34,6 +34,7 @@ export const duplicateSolutionThunk = (solutionBlockId: string) => {
       .filter((componentRow) => componentRow !== undefined)
       .map((componentRow) =>
         createBlankComponentRow({
+          gmoId: componentRow.gmoId,
           component: componentRow.component,
           volume: componentRow.volume,
           unit: componentRow.unit,

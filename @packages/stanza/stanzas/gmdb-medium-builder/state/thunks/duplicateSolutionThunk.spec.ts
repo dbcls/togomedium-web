@@ -44,6 +44,7 @@ describe("duplicateSolutionThunk", () => {
 
     expect(duplicatedFirstComponent).toEqual({
       id: duplicatedFirstComponentId,
+      gmoId: "GMO_000001",
       component: "Glucose",
       volume: 10,
       unit: "g",
@@ -51,6 +52,7 @@ describe("duplicateSolutionThunk", () => {
     });
     expect(duplicatedSecondComponent).toEqual({
       id: duplicatedSecondComponentId,
+      gmoId: "GMO_000002",
       component: "NaCl",
       volume: 5,
       unit: "mg",

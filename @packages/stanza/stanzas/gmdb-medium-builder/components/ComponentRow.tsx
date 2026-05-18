@@ -11,12 +11,18 @@ import { deleteComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/sta
 import { duplicateComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/duplicateComponentRowThunk";
 import { moveComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/moveComponentRowThunk";
 import { Autocomplete, IconButton, Menu, MenuItem, TextField } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
 
 type Props = {
   id: string;
   solutionBlockId: string;
+};
+
+type ComponentOption = {
+  label: string;
+  gmoId: string;
 };
 
 const units = [
@@ -41,8 +47,13 @@ const units = [
 export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
   const componentRow = useAppSelector((state) => ComponentRowSelectors.selectById(state, id));
   const { components, isSuccess } = useComponentsData();
-  const { handleChangeComponent, handleChangeVolume, handleChangeUnit, handleChangeNote } =
-    useInputHandlers(id);
+  const {
+    handleChangeComponent,
+    handleInputComponent,
+    handleChangeVolume,
+    handleChangeUnit,
+    handleChangeNote,
+  } = useInputHandlers(id);
   const {
     solutionBlock,
     anchorEl,
@@ -99,18 +110,26 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
           </MenuItem>
         </Menu>
       </div>
-      <div>
+      <ComponentInputCell>
+        <GmoIdLabel>{componentRow.gmoId || "No GMO ID"}</GmoIdLabel>
         <Autocomplete
+          freeSolo
           size={"small"}
           disablePortal
           disabled={!isSuccess}
           options={components}
-          sx={{ width: 300 }}
-          value={components.find((component) => component.label === componentRow.component) ?? null}
+          sx={{ width: 300, flex: "0 0 auto" }}
+          inputValue={componentRow.component}
+          value={components.find((component) => component.gmoId === componentRow.gmoId) ?? null}
+          getOptionLabel={(option) => (typeof option === "string" ? option : option.label)}
+          isOptionEqualToValue={(option, value) =>
+            typeof value === "string" ? option.label === value : option.gmoId === value.gmoId
+          }
           onChange={handleChangeComponent}
+          onInputChange={handleInputComponent}
           renderInput={(params) => <TextField {...params} />}
         />
-      </div>
+      </ComponentInputCell>
       <div>
         <TextField
           sx={{ width: 80 }}
@@ -148,18 +167,39 @@ const useComponentsData = () => {
     queryFn: fetchAllComponents,
     placeholderData: [],
   });
-  const components = (data ?? []).map((c) => ({ label: c.name }));
+  const components = (data ?? []).map((c) => ({ label: c.name, gmoId: c.gmo_id }));
   return { components, isSuccess };
 };
 
 const useInputHandlers = (id: string) => {
   const dispatch = useAppDispatch();
-  const handleChangeComponent = (_event: React.SyntheticEvent, value: { label: string } | null) => {
+  const handleChangeComponent = (
+    _event: React.SyntheticEvent,
+    value: ComponentOption | string | null,
+  ) => {
+    const component = typeof value === "string" ? value : (value?.label ?? "");
+    const gmoId = typeof value === "string" ? "" : (value?.gmoId ?? "");
     dispatch(
       ComponentRowModelActions.updateComponentRow({
         id,
         changes: {
-          component: value?.label ?? "",
+          gmoId,
+          component,
+        },
+      }),
+    );
+  };
+
+  const handleInputComponent = (_event: React.SyntheticEvent, value: string, reason: string) => {
+    if (reason === "reset") {
+      return;
+    }
+    dispatch(
+      ComponentRowModelActions.updateComponentRow({
+        id,
+        changes: {
+          gmoId: "",
+          component: value,
         },
       }),
     );
@@ -202,7 +242,13 @@ const useInputHandlers = (id: string) => {
     );
   };
 
-  return { handleChangeComponent, handleChangeVolume, handleChangeUnit, handleChangeNote };
+  return {
+    handleChangeComponent,
+    handleInputComponent,
+    handleChangeVolume,
+    handleChangeUnit,
+    handleChangeNote,
+  };
 };
 const useMenu = (id: string, solutionBlockId: string) => {
   const dispatch = useAppDispatch();
@@ -255,3 +301,19 @@ const useMenu = (id: string, solutionBlockId: string) => {
     disableMoveRowDown,
   };
 };
+
+const ComponentInputCell = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+});
+
+const GmoIdLabel = styled("span")({
+  flex: "0 0 76px",
+  fontSize: "0.75rem",
+  lineHeight: 1.2,
+  color: "rgba(0, 0, 0, 0.6)",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+});

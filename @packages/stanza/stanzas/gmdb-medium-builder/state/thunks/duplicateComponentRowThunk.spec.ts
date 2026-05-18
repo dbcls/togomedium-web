@@ -26,6 +26,7 @@ describe("duplicateComponentRowThunk", () => {
 
     expect(duplicatedComponentRow).toEqual({
       id: duplicatedComponentRowId,
+      gmoId: "GMO_000001",
       component: "Glucose",
       volume: 10,
       unit: "g",

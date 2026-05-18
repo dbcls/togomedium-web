@@ -19,6 +19,7 @@ export const createThunkTestStore = () => {
           entities: {
             "component-row-1": {
               id: "component-row-1",
+              gmoId: "GMO_000001",
               component: "Glucose",
               volume: 10,
               unit: "g",
@@ -26,6 +27,7 @@ export const createThunkTestStore = () => {
             },
             "component-row-2": {
               id: "component-row-2",
+              gmoId: "GMO_000002",
               component: "NaCl",
               volume: 5,
               unit: "mg",
@@ -33,6 +35,7 @@ export const createThunkTestStore = () => {
             },
             "component-row-3": {
               id: "component-row-3",
+              gmoId: "",
               component: "Agar",
               volume: 15,
               unit: "g",

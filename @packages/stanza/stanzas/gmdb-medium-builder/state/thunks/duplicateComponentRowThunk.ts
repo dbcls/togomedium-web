@@ -25,6 +25,7 @@ export const duplicateComponentRowThunk = (solutionBlockId: string, componentRow
     }
 
     const duplicatedComponentRow = createBlankComponentRow({
+      gmoId: componentRow.gmoId,
       component: componentRow.component,
       volume: componentRow.volume,
       unit: componentRow.unit,
