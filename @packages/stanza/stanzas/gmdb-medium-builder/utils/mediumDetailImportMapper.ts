@@ -4,6 +4,7 @@ import { createInitialFeedbackState } from "%stanza/stanzas/gmdb-medium-builder/
 import { createBlankDocumentProvenance } from "%stanza/stanzas/gmdb-medium-builder/state/slices/document";
 import type { ComponentRowModel } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/ComponentRowModelSlice";
 import type { SolutionBlockModel } from "%stanza/stanzas/gmdb-medium-builder/state/slices/entities/SolutionBlockModelSlice";
+import { formatComponentLabel } from "%stanza/stanzas/gmdb-medium-builder/utils/formatComponentLabel";
 import { nanoid } from "nanoid";
 
 type MediumDetailTable = MediumDetailResponse["components"][number];
@@ -122,10 +123,10 @@ const mapComponentToRow = (component: MediumDetailComponent, id: string): Compon
 
 const getComponentDisplayName = (component: MediumDetailComponent): string => {
   if (component.label && component.label.trim() !== "") {
-    return component.label;
+    return formatComponentLabel(component.label);
   }
 
-  return component.component_name;
+  return formatComponentLabel(component.component_name);
 };
 
 const createDocumentDescription = (meta: MediumDetailResponse["meta"]): string => {

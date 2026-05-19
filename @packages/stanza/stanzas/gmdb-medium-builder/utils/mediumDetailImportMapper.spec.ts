@@ -79,6 +79,22 @@ describe("mapMediumDetailResponseToAppState", () => {
     });
   });
 
+  it("decodes HTML entities in imported component labels and fallback component names", () => {
+    const fixture = structuredClone(mediumDetailImportFixture);
+    fixture.components[0].items[0].label = "Bacto &trade; Yeast extract";
+    fixture.components[0].items[1].label = "";
+    fixture.components[0].items[1].component_name = "Bacto &reg; Peptone";
+
+    const state = mapMediumDetailResponseToAppState(fixture, { createId });
+
+    expect(state.entities.componentRows.entities["imported-component-1-1"]?.component).toBe(
+      "Bacto \u2122 Yeast extract",
+    );
+    expect(state.entities.componentRows.entities["imported-component-1-2"]?.component).toBe(
+      "Bacto \u00ae Peptone",
+    );
+  });
+
   it("does not persist source component name, original label, or reference medium ID", () => {
     const state = mapMediumDetailResponseToAppState(mediumDetailImportFixture, { createId });
     const serializedState = JSON.stringify(state);
