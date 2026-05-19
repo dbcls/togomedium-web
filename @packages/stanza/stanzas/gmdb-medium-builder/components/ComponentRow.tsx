@@ -263,6 +263,8 @@ const useComponentsData = () => {
     queryKey: ["allComponents"],
     queryFn: fetchAllComponents,
     placeholderData: [],
+    staleTime: Infinity,
+    retryOnMount: false,
   });
   const components = (data ?? []).map((c) => ({ label: c.name, gmoId: c.gmo_id }));
   return { components, isSuccess };

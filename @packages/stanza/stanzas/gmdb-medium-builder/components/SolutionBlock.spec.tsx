@@ -1,7 +1,8 @@
+import { fetchAllComponents } from "%core/fetch/fetchAllComponents";
 import { SolutionBlock } from "%stanza/stanzas/gmdb-medium-builder/components/SolutionBlock";
 import { createThunkTestStore } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/testUtils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -12,6 +13,7 @@ vi.mock("%core/fetch/fetchAllComponents", () => ({
 describe("SolutionBlock", () => {
   afterEach(() => {
     cleanup();
+    vi.clearAllMocks();
   });
 
   it("edits the solution note description", () => {
@@ -28,6 +30,22 @@ describe("SolutionBlock", () => {
     expect(store.getState().entities.solutionBlocks.entities["solution-1"]?.description).toBe(
       "Preparation note",
     );
+  });
+
+  it("reuses the initial components query when a component row is added", async () => {
+    const store = createThunkTestStore();
+    renderSolutionBlock(store);
+
+    await waitFor(() => {
+      expect(fetchAllComponents).toHaveBeenCalledTimes(1);
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Add component row" }));
+
+    await waitFor(() => {
+      expect(screen.getAllByLabelText("Component")).toHaveLength(3);
+    });
+    expect(fetchAllComponents).toHaveBeenCalledTimes(1);
   });
 });
 
