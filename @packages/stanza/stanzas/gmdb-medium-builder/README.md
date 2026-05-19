@@ -8,6 +8,7 @@
 
 ## 実装方針
 
+- draft schema と Medium Detail import の確定方針は `docs/decisions/2026-05-19-medium-builder-schema-alignment.md` を参照してください。
 - 状態管理は `Redux` を前提にしてください。
   - `index.tsx` で `appStore` を `reduxStore` として渡す構成を基準にしています。
   - 新しい状態や更新処理を追加する時も、まずは既存の Redux の構成へ寄せてください。
