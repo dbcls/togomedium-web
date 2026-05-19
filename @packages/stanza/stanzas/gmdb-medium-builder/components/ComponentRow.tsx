@@ -10,6 +10,7 @@ import { SolutionBlockSelectors } from "%stanza/stanzas/gmdb-medium-builder/stat
 import { deleteComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/deleteComponentRowThunk";
 import { duplicateComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/duplicateComponentRowThunk";
 import { moveComponentRowThunk } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/moveComponentRowThunk";
+import { formatComponentLabel } from "%stanza/stanzas/gmdb-medium-builder/utils/formatComponentLabel";
 import { Autocomplete, IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useQuery } from "@tanstack/react-query";
@@ -266,7 +267,10 @@ const useComponentsData = () => {
     staleTime: Infinity,
     retryOnMount: false,
   });
-  const components = (data ?? []).map((c) => ({ label: c.name, gmoId: c.gmo_id }));
+  const components = (data ?? []).map((c) => ({
+    label: formatComponentLabel(c.name),
+    gmoId: c.gmo_id,
+  }));
   return { components, isSuccess };
 };
 

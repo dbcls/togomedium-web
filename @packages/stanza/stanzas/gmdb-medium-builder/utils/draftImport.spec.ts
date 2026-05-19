@@ -187,6 +187,29 @@ describe("importDraftJson", () => {
     ]);
   });
 
+  it("decodes HTML entities in fetched component candidate names before normalizing", async () => {
+    const result = await importDraftJson(createFile(JSON.stringify(createDraft())), {
+      createId,
+      fetchComponents: async () => [
+        {
+          gmo_id: "GMO_000001",
+          name: "Bacto &trade; Yeast extract",
+          japanese_name: "Bacto Yeast extract",
+        },
+      ],
+    });
+
+    expect(result.success).toBe(true);
+    if (!result.success) {
+      return;
+    }
+    expect(result.state.entities.componentRows.entities["imported-component-1-1"]).toMatchObject({
+      gmoId: "GMO_000001",
+      component: "Bacto \u2122 Yeast extract",
+    });
+    expect(result.warnings.map((warning) => warning.code)).toEqual(["component-name-normalized"]);
+  });
+
   it("treats non-ok component candidate responses as fetch failure", async () => {
     vi.stubGlobal(
       "fetch",

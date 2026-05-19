@@ -1,7 +1,7 @@
 import { ComponentRow } from "%stanza/stanzas/gmdb-medium-builder/components/ComponentRow";
 import { createThunkTestStore } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/testUtils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -10,6 +10,10 @@ vi.mock("%core/fetch/fetchAllComponents", () => ({
     {
       gmo_id: "GMO_000001",
       name: "Glucose",
+    },
+    {
+      gmo_id: "GMO_000002",
+      name: "Bacto &trade; Yeast extract",
     },
   ]),
 }));
@@ -54,6 +58,26 @@ describe("ComponentRow", () => {
     expect(
       store.getState().entities.componentRows.entities["component-row-1"]?.concentrationValue,
     ).toBe(0);
+  });
+
+  it("decodes HTML entities in component options before displaying and selecting them", async () => {
+    const store = createThunkTestStore();
+    renderComponentRow(store);
+
+    const componentInput = screen.getByLabelText("Component");
+    fireEvent.change(componentInput, { target: { value: "Bacto" } });
+
+    const option = await screen.findByText("Bacto \u2122 Yeast extract");
+    expect(screen.queryByText("Bacto &trade; Yeast extract")).toBeNull();
+
+    fireEvent.click(option);
+
+    await waitFor(() => {
+      expect(store.getState().entities.componentRows.entities["component-row-1"]).toMatchObject({
+        gmoId: "GMO_000002",
+        component: "Bacto \u2122 Yeast extract",
+      });
+    });
   });
 });
 

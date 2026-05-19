@@ -10,6 +10,7 @@ import {
 } from "%stanza/stanzas/gmdb-medium-builder/schema/appData";
 import { mapDraftAppDataToAppState } from "%stanza/stanzas/gmdb-medium-builder/schema/appDataMapper";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import { formatComponentLabel } from "%stanza/stanzas/gmdb-medium-builder/utils/formatComponentLabel";
 import { nanoid } from "nanoid";
 import type { ZodError } from "zod";
 
@@ -207,7 +208,7 @@ const fetchComponentCandidates = async (
     const components = await fetchComponents();
     return components.map((component) => ({
       gmoId: component.gmo_id,
-      name: component.name,
+      name: formatComponentLabel(component.name),
     }));
   } catch (error) {
     warnings.push({
