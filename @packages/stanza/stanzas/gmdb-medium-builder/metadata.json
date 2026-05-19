@@ -13,9 +13,9 @@
   "stanza:updated": "2026-05-18",
   "stanza:parameter": [
     {
-      "stanza:key": "gm_id",
+      "stanza:key": "source_gm_id",
       "stanza:example": "NBRC_M249",
-      "stanza:description": "Medium ID to use as the initial import target.",
+      "stanza:description": "Source medium ID to use as the initial import target.",
       "stanza:required": false
     }
   ],

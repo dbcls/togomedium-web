@@ -22,7 +22,7 @@ describe("App initial medium import", () => {
     vi.unstubAllGlobals();
   });
 
-  it("keeps the current initial state and does not import automatically without gmId", async () => {
+  it("keeps the current initial state and does not import automatically without sourceGmId", async () => {
     const fetchMock = installFetchMock();
     const store = createThunkTestStore();
     const previousBuilderState = cloneBuilderState(store.getState());
@@ -38,7 +38,7 @@ describe("App initial medium import", () => {
     installMediumDetailFetchMock();
     const store = createThunkTestStore();
 
-    renderWithProviders(<App gmId={"GM_000001"} />, store);
+    renderWithProviders(<App sourceGmId={"GM_000001"} />, store);
 
     await waitFor(() => {
       expect(store.getState().feedback).toMatchObject({
@@ -93,7 +93,7 @@ describe("App initial medium import", () => {
     fetchMock.mockReturnValue(mainMedium.promise);
     const store = createThunkTestStore();
 
-    renderWithProviders(<App gmId={"GM_000001"} />, store);
+    renderWithProviders(<App sourceGmId={"GM_000001"} />, store);
 
     expect(await screen.findByText("Importing medium...")).not.toBeNull();
     expect(screen.queryByRole("progressbar")).not.toBeNull();
@@ -107,7 +107,7 @@ describe("App initial medium import", () => {
     const store = createThunkTestStore();
     const previousBuilderState = cloneBuilderState(store.getState());
 
-    renderWithProviders(<App gmId={"GM_000001"} />, store);
+    renderWithProviders(<App sourceGmId={"GM_000001"} />, store);
 
     await waitFor(() => {
       expect(store.getState().feedback.severity).toBe("error");
@@ -129,7 +129,7 @@ describe("App initial medium import", () => {
     const store = createThunkTestStore();
     const previousBuilderState = cloneBuilderState(store.getState());
 
-    renderWithProviders(<App gmId={"GM_000001"} />, store);
+    renderWithProviders(<App sourceGmId={"GM_000001"} />, store);
 
     await waitFor(() => {
       expect(store.getState().feedback.severity).toBe("error");
@@ -155,7 +155,7 @@ describe("App initial medium import", () => {
     const store = createThunkTestStore();
     const previousBuilderState = cloneBuilderState(store.getState());
 
-    renderWithProviders(<App gmId={"GM_000001"} />, store);
+    renderWithProviders(<App sourceGmId={"GM_000001"} />, store);
 
     await waitFor(() => {
       expect(store.getState().feedback.severity).toBe("error");

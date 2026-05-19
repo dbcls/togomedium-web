@@ -32,7 +32,7 @@ export const Result1 = {
 
 export const ImportedFromRealApiM1470 = {
   args: {
-    gmId: "M1470",
+    sourceGmId: "M1470",
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

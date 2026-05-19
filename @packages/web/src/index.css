@@ -3,6 +3,7 @@
 @import "tailwindcss";
 /*noinspection CssInvalidAtRule*/
 @theme {
+  --text-sm2: 13px;
   --color-primary: #8fc31f;
   --color-primary-dark: #6fa80c;
   --font-wide: "Fira Sans", sans-serif;

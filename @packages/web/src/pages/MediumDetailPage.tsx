@@ -1,4 +1,6 @@
 import { listSimilarMediaUrl } from "%api/listSimilarMedia/definitions.ts";
+import { Link } from "@tanstack/react-router";
+import clsx from "clsx";
 import parse from "html-react-parser";
 import { FC } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
@@ -10,14 +12,24 @@ import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
 import { usePageTitle } from "@/hooks/usePageTitle.ts";
 import { Route } from "@/routes/medium/$gmId.tsx";
 
+const builderLinkClasses = clsx(
+  "text-sm2 font-narrow bg-primary self-end rounded px-1 py-0.5 text-white",
+);
+
 export const MediumDetailPage: FC = () => {
   const gmId = Route.useParams().gmId;
   const name = useMediumName(gmId);
+  const builderLink = `/builder/?source_gm_id=${gmId}`;
   usePageTitle(name);
   return (
     <PageWrapper>
       <div>
-        <H2>Medium information</H2>
+        <H2>
+          <span>{name}</span>
+          <Link className={builderLinkClasses} to={builderLink}>
+            Create new medium from this medium
+          </Link>
+        </H2>
         <MediumDetailStanza gmId={gmId} />
       </div>
       <div>

@@ -19,15 +19,15 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useMemo } from "react";
 
 type AppProps = {
-  gmId?: string;
+  sourceGmId?: string;
   stanzaElement?: ShadowRoot;
 };
 
-const App = ({ gmId }: AppProps) => {
+const App = ({ sourceGmId }: AppProps) => {
   const dispatch = useAppDispatch();
   const { showSuccess, showError } = useFeedback();
-  const normalizedGmId = useMemo(() => gmId?.trim() ?? "", [gmId]);
-  const initialImportQuery = useInitialMediumImportQuery(normalizedGmId);
+  const normalizedSourceGmId = useMemo(() => sourceGmId?.trim() ?? "", [sourceGmId]);
+  const initialImportQuery = useInitialMediumImportQuery(normalizedSourceGmId);
   const onClickAdd = () => {
     dispatch(addSolutionThunk());
   };
@@ -49,8 +49,8 @@ const App = ({ gmId }: AppProps) => {
     }
 
     dispatch(replaceImportedAppStateThunk(result.state));
-    showSuccess(`Imported ${normalizedGmId}.`);
-  }, [dispatch, initialImportQuery.data, normalizedGmId, showError, showSuccess]);
+    showSuccess(`Imported ${normalizedSourceGmId}.`);
+  }, [dispatch, initialImportQuery.data, normalizedSourceGmId, showError, showSuccess]);
 
   useEffect(() => {
     const error = initialImportQuery.error;
@@ -61,11 +61,13 @@ const App = ({ gmId }: AppProps) => {
     showError({
       message: "Import failed.",
       detail:
-        error instanceof Error ? error.message : `Medium ${normalizedGmId} could not be imported.`,
+        error instanceof Error
+          ? error.message
+          : `Medium ${normalizedSourceGmId} could not be imported.`,
     });
-  }, [initialImportQuery.error, normalizedGmId, showError]);
+  }, [initialImportQuery.error, normalizedSourceGmId, showError]);
 
-  const isInitialImporting = normalizedGmId !== "" && initialImportQuery.isFetching;
+  const isInitialImporting = normalizedSourceGmId !== "" && initialImportQuery.isFetching;
 
   return (
     <Wrapper>
@@ -98,9 +100,9 @@ const App = ({ gmId }: AppProps) => {
   );
 };
 
-const useInitialMediumImportQuery = (gmId: string) => {
+const useInitialMediumImportQuery = (sourceGmId: string) => {
   return useQuery({
-    queryKey: ["gmdb-medium-builder", "initial-medium-import", gmId],
+    queryKey: ["gmdb-medium-builder", "initial-medium-import", sourceGmId],
     queryFn: async ({ signal }) => {
       const abortController = new AbortController();
       const abortImport = () => abortController.abort();
@@ -110,12 +112,12 @@ const useInitialMediumImportQuery = (gmId: string) => {
         if (signal.aborted) {
           abortImport();
         }
-        return await importMediumDetailByGmId(gmId, { abortController });
+        return await importMediumDetailByGmId(sourceGmId, { abortController });
       } finally {
         signal.removeEventListener("abort", abortImport);
       }
     },
-    enabled: gmId !== "",
+    enabled: sourceGmId !== "",
     retry: false,
     staleTime: Infinity,
   });
