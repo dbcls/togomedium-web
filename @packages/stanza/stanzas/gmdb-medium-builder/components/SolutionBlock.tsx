@@ -3,7 +3,7 @@ import { VerticalEllipsisIcon } from "%stanza/components/icons/VerticalEllipsisI
 import { ComponentRow } from "%stanza/stanzas/gmdb-medium-builder/components/ComponentRow";
 import {
   Block,
-  COMPONENT_TABLE_GRID_TEMPLATE_COLUMNS,
+  SPAN_GRID_COLUMNS,
   TableRow,
 } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
@@ -88,7 +88,7 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
             </MenuItem>
           </Menu>
         </div>
-        <div style={{ gridColumn: "span 4" }}>
+        <div style={{ gridColumn: "span 6" }}>
           <TextField
             fullWidth={true}
             placeholder={"Solution name"}
@@ -163,32 +163,32 @@ export const SolutionBlock: FC<Props> = ({ id }) => {
 
 const ComponentTable = styled("div")({
   display: "grid",
-  gridColumn: "span 5",
-  gridTemplateColumns: COMPONENT_TABLE_GRID_TEMPLATE_COLUMNS,
+  gridColumn: SPAN_GRID_COLUMNS,
+  gridTemplateColumns: "subgrid",
   columnGap: THEME.SIZE.S2,
   rowGap: "0px",
   minWidth: "max-content",
 });
 const ComponentHeaderRow = styled(TableRow)({
-  gridColumn: "span 7",
+  gridColumn: SPAN_GRID_COLUMNS,
 });
 const ComponentTableBody = styled("div")({
   display: "grid",
   gridTemplateColumns: "subgrid",
-  gridColumn: "span 7",
+  gridColumn: SPAN_GRID_COLUMNS,
   rowGap: "10px",
 });
 const ComponentTableFooter = styled("div")({
   display: "grid",
   gridTemplateColumns: "subgrid",
-  gridColumn: "span 7",
+  gridColumn: SPAN_GRID_COLUMNS,
   paddingTop: "10px",
   rowGap: THEME.SIZE.S1,
   gridAutoFlow: "dense",
 });
 
 const AddButtonWrapper = styled("div")({
-  gridColumn: "7/8",
+  gridColumn: "6/8",
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
@@ -215,7 +215,7 @@ const NoteTextWrapper = styled("div")({
 
 const TitleRow = styled("div")({
   display: "grid",
-  gridColumn: "span 5",
+  gridColumn: SPAN_GRID_COLUMNS,
   gridTemplateColumns: "subgrid",
 });
 

@@ -4,12 +4,12 @@
 import { THEME } from "%core/theme";
 import { styled } from "@mui/material/styles";
 
-export const COMPONENT_TABLE_GRID_TEMPLATE_COLUMNS =
-  "20px minmax(384px, 1.4fr) 80px 110px 100px 110px minmax(180px, 1fr)";
+const GRID_TEMPLATE_COLUMNS = "20px 384px 70px 70px 70px 70px 1fr";
+export const SPAN_GRID_COLUMNS = "span 7";
 
 export const Sheet = styled("div")({
   display: "grid",
-  gridTemplateColumns: "20px auto auto auto 1fr",
+  gridTemplateColumns: GRID_TEMPLATE_COLUMNS,
   columnGap: THEME.SIZE.S2,
   rowGap: THEME.SIZE.S2,
 });
@@ -17,7 +17,7 @@ export const Sheet = styled("div")({
 export const Block = styled("div")({
   display: "grid",
   gridTemplateColumns: "subgrid",
-  gridColumn: "span 5",
+  gridColumn: SPAN_GRID_COLUMNS,
   rowGap: THEME.SIZE.S2,
   backgroundColor: THEME.COLOR.WHITE,
   paddingInline: THEME.SIZE.S1,
@@ -30,5 +30,5 @@ export const Block = styled("div")({
 export const TableRow = styled("div")({
   display: "grid",
   gridTemplateColumns: "subgrid",
-  gridColumn: "span 5",
+  gridColumn: SPAN_GRID_COLUMNS,
 });

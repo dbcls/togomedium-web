@@ -1,11 +1,8 @@
-import {
-  COMPONENT_TABLE_GRID_TEMPLATE_COLUMNS,
-  Sheet,
-} from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
+import { ComponentRow } from "%stanza/stanzas/gmdb-medium-builder/components/ComponentRow";
+import { Block, Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { appStore } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { ComponentRow } from "./ComponentRow";
 
 const state = appStore.getState();
 const componentRowId = state.entities.componentRows.ids[0];
@@ -25,17 +22,9 @@ const meta = {
     ),
     (Story) => (
       <Sheet>
-        <div
-          style={{
-            display: "grid",
-            gridColumn: "span 5",
-            gridTemplateColumns: COMPONENT_TABLE_GRID_TEMPLATE_COLUMNS,
-            columnGap: "8px",
-            minWidth: "max-content",
-          }}
-        >
+        <Block>
           <Story />
-        </div>
+        </Block>
       </Sheet>
     ),
   ],

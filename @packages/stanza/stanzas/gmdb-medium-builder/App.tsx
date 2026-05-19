@@ -1,6 +1,9 @@
 import { THEME } from "%core/theme";
 import { FeedbackSnackbar } from "%stanza/stanzas/gmdb-medium-builder/components/FeedbackSnackbar";
-import { Sheet } from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
+import {
+  Sheet,
+  SPAN_GRID_COLUMNS,
+} from "%stanza/stanzas/gmdb-medium-builder/components/LayoutStyles";
 import { MediumInfo } from "%stanza/stanzas/gmdb-medium-builder/components/MediumInfo";
 import { SolutionBlock } from "%stanza/stanzas/gmdb-medium-builder/components/SolutionBlock";
 import { useAppDispatch, useAppSelector } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
@@ -139,7 +142,7 @@ const InitialImportStatus = styled("div")({
 });
 
 const FooterRow = styled("div")({
-  gridColumn: "span 5",
+  gridColumn: SPAN_GRID_COLUMNS,
   display: "flex",
   justifyContent: "end",
   paddingInline: THEME.SIZE.S1,

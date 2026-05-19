@@ -170,9 +170,7 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
       </ComponentInputCell>
       <div>
         <TextField
-          sx={{ width: 80 }}
           size={"small"}
-          type="number"
           value={formatNullableNumberInput(componentRow.volume)}
           onChange={handleChangeVolume}
           slotProps={{
@@ -188,7 +186,7 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
           size={"small"}
           disablePortal
           options={units}
-          sx={{ width: 110 }}
+          // sx={{ width: 110 }}
           inputValue={componentRow.unit}
           value={componentRow.unit}
           onChange={handleChangeUnit}
@@ -209,9 +207,7 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
       </div>
       <div>
         <TextField
-          sx={{ width: 100 }}
           size={"small"}
-          type="number"
           value={formatNullableNumberInput(componentRow.concentrationValue ?? null)}
           onChange={handleChangeConcentrationValue}
           slotProps={{
@@ -227,7 +223,6 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
           size={"small"}
           disablePortal
           options={concentrationUnits}
-          sx={{ width: 110 }}
           inputValue={componentRow.concentrationUnit ?? ""}
           value={componentRow.concentrationUnit ?? ""}
           onChange={handleChangeConcentrationUnit}
