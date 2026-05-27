@@ -1,6 +1,7 @@
-import { listComponentsUrl } from "%api/listComponents/definitions.ts";
-import { listMediaURL } from "%api/listMedia/definitions.ts";
-import { listStrainsUrl } from "%api/listStrains/definitions.ts";
+import { PATH_LIST_COMPONENTS } from "%api/listComponents/definitions.ts";
+import { PATH_LIST_MEDIA } from "%api/listMedia/definitions.ts";
+import { PATH_LIST_STRAINS } from "%api/listStrains/definitions.ts";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { FC } from "react";
@@ -13,9 +14,9 @@ import { basicTextLink } from "@/consts/styles.ts";
 import { useListCount } from "@/hooks/useListCount.ts";
 
 export const StatsSection: FC = () => {
-  const mediumCount = useListCount(listMediaURL);
-  const strainCount = useListCount(listStrainsUrl);
-  const componentCount = useListCount(listComponentsUrl);
+  const mediumCount = useListCount(makeApiUrl(PATH_LIST_MEDIA));
+  const strainCount = useListCount(makeApiUrl(PATH_LIST_STRAINS));
+  const componentCount = useListCount(makeApiUrl(PATH_LIST_COMPONENTS));
 
   return (
     <section>

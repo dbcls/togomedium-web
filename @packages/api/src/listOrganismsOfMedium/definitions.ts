@@ -1,6 +1,5 @@
 import { tags } from "%api/consts";
 import { createListApiParamsSchema, createListApiResponseSchema } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -17,7 +16,6 @@ const listOrganismsOfMediumParamsSchema = createListApiParamsSchema({
 export type ListOrganismsOfMediumResponse = z.infer<typeof listOrganismsOfMediumResponseSchema>;
 export type ListOrganismsOfMediumParams = z.infer<typeof listOrganismsOfMediumParamsSchema>;
 
-export const listOrganismsOfMediumUrl = makeApiUrl("gmdb_organisms_by_gmid");
 export const PATH_LIST_ORGANISMS_OF_MEDIUM = "/gmdb_organisms_by_gmid";
 
 export const listOrganismsOfMediumDoc: RouteConfig = {

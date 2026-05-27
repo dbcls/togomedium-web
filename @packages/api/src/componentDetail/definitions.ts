@@ -1,13 +1,8 @@
 import { tags } from "%api/consts";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
-/**
- * @deprecated
- */
-export const componentDetailURL = makeApiUrl("gmdb_component_by_gmoid");
-export const PATH_COMPONENT_DETAIL = "gmdb_component_by_gtdb_gmoid";
+export const PATH_COMPONENT_DETAIL = "/gmdb_component_by_gmoid";
 
 const componentClassSchema = z.object({
   gmo_id: z.string(),

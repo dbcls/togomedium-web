@@ -1,9 +1,10 @@
 import {
   type MediumDetailParams,
   type MediumDetailResponse,
-  mediumDetailURL,
+  PATH_MEDIUM_DETAIL,
 } from "%api/mediumDetail/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import type { AppState } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
 import { mapMediumDetailResponseToAppState } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailImportMapper";
 import { expandReferenceMediumTables } from "%stanza/stanzas/gmdb-medium-builder/utils/mediumDetailReferenceExpansion";
@@ -100,7 +101,7 @@ const loadMainMedium = async (
 
 const loadMediumDetailFromApi: MediumDetailLoader = async (gmId, abortController) => {
   const response = await getData<MediumDetailResponse, MediumDetailParams>(
-    mediumDetailURL,
+    makeApiUrl(PATH_MEDIUM_DETAIL),
     { gm_id: gmId },
     abortController,
   );

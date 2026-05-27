@@ -4,11 +4,9 @@ import {
   createListApiResponseSchema,
   listApiLinkSchema,
 } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
-export const listStrainsUrl = makeApiUrl("list_strains");
 export const PATH_LIST_STRAINS = "/list_strains";
 
 const listStrainsResponseSchema = createListApiResponseSchema(

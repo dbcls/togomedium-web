@@ -1,5 +1,4 @@
 import { tags } from "%api/consts";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -40,11 +39,7 @@ const strainDetailParamsSchema = z.object({
 
 export type StrainDetailResponse = z.infer<typeof strainDetailResponseSchema>;
 export type StrainDetailParams = z.infer<typeof strainDetailParamsSchema>;
-/**
- * @deprecated
- */
-export const strainDetailURL = makeApiUrl("gmdb_strain_by_strainid");
-export const PATH_STRAIN_DETAIL = "gmdb_strain_by_strainid";
+export const PATH_STRAIN_DETAIL = "/gmdb_strain_by_strainid";
 
 export const strainDetailDoc: RouteConfig = {
   path: PATH_STRAIN_DETAIL,

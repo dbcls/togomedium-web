@@ -1,9 +1,10 @@
 import {
   MediaComponentAlignmentTableParams,
   MediaComponentAlignmentTableResponse,
-  mediaComponentAlignmentTableURL,
+  PATH_MEDIA_COMPONENT_ALIGNMENT_TABLE,
 } from "%api/mediaComponentAlignment/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { THEME } from "%core/theme";
 import { ScrollableTable } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/ScrollableTable";
 import { styled } from "@mui/material/styles";
@@ -16,6 +17,8 @@ export type AppProps = {
   stanzaElement?: ShadowRoot;
 };
 
+const API_URL = makeApiUrl(PATH_MEDIA_COMPONENT_ALIGNMENT_TABLE);
+
 const useDataQuery = (
   gm_ids: string[],
   stanzaDispatch: (eventName: string, detail: any) => void,
@@ -27,7 +30,7 @@ const useDataQuery = (
       const response = await getData<
         MediaComponentAlignmentTableResponse,
         MediaComponentAlignmentTableParams
-      >(mediaComponentAlignmentTableURL, {
+      >(API_URL, {
         gm_ids: gm_ids.join(","),
       });
       if (!response.body) throw new Error("No data");

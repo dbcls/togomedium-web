@@ -1,5 +1,6 @@
-import { listMediaOfStrain } from "%api/listMediaOfStrain/definitions.ts";
-import { listPhenotypeOfStrainUrl } from "%api/listPhenotypeOfStrain/definitions.ts";
+import { PATH_LIST_MEDIA_OF_STRAIN } from "%api/listMediaOfStrain/definitions.ts";
+import { PATH_LIST_PHENOTYPE_OF_STRAIN } from "%api/listPhenotypeOfStrain/definitions.ts";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import parse from "html-react-parser";
 import { FC } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
@@ -23,16 +24,23 @@ export const StrainDetailPage: FC = () => {
       <div>
         <H3>Phenotypes of {name}</H3>
         <ListStanza
-          api={`${listPhenotypeOfStrainUrl}?strain_id=${strainId}`}
+          api={makeStrainApiUrl(PATH_LIST_PHENOTYPE_OF_STRAIN, strainId)}
           columnSizes={[70, 15, 15]}
         />
       </div>
       <div>
         <H3>Media of {name}</H3>
-        <ListStanza api={`${listMediaOfStrain}?strain_id=${strainId}`} columnSizes={[10, 20, 70]} />
+        <ListStanza
+          api={makeStrainApiUrl(PATH_LIST_MEDIA_OF_STRAIN, strainId)}
+          columnSizes={[10, 20, 70]}
+        />
       </div>
     </PageWrapper>
   );
+};
+
+const makeStrainApiUrl = (path: string, strainId: string) => {
+  return makeApiUrl(path, new URLSearchParams({ strain_id: strainId }));
 };
 
 const useStrainName = (id: string) => {

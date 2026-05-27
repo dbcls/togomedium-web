@@ -1,4 +1,5 @@
-import { listMediaOfComponentUrl } from "%api/listMediaOfComponent/definitions.ts";
+import { PATH_LIST_MEDIA_OF_COMPONENT } from "%api/listMediaOfComponent/definitions.ts";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import parse from "html-react-parser";
 import { FC } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
@@ -21,7 +22,10 @@ export const ComponentDetailPage: FC = () => {
       </div>
       <div>
         <H3>Media including {name}</H3>
-        <ListStanza api={`${listMediaOfComponentUrl}?gmo_id=${gmoId}`} columnSizes={[15, 85]} />
+        <ListStanza
+          api={makeApiUrl(PATH_LIST_MEDIA_OF_COMPONENT, new URLSearchParams({ gmo_id: gmoId }))}
+          columnSizes={[15, 85]}
+        />
       </div>
     </PageWrapper>
   );

@@ -4,14 +4,9 @@ import {
   createListApiResponseSchema,
   listApiLinkSchema,
 } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
-/**
- * @deprecated
- */
-export const listChildrenOfTaxonUrl = makeApiUrl("gmdb_organism_under_rank_by_taxid");
 export const PATH_LIST_CHILDREN_OF_TAXON = "/gmdb_organism_under_rank_by_taxid";
 
 const listChildrenOfTaxonResponseSchema = createListApiResponseSchema(

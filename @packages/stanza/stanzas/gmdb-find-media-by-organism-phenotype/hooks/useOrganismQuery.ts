@@ -2,14 +2,17 @@ import { nullListResponse } from "%api/ListApi";
 import {
   ListOrganismsByPhenotypesParams,
   ListOrganismsByPhenotypesResponse,
-  listOrganismsByPhenotypesURL,
+  PATH_LIST_ORGANISMS_BY_PHENOTYPES,
 } from "%api/listOrganismsByPhenotypes/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { useOrganismPaginationState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/organismPagination";
 import { usePhenotypeQueryState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/phenotypeQuery";
 import { useQuery } from "@tanstack/react-query";
 
 const SHOW_COUNT = 10;
+const apiUrl = makeApiUrl(PATH_LIST_ORGANISMS_BY_PHENOTYPES);
+
 export const useOrganismQuery = () => {
   const page = useOrganismPaginationState();
   const phenotypeQueryParams = usePhenotypeQueryState();
@@ -21,7 +24,7 @@ export const useOrganismQuery = () => {
       const response = await getData<
         ListOrganismsByPhenotypesResponse,
         ListOrganismsByPhenotypesParams
-      >(listOrganismsByPhenotypesURL, {
+      >(apiUrl, {
         ...phenotypeQueryParams,
         limit: SHOW_COUNT,
         offset: (page - 1) * SHOW_COUNT,

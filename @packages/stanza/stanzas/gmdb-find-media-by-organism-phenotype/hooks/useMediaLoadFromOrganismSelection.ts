@@ -2,9 +2,10 @@ import { nullListResponse } from "%api/ListApi";
 import {
   ListMediaOfTaxonsParams,
   ListMediaOfTaxonsResponse,
-  listMediaOfTaxonsURL,
+  PATH_LIST_MEDIA_OF_TAXONS,
 } from "%api/listMediaOfTaxons/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { useSelectedOrganismsState } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/states/selectedOrganisms";
 import { useFoundMediaMutators } from "%stanza/state/media-finder/foundMedia";
 import { useIsMediaLoadingMutators } from "%stanza/state/media-finder/isMediaLoading";
@@ -18,6 +19,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 const SHOW_COUNT = 10;
+const apiUrl = makeApiUrl(PATH_LIST_MEDIA_OF_TAXONS);
+
 export const useMediaLoadFromOrganismSelection = () => {
   const page = useMediaPaginationState();
   const selectedOrganisms = useSelectedOrganismsState();
@@ -31,14 +34,11 @@ export const useMediaLoadFromOrganismSelection = () => {
       if (selectedOrganisms.length === 0) return nullListResponse;
       //
       const tax_ids = extractLabelIds(selectedOrganisms).join(",");
-      const response = await getData<ListMediaOfTaxonsResponse, ListMediaOfTaxonsParams>(
-        listMediaOfTaxonsURL,
-        {
-          tax_ids,
-          limit: SHOW_COUNT,
-          offset: (page - 1) * SHOW_COUNT,
-        },
-      );
+      const response = await getData<ListMediaOfTaxonsResponse, ListMediaOfTaxonsParams>(apiUrl, {
+        tax_ids,
+        limit: SHOW_COUNT,
+        offset: (page - 1) * SHOW_COUNT,
+      });
       if (!response.body) throw new Error("No data");
       return response.body;
     },

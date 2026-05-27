@@ -1,5 +1,4 @@
 import { tags } from "%api/consts";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -19,7 +18,6 @@ const gtdbTaxonChildrenParamsSchema = z.object({
 export type GtdbTaxonChildrenResponse = z.infer<typeof gtdbTaxonChildrenResponseSchema>;
 export type GtdbTaxonChildrenParams = z.infer<typeof gtdbTaxonChildrenParamsSchema>;
 
-export const gtdbTaxonChildrenUrl = makeApiUrl("gmdb_gtdb_taxonomy_children");
 export const PATH_GTDB_TAXON_CHILDREN = "/gmdb_gtdb_taxonomy_children";
 
 export const gtdbTaxonChildrenDoc: RouteConfig = {

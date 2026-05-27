@@ -5,7 +5,6 @@ import {
   ListApiParams,
   ListApiResponse,
 } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -13,7 +12,6 @@ export type ListMediaByAttributesResponse = ListApiResponse<{ gm_id: string; nam
 
 export type ListMediaByAttributesParams = ListApiParams<{ gmo_ids: string }>;
 
-export const listMediaByAttributesURL = makeApiUrl("gmdb_media_by_attributes");
 export const PATH_LIST_MEDIA_BY_ATTRIBUTES = "/gmdb_media_by_attributes";
 
 const listMediaByAttributesResponseSchema = createListApiResponseSchema(

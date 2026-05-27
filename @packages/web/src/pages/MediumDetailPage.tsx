@@ -1,4 +1,5 @@
-import { listSimilarMediaUrl } from "%api/listSimilarMedia/definitions.ts";
+import { PATH_LIST_SIMILAR_MEDIA } from "%api/listSimilarMedia/definitions.ts";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import parse from "html-react-parser";
@@ -34,7 +35,10 @@ export const MediumDetailPage: FC = () => {
       </div>
       <div>
         <H3>Growth media similar to {name}</H3>
-        <ListStanza api={`${listSimilarMediaUrl}?gm_id=${gmId}`} columnSizes={[15, 70, 15]} />
+        <ListStanza
+          api={makeApiUrl(PATH_LIST_SIMILAR_MEDIA, new URLSearchParams({ gm_id: gmId }))}
+          columnSizes={[15, 70, 15]}
+        />
       </div>
       <div>
         <H3>Organisms that can be cultured in {name}</H3>

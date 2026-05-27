@@ -137,7 +137,10 @@ API pathを表す定数は `PATH_...` の `UPPER_SNAKE_CASE` にする。
 値としてのAPI pathは、外部API名に合わせて `snake_case` を維持する。
 
 - 例: `"/gmdb_list_media_by_gmids"`
-- 例: `"gmdb_taxonomy_children"`
+- 例: `"/gmdb_taxonomy_children"`
+
+`PATH_...` は OpenAPI の path として扱うため、値は `/` で始める。
+API URL が必要な利用側では、`definitions.ts` で完成済み URL 定数を export せず、`makeApiUrl(PATH_...)` で生成する。
 
 ## Propsとexport
 

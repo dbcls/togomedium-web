@@ -1,9 +1,10 @@
-import { listComponentsByIdsUrl } from "%api/listComponentsByIds/definitions.ts";
-import { listComponentsByKeywordUrl } from "%api/listComponentsByKeyword/definitions.ts";
-import { listMediaByIdsUrl } from "%api/listMediaByIds/definitions.ts";
-import { listMediaByKeywordUrl } from "%api/listMediaByKeyword/definitions.ts";
-import { listOrganismByIdsUrl } from "%api/listOrganismByIds/definitions.ts";
-import { listOrganismByKeywordUrl } from "%api/listOrganismByKeyword/definitions.ts";
+import { PATH_LIST_COMPONENTS_BY_IDS } from "%api/listComponentsByIds/definitions.ts";
+import { PATH_LIST_COMPONENTS_BY_KEYWORD } from "%api/listComponentsByKeyword/definitions.ts";
+import { PATH_LIST_MEDIA_BY_IDS } from "%api/listMediaByIds/definitions.ts";
+import { PATH_LIST_MEDIA_BY_KEYWORD } from "%api/listMediaByKeyword/definitions.ts";
+import { PATH_LIST_ORGANISMS_BY_TAXIDS } from "%api/listOrganismByIds/definitions.ts";
+import { PATH_LIST_ORGANISMS_BY_KEYWORD } from "%api/listOrganismByKeyword/definitions.ts";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RefObject } from "@react-types/shared";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { FC, useRef } from "react";
@@ -55,41 +56,59 @@ export const SearchPage: FC = () => {
         {mediaById && (
           <div>
             <H3>Media of {query}</H3>
-            <ListStanza api={`${listMediaByIdsUrl}?gm_ids=${query}`} columnSizes={[]} />
+            <ListStanza
+              api={makeSearchApiUrl(PATH_LIST_MEDIA_BY_IDS, { gm_ids: query })}
+              columnSizes={[]}
+            />
           </div>
         )}
         {organismsById && (
           <div>
             <H3>Organisms of {query}</H3>
-            <ListStanza api={`${listOrganismByIdsUrl}?tax_ids=${query}`} columnSizes={[]} />
+            <ListStanza
+              api={makeSearchApiUrl(PATH_LIST_ORGANISMS_BY_TAXIDS, { tax_ids: query })}
+              columnSizes={[]}
+            />
           </div>
         )}
 
         {componentsById && (
           <div>
             <H3>Components of {query}</H3>
-            <ListStanza api={`${listComponentsByIdsUrl}?gmo_ids=${query}`} columnSizes={[]} />
+            <ListStanza
+              api={makeSearchApiUrl(PATH_LIST_COMPONENTS_BY_IDS, { gmo_ids: query })}
+              columnSizes={[]}
+            />
           </div>
         )}
 
         {mediaByKeyword && (
           <div>
             <H3>Media with {query}</H3>
-            <ListStanza api={`${listMediaByKeywordUrl}?keyword=${query}`} columnSizes={[]} />
+            <ListStanza
+              api={makeSearchApiUrl(PATH_LIST_MEDIA_BY_KEYWORD, { keyword: query })}
+              columnSizes={[]}
+            />
           </div>
         )}
 
         {componentsByKeyword && (
           <div>
             <H3>Components with {query}</H3>
-            <ListStanza api={`${listComponentsByKeywordUrl}?keyword=${query}`} columnSizes={[]} />
+            <ListStanza
+              api={makeSearchApiUrl(PATH_LIST_COMPONENTS_BY_KEYWORD, { keyword: query })}
+              columnSizes={[]}
+            />
           </div>
         )}
 
         {organismsByKeyword && (
           <div>
             <H3>Organisms with {query}</H3>
-            <ListStanza api={`${listOrganismByKeywordUrl}?keyword=${query}`} columnSizes={[]} />
+            <ListStanza
+              api={makeSearchApiUrl(PATH_LIST_ORGANISMS_BY_KEYWORD, { keyword: query })}
+              columnSizes={[]}
+            />
           </div>
         )}
       </section>
@@ -98,12 +117,17 @@ export const SearchPage: FC = () => {
 };
 
 const useSearchQuery = (query: string) => {
-  const mediaById = useListCount(`${listMediaByIdsUrl}?gm_ids=${query}`) > 0;
-  const componentsById = useListCount(`${listComponentsByIdsUrl}?gmo_ids=${query}`) > 0;
-  const organismsById = useListCount(`${listOrganismByIdsUrl}?tax_ids=${query}`) > 0;
-  const mediaByKeyword = useListCount(`${listMediaByKeywordUrl}?keyword=${query}`) > 0;
-  const componentsByKeyword = useListCount(`${listComponentsByKeywordUrl}?keyword=${query}`) > 0;
-  const organismsByKeyword = useListCount(`${listOrganismByKeywordUrl}?keyword=${query}`) > 0;
+  const mediaById = useListCount(makeSearchApiUrl(PATH_LIST_MEDIA_BY_IDS, { gm_ids: query })) > 0;
+  const componentsById =
+    useListCount(makeSearchApiUrl(PATH_LIST_COMPONENTS_BY_IDS, { gmo_ids: query })) > 0;
+  const organismsById =
+    useListCount(makeSearchApiUrl(PATH_LIST_ORGANISMS_BY_TAXIDS, { tax_ids: query })) > 0;
+  const mediaByKeyword =
+    useListCount(makeSearchApiUrl(PATH_LIST_MEDIA_BY_KEYWORD, { keyword: query })) > 0;
+  const componentsByKeyword =
+    useListCount(makeSearchApiUrl(PATH_LIST_COMPONENTS_BY_KEYWORD, { keyword: query })) > 0;
+  const organismsByKeyword =
+    useListCount(makeSearchApiUrl(PATH_LIST_ORGANISMS_BY_KEYWORD, { keyword: query })) > 0;
   return {
     mediaById,
     componentsById,
@@ -112,6 +136,10 @@ const useSearchQuery = (query: string) => {
     componentsByKeyword,
     organismsByKeyword,
   };
+};
+
+const makeSearchApiUrl = (path: string, params: Record<string, string>) => {
+  return makeApiUrl(path, new URLSearchParams(params));
 };
 
 const useSubmit = (inputRef: RefObject<HTMLInputElement | null>) => {

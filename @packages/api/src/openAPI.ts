@@ -21,9 +21,10 @@ import { listMediaByCultivableCountDoc } from "%api/listMediaByCultivableCount/d
 import { listMediaByIdsDoc } from "%api/listMediaByIds/definitions";
 import { listMediaByKeywordDoc } from "%api/listMediaByKeyword/definitions";
 import { listMediaOfComponentDoc } from "%api/listMediaOfComponent/definitions";
+import { listMediaOfGtdbTaxonsDoc } from "%api/listMediaOfGtdbTaxons/definitions";
 import { listMediaOfStrainDoc } from "%api/listMediaOfStrain/definitions";
 import { listMediaOfTaxonDoc } from "%api/listMediaOfTaxon/definitions";
-import { listMediaOfGtdbTaxonsDoc, listMediaOfTaxonsDoc } from "%api/listMediaOfTaxons/definitions";
+import { listMediaOfTaxonsDoc } from "%api/listMediaOfTaxons/definitions";
 import { listOrganismByIdsDoc } from "%api/listOrganismByIds/definitions";
 import { listOrganismByKeywordDoc } from "%api/listOrganismByKeyword/definitions";
 import { listOrganismsDoc } from "%api/listOrganisms/definitions";

@@ -5,7 +5,6 @@ import {
   ListApiParams,
   ListApiResponse,
 } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -25,7 +24,6 @@ export type ListOrganismsByPhenotypesParams = ListApiParams<{
   MPO_04053?: string;
 }>;
 
-export const listOrganismsByPhenotypesURL = makeApiUrl("gmdb_organisms_by_phenotypes");
 export const PATH_LIST_ORGANISMS_BY_PHENOTYPES = "/gmdb_organisms_by_phenotypes";
 
 const listOrganismsByPhenotypesResponseSchema = createListApiResponseSchema(

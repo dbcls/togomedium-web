@@ -2,7 +2,6 @@ import { nullListResponse } from "%api/ListApi";
 import {
   ListMediaOfTaxonsParams,
   ListMediaOfTaxonsResponse,
-  listMediaOfTaxonsURL,
 } from "%api/listMediaOfTaxons/definitions";
 import { getData } from "%core/network/getData";
 import { useSelectedTaxonState } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/selectedTaxon";

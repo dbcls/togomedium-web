@@ -1,5 +1,4 @@
 import { tags } from "%api/consts";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -17,7 +16,6 @@ const gtdbTaxonAncestorsParamsSchema = z.object({
 export type GtdbTaxonAncestorsResponse = z.infer<typeof gtdbTaxonAncestorsResponseSchema>;
 export type GtdbTaxonAncestorsParams = z.infer<typeof gtdbTaxonAncestorsParamsSchema>;
 
-export const gtdbTaxonAncestorsUrl = makeApiUrl("gmdb_gtdb_taxonomy_ancestors");
 export const PATH_GTDB_TAXON_ANCESTORS = "/gmdb_gtdb_taxonomy_ancestors";
 
 export const gtdbTaxonAncestorsDoc: RouteConfig = {

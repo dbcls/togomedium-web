@@ -7,7 +7,6 @@ import {
   ListApiParams,
   ListApiResponse,
 } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -17,7 +16,6 @@ export type ListMediaResponse = ListApiResponse<{
   label: string;
 }>;
 export type ListMediaParams = ListApiParams<unknown>;
-export const listMediaURL = makeApiUrl("list_media");
 export const PATH_LIST_MEDIA = "/list_media";
 
 const listMediaResponseSchema = createListApiResponseSchema(

@@ -1,4 +1,5 @@
-import { listComponentsUrl } from "%api/listComponents/definitions.ts";
+import { PATH_LIST_COMPONENTS } from "%api/listComponents/definitions.ts";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { FC } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
 import { ListStanza } from "@/components/stanzas/ListStanza.tsx";
@@ -11,7 +12,7 @@ export const ComponentListPage: FC = () => {
     <PageWrapper>
       <div>
         <H2>All Components</H2>
-        <ListStanza api={listComponentsUrl} columnSizes={[20, 80]} />
+        <ListStanza api={makeApiUrl(PATH_LIST_COMPONENTS)} columnSizes={[20, 80]} />
       </div>
     </PageWrapper>
   );

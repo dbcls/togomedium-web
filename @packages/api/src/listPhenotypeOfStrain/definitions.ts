@@ -4,11 +4,9 @@ import {
   createListApiResponseSchema,
   listApiLinkSchema,
 } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
-export const listPhenotypeOfStrainUrl = makeApiUrl("gmdb_phenotype_by_strainid");
 export const PATH_LIST_PHENOTYPE_OF_STRAIN = "/gmdb_phenotype_by_strainid";
 
 const listPhenotypeOfStrainResponseSchema = createListApiResponseSchema(

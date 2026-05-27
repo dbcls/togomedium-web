@@ -1,5 +1,4 @@
 import { tags } from "%api/consts";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -16,10 +15,6 @@ const deprecatedAllComponentsParamsSchema = z.object({});
 export type DeprecatedAllComponentsResponse = z.infer<typeof deprecatedAllComponentsResponseSchema>;
 export type DeprecatedAllComponentsParams = z.infer<typeof deprecatedAllComponentsParamsSchema>;
 
-/**
- * @deprecated
- */
-export const deprecatedAllComponentsUrl = makeApiUrl("gmdb_all_components");
 export const PATH_DEPRECATED_ALL_COMPONENTS = "/gmdb_all_components";
 
 export const deprecatedAllComponentsDoc: RouteConfig = {

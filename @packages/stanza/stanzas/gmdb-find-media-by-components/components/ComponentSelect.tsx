@@ -1,9 +1,10 @@
 import {
   ComponentsWithComponentsResponse,
-  componentsWithComponentsURL,
   ComponentWithComponentsParams,
+  PATH_COMPONENTS_WITH_COMPONENTS,
 } from "%api/componentsWithComponents/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { parseLabelInfo } from "%stanza/stanzas/gmdb-find-media-by-components/functions/parseLabelInfo";
 import { Autocomplete, Chip, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
@@ -12,6 +13,9 @@ import React, { FC, useState } from "react";
 type Props = {
   onChangeSelection: (ids: string[]) => void;
 };
+
+const apiUrl = makeApiUrl(PATH_COMPONENTS_WITH_COMPONENTS);
+
 export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const { data, isPending } = useQuery({
@@ -21,7 +25,7 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
       const response = await getData<
         ComponentsWithComponentsResponse,
         ComponentWithComponentsParams
-      >(componentsWithComponentsURL, { gmo_ids });
+      >(apiUrl, { gmo_ids });
       if (!response.body) throw new Error("No response body");
       return parseLabelInfo(response.body, selectedIds);
     },

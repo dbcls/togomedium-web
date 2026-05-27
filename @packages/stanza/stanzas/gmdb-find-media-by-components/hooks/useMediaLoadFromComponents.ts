@@ -2,9 +2,10 @@ import { nullListResponse } from "%api/ListApi";
 import {
   ListMediaByAttributesParams,
   ListMediaByAttributesResponse,
-  listMediaByAttributesURL,
+  PATH_LIST_MEDIA_BY_ATTRIBUTES,
 } from "%api/listMediaByAttributes/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { useSelectedAttributesState } from "%stanza/stanzas/gmdb-find-media-by-components/states/selectedAttributes";
 import { useFoundMediaMutators } from "%stanza/state/media-finder/foundMedia";
 import { useIsMediaLoadingMutators } from "%stanza/state/media-finder/isMediaLoading";
@@ -17,6 +18,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 const SHOW_COUNT = 10;
+const apiUrl = makeApiUrl(PATH_LIST_MEDIA_BY_ATTRIBUTES);
+
 export const useMediaLoadFromComponents = () => {
   const page = useMediaPaginationState();
   const selectedAttributes = useSelectedAttributesState();
@@ -31,7 +34,7 @@ export const useMediaLoadFromComponents = () => {
       if (gmo_ids.length === 0) return nullListResponse;
       //
       const response = await getData<ListMediaByAttributesResponse, ListMediaByAttributesParams>(
-        listMediaByAttributesURL,
+        apiUrl,
         {
           gmo_ids,
           limit: SHOW_COUNT,

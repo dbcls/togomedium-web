@@ -1,5 +1,4 @@
 import { tags } from "%api/consts";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -18,7 +17,6 @@ const gtdbTaxonSearchByNameParamsSchema = z.object({
 export type GtdbTaxonSearchByNameResponse = z.infer<typeof gtdbTaxonSearchByNameResponseSchema>;
 export type GtdbTaxonSearchByNameParams = z.infer<typeof gtdbTaxonSearchByNameParamsSchema>;
 
-export const gtdbTaxonSearchByNameUrl = makeApiUrl("gmdb_gtdb_taxonomy_search_by_name");
 export const PATH_GTDB_TAXON_SEARCH_BY_NAME = "/gmdb_gtdb_taxonomy_search_by_name";
 
 export const gtdbTaxonSearchByNameDoc: RouteConfig = {

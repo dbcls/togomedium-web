@@ -1,5 +1,4 @@
 import { tags } from "%api/consts";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -28,10 +27,6 @@ export type DeprecatedTaxonomicRankByTaxIdParams = z.infer<
   typeof deprecatedTaxonomicRankByTaxIdParamsSchema
 >;
 
-/**
- * @deprecated
- */
-export const deprecatedTaxonomicRankByTaxIdUrl = makeApiUrl("gmdb_taxonomic_rank_by_taxid");
 export const PATH_DEPRECATED_TAXONOMIC_RANK_BY_TAXID = "/gmdb_taxonomic_rank_by_taxid";
 
 export const deprecatedTaxonomicRankByTaxIdDoc: RouteConfig = {

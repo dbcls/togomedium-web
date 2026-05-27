@@ -4,7 +4,6 @@ import {
   createListApiResponseSchema,
   listApiLinkSchema,
 } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -26,9 +25,6 @@ export type ListMediaByCultivableCountParams = z.infer<
   typeof listMediaByCultivableCountParamsSchema
 >;
 
-export const listMediaByCultivableCountUrl = makeApiUrl(
-  "gmdb_list_media_by_cultivable_strain_count",
-);
 export const PATH_LIST_MEDIA_BY_CULTIVABLE_COUNT = "/gmdb_list_media_by_cultivable_strain_count";
 
 export const listMediaByCultivableCountDoc: RouteConfig = {

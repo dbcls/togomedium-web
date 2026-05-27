@@ -1,9 +1,10 @@
 import {
   StatsCountCulturableSpeciesParams,
   StatsCountCulturableSpeciesResponse,
-  statsCountCulturableSpeciesURL,
+  PATH_STATS_COUNT_CULTURABLE_SPECIES,
 } from "%api/statsCountCulturableSpecies/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { THEME } from "%core/theme";
 import { AppContainer } from "%stanza/stanzas/gmdb-stats-culturable-species/components/AppContainer";
 import { styled } from "@mui/material/styles";
@@ -21,7 +22,7 @@ const useGraphData = () => {
       const response = await getData<
         StatsCountCulturableSpeciesResponse,
         StatsCountCulturableSpeciesParams
-      >(statsCountCulturableSpeciesURL, {});
+      >(makeApiUrl(PATH_STATS_COUNT_CULTURABLE_SPECIES), {});
       if (!response.body) {
         throw new Error("No data found");
       }

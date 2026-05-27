@@ -1,5 +1,4 @@
 import { tags } from "%api/consts";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -18,9 +17,6 @@ export type StatsCountMediaByCultivableStrainCountParams = z.infer<
   typeof statsCountMediaByCultivableStrainCountParamsSchema
 >;
 
-export const statsCountMediaByCultivableStrainCountUrl = makeApiUrl(
-  "gmdb_stat_count_media_by_cultivable_strain_count",
-);
 export const PATH_STATS_COUNT_MEDIA_BY_CULTIVABLE_STRAIN_COUNT =
   "/gmdb_stat_count_media_by_cultivable_strain_count";
 

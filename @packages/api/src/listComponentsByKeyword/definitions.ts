@@ -4,11 +4,9 @@ import {
   createListApiResponseSchema,
   listApiLinkSchema,
 } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
-export const listComponentsByKeywordUrl = makeApiUrl("gmdb_list_components_by_keyword");
 export const PATH_LIST_COMPONENTS_BY_KEYWORD = "/gmdb_list_components_by_keyword";
 
 const listComponentsByKeywordResponseSchema = createListApiResponseSchema(

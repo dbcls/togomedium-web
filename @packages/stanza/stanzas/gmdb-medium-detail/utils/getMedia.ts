@@ -1,15 +1,18 @@
 import {
   MediumDetailParams,
   MediumDetailResponse,
-  mediumDetailURL,
+  PATH_MEDIUM_DETAIL,
 } from "%api/mediumDetail/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { ReferencingRecipe } from "%stanza/stanzas/gmdb-medium-detail/components/StanzaView";
 import { processData } from "%stanza/stanzas/gmdb-medium-detail/utils/processData";
 import { copy } from "copy-anything";
 
+const apiUrl = makeApiUrl(PATH_MEDIUM_DETAIL);
+
 export const getMedia = async (gm_id: string) => {
-  const result = await getData<MediumDetailResponse, MediumDetailParams>(mediumDetailURL, {
+  const result = await getData<MediumDetailResponse, MediumDetailParams>(apiUrl, {
     gm_id,
   });
   if (!result.body) throw new Error("No data found");
@@ -37,7 +40,7 @@ const getExternalReferences = async (
   const extraData: ReferencingRecipe[] = [];
 
   for (const ref of externalReferences) {
-    const result = await getData<MediumDetailResponse, MediumDetailParams>(mediumDetailURL, {
+    const result = await getData<MediumDetailResponse, MediumDetailParams>(apiUrl, {
       gm_id: ref.id,
     });
     if (result.body) {

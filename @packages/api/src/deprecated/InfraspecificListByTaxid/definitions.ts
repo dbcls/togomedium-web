@@ -1,6 +1,5 @@
 import { tags } from "%api/consts";
 import { createListApiParamsSchema, createListApiResponseSchema } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -23,10 +22,6 @@ export type DeprecatedInfraspecificListByTaxIdParams = z.infer<
   typeof deprecatedInfraspecificListByTaxIdParamsSchema
 >;
 
-/**
- * @deprecated
- */
-export const deprecatedInfraspecificListByTaxIdUrl = makeApiUrl("gmdb_infraspecific_list_by_taxid");
 export const PATH_DEPRECATED_INFRASPECIFIC_LIST_BY_TAXID = "/gmdb_infraspecific_list_by_taxid";
 
 export const deprecatedInfraspecificListByTaxIdDoc: RouteConfig = {

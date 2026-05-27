@@ -1,9 +1,10 @@
 import {
   TaxonDetailParams,
   TaxonDetailResponse,
-  taxonDetailURL,
+  PATH_TAXON_DETAIL,
 } from "%api/taxonDetail/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { unescapeJsonString } from "%core/string/unescapeJsonString";
 import { StanzaView } from "%stanza/stanzas/gmdb-taxon-detail/components/StanzaView";
 import { parseLineage } from "%stanza/utils/parseLineage";
@@ -44,9 +45,12 @@ const parseOtherTypeMaterial = (
 };
 
 export const getTaxonData = async (tax_id: string) => {
-  const result = await getData<TaxonDetailResponse, TaxonDetailParams>(taxonDetailURL, {
-    tax_id,
-  });
+  const result = await getData<TaxonDetailResponse, TaxonDetailParams>(
+    makeApiUrl(PATH_TAXON_DETAIL),
+    {
+      tax_id,
+    },
+  );
   if (!result.body) {
     throw new Error("No data found");
   }

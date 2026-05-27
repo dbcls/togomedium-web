@@ -1,6 +1,5 @@
 import { tags } from "%api/consts";
 import { createListApiParamsSchema, createListApiResponseSchema } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -18,10 +17,6 @@ const statsGmCountByPhylumParamsSchema = createListApiParamsSchema({});
 export type StatsGmCountByPhylumResponse = z.infer<typeof statsGmCountByPhylumResponseSchema>;
 export type StatsGmCountByPhylumParams = z.infer<typeof statsGmCountByPhylumParamsSchema>;
 
-/**
- * @deprecated
- */
-export const statsGmCountByPhylum = makeApiUrl("gmdb_stat_phylum_gm");
 export const PATH_STATS_GM_COUNT_BY_PHYLUM = "/gmdb_stat_phylum_gm";
 
 export const statsGmCountByPhylumDoc: RouteConfig = {

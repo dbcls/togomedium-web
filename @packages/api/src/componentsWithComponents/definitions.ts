@@ -1,5 +1,4 @@
 import { tags } from "%api/consts";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -19,11 +18,7 @@ export type ComponentWithComponentsParams = z.infer<typeof componentWithComponen
 export type ComponentsWithComponentsResponse = z.infer<
   typeof componentsWithComponentsResponseSchema
 >;
-/**
- * @deprecated
- */
-export const componentsWithComponentsURL = makeApiUrl("gmdb_components_with_components");
-export const PATH_COMPONENTS_WITH_COMPONENTS = "gmdb_components_with_components";
+export const PATH_COMPONENTS_WITH_COMPONENTS = "/gmdb_components_with_components";
 
 export const componentsWithComponentsDoc: RouteConfig = {
   path: PATH_COMPONENTS_WITH_COMPONENTS,

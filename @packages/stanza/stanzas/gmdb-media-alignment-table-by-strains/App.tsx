@@ -1,9 +1,10 @@
 import {
   MediaStrainsAlignmentParams,
   MediaStrainsAlignmentResponse,
-  mediaStrainsAlignmentURL,
+  PATH_MEDIA_STRAINS_ALIGNMENT,
 } from "%api/mediaStrainsAlignment/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { THEME } from "%core/theme";
 import { AppContainer } from "%stanza/stanzas/gmdb-media-alignment-table-by-strains/components/AppContainer";
 import { styled } from "@mui/material/styles";
@@ -17,12 +18,14 @@ export type AppProps = {
   stanzaElement?: ShadowRoot;
 };
 
+const apiUrl = makeApiUrl(PATH_MEDIA_STRAINS_ALIGNMENT);
+
 const useData = (gmIds: string[]) => {
   const { data, isLoading } = useQuery({
     queryKey: [...gmIds],
     queryFn: async () => {
       const result = await getData<MediaStrainsAlignmentResponse, MediaStrainsAlignmentParams>(
-        mediaStrainsAlignmentURL,
+        apiUrl,
         {
           gm_ids: gmIds.join(","),
         },

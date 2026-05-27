@@ -5,7 +5,6 @@ import {
   ListApiParams,
   ListApiResponse,
 } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -21,7 +20,6 @@ export type ListMediaOfTaxonParams = ListApiParams<{
   tax_id: string;
 }>;
 
-export const listMediaOfTaxonURL = makeApiUrl("gmdb_media_by_taxid");
 export const PATH_LIST_MEDIA_OF_TAXON = "/gmdb_media_by_taxid";
 
 const listMediaOfTaxonResponseSchema = createListApiResponseSchema(

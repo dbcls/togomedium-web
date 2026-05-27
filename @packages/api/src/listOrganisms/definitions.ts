@@ -4,7 +4,6 @@ import {
   createListApiResponseSchema,
   listApiLinkSchema,
 } from "%api/ListApi";
-import { makeApiUrl } from "%core/network/makeApiUrl";
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
@@ -19,7 +18,6 @@ const listOrganismsParamsSchema = createListApiParamsSchema({});
 export type ListOrganismsResponse = z.infer<typeof listOrganismsResponseSchema>;
 export type ListOrganismsParams = z.infer<typeof listOrganismsParamsSchema>;
 
-export const listOrganismsUrl = makeApiUrl("list_organisms");
 export const PATH_LIST_ORGANISMS = "/list_organisms";
 
 export const listOrganismsDoc: RouteConfig = {

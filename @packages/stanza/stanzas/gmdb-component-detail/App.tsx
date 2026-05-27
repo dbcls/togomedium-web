@@ -1,9 +1,10 @@
 import {
   ComponentDetailParams,
   ComponentDetailResponse,
-  componentDetailURL,
+  PATH_COMPONENT_DETAIL,
 } from "%api/componentDetail/definitions";
 import { getData } from "%core/network/getData";
+import { makeApiUrl } from "%core/network/makeApiUrl";
 import { StanzaView, ViewProps } from "%stanza/stanzas/gmdb-component-detail/components/StanzaView";
 import { parseData } from "%stanza/stanzas/gmdb-component-detail/functions/parseData";
 import { fetchWikipediaData } from "%stanza/utils/fetchWikipediaData";
@@ -15,16 +16,15 @@ type Props = {
   gmo_id: string;
 };
 
+const apiUrl = makeApiUrl(PATH_COMPONENT_DETAIL);
+
 const useComponentDataQuery = (gmo_id: string) => {
   const { data, isLoading } = useQuery({
     queryKey: [{ gmo_id }],
     queryFn: async () => {
-      const result = await getData<ComponentDetailResponse, ComponentDetailParams>(
-        componentDetailURL,
-        {
-          gmo_id,
-        },
-      );
+      const result = await getData<ComponentDetailResponse, ComponentDetailParams>(apiUrl, {
+        gmo_id,
+      });
       if (!result.body) {
         throw new Error("No data found");
       }
