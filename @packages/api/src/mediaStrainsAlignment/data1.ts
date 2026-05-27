@@ -6,7 +6,7 @@ export const data1: MediaStrainsAlignmentResponse = [
     label: "NUTRIENT AGAR",
     organisms: [
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -40,7 +40,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -74,7 +74,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -108,7 +108,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -142,7 +142,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -176,7 +176,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -210,7 +210,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -244,7 +244,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -278,7 +278,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -312,7 +312,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -346,7 +346,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -380,7 +380,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -414,7 +414,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -448,7 +448,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -482,7 +482,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -516,7 +516,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -550,7 +550,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -590,7 +590,7 @@ export const data1: MediaStrainsAlignmentResponse = [
     label: "POTATO-CARROT AGAR",
     organisms: [
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -624,7 +624,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -658,7 +658,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -692,7 +692,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -726,7 +726,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -760,7 +760,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -794,7 +794,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -828,7 +828,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -862,7 +862,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -902,7 +902,7 @@ export const data1: MediaStrainsAlignmentResponse = [
     label: "1/10 POTATO-CARROT AGAR",
     organisms: [
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -936,7 +936,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -970,7 +970,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -1004,7 +1004,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -1038,7 +1038,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -1072,7 +1072,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -1106,7 +1106,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -1140,7 +1140,7 @@ export const data1: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },

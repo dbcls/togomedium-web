@@ -22,7 +22,7 @@ export const Primary = {
     scientificName: "Streptococcus gallolyticus",
     authorityName: "Streptococcus caprinus Brooker et al. 1996",
     lineage: {
-      superkingdom: {
+      domain: {
         taxid: "2",
         label: "Bacteria",
       },

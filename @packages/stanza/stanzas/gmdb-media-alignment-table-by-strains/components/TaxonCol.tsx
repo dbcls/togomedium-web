@@ -26,7 +26,7 @@ export const TaxonCol: FC<Props> = ({ rank, taxonList }) => {
     });
   };
   useEffect(() => {
-    const isFolded = rank === "superkingdom" || rank === "phylum" || rank === "class";
+    const isFolded = rank === "domain" || rank === "phylum" || rank === "class";
     if (isFolded) {
       setIsFolded(true);
       changeFilterRank(rank, true);

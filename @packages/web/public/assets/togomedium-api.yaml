@@ -2521,7 +2521,7 @@ components:
                 items:
                   type: object
                   properties:
-                    superkingdom:
+                    domain:
                       $ref: "#/components/schemas/SimpleTaxon"
                     phylum:
                       $ref: "#/components/schemas/SimpleTaxon"
@@ -2538,7 +2538,7 @@ components:
                     strain:
                       $ref: "#/components/schemas/SimpleTaxon"
                   required:
-                    - superkingdom
+                    - domain
                     - phylum
                     - class
                     - order

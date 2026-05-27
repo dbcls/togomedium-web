@@ -28,12 +28,12 @@ describe("findCurrentFilterRank", () => {
     const result = findCurrentFilterRank(defaultStatus);
     expect(result).toBe("genus");
   });
-  it("should return 'superkingdom' when all folding are active", () => {
+  it("should return 'domain' when all folding are active", () => {
     const defaultStatus = makeDefaultStatus();
     lineageRanks.forEach((key) => {
       defaultStatus[key] = true;
     });
     const result = findCurrentFilterRank(defaultStatus);
-    expect(result).toBe("superkingdom");
+    expect(result).toBe("domain");
   });
 });

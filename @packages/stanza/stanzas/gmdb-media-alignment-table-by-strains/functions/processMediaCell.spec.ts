@@ -65,7 +65,7 @@ describe("getNodeListOfRankFromTree", () => {
 describe("getSizeOfCell", () => {
   it("should work", () => {
     const tree = makeTaxonTree(data1[0].organisms, "");
-    const target = getNodeListOfRankFromTree(tree, "superkingdom")[0];
+    const target = getNodeListOfRankFromTree(tree, "domain")[0];
     const result = getSizeOfCell(target, "strain");
     expect(result).toBe(17);
   });

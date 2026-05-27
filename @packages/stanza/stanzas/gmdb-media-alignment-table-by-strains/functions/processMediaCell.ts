@@ -145,7 +145,7 @@ const makeTaxonTree = (organisms: Lineage[], gmId: string): TaxonNode[] => {
     lineageRanks.forEach((rank, index) => {
       const targetTaxon = organism[rank];
       const targetNode = findNodeFromFlatList(flatTaxonList, targetTaxon?.id || "", rank);
-      if (rank !== "superkingdom") {
+      if (rank !== "domain") {
         const parentRank = lineageRanks[index - 1]!;
         const parentTaxon = organism[parentRank];
         const parentNode = findNodeFromFlatList(flatTaxonList, parentTaxon?.id || "", parentRank);
@@ -160,7 +160,7 @@ const makeTaxonTree = (organisms: Lineage[], gmId: string): TaxonNode[] => {
       return 0;
     });
   });
-  return flatTaxonList.filter((node) => node.rank === "superkingdom");
+  return flatTaxonList.filter((node) => node.rank === "domain");
 };
 
 const getNodeListOfRankFromTree = (tree: TaxonNode[], rank: LineageRank): TaxonNode[] => {
@@ -175,7 +175,7 @@ const getNodeListOfRankFromTree = (tree: TaxonNode[], rank: LineageRank): TaxonN
     }
   };
 
-  return process(tree, "superkingdom");
+  return process(tree, "domain");
 };
 
 const findNodeFromFlatList = (list: TaxonNode[], id: string, rank: string): TaxonNode =>

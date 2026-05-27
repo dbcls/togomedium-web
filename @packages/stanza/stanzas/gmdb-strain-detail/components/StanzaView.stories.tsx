@@ -31,7 +31,7 @@ export const Primary = {
       rank: "Species",
       authorityName: "Streptomyces nodosus Trejo 1961",
       lineage: {
-        superkingdom: {
+        domain: {
           taxid: "2",
           label: "Bacteria",
         },

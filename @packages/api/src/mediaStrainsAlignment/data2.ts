@@ -6,7 +6,7 @@ export const data2: MediaStrainsAlignmentResponse = [
     label: "IMK (SW)",
     organisms: [
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -37,7 +37,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -68,7 +68,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -99,7 +99,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -130,7 +130,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -161,7 +161,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -192,7 +192,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -223,7 +223,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -254,7 +254,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -285,7 +285,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -316,7 +316,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -347,7 +347,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -378,7 +378,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -409,7 +409,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -440,7 +440,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -471,7 +471,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -502,7 +502,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -533,7 +533,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -564,7 +564,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -595,7 +595,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -626,7 +626,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -657,7 +657,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -688,7 +688,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -719,7 +719,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -750,7 +750,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -781,7 +781,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -812,7 +812,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -843,7 +843,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -874,7 +874,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -905,7 +905,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -936,7 +936,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -967,7 +967,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -998,7 +998,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1029,7 +1029,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1060,7 +1060,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1091,7 +1091,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1122,7 +1122,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1156,7 +1156,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1187,7 +1187,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1221,7 +1221,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -1252,7 +1252,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -1283,7 +1283,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1317,7 +1317,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1351,7 +1351,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1385,7 +1385,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1419,7 +1419,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1453,7 +1453,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1487,7 +1487,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1521,7 +1521,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1555,7 +1555,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1589,7 +1589,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1623,7 +1623,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1657,7 +1657,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1691,7 +1691,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1725,7 +1725,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1759,7 +1759,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1793,7 +1793,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1827,7 +1827,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1861,7 +1861,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1895,7 +1895,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1929,7 +1929,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1963,7 +1963,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -1997,7 +1997,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2031,7 +2031,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2065,7 +2065,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2099,7 +2099,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2130,7 +2130,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2161,7 +2161,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2195,7 +2195,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2226,7 +2226,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2257,7 +2257,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2288,7 +2288,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2322,7 +2322,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2353,7 +2353,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2384,7 +2384,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2415,7 +2415,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2446,7 +2446,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2480,7 +2480,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2514,7 +2514,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2548,7 +2548,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2582,7 +2582,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2616,7 +2616,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2650,7 +2650,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2684,7 +2684,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2718,7 +2718,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2749,7 +2749,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2780,7 +2780,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2811,7 +2811,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2842,7 +2842,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2876,7 +2876,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2907,7 +2907,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2938,7 +2938,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -2969,7 +2969,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3003,7 +3003,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3025,7 +3025,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3056,7 +3056,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3087,7 +3087,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3121,7 +3121,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3155,7 +3155,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3189,7 +3189,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3220,7 +3220,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3254,7 +3254,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3288,7 +3288,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3322,7 +3322,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3356,7 +3356,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3384,7 +3384,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3412,7 +3412,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3440,7 +3440,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3468,7 +3468,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3496,7 +3496,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3524,7 +3524,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3552,7 +3552,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3580,7 +3580,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3614,7 +3614,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3648,7 +3648,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3682,7 +3682,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3716,7 +3716,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3750,7 +3750,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3784,7 +3784,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3818,7 +3818,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3852,7 +3852,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3880,7 +3880,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3908,7 +3908,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3936,7 +3936,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3964,7 +3964,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -3992,7 +3992,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4020,7 +4020,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4048,7 +4048,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4076,7 +4076,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4104,7 +4104,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4132,7 +4132,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4160,7 +4160,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4188,7 +4188,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4216,7 +4216,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4244,7 +4244,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4275,7 +4275,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4306,7 +4306,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4337,7 +4337,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4371,7 +4371,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4405,7 +4405,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4439,7 +4439,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4470,7 +4470,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4501,7 +4501,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4532,7 +4532,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4563,7 +4563,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4594,7 +4594,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4625,7 +4625,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4656,7 +4656,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4687,7 +4687,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4718,7 +4718,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4749,7 +4749,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4780,7 +4780,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4811,7 +4811,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4845,7 +4845,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4879,7 +4879,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4913,7 +4913,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4947,7 +4947,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -4981,7 +4981,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5015,7 +5015,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5049,7 +5049,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5083,7 +5083,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5117,7 +5117,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5151,7 +5151,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5185,7 +5185,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5219,7 +5219,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5253,7 +5253,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5287,7 +5287,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5321,7 +5321,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5355,7 +5355,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5389,7 +5389,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5423,7 +5423,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5457,7 +5457,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5491,7 +5491,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5519,7 +5519,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5547,7 +5547,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5575,7 +5575,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5603,7 +5603,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5631,7 +5631,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5659,7 +5659,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5687,7 +5687,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5715,7 +5715,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5743,7 +5743,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5771,7 +5771,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -5802,7 +5802,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -5833,7 +5833,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -5864,7 +5864,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -5895,7 +5895,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5926,7 +5926,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5960,7 +5960,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -5991,7 +5991,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6022,7 +6022,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6053,7 +6053,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6084,7 +6084,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6115,7 +6115,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6149,7 +6149,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6183,7 +6183,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6214,7 +6214,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6245,7 +6245,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6276,7 +6276,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6307,7 +6307,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6338,7 +6338,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6369,7 +6369,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6400,7 +6400,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6431,7 +6431,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6462,7 +6462,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6493,7 +6493,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6527,7 +6527,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6561,7 +6561,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6595,7 +6595,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6626,7 +6626,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6657,7 +6657,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6686,7 +6686,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6720,7 +6720,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6754,7 +6754,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6788,7 +6788,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6822,7 +6822,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6856,7 +6856,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6887,7 +6887,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6918,7 +6918,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6955,7 +6955,7 @@ export const data2: MediaStrainsAlignmentResponse = [
     label: "KO2(NO3)",
     organisms: [
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -6995,7 +6995,7 @@ export const data2: MediaStrainsAlignmentResponse = [
     label: "KO2(NH4)",
     organisms: [
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },
@@ -7029,7 +7029,7 @@ export const data2: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2759",
           label: "Eukaryota",
         },

@@ -9,7 +9,7 @@ const taxonSchema = z.object({
 });
 
 const lineageSchema = z.object({
-  superkingdom: taxonSchema.nullable(),
+  domain: taxonSchema.nullable(),
   phylum: taxonSchema.nullable(),
   class: taxonSchema.nullable(),
   order: taxonSchema.nullable(),
@@ -61,7 +61,7 @@ export const mediaStrainsAlignmentDoc: RouteConfig = {
 };
 
 export const lineageRanks = [
-  "superkingdom",
+  "domain",
   "phylum",
   "class",
   "order",

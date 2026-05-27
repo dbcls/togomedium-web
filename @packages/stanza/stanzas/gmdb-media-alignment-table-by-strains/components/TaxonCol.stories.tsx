@@ -32,9 +32,9 @@ export const Order = {
     taxonList: processTaxonCol(data, "order", "strain"),
   },
 } satisfies Story;
-export const Superkingdom = {
+export const Domain = {
   args: {
-    rank: "superkingdom",
-    taxonList: processTaxonCol(data, "superkingdom", "strain"),
+    rank: "domain",
+    taxonList: processTaxonCol(data, "domain", "strain"),
   },
 } satisfies Story;

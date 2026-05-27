@@ -1,7 +1,7 @@
 import { TaxonomicTreeBranch } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonomicTreeBranch";
 import {
-  gtdbSuperkingdoms,
-  ncbiSuperkingdoms,
+  gtdbDomains,
+  ncbiDomains,
   TaxonInfo,
 } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonList";
 import { useTaxonomyType } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
@@ -15,7 +15,7 @@ type Props = {
 export const TaxonomicTreeSection: FC<Props> = ({ showLoading }) => {
   const type = useTaxonomyType();
   const superKingdoms = useMemo<TaxonInfo[]>(() => {
-    return type === "GTDB" ? gtdbSuperkingdoms : ncbiSuperkingdoms;
+    return type === "GTDB" ? gtdbDomains : ncbiDomains;
   }, [type]);
   return (
     <div style={{ position: "relative" }}>

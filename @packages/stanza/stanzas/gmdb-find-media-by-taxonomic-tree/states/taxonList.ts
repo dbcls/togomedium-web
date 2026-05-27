@@ -7,28 +7,28 @@ export type TaxonInfo = {
   children: string[] | undefined;
 };
 
-export const ncbiSuperkingdoms: TaxonInfo[] = [
+export const ncbiDomains: TaxonInfo[] = [
   {
     id: "2157",
     label: "Archaea",
-    rank: "Superkingdom",
+    rank: "Domain",
     children: undefined,
   },
   {
     id: "2",
     label: "Bacteria",
-    rank: "Superkingdom",
+    rank: "Domain",
     children: undefined,
   },
   {
     id: "2759",
     label: "Eukaryota",
-    rank: "Superkingdom",
+    rank: "Domain",
     children: undefined,
   },
 ];
 
-export const gtdbSuperkingdoms: TaxonInfo[] = [
+export const gtdbDomains: TaxonInfo[] = [
   {
     id: "d__Bacteria",
     label: "d__Bacteria",
@@ -43,7 +43,7 @@ export const gtdbSuperkingdoms: TaxonInfo[] = [
   },
 ];
 
-const taxonListAtom = atom<TaxonInfo[]>([...ncbiSuperkingdoms, ...gtdbSuperkingdoms]);
+const taxonListAtom = atom<TaxonInfo[]>([...ncbiDomains, ...gtdbDomains]);
 
 export const useTaxonListState = () => {
   return useAtomValue(taxonListAtom);

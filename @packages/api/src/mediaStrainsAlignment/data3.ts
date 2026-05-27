@@ -6,7 +6,7 @@ export const data3: MediaStrainsAlignmentResponse = [
     label: "M13a MEDIUM",
     organisms: [
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -37,7 +37,7 @@ export const data3: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -71,7 +71,7 @@ export const data3: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -105,7 +105,7 @@ export const data3: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -139,7 +139,7 @@ export const data3: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -173,7 +173,7 @@ export const data3: MediaStrainsAlignmentResponse = [
         },
       },
       {
-        superkingdom: {
+        domain: {
           id: "2",
           label: "Bacteria",
         },
@@ -211,7 +211,7 @@ export const data3: MediaStrainsAlignmentResponse = [
       "Tryptic soy broth medium supplemented with 0.5% yeast extract, 0.05% cysteine HCl-H2O, 0.5 mg/ml of hemin, 2 μg/ml of vitamin K1, and 5% sheep blood",
     organisms: [
       {
-        superkingdom: null,
+        domain: null,
         phylum: null,
         class: null,
         order: null,
