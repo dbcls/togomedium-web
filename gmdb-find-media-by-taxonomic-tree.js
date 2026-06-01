@@ -1,21 +1,21 @@
 import { l as lodash_debounce, d as defineStanzaElement } from './stanza-0294ba58.js';
-import { S as Subscribable, l as notifyManager, c as shallowEqualObjects, a1 as replaceEqualDeep, u as useQueryClient, m as reactExports, n as noop, v as atom, x as useSetAtom, w as useAtomValue, s as styled, T as THEME, j as jsx, a as jsxs, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { g as getData } from './getData-4200eb91.js';
-import { C as Checkbox, u as useMediaPaginationState, d as useQueryDataMutators, b as useFoundMediaMutators, e as useIsMediaLoadingMutators, f as useMediaPaginationMutators, n as nullListResponse, Q as QueryPane, M as MediaPane, S as SubPane, A as AppWrapper } from './ListApi-c3bc90be.js';
-import { a as listMediaOfGtdbTaxonsURL, l as listMediaOfTaxonsURL } from './definitions-d74daef9.js';
-import { o as object, s as string, a as array, m as makeApiUrl, n as number } from './schemas-d468dcf7.js';
-import { Q as QueryObserver, a as useIsRestoring, b as useQueryErrorResetBoundary, e as ensureSuspenseTimers, c as ensurePreventErrorBoundaryRetry, d as useClearResetErrorBoundary, s as shouldSuspend, f as fetchOptimistic, g as getHasError, u as useQuery } from './useQuery-e63f1f9b.js';
-import { T as TextField, A as Autocomplete } from './TextField-9a5ae552.js';
-import { B as Box, I as IconLoading, a as IconCompact, b as IconExpand, c as IconNoChildren } from './icons-8743a8da.js';
+import { S as Subscribable, l as notifyManager, c as shallowEqualObjects, a1 as replaceEqualDeep, u as useQueryClient, m as reactExports, n as noop, v as atom, x as useSetAtom, w as useAtomValue, s as styled, T as THEME, j as jsx, a as jsxs, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
+import { a as array, o as object, s as string, n as number, m as makeApiUrl, g as getData } from './makeApiUrl-bc69b05b.js';
+import { c as createListApiResponseSchema, l as listApiLinkSchema, a as createListApiParamsSchema, C as Checkbox, u as useMediaPaginationState, d as useQueryDataMutators, b as useFoundMediaMutators, e as useIsMediaLoadingMutators, f as useMediaPaginationMutators, n as nullListResponse, Q as QueryPane, M as MediaPane, S as SubPane, A as AppWrapper } from './ListApi-bd743e49.js';
+import { P as PATH_LIST_MEDIA_OF_TAXONS } from './definitions-09faafc6.js';
+import { Q as QueryObserver, a as useIsRestoring, b as useQueryErrorResetBoundary, e as ensureSuspenseTimers, c as ensurePreventErrorBoundaryRetry, d as useClearResetErrorBoundary, s as shouldSuspend, f as fetchOptimistic, g as getHasError, u as useQuery } from './useQuery-c819e3b3.js';
+import { T as TextField, A as Autocomplete } from './TextField-95122230.js';
+import { B as Box } from './Box-fb1fffc6.js';
 import { g as getLinkTarget, m as makeLinkPath, b as PATH_TAXON } from './getLinkTarget-9ee27b52.js';
-import { T as Tooltip } from './Tooltip-f3002260.js';
+import { I as IconLoading, a as IconCompact, b as IconExpand, c as IconNoChildren } from './icons-0f23341a.js';
+import { T as Tooltip } from './Tooltip-805a9746.js';
 import { i as isArray } from './isArray-56c7d056.js';
-import { L as LoadingCover } from './LoadingCover-190650c9.js';
-import './Select-05682d11.js';
-import './useSlotProps-e0be0a1d.js';
-import './CircularProgress-790be7e7.js';
-import './Grow-d098dd8a.js';
-import './createSvgIcon-cd17d0e7.js';
+import { L as LoadingCover } from './LoadingCover-3d9f5272.js';
+import './Select-a2b2ad7a.js';
+import './useSlotProps-42393a51.js';
+import './CircularProgress-0dc9c54d.js';
+import './Grow-d6a16e65.js';
+import './createSvgIcon-a7ac74f6.js';
 
 // src/queriesObserver.ts
 function difference(array1, array2) {
@@ -303,6 +303,49 @@ const useShadowRootMutators = () => {
     return { setShadowRoot };
 };
 
+array(object({
+    tax_id: string(),
+    name: string(),
+    rank: string(),
+}));
+object({
+    tax_id: string(),
+});
+const PATH_GTDB_TAXON_ANCESTORS = "/gmdb_gtdb_taxonomy_ancestors";
+
+object({
+    items: array(object({
+        tax_id: string(),
+        name: string(),
+        rank: string(),
+    })),
+});
+object({
+    tax_id: string(),
+});
+const PATH_GTDB_TAXON_CHILDREN = "/gmdb_gtdb_taxonomy_children";
+
+array(object({
+    tax_id: string(),
+    name: string(),
+    rank: string(),
+}));
+object({
+    q: string(),
+    max: number().int(),
+});
+const PATH_GTDB_TAXON_SEARCH_BY_NAME = "/gmdb_gtdb_taxonomy_search_by_name";
+
+const PATH_LIST_MEDIA_OF_GTDB_TAXONS = "/gmdb_media_by_gtdb_taxon";
+createListApiResponseSchema(object({
+    name: string(),
+    original_media_id: string(),
+    media_id: listApiLinkSchema,
+}));
+createListApiParamsSchema({
+    tax_id: string(),
+});
+
 const taxonAncestorsItemSchema = object({
     tax_id: string(),
     name: string(),
@@ -312,11 +355,7 @@ array(taxonAncestorsItemSchema);
 object({
     tax_id: string(),
 });
-/**
- * @deprecated
- */
-const taxonAncestorsURL = makeApiUrl("gmdb_taxonomy_ancestors");
-const gtdbTaxonAncestorsURL = makeApiUrl("gmdb_taxonomy_gtdb_ancestors");
+const PATH_TAXON_ANCESTORS = "/gmdb_taxonomy_ancestors";
 
 const taxonChildrenItemSchema = object({
     tax_id: string(),
@@ -327,11 +366,7 @@ array(taxonChildrenItemSchema);
 object({
     tax_id: string(),
 });
-/**
- * @deprecated
- */
-const taxonChildrenURL = makeApiUrl("gmdb_taxonomy_children");
-const gtdbTaxonChildrenURL = makeApiUrl("gmdb_taxonomy_gtdb_children");
+const PATH_TAXON_CHILDREN = "/gmdb_taxonomy_children";
 
 const taxonSearchByNameItemSchema = object({
     tax_id: string(),
@@ -343,11 +378,7 @@ object({
     q: string().min(4),
     max: number(),
 });
-/**
- * @deprecated
- */
-const taxonSearchByNameURL = makeApiUrl("gmdb_taxonomy_search_by_name");
-const gtdbTaxonSearchByNameUrl = makeApiUrl("gmdb_taxonomy_gtdb_search_by_name");
+const PATH_TAXON_SEARCH_BY_NAME = "/gmdb_taxonomy_search_by_name";
 
 const taxonomyTypeAtom = atom("NCBI");
 const useTaxonomyTypeMutators = () => {
@@ -359,22 +390,22 @@ const useTaxonomyType = () => {
 };
 const useTaxonSearchApi = () => {
     const apiType = useAtomValue(taxonomyTypeAtom);
-    const url = apiType === "GTDB" ? gtdbTaxonSearchByNameUrl : taxonSearchByNameURL;
+    const url = makeApiUrl(apiType === "GTDB" ? PATH_GTDB_TAXON_SEARCH_BY_NAME : PATH_TAXON_SEARCH_BY_NAME);
     return { type: apiType, url };
 };
 const useTreeApi = () => {
     const apiType = useAtomValue(taxonomyTypeAtom);
-    const url = apiType === "GTDB" ? gtdbTaxonChildrenURL : taxonChildrenURL;
+    const url = makeApiUrl(apiType === "GTDB" ? PATH_GTDB_TAXON_CHILDREN : PATH_TAXON_CHILDREN);
     return { type: apiType, url };
 };
 const useTaxonAncestorsApi = () => {
     const apiType = useAtomValue(taxonomyTypeAtom);
-    const url = apiType === "GTDB" ? gtdbTaxonAncestorsURL : taxonAncestorsURL;
+    const url = makeApiUrl(apiType === "GTDB" ? PATH_GTDB_TAXON_ANCESTORS : PATH_TAXON_ANCESTORS);
     return { type: apiType, url };
 };
 const useListMediaOfTaxonsApi = () => {
     const apiType = useAtomValue(taxonomyTypeAtom);
-    const url = apiType === "GTDB" ? listMediaOfGtdbTaxonsURL : listMediaOfTaxonsURL;
+    const url = makeApiUrl(apiType === "GTDB" ? PATH_LIST_MEDIA_OF_GTDB_TAXONS : PATH_LIST_MEDIA_OF_TAXONS);
     return { type: apiType, url };
 };
 
@@ -695,27 +726,27 @@ const useSelectedTaxonMutators = () => {
     };
 };
 
-const ncbiSuperkingdoms = [
+const ncbiDomains = [
     {
         id: "2157",
         label: "Archaea",
-        rank: "Superkingdom",
+        rank: "Domain",
         children: undefined,
     },
     {
         id: "2",
         label: "Bacteria",
-        rank: "Superkingdom",
+        rank: "Domain",
         children: undefined,
     },
     {
         id: "2759",
         label: "Eukaryota",
-        rank: "Superkingdom",
+        rank: "Domain",
         children: undefined,
     },
 ];
-const gtdbSuperkingdoms = [
+const gtdbDomains = [
     {
         id: "d__Bacteria",
         label: "d__Bacteria",
@@ -729,7 +760,7 @@ const gtdbSuperkingdoms = [
         children: undefined,
     },
 ];
-const taxonListAtom = atom([...ncbiSuperkingdoms, ...gtdbSuperkingdoms]);
+const taxonListAtom = atom([...ncbiDomains, ...gtdbDomains]);
 const useTaxonListState = () => {
     return useAtomValue(taxonListAtom);
 };
@@ -918,7 +949,7 @@ const useLineages = (id, taxonList) => {
 const TaxonomicTreeSection = ({ showLoading }) => {
     const type = useTaxonomyType();
     const superKingdoms = reactExports.useMemo(() => {
-        return type === "GTDB" ? gtdbSuperkingdoms : ncbiSuperkingdoms;
+        return type === "GTDB" ? gtdbDomains : ncbiDomains;
     }, [type]);
     return (jsxs("div", { style: { position: "relative" }, children: [jsx(LoadingCover, { showLoading: showLoading, errorMessage: "" }), jsx("div", { children: superKingdoms.map((superKingdom) => (jsx(TaxonomicTreeBranch, { id: superKingdom.id }, superKingdom.id))) })] }));
 };

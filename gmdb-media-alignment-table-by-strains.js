@@ -1,18 +1,17 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { m as reactExports, s as styled, T as THEME, a as jsxs, j as jsx, v as atom, w as useAtomValue, x as useSetAtom, R as React, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { l as lineageRanks, m as mediaStrainsAlignmentURL } from './definitions-061f383b.js';
-import { g as getData } from './getData-4200eb91.js';
-import { N as NotFound } from './NotFound-87306622.js';
+import { m as reactExports, s as styled, T as THEME, a as jsxs, j as jsx, v as atom, w as useAtomValue, x as useSetAtom, R as React, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
+import { l as lineageRanks, P as PATH_MEDIA_STRAINS_ALIGNMENT } from './definitions-aea592e4.js';
+import { m as makeApiUrl, g as getData } from './makeApiUrl-bc69b05b.js';
+import { N as NotFound } from './NotFound-2a064869.js';
 import { m as makeLinkPath, a as PATH_MEDIUM, g as getLinkTarget } from './getLinkTarget-9ee27b52.js';
 import { c as copy } from './index-58d55e2c.js';
 import { n as nanoid } from './index.browser-9dccf6b2.js';
-import { T as Tooltip } from './Tooltip-f3002260.js';
+import { T as Tooltip } from './Tooltip-805a9746.js';
 import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-679c835b.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
-import './schemas-d468dcf7.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
 import './isArray-56c7d056.js';
-import './Grow-d098dd8a.js';
-import './useSlotProps-e0be0a1d.js';
+import './Grow-d6a16e65.js';
+import './useSlotProps-42393a51.js';
 
 const makeCellHeight = (size) => {
     return 48 * size + size - 1;
@@ -114,7 +113,7 @@ const makeTaxonTree = (organisms, gmId) => {
         lineageRanks.forEach((rank, index) => {
             const targetTaxon = organism[rank];
             const targetNode = findNodeFromFlatList(flatTaxonList, targetTaxon?.id || "", rank);
-            if (rank !== "superkingdom") {
+            if (rank !== "domain") {
                 const parentRank = lineageRanks[index - 1];
                 const parentTaxon = organism[parentRank];
                 const parentNode = findNodeFromFlatList(flatTaxonList, parentTaxon?.id || "", parentRank);
@@ -131,7 +130,7 @@ const makeTaxonTree = (organisms, gmId) => {
             return 0;
         });
     });
-    return flatTaxonList.filter((node) => node.rank === "superkingdom");
+    return flatTaxonList.filter((node) => node.rank === "domain");
 };
 const getNodeListOfRankFromTree = (tree, rank) => {
     const process = (nodes, currentRank) => {
@@ -145,7 +144,7 @@ const getNodeListOfRankFromTree = (tree, rank) => {
             return process(nextNodes, nextRank);
         }
     };
-    return process(tree, "superkingdom");
+    return process(tree, "domain");
 };
 const findNodeFromFlatList = (list, id, rank) => list.find((node) => node.rank === rank && id === node.id);
 const lineageToTaxonNode = (lineage, gmId) => lineageRanks.map((key) => makeTaxonNode(lineage[key], key, gmId));
@@ -345,8 +344,8 @@ const findCurrentFilterRank = (status) => {
             break;
         }
     }
-    if (found === "superkingdom") {
-        return "superkingdom";
+    if (found === "domain") {
+        return "domain";
     }
     const result = lineageRanks[lineageRanks.indexOf(found) - 1];
     return result || "strain";
@@ -365,7 +364,7 @@ const TaxonCol = ({ rank, taxonList }) => {
         });
     };
     reactExports.useEffect(() => {
-        const isFolded = rank === "superkingdom" || rank === "phylum" || rank === "class";
+        const isFolded = rank === "domain" || rank === "phylum" || rank === "class";
         if (isFolded) {
             setIsFolded(true);
             changeFilterRank(rank, true);
@@ -455,11 +454,12 @@ const TaxonContainer = styled("div")({
     gap: "1px",
 });
 
+const apiUrl = makeApiUrl(PATH_MEDIA_STRAINS_ALIGNMENT);
 const useData = (gmIds) => {
     const { data, isLoading } = useQuery({
         queryKey: [...gmIds],
         queryFn: async () => {
-            const result = await getData(mediaStrainsAlignmentURL, {
+            const result = await getData(apiUrl, {
                 gm_ids: gmIds.join(","),
             });
             if (!result.body)

@@ -1,15 +1,14 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
+import { j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
 import { g as getLinkTarget } from './getLinkTarget-9ee27b52.js';
-import { a as ColWrapper, C as ColorButton } from './ColWrapper-e44f4ea8.js';
-import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-8665dfe5.js';
-import { L as LineageList } from './LineageList-144064a3.js';
-import { S as StanzaWrapper } from './StanzaWrapper-69f29275.js';
-import { T as TagList } from './TagList-11b68696.js';
-import { o as object, s as string, a as array, n as number, m as makeApiUrl } from './schemas-d468dcf7.js';
-import { g as getData } from './getData-4200eb91.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
-import './definitions-061f383b.js';
+import { a as ColWrapper, C as ColorButton } from './ColWrapper-9efe3dc9.js';
+import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-4bfbc512.js';
+import { L as LineageList } from './LineageList-5eb88492.js';
+import { S as StanzaWrapper } from './StanzaWrapper-9552a4ac.js';
+import { T as TagList } from './TagList-9992f5dd.js';
+import { o as object, s as string, a as array, n as number, g as getData, m as makeApiUrl } from './makeApiUrl-bc69b05b.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
+import './definitions-aea592e4.js';
 import './string-679c835b.js';
 import './isArray-56c7d056.js';
 
@@ -46,10 +45,7 @@ object({
 object({
     strain_id: string(),
 });
-/**
- * @deprecated
- */
-const strainDetailURL = makeApiUrl("gmdb_strain_by_strainid");
+const PATH_STRAIN_DETAIL = "/gmdb_strain_by_strainid";
 
 const parseData = (body) => {
     const strainId = body.strain.strain_id;
@@ -84,7 +80,7 @@ const parseData = (body) => {
 };
 
 const getStrainData = async (strain_id) => {
-    const result = await getData(strainDetailURL, {
+    const result = await getData(makeApiUrl(PATH_STRAIN_DETAIL), {
         strain_id,
     });
     if (!result.body?.strain) {

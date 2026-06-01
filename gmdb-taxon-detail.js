@@ -1,14 +1,13 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { C as ColorButton, a as ColWrapper } from './ColWrapper-e44f4ea8.js';
-import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-8665dfe5.js';
-import { L as LineageList } from './LineageList-144064a3.js';
-import { S as StandardParagraph, W as WikipediaView, f as fetchWikipediaData } from './fetchWikipediaData-eb0593d7.js';
-import { S as StanzaWrapper } from './StanzaWrapper-69f29275.js';
-import { o as object, s as string, n as number, a as array, u as union, m as makeApiUrl } from './schemas-d468dcf7.js';
-import { g as getData } from './getData-4200eb91.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
-import './definitions-061f383b.js';
+import { s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
+import { C as ColorButton, a as ColWrapper } from './ColWrapper-9efe3dc9.js';
+import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-4bfbc512.js';
+import { L as LineageList } from './LineageList-5eb88492.js';
+import { S as StandardParagraph, W as WikipediaView, f as fetchWikipediaData } from './fetchWikipediaData-4f89b3b0.js';
+import { S as StanzaWrapper } from './StanzaWrapper-9552a4ac.js';
+import { o as object, s as string, n as number, a as array, u as union, g as getData, m as makeApiUrl } from './makeApiUrl-bc69b05b.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
+import './definitions-aea592e4.js';
 import './getLinkTarget-9ee27b52.js';
 import './string-679c835b.js';
 import './isArray-56c7d056.js';
@@ -61,10 +60,7 @@ object({
 object({
     tax_id: string(),
 });
-/**
- * @deprecated
- */
-const taxonDetailURL = makeApiUrl("gmdb_organism_by_taxid");
+const PATH_TAXON_DETAIL = "/gmdb_organism_by_taxid";
 
 const unescapeJsonString = (str) => {
     return str?.replace(/\\/g, "");
@@ -106,7 +102,7 @@ const parseOtherTypeMaterial = (data) => {
     }));
 };
 const getTaxonData = async (tax_id) => {
-    const result = await getData(taxonDetailURL, {
+    const result = await getData(makeApiUrl(PATH_TAXON_DETAIL), {
         tax_id,
     });
     if (!result.body) {

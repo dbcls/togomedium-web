@@ -1,16 +1,16 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { s as styled, j as jsx, T as THEME, m as reactExports, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { N as NotFound } from './NotFound-87306622.js';
-import { S as StanzaWrapper } from './StanzaWrapper-69f29275.js';
-import { S as Slider } from './Slider-65c6a1cf.js';
+import { s as styled, j as jsx, T as THEME, m as reactExports, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
+import { N as NotFound } from './NotFound-2a064869.js';
+import { S as StanzaWrapper } from './StanzaWrapper-9552a4ac.js';
+import { S as Slider } from './Slider-17e925d3.js';
 import { m as makeLinkPath, g as getLinkTarget } from './getLinkTarget-9ee27b52.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
 import { n as nanoid } from './index.browser-9dccf6b2.js';
-import { L as LoadingCover } from './LoadingCover-190650c9.js';
+import { L as LoadingCover } from './LoadingCover-3d9f5272.js';
 import { m as makeFormBody } from './getData-e9cb8ad8.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
-import './useSlotProps-e0be0a1d.js';
-import './CircularProgress-790be7e7.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
+import './useSlotProps-42393a51.js';
+import './CircularProgress-0dc9c54d.js';
 import './isArray-56c7d056.js';
 
 const AngleLeftIcon = ({ sx }) => {

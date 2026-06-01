@@ -1,19 +1,18 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { m as reactExports, j as jsx, q as jsx$1, v as atom, w as useAtomValue, x as useSetAtom, a as jsxs, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { c as createListApiResponseSchema, a as createListApiParamsSchema, u as useMediaPaginationState, b as useFoundMediaMutators, d as useQueryDataMutators, e as useIsMediaLoadingMutators, f as useMediaPaginationMutators, n as nullListResponse, Q as QueryPane, M as MediaPane, S as SubPane, A as AppWrapper } from './ListApi-c3bc90be.js';
-import { c as componentsWithComponentsURL } from './definitions-989b5e5a.js';
-import { g as getData } from './getData-4200eb91.js';
+import { m as reactExports, j as jsx, q as jsx$1, v as atom, w as useAtomValue, x as useSetAtom, a as jsxs, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
+import { c as createListApiResponseSchema, a as createListApiParamsSchema, u as useMediaPaginationState, b as useFoundMediaMutators, d as useQueryDataMutators, e as useIsMediaLoadingMutators, f as useMediaPaginationMutators, n as nullListResponse, Q as QueryPane, M as MediaPane, S as SubPane, A as AppWrapper } from './ListApi-bd743e49.js';
+import { P as PATH_COMPONENTS_WITH_COMPONENTS } from './definitions-a04f4463.js';
+import { m as makeApiUrl, g as getData, o as object, s as string } from './makeApiUrl-bc69b05b.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
-import { T as TextField, C as Chip, A as Autocomplete } from './TextField-9a5ae552.js';
-import { m as makeApiUrl, o as object, s as string } from './schemas-d468dcf7.js';
-import './Select-05682d11.js';
-import './useSlotProps-e0be0a1d.js';
-import './CircularProgress-790be7e7.js';
-import './Grow-d098dd8a.js';
-import './createSvgIcon-cd17d0e7.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
+import { T as TextField, C as Chip, A as Autocomplete } from './TextField-95122230.js';
+import './Select-a2b2ad7a.js';
+import './useSlotProps-42393a51.js';
+import './CircularProgress-0dc9c54d.js';
+import './Grow-d6a16e65.js';
+import './createSvgIcon-a7ac74f6.js';
 import './getLinkTarget-9ee27b52.js';
-import './Tooltip-f3002260.js';
+import './Tooltip-805a9746.js';
 import './isArray-56c7d056.js';
 
 const parseLabelInfo = (res, selectedIds) => {
@@ -26,13 +25,14 @@ const parseLabelInfo = (res, selectedIds) => {
         .filter((item) => !selectedIds.includes(item.id));
 };
 
+const apiUrl$1 = makeApiUrl(PATH_COMPONENTS_WITH_COMPONENTS);
 const ComponentSelect = ({ onChangeSelection }) => {
     const [selectedIds, setSelectedIds] = reactExports.useState([]);
     const { data, isPending } = useQuery({
         queryKey: ["componentsOfComponents", { selectedIds }],
         queryFn: async () => {
             const gmo_ids = selectedIds.join(",");
-            const response = await getData(componentsWithComponentsURL, { gmo_ids });
+            const response = await getData(apiUrl$1, { gmo_ids });
             if (!response.body)
                 throw new Error("No response body");
             return parseLabelInfo(response.body, selectedIds);
@@ -69,7 +69,7 @@ const AttributesSection = () => {
     return (jsx("div", { children: jsx(ComponentSelect, { onChangeSelection: onChangeSelection }) }));
 };
 
-const listMediaByAttributesURL = makeApiUrl("gmdb_media_by_attributes");
+const PATH_LIST_MEDIA_BY_ATTRIBUTES = "/gmdb_media_by_attributes";
 createListApiResponseSchema(object({
     gm_id: string(),
     name: string(),
@@ -81,6 +81,7 @@ createListApiParamsSchema({
 });
 
 const SHOW_COUNT = 10;
+const apiUrl = makeApiUrl(PATH_LIST_MEDIA_BY_ATTRIBUTES);
 const useMediaLoadFromComponents = () => {
     const page = useMediaPaginationState();
     const selectedAttributes = useSelectedAttributesState();
@@ -95,7 +96,7 @@ const useMediaLoadFromComponents = () => {
             if (gmo_ids.length === 0)
                 return nullListResponse;
             //
-            const response = await getData(listMediaByAttributesURL, {
+            const response = await getData(apiUrl, {
                 gmo_ids,
                 limit: SHOW_COUNT,
                 offset: (page - 1) * SHOW_COUNT,

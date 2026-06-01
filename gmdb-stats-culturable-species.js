@@ -1,13 +1,12 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { s as styled, T as THEME, m as reactExports, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { o as object$1, s as string, n as number$3, a as array, m as makeApiUrl } from './schemas-d468dcf7.js';
-import { g as getData } from './getData-4200eb91.js';
+import { s as styled, T as THEME, m as reactExports, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
+import { o as object$1, s as string, n as number$3, a as array, g as getData, m as makeApiUrl } from './makeApiUrl-bc69b05b.js';
 import { a as constant, i as interpolateNumber, b as color, e as interpolateRgb, f as interpolateString, s as select } from './transform-fa8fb55c.js';
-import { T as Tooltip } from './Tooltip-f3002260.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
+import { T as Tooltip } from './Tooltip-805a9746.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
 import './isArray-56c7d056.js';
-import './Grow-d098dd8a.js';
-import './useSlotProps-e0be0a1d.js';
+import './Grow-d6a16e65.js';
+import './useSlotProps-42393a51.js';
 
 function ascending(a, b) {
   return a == null || b == null ? NaN : a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
@@ -1158,10 +1157,7 @@ const statsCountCulturableSpeciesItemSchema = object$1({
 });
 array(statsCountCulturableSpeciesItemSchema);
 object$1({});
-/**
- * @deprecated
- */
-const statsCountCulturableSpeciesURL = makeApiUrl("gmdb_stat_media_tax_histgram");
+const PATH_STATS_COUNT_CULTURABLE_SPECIES = "/gmdb_stat_media_tax_histgram";
 
 const AppContainer = ({ data }) => {
     const svgRef = reactExports.useRef(null);
@@ -1272,7 +1268,7 @@ const useGraphData = () => {
     const { data, isLoading } = useQuery({
         queryKey: ["speciesDistribution"],
         queryFn: async () => {
-            const response = await getData(statsCountCulturableSpeciesURL, {});
+            const response = await getData(makeApiUrl(PATH_STATS_COUNT_CULTURABLE_SPECIES), {});
             if (!response.body) {
                 throw new Error("No data found");
             }

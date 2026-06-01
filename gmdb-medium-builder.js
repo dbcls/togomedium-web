@@ -1,57 +1,2006 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { s as styled, j as jsx, T as THEME, a5 as useDispatch, a6 as useSelector, a as jsxs, R as React, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { P as PATH_COMPONENTS_WITH_COMPONENTS } from './definitions-989b5e5a.js';
-import { m as makeApiUrl } from './schemas-d468dcf7.js';
+import { a5 as createStyled, M as resolveProps, W as useTheme, a6 as createTheme, a7 as handleBreakpoints, a8 as resolveBreakpointValues, a9 as createUnarySpacing, O as deepmerge, aa as mergeBreakpointsInOrder, m as reactExports, A as jsxRuntimeExports, z as clsx, ab as getValue, s as styled$1, y as capitalize, N as useId, K as keyframes, Q as css, D as useRtl, ac as emphasize, ad as useDispatch, ae as useSelector, j as jsx, a as jsxs, T as THEME, af as useStore, R as React, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
 import { n as nanoid } from './index.browser-9dccf6b2.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
-import { I as IconButton, A as Autocomplete, T as TextField } from './TextField-9a5ae552.js';
-import { M as Menu, c as Button } from './Select-05682d11.js';
-import { M as MenuItem } from './MenuItem-b9047f09.js';
-import './createSvgIcon-cd17d0e7.js';
-import './useSlotProps-e0be0a1d.js';
-import './Grow-d098dd8a.js';
-import './CircularProgress-790be7e7.js';
+import { c as composeClasses, a as generateUtilityClass, g as generateUtilityClasses, m as memoTheme, u as useDefaultProps, f as useForkRef, e as useEventCallback, o as ownerDocument, j as extractEventHandlers } from './useSlotProps-42393a51.js';
+import { u as useSlot, g as getReactElementRef, a as useTheme$1, d as useTimeout, G as Grow } from './Grow-d6a16e65.js';
+import { c as createSimplePaletteValueFilter } from './CircularProgress-0dc9c54d.js';
+import { e as extendSxProp, c as createSvgIcon } from './createSvgIcon-a7ac74f6.js';
+import { I as IconButton, a as ClearIcon, T as TextField, A as Autocomplete } from './TextField-95122230.js';
+import { P as Paper, n as Backdrop, M as Modal, p as Fade, c as Button, q as Menu } from './Select-a2b2ad7a.js';
+import { T as Typography, M as MenuItem } from './MenuItem-edfba4b0.js';
+import { B as Box } from './Box-fb1fffc6.js';
+import { o as object, s as string, n as number, a as array, l as literal, m as makeApiUrl, g as getData } from './makeApiUrl-bc69b05b.js';
+import { P as PATH_COMPONENTS_WITH_COMPONENTS } from './definitions-a04f4463.js';
+import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
+import { P as PATH_MEDIUM_DETAIL } from './definitions-a767899b.js';
+import './isArray-56c7d056.js';
 
-const VerticalEllipsisIcon = ({ sx }) => {
-    return (jsx(Wrapper$1, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 640 640", sx: sx, children: jsx("path", { d: "M368 144C368 170.5 346.5 192 320 192C293.5 192 272 170.5 272 144C272 117.5 293.5 96 320 96C346.5 96 368 117.5 368 144zM272 320C272 293.5 293.5 272 320 272C346.5 272 368 293.5 368 320C368 346.5 346.5 368 320 368C293.5 368 272 346.5 272 320zM368 496C368 522.5 346.5 544 320 544C293.5 544 272 522.5 272 496C272 469.5 293.5 448 320 448C346.5 448 368 469.5 368 496z" }) }));
-};
-const Wrapper$1 = styled("svg")({});
+const styled = createStyled();
+var systemStyled = styled;
 
-const fetchAllComponents = async () => {
-    const params = { gmo_ids: "" };
-    const url = makeApiUrl(PATH_COMPONENTS_WITH_COMPONENTS, new URLSearchParams(params));
-    const res = await fetch(url);
-    if (res.ok) {
-        return res.json();
+function getThemeProps(params) {
+  const {
+    theme,
+    name,
+    props
+  } = params;
+  if (!theme || !theme.components || !theme.components[name] || !theme.components[name].defaultProps) {
+    return props;
+  }
+  return resolveProps(theme.components[name].defaultProps, props);
+}
+
+function useThemeProps({
+  props,
+  name,
+  defaultTheme,
+  themeId
+}) {
+  let theme = useTheme(defaultTheme);
+  if (themeId) {
+    theme = theme[themeId] || theme;
+  }
+  return getThemeProps({
+    theme,
+    name,
+    props
+  });
+}
+
+const defaultTheme = createTheme();
+// widening Theme to any so that the consumer can own the theme structure.
+const defaultCreateStyledComponent = systemStyled('div', {
+  name: 'MuiStack',
+  slot: 'Root'
+});
+function useThemePropsDefault(props) {
+  return useThemeProps({
+    props,
+    name: 'MuiStack',
+    defaultTheme
+  });
+}
+
+/**
+ * Return an array with the separator React element interspersed between
+ * each React node of the input children.
+ *
+ * > joinChildren([1,2,3], 0)
+ * [1,0,2,0,3]
+ */
+function joinChildren(children, separator) {
+  const childrenArray = reactExports.Children.toArray(children).filter(Boolean);
+  return childrenArray.reduce((output, child, index) => {
+    output.push(child);
+    if (index < childrenArray.length - 1) {
+      output.push(/*#__PURE__*/reactExports.cloneElement(separator, {
+        key: `separator-${index}`
+      }));
     }
-    else {
-        return [];
-    }
+    return output;
+  }, []);
+}
+const getSideFromDirection = direction => {
+  return {
+    row: 'Left',
+    'row-reverse': 'Right',
+    column: 'Top',
+    'column-reverse': 'Bottom'
+  }[direction];
 };
+const style = ({
+  ownerState,
+  theme
+}) => {
+  let styles = {
+    display: 'flex',
+    flexDirection: 'column',
+    ...handleBreakpoints({
+      theme
+    }, resolveBreakpointValues({
+      values: ownerState.direction,
+      breakpoints: theme.breakpoints.values
+    }), propValue => ({
+      flexDirection: propValue
+    }))
+  };
+  if (ownerState.spacing) {
+    const transformer = createUnarySpacing(theme);
+    const base = Object.keys(theme.breakpoints.values).reduce((acc, breakpoint) => {
+      if (typeof ownerState.spacing === 'object' && ownerState.spacing[breakpoint] != null || typeof ownerState.direction === 'object' && ownerState.direction[breakpoint] != null) {
+        acc[breakpoint] = true;
+      }
+      return acc;
+    }, {});
+    const directionValues = resolveBreakpointValues({
+      values: ownerState.direction,
+      base
+    });
+    const spacingValues = resolveBreakpointValues({
+      values: ownerState.spacing,
+      base
+    });
+    if (typeof directionValues === 'object') {
+      Object.keys(directionValues).forEach((breakpoint, index, breakpoints) => {
+        const directionValue = directionValues[breakpoint];
+        if (!directionValue) {
+          const previousDirectionValue = index > 0 ? directionValues[breakpoints[index - 1]] : 'column';
+          directionValues[breakpoint] = previousDirectionValue;
+        }
+      });
+    }
+    const styleFromPropValue = (propValue, breakpoint) => {
+      if (ownerState.useFlexGap) {
+        return {
+          gap: getValue(transformer, propValue)
+        };
+      }
+      return {
+        // The useFlexGap={false} implement relies on each child to give up control of the margin.
+        // We need to reset the margin to avoid double spacing.
+        '& > :not(style):not(style)': {
+          margin: 0
+        },
+        '& > :not(style) ~ :not(style)': {
+          [`margin${getSideFromDirection(breakpoint ? directionValues[breakpoint] : ownerState.direction)}`]: getValue(transformer, propValue)
+        }
+      };
+    };
+    styles = deepmerge(styles, handleBreakpoints({
+      theme
+    }, spacingValues, styleFromPropValue));
+  }
+  styles = mergeBreakpointsInOrder(theme.breakpoints, styles);
+  return styles;
+};
+function createStack(options = {}) {
+  const {
+    // This will allow adding custom styled fn (for example for custom sx style function)
+    createStyledComponent = defaultCreateStyledComponent,
+    useThemeProps = useThemePropsDefault,
+    componentName = 'MuiStack'
+  } = options;
+  const useUtilityClasses = () => {
+    const slots = {
+      root: ['root']
+    };
+    return composeClasses(slots, slot => generateUtilityClass(componentName, slot), {});
+  };
+  const StackRoot = createStyledComponent(style);
+  const Stack = /*#__PURE__*/reactExports.forwardRef(function Grid(inProps, ref) {
+    const themeProps = useThemeProps(inProps);
+    const props = extendSxProp(themeProps); // `color` type conflicts with html color attribute.
+    const {
+      component = 'div',
+      direction = 'column',
+      spacing = 0,
+      divider,
+      children,
+      className,
+      useFlexGap = false,
+      ...other
+    } = props;
+    const ownerState = {
+      direction,
+      spacing,
+      useFlexGap
+    };
+    const classes = useUtilityClasses();
+    return /*#__PURE__*/jsxRuntimeExports.jsx(StackRoot, {
+      as: component,
+      ownerState: ownerState,
+      ref: ref,
+      className: clsx(classes.root, className),
+      ...other,
+      children: divider ? joinChildren(children, divider) : children
+    });
+  });
+  return Stack;
+}
 
-// disable react-refresh as this file contains shared styled components
-const Sheet = styled("div")({
-    display: "grid",
-    gridTemplateColumns: "20px auto auto auto 1fr",
-    columnGap: THEME.SIZE.S2,
-    rowGap: THEME.SIZE.S2,
+function getAlertUtilityClass(slot) {
+  return generateUtilityClass('MuiAlert', slot);
+}
+const alertClasses = generateUtilityClasses('MuiAlert', ['root', 'action', 'icon', 'message', 'filled', 'colorSuccess', 'colorInfo', 'colorWarning', 'colorError', 'filledSuccess', 'filledInfo', 'filledWarning', 'filledError', 'outlined', 'outlinedSuccess', 'outlinedInfo', 'outlinedWarning', 'outlinedError', 'standard', 'standardSuccess', 'standardInfo', 'standardWarning', 'standardError']);
+var alertClasses$1 = alertClasses;
+
+var SuccessOutlinedIcon = createSvgIcon(/*#__PURE__*/jsxRuntimeExports.jsx("path", {
+  d: "M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"
+}));
+
+var ReportProblemOutlinedIcon = createSvgIcon(/*#__PURE__*/jsxRuntimeExports.jsx("path", {
+  d: "M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"
+}));
+
+var ErrorOutlineIcon = createSvgIcon(/*#__PURE__*/jsxRuntimeExports.jsx("path", {
+  d: "M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+}));
+
+var InfoOutlinedIcon = createSvgIcon(/*#__PURE__*/jsxRuntimeExports.jsx("path", {
+  d: "M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"
+}));
+
+const useUtilityClasses$7 = ownerState => {
+  const {
+    variant,
+    color,
+    severity,
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root', `color${capitalize(color || severity)}`, `${variant}${capitalize(color || severity)}`, `${variant}`],
+    icon: ['icon'],
+    message: ['message'],
+    action: ['action']
+  };
+  return composeClasses(slots, getAlertUtilityClass, classes);
+};
+const AlertRoot = styled$1(Paper, {
+  name: 'MuiAlert',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, styles[ownerState.variant], styles[`${ownerState.variant}${capitalize(ownerState.color || ownerState.severity)}`]];
+  }
+})(memoTheme(({
+  theme
+}) => {
+  const getColor = theme.palette.mode === 'light' ? theme.darken : theme.lighten;
+  const getBackgroundColor = theme.palette.mode === 'light' ? theme.lighten : theme.darken;
+  return {
+    ...theme.typography.body2,
+    backgroundColor: 'transparent',
+    display: 'flex',
+    padding: '6px 16px',
+    variants: [...Object.entries(theme.palette).filter(createSimplePaletteValueFilter(['light'])).map(([color]) => ({
+      props: {
+        colorSeverity: color,
+        variant: 'standard'
+      },
+      style: {
+        color: theme.vars ? theme.vars.palette.Alert[`${color}Color`] : getColor(theme.palette[color].light, 0.6),
+        backgroundColor: theme.vars ? theme.vars.palette.Alert[`${color}StandardBg`] : getBackgroundColor(theme.palette[color].light, 0.9),
+        [`& .${alertClasses$1.icon}`]: theme.vars ? {
+          color: theme.vars.palette.Alert[`${color}IconColor`]
+        } : {
+          color: theme.palette[color].main
+        }
+      }
+    })), ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter(['light'])).map(([color]) => ({
+      props: {
+        colorSeverity: color,
+        variant: 'outlined'
+      },
+      style: {
+        color: theme.vars ? theme.vars.palette.Alert[`${color}Color`] : getColor(theme.palette[color].light, 0.6),
+        border: `1px solid ${(theme.vars || theme).palette[color].light}`,
+        [`& .${alertClasses$1.icon}`]: theme.vars ? {
+          color: theme.vars.palette.Alert[`${color}IconColor`]
+        } : {
+          color: theme.palette[color].main
+        }
+      }
+    })), ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter(['dark'])).map(([color]) => ({
+      props: {
+        colorSeverity: color,
+        variant: 'filled'
+      },
+      style: {
+        fontWeight: theme.typography.fontWeightMedium,
+        ...(theme.vars ? {
+          color: theme.vars.palette.Alert[`${color}FilledColor`],
+          backgroundColor: theme.vars.palette.Alert[`${color}FilledBg`]
+        } : {
+          backgroundColor: theme.palette.mode === 'dark' ? theme.palette[color].dark : theme.palette[color].main,
+          color: theme.palette.getContrastText(theme.palette[color].main)
+        })
+      }
+    }))]
+  };
+}));
+const AlertIcon = styled$1('div', {
+  name: 'MuiAlert',
+  slot: 'Icon'
+})({
+  marginRight: 12,
+  padding: '7px 0',
+  display: 'flex',
+  fontSize: 22,
+  opacity: 0.9
 });
-const Block = styled("div")({
-    display: "grid",
-    gridTemplateColumns: "subgrid",
-    gridColumn: "span 5",
-    rowGap: THEME.SIZE.S2,
-    backgroundColor: THEME.COLOR.WHITE,
-    paddingInline: THEME.SIZE.S1,
-    paddingTop: THEME.SIZE.S3,
-    paddingBottom: THEME.SIZE.S1,
-    borderRadius: THEME.ROUND.BASE,
+const AlertMessage = styled$1('div', {
+  name: 'MuiAlert',
+  slot: 'Message'
+})({
+  padding: '8px 0',
+  minWidth: 0,
+  overflow: 'auto'
 });
-const TableRow = styled("div")({
-    display: "grid",
-    gridTemplateColumns: "subgrid",
-    gridColumn: "span 5",
+const AlertAction = styled$1('div', {
+  name: 'MuiAlert',
+  slot: 'Action'
+})({
+  display: 'flex',
+  alignItems: 'flex-start',
+  padding: '4px 0 0 16px',
+  marginLeft: 'auto',
+  marginRight: -8
 });
+const defaultIconMapping = {
+  success: /*#__PURE__*/jsxRuntimeExports.jsx(SuccessOutlinedIcon, {
+    fontSize: "inherit"
+  }),
+  warning: /*#__PURE__*/jsxRuntimeExports.jsx(ReportProblemOutlinedIcon, {
+    fontSize: "inherit"
+  }),
+  error: /*#__PURE__*/jsxRuntimeExports.jsx(ErrorOutlineIcon, {
+    fontSize: "inherit"
+  }),
+  info: /*#__PURE__*/jsxRuntimeExports.jsx(InfoOutlinedIcon, {
+    fontSize: "inherit"
+  })
+};
+const Alert = /*#__PURE__*/reactExports.forwardRef(function Alert(inProps, ref) {
+  const props = useDefaultProps({
+    props: inProps,
+    name: 'MuiAlert'
+  });
+  const {
+    action,
+    children,
+    className,
+    closeText = 'Close',
+    color,
+    components = {},
+    componentsProps = {},
+    icon,
+    iconMapping = defaultIconMapping,
+    onClose,
+    role = 'alert',
+    severity = 'success',
+    slotProps = {},
+    slots = {},
+    variant = 'standard',
+    ...other
+  } = props;
+  const ownerState = {
+    ...props,
+    color,
+    severity,
+    variant,
+    colorSeverity: color || severity
+  };
+  const classes = useUtilityClasses$7(ownerState);
+  const externalForwardedProps = {
+    slots: {
+      closeButton: components.CloseButton,
+      closeIcon: components.CloseIcon,
+      ...slots
+    },
+    slotProps: {
+      ...componentsProps,
+      ...slotProps
+    }
+  };
+  const [RootSlot, rootSlotProps] = useSlot('root', {
+    ref,
+    shouldForwardComponentProp: true,
+    className: clsx(classes.root, className),
+    elementType: AlertRoot,
+    externalForwardedProps: {
+      ...externalForwardedProps,
+      ...other
+    },
+    ownerState,
+    additionalProps: {
+      role,
+      elevation: 0
+    }
+  });
+  const [IconSlot, iconSlotProps] = useSlot('icon', {
+    className: classes.icon,
+    elementType: AlertIcon,
+    externalForwardedProps,
+    ownerState
+  });
+  const [MessageSlot, messageSlotProps] = useSlot('message', {
+    className: classes.message,
+    elementType: AlertMessage,
+    externalForwardedProps,
+    ownerState
+  });
+  const [ActionSlot, actionSlotProps] = useSlot('action', {
+    className: classes.action,
+    elementType: AlertAction,
+    externalForwardedProps,
+    ownerState
+  });
+  const [CloseButtonSlot, closeButtonProps] = useSlot('closeButton', {
+    elementType: IconButton,
+    externalForwardedProps,
+    ownerState
+  });
+  const [CloseIconSlot, closeIconProps] = useSlot('closeIcon', {
+    elementType: ClearIcon,
+    externalForwardedProps,
+    ownerState
+  });
+  return /*#__PURE__*/jsxRuntimeExports.jsxs(RootSlot, {
+    ...rootSlotProps,
+    children: [icon !== false ? /*#__PURE__*/jsxRuntimeExports.jsx(IconSlot, {
+      ...iconSlotProps,
+      children: icon || iconMapping[severity] || defaultIconMapping[severity]
+    }) : null, /*#__PURE__*/jsxRuntimeExports.jsx(MessageSlot, {
+      ...messageSlotProps,
+      children: children
+    }), action != null ? /*#__PURE__*/jsxRuntimeExports.jsx(ActionSlot, {
+      ...actionSlotProps,
+      children: action
+    }) : null, action == null && onClose ? /*#__PURE__*/jsxRuntimeExports.jsx(ActionSlot, {
+      ...actionSlotProps,
+      children: /*#__PURE__*/jsxRuntimeExports.jsx(CloseButtonSlot, {
+        size: "small",
+        "aria-label": closeText,
+        title: closeText,
+        color: "inherit",
+        onClick: onClose,
+        ...closeButtonProps,
+        children: /*#__PURE__*/jsxRuntimeExports.jsx(CloseIconSlot, {
+          fontSize: "small",
+          ...closeIconProps
+        })
+      })
+    }) : null]
+  });
+});
+var Alert$1 = Alert;
+
+// TODO: return `EventHandlerName extends `on${infer EventName}` ? Lowercase<EventName> : never` once generatePropTypes runs with TS 4.1
+function mapEventPropToEvent(eventProp) {
+  return eventProp.substring(2).toLowerCase();
+}
+function clickedRootScrollbar(event, doc) {
+  return doc.documentElement.clientWidth < event.clientX || doc.documentElement.clientHeight < event.clientY;
+}
+/**
+ * Listen for click events that occur somewhere in the document, outside of the element itself.
+ * For instance, if you need to hide a menu when people click anywhere else on your page.
+ *
+ * Demos:
+ *
+ * - [Click-Away Listener](https://mui.com/material-ui/react-click-away-listener/)
+ * - [Menu](https://mui.com/material-ui/react-menu/)
+ *
+ * API:
+ *
+ * - [ClickAwayListener API](https://mui.com/material-ui/api/click-away-listener/)
+ */
+function ClickAwayListener(props) {
+  const {
+    children,
+    disableReactTree = false,
+    mouseEvent = 'onClick',
+    onClickAway,
+    touchEvent = 'onTouchEnd'
+  } = props;
+  const movedRef = reactExports.useRef(false);
+  const nodeRef = reactExports.useRef(null);
+  const activatedRef = reactExports.useRef(false);
+  const syntheticEventRef = reactExports.useRef(false);
+  reactExports.useEffect(() => {
+    // Ensure that this component is not "activated" synchronously.
+    // https://github.com/facebook/react/issues/20074
+    setTimeout(() => {
+      activatedRef.current = true;
+    }, 0);
+    return () => {
+      activatedRef.current = false;
+    };
+  }, []);
+  const handleRef = useForkRef(getReactElementRef(children), nodeRef);
+
+  // The handler doesn't take event.defaultPrevented into account:
+  //
+  // event.preventDefault() is meant to stop default behaviors like
+  // clicking a checkbox to check it, hitting a button to submit a form,
+  // and hitting left arrow to move the cursor in a text input etc.
+  // Only special HTML elements have these default behaviors.
+  const handleClickAway = useEventCallback(event => {
+    // Given developers can stop the propagation of the synthetic event,
+    // we can only be confident with a positive value.
+    const insideReactTree = syntheticEventRef.current;
+    syntheticEventRef.current = false;
+    const doc = ownerDocument(nodeRef.current);
+
+    // 1. IE11 support, which trigger the handleClickAway even after the unbind
+    // 2. The child might render null.
+    // 3. Behave like a blur listener.
+    if (!activatedRef.current || !nodeRef.current || 'clientX' in event && clickedRootScrollbar(event, doc)) {
+      return;
+    }
+
+    // Do not act if user performed touchmove
+    if (movedRef.current) {
+      movedRef.current = false;
+      return;
+    }
+    let insideDOM;
+
+    // If not enough, can use https://github.com/DieterHolvoet/event-propagation-path/blob/master/propagationPath.js
+    if (event.composedPath) {
+      insideDOM = event.composedPath().includes(nodeRef.current);
+    } else {
+      insideDOM = !doc.documentElement.contains(
+      // @ts-expect-error returns `false` as intended when not dispatched from a Node
+      event.target) || nodeRef.current.contains(
+      // @ts-expect-error returns `false` as intended when not dispatched from a Node
+      event.target);
+    }
+    if (!insideDOM && (disableReactTree || !insideReactTree)) {
+      onClickAway(event);
+    }
+  });
+
+  // Keep track of mouse/touch events that bubbled up through the portal.
+  const createHandleSynthetic = handlerName => event => {
+    syntheticEventRef.current = true;
+    const childrenPropsHandler = children.props[handlerName];
+    if (childrenPropsHandler) {
+      childrenPropsHandler(event);
+    }
+  };
+  const childrenProps = {
+    ref: handleRef
+  };
+  if (touchEvent !== false) {
+    childrenProps[touchEvent] = createHandleSynthetic(touchEvent);
+  }
+  reactExports.useEffect(() => {
+    if (touchEvent !== false) {
+      const mappedTouchEvent = mapEventPropToEvent(touchEvent);
+      const doc = ownerDocument(nodeRef.current);
+      const handleTouchMove = () => {
+        movedRef.current = true;
+      };
+      doc.addEventListener(mappedTouchEvent, handleClickAway);
+      doc.addEventListener('touchmove', handleTouchMove);
+      return () => {
+        doc.removeEventListener(mappedTouchEvent, handleClickAway);
+        doc.removeEventListener('touchmove', handleTouchMove);
+      };
+    }
+    return undefined;
+  }, [handleClickAway, touchEvent]);
+  if (mouseEvent !== false) {
+    childrenProps[mouseEvent] = createHandleSynthetic(mouseEvent);
+  }
+  reactExports.useEffect(() => {
+    if (mouseEvent !== false) {
+      const mappedMouseEvent = mapEventPropToEvent(mouseEvent);
+      const doc = ownerDocument(nodeRef.current);
+      doc.addEventListener(mappedMouseEvent, handleClickAway);
+      return () => {
+        doc.removeEventListener(mappedMouseEvent, handleClickAway);
+      };
+    }
+    return undefined;
+  }, [handleClickAway, mouseEvent]);
+  return /*#__PURE__*/reactExports.cloneElement(children, childrenProps);
+}
+
+function getDialogUtilityClass(slot) {
+  return generateUtilityClass('MuiDialog', slot);
+}
+const dialogClasses = generateUtilityClasses('MuiDialog', ['root', 'backdrop', 'scrollPaper', 'scrollBody', 'container', 'paper', 'paperScrollPaper', 'paperScrollBody', 'paperWidthFalse', 'paperWidthXs', 'paperWidthSm', 'paperWidthMd', 'paperWidthLg', 'paperWidthXl', 'paperFullWidth', 'paperFullScreen']);
+var dialogClasses$1 = dialogClasses;
+
+const DialogContext = /*#__PURE__*/reactExports.createContext({});
+var DialogContext$1 = DialogContext;
+
+const DialogBackdrop = styled$1(Backdrop, {
+  name: 'MuiDialog',
+  slot: 'Backdrop'
+})({
+  // Improve scrollable dialog support.
+  zIndex: -1
+});
+const useUtilityClasses$6 = ownerState => {
+  const {
+    classes,
+    scroll,
+    maxWidth,
+    fullWidth,
+    fullScreen
+  } = ownerState;
+  const slots = {
+    root: ['root'],
+    backdrop: ['backdrop'],
+    container: ['container', `scroll${capitalize(scroll)}`],
+    paper: ['paper', `paperScroll${capitalize(scroll)}`, `paperWidth${capitalize(String(maxWidth))}`, fullWidth && 'paperFullWidth', fullScreen && 'paperFullScreen']
+  };
+  return composeClasses(slots, getDialogUtilityClass, classes);
+};
+const DialogRoot = styled$1(Modal, {
+  name: 'MuiDialog',
+  slot: 'Root'
+})({
+  '@media print': {
+    // Use !important to override the Modal inline-style.
+    position: 'absolute !important'
+  }
+});
+const DialogContainer = styled$1('div', {
+  name: 'MuiDialog',
+  slot: 'Container',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.container, styles[`scroll${capitalize(ownerState.scroll)}`]];
+  }
+})({
+  height: '100%',
+  '@media print': {
+    height: 'auto'
+  },
+  // We disable the focus ring for mouse, touch and keyboard users.
+  outline: 0,
+  variants: [{
+    props: {
+      scroll: 'paper'
+    },
+    style: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+  }, {
+    props: {
+      scroll: 'body'
+    },
+    style: {
+      overflowY: 'auto',
+      overflowX: 'hidden',
+      textAlign: 'center',
+      '&::after': {
+        content: '""',
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        height: '100%',
+        width: '0'
+      }
+    }
+  }]
+});
+const DialogPaper = styled$1(Paper, {
+  name: 'MuiDialog',
+  slot: 'Paper',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.paper, styles[`scrollPaper${capitalize(ownerState.scroll)}`], styles[`paperWidth${capitalize(String(ownerState.maxWidth))}`], ownerState.fullWidth && styles.paperFullWidth, ownerState.fullScreen && styles.paperFullScreen];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  margin: 32,
+  position: 'relative',
+  overflowY: 'auto',
+  '@media print': {
+    overflowY: 'visible',
+    boxShadow: 'none'
+  },
+  variants: [{
+    props: {
+      scroll: 'paper'
+    },
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      maxHeight: 'calc(100% - 64px)'
+    }
+  }, {
+    props: {
+      scroll: 'body'
+    },
+    style: {
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      textAlign: 'initial'
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => !ownerState.maxWidth,
+    style: {
+      maxWidth: 'calc(100% - 64px)'
+    }
+  }, {
+    props: {
+      maxWidth: 'xs'
+    },
+    style: {
+      maxWidth: theme.breakpoints.unit === 'px' ? Math.max(theme.breakpoints.values.xs, 444) : `max(${theme.breakpoints.values.xs}${theme.breakpoints.unit}, 444px)`,
+      [`&.${dialogClasses$1.paperScrollBody}`]: {
+        [theme.breakpoints.down(Math.max(theme.breakpoints.values.xs, 444) + 32 * 2)]: {
+          maxWidth: 'calc(100% - 64px)'
+        }
+      }
+    }
+  }, ...Object.keys(theme.breakpoints.values).filter(maxWidth => maxWidth !== 'xs').map(maxWidth => ({
+    props: {
+      maxWidth
+    },
+    style: {
+      maxWidth: `${theme.breakpoints.values[maxWidth]}${theme.breakpoints.unit}`,
+      [`&.${dialogClasses$1.paperScrollBody}`]: {
+        [theme.breakpoints.down(theme.breakpoints.values[maxWidth] + 32 * 2)]: {
+          maxWidth: 'calc(100% - 64px)'
+        }
+      }
+    }
+  })), {
+    props: ({
+      ownerState
+    }) => ownerState.fullWidth,
+    style: {
+      width: 'calc(100% - 64px)'
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.fullScreen,
+    style: {
+      margin: 0,
+      width: '100%',
+      maxWidth: '100%',
+      height: '100%',
+      maxHeight: 'none',
+      borderRadius: 0,
+      [`&.${dialogClasses$1.paperScrollBody}`]: {
+        margin: 0,
+        maxWidth: '100%'
+      }
+    }
+  }]
+})));
+
+/**
+ * Dialogs are overlaid modal paper based components with a backdrop.
+ */
+const Dialog = /*#__PURE__*/reactExports.forwardRef(function Dialog(inProps, ref) {
+  const props = useDefaultProps({
+    props: inProps,
+    name: 'MuiDialog'
+  });
+  const theme = useTheme$1();
+  const defaultTransitionDuration = {
+    enter: theme.transitions.duration.enteringScreen,
+    exit: theme.transitions.duration.leavingScreen
+  };
+  const {
+    'aria-describedby': ariaDescribedby,
+    'aria-labelledby': ariaLabelledbyProp,
+    'aria-modal': ariaModal = true,
+    BackdropComponent,
+    BackdropProps,
+    children,
+    className,
+    disableEscapeKeyDown = false,
+    fullScreen = false,
+    fullWidth = false,
+    maxWidth = 'sm',
+    onClick,
+    onClose,
+    open,
+    PaperComponent = Paper,
+    PaperProps = {},
+    scroll = 'paper',
+    slots = {},
+    slotProps = {},
+    TransitionComponent = Fade,
+    transitionDuration = defaultTransitionDuration,
+    TransitionProps,
+    ...other
+  } = props;
+  const ownerState = {
+    ...props,
+    disableEscapeKeyDown,
+    fullScreen,
+    fullWidth,
+    maxWidth,
+    scroll
+  };
+  const classes = useUtilityClasses$6(ownerState);
+  const backdropClick = reactExports.useRef();
+  const handleMouseDown = event => {
+    // We don't want to close the dialog when clicking the dialog content.
+    // Make sure the event starts and ends on the same DOM element.
+    backdropClick.current = event.target === event.currentTarget;
+  };
+  const handleBackdropClick = event => {
+    if (onClick) {
+      onClick(event);
+    }
+
+    // Ignore the events not coming from the "backdrop".
+    if (!backdropClick.current) {
+      return;
+    }
+    backdropClick.current = null;
+    if (onClose) {
+      onClose(event, 'backdropClick');
+    }
+  };
+  const ariaLabelledby = useId(ariaLabelledbyProp);
+  const dialogContextValue = reactExports.useMemo(() => {
+    return {
+      titleId: ariaLabelledby
+    };
+  }, [ariaLabelledby]);
+  const backwardCompatibleSlots = {
+    transition: TransitionComponent,
+    ...slots
+  };
+  const backwardCompatibleSlotProps = {
+    transition: TransitionProps,
+    paper: PaperProps,
+    backdrop: BackdropProps,
+    ...slotProps
+  };
+  const externalForwardedProps = {
+    slots: backwardCompatibleSlots,
+    slotProps: backwardCompatibleSlotProps
+  };
+  const [RootSlot, rootSlotProps] = useSlot('root', {
+    elementType: DialogRoot,
+    shouldForwardComponentProp: true,
+    externalForwardedProps,
+    ownerState,
+    className: clsx(classes.root, className),
+    ref
+  });
+  const [BackdropSlot, backdropSlotProps] = useSlot('backdrop', {
+    elementType: DialogBackdrop,
+    shouldForwardComponentProp: true,
+    externalForwardedProps,
+    ownerState,
+    className: classes.backdrop
+  });
+  const [PaperSlot, paperSlotProps] = useSlot('paper', {
+    elementType: DialogPaper,
+    shouldForwardComponentProp: true,
+    externalForwardedProps,
+    ownerState,
+    className: clsx(classes.paper, PaperProps.className)
+  });
+  const [ContainerSlot, containerSlotProps] = useSlot('container', {
+    elementType: DialogContainer,
+    externalForwardedProps,
+    ownerState,
+    className: classes.container
+  });
+  const [TransitionSlot, transitionSlotProps] = useSlot('transition', {
+    elementType: Fade,
+    externalForwardedProps,
+    ownerState,
+    additionalProps: {
+      appear: true,
+      in: open,
+      timeout: transitionDuration,
+      role: 'presentation'
+    }
+  });
+  return /*#__PURE__*/jsxRuntimeExports.jsx(RootSlot, {
+    closeAfterTransition: true,
+    slots: {
+      backdrop: BackdropSlot
+    },
+    slotProps: {
+      backdrop: {
+        transitionDuration,
+        as: BackdropComponent,
+        ...backdropSlotProps
+      }
+    },
+    disableEscapeKeyDown: disableEscapeKeyDown,
+    onClose: onClose,
+    open: open,
+    onClick: handleBackdropClick,
+    ...rootSlotProps,
+    ...other,
+    children: /*#__PURE__*/jsxRuntimeExports.jsx(TransitionSlot, {
+      ...transitionSlotProps,
+      children: /*#__PURE__*/jsxRuntimeExports.jsx(ContainerSlot, {
+        onMouseDown: handleMouseDown,
+        ...containerSlotProps,
+        children: /*#__PURE__*/jsxRuntimeExports.jsx(PaperSlot, {
+          as: PaperComponent,
+          elevation: 24,
+          role: "dialog",
+          "aria-describedby": ariaDescribedby,
+          "aria-labelledby": ariaLabelledby,
+          "aria-modal": ariaModal,
+          ...paperSlotProps,
+          children: /*#__PURE__*/jsxRuntimeExports.jsx(DialogContext$1.Provider, {
+            value: dialogContextValue,
+            children: children
+          })
+        })
+      })
+    })
+  });
+});
+var Dialog$1 = Dialog;
+
+function getDialogActionsUtilityClass(slot) {
+  return generateUtilityClass('MuiDialogActions', slot);
+}
+generateUtilityClasses('MuiDialogActions', ['root', 'spacing']);
+
+const useUtilityClasses$5 = ownerState => {
+  const {
+    classes,
+    disableSpacing
+  } = ownerState;
+  const slots = {
+    root: ['root', !disableSpacing && 'spacing']
+  };
+  return composeClasses(slots, getDialogActionsUtilityClass, classes);
+};
+const DialogActionsRoot = styled$1('div', {
+  name: 'MuiDialogActions',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, !ownerState.disableSpacing && styles.spacing];
+  }
+})({
+  display: 'flex',
+  alignItems: 'center',
+  padding: 8,
+  justifyContent: 'flex-end',
+  flex: '0 0 auto',
+  variants: [{
+    props: ({
+      ownerState
+    }) => !ownerState.disableSpacing,
+    style: {
+      '& > :not(style) ~ :not(style)': {
+        marginLeft: 8
+      }
+    }
+  }]
+});
+const DialogActions = /*#__PURE__*/reactExports.forwardRef(function DialogActions(inProps, ref) {
+  const props = useDefaultProps({
+    props: inProps,
+    name: 'MuiDialogActions'
+  });
+  const {
+    className,
+    disableSpacing = false,
+    ...other
+  } = props;
+  const ownerState = {
+    ...props,
+    disableSpacing
+  };
+  const classes = useUtilityClasses$5(ownerState);
+  return /*#__PURE__*/jsxRuntimeExports.jsx(DialogActionsRoot, {
+    className: clsx(classes.root, className),
+    ownerState: ownerState,
+    ref: ref,
+    ...other
+  });
+});
+var DialogActions$1 = DialogActions;
+
+function getDialogContentUtilityClass(slot) {
+  return generateUtilityClass('MuiDialogContent', slot);
+}
+generateUtilityClasses('MuiDialogContent', ['root', 'dividers']);
+
+function getDialogTitleUtilityClass(slot) {
+  return generateUtilityClass('MuiDialogTitle', slot);
+}
+const dialogTitleClasses = generateUtilityClasses('MuiDialogTitle', ['root']);
+var dialogTitleClasses$1 = dialogTitleClasses;
+
+const useUtilityClasses$4 = ownerState => {
+  const {
+    classes,
+    dividers
+  } = ownerState;
+  const slots = {
+    root: ['root', dividers && 'dividers']
+  };
+  return composeClasses(slots, getDialogContentUtilityClass, classes);
+};
+const DialogContentRoot = styled$1('div', {
+  name: 'MuiDialogContent',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, ownerState.dividers && styles.dividers];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  flex: '1 1 auto',
+  // Add iOS momentum scrolling for iOS < 13.0
+  WebkitOverflowScrolling: 'touch',
+  overflowY: 'auto',
+  padding: '20px 24px',
+  variants: [{
+    props: ({
+      ownerState
+    }) => ownerState.dividers,
+    style: {
+      padding: '16px 24px',
+      borderTop: `1px solid ${(theme.vars || theme).palette.divider}`,
+      borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => !ownerState.dividers,
+    style: {
+      [`.${dialogTitleClasses$1.root} + &`]: {
+        paddingTop: 0
+      }
+    }
+  }]
+})));
+const DialogContent = /*#__PURE__*/reactExports.forwardRef(function DialogContent(inProps, ref) {
+  const props = useDefaultProps({
+    props: inProps,
+    name: 'MuiDialogContent'
+  });
+  const {
+    className,
+    dividers = false,
+    ...other
+  } = props;
+  const ownerState = {
+    ...props,
+    dividers
+  };
+  const classes = useUtilityClasses$4(ownerState);
+  return /*#__PURE__*/jsxRuntimeExports.jsx(DialogContentRoot, {
+    className: clsx(classes.root, className),
+    ownerState: ownerState,
+    ref: ref,
+    ...other
+  });
+});
+var DialogContent$1 = DialogContent;
+
+const useUtilityClasses$3 = ownerState => {
+  const {
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root']
+  };
+  return composeClasses(slots, getDialogTitleUtilityClass, classes);
+};
+const DialogTitleRoot = styled$1(Typography, {
+  name: 'MuiDialogTitle',
+  slot: 'Root'
+})({
+  padding: '16px 24px',
+  flex: '0 0 auto'
+});
+const DialogTitle = /*#__PURE__*/reactExports.forwardRef(function DialogTitle(inProps, ref) {
+  const props = useDefaultProps({
+    props: inProps,
+    name: 'MuiDialogTitle'
+  });
+  const {
+    className,
+    id: idProp,
+    ...other
+  } = props;
+  const ownerState = props;
+  const classes = useUtilityClasses$3(ownerState);
+  const {
+    titleId = idProp
+  } = reactExports.useContext(DialogContext$1);
+  return /*#__PURE__*/jsxRuntimeExports.jsx(DialogTitleRoot, {
+    component: "h2",
+    className: clsx(classes.root, className),
+    ownerState: ownerState,
+    ref: ref,
+    variant: "h6",
+    id: idProp ?? titleId,
+    ...other
+  });
+});
+var DialogTitle$1 = DialogTitle;
+
+function getLinearProgressUtilityClass(slot) {
+  return generateUtilityClass('MuiLinearProgress', slot);
+}
+generateUtilityClasses('MuiLinearProgress', ['root', 'colorPrimary', 'colorSecondary', 'determinate', 'indeterminate', 'buffer', 'query', 'dashed', 'dashedColorPrimary', 'dashedColorSecondary', 'bar', 'bar1', 'bar2', 'barColorPrimary', 'barColorSecondary', 'bar1Indeterminate', 'bar1Determinate', 'bar1Buffer', 'bar2Indeterminate', 'bar2Buffer']);
+
+const TRANSITION_DURATION = 4; // seconds
+const indeterminate1Keyframe = keyframes`
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+`;
+
+// This implementation is for supporting both Styled-components v4+ and Pigment CSS.
+// A global animation has to be created here for Styled-components v4+ (https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/utils/errors.md#12).
+// which can be done by checking typeof indeterminate1Keyframe !== 'string' (at runtime, Pigment CSS transform keyframes`` to a string).
+const indeterminate1Animation = typeof indeterminate1Keyframe !== 'string' ? css`
+        animation: ${indeterminate1Keyframe} 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+      ` : null;
+const indeterminate2Keyframe = keyframes`
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+`;
+const indeterminate2Animation = typeof indeterminate2Keyframe !== 'string' ? css`
+        animation: ${indeterminate2Keyframe} 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite;
+      ` : null;
+const bufferKeyframe = keyframes`
+  0% {
+    opacity: 1;
+    background-position: 0 -23px;
+  }
+
+  60% {
+    opacity: 0;
+    background-position: 0 -23px;
+  }
+
+  100% {
+    opacity: 1;
+    background-position: -200px -23px;
+  }
+`;
+const bufferAnimation = typeof bufferKeyframe !== 'string' ? css`
+        animation: ${bufferKeyframe} 3s infinite linear;
+      ` : null;
+const useUtilityClasses$2 = ownerState => {
+  const {
+    classes,
+    variant,
+    color
+  } = ownerState;
+  const slots = {
+    root: ['root', `color${capitalize(color)}`, variant],
+    dashed: ['dashed', `dashedColor${capitalize(color)}`],
+    bar1: ['bar', 'bar1', `barColor${capitalize(color)}`, (variant === 'indeterminate' || variant === 'query') && 'bar1Indeterminate', variant === 'determinate' && 'bar1Determinate', variant === 'buffer' && 'bar1Buffer'],
+    bar2: ['bar', 'bar2', variant !== 'buffer' && `barColor${capitalize(color)}`, variant === 'buffer' && `color${capitalize(color)}`, (variant === 'indeterminate' || variant === 'query') && 'bar2Indeterminate', variant === 'buffer' && 'bar2Buffer']
+  };
+  return composeClasses(slots, getLinearProgressUtilityClass, classes);
+};
+const getColorShade = (theme, color) => {
+  if (theme.vars) {
+    return theme.vars.palette.LinearProgress[`${color}Bg`];
+  }
+  return theme.palette.mode === 'light' ? theme.lighten(theme.palette[color].main, 0.62) : theme.darken(theme.palette[color].main, 0.5);
+};
+const LinearProgressRoot = styled$1('span', {
+  name: 'MuiLinearProgress',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, styles[`color${capitalize(ownerState.color)}`], styles[ownerState.variant]];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  position: 'relative',
+  overflow: 'hidden',
+  display: 'block',
+  height: 4,
+  // Fix Safari's bug during composition of different paint.
+  zIndex: 0,
+  '@media print': {
+    colorAdjust: 'exact'
+  },
+  variants: [...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => ({
+    props: {
+      color
+    },
+    style: {
+      backgroundColor: getColorShade(theme, color)
+    }
+  })), {
+    props: ({
+      ownerState
+    }) => ownerState.color === 'inherit' && ownerState.variant !== 'buffer',
+    style: {
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'currentColor',
+        opacity: 0.3
+      }
+    }
+  }, {
+    props: {
+      variant: 'buffer'
+    },
+    style: {
+      backgroundColor: 'transparent'
+    }
+  }, {
+    props: {
+      variant: 'query'
+    },
+    style: {
+      transform: 'rotate(180deg)'
+    }
+  }]
+})));
+const LinearProgressDashed = styled$1('span', {
+  name: 'MuiLinearProgress',
+  slot: 'Dashed',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.dashed, styles[`dashedColor${capitalize(ownerState.color)}`]];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  position: 'absolute',
+  marginTop: 0,
+  height: '100%',
+  width: '100%',
+  backgroundSize: '10px 10px',
+  backgroundPosition: '0 -23px',
+  variants: [{
+    props: {
+      color: 'inherit'
+    },
+    style: {
+      opacity: 0.3,
+      backgroundImage: `radial-gradient(currentColor 0%, currentColor 16%, transparent 42%)`
+    }
+  }, ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => {
+    const backgroundColor = getColorShade(theme, color);
+    return {
+      props: {
+        color
+      },
+      style: {
+        backgroundImage: `radial-gradient(${backgroundColor} 0%, ${backgroundColor} 16%, transparent 42%)`
+      }
+    };
+  })]
+})), bufferAnimation || {
+  // At runtime for Pigment CSS, `bufferAnimation` will be null and the generated keyframe will be used.
+  animation: `${bufferKeyframe} 3s infinite linear`
+});
+const LinearProgressBar1 = styled$1('span', {
+  name: 'MuiLinearProgress',
+  slot: 'Bar1',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.bar, styles.bar1, styles[`barColor${capitalize(ownerState.color)}`], (ownerState.variant === 'indeterminate' || ownerState.variant === 'query') && styles.bar1Indeterminate, ownerState.variant === 'determinate' && styles.bar1Determinate, ownerState.variant === 'buffer' && styles.bar1Buffer];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  width: '100%',
+  position: 'absolute',
+  left: 0,
+  bottom: 0,
+  top: 0,
+  transition: 'transform 0.2s linear',
+  transformOrigin: 'left',
+  variants: [{
+    props: {
+      color: 'inherit'
+    },
+    style: {
+      backgroundColor: 'currentColor'
+    }
+  }, ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => ({
+    props: {
+      color
+    },
+    style: {
+      backgroundColor: (theme.vars || theme).palette[color].main
+    }
+  })), {
+    props: {
+      variant: 'determinate'
+    },
+    style: {
+      transition: `transform .${TRANSITION_DURATION}s linear`
+    }
+  }, {
+    props: {
+      variant: 'buffer'
+    },
+    style: {
+      zIndex: 1,
+      transition: `transform .${TRANSITION_DURATION}s linear`
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.variant === 'indeterminate' || ownerState.variant === 'query',
+    style: {
+      width: 'auto'
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.variant === 'indeterminate' || ownerState.variant === 'query',
+    style: indeterminate1Animation || {
+      animation: `${indeterminate1Keyframe} 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite`
+    }
+  }]
+})));
+const LinearProgressBar2 = styled$1('span', {
+  name: 'MuiLinearProgress',
+  slot: 'Bar2',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.bar, styles.bar2, styles[`barColor${capitalize(ownerState.color)}`], (ownerState.variant === 'indeterminate' || ownerState.variant === 'query') && styles.bar2Indeterminate, ownerState.variant === 'buffer' && styles.bar2Buffer];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  width: '100%',
+  position: 'absolute',
+  left: 0,
+  bottom: 0,
+  top: 0,
+  transition: 'transform 0.2s linear',
+  transformOrigin: 'left',
+  variants: [...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => ({
+    props: {
+      color
+    },
+    style: {
+      '--LinearProgressBar2-barColor': (theme.vars || theme).palette[color].main
+    }
+  })), {
+    props: ({
+      ownerState
+    }) => ownerState.variant !== 'buffer' && ownerState.color !== 'inherit',
+    style: {
+      backgroundColor: 'var(--LinearProgressBar2-barColor, currentColor)'
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.variant !== 'buffer' && ownerState.color === 'inherit',
+    style: {
+      backgroundColor: 'currentColor'
+    }
+  }, {
+    props: {
+      color: 'inherit'
+    },
+    style: {
+      opacity: 0.3
+    }
+  }, ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => ({
+    props: {
+      color,
+      variant: 'buffer'
+    },
+    style: {
+      backgroundColor: getColorShade(theme, color),
+      transition: `transform .${TRANSITION_DURATION}s linear`
+    }
+  })), {
+    props: ({
+      ownerState
+    }) => ownerState.variant === 'indeterminate' || ownerState.variant === 'query',
+    style: {
+      width: 'auto'
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.variant === 'indeterminate' || ownerState.variant === 'query',
+    style: indeterminate2Animation || {
+      animation: `${indeterminate2Keyframe} 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite`
+    }
+  }]
+})));
+
+/**
+ * ## ARIA
+ *
+ * If the progress bar is describing the loading progress of a particular region of a page,
+ * you should use `aria-describedby` to point to the progress bar, and set the `aria-busy`
+ * attribute to `true` on that region until it has finished loading.
+ */
+const LinearProgress = /*#__PURE__*/reactExports.forwardRef(function LinearProgress(inProps, ref) {
+  const props = useDefaultProps({
+    props: inProps,
+    name: 'MuiLinearProgress'
+  });
+  const {
+    className,
+    color = 'primary',
+    value,
+    valueBuffer,
+    variant = 'indeterminate',
+    ...other
+  } = props;
+  const ownerState = {
+    ...props,
+    color,
+    variant
+  };
+  const classes = useUtilityClasses$2(ownerState);
+  const isRtl = useRtl();
+  const rootProps = {};
+  const inlineStyles = {
+    bar1: {},
+    bar2: {}
+  };
+  if (variant === 'determinate' || variant === 'buffer') {
+    if (value !== undefined) {
+      rootProps['aria-valuenow'] = Math.round(value);
+      rootProps['aria-valuemin'] = 0;
+      rootProps['aria-valuemax'] = 100;
+      let transform = value - 100;
+      if (isRtl) {
+        transform = -transform;
+      }
+      inlineStyles.bar1.transform = `translateX(${transform}%)`;
+    }
+  }
+  if (variant === 'buffer') {
+    if (valueBuffer !== undefined) {
+      let transform = (valueBuffer || 0) - 100;
+      if (isRtl) {
+        transform = -transform;
+      }
+      inlineStyles.bar2.transform = `translateX(${transform}%)`;
+    }
+  }
+  return /*#__PURE__*/jsxRuntimeExports.jsxs(LinearProgressRoot, {
+    className: clsx(classes.root, className),
+    ownerState: ownerState,
+    role: "progressbar",
+    ...rootProps,
+    ref: ref,
+    ...other,
+    children: [variant === 'buffer' ? /*#__PURE__*/jsxRuntimeExports.jsx(LinearProgressDashed, {
+      className: classes.dashed,
+      ownerState: ownerState
+    }) : null, /*#__PURE__*/jsxRuntimeExports.jsx(LinearProgressBar1, {
+      className: classes.bar1,
+      ownerState: ownerState,
+      style: inlineStyles.bar1
+    }), variant === 'determinate' ? null : /*#__PURE__*/jsxRuntimeExports.jsx(LinearProgressBar2, {
+      className: classes.bar2,
+      ownerState: ownerState,
+      style: inlineStyles.bar2
+    })]
+  });
+});
+var LinearProgress$1 = LinearProgress;
+
+function useSnackbar(parameters = {}) {
+  const {
+    autoHideDuration = null,
+    disableWindowBlurListener = false,
+    onClose,
+    open,
+    resumeHideDuration
+  } = parameters;
+  const timerAutoHide = useTimeout();
+  reactExports.useEffect(() => {
+    if (!open) {
+      return undefined;
+    }
+
+    /**
+     * @param {KeyboardEvent} nativeEvent
+     */
+    function handleKeyDown(nativeEvent) {
+      if (!nativeEvent.defaultPrevented) {
+        if (nativeEvent.key === 'Escape') {
+          // not calling `preventDefault` since we don't know if people may ignore this event e.g. a permanently open snackbar
+          onClose?.(nativeEvent, 'escapeKeyDown');
+        }
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [open, onClose]);
+  const handleClose = useEventCallback((event, reason) => {
+    onClose?.(event, reason);
+  });
+  const setAutoHideTimer = useEventCallback(autoHideDurationParam => {
+    if (!onClose || autoHideDurationParam == null) {
+      return;
+    }
+    timerAutoHide.start(autoHideDurationParam, () => {
+      handleClose(null, 'timeout');
+    });
+  });
+  reactExports.useEffect(() => {
+    if (open) {
+      setAutoHideTimer(autoHideDuration);
+    }
+    return timerAutoHide.clear;
+  }, [open, autoHideDuration, setAutoHideTimer, timerAutoHide]);
+  const handleClickAway = event => {
+    onClose?.(event, 'clickaway');
+  };
+
+  // Pause the timer when the user is interacting with the Snackbar
+  // or when the user hide the window.
+  const handlePause = timerAutoHide.clear;
+
+  // Restart the timer when the user is no longer interacting with the Snackbar
+  // or when the window is shown back.
+  const handleResume = reactExports.useCallback(() => {
+    if (autoHideDuration != null) {
+      setAutoHideTimer(resumeHideDuration != null ? resumeHideDuration : autoHideDuration * 0.5);
+    }
+  }, [autoHideDuration, resumeHideDuration, setAutoHideTimer]);
+  const createHandleBlur = otherHandlers => event => {
+    const onBlurCallback = otherHandlers.onBlur;
+    onBlurCallback?.(event);
+    handleResume();
+  };
+  const createHandleFocus = otherHandlers => event => {
+    const onFocusCallback = otherHandlers.onFocus;
+    onFocusCallback?.(event);
+    handlePause();
+  };
+  const createMouseEnter = otherHandlers => event => {
+    const onMouseEnterCallback = otherHandlers.onMouseEnter;
+    onMouseEnterCallback?.(event);
+    handlePause();
+  };
+  const createMouseLeave = otherHandlers => event => {
+    const onMouseLeaveCallback = otherHandlers.onMouseLeave;
+    onMouseLeaveCallback?.(event);
+    handleResume();
+  };
+  reactExports.useEffect(() => {
+    // TODO: window global should be refactored here
+    if (!disableWindowBlurListener && open) {
+      window.addEventListener('focus', handleResume);
+      window.addEventListener('blur', handlePause);
+      return () => {
+        window.removeEventListener('focus', handleResume);
+        window.removeEventListener('blur', handlePause);
+      };
+    }
+    return undefined;
+  }, [disableWindowBlurListener, open, handleResume, handlePause]);
+  const getRootProps = (externalProps = {}) => {
+    const externalEventHandlers = {
+      ...extractEventHandlers(parameters),
+      ...extractEventHandlers(externalProps)
+    };
+    return {
+      // ClickAwayListener adds an `onClick` prop which results in the alert not being announced.
+      // See https://github.com/mui/material-ui/issues/29080
+      role: 'presentation',
+      ...externalProps,
+      ...externalEventHandlers,
+      onBlur: createHandleBlur(externalEventHandlers),
+      onFocus: createHandleFocus(externalEventHandlers),
+      onMouseEnter: createMouseEnter(externalEventHandlers),
+      onMouseLeave: createMouseLeave(externalEventHandlers)
+    };
+  };
+  return {
+    getRootProps,
+    onClickAway: handleClickAway
+  };
+}
+
+function getSnackbarContentUtilityClass(slot) {
+  return generateUtilityClass('MuiSnackbarContent', slot);
+}
+generateUtilityClasses('MuiSnackbarContent', ['root', 'message', 'action']);
+
+const useUtilityClasses$1 = ownerState => {
+  const {
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root'],
+    action: ['action'],
+    message: ['message']
+  };
+  return composeClasses(slots, getSnackbarContentUtilityClass, classes);
+};
+const SnackbarContentRoot = styled$1(Paper, {
+  name: 'MuiSnackbarContent',
+  slot: 'Root'
+})(memoTheme(({
+  theme
+}) => {
+  const emphasis = theme.palette.mode === 'light' ? 0.8 : 0.98;
+  return {
+    ...theme.typography.body2,
+    color: theme.vars ? theme.vars.palette.SnackbarContent.color : theme.palette.getContrastText(emphasize(theme.palette.background.default, emphasis)),
+    backgroundColor: theme.vars ? theme.vars.palette.SnackbarContent.bg : emphasize(theme.palette.background.default, emphasis),
+    display: 'flex',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    padding: '6px 16px',
+    flexGrow: 1,
+    [theme.breakpoints.up('sm')]: {
+      flexGrow: 'initial',
+      minWidth: 288
+    }
+  };
+}));
+const SnackbarContentMessage = styled$1('div', {
+  name: 'MuiSnackbarContent',
+  slot: 'Message'
+})({
+  padding: '8px 0'
+});
+const SnackbarContentAction = styled$1('div', {
+  name: 'MuiSnackbarContent',
+  slot: 'Action'
+})({
+  display: 'flex',
+  alignItems: 'center',
+  marginLeft: 'auto',
+  paddingLeft: 16,
+  marginRight: -8
+});
+const SnackbarContent = /*#__PURE__*/reactExports.forwardRef(function SnackbarContent(inProps, ref) {
+  const props = useDefaultProps({
+    props: inProps,
+    name: 'MuiSnackbarContent'
+  });
+  const {
+    action,
+    className,
+    message,
+    role = 'alert',
+    ...other
+  } = props;
+  const ownerState = props;
+  const classes = useUtilityClasses$1(ownerState);
+  return /*#__PURE__*/jsxRuntimeExports.jsxs(SnackbarContentRoot, {
+    role: role,
+    elevation: 6,
+    className: clsx(classes.root, className),
+    ownerState: ownerState,
+    ref: ref,
+    ...other,
+    children: [/*#__PURE__*/jsxRuntimeExports.jsx(SnackbarContentMessage, {
+      className: classes.message,
+      ownerState: ownerState,
+      children: message
+    }), action ? /*#__PURE__*/jsxRuntimeExports.jsx(SnackbarContentAction, {
+      className: classes.action,
+      ownerState: ownerState,
+      children: action
+    }) : null]
+  });
+});
+var SnackbarContent$1 = SnackbarContent;
+
+function getSnackbarUtilityClass(slot) {
+  return generateUtilityClass('MuiSnackbar', slot);
+}
+generateUtilityClasses('MuiSnackbar', ['root', 'anchorOriginTopCenter', 'anchorOriginBottomCenter', 'anchorOriginTopRight', 'anchorOriginBottomRight', 'anchorOriginTopLeft', 'anchorOriginBottomLeft']);
+
+const useUtilityClasses = ownerState => {
+  const {
+    classes,
+    anchorOrigin
+  } = ownerState;
+  const slots = {
+    root: ['root', `anchorOrigin${capitalize(anchorOrigin.vertical)}${capitalize(anchorOrigin.horizontal)}`]
+  };
+  return composeClasses(slots, getSnackbarUtilityClass, classes);
+};
+const SnackbarRoot = styled$1('div', {
+  name: 'MuiSnackbar',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, styles[`anchorOrigin${capitalize(ownerState.anchorOrigin.vertical)}${capitalize(ownerState.anchorOrigin.horizontal)}`]];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  zIndex: (theme.vars || theme).zIndex.snackbar,
+  position: 'fixed',
+  display: 'flex',
+  left: 8,
+  right: 8,
+  justifyContent: 'center',
+  alignItems: 'center',
+  variants: [{
+    props: ({
+      ownerState
+    }) => ownerState.anchorOrigin.vertical === 'top',
+    style: {
+      top: 8,
+      [theme.breakpoints.up('sm')]: {
+        top: 24
+      }
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.anchorOrigin.vertical !== 'top',
+    style: {
+      bottom: 8,
+      [theme.breakpoints.up('sm')]: {
+        bottom: 24
+      }
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.anchorOrigin.horizontal === 'left',
+    style: {
+      justifyContent: 'flex-start',
+      [theme.breakpoints.up('sm')]: {
+        left: 24,
+        right: 'auto'
+      }
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.anchorOrigin.horizontal === 'right',
+    style: {
+      justifyContent: 'flex-end',
+      [theme.breakpoints.up('sm')]: {
+        right: 24,
+        left: 'auto'
+      }
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.anchorOrigin.horizontal === 'center',
+    style: {
+      [theme.breakpoints.up('sm')]: {
+        left: '50%',
+        right: 'auto',
+        transform: 'translateX(-50%)'
+      }
+    }
+  }]
+})));
+const Snackbar = /*#__PURE__*/reactExports.forwardRef(function Snackbar(inProps, ref) {
+  const props = useDefaultProps({
+    props: inProps,
+    name: 'MuiSnackbar'
+  });
+  const theme = useTheme$1();
+  const defaultTransitionDuration = {
+    enter: theme.transitions.duration.enteringScreen,
+    exit: theme.transitions.duration.leavingScreen
+  };
+  const {
+    action,
+    anchorOrigin: {
+      vertical,
+      horizontal
+    } = {
+      vertical: 'bottom',
+      horizontal: 'left'
+    },
+    autoHideDuration = null,
+    children,
+    className,
+    ClickAwayListenerProps: ClickAwayListenerPropsProp,
+    ContentProps: ContentPropsProp,
+    disableWindowBlurListener = false,
+    message,
+    onBlur,
+    onClose,
+    onFocus,
+    onMouseEnter,
+    onMouseLeave,
+    open,
+    resumeHideDuration,
+    slots = {},
+    slotProps = {},
+    TransitionComponent: TransitionComponentProp,
+    transitionDuration = defaultTransitionDuration,
+    TransitionProps: {
+      onEnter,
+      onExited,
+      ...TransitionPropsProp
+    } = {},
+    ...other
+  } = props;
+  const ownerState = {
+    ...props,
+    anchorOrigin: {
+      vertical,
+      horizontal
+    },
+    autoHideDuration,
+    disableWindowBlurListener,
+    TransitionComponent: TransitionComponentProp,
+    transitionDuration
+  };
+  const classes = useUtilityClasses(ownerState);
+  const {
+    getRootProps,
+    onClickAway
+  } = useSnackbar(ownerState);
+  const [exited, setExited] = reactExports.useState(true);
+  const handleExited = node => {
+    setExited(true);
+    if (onExited) {
+      onExited(node);
+    }
+  };
+  const handleEnter = (node, isAppearing) => {
+    setExited(false);
+    if (onEnter) {
+      onEnter(node, isAppearing);
+    }
+  };
+  const externalForwardedProps = {
+    slots: {
+      transition: TransitionComponentProp,
+      ...slots
+    },
+    slotProps: {
+      content: ContentPropsProp,
+      clickAwayListener: ClickAwayListenerPropsProp,
+      transition: TransitionPropsProp,
+      ...slotProps
+    }
+  };
+  const [Root, rootProps] = useSlot('root', {
+    ref,
+    className: [classes.root, className],
+    elementType: SnackbarRoot,
+    getSlotProps: getRootProps,
+    externalForwardedProps: {
+      ...externalForwardedProps,
+      ...other
+    },
+    ownerState
+  });
+  const [ClickAwaySlot, {
+    ownerState: clickAwayOwnerStateProp,
+    ...clickAwayListenerProps
+  }] = useSlot('clickAwayListener', {
+    elementType: ClickAwayListener,
+    externalForwardedProps,
+    getSlotProps: handlers => ({
+      onClickAway: (...params) => {
+        const event = params[0];
+        handlers.onClickAway?.(...params);
+        if (event?.defaultMuiPrevented) {
+          return;
+        }
+        onClickAway(...params);
+      }
+    }),
+    ownerState
+  });
+  const [ContentSlot, contentSlotProps] = useSlot('content', {
+    elementType: SnackbarContent$1,
+    shouldForwardComponentProp: true,
+    externalForwardedProps,
+    additionalProps: {
+      message,
+      action
+    },
+    ownerState
+  });
+  const [TransitionSlot, transitionProps] = useSlot('transition', {
+    elementType: Grow,
+    externalForwardedProps,
+    getSlotProps: handlers => ({
+      onEnter: (...params) => {
+        handlers.onEnter?.(...params);
+        handleEnter(...params);
+      },
+      onExited: (...params) => {
+        handlers.onExited?.(...params);
+        handleExited(...params);
+      }
+    }),
+    additionalProps: {
+      appear: true,
+      in: open,
+      timeout: transitionDuration,
+      direction: vertical === 'top' ? 'down' : 'up'
+    },
+    ownerState
+  });
+
+  // So we only render active snackbars.
+  if (!open && exited) {
+    return null;
+  }
+  return /*#__PURE__*/jsxRuntimeExports.jsx(ClickAwaySlot, {
+    ...clickAwayListenerProps,
+    ...(slots.clickAwayListener && {
+      ownerState: clickAwayOwnerStateProp
+    }),
+    children: /*#__PURE__*/jsxRuntimeExports.jsx(Root, {
+      ...rootProps,
+      children: /*#__PURE__*/jsxRuntimeExports.jsx(TransitionSlot, {
+        ...transitionProps,
+        children: children || /*#__PURE__*/jsxRuntimeExports.jsx(ContentSlot, {
+          ...contentSlotProps
+        })
+      })
+    })
+  });
+});
+var Snackbar$1 = Snackbar;
+
+const Stack = createStack({
+  createStyledComponent: styled$1('div', {
+    name: 'MuiStack',
+    slot: 'Root'
+  }),
+  useThemeProps: inProps => useDefaultProps({
+    props: inProps,
+    name: 'MuiStack'
+  })
+});
+var Stack$1 = Stack;
 
 // src/utils/formatProdErrorMessage.ts
 function formatProdErrorMessage$1(code) {
@@ -2378,7 +4327,62 @@ function formatProdErrorMessage(code) {
   return `Minified Redux Toolkit error #${code}; visit https://redux-toolkit.js.org/Errors?code=${code} for the full message or use the non-minified dev environment for full errors. `;
 }
 
+const DEFAULT_FEEDBACK_AUTO_HIDE_DURATION = 6000;
+const createInitialFeedbackState = () => ({
+    open: false,
+    severity: "success",
+    message: "",
+    detail: undefined,
+    autoHideDuration: DEFAULT_FEEDBACK_AUTO_HIDE_DURATION,
+    key: 0,
+});
+const normalizePayload = (payload) => {
+    if (typeof payload === "string") {
+        return { message: payload };
+    }
+    return payload;
+};
+const showFeedback = (state, severity, payload) => {
+    const input = normalizePayload(payload);
+    state.open = true;
+    state.severity = severity;
+    state.message = input.message;
+    state.detail = input.detail;
+    state.autoHideDuration = input.autoHideDuration ?? DEFAULT_FEEDBACK_AUTO_HIDE_DURATION;
+    state.key += 1;
+};
+const slice$3 = createSlice({
+    name: "feedback",
+    initialState: createInitialFeedbackState(),
+    reducers: {
+        showSuccess: (state, action) => {
+            showFeedback(state, "success", action.payload);
+        },
+        showError: (state, action) => {
+            showFeedback(state, "error", action.payload);
+        },
+        closeFeedback: (state) => {
+            state.open = false;
+        },
+    },
+});
+const feedbackReducer = slice$3.reducer;
+const FeedbackActions = slice$3.actions;
+const FeedbackSelectors = {
+    selectFeedback: (state) => state.feedback,
+};
+
+const createBlankDocumentProvenance = (params = {}) => {
+    return {
+        importSourceGmId: params.importSourceGmId ?? "",
+        originalMediaId: params.originalMediaId ?? "",
+        sourceUrl: params.sourceUrl ?? "",
+    };
+};
 const initialState = {
+    title: "",
+    description: "",
+    provenance: createBlankDocumentProvenance(),
     solutions: [],
 };
 const slice$2 = createSlice({
@@ -2394,12 +4398,30 @@ const slice$2 = createSlice({
         setSolutions: (state, action) => {
             state.solutions = action.payload;
         },
+        setTitle: (state, action) => {
+            state.title = action.payload;
+        },
+        setDescription: (state, action) => {
+            state.description = action.payload;
+        },
+        setProvenance: (state, action) => {
+            state.provenance = createBlankDocumentProvenance({
+                ...state.provenance,
+                ...action.payload,
+            });
+        },
+        replaceDocument: (_state, action) => {
+            return action.payload;
+        },
     },
 });
 const documentReducer = slice$2.reducer;
 const DocumentActions = slice$2.actions;
 const documentState = (state) => state.document;
 const DocumentSelectors = {
+    selectTitle: createSelector(documentState, (document) => document.title),
+    selectDescription: createSelector(documentState, (document) => document.description),
+    selectProvenance: createSelector(documentState, (document) => document.provenance ?? createBlankDocumentProvenance()),
     selectSolutions: createSelector(documentState, (document) => document.solutions),
 };
 
@@ -2415,7 +4437,9 @@ const slice$1 = createSlice({
         removeComponentRow: (state, action) => adapter$1.removeOne(state, action),
         removeComponentRows: (state, action) => adapter$1.removeMany(state, action),
         updateComponentRow: (state, action) => adapter$1.updateOne(state, action),
-        setComponentRows: (state, action) => adapter$1.setAll(state, action),
+        replaceComponentRows: (_state, action) => {
+            return action.payload;
+        },
     },
 });
 const ComponentRowModelActions = slice$1.actions;
@@ -2426,9 +4450,12 @@ const createBlankComponentRow = (params = {}) => {
     const id = params.id ?? nanoid();
     return {
         id,
+        gmoId: params.gmoId ?? "",
         component: params.component ?? "",
-        volume: params.volume ?? 0,
+        volume: params.volume ?? null,
         unit: params.unit ?? "",
+        concentrationValue: params.concentrationValue ?? null,
+        concentrationUnit: params.concentrationUnit ?? "",
         note: params.note ?? "",
     };
 };
@@ -2445,6 +4472,9 @@ const slice = createSlice({
         removeSolutionBlock: (state, action) => adapter.removeOne(state, action),
         updateSolutionBlock: (state, action) => adapter.updateOne(state, action),
         setSolutionBlocks: (state, action) => adapter.setAll(state, action),
+        replaceSolutionBlocks: (_state, action) => {
+            return action.payload;
+        },
     },
 });
 const SolutionBlockModelActions = slice.actions;
@@ -2482,8 +4512,12 @@ const createInitialState = () => {
             },
         },
         document: {
+            title: "",
+            description: "",
+            provenance: createBlankDocumentProvenance(),
             solutions: [solutionBlock.id],
         },
+        feedback: createInitialFeedbackState(),
     };
 };
 
@@ -2494,11 +4528,659 @@ const appStore = configureStore({
             solutionBlocks: solutionBlockModelReducer,
         }),
         document: documentReducer,
+        feedback: feedbackReducer,
     },
     preloadedState: createInitialState(),
 });
 const useAppDispatch = useDispatch;
 const useAppSelector = useSelector;
+
+const useFeedback = () => {
+    const dispatch = useAppDispatch();
+    return reactExports.useMemo(() => ({
+        showSuccess: (input) => {
+            dispatch(FeedbackActions.showSuccess(input));
+        },
+        showError: (input) => {
+            dispatch(FeedbackActions.showError(input));
+        },
+        closeFeedback: () => {
+            dispatch(FeedbackActions.closeFeedback());
+        },
+    }), [dispatch]);
+};
+
+const FeedbackSnackbar = () => {
+    const feedback = useAppSelector(FeedbackSelectors.selectFeedback);
+    const { closeFeedback } = useFeedback();
+    const handleClose = (_event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        closeFeedback();
+    };
+    return (jsx(Snackbar$1, { open: feedback.open, autoHideDuration: feedback.autoHideDuration, anchorOrigin: { vertical: "bottom", horizontal: "center" }, onClose: handleClose, children: jsxs(Alert$1, { variant: "filled", severity: feedback.severity, onClose: handleClose, sx: { alignItems: "center", maxWidth: 560, width: "100%" }, children: [jsx("span", { children: feedback.message }), feedback.detail ? jsxs("span", { children: [" ", feedback.detail] }) : null] }) }, feedback.key));
+};
+
+// disable react-refresh as this file contains shared styled components
+const GRID_TEMPLATE_COLUMNS = "20px 384px 70px 70px 70px 70px 1fr";
+const SPAN_GRID_COLUMNS = "span 7";
+const Sheet = styled$1("div")({
+    display: "grid",
+    gridTemplateColumns: GRID_TEMPLATE_COLUMNS,
+    columnGap: THEME.SIZE.S2,
+    rowGap: THEME.SIZE.S2,
+});
+const Block = styled$1("div")({
+    display: "grid",
+    gridTemplateColumns: "subgrid",
+    gridColumn: SPAN_GRID_COLUMNS,
+    rowGap: THEME.SIZE.S2,
+    backgroundColor: THEME.COLOR.WHITE,
+    paddingInline: THEME.SIZE.S1,
+    paddingTop: THEME.SIZE.S3,
+    paddingBottom: THEME.SIZE.S1,
+    borderRadius: THEME.ROUND.BASE,
+    // border: THEME.BORDER,
+});
+const TableRow = styled$1("div")({
+    display: "grid",
+    gridTemplateColumns: "subgrid",
+    gridColumn: SPAN_GRID_COLUMNS,
+});
+
+const ImportDialog = ({ open, selectedFile, onClose, onFileSelect, onImport, }) => {
+    const inputId = reactExports.useId();
+    const [selectionError, setSelectionError] = reactExports.useState(null);
+    const selectFiles = (files) => {
+        if (!files || files.length === 0) {
+            return;
+        }
+        if (files.length > 1) {
+            onFileSelect(null);
+            setSelectionError("Select a single JSON file. Multiple files cannot be imported at once.");
+            return;
+        }
+        onFileSelect(files[0] ?? null);
+        setSelectionError(null);
+    };
+    const handleInputChange = (event) => {
+        selectFiles(event.target.files);
+        event.target.value = "";
+    };
+    const handleDrop = (event) => {
+        event.preventDefault();
+        selectFiles(event.dataTransfer.files);
+    };
+    const handleDragOver = (event) => {
+        event.preventDefault();
+    };
+    const handleClose = () => {
+        setSelectionError(null);
+        onClose();
+    };
+    const handleImport = () => {
+        if (!selectedFile || !onImport) {
+            return;
+        }
+        onImport(selectedFile);
+    };
+    return (jsxs(Dialog$1, { open: open, onClose: handleClose, fullWidth: true, maxWidth: "sm", children: [jsx(DialogTitle$1, { children: "Upload .json" }), jsx(DialogContent$1, { children: jsxs(Stack$1, { gap: 2, children: [jsx(Alert$1, { severity: "warning", children: "Importing a JSON file will replace the current medium builder contents." }), jsxs(DropZone, { htmlFor: inputId, onDrop: handleDrop, onDragOver: handleDragOver, children: [jsx(VisuallyHiddenInput, { id: inputId, type: "file", accept: "application/json,.json", onChange: handleInputChange }), jsx(Typography, { variant: "subtitle2", component: "span", children: "Drop a JSON file here" }), jsx(Typography, { variant: "body2", color: "text.secondary", component: "span", children: "or choose one from your computer" }), jsx(Button, { variant: "outlined", size: "small", component: "span", sx: { textTransform: "none" }, children: "Choose file" })] }), jsxs(Box, { children: [jsx(Typography, { variant: "caption", color: "text.secondary", component: "p", children: "Selected file" }), jsx(Typography, { variant: "body2", component: "p", children: selectedFile ? selectedFile.name : "No file selected" })] }), selectionError ? jsx(Alert$1, { severity: "error", children: selectionError }) : null] }) }), jsxs(DialogActions$1, { children: [jsx(Button, { onClick: handleClose, sx: { textTransform: "none" }, children: "Cancel" }), jsx(Button, { variant: "contained", disableElevation: true, disabled: !selectedFile || !onImport, onClick: handleImport, sx: { textTransform: "none" }, children: "Import" })] })] }));
+};
+const DropZone = styled$1("label")({
+    minHeight: 140,
+    border: `1px dashed ${THEME.COLOR.GRAY_LINE}`,
+    borderRadius: THEME.ROUND.BASE,
+    padding: THEME.SIZE.S2,
+    display: "grid",
+    placeItems: "center",
+    alignContent: "center",
+    gap: THEME.SIZE.S1,
+    cursor: "pointer",
+    backgroundColor: THEME.COLOR.WHITE,
+});
+const VisuallyHiddenInput = styled$1("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+});
+
+const replaceImportedAppStateThunk = (importedState) => {
+    return (dispatch) => {
+        dispatch(ComponentRowModelActions.replaceComponentRows(importedState.entities.componentRows));
+        dispatch(SolutionBlockModelActions.replaceSolutionBlocks(importedState.entities.solutionBlocks));
+        dispatch(DocumentActions.replaceDocument(importedState.document));
+    };
+};
+
+const DRAFT_SCHEMA_VERSION = "2026-05-18";
+const componentSchema = object({
+    gmoId: string().nullable(),
+    component: string().nullable(),
+    volume: number().finite().nullable(),
+    unit: string().nullable(),
+    concentrationValue: number().finite().nullable(),
+    concentrationUnit: string().nullable(),
+    note: string().nullable(),
+});
+const solutionSchema = object({
+    title: string().nullable(),
+    description: string().nullable(),
+    components: array(componentSchema),
+});
+const provenanceSchema = object({
+    importSourceGmId: string().nullable(),
+    originalMediaId: string().nullable(),
+    sourceUrl: string().nullable(),
+});
+const appDataSchema = object({
+    schemaVersion: literal(DRAFT_SCHEMA_VERSION),
+    title: string().nullable(),
+    description: string().nullable(),
+    provenance: provenanceSchema,
+    solutions: array(solutionSchema),
+});
+
+const mapAppStateToDraftAppData = (state) => {
+    return {
+        schemaVersion: DRAFT_SCHEMA_VERSION,
+        title: state.document.title,
+        description: state.document.description,
+        provenance: mapDocumentProvenanceToDraft(state.document.provenance),
+        solutions: state.document.solutions.flatMap((solutionId) => {
+            const solution = state.entities.solutionBlocks.entities[solutionId];
+            if (!solution) {
+                return [];
+            }
+            return [
+                {
+                    title: solution.title,
+                    description: solution.description,
+                    components: solution.components.flatMap((componentId) => {
+                        const component = state.entities.componentRows.entities[componentId];
+                        if (!component) {
+                            return [];
+                        }
+                        return [
+                            {
+                                gmoId: component.gmoId,
+                                component: component.component,
+                                volume: component.volume,
+                                unit: component.unit,
+                                concentrationValue: component.concentrationValue ?? null,
+                                concentrationUnit: component.concentrationUnit ?? "",
+                                note: component.note,
+                            },
+                        ];
+                    }),
+                },
+            ];
+        }),
+    };
+};
+const mapDraftAppDataToAppState = (input, options) => {
+    const parseResult = appDataSchema.safeParse(input);
+    if (!parseResult.success) {
+        return {
+            success: false,
+            error: parseResult.error,
+            warnings: [],
+        };
+    }
+    const warnings = [];
+    const draft = parseResult.data;
+    const componentCandidateByGmoId = createComponentCandidateMap(options.componentCandidates);
+    if (!componentCandidateByGmoId && hasAnyGmoId(draft)) {
+        warnings.push({
+            code: "gmo-id-validation-skipped",
+            path: ["solutions"],
+            message: "GMO ID validation was skipped because component candidates were not provided.",
+        });
+    }
+    const solutionIds = [];
+    const solutionBlockEntities = {};
+    const componentRowIds = [];
+    const componentRowEntities = {};
+    draft.solutions.forEach((solution, solutionIndex) => {
+        const solutionId = options.createId({ kind: "solution", solutionIndex });
+        const componentIds = [];
+        solution.components.forEach((component, componentIndex) => {
+            const componentId = options.createId({
+                kind: "component",
+                solutionIndex,
+                componentIndex,
+            });
+            const normalizedGmoComponent = normalizeGmoComponent({
+                gmoId: normalizeString(component.gmoId, ["solutions", solutionIndex, "components", componentIndex, "gmoId"], warnings),
+                component: normalizeString(component.component, ["solutions", solutionIndex, "components", componentIndex, "component"], warnings),
+                componentCandidateByGmoId,
+                path: ["solutions", solutionIndex, "components", componentIndex],
+                warnings,
+            });
+            componentIds.push(componentId);
+            componentRowIds.push(componentId);
+            componentRowEntities[componentId] = {
+                id: componentId,
+                gmoId: normalizedGmoComponent.gmoId,
+                component: normalizedGmoComponent.component,
+                volume: normalizeNumber(component.volume),
+                unit: normalizeString(component.unit, ["solutions", solutionIndex, "components", componentIndex, "unit"], warnings),
+                concentrationValue: normalizeNumber(component.concentrationValue),
+                concentrationUnit: normalizeString(component.concentrationUnit, ["solutions", solutionIndex, "components", componentIndex, "concentrationUnit"], warnings),
+                note: normalizeString(component.note, ["solutions", solutionIndex, "components", componentIndex, "note"], warnings),
+            };
+        });
+        solutionIds.push(solutionId);
+        solutionBlockEntities[solutionId] = {
+            id: solutionId,
+            title: normalizeString(solution.title, ["solutions", solutionIndex, "title"], warnings),
+            description: normalizeString(solution.description, ["solutions", solutionIndex, "description"], warnings),
+            components: componentIds,
+        };
+    });
+    return {
+        success: true,
+        draft,
+        warnings,
+        state: {
+            entities: {
+                componentRows: {
+                    ids: componentRowIds,
+                    entities: componentRowEntities,
+                },
+                solutionBlocks: {
+                    ids: solutionIds,
+                    entities: solutionBlockEntities,
+                },
+            },
+            document: {
+                title: normalizeString(draft.title, ["title"], warnings),
+                description: normalizeString(draft.description, ["description"], warnings),
+                provenance: {
+                    importSourceGmId: normalizeString(draft.provenance.importSourceGmId, ["provenance", "importSourceGmId"], warnings),
+                    originalMediaId: normalizeString(draft.provenance.originalMediaId, ["provenance", "originalMediaId"], warnings),
+                    sourceUrl: normalizeString(draft.provenance.sourceUrl, ["provenance", "sourceUrl"], warnings),
+                },
+                solutions: solutionIds,
+            },
+            feedback: createInitialFeedbackState(),
+        },
+    };
+};
+const normalizeString = (value, path, warnings) => {
+    if (value !== null) {
+        return value;
+    }
+    warnings.push({
+        code: "null-normalized",
+        path,
+        message: `Null at ${formatPath$1(path)} was normalized to an empty string.`,
+    });
+    return "";
+};
+const normalizeNumber = (value, _path) => value;
+const mapDocumentProvenanceToDraft = (provenance) => {
+    if (!provenance) {
+        return {
+            importSourceGmId: null,
+            originalMediaId: null,
+            sourceUrl: null,
+        };
+    }
+    const normalizedProvenance = createBlankDocumentProvenance(provenance);
+    return {
+        importSourceGmId: normalizedProvenance.importSourceGmId,
+        originalMediaId: normalizedProvenance.originalMediaId,
+        sourceUrl: normalizedProvenance.sourceUrl,
+    };
+};
+const normalizeGmoComponent = ({ gmoId, component, componentCandidateByGmoId, path, warnings, }) => {
+    if (!componentCandidateByGmoId || gmoId === "") {
+        return { gmoId, component };
+    }
+    const candidate = componentCandidateByGmoId.get(gmoId);
+    if (!candidate) {
+        warnings.push({
+            code: "invalid-gmo-id",
+            path: [...path, "gmoId"],
+            message: `Unknown GMO ID ${gmoId} was normalized to an empty string.`,
+        });
+        return { gmoId: "", component };
+    }
+    if (component !== candidate.name) {
+        warnings.push({
+            code: "component-name-normalized",
+            path: [...path, "component"],
+            message: `Component name for ${gmoId} was normalized to ${candidate.name}.`,
+        });
+        return { gmoId, component: candidate.name };
+    }
+    return { gmoId, component };
+};
+const createComponentCandidateMap = (componentCandidates) => {
+    if (!componentCandidates) {
+        return undefined;
+    }
+    const componentCandidateByGmoId = new Map();
+    for (const candidate of componentCandidates) {
+        if (candidate.gmoId !== "" && !componentCandidateByGmoId.has(candidate.gmoId)) {
+            componentCandidateByGmoId.set(candidate.gmoId, candidate);
+        }
+    }
+    return componentCandidateByGmoId;
+};
+const hasAnyGmoId = (draft) => {
+    return draft.solutions.some((solution) => solution.components.some((component) => component.gmoId !== null && component.gmoId !== ""));
+};
+const formatPath$1 = (path) => path.map(String).join(".");
+
+const FALLBACK_FILENAME_PREFIX = "medium-builder-draft";
+const JSON_MIME_TYPE = "application/json";
+const createDraftFilename = (title, now = new Date()) => {
+    const basename = createFilenameBasename(title) || FALLBACK_FILENAME_PREFIX;
+    return `${basename}-${formatLocalDate(now)}.json`;
+};
+const createDraftJson = (state) => {
+    return JSON.stringify(mapAppStateToDraftAppData(state), null, 2);
+};
+const downloadDraft = (state, options = {}) => {
+    const json = createDraftJson(state);
+    const filename = createDraftFilename(state.document.title, options.now);
+    downloadTextFile({
+        content: json,
+        filename,
+        mimeType: JSON_MIME_TYPE,
+        documentRef: options.document ?? globalThis.document,
+        urlRef: options.url ?? globalThis.URL,
+    });
+    return { filename, json };
+};
+const createFilenameBasename = (title) => {
+    const sanitizedTitle = Array.from(title.normalize("NFKC"))
+        .filter((character) => character.charCodeAt(0) > 31 && !`"*/:<>?\\|`.includes(character))
+        .join("");
+    return sanitizedTitle
+        .trim()
+        .replace(/\s+/gu, "-")
+        .replace(/-+/gu, "-")
+        .replace(/^[.-]+|[.-]+$/gu, "");
+};
+const formatLocalDate = (date) => {
+    const year = date.getFullYear();
+    const month = `${date.getMonth() + 1}`.padStart(2, "0");
+    const day = `${date.getDate()}`.padStart(2, "0");
+    return `${year}-${month}-${day}`;
+};
+const downloadTextFile = ({ content, filename, mimeType, documentRef, urlRef, }) => {
+    if (!documentRef || !urlRef?.createObjectURL || !urlRef?.revokeObjectURL) {
+        throw new Error("Browser download APIs are unavailable.");
+    }
+    const blob = new Blob([content], { type: mimeType });
+    const objectUrl = urlRef.createObjectURL(blob);
+    const anchor = documentRef.createElement("a");
+    anchor.href = objectUrl;
+    anchor.download = filename;
+    anchor.style.display = "none";
+    try {
+        documentRef.body.append(anchor);
+        anchor.click();
+    }
+    finally {
+        anchor.remove();
+        urlRef.revokeObjectURL(objectUrl);
+    }
+};
+
+const formatComponentLabel = (label) => {
+    return label.includes(";") ? decodeHTMLEntities(label) : label;
+};
+
+const importDraftJson = async (file, dependencies = {}) => {
+    const readFileText = dependencies.readFileText ?? ((targetFile) => targetFile.text());
+    const createId = dependencies.createId ?? createImportId;
+    const fetchComponents = dependencies.fetchComponents ?? fetchComponentCandidatesFromApi;
+    const warnings = [];
+    let fileText;
+    try {
+        fileText = await readFileText(file);
+    }
+    catch (error) {
+        return {
+            success: false,
+            warnings,
+            error: {
+                code: "file-read-failed",
+                message: "Import failed.",
+                detail: error instanceof Error ? error.message : "The selected file could not be read.",
+            },
+        };
+    }
+    const parseResult = parseJson(fileText);
+    if (!parseResult.success) {
+        return {
+            success: false,
+            warnings,
+            error: {
+                code: "invalid-json",
+                message: "Import failed.",
+                detail: parseResult.detail,
+            },
+        };
+    }
+    const schemaVersion = getSchemaVersion(parseResult.value);
+    if (schemaVersion !== DRAFT_SCHEMA_VERSION) {
+        return {
+            success: false,
+            warnings,
+            error: {
+                code: "unsupported-schema-version",
+                message: "Import failed.",
+                detail: `Unsupported schemaVersion. Expected ${DRAFT_SCHEMA_VERSION}.`,
+            },
+        };
+    }
+    const schemaResult = appDataSchema.safeParse(parseResult.value);
+    if (!schemaResult.success) {
+        return {
+            success: false,
+            warnings,
+            error: {
+                code: "schema-validation-failed",
+                message: "Import failed.",
+                detail: formatZodError(schemaResult.error),
+            },
+        };
+    }
+    const componentCandidates = await fetchComponentCandidates(fetchComponents, warnings);
+    const mapResult = mapDraftAppDataToAppState(schemaResult.data, {
+        createId,
+        ...(componentCandidates ? { componentCandidates } : {}),
+    });
+    warnings.push(...mapResult.warnings);
+    if (!mapResult.success) {
+        return {
+            success: false,
+            warnings,
+            error: {
+                code: "mapper-failed",
+                message: "Import failed.",
+                detail: formatZodError(mapResult.error),
+            },
+        };
+    }
+    return {
+        success: true,
+        state: mapResult.state,
+        warnings,
+    };
+};
+const logImportWarnings = (warnings, warn = console.warn) => {
+    for (const warning of warnings) {
+        const location = warning.path.length > 0 ? ` at ${formatPath(warning.path)}` : "";
+        if (warning.code === "component-candidates-fetch-failed") {
+            warn(`[Import] ${warning.message}`, warning.error);
+            continue;
+        }
+        warn(`[Import] ${warning.code}${location}: ${warning.message}`);
+    }
+};
+const createImportId = (params) => {
+    return `${params.kind}-${nanoid()}`;
+};
+const parseJson = (text) => {
+    try {
+        return { success: true, value: JSON.parse(text) };
+    }
+    catch (error) {
+        return {
+            success: false,
+            detail: error instanceof Error ? error.message : "The selected file is not valid JSON.",
+        };
+    }
+};
+const getSchemaVersion = (value) => {
+    if (typeof value !== "object" || value === null || Array.isArray(value)) {
+        return undefined;
+    }
+    return value.schemaVersion;
+};
+const fetchComponentCandidates = async (fetchComponents, warnings) => {
+    try {
+        const components = await fetchComponents();
+        return components.map((component) => ({
+            gmoId: component.gmo_id,
+            name: formatComponentLabel(component.name),
+        }));
+    }
+    catch (error) {
+        warnings.push({
+            code: "component-candidates-fetch-failed",
+            path: [],
+            message: "Component candidates could not be fetched. GMO ID validation was skipped.",
+            error,
+        });
+        return undefined;
+    }
+};
+const fetchComponentCandidatesFromApi = async () => {
+    const params = { gmo_ids: "" };
+    const url = makeApiUrl(PATH_COMPONENTS_WITH_COMPONENTS, new URLSearchParams(params));
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Component candidates request failed with HTTP ${response.status}.`);
+    }
+    return response.json();
+};
+const formatZodError = (error) => {
+    const firstIssue = error.issues[0];
+    if (!firstIssue) {
+        return "The selected file does not match the Medium Builder draft format.";
+    }
+    const location = firstIssue.path.length > 0 ? `${formatPath(firstIssue.path)}: ` : "";
+    return `${location}${firstIssue.message}`;
+};
+const formatPath = (path) => path.map(String).join(".");
+
+const MediumInfo = () => {
+    const dispatch = useAppDispatch();
+    const store = useStore();
+    const title = useAppSelector(DocumentSelectors.selectTitle);
+    const description = useAppSelector(DocumentSelectors.selectDescription);
+    const { showSuccess, showError } = useFeedback();
+    const [isImportDialogOpen, setIsImportDialogOpen] = reactExports.useState(false);
+    const [selectedImportFile, setSelectedImportFile] = reactExports.useState(null);
+    const [isImporting, setIsImporting] = reactExports.useState(false);
+    const handleChangeTitle = (event) => {
+        dispatch(DocumentActions.setTitle(event.target.value));
+    };
+    const handleChangeDescription = (event) => {
+        dispatch(DocumentActions.setDescription(event.target.value));
+    };
+    const handleOpenImportDialog = () => {
+        setIsImportDialogOpen(true);
+    };
+    const handleSaveDraftJson = () => {
+        try {
+            const { filename } = downloadDraft(store.getState());
+            showSuccess(`Saved ${filename}.`);
+        }
+        catch (error) {
+            showError({
+                message: "Export failed.",
+                detail: error instanceof Error ? error.message : "The draft JSON could not be downloaded.",
+            });
+        }
+    };
+    const handleCloseImportDialog = () => {
+        setIsImportDialogOpen(false);
+        setSelectedImportFile(null);
+    };
+    const handleImportDraftJson = async (file) => {
+        if (isImporting) {
+            return;
+        }
+        setIsImporting(true);
+        try {
+            const result = await importDraftJson(file);
+            logImportWarnings(result.warnings);
+            if (!result.success) {
+                showError({
+                    message: result.error.message,
+                    detail: result.error.detail,
+                });
+                return;
+            }
+            dispatch(replaceImportedAppStateThunk(result.state));
+            handleCloseImportDialog();
+            showSuccess(`Imported ${file.name}.`);
+        }
+        finally {
+            setIsImporting(false);
+        }
+    };
+    return (jsxs(Wrapper$2, { children: [jsxs(Fields, { children: [jsx(TextField, { fullWidth: true, placeholder: "Medium name", size: "small", value: title, onChange: handleChangeTitle }), jsx(TextField, { fullWidth: true, placeholder: "Medium description", multiline: true, size: "small", rows: 3, value: description, onChange: handleChangeDescription })] }), jsxs(Actions, { children: [jsx(Button, { variant: "contained", size: "small", disableElevation: true, sx: { textTransform: "none" }, onClick: handleSaveDraftJson, children: "Save as .json" }), jsx(Button, { variant: "contained", size: "small", disableElevation: true, sx: { textTransform: "none" }, onClick: handleOpenImportDialog, children: "Upload .json" })] }), jsx(ImportDialog, { open: isImportDialogOpen, selectedFile: selectedImportFile, onClose: handleCloseImportDialog, onFileSelect: setSelectedImportFile, onImport: handleImportDraftJson })] }));
+};
+const Wrapper$2 = styled$1("header")({
+    padding: THEME.SIZE.S2,
+    borderRadius: THEME.ROUND.BASE,
+    display: "grid",
+    gridTemplateColumns: "1fr auto",
+    gap: THEME.SIZE.S2,
+    backgroundColor: THEME.COLOR.WHITE,
+});
+const Actions = styled$1("div")({
+    display: "flex",
+    flexDirection: "column",
+    gap: THEME.SIZE.S1,
+});
+const Fields = styled$1("div")({
+    display: "grid",
+    gap: THEME.SIZE.S1,
+    flex: 1,
+});
+
+const VerticalEllipsisIcon = ({ sx }) => {
+    return (jsx(Wrapper$1, { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 640 640", sx: sx, children: jsx("path", { d: "M368 144C368 170.5 346.5 192 320 192C293.5 192 272 170.5 272 144C272 117.5 293.5 96 320 96C346.5 96 368 117.5 368 144zM272 320C272 293.5 293.5 272 320 272C346.5 272 368 293.5 368 320C368 346.5 346.5 368 320 368C293.5 368 272 346.5 272 320zM368 496C368 522.5 346.5 544 320 544C293.5 544 272 522.5 272 496C272 469.5 293.5 448 320 448C346.5 448 368 469.5 368 496z" }) }));
+};
+const Wrapper$1 = styled$1("svg")({});
+
+const fetchAllComponents = async () => {
+    const params = { gmo_ids: "" };
+    const url = makeApiUrl(PATH_COMPONENTS_WITH_COMPONENTS, new URLSearchParams(params));
+    const res = await fetch(url);
+    if (res.ok) {
+        return res.json();
+    }
+    else {
+        return [];
+    }
+};
 
 const deleteComponentRowThunk = (solutionBlockId, componentRowId) => {
     return (dispatch, getState) => {
@@ -2511,6 +5193,39 @@ const deleteComponentRowThunk = (solutionBlockId, componentRowId) => {
             id: solutionBlockId,
             changes: {
                 components: solutionBlock.components.filter((id) => id !== componentRowId),
+            },
+        }));
+    };
+};
+
+const duplicateComponentRowThunk = (solutionBlockId, componentRowId) => {
+    return (dispatch, getState) => {
+        const state = getState();
+        const solutionBlock = SolutionBlockSelectors.selectById(state, solutionBlockId);
+        const componentRow = ComponentRowSelectors.selectById(state, componentRowId);
+        if (!solutionBlock || !componentRow) {
+            return;
+        }
+        const currentIndex = solutionBlock.components.indexOf(componentRowId);
+        if (currentIndex < 0) {
+            return;
+        }
+        const duplicatedComponentRow = createBlankComponentRow({
+            gmoId: componentRow.gmoId,
+            component: componentRow.component,
+            volume: componentRow.volume,
+            unit: componentRow.unit,
+            concentrationValue: componentRow.concentrationValue,
+            concentrationUnit: componentRow.concentrationUnit,
+            note: componentRow.note,
+        });
+        const nextComponents = [...solutionBlock.components];
+        nextComponents.splice(currentIndex + 1, 0, duplicatedComponentRow.id);
+        dispatch(ComponentRowModelActions.addComponentRow(duplicatedComponentRow));
+        dispatch(SolutionBlockModelActions.updateSolutionBlock({
+            id: solutionBlockId,
+            changes: {
+                components: nextComponents,
             },
         }));
     };
@@ -2554,45 +5269,116 @@ const units = [
         value: "g",
     },
     {
-        label: "L",
+        label: "ml",
+        value: "ml",
+    },
+    {
+        label: "l",
         value: "l",
     },
 ];
-const InputRow = ({ id, solutionBlockId }) => {
+const concentrationUnits = [
+    {
+        label: "mM",
+        value: "mM",
+    },
+    {
+        label: "uM",
+        value: "uM",
+    },
+    {
+        label: "%",
+        value: "%",
+    },
+    {
+        label: "x",
+        value: "x",
+    },
+];
+const ComponentRow = ({ id, solutionBlockId }) => {
     const componentRow = useAppSelector((state) => ComponentRowSelectors.selectById(state, id));
     const { components, isSuccess } = useComponentsData();
-    const { handleChangeComponent, handleChangeVolume, handleChangeUnit, handleChangeNote } = useInputHandlers$1(id);
-    const { solutionBlock, anchorEl, open, handleClose, handleClick, handleClickDeleteRow, handleClickMoveRowUp, handleClickMoveRowDown, disableDelete, disableMoveRowUp, disableMoveRowDown, } = useMenu$1(id, solutionBlockId);
+    const { handleChangeComponent, handleInputComponent, handleChangeVolume, handleChangeUnit, handleInputUnit, handleChangeConcentrationValue, handleChangeConcentrationUnit, handleInputConcentrationUnit, handleChangeNote, } = useInputHandlers$1(id);
+    const { solutionBlock, anchorEl, open, handleClose, handleClick, handleClickDeleteRow, handleClickDuplicateRow, handleClickMoveRowUp, handleClickMoveRowDown, disableDelete, disableMoveRowUp, disableMoveRowDown, } = useMenu$1(id, solutionBlockId);
     if (!componentRow || !solutionBlock) {
         return null;
     }
-    return (jsxs(TableRow, { children: [jsxs("div", { style: { display: "flex", alignItems: "center" }, children: [jsx(IconButton, { size: "small", id: "basic-button", "aria-controls": open ? "basic-menu" : undefined, "aria-haspopup": "true", "aria-expanded": open ? "true" : undefined, onClick: handleClick, children: jsx(VerticalEllipsisIcon, { sx: { fill: "black", width: "16px" } }) }), jsxs(Menu, { id: "basic-menu", disablePortal: true, anchorEl: anchorEl, open: open, onClose: handleClose, slotProps: {
+    return (jsxs(ComponentTableRow, { children: [jsxs("div", { style: { display: "flex", alignItems: "center" }, children: [jsx(IconButton, { size: "small", id: "basic-button", "aria-controls": open ? "basic-menu" : undefined, "aria-haspopup": "true", "aria-expanded": open ? "true" : undefined, onClick: handleClick, children: jsx(VerticalEllipsisIcon, { sx: { fill: "black", width: "16px" } }) }), jsxs(Menu, { id: "basic-menu", disablePortal: true, anchorEl: anchorEl, open: open, onClose: handleClose, slotProps: {
                             list: {
                                 "aria-labelledby": "basic-button",
                             },
-                        }, children: [jsx(MenuItem, { onClick: handleClickDeleteRow, disabled: disableDelete, children: "Delete row" }), jsx(MenuItem, { onClick: handleClickMoveRowUp, disabled: disableMoveRowUp, children: "Move row up" }), jsx(MenuItem, { onClick: handleClickMoveRowDown, disabled: disableMoveRowDown, children: "Move row down" })] })] }), jsx("div", { children: jsx(Autocomplete, { size: "small", disablePortal: true, disabled: !isSuccess, options: components, sx: { width: 300 }, value: components.find((component) => component.label === componentRow.component) ?? null, onChange: handleChangeComponent, renderInput: (params) => jsx(TextField, { ...params }) }) }), jsx("div", { children: jsx(TextField, { sx: { width: 80 }, size: "small", value: componentRow.volume, onChange: handleChangeVolume }) }), jsx("div", { children: jsx(Autocomplete, { size: "small", disablePortal: true, options: units, sx: { width: 80 }, value: units.find((unit) => unit.value === componentRow.unit) ?? null, onChange: handleChangeUnit, renderInput: (params) => jsx(TextField, { ...params }) }) }), jsx("div", { children: jsx(TextField, { sx: { width: "100%" }, size: "small", value: componentRow.note, onChange: handleChangeNote }) })] }));
+                        }, children: [jsx(MenuItem, { onClick: handleClickDuplicateRow, children: "Duplicate row" }), jsx(MenuItem, { onClick: handleClickDeleteRow, disabled: disableDelete, children: "Delete row" }), jsx(MenuItem, { onClick: handleClickMoveRowUp, disabled: disableMoveRowUp, children: "Move row up" }), jsx(MenuItem, { onClick: handleClickMoveRowDown, disabled: disableMoveRowDown, children: "Move row down" })] })] }), jsxs(ComponentInputCell, { children: [jsx(GmoIdLabel, { children: componentRow.gmoId || "No GMO ID" }), jsx(Autocomplete, { freeSolo: true, size: "small", disablePortal: true, disabled: !isSuccess, options: components, sx: { width: 300, flex: "0 0 auto" }, inputValue: componentRow.component, value: components.find((component) => component.gmoId === componentRow.gmoId) ?? null, getOptionLabel: (option) => (typeof option === "string" ? option : option.label), isOptionEqualToValue: (option, value) => typeof value === "string" ? option.label === value : option.gmoId === value.gmoId, onChange: handleChangeComponent, onInputChange: handleInputComponent, renderInput: (params) => (jsx(TextField, { ...params, slotProps: {
+                                htmlInput: {
+                                    ...params.inputProps,
+                                    "aria-label": "Component",
+                                },
+                            } })) })] }), jsx("div", { children: jsx(TextField, { size: "small", value: formatNullableNumberInput(componentRow.volume), onChange: handleChangeVolume, slotProps: {
+                        htmlInput: {
+                            "aria-label": "Volume",
+                        },
+                    } }) }), jsx("div", { children: jsx(Autocomplete, { freeSolo: true, size: "small", disablePortal: true, options: units, 
+                    // sx={{ width: 110 }}
+                    inputValue: componentRow.unit, value: componentRow.unit, onChange: handleChangeUnit, onInputChange: handleInputUnit, getOptionLabel: getUnitOptionLabel, renderInput: (params) => (jsx(TextField, { ...params, slotProps: {
+                            htmlInput: {
+                                ...params.inputProps,
+                                "aria-label": "Unit",
+                            },
+                        } })) }) }), jsx("div", { children: jsx(TextField, { size: "small", value: formatNullableNumberInput(componentRow.concentrationValue ?? null), onChange: handleChangeConcentrationValue, slotProps: {
+                        htmlInput: {
+                            "aria-label": "Concentration",
+                        },
+                    } }) }), jsx("div", { children: jsx(Autocomplete, { freeSolo: true, size: "small", disablePortal: true, options: concentrationUnits, inputValue: componentRow.concentrationUnit ?? "", value: componentRow.concentrationUnit ?? "", onChange: handleChangeConcentrationUnit, onInputChange: handleInputConcentrationUnit, getOptionLabel: getUnitOptionLabel, renderInput: (params) => (jsx(TextField, { ...params, slotProps: {
+                            htmlInput: {
+                                ...params.inputProps,
+                                "aria-label": "Concentration unit",
+                            },
+                        } })) }) }), jsx("div", { children: jsx(TextField, { sx: { width: "100%" }, size: "small", value: componentRow.note, onChange: handleChangeNote, slotProps: {
+                        htmlInput: {
+                            "aria-label": "Component note",
+                        },
+                    } }) })] }));
 };
 const useComponentsData = () => {
     const { data, isSuccess } = useQuery({
         queryKey: ["allComponents"],
         queryFn: fetchAllComponents,
         placeholderData: [],
+        staleTime: Infinity,
+        retryOnMount: false,
     });
-    const components = (data ?? []).map((c) => ({ label: c.name }));
+    const components = (data ?? []).map((c) => ({
+        label: formatComponentLabel(c.name),
+        gmoId: c.gmo_id,
+    }));
     return { components, isSuccess };
 };
 const useInputHandlers$1 = (id) => {
     const dispatch = useAppDispatch();
     const handleChangeComponent = (_event, value) => {
+        const component = typeof value === "string" ? value : (value?.label ?? "");
+        const gmoId = typeof value === "string" ? "" : (value?.gmoId ?? "");
         dispatch(ComponentRowModelActions.updateComponentRow({
             id,
             changes: {
-                component: value?.label ?? "",
+                gmoId,
+                component,
+            },
+        }));
+    };
+    const handleInputComponent = (_event, value, reason) => {
+        if (reason === "reset") {
+            return;
+        }
+        dispatch(ComponentRowModelActions.updateComponentRow({
+            id,
+            changes: {
+                gmoId: "",
+                component: value,
             },
         }));
     };
     const handleChangeVolume = (event) => {
-        const nextVolume = event.target.value === "" ? 0 : Number(event.target.value);
+        const nextVolume = parseNullableNumberInput(event.target.value);
         dispatch(ComponentRowModelActions.updateComponentRow({
             id,
             changes: {
@@ -2601,10 +5387,45 @@ const useInputHandlers$1 = (id) => {
         }));
     };
     const handleChangeUnit = (_event, value) => {
+        updateUnit(getUnitValue(value));
+    };
+    const handleInputUnit = (_event, value, reason) => {
+        if (reason === "reset") {
+            return;
+        }
+        updateUnit(value);
+    };
+    const updateUnit = (unit) => {
         dispatch(ComponentRowModelActions.updateComponentRow({
             id,
             changes: {
-                unit: value?.value ?? "",
+                unit,
+            },
+        }));
+    };
+    const handleChangeConcentrationValue = (event) => {
+        const nextConcentrationValue = parseNullableNumberInput(event.target.value);
+        dispatch(ComponentRowModelActions.updateComponentRow({
+            id,
+            changes: {
+                concentrationValue: nextConcentrationValue,
+            },
+        }));
+    };
+    const handleChangeConcentrationUnit = (_event, value) => {
+        updateConcentrationUnit(getUnitValue(value));
+    };
+    const handleInputConcentrationUnit = (_event, value, reason) => {
+        if (reason === "reset") {
+            return;
+        }
+        updateConcentrationUnit(value);
+    };
+    const updateConcentrationUnit = (concentrationUnit) => {
+        dispatch(ComponentRowModelActions.updateComponentRow({
+            id,
+            changes: {
+                concentrationUnit,
             },
         }));
     };
@@ -2616,7 +5437,17 @@ const useInputHandlers$1 = (id) => {
             },
         }));
     };
-    return { handleChangeComponent, handleChangeVolume, handleChangeUnit, handleChangeNote };
+    return {
+        handleChangeComponent,
+        handleInputComponent,
+        handleChangeVolume,
+        handleChangeUnit,
+        handleInputUnit,
+        handleChangeConcentrationValue,
+        handleChangeConcentrationUnit,
+        handleInputConcentrationUnit,
+        handleChangeNote,
+    };
 };
 const useMenu$1 = (id, solutionBlockId) => {
     const dispatch = useAppDispatch();
@@ -2638,6 +5469,10 @@ const useMenu$1 = (id, solutionBlockId) => {
         dispatch(deleteComponentRowThunk(solutionBlockId, id));
         handleClose();
     };
+    const handleClickDuplicateRow = () => {
+        dispatch(duplicateComponentRowThunk(solutionBlockId, id));
+        handleClose();
+    };
     const handleClickMoveRowUp = () => {
         dispatch(moveComponentRowThunk(solutionBlockId, id, "up"));
         handleClose();
@@ -2653,6 +5488,7 @@ const useMenu$1 = (id, solutionBlockId) => {
         handleClose,
         handleClick,
         handleClickDeleteRow,
+        handleClickDuplicateRow,
         handleClickMoveRowUp,
         handleClickMoveRowDown,
         disableDelete,
@@ -2660,6 +5496,33 @@ const useMenu$1 = (id, solutionBlockId) => {
         disableMoveRowDown,
     };
 };
+const formatNullableNumberInput = (value) => (value === null ? "" : String(value));
+const parseNullableNumberInput = (value) => {
+    if (value.trim() === "") {
+        return null;
+    }
+    const numericValue = Number(value);
+    return Number.isFinite(numericValue) ? numericValue : null;
+};
+const getUnitOptionLabel = (option) => typeof option === "string" ? option : option.label;
+const getUnitValue = (value) => typeof value === "string" ? value : (value?.value ?? "");
+const ComponentTableRow = styled$1(TableRow)({
+    gridColumn: "span 7",
+});
+const ComponentInputCell = styled$1("div")({
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+});
+const GmoIdLabel = styled$1("span")({
+    flex: "0 0 76px",
+    fontSize: "0.75rem",
+    lineHeight: 1.2,
+    color: "rgba(0, 0, 0, 0.6)",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+});
 
 const selectSolutionComponentRows = createSelector([
     (_state, solutionBlockId) => solutionBlockId,
@@ -2705,6 +5568,45 @@ const deleteSolutionThunk = (solutionBlockId) => {
     };
 };
 
+const duplicateSolutionThunk = (solutionBlockId) => {
+    return (dispatch, getState) => {
+        const state = getState();
+        const solutions = DocumentSelectors.selectSolutions(state);
+        const solutionBlock = SolutionBlockSelectors.selectById(state, solutionBlockId);
+        if (!solutionBlock) {
+            return;
+        }
+        const currentIndex = solutions.indexOf(solutionBlockId);
+        if (currentIndex < 0) {
+            return;
+        }
+        const duplicatedComponentRows = solutionBlock.components
+            .map((componentRowId) => ComponentRowSelectors.selectById(state, componentRowId))
+            .filter((componentRow) => componentRow !== undefined)
+            .map((componentRow) => createBlankComponentRow({
+            gmoId: componentRow.gmoId,
+            component: componentRow.component,
+            volume: componentRow.volume,
+            unit: componentRow.unit,
+            concentrationValue: componentRow.concentrationValue,
+            concentrationUnit: componentRow.concentrationUnit,
+            note: componentRow.note,
+        }));
+        const duplicatedSolutionBlock = createBlankSolutionBlock({
+            title: solutionBlock.title,
+            description: solutionBlock.description,
+            components: duplicatedComponentRows.map((componentRow) => componentRow.id),
+        });
+        const nextSolutions = [...solutions];
+        nextSolutions.splice(currentIndex + 1, 0, duplicatedSolutionBlock.id);
+        duplicatedComponentRows.forEach((componentRow) => {
+            dispatch(ComponentRowModelActions.addComponentRow(componentRow));
+        });
+        dispatch(SolutionBlockModelActions.addSolutionBlock(duplicatedSolutionBlock));
+        dispatch(DocumentActions.setSolutions(nextSolutions));
+    };
+};
+
 const moveSolutionThunk = (solutionBlockId, direction) => {
     return (dispatch, getState) => {
         const solutions = DocumentSelectors.selectSolutions(getState());
@@ -2725,11 +5627,20 @@ const moveSolutionThunk = (solutionBlockId, direction) => {
     };
 };
 
-const InputBlock = ({ id }) => {
+var ArrowDropDownIcon = createSvgIcon(/*#__PURE__*/jsxRuntimeExports.jsx("path", {
+  d: "m7 10 5 5 5-5z"
+}));
+
+var ArrowRightIcon = createSvgIcon(/*#__PURE__*/jsxRuntimeExports.jsx("path", {
+  d: "m10 17 5-5-5-5z"
+}));
+
+const SolutionBlock = ({ id }) => {
     const solution = useAppSelector((state) => SolutionBlockSelectors.selectById(state, id));
     const componentRows = useAppSelector((state) => selectSolutionComponentRows(state, id));
-    const { handleClickAddComponentRow, handleChangeTitle } = useInputHandlers(id);
-    const { anchorEl, open, handleClose, handleClick, handleClickDeleteBlock, handleClickMoveBlockUp, handleClickMoveBlockDown, disableDelete, disableMoveBlockUp, disableMoveBlockDown, } = useMenu(id);
+    const { handleClickAddComponentRow, handleChangeTitle, handleChangeDescription } = useInputHandlers(id);
+    const [isNoteOpen, setIsNoteOpen] = reactExports.useState(false);
+    const { anchorEl, open, handleClose, handleClick, handleClickDeleteBlock, handleClickDuplicateBlock, handleClickMoveBlockUp, handleClickMoveBlockDown, disableDelete, disableMoveBlockUp, disableMoveBlockDown, } = useMenu(id);
     if (!solution) {
         return null;
     }
@@ -2737,31 +5648,63 @@ const InputBlock = ({ id }) => {
                                     list: {
                                         "aria-labelledby": "basic-button",
                                     },
-                                }, children: [jsx(MenuItem, { onClick: handleClickDeleteBlock, disabled: disableDelete, children: "Delete Block" }), jsx(MenuItem, { onClick: handleClickMoveBlockUp, disabled: disableMoveBlockUp, children: "Move Block up" }), jsx(MenuItem, { onClick: handleClickMoveBlockDown, disabled: disableMoveBlockDown, children: "Move Block down" })] })] }), jsx("div", { style: { gridColumn: "span 4" }, children: jsx(TextField, { sx: { width: "100%" }, placeholder: "Solution name", size: "small", value: solution.title, onChange: handleChangeTitle }) })] }), jsxs(ComponentTable, { children: [jsxs(TableRow, { children: [jsx("div", {}), jsx("div", { children: "Component" }), jsx("div", { children: "Volume" }), jsx("div", { children: "Unit" }), jsx("div", { children: "Note" })] }), jsx(ComponentTableBody, { children: componentRows.map((componentRow) => (jsx(InputRow, { id: componentRow.id, solutionBlockId: id }, componentRow.id))) }), jsx(ComponentTableFooter, { children: jsx(Button, { variant: "contained", size: "small", disableElevation: true, sx: { textTransform: "none" }, onClick: handleClickAddComponentRow, children: "Add component row" }) })] })] }));
+                                }, children: [jsx(MenuItem, { onClick: handleClickDuplicateBlock, children: "Duplicate Block" }), jsx(MenuItem, { onClick: handleClickDeleteBlock, disabled: disableDelete, children: "Delete Block" }), jsx(MenuItem, { onClick: handleClickMoveBlockUp, disabled: disableMoveBlockUp, children: "Move Block up" }), jsx(MenuItem, { onClick: handleClickMoveBlockDown, disabled: disableMoveBlockDown, children: "Move Block down" })] })] }), jsx("div", { style: { gridColumn: "span 6" }, children: jsx(TextField, { fullWidth: true, placeholder: "Solution name", size: "small", value: solution.title, onChange: handleChangeTitle }) })] }), jsxs(ComponentTable, { children: [jsxs(ComponentHeaderRow, { children: [jsx("div", {}), jsx("div", { children: "Component" }), jsx("div", { children: "Volume" }), jsx("div", { children: "Unit" }), jsx("div", { children: "Conc." }), jsx("div", { children: "Conc. unit" }), jsx("div", { children: "Note" })] }), jsx(ComponentTableBody, { children: componentRows.map((componentRow) => (jsx(ComponentRow, { id: componentRow.id, solutionBlockId: id }, componentRow.id))) }), jsxs(ComponentTableFooter, { children: [jsx(AddButtonWrapper, { children: jsx(Button, { variant: "contained", size: "small", disableElevation: true, sx: { textTransform: "none" }, onClick: handleClickAddComponentRow, children: "Add component row" }) }), jsxs(NoteLabelWrapper, { type: "button", "aria-expanded": isNoteOpen, "aria-controls": `solution-note-${id}`, onClick: () => setIsNoteOpen((prev) => !prev), children: [jsx("span", { children: "Note" }), isNoteOpen ? (jsx(ArrowDropDownIcon, { fontSize: "small" })) : (jsx(ArrowRightIcon, { fontSize: "small" }))] }), isNoteOpen ? (jsx(NoteTextWrapper, { id: `solution-note-${id}`, children: jsx(TextField, { multiline: true, fullWidth: true, rows: 3, value: solution.description, onChange: handleChangeDescription, size: "small", slotProps: {
+                                        htmlInput: {
+                                            "aria-label": "Solution note",
+                                        },
+                                    } }) })) : null] })] })] }));
 };
-const ComponentTable = styled("div")({
+const ComponentTable = styled$1("div")({
     display: "grid",
-    gridColumn: "span 5",
+    gridColumn: SPAN_GRID_COLUMNS,
     gridTemplateColumns: "subgrid",
+    columnGap: THEME.SIZE.S2,
     rowGap: "0px",
+    minWidth: "max-content",
 });
-const ComponentTableBody = styled("div")({
+const ComponentHeaderRow = styled$1(TableRow)({
+    gridColumn: SPAN_GRID_COLUMNS,
+});
+const ComponentTableBody = styled$1("div")({
     display: "grid",
     gridTemplateColumns: "subgrid",
-    gridColumn: "span 5",
+    gridColumn: SPAN_GRID_COLUMNS,
     rowGap: "10px",
 });
-const ComponentTableFooter = styled("div")({
-    // display: "grid",
-    // gridTemplateColumns: "subgrid",
-    display: "flex",
-    justifyContent: "flex-end",
-    gridColumn: "span 5",
-    paddingTop: "10px",
-});
-const TitleRow = styled("div")({
+const ComponentTableFooter = styled$1("div")({
     display: "grid",
-    gridColumn: "span 5",
+    gridTemplateColumns: "subgrid",
+    gridColumn: SPAN_GRID_COLUMNS,
+    paddingTop: "10px",
+    rowGap: THEME.SIZE.S1,
+    gridAutoFlow: "dense",
+});
+const AddButtonWrapper = styled$1("div")({
+    gridColumn: "6/8",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+});
+const NoteLabelWrapper = styled$1("button")({
+    gridColumn: "2/3",
+    display: "flex",
+    alignItems: "center",
+    gap: "4px",
+    whiteSpace: "nowrap",
+    width: "fit-content",
+    padding: 0,
+    border: "none",
+    background: "transparent",
+    color: "inherit",
+    font: "inherit",
+    cursor: "pointer",
+});
+const NoteTextWrapper = styled$1("div")({
+    gridColumn: "2/8",
+});
+const TitleRow = styled$1("div")({
+    display: "grid",
+    gridColumn: SPAN_GRID_COLUMNS,
     gridTemplateColumns: "subgrid",
 });
 const useInputHandlers = (id) => {
@@ -2777,9 +5720,18 @@ const useInputHandlers = (id) => {
             },
         }));
     };
+    const handleChangeDescription = (event) => {
+        dispatch(SolutionBlockModelActions.updateSolutionBlock({
+            id,
+            changes: {
+                description: event.target.value,
+            },
+        }));
+    };
     return {
         handleClickAddComponentRow,
         handleChangeTitle,
+        handleChangeDescription,
     };
 };
 const useMenu = (id) => {
@@ -2801,6 +5753,10 @@ const useMenu = (id) => {
         dispatch(deleteSolutionThunk(id));
         handleClose();
     };
+    const handleClickDuplicateBlock = () => {
+        dispatch(duplicateSolutionThunk(id));
+        handleClose();
+    };
     const handleClickMoveBlockUp = () => {
         dispatch(moveSolutionThunk(id, "up"));
         handleClose();
@@ -2815,6 +5771,7 @@ const useMenu = (id) => {
         handleClose,
         handleClick,
         handleClickDeleteBlock,
+        handleClickDuplicateBlock,
         handleClickMoveBlockUp,
         handleClickMoveBlockDown,
         disableDelete,
@@ -2839,37 +5796,388 @@ const addSolutionThunk = () => {
     };
 };
 
-const App = (_props) => {
+const mapMediumDetailResponseToAppState = (response, options = {}) => {
+    const createId = options.createId ?? createMediumDetailImportId;
+    const solutionIds = [];
+    const solutionBlockEntities = {};
+    const componentRowIds = [];
+    const componentRowEntities = {};
+    const commentMap = createSolutionCommentMap(response);
+    response.components.forEach((table, tableIndex) => {
+        const solutionId = createId({ kind: "solution", tableIndex });
+        const componentIds = [];
+        table.items.forEach((component, componentIndex) => {
+            const componentId = createId({
+                kind: "component",
+                tableIndex,
+                componentIndex,
+            });
+            componentIds.push(componentId);
+            componentRowIds.push(componentId);
+            componentRowEntities[componentId] = mapComponentToRow(component, componentId);
+        });
+        solutionIds.push(solutionId);
+        solutionBlockEntities[solutionId] = mapTableToSolutionBlock(table, solutionId, componentIds, commentMap.get(table.paragraph_index) ?? "");
+    });
+    return {
+        entities: {
+            componentRows: {
+                ids: componentRowIds,
+                entities: componentRowEntities,
+            },
+            solutionBlocks: {
+                ids: solutionIds,
+                entities: solutionBlockEntities,
+            },
+        },
+        document: {
+            title: response.meta.name,
+            description: createDocumentDescription(response.meta),
+            provenance: createBlankDocumentProvenance({
+                importSourceGmId: response.meta.gm,
+                originalMediaId: response.meta.original_media_id ?? "",
+                sourceUrl: response.meta.src_url,
+            }),
+            solutions: solutionIds,
+        },
+        feedback: createInitialFeedbackState(),
+    };
+};
+const createMediumDetailImportId = (params) => {
+    return `${params.kind}-${nanoid()}`;
+};
+const mapTableToSolutionBlock = (table, id, components, description) => {
+    return {
+        id,
+        title: table.subcomponent_name,
+        description,
+        components,
+    };
+};
+const mapComponentToRow = (component, id) => {
+    const displayComponent = getComponentDisplayName(component);
+    return {
+        id,
+        gmoId: component.gmo_id ?? "",
+        component: displayComponent,
+        volume: component.volume ?? null,
+        unit: component.unit ?? "",
+        concentrationValue: component.conc_value ?? null,
+        concentrationUnit: component.conc_unit ?? "",
+        note: "",
+    };
+};
+const getComponentDisplayName = (component) => {
+    if (component.label && component.label.trim() !== "") {
+        return formatComponentLabel(component.label);
+    }
+    return formatComponentLabel(component.component_name);
+};
+const createDocumentDescription = (meta) => {
+    const descriptionLines = [meta.ph ? `pH: ${meta.ph}` : ""];
+    return descriptionLines.filter((line) => line !== "").join("\n");
+};
+const createSolutionCommentMap = (response) => {
+    const sortedTables = [...response.components].sort((a, b) => a.paragraph_index - b.paragraph_index);
+    const commentsByTableParagraphIndex = new Map();
+    response.comments.forEach((comment) => {
+        const table = findPreviousTable(sortedTables, comment.paragraph_index);
+        if (!table || comment.comment === "") {
+            return;
+        }
+        const comments = commentsByTableParagraphIndex.get(table.paragraph_index) ?? [];
+        comments.push(comment.comment);
+        commentsByTableParagraphIndex.set(table.paragraph_index, comments);
+    });
+    return new Map([...commentsByTableParagraphIndex.entries()].map(([paragraphIndex, comments]) => [
+        paragraphIndex,
+        comments.join("\n"),
+    ]));
+};
+const findPreviousTable = (tables, paragraphIndex) => {
+    let previousTable;
+    tables.forEach((table) => {
+        if (table.paragraph_index < paragraphIndex) {
+            previousTable = table;
+        }
+    });
+    return previousTable;
+};
+
+const expandReferenceMediumTables = async (response, loadReferenceMedium) => {
+    const requests = collectReferenceRequests(response);
+    const appendedTables = [];
+    const appendedComments = [];
+    const loadedReferences = new Map();
+    let nextParagraphIndex = getNextParagraphIndex(response);
+    for (const request of requests) {
+        const referenceResponse = await getReferenceResponse(request, loadReferenceMedium, loadedReferences);
+        if (!referenceResponse.success) {
+            return referenceResponse;
+        }
+        const table = findReferencedTable(referenceResponse.response, request.tableName);
+        if (!table) {
+            return {
+                success: false,
+                error: {
+                    code: "reference-table-missing",
+                    message: "Import failed.",
+                    detail: `Reference medium ${request.referenceMediaId} does not include table "${request.tableName}".`,
+                    referenceMediaId: request.referenceMediaId,
+                    tableName: request.tableName,
+                },
+            };
+        }
+        const reindexed = createReindexedReferencedRecipeItems(referenceResponse.response, table, nextParagraphIndex);
+        nextParagraphIndex = reindexed.nextParagraphIndex;
+        appendedTables.push(reindexed.table);
+        appendedComments.push(...reindexed.comments);
+    }
+    return {
+        success: true,
+        response: {
+            ...response,
+            components: [...response.components, ...appendedTables],
+            comments: [...response.comments, ...appendedComments],
+        },
+    };
+};
+const collectReferenceRequests = (response) => {
+    const requests = [];
+    const seen = new Set();
+    response.components.forEach((table) => {
+        table.items.forEach((component) => {
+            const request = createReferenceRequest(component);
+            if (!request) {
+                return;
+            }
+            const key = createReferenceRequestKey(request);
+            if (seen.has(key)) {
+                return;
+            }
+            seen.add(key);
+            requests.push(request);
+        });
+    });
+    return requests;
+};
+const createReferenceRequest = (component) => {
+    const referenceMediaId = component.reference_media_id?.trim();
+    if (!referenceMediaId) {
+        return null;
+    }
+    return {
+        referenceMediaId,
+        tableName: normalizeReferenceTableName(component.component_name),
+    };
+};
+const createReferenceRequestKey = (request) => {
+    return `${request.referenceMediaId}\u0000${request.tableName}`;
+};
+const getReferenceResponse = async (request, loadReferenceMedium, loadedReferences) => {
+    const cached = loadedReferences.get(request.referenceMediaId);
+    if (cached) {
+        return {
+            success: true,
+            response: cached,
+        };
+    }
+    try {
+        const response = await loadReferenceMedium(request.referenceMediaId);
+        loadedReferences.set(request.referenceMediaId, response);
+        return {
+            success: true,
+            response,
+        };
+    }
+    catch (cause) {
+        return {
+            success: false,
+            error: {
+                code: "reference-fetch-failed",
+                message: "Import failed.",
+                detail: `Reference medium ${request.referenceMediaId} could not be fetched.`,
+                referenceMediaId: request.referenceMediaId,
+                tableName: request.tableName,
+                cause,
+            },
+        };
+    }
+};
+const findReferencedTable = (response, tableName) => {
+    return response.components.find((table) => normalizeReferenceTableName(table.subcomponent_name) === tableName);
+};
+const createReindexedReferencedRecipeItems = (response, table, startParagraphIndex) => {
+    const comments = findCommentsForTable(response, table);
+    const reindexedTable = {
+        ...table,
+        paragraph_index: startParagraphIndex,
+    };
+    const reindexedComments = comments.map((comment, index) => ({
+        ...comment,
+        paragraph_index: startParagraphIndex + index + 1,
+    }));
+    return {
+        table: reindexedTable,
+        comments: reindexedComments,
+        nextParagraphIndex: startParagraphIndex + reindexedComments.length + 1,
+    };
+};
+const findCommentsForTable = (response, table) => {
+    const nextTable = response.components
+        .filter((candidate) => candidate.paragraph_index > table.paragraph_index)
+        .sort((a, b) => a.paragraph_index - b.paragraph_index)[0];
+    return response.comments.filter((comment) => {
+        return (comment.paragraph_index > table.paragraph_index &&
+            (!nextTable || comment.paragraph_index < nextTable.paragraph_index));
+    });
+};
+const getNextParagraphIndex = (response) => {
+    const maxParagraphIndex = [...response.components, ...response.comments].reduce((max, item) => Math.max(max, item.paragraph_index), 0);
+    return maxParagraphIndex + 1;
+};
+const normalizeReferenceTableName = (value) => {
+    return value
+        .replace(/ \(.*\)/, "")
+        .replace(/\*/g, "")
+        .trim();
+};
+
+const importMediumDetailByGmId = async (gmId, options = {}) => {
+    const loadMediumDetail = options.loadMediumDetail ?? loadMediumDetailFromApi;
+    const mainMediumResult = await loadMainMedium(gmId, loadMediumDetail, options.abortController);
+    if (!mainMediumResult.success) {
+        return mainMediumResult;
+    }
+    const expansionResult = await expandReferenceMediumTables(mainMediumResult.response, (refGmId) => loadMediumDetail(refGmId, options.abortController));
+    if (!expansionResult.success) {
+        return {
+            success: false,
+            error: expansionResult.error,
+        };
+    }
+    return {
+        success: true,
+        state: mapMediumDetailResponseToAppState(expansionResult.response),
+    };
+};
+const loadMainMedium = async (gmId, loadMediumDetail, abortController) => {
+    try {
+        return {
+            success: true,
+            response: await loadMediumDetail(gmId, abortController),
+        };
+    }
+    catch (cause) {
+        return {
+            success: false,
+            error: {
+                message: "Import failed.",
+                detail: `Medium ${gmId} could not be fetched.`,
+                cause,
+            },
+        };
+    }
+};
+const loadMediumDetailFromApi = async (gmId, abortController) => {
+    const response = await getData(makeApiUrl(PATH_MEDIUM_DETAIL), { gm_id: gmId }, abortController);
+    if (!response.body) {
+        throw new Error(response.message ?? `Medium detail request failed with ${response.status}.`);
+    }
+    return response.body;
+};
+
+const App = ({ sourceGmId }) => {
     const dispatch = useAppDispatch();
+    const { showSuccess, showError } = useFeedback();
+    const normalizedSourceGmId = reactExports.useMemo(() => sourceGmId?.trim() ?? "", [sourceGmId]);
+    const initialImportQuery = useInitialMediumImportQuery(normalizedSourceGmId);
     const onClickAdd = () => {
         dispatch(addSolutionThunk());
     };
     const solutions = useAppSelector(selectDocumentSolutions);
-    return (jsx(Wrapper, { children: jsxs(Sheet, { children: [solutions.map((solution) => (jsx(InputBlock, { id: solution.id }, solution.id))), jsxs(FooterRow, { children: [jsxs(FooterLeft, { children: [jsx(Button, { variant: "contained", size: "small", disableElevation: true, sx: { textTransform: "none" }, children: "Save as .json" }), jsx(Button, { variant: "contained", size: "small", disableElevation: true, sx: { textTransform: "none" }, children: "Upload .json" })] }), jsx(FooterRight, { children: jsx(Button, { variant: "contained", size: "small", disableElevation: true, sx: { textTransform: "none" }, onClick: onClickAdd, children: "Add solution block" }) })] })] }) }));
+    reactExports.useEffect(() => {
+        const result = initialImportQuery.data;
+        if (!result) {
+            return;
+        }
+        if (!result.success) {
+            showError({
+                message: result.error.message,
+                detail: result.error.detail,
+            });
+            return;
+        }
+        dispatch(replaceImportedAppStateThunk(result.state));
+        showSuccess(`Imported ${normalizedSourceGmId}.`);
+    }, [dispatch, initialImportQuery.data, normalizedSourceGmId, showError, showSuccess]);
+    reactExports.useEffect(() => {
+        const error = initialImportQuery.error;
+        if (!error) {
+            return;
+        }
+        showError({
+            message: "Import failed.",
+            detail: error instanceof Error
+                ? error.message
+                : `Medium ${normalizedSourceGmId} could not be imported.`,
+        });
+    }, [initialImportQuery.error, normalizedSourceGmId, showError]);
+    const isInitialImporting = normalizedSourceGmId !== "" && initialImportQuery.isFetching;
+    return (jsxs(Wrapper, { children: [isInitialImporting ? (jsxs(InitialImportStatus, { children: [jsx(LinearProgress$1, {}), jsx("span", { children: "Importing medium..." })] })) : null, jsx(MediumInfo, {}), jsxs(Sheet, { children: [solutions.map((solution) => (jsx(SolutionBlock, { id: solution.id }, solution.id))), jsx(FooterRow, { children: jsx(Button, { variant: "contained", size: "small", disableElevation: true, sx: { textTransform: "none" }, onClick: onClickAdd, children: "Add solution block" }) })] }), jsx(FeedbackSnackbar, {})] }));
 };
-const Wrapper = styled("div")({
+const useInitialMediumImportQuery = (sourceGmId) => {
+    return useQuery({
+        queryKey: ["gmdb-medium-builder", "initial-medium-import", sourceGmId],
+        queryFn: async ({ signal }) => {
+            const abortController = new AbortController();
+            const abortImport = () => abortController.abort();
+            signal.addEventListener("abort", abortImport, { once: true });
+            try {
+                if (signal.aborted) {
+                    abortImport();
+                }
+                return await importMediumDetailByGmId(sourceGmId, { abortController });
+            }
+            finally {
+                signal.removeEventListener("abort", abortImport);
+            }
+        },
+        enabled: sourceGmId !== "",
+        retry: false,
+        staleTime: Infinity,
+    });
+};
+const Wrapper = styled$1("div")({
     minHeight: 100,
     width: "fit-content",
     minWidth: "100%",
+    // backgroundColor: "white",
+    borderRadius: THEME.ROUND.BASE,
+    display: "grid",
+    gap: THEME.SIZE.S2,
 });
-const FooterRow = styled("div")({
-    gridColumn: "span 5",
-    display: "flex",
-    justifyContent: "space-between",
-    paddingInline: THEME.SIZE.S1,
-});
-const FooterLeft = styled("div")({
-    display: "flex",
+const InitialImportStatus = styled$1("div")({
+    display: "grid",
     gap: THEME.SIZE.S1,
+    padding: THEME.SIZE.S2,
+    borderRadius: THEME.ROUND.BASE,
+    backgroundColor: THEME.COLOR.WHITE,
+    color: THEME.COLOR.GRAY,
+    fontSize: 13,
 });
-const FooterRight = styled("div")({
+const FooterRow = styled$1("div")({
+    gridColumn: SPAN_GRID_COLUMNS,
     display: "flex",
+    justifyContent: "end",
+    paddingInline: THEME.SIZE.S1,
 });
 
 class ReactStanza extends TogoMediumReactStanza {
     makeApp() {
         this.reduxStore = appStore;
-        return jsx(App, {});
+        const sourceGmId = this.params.source_gm_id;
+        return jsx(App, { sourceGmId: sourceGmId });
     }
 }
 
@@ -2891,8 +6199,14 @@ var metadata = {
 	"stanza:contributor": [
 ],
 	"stanza:created": "2022-01-01",
-	"stanza:updated": "2026-03-22",
+	"stanza:updated": "2026-05-18",
 	"stanza:parameter": [
+	{
+		"stanza:key": "source_gm_id",
+		"stanza:example": "NBRC_M249",
+		"stanza:description": "Source medium ID to use as the initial import target.",
+		"stanza:required": false
+	}
 ],
 	"stanza:menu-placement": "none",
 	"stanza:style": [

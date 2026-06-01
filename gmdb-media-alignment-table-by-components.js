@@ -1,18 +1,18 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { v as atom, w as useAtomValue, x as useSetAtom, s as styled, T as THEME, j as jsx, a as jsxs, q as jsx$1, m as reactExports, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { o as object, s as string, a as array, m as makeApiUrl } from './schemas-d468dcf7.js';
-import { g as getData } from './getData-4200eb91.js';
+import { v as atom, w as useAtomValue, x as useSetAtom, s as styled, T as THEME, j as jsx, a as jsxs, q as jsx$1, m as reactExports, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
+import { o as object, s as string, a as array, m as makeApiUrl, g as getData } from './makeApiUrl-bc69b05b.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
-import { a as IconCompact, b as IconExpand, d as IconBlank } from './icons-8743a8da.js';
+import { a as IconCompact, b as IconExpand, d as IconBlank } from './icons-0f23341a.js';
 import { c as clone } from './clone-4533aa20.js';
 import { m as makeLinkPath, P as PATH_COMPONENT, g as getLinkTarget, a as PATH_MEDIUM, b as PATH_TAXON } from './getLinkTarget-9ee27b52.js';
-import { T as Tooltip } from './Tooltip-f3002260.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
+import { T as Tooltip } from './Tooltip-805a9746.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
 import { s as stringToArray } from './string-679c835b.js';
 import './isArray-56c7d056.js';
-import './createSvgIcon-cd17d0e7.js';
-import './useSlotProps-e0be0a1d.js';
-import './Grow-d098dd8a.js';
+import './createSvgIcon-a7ac74f6.js';
+import './useSlotProps-42393a51.js';
+import './Box-fb1fffc6.js';
+import './Grow-d6a16e65.js';
 
 const mediaComponentAlignmentMediaSchema = object({
     gm_id: string(),
@@ -39,10 +39,7 @@ object({
 object({
     gm_ids: string(),
 });
-/**
- * @deprecated
- */
-const mediaComponentAlignmentTableURL = makeApiUrl("gmdb_media_alignment_by_gm_ids");
+const PATH_MEDIA_COMPONENT_ALIGNMENT_TABLE = "/gmdb_media_alignment_by_gm_ids";
 
 const WIDTH_EXPANDED = "200px";
 const WIDTH_COMPACT = "150px";
@@ -554,12 +551,13 @@ const Wrapper$1 = styled("div")({
     },
 });
 
+const API_URL = makeApiUrl(PATH_MEDIA_COMPONENT_ALIGNMENT_TABLE);
 const useDataQuery = (gm_ids, stanzaDispatch) => {
     return useQuery({
         queryKey: ["media-alignment", { gm_ids }],
         queryFn: async () => {
             stanzaDispatch("STANZA_ON_QUERY_DATA", gm_ids);
-            const response = await getData(mediaComponentAlignmentTableURL, {
+            const response = await getData(API_URL, {
                 gm_ids: gm_ids.join(","),
             });
             if (!response.body)

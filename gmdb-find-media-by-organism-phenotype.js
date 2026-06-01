@@ -1,196 +1,20 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { s as styled, y as capitalize, m as reactExports, A as jsxRuntimeExports, z as clsx, T as THEME, a as jsxs, j as jsx, v as atom, w as useAtomValue, x as useSetAtom, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { C as Checkbox, h as hasInfo, g as filterOutInfo, i as hasIdOfLabel, c as createListApiResponseSchema, a as createListApiParamsSchema, n as nullListResponse, P as Pagination, T as Tabs, j as Tab, B as Badge, u as useMediaPaginationState, d as useQueryDataMutators, b as useFoundMediaMutators, e as useIsMediaLoadingMutators, f as useMediaPaginationMutators, k as extractLabelIds, Q as QueryPane, S as SubPane, M as MediaPane, A as AppWrapper } from './ListApi-c3bc90be.js';
+import { s as styled, y as capitalize, m as reactExports, A as jsxRuntimeExports, z as clsx, T as THEME, a as jsxs, j as jsx, v as atom, w as useAtomValue, x as useSetAtom, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
+import { C as Checkbox, h as hasInfo, g as filterOutInfo, i as hasIdOfLabel, c as createListApiResponseSchema, a as createListApiParamsSchema, n as nullListResponse, P as Pagination, T as Tabs, j as Tab, B as Badge, u as useMediaPaginationState, d as useQueryDataMutators, b as useFoundMediaMutators, e as useIsMediaLoadingMutators, f as useMediaPaginationMutators, k as extractLabelIds, Q as QueryPane, S as SubPane, M as MediaPane, A as AppWrapper } from './ListApi-bd743e49.js';
 import { m as makeLinkPath, g as getLinkTarget, b as PATH_TAXON } from './getLinkTarget-9ee27b52.js';
-import { m as makeApiUrl, o as object, s as string } from './schemas-d468dcf7.js';
-import { g as getData } from './getData-4200eb91.js';
+import { o as object, s as string, m as makeApiUrl, g as getData } from './makeApiUrl-bc69b05b.js';
 import { c as clone } from './clone-4533aa20.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
-import { c as createSimplePaletteValueFilter, C as CircularProgress } from './CircularProgress-790be7e7.js';
-import { a as generateUtilityClass, g as generateUtilityClasses, m as memoTheme, u as useDefaultProps, c as composeClasses } from './useSlotProps-e0be0a1d.js';
-import { l as internal_createExtendSxProp, a as useFormControl, h as formControlState, F as FormControl, I as InputLabel, S as Select } from './Select-05682d11.js';
-import { u as useSlot } from './Grow-d098dd8a.js';
-import { S as Slider } from './Slider-65c6a1cf.js';
-import { M as MenuItem } from './MenuItem-b9047f09.js';
-import { l as listMediaOfTaxonsURL } from './definitions-d74daef9.js';
-import './Tooltip-f3002260.js';
-import './createSvgIcon-cd17d0e7.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
+import { C as CircularProgress } from './CircularProgress-0dc9c54d.js';
+import { g as generateUtilityClasses, a as generateUtilityClass, m as memoTheme, u as useDefaultProps, c as composeClasses } from './useSlotProps-42393a51.js';
+import { a as useFormControl, h as formControlState, F as FormControl, I as InputLabel, S as Select } from './Select-a2b2ad7a.js';
+import { u as useSlot } from './Grow-d6a16e65.js';
+import { T as Typography, M as MenuItem } from './MenuItem-edfba4b0.js';
+import { S as Slider } from './Slider-17e925d3.js';
+import { P as PATH_LIST_MEDIA_OF_TAXONS } from './definitions-09faafc6.js';
+import './Tooltip-805a9746.js';
+import './createSvgIcon-a7ac74f6.js';
 import './isArray-56c7d056.js';
-
-function getTypographyUtilityClass(slot) {
-  return generateUtilityClass('MuiTypography', slot);
-}
-generateUtilityClasses('MuiTypography', ['root', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'inherit', 'button', 'caption', 'overline', 'alignLeft', 'alignRight', 'alignCenter', 'alignJustify', 'noWrap', 'gutterBottom', 'paragraph']);
-
-const v6Colors = {
-  primary: true,
-  secondary: true,
-  error: true,
-  info: true,
-  success: true,
-  warning: true,
-  textPrimary: true,
-  textSecondary: true,
-  textDisabled: true
-};
-const extendSxProp = internal_createExtendSxProp();
-const useUtilityClasses$1 = ownerState => {
-  const {
-    align,
-    gutterBottom,
-    noWrap,
-    paragraph,
-    variant,
-    classes
-  } = ownerState;
-  const slots = {
-    root: ['root', variant, ownerState.align !== 'inherit' && `align${capitalize(align)}`, gutterBottom && 'gutterBottom', noWrap && 'noWrap', paragraph && 'paragraph']
-  };
-  return composeClasses(slots, getTypographyUtilityClass, classes);
-};
-const TypographyRoot = styled('span', {
-  name: 'MuiTypography',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.root, ownerState.variant && styles[ownerState.variant], ownerState.align !== 'inherit' && styles[`align${capitalize(ownerState.align)}`], ownerState.noWrap && styles.noWrap, ownerState.gutterBottom && styles.gutterBottom, ownerState.paragraph && styles.paragraph];
-  }
-})(memoTheme(({
-  theme
-}) => ({
-  margin: 0,
-  variants: [{
-    props: {
-      variant: 'inherit'
-    },
-    style: {
-      // Some elements, like <button> on Chrome have default font that doesn't inherit, reset this.
-      font: 'inherit',
-      lineHeight: 'inherit',
-      letterSpacing: 'inherit'
-    }
-  }, ...Object.entries(theme.typography).filter(([variant, value]) => variant !== 'inherit' && value && typeof value === 'object').map(([variant, value]) => ({
-    props: {
-      variant
-    },
-    style: value
-  })), ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => ({
-    props: {
-      color
-    },
-    style: {
-      color: (theme.vars || theme).palette[color].main
-    }
-  })), ...Object.entries(theme.palette?.text || {}).filter(([, value]) => typeof value === 'string').map(([color]) => ({
-    props: {
-      color: `text${capitalize(color)}`
-    },
-    style: {
-      color: (theme.vars || theme).palette.text[color]
-    }
-  })), {
-    props: ({
-      ownerState
-    }) => ownerState.align !== 'inherit',
-    style: {
-      textAlign: 'var(--Typography-textAlign)'
-    }
-  }, {
-    props: ({
-      ownerState
-    }) => ownerState.noWrap,
-    style: {
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap'
-    }
-  }, {
-    props: ({
-      ownerState
-    }) => ownerState.gutterBottom,
-    style: {
-      marginBottom: '0.35em'
-    }
-  }, {
-    props: ({
-      ownerState
-    }) => ownerState.paragraph,
-    style: {
-      marginBottom: 16
-    }
-  }]
-})));
-const defaultVariantMapping = {
-  h1: 'h1',
-  h2: 'h2',
-  h3: 'h3',
-  h4: 'h4',
-  h5: 'h5',
-  h6: 'h6',
-  subtitle1: 'h6',
-  subtitle2: 'h6',
-  body1: 'p',
-  body2: 'p',
-  inherit: 'p'
-};
-const Typography = /*#__PURE__*/reactExports.forwardRef(function Typography(inProps, ref) {
-  const {
-    color,
-    ...themeProps
-  } = useDefaultProps({
-    props: inProps,
-    name: 'MuiTypography'
-  });
-  const isSxColor = !v6Colors[color];
-  // TODO: Remove `extendSxProp` in v7
-  const props = extendSxProp({
-    ...themeProps,
-    ...(isSxColor && {
-      color
-    })
-  });
-  const {
-    align = 'inherit',
-    className,
-    component,
-    gutterBottom = false,
-    noWrap = false,
-    paragraph = false,
-    variant = 'body1',
-    variantMapping = defaultVariantMapping,
-    ...other
-  } = props;
-  const ownerState = {
-    ...props,
-    align,
-    color,
-    className,
-    component,
-    gutterBottom,
-    noWrap,
-    paragraph,
-    variant,
-    variantMapping
-  };
-  const Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
-  const classes = useUtilityClasses$1(ownerState);
-  return /*#__PURE__*/jsxRuntimeExports.jsx(TypographyRoot, {
-    as: Component,
-    ref: ref,
-    className: clsx(classes.root, className),
-    ...other,
-    ownerState: ownerState,
-    style: {
-      ...(align !== 'inherit' && {
-        '--Typography-textAlign': align
-      }),
-      ...other.style
-    }
-  });
-});
-var Typography$1 = Typography;
 
 function getFormControlLabelUtilityClasses(slot) {
   return generateUtilityClass('MuiFormControlLabel', slot);
@@ -346,12 +170,12 @@ const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormContr
     }
   };
   const [TypographySlot, typographySlotProps] = useSlot('typography', {
-    elementType: Typography$1,
+    elementType: Typography,
     externalForwardedProps,
     ownerState
   });
   let label = labelProp;
-  if (label != null && label.type !== Typography$1 && !disableTypography) {
+  if (label != null && label.type !== Typography && !disableTypography) {
     label = /*#__PURE__*/jsxRuntimeExports.jsx(TypographySlot, {
       component: "span",
       ...typographySlotProps,
@@ -451,7 +275,7 @@ const useOrganismList = (response) => {
     return { list, toggleOrganismSelection };
 };
 
-const listOrganismsByPhenotypesURL = makeApiUrl("gmdb_organisms_by_phenotypes");
+const PATH_LIST_ORGANISMS_BY_PHENOTYPES = "/gmdb_organisms_by_phenotypes";
 createListApiResponseSchema(object({
     tax_id: string(),
     name: string(),
@@ -509,6 +333,7 @@ const usePhenotypeQueryMutators = () => {
 };
 
 const SHOW_COUNT$2 = 10;
+const apiUrl$1 = makeApiUrl(PATH_LIST_ORGANISMS_BY_PHENOTYPES);
 const useOrganismQuery = () => {
     const page = useOrganismPaginationState();
     const phenotypeQueryParams = usePhenotypeQueryState();
@@ -518,7 +343,7 @@ const useOrganismQuery = () => {
             if (Object.entries(phenotypeQueryParams).length === 0)
                 return nullListResponse;
             //
-            const response = await getData(listOrganismsByPhenotypesURL, {
+            const response = await getData(apiUrl$1, {
                 ...phenotypeQueryParams,
                 limit: SHOW_COUNT$2,
                 offset: (page - 1) * SHOW_COUNT$2,
@@ -814,6 +639,7 @@ const Wrapper = styled("div")({
 });
 
 const SHOW_COUNT = 10;
+const apiUrl = makeApiUrl(PATH_LIST_MEDIA_OF_TAXONS);
 const useMediaLoadFromOrganismSelection = () => {
     const page = useMediaPaginationState();
     const selectedOrganisms = useSelectedOrganismsState();
@@ -828,7 +654,7 @@ const useMediaLoadFromOrganismSelection = () => {
                 return nullListResponse;
             //
             const tax_ids = extractLabelIds(selectedOrganisms).join(",");
-            const response = await getData(listMediaOfTaxonsURL, {
+            const response = await getData(apiUrl, {
                 tax_ids,
                 limit: SHOW_COUNT,
                 offset: (page - 1) * SHOW_COUNT,

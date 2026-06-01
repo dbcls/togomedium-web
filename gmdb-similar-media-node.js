@@ -1,13 +1,13 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { T as THEME, s as styled, m as reactExports, j as jsx, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { S as StanzaWrapper } from './StanzaWrapper-69f29275.js';
+import { T as THEME, s as styled, m as reactExports, j as jsx, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
+import { S as StanzaWrapper } from './StanzaWrapper-9552a4ac.js';
 import { s as select, c as creator, d as dispatch, t as timer } from './transform-fa8fb55c.js';
-import { g as getMedia } from './getMedia-0af2354d.js';
+import { g as getMedia } from './getMedia-7e7c5303.js';
 import { c as clone } from './clone-4533aa20.js';
 import { g as getData } from './getData-e9cb8ad8.js';
 import { U as URL_API } from './variables-f5cb7401.js';
-import './schemas-d468dcf7.js';
-import './getData-4200eb91.js';
+import './definitions-a767899b.js';
+import './makeApiUrl-bc69b05b.js';
 import './isArray-56c7d056.js';
 import './index-58d55e2c.js';
 

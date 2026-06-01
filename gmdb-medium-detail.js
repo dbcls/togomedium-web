@@ -1,13 +1,13 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { s as styled, j as jsx, T as THEME, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
+import { s as styled, j as jsx, T as THEME, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
 import { m as makeLinkPath, a as PATH_MEDIUM, P as PATH_COMPONENT, g as getLinkTarget } from './getLinkTarget-9ee27b52.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
-import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-8665dfe5.js';
-import { S as StanzaWrapper } from './StanzaWrapper-69f29275.js';
-import { g as getMedia } from './getMedia-0af2354d.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
-import './schemas-d468dcf7.js';
-import './getData-4200eb91.js';
+import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-4bfbc512.js';
+import { S as StanzaWrapper } from './StanzaWrapper-9552a4ac.js';
+import { g as getMedia } from './getMedia-7e7c5303.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
+import './definitions-a767899b.js';
+import './makeApiUrl-bc69b05b.js';
 import './isArray-56c7d056.js';
 import './index-58d55e2c.js';
 

@@ -1,21 +1,17 @@
 import { d as defineStanzaElement } from './stanza-0294ba58.js';
-import { s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-7e768473.js';
-import { m as makeApiUrl, o as object, s as string, a as array } from './schemas-d468dcf7.js';
-import { g as getData } from './getData-4200eb91.js';
+import { s as styled, T as THEME, j as jsx, a as jsxs, F as Fragment, b as TogoMediumReactStanza } from './StanzaReactProvider-6021d3e7.js';
+import { o as object, s as string, a as array, m as makeApiUrl, g as getData } from './makeApiUrl-bc69b05b.js';
 import { m as makeLinkPath, P as PATH_COMPONENT, g as getLinkTarget } from './getLinkTarget-9ee27b52.js';
 import { d as decodeHTMLEntities } from './decodeHtmlEntities-9696853d.js';
-import { C as ColorButton, a as ColWrapper } from './ColWrapper-e44f4ea8.js';
-import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-8665dfe5.js';
-import { S as StandardParagraph, W as WikipediaView, f as fetchWikipediaData } from './fetchWikipediaData-eb0593d7.js';
-import { S as StanzaWrapper } from './StanzaWrapper-69f29275.js';
-import { T as TagList } from './TagList-11b68696.js';
-import { u as useQuery } from './useQuery-e63f1f9b.js';
+import { C as ColorButton, a as ColWrapper } from './ColWrapper-9efe3dc9.js';
+import { I as InfoId, a as InfoTitle, S as SubHeading } from './SubHeading-4bfbc512.js';
+import { S as StandardParagraph, W as WikipediaView, f as fetchWikipediaData } from './fetchWikipediaData-4f89b3b0.js';
+import { S as StanzaWrapper } from './StanzaWrapper-9552a4ac.js';
+import { T as TagList } from './TagList-9992f5dd.js';
+import { u as useQuery } from './useQuery-c819e3b3.js';
 import './isArray-56c7d056.js';
 
-/**
- * @deprecated
- */
-const componentDetailURL = makeApiUrl("gmdb_component_by_gmoid");
+const PATH_COMPONENT_DETAIL = "/gmdb_component_by_gmoid";
 const componentClassSchema = object({
     gmo_id: string(),
     uri: string(),
@@ -90,11 +86,12 @@ const getLinkLabel = (link) => {
     }
 };
 
+const apiUrl = makeApiUrl(PATH_COMPONENT_DETAIL);
 const useComponentDataQuery = (gmo_id) => {
     const { data, isLoading } = useQuery({
         queryKey: [{ gmo_id }],
         queryFn: async () => {
-            const result = await getData(componentDetailURL, {
+            const result = await getData(apiUrl, {
                 gmo_id,
             });
             if (!result.body) {
