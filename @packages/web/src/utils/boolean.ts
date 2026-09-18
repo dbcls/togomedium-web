@@ -4,3 +4,4 @@ export const stringToBoolean = (str: string): boolean => {
 export const booleanToString = (bool: boolean): BooleanString => {
   return bool ? "true" : "false";
 };
+import type { BooleanString } from "@/types/stanza";

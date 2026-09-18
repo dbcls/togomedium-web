@@ -1,6 +1,5 @@
 import { useLocation } from "@tanstack/react-router";
 import { FC } from "react";
-
 import { H2 } from "@/components/atoms/H2.tsx";
 import { MediumBuilderStanza } from "@/components/stanzas/MediumBuilderStanza.tsx";
 import { PageWrapper } from "@/components/wrappers/PageWrapper.tsx";
