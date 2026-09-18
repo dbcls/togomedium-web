@@ -1,6 +1,7 @@
 import { TogoMediumReactStanza } from "%stanza/components/providers/StanzaReactProvider";
 import App from "%stanza/stanzas/gmdb-medium-builder/App";
 import { appStore } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
+import { readOptionalStringParameter } from "%stanza/utils/parameters";
 import React from "react";
 
 type StanzaParameters = {
@@ -10,7 +11,7 @@ type StanzaParameters = {
 export default class ReactStanza extends TogoMediumReactStanza<StanzaParameters> {
   makeApp() {
     this.reduxStore = appStore;
-    const sourceGmId = this.params.source_gm_id;
+    const sourceGmId = readOptionalStringParameter(this.params.source_gm_id, "source_gm_id");
     return <App sourceGmId={sourceGmId} />;
   }
 }

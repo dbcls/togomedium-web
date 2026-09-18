@@ -215,9 +215,6 @@ importers:
 
   '@packages/stanza':
     dependencies:
-      '@rollup/plugin-typescript':
-        specifier: ^12.3.0
-        version: 12.3.0(rollup@4.59.0)(tslib@2.8.1)(typescript@5.9.3)
       '@types/d3-drag':
         specifier: ^3.0.7
         version: 3.0.7
@@ -230,22 +227,16 @@ importers:
       d3-drag:
         specifier: ^3.0.0
         version: 3.0.0
-      rollup-plugin-dotenv:
-        specifier: ^0.5.1
-        version: 0.5.1(rollup@4.59.0)
       sleep-promise:
         specifier: ^9.1.0
         version: 9.1.0
       togostanza:
-        specifier: github:yohak/togostanza#v4.0.0-alpha.1
-        version: https://codeload.github.com/yohak/togostanza/tar.gz/cd256a31b17986f7ed1338813a978425ed530ded(@popperjs/core@2.11.8)(@types/node@25.3.5)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.9.0)
+        specifier: github:yohak/togostanza#v4.0.0-alpha.2
+        version: https://codeload.github.com/yohak/togostanza/tar.gz/56107791fb95d004106b3233c9f1a2a0fd3f0947(@popperjs/core@2.11.8)(@types/node@25.3.5)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.9.0)
     devDependencies:
       '@types/d3':
         specifier: ^7.4.0
         version: 7.4.3
-      tslib:
-        specifier: ^2.6.3
-        version: 2.8.1
 
   '@packages/storybook':
     dependencies:
@@ -1973,28 +1964,6 @@ packages:
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
-  '@rollup/plugin-replace@5.0.7':
-    resolution: {integrity: sha512-PqxSfuorkHz/SPpyngLyg5GCEkOcee9M1bkxiVDr41Pd61mqP1PLOoDPbpl44SB2mQGKwV/In74gqQmGITOhEQ==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-
-  '@rollup/plugin-typescript@12.3.0':
-    resolution: {integrity: sha512-7DP0/p7y3t67+NabT9f8oTBFE6gGkto4SA6Np2oudYmZE/m1dt8RB0SjL1msMxFpLo631qjRCcBlAbq1ml/Big==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^2.14.0||^3.0.0||^4.0.0
-      tslib: '*'
-      typescript: '>=3.7.0'
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-      tslib:
-        optional: true
-
   '@rollup/pluginutils@5.3.0':
     resolution: {integrity: sha512-5EdhGZtnu3V88ces7s53hhfK5KSASnJZv8Lulpc04cWO3REESroJXg73DFsOmgbU2BhwV0E20bu2IDZb3VKW4Q==}
     engines: {node: '>=14.0.0'}
@@ -3691,10 +3660,6 @@ packages:
   dot-case@3.0.4:
     resolution: {integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==}
 
-  dotenv@16.4.7:
-    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
-    engines: {node: '>=12'}
-
   electron-to-chromium@1.5.307:
     resolution: {integrity: sha512-5z3uFKBWjiNR44nFcYdkcXjKMbg5KXNdciu7mhTPo9tB7NbqSNP2sSnGR+fqknZSCwKkBN+oxiiajWs4dT6ORg==}
 
@@ -5092,12 +5057,6 @@ packages:
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
-  rollup-plugin-dotenv@0.5.1:
-    resolution: {integrity: sha512-ARUPDmeKAw3niZ2Ajv0qKNRryIWFMW796oJSS1hNdop3HF63Vljio/QRmG6ob0aQzzVUrFq6vW1p4jOE6xDQrQ==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      rollup: ^1.20.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
-
   rollup@4.59.0:
     resolution: {integrity: sha512-2oMpl67a3zCH9H79LeMcbDhXW/UmWG/y2zuqnF2jQq5uq9TbM9TVyXvA4+t+ne2IIkBdrLpAaRQAvo7YI/Yyeg==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -5384,9 +5343,9 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  togostanza@https://codeload.github.com/yohak/togostanza/tar.gz/cd256a31b17986f7ed1338813a978425ed530ded:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/yohak/togostanza/tar.gz/cd256a31b17986f7ed1338813a978425ed530ded}
-    version: 4.0.0-alpha.1
+  togostanza@https://codeload.github.com/yohak/togostanza/tar.gz/56107791fb95d004106b3233c9f1a2a0fd3f0947:
+    resolution: {gitHosted: true, integrity: sha512-asidlTJ6F0qTnm4yXzzNlCIO9SRTIL2GjEXW4Vj3Hbk7TmZXB8A5IwfxRo71aw7T3hCKuq0prePkPYiopEuL7g==, tarball: https://codeload.github.com/yohak/togostanza/tar.gz/56107791fb95d004106b3233c9f1a2a0fd3f0947}
+    version: 4.0.0-alpha.2
     engines: {node: '>=24.0.0'}
     hasBin: true
 
@@ -7277,22 +7236,6 @@ snapshots:
   '@rolldown/pluginutils@1.0.0-rc.3': {}
 
   '@rolldown/pluginutils@1.0.1': {}
-
-  '@rollup/plugin-replace@5.0.7(rollup@4.59.0)':
-    dependencies:
-      '@rollup/pluginutils': 5.3.0(rollup@4.59.0)
-      magic-string: 0.30.21
-    optionalDependencies:
-      rollup: 4.59.0
-
-  '@rollup/plugin-typescript@12.3.0(rollup@4.59.0)(tslib@2.8.1)(typescript@5.9.3)':
-    dependencies:
-      '@rollup/pluginutils': 5.3.0(rollup@4.59.0)
-      resolve: 1.22.11
-      typescript: 5.9.3
-    optionalDependencies:
-      rollup: 4.59.0
-      tslib: 2.8.1
 
   '@rollup/pluginutils@5.3.0(rollup@4.59.0)':
     dependencies:
@@ -9278,8 +9221,6 @@ snapshots:
       no-case: 3.0.4
       tslib: 2.8.1
 
-  dotenv@16.4.7: {}
-
   electron-to-chromium@1.5.307: {}
 
   emoji-regex@10.6.0: {}
@@ -10965,12 +10906,6 @@ snapshots:
       '@rolldown/binding-win32-arm64-msvc': 1.1.5
       '@rolldown/binding-win32-x64-msvc': 1.1.5
 
-  rollup-plugin-dotenv@0.5.1(rollup@4.59.0):
-    dependencies:
-      '@rollup/plugin-replace': 5.0.7(rollup@4.59.0)
-      dotenv: 16.4.7
-      rollup: 4.59.0
-
   rollup@4.59.0:
     dependencies:
       '@types/estree': 1.0.8
@@ -11259,7 +11194,7 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  togostanza@https://codeload.github.com/yohak/togostanza/tar.gz/cd256a31b17986f7ed1338813a978425ed530ded(@popperjs/core@2.11.8)(@types/node@25.3.5)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.9.0):
+  togostanza@https://codeload.github.com/yohak/togostanza/tar.gz/56107791fb95d004106b3233c9f1a2a0fd3f0947(@popperjs/core@2.11.8)(@types/node@25.3.5)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.9.0):
     dependencies:
       '@vitejs/plugin-vue': 6.0.8(vite@8.1.5(@types/node@25.3.5)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.101.6)(tsx@4.19.3)(yaml@2.9.0))(vue@3.5.40(typescript@5.9.3))
       bootstrap: 5.3.8(@popperjs/core@2.11.8)

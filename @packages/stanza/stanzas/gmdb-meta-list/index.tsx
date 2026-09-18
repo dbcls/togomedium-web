@@ -1,5 +1,6 @@
 import { TogoMediumReactStanza } from "%stanza/components/providers/StanzaReactProvider";
 import App from "%stanza/stanzas/gmdb-meta-list/App";
+import { readOptionalStringParameter, readStringParameter } from "%stanza/utils/parameters";
 import React from "react";
 
 export type StanzaParameters = {
@@ -12,13 +13,16 @@ export type StanzaParameters = {
 };
 export default class ReactStanza extends TogoMediumReactStanza<StanzaParameters> {
   makeApp() {
-    const params = this.params as StanzaParameters;
-    const apiUrl = params.api_url;
-    const limit = parseInt(params.limit ?? "20");
-    const title = params.title ?? "";
-    const columNames = params.column_names === "true";
-    const columnSizes = (params.column_sizes ?? "").split(",").map((s) => parseInt(s));
-    const webFont = params.web_font ?? "Fira Sans Condensed";
+    const params = this.params;
+    const apiUrl = readStringParameter(params.api_url, "api_url");
+    const limit = parseInt(readOptionalStringParameter(params.limit, "limit") ?? "20");
+    const title = readOptionalStringParameter(params.title, "title") ?? "";
+    const columNames = readOptionalStringParameter(params.column_names, "column_names") === "true";
+    const columnSizes = (readOptionalStringParameter(params.column_sizes, "column_sizes") ?? "")
+      .split(",")
+      .map((s) => parseInt(s));
+    const webFont =
+      readOptionalStringParameter(params.web_font, "web_font") ?? "Fira Sans Condensed";
     return (
       <App
         stanzaElement={this.root}

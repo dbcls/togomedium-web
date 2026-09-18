@@ -35,4 +35,4 @@
 - `components/providers/`
 - `stanzas/*/metadata.json`
 - `stanzas/*/index.tsx`
-- `togostanza-build.js`
+- `togostanza.config.ts`

@@ -66,9 +66,18 @@
 
 ## 共通基盤の扱い
 
-- `@packages/stanza/togostanza-build.js` と `@packages/stanza/tsconfig.json` では `%stanza/` `%core/` `%api/` などのエイリアスを前提にしているため、importは既存パターンに揃える。
+- `@packages/stanza/togostanza.config.ts` と `@packages/stanza/tsconfig.json` では `%stanza/` `%core/` `%api/` `%storybook/` のエイリアスを定義している。V4のビルド用設定とTypeScript用設定の参照先を揃え、importは既存パターンに揃える。
 - provider、theme、共通utilityに寄せられる責務は、stanza個別実装へ重複させない。
 - 逆に、ひとつのstanzaに強く依存する状態構造やドメイン知識は、共通基盤へ早い段階で持ち込まない。
+
+## ビルド設定とAPI接続先
+
+- V4のビルド設定は `@packages/stanza/togostanza.config.ts` で管理する。
+- API接続先は `VITE_URL_API` を使う。Stanzaパッケージの `.env` 系ファイルまたはコマンド実行時の環境変数で指定する。
+- 旧 `URL_API` も移行用に読み込む。両方が指定されている場合は `VITE_URL_API` を優先し、同じ接続先を共有コードと旧 `utils/variables.ts` の参照箇所へ適用する。
+- 未指定時は共有の `makeApiUrl()` の既定値を使う。ビルド後に接続先を変える場合は再ビルドする。
+- alpha.2のCLIは `build` と `serve` の設定読み込みに `production` モードを渡すため、`.env.production` なども読み込み対象になる。
+- ビルド設定からコードに埋め込む値はAPI接続先に限定し、環境変数全体を公開しない。
 
 ## `metadata.json` の扱い
 
@@ -98,6 +107,6 @@
 
 - `@packages/stanza/components/providers/StanzaReactProvider.tsx`
 - `@packages/stanza/styles/muiTheme.ts`
-- `@packages/stanza/togostanza-build.js`
+- `@packages/stanza/togostanza.config.ts`
 - `@packages/stanza/stanzas/gmdb-component-detail/index.tsx`
 - `@packages/stanza/stanzas/gmdb-component-detail/metadata.json`

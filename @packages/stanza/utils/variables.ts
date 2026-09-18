@@ -1,5 +1,5 @@
-const ENV_URL_API = typeof process !== "undefined" ? process.env?.URL_API : undefined;
+import { makeApiUrl } from "%core/network/makeApiUrl";
 /**
  * @deprecated
  */
-export const URL_API: string = ENV_URL_API ?? "https://togomedium.org/sparqlist/api/";
+export const URL_API: string = makeApiUrl("");

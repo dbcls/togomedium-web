@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import Stanza from "togostanza/stanza";
+import { readStringParameter } from "../../utils/parameters";
 import { URL_API } from "../../utils/variables";
 
 type D3Selection = d3.Selection<any, any, any, any>;
@@ -12,14 +13,15 @@ const TID_API: string = `${URL_API}gms_kegg_code_tid`;
 export default class GmdbRoundtree extends Stanza {
   async render() {
     const params = this.params;
-    const [newicText, codeList] = await downloadData(params.newick, TID_API);
+    const newick = readStringParameter(params.newick, "newick");
+    const [newicText, codeList] = await downloadData(newick, TID_API);
     const newicTree = parseNewic(newicText);
     const leafList = createLeafList(newicTree, codeList);
 
     this.renderTemplate({
       template: "stanza.html.hbs",
       parameters: {
-        greeting: `Hello, ${params.newick}!`,
+        greeting: `Hello, ${newick}!`,
       },
     });
 
