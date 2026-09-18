@@ -1,6 +1,6 @@
-import { join } from "path";
+import { join } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
@@ -11,23 +11,23 @@ export default defineConfig({
     alias: [
       {
         find: /^%stanza\//,
-        replacement: join(__dirname, "../", "stanza/"),
+        replacement: join(import.meta.dirname, "../", "stanza/"),
       },
       {
         find: /^%storybook\//,
-        replacement: join(__dirname, "../", "storybook/src/"),
+        replacement: join(import.meta.dirname, "../", "storybook/src/"),
       },
       {
         find: /^%core\//,
-        replacement: join(__dirname, "../", "core/src/"),
+        replacement: join(import.meta.dirname, "../", "core/src/"),
       },
       {
         find: /^%api\//,
-        replacement: join(__dirname, "../", "api/src/"),
+        replacement: join(import.meta.dirname, "../", "api/src/"),
       },
       {
         find: /^%web\//,
-        replacement: join(__dirname, "../", "web/src/"),
+        replacement: join(import.meta.dirname, "../", "web/src/"),
       },
     ],
   },
