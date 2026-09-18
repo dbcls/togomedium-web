@@ -15,7 +15,7 @@
     {
       "stanza:key": "gm_ids",
       "stanza:type": "string",
-      "stanza:example": "HM_D00001a,HM_D00065",
+      "stanza:example": "M2339,M328",
       "stanza:description": "",
       "stanza:required": true
     },

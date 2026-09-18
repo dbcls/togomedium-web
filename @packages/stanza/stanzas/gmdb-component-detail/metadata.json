@@ -22,7 +22,6 @@
       "stanza:required": true
     }
   ],
-  "stanza:menu-placement": "none",
   "stanza:style": [
     {
       "stanza:key": "--color-primary",
