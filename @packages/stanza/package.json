@@ -17,7 +17,7 @@
     "d3-drag": "^3.0.0",
     "rollup-plugin-dotenv": "^0.5.1",
     "sleep-promise": "^9.1.0",
-    "togostanza": "github:togostanza/togostanza"
+    "togostanza": "github:yohak/togostanza#v4.0.0-alpha.1"
   },
   "devDependencies": {
     "@types/d3": "^7.4.0",

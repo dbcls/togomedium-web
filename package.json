@@ -84,10 +84,5 @@
   },
   "resolutions": {
     "esbuild": "0.24.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "togostanza"
-    ]
   }
 }
