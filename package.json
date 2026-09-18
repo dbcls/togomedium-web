@@ -75,7 +75,7 @@
     "run-func": "^3.0.0",
     "storybook": "^10.6.0",
     "tailwindcss": "^4.3.3",
-    "typescript": "~5.9.3",
+    "typescript": "~7.0.2",
     "vite": "^8.3.0",
     "vite-multiple-assets": "^2.2.6",
     "vite-plugin-full-reload": "^1.2.0",

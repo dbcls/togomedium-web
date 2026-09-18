@@ -1,5 +1,27 @@
 # 依存関係更新の結果（2026-09-18）
 
+## 追補：Scalar・TypeScript 7の更新完了
+
+以下の初回報告で保留したScalarとTypeScriptは、上流の対応状況を確認し、再検証して更新した。
+
+- `0b7f181`: Scalar React 0.9.68へ更新。間接依存はcva 1.0.0-beta.4、neverpanic 0.0.8となり、TypeScript 7を妨げていたpeer dependency制約が解消した。
+- TypeScript本体を7.0.2へ更新。旧JavaScriptコンパイラーAPIの互換パッケージ追加や、アプリのコード修正は不要だった。検証範囲は現在の設定・ビルド経路であり、未使用のオプションまで互換性を保証するものではない。
+- Scalar再導入は全ワークスペースに対する通常の `pnpm install` で成功した。以前の依存解決エラーは再現しなかったが、配布パッケージで確認できた未宣言の実行時依存はpackageExtensionsで補正した。対象はvue-sonner 1.3.2のVueと、@scalar/schemas 0.10.0の@scalar/types 0.20.0。Vue 3.5.40への統一は維持した。
+
+検証結果：
+
+- `check-all` 成功（45ファイル・197テスト、既報の警告3件は残存）。
+- TypeScript 7の `tsc --noEmit` でWeb、Stanza、API、Core、Storybookの各tsconfig、およびWeb/StorybookのVite設定用tsconfigを直接検証し、すべて成功。
+- Web・Stanza・Storybookの本番ビルド、TypeSpec 1.16のコンパイル成功。
+- ブラウザでAPI画面の描画とAPI項目への移動、Storybookの培地選択解除を確認。ブラウザエラーなし。
+- frozen-lockfileでのインストールと、その後のWebビルド成功。peer dependency不一致なし。
+
+上流では [PR #9454](https://github.com/scalar/scalar/pull/9454) で純TypeScriptパッケージの型チェックをtsgoへ移行し、[PR #9682](https://github.com/scalar/scalar/pull/9682) で旧コンパイラーAPIを使うツール向けにTypeScript 5との併用を説明している。こちらの利用構成ではTS7単体で上記検証が通った。neverpanicの制約削除は [PR #9445](https://github.com/scalar/scalar/pull/9445) に記録されている。
+
+現在保留している直接依存の更新はMUI 2パッケージとBabelのみ。以下は初回更新時点の記録であり、Scalar・TypeScriptに関する保留判断はこの追補で更新する。
+
+## 初回更新
+
 MUI・Emotionと関連するBabelのメジャー更新を保留し、その他を段階的に更新した。
 更新前のTogoStanza v4 alpha.2移行は `85b789d` に記録している。
 
