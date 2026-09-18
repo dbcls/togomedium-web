@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@types/d3-drag": "^3.0.7",
-    "colord": "^2.9.3",
+    "colord": "^2.10.0",
     "d3": "^7.9.0",
     "d3-drag": "^3.0.0",
     "sleep-promise": "^9.1.0",

@@ -10,330 +10,158 @@
 
 import { createFileRoute } from '@tanstack/react-router'
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as PathwayStanzaRouteImport } from './routes/pathway-stanza'
+import { Route as ComponentIndexRouteImport } from './routes/component/index'
+import { Route as ComponentGmoIdRouteImport } from './routes/component/$gmoId'
+import { Route as MediumIndexRouteImport } from './routes/medium/index'
+import { Route as MediumGmIdRouteImport } from './routes/medium/$gmId'
+import { Route as StrainIndexRouteImport } from './routes/strain/index'
+import { Route as StrainStrainIdRouteImport } from './routes/strain/$strainId'
+import { Route as TaxonTaxIdRouteImport } from './routes/taxon/$taxId'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as PathwayStanzaImport } from './routes/pathway-stanza'
-import { Route as StrainIndexImport } from './routes/strain/index'
-import { Route as MediumIndexImport } from './routes/medium/index'
-import { Route as ComponentIndexImport } from './routes/component/index'
-import { Route as TaxonTaxIdImport } from './routes/taxon/$taxId'
-import { Route as StrainStrainIdImport } from './routes/strain/$strainId'
-import { Route as MediumGmIdImport } from './routes/medium/$gmId'
-import { Route as ComponentGmoIdImport } from './routes/component/$gmoId'
-
-// Create Virtual Routes
-
-const StatisticsLazyImport = createFileRoute('/statistics')()
-const SearchLazyImport = createFileRoute('/search')()
-const FindMediaByTaxonomicTreeLazyImport = createFileRoute(
-  '/find-media-by-taxonomic-tree',
-)()
-const FindMediaByOrganismPhenotypeLazyImport = createFileRoute(
-  '/find-media-by-organism-phenotype',
-)()
-const FindMediaByGtdbTaxonomicTreeLazyImport = createFileRoute(
-  '/find-media-by-gtdb-taxonomic-tree',
-)()
-const FindMediaByComponentsLazyImport = createFileRoute(
-  '/find-media-by-components',
-)()
-const CompareMediaByTaxidsLazyImport = createFileRoute(
+const IndexLazyRouteImport = createFileRoute('/')()
+const AboutLazyRouteImport = createFileRoute('/about')()
+const ApiLazyRouteImport = createFileRoute('/api')()
+const BuilderLazyRouteImport = createFileRoute('/builder')()
+const CompareMediaLazyRouteImport = createFileRoute('/compare-media')()
+const CompareMediaByTaxidsLazyRouteImport = createFileRoute(
   '/compare-media-by-taxids',
 )()
-const CompareMediaLazyImport = createFileRoute('/compare-media')()
-const BuilderLazyImport = createFileRoute('/builder')()
-const ApiLazyImport = createFileRoute('/api')()
-const AboutLazyImport = createFileRoute('/about')()
-const IndexLazyImport = createFileRoute('/')()
+const FindMediaByComponentsLazyRouteImport = createFileRoute(
+  '/find-media-by-components',
+)()
+const FindMediaByGtdbTaxonomicTreeLazyRouteImport = createFileRoute(
+  '/find-media-by-gtdb-taxonomic-tree',
+)()
+const FindMediaByOrganismPhenotypeLazyRouteImport = createFileRoute(
+  '/find-media-by-organism-phenotype',
+)()
+const FindMediaByTaxonomicTreeLazyRouteImport = createFileRoute(
+  '/find-media-by-taxonomic-tree',
+)()
+const SearchLazyRouteImport = createFileRoute('/search')()
+const StatisticsLazyRouteImport = createFileRoute('/statistics')()
 
-// Create/Update Routes
-
-const StatisticsLazyRoute = StatisticsLazyImport.update({
-  id: '/statistics',
-  path: '/statistics',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/statistics.lazy').then((d) => d.Route))
-
-const SearchLazyRoute = SearchLazyImport.update({
-  id: '/search',
-  path: '/search',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/search.lazy').then((d) => d.Route))
-
-const FindMediaByTaxonomicTreeLazyRoute =
-  FindMediaByTaxonomicTreeLazyImport.update({
-    id: '/find-media-by-taxonomic-tree',
-    path: '/find-media-by-taxonomic-tree',
-    getParentRoute: () => rootRoute,
+const IndexLazyRoute = IndexLazyRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+const AboutLazyRoute = AboutLazyRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+const ApiLazyRoute = ApiLazyRouteImport.update({
+  id: '/api',
+  path: '/api',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/api.lazy').then((d) => d.Route))
+const BuilderLazyRoute = BuilderLazyRouteImport.update({
+  id: '/builder',
+  path: '/builder',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/builder.lazy').then((d) => d.Route))
+const CompareMediaLazyRoute = CompareMediaLazyRouteImport.update({
+  id: '/compare-media',
+  path: '/compare-media',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/compare-media.lazy').then((d) => d.Route))
+const CompareMediaByTaxidsLazyRoute =
+  CompareMediaByTaxidsLazyRouteImport.update({
+    id: '/compare-media-by-taxids',
+    path: '/compare-media-by-taxids',
+    getParentRoute: () => rootRouteImport,
   } as any).lazy(() =>
-    import('./routes/find-media-by-taxonomic-tree.lazy').then((d) => d.Route),
+    import('./routes/compare-media-by-taxids.lazy').then((d) => d.Route),
   )
-
-const FindMediaByOrganismPhenotypeLazyRoute =
-  FindMediaByOrganismPhenotypeLazyImport.update({
-    id: '/find-media-by-organism-phenotype',
-    path: '/find-media-by-organism-phenotype',
-    getParentRoute: () => rootRoute,
+const FindMediaByComponentsLazyRoute =
+  FindMediaByComponentsLazyRouteImport.update({
+    id: '/find-media-by-components',
+    path: '/find-media-by-components',
+    getParentRoute: () => rootRouteImport,
   } as any).lazy(() =>
-    import('./routes/find-media-by-organism-phenotype.lazy').then(
-      (d) => d.Route,
-    ),
+    import('./routes/find-media-by-components.lazy').then((d) => d.Route),
   )
-
 const FindMediaByGtdbTaxonomicTreeLazyRoute =
-  FindMediaByGtdbTaxonomicTreeLazyImport.update({
+  FindMediaByGtdbTaxonomicTreeLazyRouteImport.update({
     id: '/find-media-by-gtdb-taxonomic-tree',
     path: '/find-media-by-gtdb-taxonomic-tree',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any).lazy(() =>
     import('./routes/find-media-by-gtdb-taxonomic-tree.lazy').then(
       (d) => d.Route,
     ),
   )
-
-const FindMediaByComponentsLazyRoute = FindMediaByComponentsLazyImport.update({
-  id: '/find-media-by-components',
-  path: '/find-media-by-components',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/find-media-by-components.lazy').then((d) => d.Route),
-)
-
-const CompareMediaByTaxidsLazyRoute = CompareMediaByTaxidsLazyImport.update({
-  id: '/compare-media-by-taxids',
-  path: '/compare-media-by-taxids',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/compare-media-by-taxids.lazy').then((d) => d.Route),
-)
-
-const CompareMediaLazyRoute = CompareMediaLazyImport.update({
-  id: '/compare-media',
-  path: '/compare-media',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/compare-media.lazy').then((d) => d.Route))
-
-const BuilderLazyRoute = BuilderLazyImport.update({
-  id: '/builder',
-  path: '/builder',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/builder.lazy').then((d) => d.Route))
-
-const ApiLazyRoute = ApiLazyImport.update({
-  id: '/api',
-  path: '/api',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/api.lazy').then((d) => d.Route))
-
-const AboutLazyRoute = AboutLazyImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
-
-const PathwayStanzaRoute = PathwayStanzaImport.update({
+const FindMediaByOrganismPhenotypeLazyRoute =
+  FindMediaByOrganismPhenotypeLazyRouteImport.update({
+    id: '/find-media-by-organism-phenotype',
+    path: '/find-media-by-organism-phenotype',
+    getParentRoute: () => rootRouteImport,
+  } as any).lazy(() =>
+    import('./routes/find-media-by-organism-phenotype.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+const FindMediaByTaxonomicTreeLazyRoute =
+  FindMediaByTaxonomicTreeLazyRouteImport.update({
+    id: '/find-media-by-taxonomic-tree',
+    path: '/find-media-by-taxonomic-tree',
+    getParentRoute: () => rootRouteImport,
+  } as any).lazy(() =>
+    import('./routes/find-media-by-taxonomic-tree.lazy').then((d) => d.Route),
+  )
+const PathwayStanzaRoute = PathwayStanzaRouteImport.update({
   id: '/pathway-stanza',
   path: '/pathway-stanza',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexLazyRoute = IndexLazyImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
-
-const StrainIndexRoute = StrainIndexImport.update({
-  id: '/strain/',
-  path: '/strain/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const MediumIndexRoute = MediumIndexImport.update({
-  id: '/medium/',
-  path: '/medium/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ComponentIndexRoute = ComponentIndexImport.update({
+const SearchLazyRoute = SearchLazyRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/search.lazy').then((d) => d.Route))
+const StatisticsLazyRoute = StatisticsLazyRouteImport.update({
+  id: '/statistics',
+  path: '/statistics',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/statistics.lazy').then((d) => d.Route))
+const ComponentIndexRoute = ComponentIndexRouteImport.update({
   id: '/component/',
   path: '/component/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const TaxonTaxIdRoute = TaxonTaxIdImport.update({
-  id: '/taxon/$taxId',
-  path: '/taxon/$taxId',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const StrainStrainIdRoute = StrainStrainIdImport.update({
-  id: '/strain/$strainId',
-  path: '/strain/$strainId',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const MediumGmIdRoute = MediumGmIdImport.update({
-  id: '/medium/$gmId',
-  path: '/medium/$gmId',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ComponentGmoIdRoute = ComponentGmoIdImport.update({
+const ComponentGmoIdRoute = ComponentGmoIdRouteImport.update({
   id: '/component/$gmoId',
   path: '/component/$gmoId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/pathway-stanza': {
-      id: '/pathway-stanza'
-      path: '/pathway-stanza'
-      fullPath: '/pathway-stanza'
-      preLoaderRoute: typeof PathwayStanzaImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/api': {
-      id: '/api'
-      path: '/api'
-      fullPath: '/api'
-      preLoaderRoute: typeof ApiLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/builder': {
-      id: '/builder'
-      path: '/builder'
-      fullPath: '/builder'
-      preLoaderRoute: typeof BuilderLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/compare-media': {
-      id: '/compare-media'
-      path: '/compare-media'
-      fullPath: '/compare-media'
-      preLoaderRoute: typeof CompareMediaLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/compare-media-by-taxids': {
-      id: '/compare-media-by-taxids'
-      path: '/compare-media-by-taxids'
-      fullPath: '/compare-media-by-taxids'
-      preLoaderRoute: typeof CompareMediaByTaxidsLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/find-media-by-components': {
-      id: '/find-media-by-components'
-      path: '/find-media-by-components'
-      fullPath: '/find-media-by-components'
-      preLoaderRoute: typeof FindMediaByComponentsLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/find-media-by-gtdb-taxonomic-tree': {
-      id: '/find-media-by-gtdb-taxonomic-tree'
-      path: '/find-media-by-gtdb-taxonomic-tree'
-      fullPath: '/find-media-by-gtdb-taxonomic-tree'
-      preLoaderRoute: typeof FindMediaByGtdbTaxonomicTreeLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/find-media-by-organism-phenotype': {
-      id: '/find-media-by-organism-phenotype'
-      path: '/find-media-by-organism-phenotype'
-      fullPath: '/find-media-by-organism-phenotype'
-      preLoaderRoute: typeof FindMediaByOrganismPhenotypeLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/find-media-by-taxonomic-tree': {
-      id: '/find-media-by-taxonomic-tree'
-      path: '/find-media-by-taxonomic-tree'
-      fullPath: '/find-media-by-taxonomic-tree'
-      preLoaderRoute: typeof FindMediaByTaxonomicTreeLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/search': {
-      id: '/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof SearchLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/statistics': {
-      id: '/statistics'
-      path: '/statistics'
-      fullPath: '/statistics'
-      preLoaderRoute: typeof StatisticsLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/component/$gmoId': {
-      id: '/component/$gmoId'
-      path: '/component/$gmoId'
-      fullPath: '/component/$gmoId'
-      preLoaderRoute: typeof ComponentGmoIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/medium/$gmId': {
-      id: '/medium/$gmId'
-      path: '/medium/$gmId'
-      fullPath: '/medium/$gmId'
-      preLoaderRoute: typeof MediumGmIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/strain/$strainId': {
-      id: '/strain/$strainId'
-      path: '/strain/$strainId'
-      fullPath: '/strain/$strainId'
-      preLoaderRoute: typeof StrainStrainIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/taxon/$taxId': {
-      id: '/taxon/$taxId'
-      path: '/taxon/$taxId'
-      fullPath: '/taxon/$taxId'
-      preLoaderRoute: typeof TaxonTaxIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/component/': {
-      id: '/component/'
-      path: '/component'
-      fullPath: '/component'
-      preLoaderRoute: typeof ComponentIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/medium/': {
-      id: '/medium/'
-      path: '/medium'
-      fullPath: '/medium'
-      preLoaderRoute: typeof MediumIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/strain/': {
-      id: '/strain/'
-      path: '/strain'
-      fullPath: '/strain'
-      preLoaderRoute: typeof StrainIndexImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
+const MediumIndexRoute = MediumIndexRouteImport.update({
+  id: '/medium/',
+  path: '/medium/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MediumGmIdRoute = MediumGmIdRouteImport.update({
+  id: '/medium/$gmId',
+  path: '/medium/$gmId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StrainIndexRoute = StrainIndexRouteImport.update({
+  id: '/strain/',
+  path: '/strain/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StrainStrainIdRoute = StrainStrainIdRouteImport.update({
+  id: '/strain/$strainId',
+  path: '/strain/$strainId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaxonTaxIdRoute = TaxonTaxIdRouteImport.update({
+  id: '/taxon/$taxId',
+  path: '/taxon/$taxId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
@@ -353,11 +181,10 @@ export interface FileRoutesByFullPath {
   '/medium/$gmId': typeof MediumGmIdRoute
   '/strain/$strainId': typeof StrainStrainIdRoute
   '/taxon/$taxId': typeof TaxonTaxIdRoute
-  '/component': typeof ComponentIndexRoute
-  '/medium': typeof MediumIndexRoute
-  '/strain': typeof StrainIndexRoute
+  '/component/': typeof ComponentIndexRoute
+  '/medium/': typeof MediumIndexRoute
+  '/strain/': typeof StrainIndexRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/pathway-stanza': typeof PathwayStanzaRoute
@@ -380,9 +207,8 @@ export interface FileRoutesByTo {
   '/medium': typeof MediumIndexRoute
   '/strain': typeof StrainIndexRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
   '/pathway-stanza': typeof PathwayStanzaRoute
   '/about': typeof AboutLazyRoute
@@ -404,7 +230,6 @@ export interface FileRoutesById {
   '/medium/': typeof MediumIndexRoute
   '/strain/': typeof StrainIndexRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -425,9 +250,9 @@ export interface FileRouteTypes {
     | '/medium/$gmId'
     | '/strain/$strainId'
     | '/taxon/$taxId'
-    | '/component'
-    | '/medium'
-    | '/strain'
+    | '/component/'
+    | '/medium/'
+    | '/strain/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -474,7 +299,6 @@ export interface FileRouteTypes {
     | '/strain/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   PathwayStanzaRoute: typeof PathwayStanzaRoute
@@ -496,6 +320,151 @@ export interface RootRouteChildren {
   ComponentIndexRoute: typeof ComponentIndexRoute
   MediumIndexRoute: typeof MediumIndexRoute
   StrainIndexRoute: typeof StrainIndexRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api': {
+      id: '/api'
+      path: '/api'
+      fullPath: '/api'
+      preLoaderRoute: typeof ApiLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/builder': {
+      id: '/builder'
+      path: '/builder'
+      fullPath: '/builder'
+      preLoaderRoute: typeof BuilderLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare-media': {
+      id: '/compare-media'
+      path: '/compare-media'
+      fullPath: '/compare-media'
+      preLoaderRoute: typeof CompareMediaLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare-media-by-taxids': {
+      id: '/compare-media-by-taxids'
+      path: '/compare-media-by-taxids'
+      fullPath: '/compare-media-by-taxids'
+      preLoaderRoute: typeof CompareMediaByTaxidsLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/find-media-by-components': {
+      id: '/find-media-by-components'
+      path: '/find-media-by-components'
+      fullPath: '/find-media-by-components'
+      preLoaderRoute: typeof FindMediaByComponentsLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/find-media-by-gtdb-taxonomic-tree': {
+      id: '/find-media-by-gtdb-taxonomic-tree'
+      path: '/find-media-by-gtdb-taxonomic-tree'
+      fullPath: '/find-media-by-gtdb-taxonomic-tree'
+      preLoaderRoute: typeof FindMediaByGtdbTaxonomicTreeLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/find-media-by-organism-phenotype': {
+      id: '/find-media-by-organism-phenotype'
+      path: '/find-media-by-organism-phenotype'
+      fullPath: '/find-media-by-organism-phenotype'
+      preLoaderRoute: typeof FindMediaByOrganismPhenotypeLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/find-media-by-taxonomic-tree': {
+      id: '/find-media-by-taxonomic-tree'
+      path: '/find-media-by-taxonomic-tree'
+      fullPath: '/find-media-by-taxonomic-tree'
+      preLoaderRoute: typeof FindMediaByTaxonomicTreeLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pathway-stanza': {
+      id: '/pathway-stanza'
+      path: '/pathway-stanza'
+      fullPath: '/pathway-stanza'
+      preLoaderRoute: typeof PathwayStanzaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/statistics': {
+      id: '/statistics'
+      path: '/statistics'
+      fullPath: '/statistics'
+      preLoaderRoute: typeof StatisticsLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/component/': {
+      id: '/component/'
+      path: '/component'
+      fullPath: '/component/'
+      preLoaderRoute: typeof ComponentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/component/$gmoId': {
+      id: '/component/$gmoId'
+      path: '/component/$gmoId'
+      fullPath: '/component/$gmoId'
+      preLoaderRoute: typeof ComponentGmoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/medium/': {
+      id: '/medium/'
+      path: '/medium'
+      fullPath: '/medium/'
+      preLoaderRoute: typeof MediumIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/medium/$gmId': {
+      id: '/medium/$gmId'
+      path: '/medium/$gmId'
+      fullPath: '/medium/$gmId'
+      preLoaderRoute: typeof MediumGmIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/strain/': {
+      id: '/strain/'
+      path: '/strain'
+      fullPath: '/strain/'
+      preLoaderRoute: typeof StrainIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/strain/$strainId': {
+      id: '/strain/$strainId'
+      path: '/strain/$strainId'
+      fullPath: '/strain/$strainId'
+      preLoaderRoute: typeof StrainStrainIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/taxon/$taxId': {
+      id: '/taxon/$taxId'
+      path: '/taxon/$taxId'
+      fullPath: '/taxon/$taxId'
+      preLoaderRoute: typeof TaxonTaxIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -520,99 +489,6 @@ const rootRouteChildren: RootRouteChildren = {
   MediumIndexRoute: MediumIndexRoute,
   StrainIndexRoute: StrainIndexRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/pathway-stanza",
-        "/about",
-        "/api",
-        "/builder",
-        "/compare-media",
-        "/compare-media-by-taxids",
-        "/find-media-by-components",
-        "/find-media-by-gtdb-taxonomic-tree",
-        "/find-media-by-organism-phenotype",
-        "/find-media-by-taxonomic-tree",
-        "/search",
-        "/statistics",
-        "/component/$gmoId",
-        "/medium/$gmId",
-        "/strain/$strainId",
-        "/taxon/$taxId",
-        "/component/",
-        "/medium/",
-        "/strain/"
-      ]
-    },
-    "/": {
-      "filePath": "index.lazy.tsx"
-    },
-    "/pathway-stanza": {
-      "filePath": "pathway-stanza.tsx"
-    },
-    "/about": {
-      "filePath": "about.lazy.tsx"
-    },
-    "/api": {
-      "filePath": "api.lazy.tsx"
-    },
-    "/builder": {
-      "filePath": "builder.lazy.tsx"
-    },
-    "/compare-media": {
-      "filePath": "compare-media.lazy.tsx"
-    },
-    "/compare-media-by-taxids": {
-      "filePath": "compare-media-by-taxids.lazy.tsx"
-    },
-    "/find-media-by-components": {
-      "filePath": "find-media-by-components.lazy.tsx"
-    },
-    "/find-media-by-gtdb-taxonomic-tree": {
-      "filePath": "find-media-by-gtdb-taxonomic-tree.lazy.tsx"
-    },
-    "/find-media-by-organism-phenotype": {
-      "filePath": "find-media-by-organism-phenotype.lazy.tsx"
-    },
-    "/find-media-by-taxonomic-tree": {
-      "filePath": "find-media-by-taxonomic-tree.lazy.tsx"
-    },
-    "/search": {
-      "filePath": "search.lazy.tsx"
-    },
-    "/statistics": {
-      "filePath": "statistics.lazy.tsx"
-    },
-    "/component/$gmoId": {
-      "filePath": "component/$gmoId.tsx"
-    },
-    "/medium/$gmId": {
-      "filePath": "medium/$gmId.tsx"
-    },
-    "/strain/$strainId": {
-      "filePath": "strain/$strainId.tsx"
-    },
-    "/taxon/$taxId": {
-      "filePath": "taxon/$taxId.tsx"
-    },
-    "/component/": {
-      "filePath": "component/index.tsx"
-    },
-    "/medium/": {
-      "filePath": "medium/index.tsx"
-    },
-    "/strain/": {
-      "filePath": "strain/index.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
