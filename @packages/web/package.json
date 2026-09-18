@@ -9,7 +9,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@scalar/api-reference-react": "^0.9.1",
+    "@scalar/api-reference-react": "^0.9.68",
     "@tanstack/react-router": "^1.170.38",
     "@tanstack/router-devtools": "^1.167.2",
     "@types/d3": "^7.4.3",
