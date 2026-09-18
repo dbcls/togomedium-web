@@ -58,7 +58,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 
-@service({
+@service(#{
   title: "TogoMedium API",
 })
 @doc("TogoMedium API is a RESTful API for TogoMedium, a database of growth media for microorganisms.")

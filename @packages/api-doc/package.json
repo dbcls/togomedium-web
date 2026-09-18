@@ -16,15 +16,15 @@
     "bundle": "npm run tsp:build && npm run vite:build && npm run tsp:copy-to-web"
   },
   "devDependencies": {
-    "@typespec/compiler": "latest",
-    "@typespec/http": "latest",
-    "@typespec/json-schema": "latest",
-    "@typespec/openapi": "latest",
-    "@typespec/openapi3": "latest",
-    "@typespec/prettier-plugin-typespec": "latest",
-    "@typespec/rest": "latest",
-    "@typespec/versioning": "latest",
-    "concurrently": "^9.1.0"
+    "@typespec/compiler": "1.16.0",
+    "@typespec/http": "1.16.0",
+    "@typespec/json-schema": "1.16.0",
+    "@typespec/openapi": "1.16.0",
+    "@typespec/openapi3": "1.16.0",
+    "@typespec/prettier-plugin-typespec": "1.16.0",
+    "@typespec/rest": "0.86.0",
+    "@typespec/versioning": "0.86.0",
+    "concurrently": "^10.0.5"
   },
   "deprecated": true
 }
