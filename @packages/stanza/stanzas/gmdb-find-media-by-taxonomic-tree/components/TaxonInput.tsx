@@ -77,7 +77,6 @@ export const TaxonInput: FC<Props> = ({ onChange }) => {
       onChange={(e, v) => {
         onChange(v ? v.tax_id : null);
       }}
-      renderTags={() => null}
       renderOption={(props, option, { selected }) => {
         const { key, ...optionProps } = props;
         return (

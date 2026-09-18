@@ -1,5 +1,25 @@
 # 依存関係更新の結果（2026-09-18）
 
+## 追補：MUI・Emotionの更新完了
+
+- MUI material / icons-materialを7.3.9から9.4.0へ更新した。
+- Emotion cache / reactの依存宣言を11.14.0へ揃えた。styledは11.14.1を維持。解決済みのEmotion本体は更新前からこれらの版であり、ランタイムの版変更はない。
+- 現行のVite・SWC・JSX runtime設定で使用していない直接依存 `@babel/core`、`@emotion/babel-plugin`、`@emotion/babel-preset-css-prop` を削除した。Babel 8への置換は不要となった。ビルドツールが必要とする間接依存は残る。
+- Autocompleteの `renderTags` を `renderValue` に移行し、入力欄は `params.slotProps` を引き継ぐ形へ修正した。単一選択で無効だったTaxonInputの `renderTags` は削除した。
+- Stackのgap指定をsxへ移し、spanとして描画するButtonに `nativeButton={false}` を指定した。
+- 実StanzaでインポートダイアログがShadow DOMの外に描画され、Emotionのスタイルが届かないことを確認した。共通ProviderのテーマでModal・Popover・PopperのcontainerをStanzaのmain要素へ指定し、スタイルと閉じた後のフォーカス復元を確認した。更新前との比較は行っていないため、MUI 9固有の回帰とは断定していない。
+- ダイアログのテストでは起点のボタンへフォーカスを置く操作を明示した。MUIの復元処理がjsdomのDocumentをフォーカス対象にするエラーを防ぎ、閉じた後のフォーカス復元とShadow DOM内への描画を検証している。
+
+検証結果：
+
+- `check-all` 成功（45ファイル・198テスト）。既報の型チェック警告3件は残存。
+- frozen-lockfileでのインストール、Web・Stanza・Storybookの本番ビルド成功。peer dependency不一致なし。
+- StorybookでComponentRowの候補選択・メニュー開閉、ComponentSelectのチップ追加・削除、TaxonInputの候補選択後の表示、Selectのキーボード選択、ImportDialogの表示を確認した。
+- 実StanzaのShadow DOM内で、成分検索の候補表示・選択、培地選択・タブ切り替え、およびMedium Builderのダイアログ表示・閉じる操作と起点へのフォーカス復元を確認した。確認中のブラウザ実行時エラーなし。
+- 全画面・全ブラウザの回帰確認は未実施。MUI 9の最低対応ブラウザはChrome 117、Edge 121、Firefox 121、Safari 17。古いSafariをサポートする場合は別途判断が必要となる。
+
+参照：[MUI 9移行ガイド](https://mui.com/material-ui/migration/upgrade-to-v9/)、[MUIのShadow DOM対応](https://mui.com/material-ui/customization/shadow-dom/)。
+
 ## 追補：Scalar・TypeScript 7の更新完了
 
 以下の初回報告で保留したScalarとTypeScriptは、上流の対応状況を確認し、再検証して更新した。
@@ -18,7 +38,7 @@
 
 上流では [PR #9454](https://github.com/scalar/scalar/pull/9454) で純TypeScriptパッケージの型チェックをtsgoへ移行し、[PR #9682](https://github.com/scalar/scalar/pull/9682) で旧コンパイラーAPIを使うツール向けにTypeScript 5との併用を説明している。こちらの利用構成ではTS7単体で上記検証が通った。neverpanicの制約削除は [PR #9445](https://github.com/scalar/scalar/pull/9445) に記録されている。
 
-現在保留している直接依存の更新はMUI 2パッケージとBabelのみ。以下は初回更新時点の記録であり、Scalar・TypeScriptに関する保留判断はこの追補で更新する。
+この追補の時点ではMUI 2パッケージとBabelを保留したが、上のMUI・Emotion追補で対応を完了した。以下は初回更新時点の記録であり、Scalar・TypeScriptに関する保留判断はこの追補で更新する。
 
 ## 初回更新
 

@@ -76,7 +76,7 @@ export const ImportDialog: FC<ImportDialogProps> = ({
     <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth={"sm"}>
       <DialogTitle>Upload .json</DialogTitle>
       <DialogContent>
-        <Stack gap={2}>
+        <Stack sx={{ gap: 2 }}>
           <Alert severity={"warning"}>
             Importing a JSON file will replace the current medium builder contents.
           </Alert>
@@ -98,6 +98,7 @@ export const ImportDialog: FC<ImportDialogProps> = ({
               variant={"outlined"}
               size={"small"}
               component={"span"}
+              nativeButton={false}
               sx={{ textTransform: "none" }}
             >
               Choose file

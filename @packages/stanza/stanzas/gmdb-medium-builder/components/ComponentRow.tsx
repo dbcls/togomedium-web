@@ -160,8 +160,9 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
             <TextField
               {...params}
               slotProps={{
+                ...params.slotProps,
                 htmlInput: {
-                  ...params.inputProps,
+                  ...params.slotProps.htmlInput,
                   "aria-label": "Component",
                 },
               }}
@@ -197,8 +198,9 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
             <TextField
               {...params}
               slotProps={{
+                ...params.slotProps,
                 htmlInput: {
-                  ...params.inputProps,
+                  ...params.slotProps.htmlInput,
                   "aria-label": "Unit",
                 },
               }}
@@ -233,8 +235,9 @@ export const ComponentRow: FC<Props> = ({ id, solutionBlockId }) => {
             <TextField
               {...params}
               slotProps={{
+                ...params.slotProps,
                 htmlInput: {
-                  ...params.inputProps,
+                  ...params.slotProps.htmlInput,
                   "aria-label": "Concentration unit",
                 },
               }}

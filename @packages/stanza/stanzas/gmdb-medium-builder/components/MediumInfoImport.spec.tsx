@@ -129,7 +129,9 @@ describe("MediumInfo JSON import", () => {
 });
 
 const selectImportFile = async (file: File) => {
-  fireEvent.click(screen.getByRole("button", { name: "Upload .json" }));
+  const uploadButton = screen.getByRole("button", { name: "Upload .json" });
+  uploadButton.focus();
+  fireEvent.click(uploadButton);
 
   const dropZone = screen.getByText("Drop a JSON file here").closest("label");
   expect(dropZone).not.toBeNull();

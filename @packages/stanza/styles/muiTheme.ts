@@ -45,3 +45,13 @@ export const muiTheme = createTheme({
     },
   },
 });
+
+// Keep portal content in the same shadow root as the Stanza's Emotion styles.
+export const createStanzaMuiTheme = (container: HTMLElement) =>
+  createTheme(muiTheme, {
+    components: {
+      MuiModal: { defaultProps: { container } },
+      MuiPopover: { defaultProps: { container } },
+      MuiPopper: { defaultProps: { container } },
+    },
+  });

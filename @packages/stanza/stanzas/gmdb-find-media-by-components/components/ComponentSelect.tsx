@@ -53,11 +53,11 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
       loading={isPending}
       getOptionLabel={(option) => option.label}
       renderInput={(params) => <TextField {...params} label="Components" />}
-      renderTags={(value, getTagProps) =>
+      renderValue={(value, getItemProps) =>
         value.map((option, index) => (
           <Chip
             variant="outlined"
-            {...getTagProps({ index })}
+            {...getItemProps({ index })}
             label={option.label}
             key={option.id}
           />

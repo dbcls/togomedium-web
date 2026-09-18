@@ -1,13 +1,24 @@
 import { ImportDialog } from "%stanza/stanzas/gmdb-medium-builder/components/ImportDialog";
 import { MediumInfo } from "%stanza/stanzas/gmdb-medium-builder/components/MediumInfo";
 import { createThunkTestStore } from "%stanza/stanzas/gmdb-medium-builder/state/thunks/testUtils";
+import { createStanzaMuiTheme } from "%stanza/styles/muiTheme";
+import { ThemeProvider } from "@mui/material/styles";
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("ImportDialog", () => {
+  let opener: HTMLButtonElement;
+
+  beforeEach(() => {
+    // Model the focused control that opens a dialog so MUI can restore focus on close.
+    opener = document.createElement("button");
+    document.body.append(opener);
+    opener.focus();
+  });
   afterEach(() => {
     cleanup();
+    opener.remove();
   });
 
   it("opens from MediumInfo and closes from the dialog", async () => {
@@ -19,7 +30,9 @@ describe("ImportDialog", () => {
       </Provider>,
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Upload .json" }));
+    const uploadButton = screen.getByRole("button", { name: "Upload .json" });
+    uploadButton.focus();
+    fireEvent.click(uploadButton);
 
     expect(screen.queryByRole("dialog", { name: "Upload .json" })).not.toBeNull();
     expect(
@@ -30,7 +43,29 @@ describe("ImportDialog", () => {
 
     await waitFor(() => {
       expect(screen.queryByRole("dialog", { name: "Upload .json" })).toBeNull();
+      expect(document.activeElement).toBe(uploadButton);
     });
+  });
+
+  it("keeps the dialog inside the Stanza shadow root where Emotion styles are injected", () => {
+    const host = document.createElement("div");
+    document.body.append(host);
+    const shadowRoot = host.attachShadow({ mode: "open" });
+    const container = document.createElement("div");
+    shadowRoot.append(container);
+
+    const { unmount } = render(
+      <ThemeProvider theme={createStanzaMuiTheme(container)}>
+        <ImportDialog open={true} selectedFile={null} onClose={vi.fn()} onFileSelect={vi.fn()} />
+      </ThemeProvider>,
+      { container },
+    );
+
+    expect(shadowRoot.querySelector('[role="dialog"]')).not.toBeNull();
+    expect(document.body.querySelector('[role="dialog"]')).toBeNull();
+
+    unmount();
+    host.remove();
   });
 
   it("selects one file from the file input and shows its name without content preview", () => {
