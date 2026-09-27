@@ -160,8 +160,6 @@ Reactコンポーネントのprops型は、利用範囲に応じて名前を分�
 
 次のものは、この文書の標準ルールをそのまま適用しない。
 
-- deprecatedな `@packages/api-doc`
-  - 旧TypeSpec構成の参照用として残っているため、新規命名の標準例にはしない。
 - 自動生成ファイル
   - 例: `@packages/web/src/routeTree.gen.ts`
 - frameworkやtoolが要求する名前

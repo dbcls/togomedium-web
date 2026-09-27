@@ -34,8 +34,6 @@
 
 - `@packages/api`
   - API の型・スキーマ定義を扱うパッケージです。
-- `@packages/api-doc`
-  - TypeSpec と Vite を使った API ドキュメント関連の旧パッケージです。現在は `@packages/api` 開発時の参照用として残しており、今後廃止予定です。
 - `@packages/core`
   - 複数パッケージで共有する基礎ロジックの置き場です。
 - `@packages/stanza`

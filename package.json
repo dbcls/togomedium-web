@@ -6,8 +6,6 @@
   "scripts": {
     "web:build": "pnpm --filter @packages/web build",
     "web:serve": "pnpm --filter @packages/web start",
-    "doc:build": "pnpm --filter @packages/doc bundle",
-    "doc:serve": "pnpm --filter @packages/doc dev",
     "stanza:serve": "pnpm --filter @packages/stanza stanza:server",
     "stanza:build": "pnpm --filter @packages/stanza stanza:build",
     "storybook:serve": "pnpm --filter @packages/storybook storybook",
@@ -69,13 +67,10 @@
     "oxlint": "^1.83.0",
     "oxlint-tsgolint": "^7.0.2001",
     "postcss": "^8.5.28",
-    "run-func": "^3.0.0",
     "storybook": "^10.6.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~7.0.2",
     "vite": "^8.3.0",
-    "vite-multiple-assets": "^2.2.6",
-    "vite-plugin-full-reload": "^1.2.0",
     "vitest": "^5.0.1"
   }
 }

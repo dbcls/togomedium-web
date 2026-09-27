@@ -49,11 +49,6 @@ mise exec -- pnpm install
 
 表示確認の補足は `docs/agent-browser.md` を参照する。
 
-### APIドキュメント関連
-
-- `pnpm doc:serve`: APIドキュメント関連の旧パッケージを起動する
-- `pnpm doc:build`: APIドキュメント関連の旧パッケージをビルドする
-
 ## 品質ツール
 
 このリポジトリでは、Oxc系ツールとVitestを標準の確認手段として使う。
