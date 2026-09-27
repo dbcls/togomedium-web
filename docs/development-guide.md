@@ -47,6 +47,13 @@ APIドキュメントはWebの `/api` で確認できる。`@packages/api` のZo
 - `pnpm stanza:serve`: Stanza開発サーバーを起動する
 - `pnpm stanza:build`: Stanza配布物をビルドする
 
+### SPARQL
+
+- `pnpm --filter @packages/sparql query <ファイル.rq>`: クエリを実行する
+- `pnpm --filter @packages/sparql api <クエリフォルダ>`: 取得・整形・指定された出力検証を行う
+
+引数のパスは `@packages/sparql` を基準にする。区分、接続設定、個別クエリのコマンドは `@packages/sparql/README.md` を参照する。
+
 ### Storybook
 
 - `pnpm storybook:serve`: Storybookを起動する

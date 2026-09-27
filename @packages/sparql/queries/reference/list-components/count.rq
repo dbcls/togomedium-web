@@ -1,0 +1,23 @@
+# Source: https://togomedium.org/sparqlist/list_components
+# API definition version: 2025-06-25T13:29:03.821Z
+# Original count query; template values replaced, retaining string literals.
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX olo: <http://purl.org/ontology/olo/core#>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+
+SELECT
+  (COUNT(DISTINCT ?gmo_id) AS ?total) ?limit ?offset
+FROM <http://togomedium.org/gmo>
+WHERE {
+  ?gmo rdfs:subClassOf+ gmo:GMO_000002 ;
+    dcterms:identifier ?gmo_id ;
+    skos:prefLabel ?l .
+  OPTIONAL {
+    ?gmo skos:altLabel ?alt_label
+    FILTER(LANG(?alt_label) = "en")
+  }
+  BIND("20" AS ?limit)
+  BIND("0" AS ?offset)
+}

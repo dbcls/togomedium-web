@@ -16,7 +16,7 @@
     "format:check": "oxfmt -c oxfmt.config.ts --check .",
     "fmt": "pnpm run format",
     "fmt:check": "pnpm run format:check",
-    "test": "vitest run",
+    "test": "vitest run && pnpm --filter @packages/sparql test",
     "test:watch": "vitest run --watch",
     "type-check": "oxlint -c oxlint.config.ts . --type-aware --type-check",
     "check-all": "pnpm run format && pnpm run lint && pnpm run type-check && pnpm run test"

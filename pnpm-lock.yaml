@@ -11,6 +11,8 @@ packageExtensionsChecksum: sha256-Ydiaat+hV9bH7iJKqix95//6k6dYw1uPE6nfzUqfaBg=
 
 importers:
 
+  '@packages/sparql': {}
+
   .:
     dependencies:
       '@emotion/cache':

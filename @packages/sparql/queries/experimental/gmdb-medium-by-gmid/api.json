@@ -1,0 +1,13 @@
+{
+  "inputs": {
+    "metadata": "medium-metadata.rq",
+    "component_table": "medium-components.rq",
+    "comment_list": "medium-comments.rq"
+  },
+  "parameters": {
+    "gm_id": {
+      "default": "M1470",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    }
+  }
+}

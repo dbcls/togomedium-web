@@ -1,0 +1,28 @@
+# List all descendants of Role, whether or not assigned to a component.
+# GMO_000037 (Role) itself is excluded; it can appear as a parent.
+# Return direct parents within the Role hierarchy, one row per parent.
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT ?role ?id ?label ?parent ?parent_id
+FROM <http://togomedium.org/gmo>
+WHERE {
+  ?role rdfs:subClassOf+ gmo:GMO_000037 .
+
+  OPTIONAL {
+    ?role dcterms:identifier ?id .
+  }
+  OPTIONAL {
+    ?role rdfs:label ?label .
+    FILTER(LANG(?label) = "en")
+  }
+  OPTIONAL {
+    ?role rdfs:subClassOf ?parent .
+    ?parent rdfs:subClassOf* gmo:GMO_000037 .
+    OPTIONAL {
+      ?parent dcterms:identifier ?parent_id .
+    }
+  }
+}
+ORDER BY ?label ?role ?parent

@@ -1,0 +1,22 @@
+# Source: https://github.com/dbcls/togomedium-sparqlist/blob/main/repository/gmdb_medium_by_gmid.md
+# Retrieved 2026-09-26. gm_id is supplied by api.json / --param.
+PREFIX gmo:     <http://purl.jp/bio/10/gmo/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?gm ?name ?original_media_id ?src_url ?ph
+FROM <http://togomedium.org/media>
+FROM <http://togomedium.org/gmo>
+{
+  VALUES ?gm_no { "{{gm_id}}" }
+  ?gm (dcterms:identifier | skos:altLabel) ?gm_no ;
+    rdfs:label ?media_name ;
+    gmo:GMO_000108 ?src_url .
+  OPTIONAL {
+    ?gm skos:altLabel ?original_media_id .
+    FILTER (strStarts(?original_media_id, "JCM") || strStarts(?original_media_id, "NBRC") )
+  }
+  BIND (if(STR(?media_name) = "", "(Unnamed medium)", ?media_name) AS ?name)
+  OPTIONAL { ?gm gmo:ph ?ph }
+}

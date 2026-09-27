@@ -1,0 +1,71 @@
+# UNION variant of queries/reference/gmdb-component-by-gmoid/result.rq.
+# Keep the required name/ID conditions and each original OPTIONAL's conditions.
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT ?gmo ?pref_label ?id ?kind
+                ?label_ja ?alt_label_en ?alt_label_ja
+                ?super_gmo ?super_gmo_id ?super_gmo_label_en
+                ?sub_gmo ?sub_gmo_label_en ?sub_gmo_id
+                ?link ?property ?property_id ?property_label_en
+                ?role ?role_id ?role_label_en
+FROM <http://togomedium.org/gmo>
+WHERE {
+  VALUES ?gmo { gmo:GMO_001010 }
+  ?gmo skos:prefLabel ?pref_label ;
+       dcterms:identifier ?id .
+
+  # A base row also preserves components without optional information.
+  { BIND("base" AS ?kind) }
+  UNION {
+    BIND("super_class" AS ?kind)
+    ?gmo rdfs:subClassOf ?super_gmo .
+    ?super_gmo dcterms:identifier ?super_gmo_id ;
+               rdfs:label ?super_gmo_label_en .
+    FILTER(LANG(?super_gmo_label_en) = "en")
+  }
+  UNION {
+    BIND("label_ja" AS ?kind)
+    ?gmo rdfs:label ?label_ja .
+    FILTER(LANG(?label_ja) = "ja")
+  }
+  UNION {
+    BIND("alt_label_ja" AS ?kind)
+    ?gmo skos:altLabel ?alt_label_ja .
+    FILTER(LANG(?alt_label_ja) = "ja")
+  }
+  UNION {
+    BIND("alt_label_en" AS ?kind)
+    ?gmo skos:altLabel ?alt_label_en .
+    FILTER(LANG(?alt_label_en) = "en")
+  }
+  UNION {
+    BIND("sub_class" AS ?kind)
+    ?sub_gmo rdfs:subClassOf ?gmo ;
+             dcterms:identifier ?sub_gmo_id ;
+             rdfs:label ?sub_gmo_label_en .
+    FILTER(LANG(?sub_gmo_label_en) = "en")
+  }
+  UNION {
+    BIND("property" AS ?kind)
+    ?gmo gmo:GMO_000113 ?property .
+    ?property rdfs:label ?property_label_en ;
+              dcterms:identifier ?property_id .
+    FILTER(LANG(?property_label_en) = "en")
+  }
+  UNION {
+    BIND("role" AS ?kind)
+    ?gmo gmo:GMO_000112 ?role .
+    ?role rdfs:label ?role_label_en ;
+          dcterms:identifier ?role_id .
+    FILTER(LANG(?role_label_en) = "en")
+  }
+  UNION {
+    BIND("link" AS ?kind)
+    ?gmo rdfs:seeAlso ?link .
+  }
+}
+ORDER BY ?kind ?label_ja ?alt_label_en ?alt_label_ja
+         ?super_gmo ?sub_gmo ?property ?role ?link

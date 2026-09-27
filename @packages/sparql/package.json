@@ -1,0 +1,12 @@
+{
+  "name": "@packages/sparql",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "query": "node --env-file-if-exists=.env scripts/query.mjs",
+    "api": "node --env-file-if-exists=.env scripts/api.mjs",
+    "check": "node --check scripts/query.mjs && node --check scripts/api.mjs && node --check scripts/build-output.mjs && node --check scripts/parameters.mjs",
+    "test": "node --test \"queries/*/*/output.test.mjs\" \"scripts/*.test.mjs\""
+  }
+}

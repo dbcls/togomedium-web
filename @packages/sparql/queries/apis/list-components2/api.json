@@ -1,0 +1,43 @@
+{
+  "validation": "validate.mjs",
+  "inputs": {
+    "result": "list-components-with-properties.rq",
+    "count": "count-components.rq"
+  },
+  "parameters": {
+    "role_id": {
+      "default": "",
+      "pattern": "^(?:GMO_[0-9]{6})?$"
+    },
+    "property_id": {
+      "default": "",
+      "pattern": "^(?:GMO_[0-9]{6})?$"
+    },
+    "sort": {
+      "default": "name",
+      "pattern": "^(?:name|medium_count|id)$"
+    },
+    "order": {
+      "default": "asc",
+      "pattern": "^(?:asc|desc)$"
+    },
+    "limit": {
+      "type": "integer",
+      "default": "20",
+      "pattern": "^(?:0|[1-9][0-9]*)$"
+    },
+    "offset": {
+      "type": "integer",
+      "default": "0",
+      "pattern": "^(?:0|[1-9][0-9]*)$"
+    }
+  },
+  "queryVariants": {
+    "list-components-with-properties.rq": {
+      "parameter": "sort",
+      "cases": {
+        "medium_count": "list-components-by-medium-count.rq"
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+
+SELECT ?id ?label
+FROM <http://togomedium.org/gmo>
+WHERE {
+  ?component rdfs:subClassOf+ gmo:GMO_000002 ;
+    dcterms:identifier ?id ;
+    skos:prefLabel ?label .
+}
+ORDER BY ?id
+LIMIT 10

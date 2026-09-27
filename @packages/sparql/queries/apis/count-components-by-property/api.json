@@ -1,0 +1,11 @@
+{
+  "inputs": {
+    "result": "count-components-by-property.rq"
+  },
+  "parameters": {
+    "role_id": {
+      "default": "",
+      "pattern": "^(?:GMO_[0-9]{6})?$"
+    }
+  }
+}

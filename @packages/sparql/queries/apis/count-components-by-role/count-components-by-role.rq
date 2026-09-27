@@ -1,0 +1,46 @@
+い# Count component URIs for every defined Role (excluding Role itself).
+# Direct and inclusive matches are combined with UNION, not multiplied.
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?role ?id ?label ?parent ?parent_id
+       (COUNT(DISTINCT ?direct_component) AS ?direct_count)
+       (COUNT(DISTINCT ?inclusive_component) AS ?inclusive_count)
+FROM <http://togomedium.org/gmo>
+WHERE {
+  ?role rdfs:subClassOf+ gmo:GMO_000037 .
+  OPTIONAL { ?role dcterms:identifier ?id . }
+  OPTIONAL {
+    ?role rdfs:label ?label .
+    FILTER(LANG(?label) = "en")
+  }
+  OPTIONAL {
+    ?role rdfs:subClassOf ?parent .
+    ?parent rdfs:subClassOf* gmo:GMO_000037 .
+    OPTIONAL { ?parent dcterms:identifier ?parent_id . }
+  }
+  OPTIONAL {
+    {
+      ?direct_component rdfs:subClassOf+ gmo:GMO_000002 ;
+                        gmo:GMO_000112 ?role .
+      FILTER("{{property_id}}" = "" || EXISTS {
+        ?direct_component gmo:GMO_000113 ?filter_property .
+        ?filter_property rdfs:subClassOf gmo:GMO_000039 ;
+                         dcterms:identifier "{{property_id}}" .
+      })
+    }
+    UNION {
+      ?assigned_role rdfs:subClassOf* ?role .
+      ?inclusive_component rdfs:subClassOf+ gmo:GMO_000002 ;
+                           gmo:GMO_000112 ?assigned_role .
+      FILTER("{{property_id}}" = "" || EXISTS {
+        ?inclusive_component gmo:GMO_000113 ?filter_property .
+        ?filter_property rdfs:subClassOf gmo:GMO_000039 ;
+                         dcterms:identifier "{{property_id}}" .
+      })
+    }
+  }
+}
+GROUP BY ?role ?id ?label ?parent ?parent_id
+ORDER BY ?label ?role ?parent

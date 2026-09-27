@@ -1,0 +1,21 @@
+# Source: https://github.com/dbcls/togomedium-sparqlist/blob/main/repository/gmdb_medium_by_gmid.md
+# Retrieved 2026-09-26. gm_id is supplied by api.json / --param.
+DEFINE sql:select-option "order"
+prefix gmo:     <http://purl.jp/bio/10/gmo/>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+prefix olo:     <http://purl.org/ontology/olo/core#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?paragraph_index ?comment
+FROM <http://togomedium.org/media>
+FROM <http://togomedium.org/gmo>
+{
+  VALUES ?medium_no { "{{gm_id}}" }
+  ?medium (dcterms:identifier | skos:altLabel) ?medium_no ;
+    olo:slot ?slot.
+  ?slot olo:index ?paragraph_index ;
+   olo:item ?paragraph .
+  ?paragraph rdf:type gmo:Comment;
+    rdfs:comment ?comment .
+} ORDER BY ?paragraph_index

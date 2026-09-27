@@ -6,13 +6,14 @@
 
 pnpmワークスペースとして `@packages/*` を管理する。WebサイトとStanzaの実装を分け、API定義と基礎処理を共有する。
 
-| パッケージ | 責務と利用関係 |
-| --- | --- |
-| `@packages/web` | React・Viteによるサイト。TanStack RouterでURLと画面を結び、ページにStanzaを組み込む。API定義とcoreの処理も直接利用する |
-| `@packages/stanza` | TogoStanzaによるWebComponent。現行のUIは主にReact・MUIで実装し、Shadow DOM内に描画する。API定義とcoreを利用する |
-| `@packages/api` | リクエスト・レスポンスのZodスキーマ、TypeScript型、APIパス、OpenAPI定義。APIサーバーの実装ではない |
-| `@packages/core` | URL組み立て、通信、文字列処理など、パッケージ間で使う基礎処理 |
-| `@packages/storybook` | Stanza配下のStoryを読み込む確認環境と補助コード。Stanzaの配布物とは別にコンポーネントを確認できる |
+| パッケージ            | 責務と利用関係                                                                                                             |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `@packages/web`       | React・Viteによるサイト。TanStack RouterでURLと画面を結び、ページにStanzaを組み込む。API定義とcoreの処理も直接利用する     |
+| `@packages/stanza`    | TogoStanzaによるWebComponent。現行のUIは主にReact・MUIで実装し、Shadow DOM内に描画する。API定義とcoreを利用する            |
+| `@packages/api`       | リクエスト・レスポンスのZodスキーマ、TypeScript型、APIパス、OpenAPI定義。APIサーバーの実装ではない                         |
+| `@packages/sparql`    | SPARQLクエリの比較・実験・採用予定APIの検証。CLIで問い合わせと整形を行い、APIスキーマを利用する。Webの実行時には依存しない |
+| `@packages/core`      | URL組み立て、通信、文字列処理など、パッケージ間で使う基礎処理                                                              |
+| `@packages/storybook` | Stanza配下のStoryを読み込む確認環境と補助コード。Stanzaの配布物とは別にコンポーネントを確認できる                          |
 
 WebやStanzaからの `%api/`・`%core/` importは、各パッケージのTypeScriptソースを参照する。対応は `@packages/web/tsconfig.app.json`、`@packages/stanza/tsconfig.json` と `@packages/stanza/togostanza.config.ts` で確認できる。
 
@@ -21,6 +22,10 @@ Webに組み込むStanzaは、Reactコンポーネントとして直接importす
 ## SPARQListとAPI定義
 
 データを返すのは外部のSPARQList API。このリポジトリは、そのAPIを呼ぶクライアントと型・スキーマ定義を持つ。SPARQList側のクエリや処理を変更する作業は、このリポジトリの型変更とは別に扱う。
+
+`@packages/sparql` では、既存APIの比較元を `queries/reference/`、試案を `queries/experimental/`、採用予定・採用済みの定義を `queries/apis/` で管理する。既存定義を改良するときもreferenceは残す。採用状態とSPARQListへの公開状態は分け、公開・登録は `dbcls/togomedium-sparqlist` 側で行う。
+
+入出力スキーマの正本は `@packages/api`。最初の連携対象の `listComponents2` は、ローカルの出力保存前にZodで検証する。SPARQList用の整形関数にはZodを持ち込まない。採用予定のスキーマは、公開状態を確認するまで下記のOpenAPI登録に含めない。実行方法と状態管理は `@packages/sparql/README.md` を参照する。
 
 `@packages/api/src/` の各 `definitions.ts` はAPIパス、入力と出力の定義を持つ。`@packages/api/src/openAPI.ts` の `getDocs()` が登録済みの定義からOpenAPI文書を生成し、Webの `@packages/web/src/pages/ApiPage.tsx` がScalarへ渡して表示する。現在のAPI画面は、この生成結果を直接利用する。
 
@@ -42,10 +47,10 @@ Stanzaからの操作をWebへ伝える場合は、公開イベントを接続�
 
 ## 開発時の接続先
 
-| 接続 | 設定と既定値 |
-| --- | --- |
-| WebからAPI | `VITE_URL_API`。未指定時は `https://togomedium.org/sparqlist/api` |
-| WebからStanza | `VITE_URL_STANZA`。未指定時は `https://dbcls.github.io/togomedium-stanza` |
+| 接続          | 設定と既定値                                                                        |
+| ------------- | ----------------------------------------------------------------------------------- |
+| WebからAPI    | `VITE_URL_API`。未指定時は `https://togomedium.org/sparqlist/api`                   |
+| WebからStanza | `VITE_URL_STANZA`。未指定時は `https://dbcls.github.io/togomedium-stanza`           |
 | StanzaからAPI | Stanza側の `VITE_URL_API`。未指定時は共有のURL組み立て処理が公開SPARQList APIを使う |
 
 Web側の設定は `@packages/web/src/consts/api.ts`、APIのURLを組み立てる共通処理は `@packages/core/src/network/makeApiUrl.ts` にある。Stanza側の環境変数読込みと旧設定との互換性は `@packages/stanza/togostanza.config.ts` とStanza開発ガイドで扱う。
@@ -54,12 +59,12 @@ WebとStanzaは別々にビルドする。Web側のAPI設定を変更しても�
 
 ## 編集元・生成物・公開インターフェース
 
-| 対象 | 編集元・定義 | 生成物・利用先 |
-| --- | --- | --- |
-| Web画面 | `@packages/web/src/` | Webビルドの出力は `@packages/web/dist/` |
-| Webルーティング | `@packages/web/src/routes/` | TanStack Routerが `@packages/web/src/routeTree.gen.ts` を生成する |
-| Stanza | `@packages/stanza/stanzas/` と共通部品 | Stanzaビルドの出力は `@packages/stanza/dist/` |
-| API文書 | `@packages/api/src/` の定義と `openAPI.ts` | `getDocs()` のOpenAPIオブジェクトをWebのAPI画面が表示する |
+| 対象            | 編集元・定義                               | 生成物・利用先                                                    |
+| --------------- | ------------------------------------------ | ----------------------------------------------------------------- |
+| Web画面         | `@packages/web/src/`                       | Webビルドの出力は `@packages/web/dist/`                           |
+| Webルーティング | `@packages/web/src/routes/`                | TanStack Routerが `@packages/web/src/routeTree.gen.ts` を生成する |
+| Stanza          | `@packages/stanza/stanzas/` と共通部品     | Stanzaビルドの出力は `@packages/stanza/dist/`                     |
+| API文書         | `@packages/api/src/` の定義と `openAPI.ts` | `getDocs()` のOpenAPIオブジェクトをWebのAPI画面が表示する         |
 
 生成物を手動で修正せず、編集元を変更する。Stanzaの公開パラメータは各 `metadata.json`、実際の受取りは `index.tsx`、Web側の属性型は `@packages/web/src/types/stanza.d.ts` で確認する。パラメータや外向きイベントの変更は利用側にも影響する。
 

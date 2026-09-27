@@ -1,0 +1,26 @@
+# Count distinct component URIs directly associated with each child of Component property.
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?property ?id ?label (COUNT(DISTINCT ?component) AS ?count)
+FROM <http://togomedium.org/gmo>
+WHERE {
+  ?property rdfs:subClassOf gmo:GMO_000039 .
+  OPTIONAL { ?property dcterms:identifier ?id . }
+  OPTIONAL {
+    ?property rdfs:label ?label .
+    FILTER(LANG(?label) = "en")
+  }
+  OPTIONAL {
+    ?component rdfs:subClassOf+ gmo:GMO_000002 ;
+               gmo:GMO_000113 ?property .
+    FILTER("{{role_id}}" = "" || EXISTS {
+      ?component gmo:GMO_000112 ?filter_role .
+      ?filter_role rdfs:subClassOf+ gmo:GMO_000037 ;
+                   dcterms:identifier "{{role_id}}" .
+    })
+  }
+}
+GROUP BY ?property ?id ?label
+ORDER BY ?label ?property

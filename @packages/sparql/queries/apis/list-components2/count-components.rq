@@ -1,0 +1,23 @@
+# Count all matching components, with the same filters as the list, independently of pagination.
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+
+SELECT (COUNT(DISTINCT ?gmo_id) AS ?total) ("{{limit}}" AS ?limit) ("{{offset}}" AS ?offset)
+FROM <http://togomedium.org/gmo>
+WHERE {
+  ?gmo rdfs:subClassOf+ gmo:GMO_000002 ;
+       dcterms:identifier ?gmo_id ;
+       skos:prefLabel ?label .
+  FILTER("{{role_id}}" = "" || EXISTS {
+    ?gmo gmo:GMO_000112 ?filter_role .
+    ?filter_role rdfs:subClassOf+ gmo:GMO_000037 ;
+                 dcterms:identifier "{{role_id}}" .
+  })
+  FILTER("{{property_id}}" = "" || EXISTS {
+    ?gmo gmo:GMO_000113 ?filter_property .
+    ?filter_property rdfs:subClassOf gmo:GMO_000039 ;
+                     dcterms:identifier "{{property_id}}" .
+  })
+}

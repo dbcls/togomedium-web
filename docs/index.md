@@ -11,19 +11,22 @@
 
 ## 開発・検証する
 
+- `@packages/sparql/README.md`: SPARQLクエリの区分、実行、API設計とZod検証
+- `@packages/sparql/docs/migration.md`: Playgroundからの移植元と配置の対応
+
 - `docs/development-guide.md`: 環境構築、起動、ビルド、日常操作
 - `docs/testing-policy.md`: 変更内容に応じた検証、確認コマンド、完了条件
 - `docs/agent-browser.md`: ブラウザで表示確認するときの前提と一時成果物の扱い
 
 ## 実装の判断基準を確認する
 
-| 対象 | 参照先 |
-| --- | --- |
-| 共通のコード規約 | `docs/development/coding-guidelines.md` |
-| 型・変数・ファイル・API・Stanzaの命名 | `docs/naming-convention.md` |
-| Webのルーティング・画面・データ取得・スタイル | `@packages/web/docs/coding-guidelines.md` |
-| WebへのStanzaの組み込み | `@packages/web/docs/stanza-integration.md` |
-| Stanza内部の構成・公開パラメータ・接続設定 | `@packages/stanza/docs/development-guide.md` |
+| 対象                                          | 参照先                                       |
+| --------------------------------------------- | -------------------------------------------- |
+| 共通のコード規約                              | `docs/development/coding-guidelines.md`      |
+| 型・変数・ファイル・API・Stanzaの命名         | `docs/naming-convention.md`                  |
+| Webのルーティング・画面・データ取得・スタイル | `@packages/web/docs/coding-guidelines.md`    |
+| WebへのStanzaの組み込み                       | `@packages/web/docs/stanza-integration.md`   |
+| Stanza内部の構成・公開パラメータ・接続設定    | `@packages/stanza/docs/development-guide.md` |
 
 各パッケージで作業する際の注意点は `@packages/*/AGENTS.md` にある。個別Stanzaの資料は `@packages/stanza/stanzas/` 配下に置く。
 

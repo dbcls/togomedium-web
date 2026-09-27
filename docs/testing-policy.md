@@ -23,6 +23,7 @@
 - 型チェックは `oxlint --type-aware --type-check` で実行する
 - テストはVitestで書く
 - テストファイル名は `*.spec.ts` または `*.spec.tsx` とする
+- Playgroundから移植した `@packages/sparql` のCLI・整形テストは、Node標準の `*.test.mjs` を維持する。SPARQList用コードの単独実行とNode上のCLIを検証するための例外とし、ルートの `pnpm test` からも実行する
 - ロジックは、ユニットテストしやすい形へ分離する
 - lintや型チェックのエラーをignore系コメントで覆い隠さない
 - 実行した確認と、省略した確認の理由を完了報告に含める
@@ -86,6 +87,7 @@ pnpm check-all
 ## test
 
 - 通常のテストは `pnpm test` で実行する
+- `pnpm test` はVitestの後に `@packages/sparql` のNodeテストを実行する。`test:watch` はVitestのみで、クエリ用パッケージだけの確認は `pnpm --filter @packages/sparql test` と `pnpm --filter @packages/sparql check` を使う。実エンドポイントへの問い合わせは通常のテストには含めない
 - 監視実行が必要な場合は `pnpm test:watch` を使う
 - Webだけのテストは `pnpm --filter @packages/web test --run`、Stanzaだけのテストは `pnpm --filter @packages/stanza test --run` で実行できる。各パッケージの `test` は `vitest` のため、監視を避ける場合は `--run` を付ける。これらは全体の完了前確認を置き換えない
 - `@packages/api` と `@packages/core` には専用のスクリプトがないため、ルートの確認コマンドを使う

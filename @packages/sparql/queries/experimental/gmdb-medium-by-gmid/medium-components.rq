@@ -1,0 +1,59 @@
+# Source: https://github.com/dbcls/togomedium-sparqlist/blob/main/repository/gmdb_medium_by_gmid.md
+# Retrieved 2026-09-26. gm_id is supplied by api.json / --param.
+DEFINE sql:select-option "order"
+PREFIX gm:     <http://togomedium.org/>
+PREFIX gmo:     <http://purl.jp/bio/10/gmo/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+PREFIX olo:     <http://purl.org/ontology/olo/core#>
+PREFIX sio:     <http://semanticscience.org/resource/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?paragraph_index ?subcomponent_name ?component_name ?volume ?unit ?conc_value ?conc_unit ?gmo ?gmo_id ?label ?property_id ?property ?property_label ?role_id ?role ?role_label ?reference_media_id
+FROM <http://togomedium.org/media>
+FROM <http://togomedium.org/gmo>
+FROM <http://togomedium.org/uo>
+{
+  VALUES ?medium_no { "{{gm_id}}" }
+  ?medium (dcterms:identifier | skos:altLabel) ?medium_no ;
+    olo:slot ?slot.
+  ?slot olo:index ?paragraph_index ;
+   olo:item ?component_table .
+  ?component_table rdf:type gmo:Component .
+  OPTIONAL { ?component_table rdfs:label ?subcomponent_name }
+  ?component_table gmo:has_component ?component .
+  ?component rdfs:label ?component_name .
+  OPTIONAL  {
+    ?component sio:SIO_000216/sio:SIO_000300 ?volume ;
+      sio:SIO_000216/sio:SIO_000221 ?unit_class .
+      ?unit_class <oboInOwl:hasExactSynonym> ?unit .
+  }
+  OPTIONAL  {
+    ?component gmo:has-concentration-value/sio:SIO_000300 ?conc_value ;
+      gmo:has-concentration-value/sio:SIO_000221 ?conc_unit_class .
+      ?conc_unit_class <oboInOwl:hasExactSynonym> ?conc_unit .
+  }
+  OPTIONAL  {
+    ?component gmo:gmo_id ?gmo .
+      ?gmo rdfs:label ?label ;
+      dcterms:identifier ?gmo_id .
+     FILTER (lang(?label) = "en")
+    OPTIONAL {
+      ?gmo gmo:GMO_000113 ?property .
+      ?property rdfs:label ?property_label .
+      ?property dcterms:identifier ?property_id
+    }
+    OPTIONAL {
+      ?gmo gmo:GMO_000112 ?role .
+      ?role rdfs:label ?role_label .
+      ?role dcterms:identifier ?role_id
+      FILTER(LANG(?role_label) = "en")
+    }
+  }
+  OPTIONAL {
+    ?component gmo:reference ?reference_paragraph .
+    BIND (replace(replace(str(?reference_paragraph), "_[0-9]+$", ""), "http://togomedium.org/medium/", "") AS ?reference_media_id)
+  }
+} ORDER BY ?paragraph_index

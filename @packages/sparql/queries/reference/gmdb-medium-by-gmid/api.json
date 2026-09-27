@@ -1,0 +1,13 @@
+{
+  "inputs": {
+    "metadata": "gmdb_medium_by_gmid_metadata.rq",
+    "component_table": "gmdb_medium_by_gmid_component_table.rq",
+    "comment_list": "gmdb_medium_by_gmid_comment_list.rq"
+  },
+  "parameters": {
+    "gm_id": {
+      "default": "M1470",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    }
+  }
+}

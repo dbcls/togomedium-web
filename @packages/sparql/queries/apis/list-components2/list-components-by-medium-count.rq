@@ -1,0 +1,104 @@
+# Select one label per component; paginate before expanding properties and roles.
+# Pagination parameters: limit (default 20), offset (default 0).
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX olo: <http://purl.org/ontology/olo/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+
+SELECT ?gmo_id ?component ?label ?alt_labels ?medium_count
+       ?property ?property_id ?property_label_en
+       ?role ?role_id ?role_label_en ?role_parent ?role_parent_id
+FROM <http://togomedium.org/gmo>
+FROM NAMED <http://togomedium.org/media>
+WHERE {
+  {
+    SELECT ?gmo_id ?component ?label ?alt_labels
+           (COUNT(DISTINCT ?medium) AS ?medium_count)
+    WHERE {
+      {
+        SELECT ?gmo_id (?gmo AS ?component) (STR(?l) AS ?label)
+               (GROUP_CONCAT(DISTINCT ?alt_label; SEPARATOR = ", ") AS ?alt_labels)
+        WHERE {
+          ?gmo rdfs:subClassOf+ gmo:GMO_000002 ;
+               dcterms:identifier ?gmo_id ;
+               skos:prefLabel ?l .
+          FILTER("{{role_id}}" = "" || EXISTS {
+            ?gmo gmo:GMO_000112 ?filter_role .
+            ?filter_role rdfs:subClassOf+ gmo:GMO_000037 ;
+                         dcterms:identifier "{{role_id}}" .
+          })
+          FILTER("{{property_id}}" = "" || EXISTS {
+            ?gmo gmo:GMO_000113 ?filter_property .
+            ?filter_property rdfs:subClassOf gmo:GMO_000039 ;
+                             dcterms:identifier "{{property_id}}" .
+          })
+          # Prefer English, then the lexically first label and language tag.
+          FILTER NOT EXISTS {
+            ?gmo skos:prefLabel ?other_label .
+            FILTER(
+              (LANGMATCHES(LANG(?other_label), "en") && !LANGMATCHES(LANG(?l), "en")) ||
+              (LANGMATCHES(LANG(?other_label), "en") = LANGMATCHES(LANG(?l), "en") &&
+                (STR(?other_label) < STR(?l) ||
+                 (STR(?other_label) = STR(?l) && LANG(?other_label) < LANG(?l))))
+            )
+          }
+          OPTIONAL {
+            ?gmo skos:altLabel ?alt_label .
+            FILTER(LANG(?alt_label) = "en")
+          }
+        }
+        GROUP BY ?gmo_id ?gmo ?l
+      }
+      OPTIONAL {
+        GRAPH <http://togomedium.org/media> {
+          ?medium olo:slot/olo:item ?component_table .
+          ?component_table rdf:type gmo:Component ;
+                           gmo:has_component ?recipe_component .
+          ?recipe_component gmo:gmo_id ?component .
+        }
+      }
+    }
+    GROUP BY ?gmo_id ?component ?label ?alt_labels
+    ORDER BY
+      ASC(IF("{{sort}}" = "name" && "{{order}}" = "asc", ?label, ""))
+      DESC(IF("{{sort}}" = "name" && "{{order}}" = "desc", ?label, ""))
+      ASC(IF("{{sort}}" = "id" && "{{order}}" = "asc", ?gmo_id, ""))
+      DESC(IF("{{sort}}" = "id" && "{{order}}" = "desc", ?gmo_id, ""))
+      ASC(IF("{{sort}}" = "medium_count" && "{{order}}" = "asc", COUNT(DISTINCT ?medium), ""))
+      DESC(IF("{{sort}}" = "medium_count" && "{{order}}" = "desc", COUNT(DISTINCT ?medium), ""))
+      ?gmo_id
+    LIMIT {{limit}}
+    OFFSET {{offset}}
+  }
+  OPTIONAL {
+    {
+      ?component gmo:GMO_000113 ?property .
+      ?property dcterms:identifier ?property_id ;
+                rdfs:label ?property_label_en .
+      FILTER(LANG(?property_label_en) = "en")
+    }
+    UNION
+    {
+      ?component gmo:GMO_000112 ?role .
+      ?role dcterms:identifier ?role_id ;
+            rdfs:label ?role_label_en .
+      FILTER(LANG(?role_label_en) = "en")
+      OPTIONAL {
+        ?role rdfs:subClassOf ?role_parent .
+        ?role_parent rdfs:subClassOf* gmo:GMO_000037 .
+        OPTIONAL { ?role_parent dcterms:identifier ?role_parent_id . }
+      }
+    }
+  }
+}
+ORDER BY
+  ASC(IF("{{sort}}" = "name" && "{{order}}" = "asc", ?label, ""))
+  DESC(IF("{{sort}}" = "name" && "{{order}}" = "desc", ?label, ""))
+  ASC(IF("{{sort}}" = "id" && "{{order}}" = "asc", ?gmo_id, ""))
+  DESC(IF("{{sort}}" = "id" && "{{order}}" = "desc", ?gmo_id, ""))
+  ASC(IF("{{sort}}" = "medium_count" && "{{order}}" = "asc", ?medium_count, ""))
+  DESC(IF("{{sort}}" = "medium_count" && "{{order}}" = "desc", ?medium_count, ""))
+  ?gmo_id
+  ?property_id ?property_label_en ?role_id ?role_label_en
