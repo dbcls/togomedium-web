@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { createValidationRuntime } from "./validation-runtime.mjs";
 
 export const root = fileURLToPath(new URL("../", import.meta.url));
 
@@ -64,8 +65,13 @@ export async function buildOutput(api) {
   const { json } = await import(pathToFileURL(join(api.directory, "output.mjs")));
   const output = json(inputs);
   if (api.validation) {
-    const { validate } = await import(pathToFileURL(join(api.directory, api.validation)));
-    await validate(output);
+    const runtime = await createValidationRuntime();
+    try {
+      const { validate } = await runtime.importModule(join(api.directory, api.validation));
+      await validate(output);
+    } finally {
+      await runtime.close();
+    }
   }
   await mkdir(api.outputDirectory, { recursive: true });
   for (const [file, text] of [

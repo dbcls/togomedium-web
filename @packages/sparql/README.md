@@ -35,6 +35,8 @@ mise exec -- pnpm --filter @packages/sparql test
 
 引数のパスはパッケージを基準にする。各クエリREADMEの短い `pnpm api` / `pnpm query` コマンドは、`@packages/sparql` に移動して実行する。個別API用のpackage scriptsは増やさない。
 
+`query` はクエリファイル、`api` はクエリフォルダの指定が必須。指定がない場合はUsageを表示して終了コード1で終了する。`--help` なら使い方を表示して正常終了する。
+
 既定の接続先は `https://togomedium.org/sparql`。変更する場合は、このパッケージの `.env.example` を `.env` にコピーし、`SPARQL_ENDPOINT` を設定する。モノリポのルートにある `.env` とは別に読み込む。
 
 実行結果は各クエリの `results/` に保存する。生の結果に加え、APIコマンドは `output.json` と `output.sparqlist.js` を生成する。通常結果と `.env` はGit管理外。`--output` による明示ファイルの上書きは拒否する。
@@ -42,6 +44,10 @@ mise exec -- pnpm --filter @packages/sparql test
 問い合わせはGET、タイムアウトは30秒。失敗すると前回の結果が残る場合があるため、ファイルの存在だけで成功と判断しない。`--saved` は結果の鮮度や引数を確認せず、`--param` と併用できない。
 
 ## Zodとの連携
+
+検証モジュールでは `%api/listComponents2/definitions` のように、Webと同じパスエイリアスでスキーマを参照する。対応先はこのパッケージの `tsconfig.json` に定義し、Viteの `resolve.tsconfigPaths` で解決する。`.mjs` のまま利用でき、TypeScriptへの変更は不要。
+
+CLIは検証モジュールをVite経由で読み込み、検証後に実行環境を閉じる。HTTPサーバーやファイル監視は起動しない。検証モジュールをNodeで直接実行せず、上記の `pnpm api` / `pnpm test` を使う。クエリ実行とSPARQList用Outputの読み込みは引き続きNodeで行う。
 
 `@packages/api/src/` にAPIの入出力スキーマを置き、このパッケージはそれを利用する。最初の連携対象は `list-components2`。`api.json` の `validation` が指定する `validate.mjs` を、整形後・出力保存前に実行する。検証エラー時には整形済み出力を更新しない。
 

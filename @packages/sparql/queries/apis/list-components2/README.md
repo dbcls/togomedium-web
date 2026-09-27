@@ -12,14 +12,15 @@
 
 成分をRole・Propertyで絞り込み、名前・GMO ID・利用培地数で並べ替える。各成分のProperty・Roleと、レシピに直接記載された培地数も返す。比較元は `queries/reference/list-components/`。公開APIへの登録・変更は行っていない。
 
-| ファイル                           | 役割                                                                     |
-| ---------------------------------- | ------------------------------------------------------------------------ |
-| list-components-with-properties.rq | 名前・ID順でページを確定してから、その成分の培地数を集計する             |
-| list-components-by-medium-count.rq | 全対象の培地数を集計し、並べ替えてからページを確定する                   |
-| count-components.rq                | 同じ絞り込み条件で成分IDの総数を数える。ソート・ページ範囲には依存しない |
-| api.json                           | 引数の許可値と、sortによる実行クエリの切り替えを定義する                 |
-| output.mjs                         | 成分IDごとにまとめ、properties・roles配列とmedium_countを返す            |
-| output.test.mjs                    | 重複排除、欠損、空ページ、親、出力順、引数を確認する                     |
+| ファイル                           | 役割                                                                                                 |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| list-components-with-properties.rq | 名前・ID順でページを確定してから、その成分の培地数を集計する                                         |
+| list-components-by-medium-count.rq | 全対象の培地数を集計し、並べ替えてからページを確定する                                               |
+| count-components.rq                | 同じ絞り込み条件で成分IDの総数を数える。ソート・ページ範囲には依存しない                             |
+| api.json                           | 引数の許可値と、sortによる実行クエリの切り替えを定義する                                             |
+| output.mjs                         | 成分IDごとにまとめ、properties・roles配列とmedium_countを返す                                        |
+| output.test.mjs                    | 重複排除、欠損、空ページ、親、出力順、引数を確認する                                                 |
+| validate.mjs                       | `%api/listComponents2/definitions` のZodスキーマで保存前に検証する。ローカル専用でVite経由で読み込む |
 
 どちらの一覧クエリも、Property・Roleはページを確定した後、OPTIONAL内のUNIONで取得する。関連先の組み合わせで行数を増やさず、整形時に成分ごとの配列へまとめる。
 

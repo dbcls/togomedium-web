@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, extname, join } from "node:path";
 import { parseParameters, prepareQuery } from "./parameters.mjs";
 
-const usage = "Usage: pnpm query [query.rq] [--output result.json] [--param name=value]";
+const usage = "Usage: pnpm query <query.rq> [--output result.json] [--param name=value]";
 
 function defaultOutputPath(queryPath) {
   const file = basename(queryPath, extname(queryPath));
@@ -32,7 +32,7 @@ async function main() {
     }
   }
 
-  queryPath ??= "queries/experimental/components/list-components.rq";
+  if (!queryPath) throw new Error(usage);
   const query = await prepareQuery(await readFile(queryPath, "utf8"), queryPath, values);
   if (!query.trim()) throw new Error(`Query file is empty: ${queryPath}`);
 

@@ -95,6 +95,9 @@ SPARQListにはこの設定は自動移植されない。公開先でも同じ�
 | `scripts/api.mjs`                | フォルダを受け取り、設定を読み、必要なクエリの実行と整形を順に進める                                    |
 | `scripts/build-output.mjs`       | `api.json` の読み込み・検証、保存済み結果の読み込み、整形関数の呼び出し、JSONと移植用コードの保存を行う |
 | `scripts/output.test.mjs`        | 共通のOutputコード生成をテストする                                                                      |
+| `scripts/validation-runtime.mjs` | Viteで検証モジュールを読み込み、tsconfigのパスエイリアスを解決する                                      |
+| `scripts/validation.test.mjs`    | 保存前検証と失敗時の出力保持をNodeで確認し、スキーマ連携テストをVite経由で実行する                      |
+| `scripts/validation-cases.mjs`   | `%api/...` を使うスキーマ連携テスト。validation.test.mjsから読み込む                                    |
 | `scripts/output-test-helper.mjs` | 各クエリのテストから使う、生成コードの単独動作を確認する共通ヘルパー                                    |
 
 `build-output.mjs` は変換処理そのものを定義せず、対象フォルダの `output.mjs` を読み込んで呼び出す。共通ヘルパーにもRoleや成分などの個別仕様は置かない。
@@ -180,4 +183,6 @@ api.mjs
 
 `api.json` の任意の `validation` に、同じフォルダの `validate.mjs` を指定する。共通処理は整形関数の結果を `validate(output)` に渡し、成功したときだけJSONとSPARQList用Outputを保存する。検証関数は不正な出力で例外を投げる。戻り値による出力の置換は行わない。失敗時に前回の出力が残る点はクエリ失敗時と同じ。
 
-Zod定義は `@packages/api` から参照する。検証モジュールはローカル用で、SPARQList用Outputには含めない。
+Zod定義は `%api/...` で `@packages/api` から参照する。パスの対応はパッケージの `tsconfig.json`、解決はWebと同じViteの `resolve.tsconfigPaths` を使う。`validation-runtime.mjs` はHTTP待ち受けと監視を無効にし、検証の成功・失敗にかかわらず終了する。検証モジュールはローカル用で、SPARQList用Outputには含めない。
+
+`output.mjs` はNodeで直接読み込む。移植用コードは関数を文字列化するため、Viteの変換処理を通さない。スキーマ連携テストはCLIと同じViteの実行設定を使い、整形関数の単独動作とファイル保存のテストはNodeで行う。

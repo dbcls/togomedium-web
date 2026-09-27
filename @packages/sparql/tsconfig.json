@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "paths": {
+      "%api/*": ["../api/src/*"],
+      "%core/*": ["../core/src/*"]
+    }
+  },
+  "include": ["scripts/**/*", "queries/**/*"]
+}
