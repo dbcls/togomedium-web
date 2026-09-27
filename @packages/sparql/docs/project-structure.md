@@ -20,6 +20,7 @@ queries/
     validate.mjs             任意のローカル検証
     output.test.mjs          整形テスト
     results/                 生成物（Git管理外）
+    dist/sparqlist.md         SPARQList用Markdown（Git管理外）
 scripts/                     共通の実行・保存・コード生成
 docs/                        構成・学習資料
 ```
@@ -78,7 +79,7 @@ docs/                        構成・学習資料
 
 `pnpm query` と `pnpm api` の両方に適用する。保存先は指定された元のファイル名に基づくため、APIの入力名やOutputの引数は変わらない。`--saved` は最後に保存した結果を使い、引数による切り替えや並べ替えを行わない。
 
-SPARQListにはこの設定は自動移植されない。公開先でも同じ条件でクエリを選択し、Outputには選択した結果を `result` として渡す。両クエリを常に実行すると、名前・ID順で集計対象を減らす効果が失われる。
+`pnpm export` はこの設定をSPARQList用のJSとHandlebars条件分岐へ変換する。公開先でも選択したクエリだけを実行し、その結果を `result` としてOutputへ渡す。`.rq` とOutputを手作業で移す場合は、同じ選択処理を別途用意する。
 
 ### output.mjsと移植用コード
 
@@ -104,14 +105,15 @@ SPARQListにはこの設定は自動移植されない。公開先でも同じ�
 
 ## コマンドと実行の流れ
 
-コマンドは`@packages/sparql`で実行する。`package.json` のscriptsは4つ。
+コマンドは`@packages/sparql`で実行する。
 
-| コマンド                    | 用途                                                       |
-| --------------------------- | ---------------------------------------------------------- |
-| `pnpm query <ファイル.rq>`  | 1つのクエリを実行し、生の結果を保存する                    |
-| `pnpm api <クエリフォルダ>` | 設定されたクエリを実行し、整形結果と移植用コードも保存する |
-| `pnpm check`                | 実行スクリプトの構文を確認する                             |
-| `pnpm test`                 | 各クエリの整形テストと共通処理のテストを実行する           |
+| コマンド                       | 用途                                                       |
+| ------------------------------ | ---------------------------------------------------------- |
+| `pnpm query <ファイル.rq>`     | 1つのクエリを実行し、生の結果を保存する                    |
+| `pnpm api <クエリフォルダ>`    | 設定されたクエリを実行し、整形結果と移植用コードも保存する |
+| `pnpm check`                   | 実行スクリプトの構文を確認する                             |
+| `pnpm test`                    | 各クエリの整形テストと共通処理のテストを実行する           |
+| `pnpm export <クエリフォルダ>` | 問い合わせずにSPARQList用Markdownを生成する                |
 
 たとえば、property付き一覧のAPI形式の結果を作る場合は次を実行する。
 
@@ -186,3 +188,41 @@ api.mjs
 Zod定義は `%api/...` で `@packages/api` から参照する。パスの対応はパッケージの `tsconfig.json`、解決はWebと同じViteの `resolve.tsconfigPaths` を使う。`validation-runtime.mjs` はHTTP待ち受けと監視を無効にし、検証の成功・失敗にかかわらず終了する。検証モジュールはローカル用で、SPARQList用Outputには含めない。
 
 `output.mjs` はNodeで直接読み込む。移植用コードは関数を文字列化するため、Viteの変換処理を通さない。スキーマ連携テストはCLIと同じViteの実行設定を使い、整形関数の単独動作とファイル保存のテストはNodeで行う。
+
+## SPARQList用Markdownの生成
+
+`scripts/export.mjs` がCLI引数を受け取り、`scripts/export-markdown.mjs` が設定・クエリ・Outputを読み込んで `dist/sparqlist.md` を生成する。API名の設定は持たず、登録時にGUIで指定する。出力先は引数によらず固定で、再生成すると上書きする。
+
+メタ情報は `api.json` に置く。READMEは利用方法と設計の補足、api.jsonは生成に必要な構造化情報を担当する。
+
+対外向けのタイトル・説明・引数の説明は原則英語で書く。生成Markdownに載る `title`・`description`・各引数の `description` も英語とする。
+
+```json
+{
+  "title": "List components",
+  "description": "List components.",
+  "inputs": { "result": "list-components.rq" },
+  "parameters": {
+    "role_id": {
+      "description": "GMO ID of a directly assigned role. Leave empty to apply no role filter.",
+      "default": "",
+      "pattern": "^(?:GMO_[0-9]{6})?$",
+      "examples": ["GMO_000042"]
+    }
+  }
+}
+```
+
+`title`・`description`・各引数の `description` は空でない1行の文字列を必須とする。`examples` は任意の文字列配列で、各値も引数の検証条件を満たす必要がある。既定値と検証条件はローカル実行と共用する。既定値の前後空白と改行は、SPARQListのParametersで保持できないため生成時に拒否する。引数がなければParameters節は省略する。
+
+生成物は次の順で実行される。
+
+1. `prepared` という内部変数に、検証済み引数、SPARQL文字列リテラル、クエリ選択結果を保存する。
+2. `inputs` の順にSPARQLブロックを実行し、同じ名前で結果を保存する。切り替え候補はHandlebarsの `if` で1本を選ぶ。
+3. 最後のOutputで整形結果を返す。
+
+検証とクエリ選択は `parameters.mjs` の関数を組み込む。クエリ本文はSPARQLブロックに残し、引用符付きのプレースホルダーは検証済み文字列リテラル、整数は検証済み数字列の参照へ変換する。JSは環境変数を含むSPARQListのコンテキストから定義済み引数だけを取り出して検証する。未定義のキーを拒否するローカルCLIとは、この点が異なる。
+
+Endpointは `{{SPARQLIST_TOGOMEDIUM_ENDPOINT}}` とする。生成時には `.env` や保存済み結果を読まず、ネットワーク問い合わせも行わない。出力用Zod検証は組み込まない。`prepared` は内部変数として予約し、引数名や入力名には使わない。
+
+生成後もSPARQListへの登録・実行確認は別途必要。仕様の参照元は [SPARQList Reference Guide](https://github.com/dbcls/sparqlist/blob/main/doc/REFERENCE.md)。

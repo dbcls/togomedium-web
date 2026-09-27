@@ -62,11 +62,13 @@ mise exec -- pnpm api queries/apis/count-components-by-role
 
 クエリを実行し、`queries/apis/count-components-by-role/results/output.json` と `queries/apis/count-components-by-role/results/output.sparqlist.js` を保存する。保存済みのクエリ結果だけで整形をやり直す場合は `mise exec -- pnpm api queries/apis/count-components-by-role --saved` を使う。保存済み結果の引数・鮮度は自動では確認しない。
 
-移植時は `output.sparqlist.js` の全体をSPARQList定義のOutputのJavaScriptコードブロックへ貼り付ける。`output.mjs` はローカル用のexportを含むため、そのままは貼り付けない。
+次のコマンドで、引数検証・クエリ・Outputを含むMarkdownを生成する。
 
-SPARQListではクエリ名を `result` にし、Parametersに `property_id` を既定値が空文字列の任意引数として定義する。形式検証はローカルの `api.json` では移植されないため、公開先でも `GMO_` と6桁の数字または空文字列に制限する。Outputは `json({ result })` で受け取る。
+```sh
+mise exec -- pnpm export queries/apis/count-components-by-role
+```
 
-エンドポイントを設定し、引数があるクエリは本READMEの置き換え箇所をテンプレート変数へ戻す。移植の共通手順はルートの `README.md` を参照する。
+保存先は `queries/apis/count-components-by-role/dist/sparqlist.md`。生成時に問い合わせは行わず、保存済み結果も不要。タイトル・説明・各引数の説明や例は `api.json` を編集する。API名はSPARQListのGUIで指定し、公開環境の `SPARQLIST_TOGOMEDIUM_ENDPOINT` を確認する。共通手順はパッケージの `README.md` を参照する。SPARQList本体への登録・実行は未確認。
 
 ### 整形処理の検証
 

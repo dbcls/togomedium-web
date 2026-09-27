@@ -1,4 +1,6 @@
 {
+  "title": "List component roles",
+  "description": "List defined component roles and their direct parents in the role hierarchy.",
   "inputs": {
     "result": "list-component-roles.rq"
   }

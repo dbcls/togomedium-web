@@ -1,4 +1,6 @@
 {
+  "title": "List components",
+  "description": "List components filtered by role and property, ordered by name, GMO ID, or the number of media whose recipes directly include each component.",
   "validation": "validate.mjs",
   "inputs": {
     "result": "list-components-with-properties.rq",
@@ -7,29 +9,41 @@
   "parameters": {
     "role_id": {
       "default": "",
-      "pattern": "^(?:GMO_[0-9]{6})?$"
+      "pattern": "^(?:GMO_[0-9]{6})?$",
+      "description": "GMO ID of a role directly assigned to the component. Leave empty to apply no role filter.",
+      "examples": ["GMO_000042"]
     },
     "property_id": {
       "default": "",
-      "pattern": "^(?:GMO_[0-9]{6})?$"
+      "pattern": "^(?:GMO_[0-9]{6})?$",
+      "description": "GMO ID of a property directly assigned to the component. The property must be a direct subclass of Component property. Leave empty to apply no property filter.",
+      "examples": ["GMO_000050"]
     },
     "sort": {
       "default": "name",
-      "pattern": "^(?:name|medium_count|id)$"
+      "pattern": "^(?:name|medium_count|id)$",
+      "description": "Sort key: name for the preferred label, id for the GMO ID, or medium_count for the number of media whose recipes directly include the component.",
+      "examples": ["name", "id", "medium_count"]
     },
     "order": {
       "default": "asc",
-      "pattern": "^(?:asc|desc)$"
+      "pattern": "^(?:asc|desc)$",
+      "description": "Sort direction: asc for ascending or desc for descending.",
+      "examples": ["asc", "desc"]
     },
     "limit": {
       "type": "integer",
       "default": "20",
-      "pattern": "^(?:0|[1-9][0-9]*)$"
+      "pattern": "^(?:0|[1-9][0-9]*)$",
+      "description": "Maximum number of components to return. Use a non-negative safe integer; 0 returns an empty list.",
+      "examples": ["20", "0"]
     },
     "offset": {
       "type": "integer",
       "default": "0",
-      "pattern": "^(?:0|[1-9][0-9]*)$"
+      "pattern": "^(?:0|[1-9][0-9]*)$",
+      "description": "Number of components to skip. Use a non-negative safe integer.",
+      "examples": ["0", "20"]
     }
   },
   "queryVariants": {

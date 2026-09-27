@@ -64,6 +64,21 @@ export function renderParameters(query, definitions = {}, supplied = {}) {
   return rendered;
 }
 
+export const selectQueryFile = (file, config = {}, supplied = {}) => {
+  const variant = config.queryVariants?.[file];
+  if (!variant) return file;
+  if (!Object.hasOwn(config.parameters ?? {}, variant.parameter)) {
+    throw new Error("Query variant must reference a defined parameter.");
+  }
+  const selected = supplied[variant.parameter] ?? config.parameters[variant.parameter].default;
+  if (!Object.hasOwn(variant.cases ?? {}, selected)) return file;
+  const selectedFile = variant.cases[selected];
+  if (typeof selectedFile !== "string" || !/^[A-Za-z0-9_-]+\.rq$/.test(selectedFile)) {
+    throw new Error("Query variant must be a local .rq filename.");
+  }
+  return selectedFile;
+};
+
 export async function prepareQuery(query, path, supplied) {
   let config;
   try {
@@ -73,17 +88,8 @@ export async function prepareQuery(query, path, supplied) {
   }
   // Validate all supplied values before selecting a configured query variant.
   const rendered = renderParameters(query, config?.parameters, supplied);
-  const variant = config?.queryVariants?.[basename(path)];
-  if (!variant) return rendered;
-  if (!Object.hasOwn(config.parameters ?? {}, variant.parameter)) {
-    throw new Error("Query variant must reference a defined parameter.");
-  }
-  const selected = supplied?.[variant.parameter] ?? config.parameters[variant.parameter].default;
-  if (!Object.hasOwn(variant.cases ?? {}, selected)) return rendered;
-  const file = variant.cases[selected];
-  if (typeof file !== "string" || !/^[A-Za-z0-9_-]+\.rq$/.test(file)) {
-    throw new Error("Query variant must be a local .rq filename.");
-  }
+  const file = selectQueryFile(basename(path), config, supplied);
+  if (file === basename(path)) return rendered;
   return renderParameters(
     await readFile(join(dirname(path), file), "utf8"),
     config.parameters,

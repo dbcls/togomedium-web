@@ -1,11 +1,15 @@
 {
+  "title": "Count components by property",
+  "description": "Count components for each direct subclass of Component property. Optionally filter components by role.",
   "inputs": {
     "result": "count-components-by-property.rq"
   },
   "parameters": {
     "role_id": {
       "default": "",
-      "pattern": "^(?:GMO_[0-9]{6})?$"
+      "pattern": "^(?:GMO_[0-9]{6})?$",
+      "description": "GMO ID of a role directly assigned to the component. Leave empty to apply no role filter.",
+      "examples": ["GMO_000042"]
     }
   }
 }

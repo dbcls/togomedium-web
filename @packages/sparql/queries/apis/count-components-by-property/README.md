@@ -75,7 +75,13 @@ ID・ラベルの欠損はnull。countは非負の安全な整数へ変換し、
 
 ## SPARQListへの移植
 
-クエリを `result` という名前で登録し、エンドポイントを設定する。Outputには生成した `output.sparqlist.js` 全体を貼り付ける。Parametersに既定値が空文字列の `role_id` を定義する。`api.json` の形式検証は移植されないため、公開先でも `GMO_` と6桁の数字または空文字列に制限する。共通手順はルートの `README.md` を参照する。
+次のコマンドで、引数検証・クエリ・Outputを含むMarkdownを生成する。
+
+```sh
+mise exec -- pnpm export queries/apis/count-components-by-property
+```
+
+保存先は `queries/apis/count-components-by-property/dist/sparqlist.md`。生成時に問い合わせは行わず、保存済み結果も不要。タイトル・説明・各引数の説明や例は `api.json` を編集する。API名はSPARQListのGUIで指定し、公開環境の `SPARQLIST_TOGOMEDIUM_ENDPOINT` を確認する。共通手順はパッケージの `README.md` を参照する。SPARQList本体への登録・実行は未確認。
 
 ## Roleで絞ったProperty別件数
 

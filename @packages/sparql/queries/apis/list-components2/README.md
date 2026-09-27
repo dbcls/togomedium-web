@@ -127,9 +127,15 @@ OPTIONALでレシピを結び、`COUNT(DISTINCT ?medium)` を計算する。Prop
 
 ## SPARQListへの移植
 
-Outputは `json({ result, count })`。生成した `output.sparqlist.js` 全体をOutput節に貼り付ける。外部importは不要。
+次のコマンドで、引数検証・クエリ・Outputを含むMarkdownを生成する。
 
-Parametersにはrole_id・property_id・sort・orderを上記の既定値と許可値で定義する。limit・offsetも既定値20・0の引数として定義し、非負整数に検証する。クエリの `LIMIT {{limit}}`・`OFFSET {{offset}}` は検証済みの数字として展開し、count内の引用符付き引数は文字列として展開する。`api.json` の検証や `queryVariants` は自動移植されないため、公開側にも入力検証とクエリ選択を用意し、選択した一覧結果をresultとして渡す。両クエリを常に実行すると、名前・ID順での集計対象削減が失われる。SPARQList環境への登録・実行は未確認。
+```sh
+mise exec -- pnpm export queries/apis/list-components2
+```
+
+保存先は `queries/apis/list-components2/dist/sparqlist.md`。生成時に問い合わせは行わず、保存済み結果も不要。タイトル・説明・各引数の説明や例は `api.json` を編集する。API名はSPARQListのGUIで指定し、公開環境の `SPARQLIST_TOGOMEDIUM_ENDPOINT` を確認する。共通手順はパッケージの `README.md` を参照する。SPARQList本体への登録・実行は未確認。
+
+`sort=medium_count` の場合だけ集計用クエリを選択する処理も含まれる。limit・offsetは非負の安全な整数として検証し、一覧の数値指定とcountの文字列値に同じ引数を使う。`validate.mjs` とZodによる出力検証はローカル専用で、Markdownには含めない。
 
 ## 検証記録
 

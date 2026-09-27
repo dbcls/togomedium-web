@@ -59,11 +59,20 @@ CLIは検証モジュールをVite経由で読み込み、検証後に実行環�
 
 公開先は [dbcls/togomedium-sparqlist](https://github.com/dbcls/togomedium-sparqlist)。このCLIはAPI登録・公開を行わない。
 
-1. `.rq` をSPARQListのクエリ節へ配置し、エンドポイントと引数を設定する。
-2. 引数の検証と `queryVariants` の選択を公開側にも用意する。ローカルの `api.json` は自動移植されない。
-3. `output.sparqlist.js` 全体をOutput節へ貼り付ける。`validate.mjs` は貼り付けない。
+```sh
+# モノリポのルートから、対象APIのMarkdownを生成
+mise exec -- pnpm --filter @packages/sparql export queries/apis/list-components2
+```
+
+出力は対象フォルダの `dist/sparqlist.md`。生成時にクエリを実行せず、保存済み結果も不要。同じファイルを再生成で上書きする。`dist/` はGit管理外で、編集元は `api.json`・`.rq`・`output.mjs` とする。API名はGUI上で指定し、生成ファイル名には持たせない。
+
+1. `api.json` にタイトル・説明・各引数の説明と例を記入し、`pnpm export` で生成する。
+2. SPARQListのGUIでAPI名を指定し、Markdownの内容を取り込む。
+3. Endpointが参照する公開環境の `SPARQLIST_TOGOMEDIUM_ENDPOINT` を確認する。ローカルの `.env` は生成物へ取り込まない。
 4. 公開先でも通常結果、空結果、引数、ページングを確認し、ローカル結果と比較する。
 5. 対象READMEに公開先・反映日・版・検証結果を記録する。
+
+生成物にはParameters、引数検証JS、クエリ切り替え、SPARQL、Outputが含まれる。`validate.mjs` とZodによる出力検証はローカル専用で、生成物には含めない。現在は `queries/apis/` の4つにメタ情報を用意している。ほかの定義を生成する場合も、先にメタ情報を追加する。項目と生成の仕組みは `docs/project-structure.md` を参照する。
 
 ローカルでの採用・検証、API文書への登録、SPARQListでの公開は別の作業として扱う。
 
