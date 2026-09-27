@@ -2,29 +2,21 @@
 
 ## このパッケージについて
 
-- `@packages/stanza` は TogoStanza ベースの WebComponent 群を扱うパッケージです。
-- React アプリとは前提が少し異なるため、Web 側の実装をそのまま持ち込まないようにしてください。
-- UI 実装には MUI を利用しており、React コンポーネントの構成だけでなく Theme や Shadow DOM 上での描画も前提になります。
+- `@packages/stanza` はTogoStanzaベースのWebComponent群を扱うパッケージ。
+- WebComponentとして配布し、Shadow DOM内で描画するため、Web側の実装をそのまま持ち込まないようにする。
+- UI実装にはMUIを利用しており、Reactコンポーネントの構成だけでなくテーマやShadow DOM上での描画も前提になる。
 
 ## 作業時の方針
 
-- Stanza の構成、MUI 利用、`metadata.json`、`index.tsx`、共通部品の切り分けなどの詳細は `@packages/stanza/docs/development-guide.md` を参照してください。
-- 描画や配布形式に関わる変更では `dist/` ではなく元ソース側を編集してください。
-- stanza 個別の実装と、`components/` `utils/` `styles/` に置く共通処理の境界を意識してください。
-- SVG アイコン関連の作業では `docs/agents/task-guides/svgIcon.md` の指示も確認してください。
-- `togostanza` 依存の都合で build や実行結果が変わりやすいため、変更後は対象 stanza の動作確認まで意識してください。
+- Stanzaの構成、MUI利用、`metadata.json`、`index.tsx`、共通部品の切り分けなどの詳細は `@packages/stanza/docs/development-guide.md` を参照する。
+- 描画や配布形式に関わる変更では `dist/` ではなく元ソース側を編集する。
+- Stanza固有の実装か、`components/` `utils/` `styles/` に置く共通処理かを区別する。
+- SVGアイコン関連の作業では `docs/agents/task-guides/svgIcon.md` の指示も確認する。
+- `togostanza` のバージョンによってビルドや実行結果が変わりやすいため、変更後は対象Stanzaの動作への影響も確認対象として考える。
 
-### 関連ガイド
+## 起動と検証
 
-- Stanza 固有の開発ガイドは `@packages/stanza/docs/development-guide.md` を確認してください。
-- SVG アイコン関連の作業では `docs/agents/task-guides/svgIcon.md` を確認してください。
-
-## よく使うコマンド
-
-- 開発サーバー: `pnpm --filter @packages/stanza stanza:server`
-- ビルド: `pnpm --filter @packages/stanza stanza:build`
-- テスト: `pnpm --filter @packages/stanza test`
-- 全体確認: ルートで `pnpm run fmt` `pnpm run lint` `pnpm run test`
+起動・ビルドは `docs/development-guide.md`、検証コマンドと完了条件は `docs/testing-policy.md` に従う。Stanza固有の確認対象は `@packages/stanza/docs/development-guide.md` の「確認の進め方」を参照する。
 
 ## よく触る場所
 

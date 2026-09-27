@@ -1,5 +1,11 @@
 # Node.js / pnpmの基準をmise.tomlに集約する方針
 
+## 現在の運用への案内（2026-09-27追記）
+
+以下は2026-05-18の判断記録。本文中の固定バージョンは当時の値として残す。現在のバージョンは `mise.toml`、セットアップは `docs/development-guide.md`、検証は `docs/testing-policy.md` を参照する。
+
+2026-09-27時点で、`mise.toml` はNode 24.5.0 / pnpm 11.8.0、`.github/workflows/publish.yml` はNode 22 / pnpm 9を指定している。この記録ではCIを対象外としており、ローカルとCIの環境は一致していない。今回の文書整理では設定を変更していない。
+
 ## 決定
 
 - Node.js / pnpmの実行バージョンは、`mise.toml` を唯一の参照元とする

@@ -4,6 +4,10 @@
 - 対象読者: TogoStanza V4実装担当者
 - 目的: `this.params` のドロップイン互換性について、確認できた差分と検証事項を共有する。
 
+## 現行文書への案内（2026-09-27追記）
+
+以下は「比較対象と根拠」に示す版・コミットの静的調査。現在の依存指定は `@packages/stanza/package.json`、開発上の扱いは `@packages/stanza/docs/development-guide.md`、Webとの接続は `@packages/web/docs/stanza-integration.md` を参照する。本文の提案・未検証事項を、現行版で採用・解決済みと読み替えない。
+
 ## 結論
 
 **metadataに宣言されたパラメーターだけを `this.params` に取り込む点は、V3とV4で共通する。** この点をV4で導入された制約として扱う必要はない。

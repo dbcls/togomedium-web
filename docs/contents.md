@@ -1,8 +1,26 @@
 # 機能・Stanza・API対応表
 
-この文書では、TogoMediumの主な画面、画面で使うStanza、参照するSPARQList APIの対応を示す。
+この文書では、公開サイトを対象として作成された、画面・Stanza・SPARQList APIの対応表を保持する。
 
-画面仕様やStanzaの実装を確認するときは、まずこの対応表で影響範囲を把握する。開発手順や確認コマンドは `docs/development-guide.md`、品質確認の方針は `docs/testing-policy.md` を参照する。
+## 対象環境と確認状況
+
+- 下記の「トップページ」「一覧・詳細画面」「検索・比較画面」は公開サイトの対応表。元の調査日は不明で、2026-09-27の文書整理では公開環境の表示・配信ファイル・API応答を再確認していない。
+- 2026-09-27にリポジトリ内のルート、Stanzaラッパー、API定義を照合した。公開向けの表と異なる名前があるため、表を現在のローカル実装の一覧として使わない。
+- 公開サイトの変更を判断するときは対象URLと配信済みStanzaを別途確認する。リポジトリの構成は `docs/architecture.md`、起動は `docs/development-guide.md`、検証は `docs/testing-policy.md` を参照する。
+
+### リポジトリとの主な差
+
+以下はコード上で確認した対応であり、公開済みかどうかは未確認。
+
+| 対象 | 公開向けの表に残る記載 | リポジトリ内の対応 |
+| --- | --- | --- |
+| 培地詳細 | `/media/$ID`、`gmdb-medium-by-gmid.html` | `/medium/$gmId`、`gmdb-medium-detail`、API `gmdb_medium_by_gmid` |
+| 成分詳細 | `gmdb-component-by-gmoid.html` | `/component/$gmoId`、`gmdb-component-detail`、API `gmdb_component_by_gmoid` |
+| 生物の詳細 | `/organism/$ID` | `/strain/$strainId`、`gmdb-strain-detail`、API `gmdb_strain_by_strainid` |
+| タクソン詳細 | `gmdb-taxon-by-taxid.html`、API `gmdb_taxonomic_rank_by_taxid` | `/taxon/$taxId`、`gmdb-taxon-detail`、API `gmdb_organism_by_taxid` |
+| Stanza読込み | 配布HTMLファイル名 | Webラッパーは `<stanza-name>.js` を読み込み、custom elementを配置する |
+
+照合元は `@packages/web/src/routes/`、`@packages/web/src/components/stanzas/`、`@packages/api/src/` の各 `definitions.ts`。この表は差の例を示すもので、画面・APIの全件一覧ではない。
 
 ## 表記
 

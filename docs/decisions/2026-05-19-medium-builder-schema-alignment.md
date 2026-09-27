@@ -1,5 +1,9 @@
 # Medium Builder schema alignment policy
 
+## 現行文書への案内（2026-09-27追記）
+
+以下は2026-05-19の判断と背景を残した記録。Medium Builderの使い方と現在の機能説明は `@packages/stanza/stanzas/gmdb-medium-builder/README.md` を参照する。今回の文書整理では、本文のschema判断を変更せず、現行実装との詳細な再照合も行っていない。
+
 ## 決定
 
 - Medium Builder draft schema は、既存 Medium をテンプレートとして取り込んで編集するための schema として扱う。

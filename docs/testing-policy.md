@@ -2,11 +2,11 @@
 
 ## この文書の役割
 
-この文書では、TogoMediumの開発で使う `format` / `lint` / `test` / `type-check` の扱いを定める。
+この文書では、変更種別ごとの検証、確認コマンド、完了条件を定める。`format` / `lint` / `test` / `type-check` の詳細もここで管理する。
 
-- 日常開発の手順と完了条件は `docs/development-guide.md` を参照する
+- 環境構築・起動・ビルドの手順は `docs/development-guide.md` を参照する
 - 実装時のコード規約は `docs/development/coding-guidelines.md` を参照する
-- package固有の例外や追加確認は、対象packageの `AGENTS.md` とdocsを参照する
+- パッケージ固有の例外や追加確認は、対象パッケージの `AGENTS.md` とドキュメントを参照する
 
 ## コマンド表記の前提
 
@@ -17,6 +17,7 @@
 
 ## 基本方針
 
+- 変更内容に応じて、必要な検証だけを実行する
 - 整形は `oxfmt` で行う
 - lintは `oxlint.config.ts` を基準に `oxlint` で実行する
 - 型チェックは `oxlint --type-aware --type-check` で実行する
@@ -26,6 +27,18 @@
 - lintや型チェックのエラーをignore系コメントで覆い隠さない
 - 実行した確認と、省略した確認の理由を完了報告に含める
 
+## 作業開始時の確認
+
+コードや設定に影響する変更を始める前は、必要に応じて次を実行する。
+
+```bash
+pnpm lint
+pnpm type-check
+pnpm test
+```
+
+変更前から壊れている箇所を把握し、作業後の失敗と既存不具合を切り分ける。
+
 ## 作業種別ごとの確認
 
 ### ドキュメントのみの変更
@@ -33,6 +46,7 @@
 - 原則として `format` / `lint` / `test` は必須にしない
 - Markdownの整形やリンク修正など、機械的な確認が有効な場合は必要に応じて `pnpm format:check` を実行する
 - 確認を省略した場合は、ドキュメントのみの変更であることを完了報告に含める
+- ユーザーが明示的に検証を希望した場合は実行する
 
 ### コード変更を含む場合
 
@@ -42,13 +56,17 @@
 pnpm check-all
 ```
 
-- 変更が特定packageに閉じる場合でも、共有ロジックや型へ影響する可能性を確認する
+- 変更が特定パッケージに閉じる場合でも、共有ロジックや型へ影響する可能性を確認する
 - Stanza、Webアプリ、Storybookなど表示確認が必要な変更では、対象の開発サーバーを起動し、必要に応じて `agent-browser` などで表示確認を追加する
 - 検証を省略する場合は、理由と残るリスクを完了報告に含める
 
-### 設定・script変更を含む場合
+必要に応じて `pnpm web:build` でWebの本番ビルド、`pnpm stanza:build` でStanza配布物への影響を確認する。画面確認用の起動コマンドは `docs/development-guide.md`、操作と記録の方法は `docs/agent-browser.md` を参照する。
 
-- `package.json` のscriptを変更した場合は、変更したscriptを実行して挙動を確認する
+単体テストやlintで確認できる変更だけなら、`agent-browser` による画面確認は必須にしない。
+
+### 設定・スクリプト変更を含む場合
+
+- `package.json` のスクリプトを変更した場合は、変更したスクリプトを実行して挙動を確認する
 - 品質確認の導線を変更した場合は、`docs/development-guide.md` とこの文書の整合を確認する
 - `mise.toml` や実行環境に関わる変更では、`mise exec -- node -v` と `mise exec -- pnpm --version` を確認する
 
@@ -69,24 +87,25 @@ pnpm check-all
 
 - 通常のテストは `pnpm test` で実行する
 - 監視実行が必要な場合は `pnpm test:watch` を使う
-- package固有のテストscriptがある場合は、対象packageの `AGENTS.md` を確認する
-- 新しいロジックを追加する場合は、pure functionとして切り出せる範囲を優先してテストする
+- Webだけのテストは `pnpm --filter @packages/web test --run`、Stanzaだけのテストは `pnpm --filter @packages/stanza test --run` で実行できる。各パッケージの `test` は `vitest` のため、監視を避ける場合は `--run` を付ける。これらは全体の完了前確認を置き換えない
+- `@packages/api` と `@packages/core` には専用のスクリプトがないため、ルートの確認コマンドを使う
+- 新しいロジックを追加する場合は、純粋関数として切り出せる範囲を優先してテストする
 
 ## `__TEST__` exportの扱い
 
-- production module間で使うものだけを通常の `export` とする
-- テストからだけ参照する内部実装は、まずfile localに戻せないか検討する
+- 本番用モジュール間で使うものだけを通常の `export` とする
+- テストからだけ参照する内部実装は、まずファイル内に戻せないか検討する
 - Reactコンポーネントなど、同じファイルに置く内部ロジックをユニットテストから参照する必要がある場合は、`__TEST__` で始まるオブジェクトにまとめて `export` する
 - 通常利用向けの `export` とテスト補助用の `export` を分け、内部実装を必要以上に公開しない
 - `react-refresh/only-export-components` などのlint例外が必要な場合は、`__TEST__` exportに限定し、理由を短くコメントで残す
 
 ## type-check
 
-- `pnpm type-check` はTypeScriptの型チェック用scriptとして用意している
+- `pnpm type-check` はTypeScriptの型チェック用スクリプトとして用意している
 - 実行実体は `oxlint -c oxlint.config.ts . --type-aware --type-check`
 - quiet指定は付けず、通常出力で診断情報を確認できるようにする
 - 型エラーは `check-all` の失敗として扱う
-- `tsc` によるpackage別scriptは標準導線としては用意しない
+- `tsc` によるパッケージ別スクリプトは標準導線としては用意しない
 
 ## check-all
 
@@ -99,8 +118,18 @@ pnpm check-all
 - まず実装、型、テスト配置を見直し、コメントでの回避は最後の手段にする
 - やむをえず例外を使う場合は、なぜ必要かを短く残す
 
+## 完了条件
+
+タスク完了時には、少なくとも次を満たす。
+
+- 依頼された変更が反映されている
+- 変更内容に見合った検証が完了している
+- 検証を省略した場合は理由が説明できる
+- 必要なら整形が実施されている
+- 関連ドキュメントの更新が必要な場合は反映されている
+
 ## 関連ドキュメント
 
-- `docs/development-guide.md`: 日常開発の手順と検証方針
+- `docs/development-guide.md`: 環境構築・起動・ビルドの手順
 - `docs/development/coding-guidelines.md`: 実装時のコード規約
 - `docs/agent-browser.md`: `agent-browser` による画面確認と一時成果物の扱い

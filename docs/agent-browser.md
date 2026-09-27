@@ -4,8 +4,8 @@
 
 この文書では、このリポジトリで `agent-browser` を使って画面確認するときの前提、確認対象、成果物の扱いを定める。
 
-- 日常開発の手順と検証方針は `docs/development-guide.md` を参照する
-- テスト・lint方針は `docs/testing-policy.md` を参照する
+- 起動手順は `docs/development-guide.md` を参照する
+- 画面確認の要否を含む検証方針は `docs/testing-policy.md` を参照する
 - `agent-browser` で取得したスクリーンショットや確認ログの扱いは、この文書で判断する
 
 ## 前提
@@ -14,20 +14,18 @@
 - このリポジトリでは、`agent-browser` 本体のインストールや設定ファイルを管理しない
 - `agent-browser` を使う場合も、対象アプリやStorybookの起動は通常の開発手順に従う
 
-コマンド例では `pnpm ...` と表記する。AIエージェントやクラウド環境では、原則として `mise exec -- pnpm ...` に読み替える。
-
 ## 使う場面
 
 - StanzaやWebアプリの見た目、表示崩れ、操作後の状態を確認する
-- Storybook上のstoryを、ブラウザで実際に描画された状態として確認する
+- Storybook上のStoryを、ブラウザで実際に描画された状態として確認する
 - 変更前後の比較用にスクリーンショットを残す
 
-単体テストやlintで確認できる変更だけなら、`agent-browser` による画面確認は必須にしない。
+画面確認を追加するかどうかは `docs/testing-policy.md` の「コード変更を含む場合」に従う。
 
 ## Storybookでの見方
 
-- Storybookを確認するときは、必要に応じて `pnpm storybook:serve` を起動する
-- 対象storyが明確な場合は、manager UI経由ではなく `iframe.html` を直接開く
+- Storybookは `docs/development-guide.md` の手順で起動する
+- 対象Storyが明確な場合は、管理画面経由ではなく `iframe.html` を直接開く
 - `iframe.html` を使うと、Storybookのサイドバーやツールバーの影響を受けずに描画対象を確認しやすい
 
 確認用URLの例:
@@ -36,12 +34,11 @@
 http://127.0.0.1:6006/iframe.html?id=<story-id>
 ```
 
-manager UI上でstoryを選んだ場合も、最終確認では同じstoryの `iframe.html` URLを使う。
+管理画面上でStoryを選んだ場合も、最終確認では同じStoryの `iframe.html` URLを使う。
 
 ## Webアプリでの見方
 
-- Webアプリを確認するときは、必要に応じて `pnpm web:serve` を起動する
-- Stanza単体の挙動を確認するときは、対象に応じて `pnpm stanza:serve` またはStorybookを使う
+- WebアプリやStanzaの起動は `docs/development-guide.md` に従う。Stanza単体の確認環境は `@packages/stanza/docs/development-guide.md` の「確認の進め方」を参照する
 - 操作を伴う確認では、最初の表示状態、操作内容、操作後の状態が分かるように記録する
 
 ## スクリーンショット運用
@@ -63,6 +60,6 @@ manager UI上でstoryを選んだ場合も、最終確認では同じstoryの `i
 
 ## 関連文書
 
-- `docs/development-guide.md`: 日常開発の手順と検証方針
+- `docs/development-guide.md`: 環境構築・起動・ビルドの手順
 - `docs/testing-policy.md`: テスト・lint・表示確認の扱い
-- `docs/index.md`: docs全体の入口
+- `docs/index.md`: ドキュメント全体の入口

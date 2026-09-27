@@ -1,50 +1,39 @@
-# React + TypeScript + Vite
+# TogoMedium Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DBCLSが管理する培地データベースTogoMediumのWebフロントエンドと、関連するUI・API定義を管理するモノリポ。
 
-Currently, two official plugins are available:
+WebサイトはReactとViteで構成し、培地詳細や検索などの機能をTogoStanzaベースのWebComponentとして組み込む。Stanzaは他のサイトでも再利用する前提で開発する。データは外部のSPARQList APIから取得する。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 開発を始める
 
-## Expanding the ESLint configuration
+miseを利用できる環境で、リポジトリのルートから実行する。Node.jsとpnpmのバージョンは `mise.toml` に定義している。
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+```sh
+mise install
+mise exec -- pnpm install
+mise exec -- pnpm web:serve
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Web開発サーバーの設定ポートは5200。起動ログのURLをブラウザで開く。初回のmise設定の信頼確認や、ビルド・検証の手順は `docs/development-guide.md` を参照する。
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+接続先を変更しなければ、APIはTogoMediumの公開SPARQList、Stanzaは配信済みのJavaScriptを利用する。Webを起動するだけではローカルのStanza変更は反映されない。Stanzaの開発・確認は次のコマンドと `@packages/stanza/docs/development-guide.md` を入口にする。
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
+```sh
+mise exec -- pnpm storybook:serve
 ```
+
+WebとStanzaの接続先設定は `docs/architecture.md` にまとめている。
+
+## 構成と資料
+
+| パッケージ | 役割 |
+| --- | --- |
+| `@packages/web` | Webサイトの画面構成、ルーティング、Stanzaの組み込み |
+| `@packages/stanza` | 再利用可能なStanzaと共通UI |
+| `@packages/api` | APIの型・スキーマ・OpenAPI定義 |
+| `@packages/core` | 通信や文字列処理などの共有処理 |
+| `@packages/storybook` | コンポーネントを確認するStorybook環境 |
+
+文書全体の入口は `docs/index.md`。構成とデータの流れは `docs/architecture.md`、環境構築と日常操作は `docs/development-guide.md`、変更後の確認は `docs/testing-policy.md` を参照する。
+
+エージェントによる作業では、ルートと対象パッケージの `AGENTS.md` も確認する。

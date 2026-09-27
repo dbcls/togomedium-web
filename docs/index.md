@@ -1,40 +1,50 @@
-# docs一覧
+# ドキュメント案内
 
-## この文書の役割
+目的に応じて、共通文書とパッケージ固有の文書を探すための入口。以下のパスはリポジトリのルートを基準にする。
 
-この文書では、`docs/` 配下の文書への入口を示します。
+## 全体を理解する
 
-- どの情報をどの文書で扱うかを素早く把握できるようにする
-- 詳細を確認したい文書へ迷わず辿れるようにする
-- 個別文書の役割が重ならないように導線を整理する
+- `README.md`: プロジェクト概要と最短の起動手順
+- `docs/architecture.md`: パッケージの責務、データ取得から表示まで、公開インターフェースと生成物
+- `docs/domain-terms.md`: 実装を読むための用語、ID、略語
+- `docs/contents.md`: 公開サイトを対象とする画面・Stanza・APIの対応表。リポジトリの構成を知るときは全体設計を参照する
 
-## 日常開発
+## 開発・検証する
 
-- `docs/development-guide.md`: 日常開発で使う手順、環境、検証方針、完了条件
-- `docs/testing-policy.md`: format / lint / test / type-checkの扱い
-- `docs/agent-browser.md`: `agent-browser` でStorybookや実アプリを確認するときの前提と成果物運用
-- `docs/agents/task-guides/documentation.md`: ドキュメントの書き方、置き分け方、一時メモの扱い
+- `docs/development-guide.md`: 環境構築、起動、ビルド、日常操作
+- `docs/testing-policy.md`: 変更内容に応じた検証、確認コマンド、完了条件
+- `docs/agent-browser.md`: ブラウザで表示確認するときの前提と一時成果物の扱い
 
-## 実装規約
+## 実装の判断基準を確認する
 
-- `docs/development/coding-guidelines.md`: リポジトリ全体の基本的なコード規約
-- `docs/naming-convention.md`: 型名、変数名、ファイル名、API、Stanzaなどの命名規約
-- `@packages/web/docs/coding-guidelines.md`: Webパッケージ固有のルーティング、page、component、data fetching、stylingの方針
-- `@packages/web/docs/stanza-integration.md`: Web側でStanzaを組み込むときの実装パターン
-- `@packages/stanza/docs/development-guide.md`: Stanza本体の実装、MUI、metadata、確認方針
+| 対象 | 参照先 |
+| --- | --- |
+| 共通のコード規約 | `docs/development/coding-guidelines.md` |
+| 型・変数・ファイル・API・Stanzaの命名 | `docs/naming-convention.md` |
+| Webのルーティング・画面・データ取得・スタイル | `@packages/web/docs/coding-guidelines.md` |
+| WebへのStanzaの組み込み | `@packages/web/docs/stanza-integration.md` |
+| Stanza内部の構成・公開パラメータ・接続設定 | `@packages/stanza/docs/development-guide.md` |
 
-## 仕様・機能
+各パッケージで作業する際の注意点は `@packages/*/AGENTS.md` にある。個別Stanzaの資料は `@packages/stanza/stanzas/` 配下に置く。
 
-- `docs/contents.md`: 公開サイトの画面、Stanza、APIの対応表
-- `docs/domain-terms.md`: TogoMediumで使うドメイン用語、ID、略語の作業用語集
+## 文書・エージェントの作業手順を確認する
 
-## 設計判断
+- `docs/agents/task-guides/documentation.md`: 文書の役割、配置、編集時の判断基準
+- `AGENTS.md`: エージェントの共通作業ルールと参照先
+- `docs/agents/task-guides/storybookComponent.md`: コンポーネントとStoryの作成手順
+- `docs/agents/task-guides/svgIcon.md`: SVGアイコンの作成・置換時の制約
 
-- `docs/decisions/README.md`: 設計判断ログの役割、運用ルール、ひな形を示す入口
-- `docs/decisions/2026-05-18-mise-source-of-truth.md`: Node.js / pnpmの基準を `mise.toml` に寄せる判断
+## 判断の背景・過去の調査を読む
 
-## エージェント向け
+判断ログとレポートは、記録時点の理由・事実・未確認事項を扱う。現在の環境や手順は上記の開発文書と設定を確認する。
 
-- `AGENTS.md`: モノリポ全体の作業ルール
-- `@packages/*/AGENTS.md`: 各パッケージ固有の作業ルール
-- `docs/agents/task-guides/`: エージェント用のタスク別ガイド
+- `docs/decisions/README.md`: 設計判断ログの運用とひな形
+- `docs/decisions/2026-05-18-mise-source-of-truth.md`: Node.js・pnpmの基準をmiseへ集約した理由
+- `docs/decisions/2026-05-19-medium-builder-schema-alignment.md`: Medium Builderのスキーマに関する判断
+- `docs/reports/2026-09-18-dependency-update-candidates.md`: 依存更新の候補と調査
+- `docs/reports/2026-09-18-dependency-update-results.md`: 依存更新と検証の結果
+- `docs/reports/2026-09-18-togostanza-v4-parameter-compatibility.md`: TogoStanza V4のパラメータ互換性調査
+
+## ドキュメント改善の計画・進捗
+
+[Linearのドキュメント改善プロジェクト](https://linear.app/yohak/project/ドキュメント改善-fc75a43650f3/overview)で管理する。改善計画とIssueはLinearを正本とし、計画本文をローカルに重複して置かない。

@@ -7,7 +7,7 @@
 - 対象:
   - TypeScriptの型名、変数名、関数名、定数名、Reactコンポーネント名
   - ファイル名、ディレクトリ名
-  - API定義、Zod schema、Stanza関連の識別子
+  - API定義、Zodスキーマ、Stanza関連の識別子
 - 対象外:
   - コードスタイル全般。関数定義やimport方針は `docs/development/coding-guidelines.md` を参照する
   - format / lint / testの運用。検証方針は `docs/testing-policy.md` を参照する
@@ -19,7 +19,7 @@
 
 - 型名 / クラス名 / Reactコンポーネント名: `PascalCase`
   - 例: `MediumDetailResponse`, `TaxonomyType`, `MediumDetailPage`
-- 変数名 / 関数名 / React Hooks: `camelCase`
+- 変数名 / 関数名 / Reactフック: `camelCase`
   - 例: `gmId`, `taxId`, `fetchData`, `usePageTitle`
 - 定数: 原則として `UPPER_SNAKE_CASE`
   - 例: `PATH_LIST_MEDIA`, `DEFAULT_FEEDBACK_AUTO_HIDE_DURATION`
@@ -30,11 +30,22 @@
 
 略語やIDの意味は名前だけで判断しない。`GM ID` と `GMO ID` のように別の意味を持つ語は、`docs/domain-terms.md` を確認してから命名する。
 
+### 用語とIDを名前に使うとき
+
+- `media` は `medium` の複数形として使う。画面名やAPI名では既存の `media` 表記に合わせる。
+- GMO IDを扱う名前は、成分・Role・Propertyなど、対象が分かる文脈で使う。既存APIの `gmo_id` など、公開済みの識別子は維持する。
+- `organism`、`taxon`、`strain` が混ざる場合は、対象の粒度が分かる名前にする。
+- 新規命名では、単一の分類群は `taxon`、分類体系や階層構造は `taxonomy` を優先する。
+- phenotype検索では、UI上の選択条件、APIへの検索条件、検索結果のorganismを区別する。
+- `GM ID` と `GMO ID` は別の識別子なので、短縮して `id` だけにしない。
+- NCBI以外のtaxonomyを扱う場合は、`taxonomyType` や `gtdbTaxon...` のように区別できる名前にする。
+- 通常の画面や新規StanzaでKEGG TIDを扱う場合は、他のIDとの混同を避けるためKEGG由来だと分かる名前にする。
+
 ## ファイルとディレクトリ
 
 ### Reactコンポーネント
 
-Reactコンポーネント、page、wrapper、Storybook用の表示コンポーネントは `PascalCase` にする。
+Reactコンポーネント、ページ、ラッパー、Storybook用の表示コンポーネントは `PascalCase` にする。
 
 - 例: `HomePage.tsx`
 - 例: `MediumDetailStanza.tsx`
@@ -48,7 +59,7 @@ Reactコンポーネント、page、wrapper、Storybook用の表示コンポー�
 
 ### ロジックと状態
 
-utility、hook、state、selector、thunk、schema、mapperなど、Reactコンポーネント以外の実装ファイルは `camelCase` にする。
+ユーティリティ、フック、状態、セレクター、Thunk、スキーマ、マッパーなど、Reactコンポーネント以外の実装ファイルは `camelCase` にする。
 
 - 例: `fetch.ts`
 - 例: `createCustomHistory.ts`
@@ -64,7 +75,7 @@ utility、hook、state、selector、thunk、schema、mapperなど、Reactコン�
 
 ### ルート定義
 
-`@packages/web/src/routes/` 配下はTanStack Routerのfile-based routing規則に従う。
+`@packages/web/src/routes/` 配下はTanStack Routerのファイルベースルーティング規則に従う。
 
 - URLパスに対応するファイルは `kebab-case` を使う
   - 例: `find-media-by-components.lazy.tsx`
@@ -83,33 +94,33 @@ utility、hook、state、selector、thunk、schema、mapperなど、Reactコン�
 
 Stanzaの外部から参照される識別子は、WebComponentとしての公開名を優先する。
 
-- stanzaディレクトリ名: `gmdb-...` の `kebab-case`
+- Stanzaディレクトリ名: `gmdb-...` の `kebab-case`
   - 例: `gmdb-medium-builder`
   - 例: `gmdb-find-media-by-taxonomic-tree`
 - `metadata.json` や配布名など、外部から参照される名前は既存のStanza名に合わせる。
 
-一方で、stanza内部の実装では、文脈上明らかなprefixを重ねない。
+一方で、Stanza内部の実装では、文脈上明らかな接頭辞を重ねない。
 
-- 各stanzaディレクトリ配下では、内部コンポーネントや関数に原則として `Gmdb` / `GMDB` やstanza名由来のprefixを付けない。
-- 例: `@packages/stanza/stanzas/gmdb-medium-builder` 配下では、内部名に `MediumBuilder` prefixを付けない。
+- 各Stanzaディレクトリ配下では、内部コンポーネントや関数に原則として `Gmdb` / `GMDB` やStanza名由来の接頭辞を付けない。
+- 例: `@packages/stanza/stanzas/gmdb-medium-builder` 配下では、内部名に `MediumBuilder` 接頭辞を付けない。
 - 例: `ImportDialog`, `FeedbackSnackbar`, `draftImport`, `draftExport`
-- 外部公開API、Stanza登録名、metadata、ディレクトリ名ではprefixを維持する。
+- 外部公開API、Stanza登録名、metadata、ディレクトリ名では接頭辞を維持する。
 
 ## API関連
 
-`@packages/api` では、既存の命名に合わせてendpoint単位の名前を基準にする。
+`@packages/api` では、既存の命名に合わせてエンドポイント単位の名前を基準にする。
 
-### endpointディレクトリ
+### エンドポイントディレクトリ
 
-API endpointごとのディレクトリは `camelCase` にする。
+APIエンドポイントごとのディレクトリは `camelCase` にする。
 
 - 例: `listMedia`
 - 例: `componentDetail`
 - 例: `gtdbTaxonChildren`
 
-deprecated APIや旧構成には `PascalCase` ディレクトリなどの揺れが残っているが、新規実装の参考にはしない。
+非推奨APIや旧構成には `PascalCase` ディレクトリなどの揺れが残っているが、新規実装の参考にはしない。
 
-### 型とschema
+### 型とスキーマ
 
 - APIレスポンス型: `XxxResponse`
   - 例: `ListMediaResponse`
@@ -117,30 +128,30 @@ deprecated APIや旧構成には `PascalCase` ディレクトリなどの揺れ�
 - APIパラメータ型: `XxxParams`
   - 例: `ListMediaParams`
   - 例: `ComponentDetailParams`
-- Zod schema: `xxxSchema`
+- Zodスキーマ: `xxxSchema`
   - 例: `mediumDetailResponseSchema`
   - 例: `listMediaParamsSchema`
-- 共通schema生成関数: `createXxxSchema`
+- 共通スキーマ生成関数: `createXxxSchema`
   - 例: `createListApiResponseSchema`
   - 例: `createListApiParamsSchema`
 
 このリポジトリでは、API入力型の接尾辞は `RequestParams` ではなく、既存の `Params` を標準にする。
 
-### API path定数
+### APIパス定数
 
-API pathを表す定数は `PATH_...` の `UPPER_SNAKE_CASE` にする。
+APIパスを表す定数は `PATH_...` の `UPPER_SNAKE_CASE` にする。
 
 - 例: `PATH_LIST_MEDIA`
 - 例: `PATH_COMPONENTS_WITH_COMPONENTS`
 - 例: `PATH_GTDB_TAXON_CHILDREN`
 
-値としてのAPI pathは、外部API名に合わせて `snake_case` を維持する。
+値としてのAPIパスは、外部API名に合わせて `snake_case` を維持する。
 
 - 例: `"/gmdb_list_media_by_gmids"`
 - 例: `"/gmdb_taxonomy_children"`
 
-`PATH_...` は OpenAPI の path として扱うため、値は `/` で始める。
-API URL が必要な利用側では、`definitions.ts` で完成済み URL 定数を export せず、`makeApiUrl(PATH_...)` で生成する。
+`PATH_...` はOpenAPIのpathとして扱うため、値は `/` で始める。
+APIのURLが必要な利用側では、`definitions.ts` で完成済みURL定数をexportせず、`makeApiUrl(PATH_...)` で生成する。
 
 ## Propsとexport
 
@@ -152,9 +163,7 @@ Reactコンポーネントのprops型は、利用範囲に応じて名前を分�
   - 例: `ImportDialogProps`
   - 例: `AppProps`
 
-通常の `export` はproductionコード間で使うものに限定する。テストからだけ参照する内部実装は、まず同一ファイル内に閉じられないか確認する。
-
-テストから内部実装を直接参照する必要がある場合は、`docs/testing-policy.md` の `__TEST__` export 方針に従う。
+通常の `export` とテスト補助用の公開範囲は、`docs/testing-policy.md` の `__TEST__` export方針に従う。
 
 ## 例外と既存の揺れ
 
@@ -162,11 +171,11 @@ Reactコンポーネントのprops型は、利用範囲に応じて名前を分�
 
 - 自動生成ファイル
   - 例: `@packages/web/src/routeTree.gen.ts`
-- frameworkやtoolが要求する名前
+- フレームワークやツールが要求する名前
   - 例: TanStack Routerの `__root.tsx`, `$param.tsx`
-- 初期プロトタイプstanza
+- 初期プロトタイプStanza
   - `@packages/stanza/docs/development-guide.md` で示されている `gmdb-gms-by-tid` と `gmdb-roundtree` は、現行の実装方針や命名規約の判断材料に含めない。
-- legacy、typo、mixed styleの既存名
+- 古い命名、誤字、表記が混在した既存名
   - 既存コードに残っていても、新規コードでは再利用しない。
 
-例外が必要な場合は、名前の近くに理由を短く残す。ただし、外部API仕様、生成物、framework規約のように理由が明らかな場合は不要とする。
+例外が必要な場合は、名前の近くに理由を短く残す。ただし、外部API仕様、生成物、フレームワーク規約のように理由が明らかな場合は不要とする。
