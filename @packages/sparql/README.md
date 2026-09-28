@@ -43,6 +43,8 @@ mise exec -- pnpm --filter @packages/sparql test
 
 問い合わせはGET、タイムアウトは30秒。失敗すると前回の結果が残る場合があるため、ファイルの存在だけで成功と判断しない。`--saved` は結果の鮮度や引数を確認せず、`--param` と併用できない。
 
+カンマ区切りのIDをVALUES句へ渡す場合は、`api.json` の `type: "string-list"` と任意の `placeholder` を使う。設定・空要素・エスケープの扱いは `docs/project-structure.md` の「文字列リスト引数」を参照する。
+
 ## Zodとの連携
 
 検証モジュールでは `%api/listComponents2/definitions` のように、Webと同じパスエイリアスでスキーマを参照する。対応先はこのパッケージの `tsconfig.json` に定義し、Viteの `resolve.tsconfigPaths` で解決する。`.mjs` のまま利用でき、TypeScriptへの変更は不要。

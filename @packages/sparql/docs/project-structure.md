@@ -179,7 +179,40 @@ api.mjs
 }
 ```
 
-`LIMIT {{limit}}` は数値トークンへ、`("{{limit}}" AS ?limit)` は文字列リテラルへ置換する。typeを省略した引数は従来どおり文字列で、完全な引用符付きプレースホルダーだけを許可する。任意のSPARQL構文を引数として挿入する機能ではない。
+`LIMIT {{limit}}` は数値トークンへ、`("{{limit}}" AS ?limit)` は文字列リテラルへ置換する。typeを省略した引数は従来どおり文字列で、完全な引用符付きプレースホルダーだけを許可する。任意のSPARQL構文を引数として挿入する機能ではない。文字列の値列には次の `string-list` を使う。
+
+## 文字列リスト引数
+
+`parameters` の `type: "string-list"` は、カンマ区切りの入力を各要素でtrimし、SPARQL文字列リテラルの列へ変換する。`placeholder` はクエリ内の置換名で、省略すると引数名を使う。
+
+```json
+{
+  "parameters": {
+    "gm_ids": {
+      "type": "string-list",
+      "default": "M2794,M941",
+      "placeholder": "media_values",
+      "description": "Comma-separated medium IDs."
+    }
+  }
+}
+```
+
+```sparql
+VALUES ?medium_no { {{media_values}} }
+```
+
+上の設定では、`--param gm_ids=M2794,M941` が `"M2794" "M941"` に展開される。CLIには引数名の `gm_ids` を渡し、置換名の `media_values` は渡さない。`query` にはクエリファイル、`api` にはそのフォルダを指定して利用する。
+
+未指定時はdefaultを使い、空文字列を明示すると空文字列1要素の `""` を作る。`M1,,M1,` は `"M1" "" "M1" ""` となる。空要素・重複・入力順を保持する。CSVの引用規則は扱わず、カンマを含む1つのIDは入力できない。
+
+引用符、バックスラッシュ、改行などは文字列としてエスケープする。入力内の `{{...}}` をテンプレートとして再解釈しない。既存のSPARQListが単に二重引用符を足していた場合、特殊文字の扱いは変更点として記録する。
+
+`pattern` はこの型では任意で、指定時は分割前の入力文字列全体を検証する。IDの接頭辞などを暗黙には制限しない。入力とdefaultは文字列で指定する。
+
+置換箇所は `VALUES ?変数 { {{置換名}} }` の本体全体に限る。文字列リテラル内、IRI、複数列のVALUES、固定値と混在する本体には使えない。引数名・置換名は英数字とアンダースコア（先頭は英字またはアンダースコア）とし、`prepared`・`__proto__`・`prototype`・`constructor` は予約する。他の引数名や置換名との衝突はエラーにする。`placeholder` は `string-list` 専用。
+
+`parameters.mjs` の `prepareParameters` が検証と変換を行い、`mapQueryParameters` が元のテンプレートの置換箇所を一度だけ処理する。`export` も同じ関数を使い、生成先では `prepared.lists.media_values` のような参照で展開する。任意の前処理JSを実行する仕組みではない。
 
 ## ローカル出力検証
 
