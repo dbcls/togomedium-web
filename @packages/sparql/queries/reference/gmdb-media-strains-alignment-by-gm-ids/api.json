@@ -1,0 +1,16 @@
+{
+  "title": "Get media and strain list by multiple media ids",
+  "description": "Retrieve media and their strains with taxonomic lineages by medium IDs.",
+  "inputs": {
+    "result": "gmdb_media_strains_alignment_by_gm_ids.rq"
+  },
+  "parameters": {
+    "gm_ids": {
+      "type": "string-list",
+      "default": "M2794,M941",
+      "placeholder": "media_values",
+      "description": "Comma-separated medium IDs.",
+      "examples": ["SY4047,JCM_M900"]
+    }
+  }
+}

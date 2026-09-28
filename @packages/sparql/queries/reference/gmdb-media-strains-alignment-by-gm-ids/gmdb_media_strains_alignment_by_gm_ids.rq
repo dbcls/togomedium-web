@@ -1,0 +1,30 @@
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX olo: <http://purl.org/ontology/olo/core#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX tax:  <http://ddbj.nig.ac.jp/ontologies/taxonomy/>
+
+SELECT DISTINCT ?medium_id ?original_media_id ?medium_name ?strain_id ?strain_name ?tax ?tax_name ?ancestor_tax ?ancestor_tax_name ?rank
+FROM <http://togomedium.org/media>
+FROM <http://togomedium.org/strain>
+FROM <http://togomedium.org/taxonomy/filtered_has_strain>
+WHERE {
+  VALUES ?medium_no { {{media_values}} }
+  VALUES ?rank { tax:Domain tax:Phylum tax:Class tax:Order tax:Family tax:Genus tax:Species }
+  ?medium (dcterms:identifier | skos:altLabel) ?medium_no ;
+    dcterms:identifier ?medium_id ;
+    rdfs:label ?name ;
+    gmo:GMO_000114/gmo:strain_id ?strain .
+  OPTIONAL { ?medium skos:altLabel ?original_media_id . }
+  ?strain a sio:SIO_010055 ;
+    rdfs:label ?strain_name ;
+    dcterms:identifier ?strain_id ;
+    gmo:taxon ?tax .
+  ?tax rdfs:label ?tax_name ;
+    rdfs:subClassOf* ?ancestor_tax .
+  ?ancestor_tax tax:rank  ?rank ;
+    rdfs:label ?ancestor_tax_name .
+  BIND (if(STR(?name) = "", "(Unnamed medium)",  ?name) AS ?medium_name)
+} ORDER BY ?tax ?rank
