@@ -4,19 +4,21 @@
 
 既存公開APIの比較元。ユーザーが2026-09-28に貼り付けたSPARQList本文をsource.mdに保持した。元ファイル名は未提示、版・コミットは不明。原文を囲む4連バッククォートは保存内容に含めない。
 
-2026-09-28に共通CLIの文字列リスト対応を使って取り込んだ。クエリ、api.json、Output、整形テストを配置し、実エンドポイントで検証した。コミットと公開先への反映は未実施。
+ローカルへの取り込みと実エンドポイントでの検証は完了している。クエリ、api.json、Output、整形テストを配置済み。この定義の公開先への反映は未実施。
 
 ## 目的と処理順
 
 複数の培地IDから培地と、それに紐づくStrainの分類階層を取得する。
 
-1. gm_idsをカンマで分割し、各値をtrimして二重引用符で囲み、空白で結合してmedia_valuesを作る。
+1. gm_idsをカンマで分割し、各値をtrimしてSPARQL文字列リテラルへ変換し、空白で結合してmedia_valuesを作る。
 2. resultのSPARQLでmedia_valuesをVALUES句へ挿入し、培地、Strain、分類階層を取得する。
 3. Outputがresultを培地IDとStrain IDでまとめる。各培地はgm_id、label、original_media_id、organismsを持ち、各organismはdomainからstrainまでの分類を持つ。未取得の分類はnull、original_media_idの欠損は空文字列、空結果は空配列となる。
 
 ## 引数と接続先
 
-gm_idsはカンマ区切りの培地ID。既定値はM2794,M941、例はSY4047,JCM_M900。検索対象はdcterms:identifierまたはskos:altLabel。原文の前処理は空文字列を除去せず、引用符のエスケープも行わない。未指定時の既定値適用はSPARQList側に依存する。
+gm_idsはカンマ区切りの培地ID。未指定時の既定値はM2794,M941、例はSY4047,JCM_M900。検索対象はdcterms:identifierまたはskos:altLabel。
+
+api.jsonの `type: "string-list"` と `placeholder: "media_values"` で引数を展開する。空要素と重複は原文どおり保持し、空入力は `""` の1要素、`M2794,` は `"M2794" ""` となる。カンマを含む単一IDには対応しない。引用符やバックスラッシュなどはエスケープするため、その入力では原文と挙動が異なる。設定の詳細は `@packages/sparql/docs/project-structure.md` を参照する。
 
 元のEndpointは{{SPARQLIST_TOGOMEDIUM_ENDPOINT}}。実値は未確認。ローカルではhttps://togomedium.org/sparqlへ問い合わせた（環境変数未設定、パッケージの.envなし）。指定したローカル接続先で動作確認済みだが、元環境との同等性は未確認。
 
@@ -48,4 +50,4 @@ mise exec -- pnpm --filter @packages/sparql export queries/reference/gmdb-media-
 
 --savedによる再整形、exportによるMarkdown生成、パッケージのcheckが成功した。公開先への登録・実行は未実施。原文はoxfmt.config.tsで整形対象から除外し、整形後もSHA-256が6b809b84b12b77ebb10cef899ca846b19bd6b31da98fe959d53567133a9ffac1で一致した。
 
-ルートのcheck-allは成功した（Vitest 198件、Nodeテスト63件）。最初の実行では模擬HTTPサーバーのlistenがサンドボックスに拒否されたため、同じコマンドを権限付きで再実行した。lint:debugも成功し、このAPIの追加ファイルに警告はない。既存のlist-media由来の警告4件と、Web・Stanzaの既存の型関連警告3件は変更していない。画面や配布物の変更はないため、ブラウザ確認と本番ビルドは実施していない。
+ルートのcheck-allは成功した（Vitest 198件、Nodeテスト63件）。lint:debugも成功し、このAPIの追加ファイルに警告はない。
