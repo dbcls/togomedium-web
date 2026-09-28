@@ -1,6 +1,6 @@
 # RDF・SPARQL・SPARQList 学習メモ
 
-更新日: 2026-09-26
+更新日: 2026-09-28
 
 TogoMediumのクエリを理解・改善するために、データの表し方から結果の整形までを整理する。個別クエリの取得条件や検証結果は各クエリのREADMEに記録する。DB上の名前や識別子の対応は `UBIQUITOUS_LANGUAGE.md` を参照する。
 
@@ -43,6 +43,36 @@ LIMIT 10
 ## SPARQListと実行環境
 
 SPARQListは、SPARQLによる問い合わせやJavaScriptによる整形を組み合わせてAPIを定義する仕組み。SPARQL自体とは役割が異なる。
+
+### Virtuosoはクエリを実行するデータベース
+
+VirtuosoはOpenLink Softwareが開発するデータベース製品。RDFの保存とSPARQLによる検索に対応しており、TogoMediumのSPARQLエンドポイントではVirtuosoがクエリを処理する。
+
+| 名前      | 役割                                                                   |
+| --------- | ---------------------------------------------------------------------- |
+| RDF       | データと関係を表す形式                                                 |
+| SPARQL    | RDFを検索・集計する言語                                                |
+| Virtuoso  | データを保存し、SPARQLクエリを実行するデータベース                     |
+| SPARQList | クエリとJavaScriptの整形処理を組み合わせ、HTTP APIとして提供する仕組み |
+
+SPARQLエンドポイントは、HTTPでクエリを受け付ける窓口。Virtuosoはその窓口の背後で検索や集計を実行する。SPARQLはVirtuoso専用の言語ではなく、ほかの対応データベースでも利用できる。
+
+公開APIを利用するときの処理は、次のように流れる。
+
+```text
+Webページ・Stanza
+  → SPARQListへAPIリクエスト
+  → SPARQListがSPARQLエンドポイントへクエリを送信
+  → Virtuosoが検索・集計・並べ替えを実行し、生の結果を返す
+  → SPARQListのOutputがJavaScriptでAPI用JSONに整形
+  → Webページ・Stanzaが結果を表示
+```
+
+たとえば培地ごとのstrain数を数えるCOUNTや、その数で並べ替えるORDER BYはVirtuoso側で実行する。`output.mjs` は取得済みの結果から数値や文字列を取り出し、API用の返却形式に整える。
+
+「Virtuosoでクエリエラーになった」とは、送信したSPARQLをデータベース側で解釈・実行できなかったという意味。SPARQListの整形処理や画面表示のエラーとは区別する。標準仕様とデータベース実装の対応には差があり得るため、実際に使うエンドポイントで確認する。
+
+### ローカル実行と公開APIの違い
 
 このパッケージでは、ローカルの `.rq` ファイルを読み、`https://togomedium.org/sparql` へ送信する。検索処理はリモートで行われ、ローカルには結果を保存する。SPARQListの起動やAPI登録は不要。実行コマンドと保存先はパッケージの `README.md` に記載する。
 
@@ -119,3 +149,4 @@ LIMIT・OFFSETは結果の行を区切る。関連情報の展開で1対象が�
 - SPARQL 1.1 Query Language: https://www.w3.org/TR/sparql11-query/
 - SPARQL Results JSON: https://www.w3.org/TR/sparql11-results-json/
 - SPARQList: https://github.com/dbcls/sparqlist
+- Virtuoso: https://virtuoso.openlinksw.com/
