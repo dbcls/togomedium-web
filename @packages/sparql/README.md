@@ -81,6 +81,7 @@ mise exec -- pnpm --filter @packages/sparql export queries/apis/list-components2
 このパッケージ内の参照は、特記しない限り `@packages/sparql` 基準のパス。
 
 - `docs/project-structure.md`: ファイルの責務と実行フロー
+- `docs/import-sparqlist.md`: 既存SPARQList Markdownの取り込み手順と、別セッションでの依頼例
 - `docs/migration.md`: 移植元、分類、正本の移行
 - `docs/gmo.md`: GMOの識別子、分類、関係
 - `docs/sparql-learning-notes.md`: RDF・SPARQLの学習メモ

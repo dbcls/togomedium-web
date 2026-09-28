@@ -13,6 +13,7 @@
 
 - `@packages/sparql/README.md`: SPARQLクエリの区分、実行、API設計とZod検証
 - `@packages/sparql/docs/migration.md`: Playgroundからの移植元と配置の対応
+- `@packages/sparql/docs/import-sparqlist.md`: 既存SPARQList Markdownの読み取り、分割、検証の手順
 
 - `docs/development-guide.md`: 環境構築、起動、ビルド、日常操作
 - `docs/testing-policy.md`: 変更内容に応じた検証、確認コマンド、完了条件
