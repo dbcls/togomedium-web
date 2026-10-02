@@ -8,7 +8,8 @@ import {
 
 export const PATH_SEARCH_COMPONENTS_LIST = "/gmdb_search_components_list";
 export const searchComponentsListParamsSchema = searchComponents2ParamsSchema.extend({
-  sort: searchComponentsParamsSchema.shape.sort.removeDefault().default("name"),
+  sort: searchComponentsParamsSchema.shape.sort,
+  order: searchComponentsParamsSchema.shape.order,
 });
 export const searchComponentsListResponseSchema = searchComponents2ResponseSchema.omit({
   facets: true,

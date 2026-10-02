@@ -39,7 +39,7 @@ for (const params of cases) {
   const key = JSON.stringify(filters);
   const [combined, list] = await Promise.all([
     request("gmdb_search_components2", params),
-    request("gmdb_search_components_list", params),
+    request("gmdb_search_components_list", { sort: "name", order: "asc", ...params }),
   ]);
   const { facets, ...expectedList } = combined.output;
   assert.deepEqual(list.output, expectedList, JSON.stringify(params));
@@ -54,7 +54,7 @@ const rounds = [];
 for (let round = 0; round < 3; round++) {
   const combined = await request("gmdb_search_components2");
   const start = performance.now();
-  const list = await request("gmdb_search_components_list");
+  const list = await request("gmdb_search_components_list", { sort: "name", order: "asc" });
   const listReady = performance.now() - start;
   const facets = await request("gmdb_search_components_facets");
   const allReady = performance.now() - start;

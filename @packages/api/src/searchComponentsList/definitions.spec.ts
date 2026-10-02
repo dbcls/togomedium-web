@@ -9,8 +9,8 @@ import {
 
 it("separates paging and sorting from facet input and response", () => {
   expect(searchComponentsListParamsSchema.parse({})).toMatchObject({
-    sort: "name",
-    order: "asc",
+    sort: "medium_count",
+    order: "desc",
     limit: "20",
     offset: "0",
   });

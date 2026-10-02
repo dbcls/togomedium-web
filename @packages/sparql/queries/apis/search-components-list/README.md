@@ -5,14 +5,14 @@
 - 採用状態: 一覧を先に取得するため、検索とfacet集計を分離したAPI。
 - 外部名: `gmdb_search_components_list`、内部名: `searchComponentsList`。
 - ローカルDockerへ登録・検証。productionへのpush・deployと公開OpenAPI登録は未実施。
-- Zod正本: `@packages/api/src/searchComponentsList/definitions.ts`。searchComponents2の入力既定値と応答の一覧部分を再利用し、sortだけ既存統合APIと同じ3候補へ拡張する。
+- Zod正本: `@packages/api/src/searchComponentsList/definitions.ts`。searchComponents2の入力と応答の一覧部分を再利用し、sort/orderは既存統合APIと同じ候補・既定値を使う。
 - 比較元の`gmdb_search_components`と`gmdb_search_components2`は維持する。
 
 ## 仕様・構成
 
 名前・下位Role込みのRole・直接付与PropertyをAND条件で検索し、標準名またはGMO IDでページを確定してから、ページ内成分だけの直接利用培地数を集計する。検索・名前選定・別名・matched_names・直接培地数の意味は[search-components2](../search-components2/README.md)と同じ。
 
-人間の追加依頼によりmedium_countの昇順・降順も許可する。このソートだけは、検索結果全体の直接利用培地数を集計してからソート・ページ確定する。既定name/asc/20/0は維持する。name/idのページ後集計とは処理順が異なる。
+人間の追加依頼によりmedium_countの昇順・降順も許可する。このソートだけは、検索結果全体の直接利用培地数を集計してからソート・ページ確定する。APIの既定はmedium_count/desc/20/0。name/idのページ後集計とは処理順が異なる。
 
 api.jsonは一覧クエリと総数クエリの2入力だけを持ち、facetクエリを実行しない。list-components-with-properties.rqとcount-components.rqは比較元と同一。Outputは一覧とページ情報だけを返し、facet結果を引数に必要としない。SPARQListで単独実行できる関数に保ち、Zod検証はローカルvalidate.mjsへ分離する。
 
@@ -20,15 +20,15 @@ queryVariantsでsort=medium_countだけlist-components-by-medium-count.rqへ切�
 
 ## 引数・応答
 
-| 引数        | 既定値   | 意味                                                 |
-| ----------- | -------- | ---------------------------------------------------- |
-| name        | 空文字列 | 全言語の標準名・別名への大小文字を区別しない部分一致 |
-| role_id     | 空文字列 | 選択Role自身と下位Role。空なら未指定                 |
-| property_id | 空文字列 | 直接付与Property。空なら未指定                       |
-| sort        | name     | name / id / medium_count                             |
-| order       | asc      | asc / desc                                           |
-| limit       | 20       | 非負の安全な整数文字列。20/50/100等を指定可能        |
-| offset      | 0        | 先頭から省略する成分数                               |
+| 引数        | 既定値       | 意味                                                 |
+| ----------- | ------------ | ---------------------------------------------------- |
+| name        | 空文字列     | 全言語の標準名・別名への大小文字を区別しない部分一致 |
+| role_id     | 空文字列     | 選択Role自身と下位Role。空なら未指定                 |
+| property_id | 空文字列     | 直接付与Property。空なら未指定                       |
+| sort        | medium_count | name / id / medium_count                             |
+| order       | desc         | asc / desc                                           |
+| limit       | 20           | 非負の安全な整数文字列。20/50/100等を指定可能        |
+| offset      | 0            | 先頭から省略する成分数                               |
 
 api.jsonの定義に従い、文字列リテラルと数値プレースホルダーを安全に置換する。同順位はGMO ID昇順。応答はcontentsと文字列total/limit/offset。各成分はid/name/aliases/matched_names/medium_count/roles/propertiesを持つ。名前条件なしのmatched_namesは空配列。空ページでも総数とページ情報を残す。
 
@@ -50,7 +50,7 @@ mise exec -- node queries/apis/search-components-list/verify-medium-sort.mjs
 
 登録先は`/Volumes/DATA/repositories/togomedium-sparqlist/repository/gmdb_search_components_list.md`、ローカルURLは`http://localhost:3000/sparqlist/api/gmdb_search_components_list`。DockerのSPARQL接続先は`https://dev.togomedium.org/sparql`。
 
-verify-split.mjsは同じDockerのsearch2/list/facetsを17条件で比較する。page/sortだけの変更ではfacet結果を再利用し、検索条件が異なる5組だけfacetを取得する。旧API応答の一覧部分とfacet部分への全項目一致を確認し、既定値で各3回の逐次取得時間をresults/split-benchmark.jsonへ保存する。通常テストからは分離する。
+verify-split.mjsは同じDockerのsearch2/list/facetsを17条件で比較する。listには比較元と同じname/ascを明示する。page/sortだけの変更ではfacet結果を再利用し、検索条件が異なる5組だけfacetを取得する。旧API応答の一覧部分とfacet部分への全項目一致を確認し、name/ascで各3回の逐次取得時間をresults/split-benchmark.jsonへ保存する。通常テストからは分離する。
 
 ## 検証（2026-10-02）
 
@@ -90,3 +90,9 @@ verify-medium-sort.mjsで同じDockerの既存統合APIと22条件を比較し�
 | medium_count/desc |   464 |   390 |   365 |    390 |
 
 この条件ではmedium_countソートの中央値は約0.39秒、nameソートは約0.19秒だった。medium_countは検索結果全体の集計が必要になるが、この3回だけから原因や一般的な速度差を断定しない。キャッシュ・負荷・通信を制御しておらず、コールドキャッシュ・同時アクセス・production・実描画時間は未検証。端数を含む観測値はresults/medium-sort-verification.jsonに保存した。今回もfacetクエリは実行しない。
+
+## API既定値の変更（2026-10-02、人間指示）
+
+sort=medium_count、order=descをAPI既定値とした。limit=20、offset=0は維持する。Zod・api.json・登録Markdownを揃え、引数なしのDocker応答が明示medium_count/descと完全一致した（検証時点で総数1539、20件、先頭GMO_001001）。明示name/ascとid/desc・offset=20はsearchComponents2の一覧部分と全項目一致した。check-allはVitest204件・Node78件成功。性能は再測定しておらず、上記計測は記載した明示ソート条件の観測として扱う。
+
+他APIの既定値は変更しない。verify-split.mjsは比較元のname/ascをlistへ明示して比較する。productionへの反映と公開OpenAPI登録は引き続き未実施。

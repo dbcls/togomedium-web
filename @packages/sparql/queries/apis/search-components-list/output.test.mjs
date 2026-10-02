@@ -41,6 +41,7 @@ await test("list needs no facet results and equals the combined page projection"
 await test("list execution config has only the page and total queries", async () => {
   const config = JSON.parse(await readFile(new URL("./api.json", import.meta.url), "utf8"));
   assert.deepEqual(Object.keys(config.inputs), ["result", "count"]);
+  assert.equal(selectQueryFile(config.inputs.result, config), "list-components-by-medium-count.rq");
   for (const sort of ["name", "id", "medium_count"]) {
     const supplied = { sort };
     const selected = selectQueryFile(config.inputs.result, config, supplied);
