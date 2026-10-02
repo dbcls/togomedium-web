@@ -12,13 +12,13 @@
 
 以下はコード上で確認した対応であり、公開済みかどうかは未確認。
 
-| 対象 | 公開向けの表に残る記載 | リポジトリ内の対応 |
-| --- | --- | --- |
-| 培地詳細 | `/media/$ID`、`gmdb-medium-by-gmid.html` | `/medium/$gmId`、`gmdb-medium-detail`、API `gmdb_medium_by_gmid` |
-| 成分詳細 | `gmdb-component-by-gmoid.html` | `/component/$gmoId`、`gmdb-component-detail`、API `gmdb_component_by_gmoid` |
-| 生物の詳細 | `/organism/$ID` | `/strain/$strainId`、`gmdb-strain-detail`、API `gmdb_strain_by_strainid` |
-| タクソン詳細 | `gmdb-taxon-by-taxid.html`、API `gmdb_taxonomic_rank_by_taxid` | `/taxon/$taxId`、`gmdb-taxon-detail`、API `gmdb_organism_by_taxid` |
-| Stanza読込み | 配布HTMLファイル名 | Webラッパーは `<stanza-name>.js` を読み込み、custom elementを配置する |
+| 対象         | 公開向けの表に残る記載                                         | リポジトリ内の対応                                                          |
+| ------------ | -------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| 培地詳細     | `/media/$ID`、`gmdb-medium-by-gmid.html`                       | `/medium/$gmId`、`gmdb-medium-detail`、API `gmdb_medium_by_gmid`            |
+| 成分詳細     | `gmdb-component-by-gmoid.html`                                 | `/component/$gmoId`、`gmdb-component-detail`、API `gmdb_component_by_gmoid` |
+| 生物の詳細   | `/organism/$ID`                                                | `/strain/$strainId`、`gmdb-strain-detail`、API `gmdb_strain_by_strainid`    |
+| タクソン詳細 | `gmdb-taxon-by-taxid.html`、API `gmdb_taxonomic_rank_by_taxid` | `/taxon/$taxId`、`gmdb-taxon-detail`、API `gmdb_organism_by_taxid`          |
+| Stanza読込み | 配布HTMLファイル名                                             | Webラッパーは `<stanza-name>.js` を読み込み、custom elementを配置する       |
 
 照合元は `@packages/web/src/routes/`、`@packages/web/src/components/stanzas/`、`@packages/api/src/` の各 `definitions.ts`。この表は差の例を示すもので、画面・APIの全件一覧ではない。
 

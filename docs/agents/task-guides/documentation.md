@@ -27,22 +27,22 @@ description: プロジェクト内ドキュメントを新規作成・整理・�
 
 ### 内容ごとの管理先
 
-| 内容 | 管理先 |
-| --- | --- |
-| プロジェクト概要、最短の起動手順 | `README.md` |
-| 目的別の文書案内 | `docs/index.md` |
-| パッケージの責務、データの流れ、編集元と生成物 | `docs/architecture.md` |
-| 環境構築、起動、ビルド、日常操作 | `docs/development-guide.md` |
-| 変更種別ごとの検証、確認コマンド、完了条件 | `docs/testing-policy.md` |
-| 共通の実装規則と例外 | `docs/development/coding-guidelines.md` |
-| 識別子・ファイル・API・Stanzaの命名 | `docs/naming-convention.md` |
-| 用語とIDの意味・対応 | `docs/domain-terms.md` |
-| 対象環境を明示した画面・Stanza・APIの対応 | `docs/contents.md` |
-| エージェントの制約、作業入口、固有の注意 | ルートと各パッケージの `AGENTS.md` |
-| パッケージ固有の実装・連携手順 | 各パッケージの `docs/` |
-| 作業別の手順、ブラウザ確認と一時成果物 | `docs/agents/task-guides/`、`docs/agent-browser.md` |
-| 個別Stanzaの用途、公開インターフェース、固有の制約 | 各Stanzaの `README.md` |
-| 時点を伴う判断や調査・検証結果 | `docs/decisions/`、`docs/reports/` |
+| 内容                                               | 管理先                                              |
+| -------------------------------------------------- | --------------------------------------------------- |
+| プロジェクト概要、最短の起動手順                   | `README.md`                                         |
+| 目的別の文書案内                                   | `docs/index.md`                                     |
+| パッケージの責務、データの流れ、編集元と生成物     | `docs/architecture.md`                              |
+| 環境構築、起動、ビルド、日常操作                   | `docs/development-guide.md`                         |
+| 変更種別ごとの検証、確認コマンド、完了条件         | `docs/testing-policy.md`                            |
+| 共通の実装規則と例外                               | `docs/development/coding-guidelines.md`             |
+| 識別子・ファイル・API・Stanzaの命名                | `docs/naming-convention.md`                         |
+| 用語とIDの意味・対応                               | `docs/domain-terms.md`                              |
+| 対象環境を明示した画面・Stanza・APIの対応          | `docs/contents.md`                                  |
+| エージェントの制約、作業入口、固有の注意           | ルートと各パッケージの `AGENTS.md`                  |
+| パッケージ固有の実装・連携手順                     | 各パッケージの `docs/`                              |
+| 作業別の手順、ブラウザ確認と一時成果物             | `docs/agents/task-guides/`、`docs/agent-browser.md` |
+| 個別Stanzaの用途、公開インターフェース、固有の制約 | 各Stanzaの `README.md`                              |
+| 時点を伴う判断や調査・検証結果                     | `docs/decisions/`、`docs/reports/`                  |
 
 ### 重複を整理するとき
 
