@@ -18,50 +18,103 @@ export function parseParameters(args) {
   return { values, remaining };
 }
 
-// Strings require complete quoted literals; validated integers also support bare placeholders.
-export function renderParameters(query, definitions = {}, supplied = {}) {
+// Kept self-contained so the exporter can embed the same validation and serialization.
+export const prepareParameters = (definitions = {}, supplied = {}) => {
+  const reserved = new Set(["prepared", "__proto__", "prototype", "constructor"]);
+  const validName = (name) =>
+    typeof name === "string" && /^[A-Za-z_][A-Za-z0-9_]*$/.test(name) && !reserved.has(name);
+  const values = {};
+  const literals = {};
+  const lists = {};
+  const integers = {};
+  const aliases = new Set();
   for (const name of Object.keys(supplied)) {
     if (!Object.hasOwn(definitions, name)) throw new Error(`Unknown parameter: ${name}`);
   }
-  const values = {};
   for (const [name, definition] of Object.entries(definitions)) {
+    if (!validName(name)) throw new Error(`Unsupported parameter name: ${name}`);
+    const type = definition.type ?? "string";
+    if (!["string", "integer", "string-list"].includes(type)) {
+      throw new Error(`Unsupported parameter type: ${name}`);
+    }
+    if (definition.placeholder !== undefined && type !== "string-list") {
+      throw new Error(`placeholder requires string-list type: ${name}`);
+    }
     const value = Object.hasOwn(supplied, name) ? supplied[name] : definition.default;
     if (
       typeof value !== "string" ||
-      typeof definition.pattern !== "string" ||
-      !new RegExp(definition.pattern).test(value)
+      (definition.pattern === undefined && type !== "string-list") ||
+      (definition.pattern !== undefined &&
+        (typeof definition.pattern !== "string" || !new RegExp(definition.pattern).test(value)))
     ) {
       throw new Error(`Invalid parameter: ${name}`);
     }
-    if (
-      definition.type !== undefined &&
-      definition.type !== "string" &&
-      definition.type !== "integer"
-    ) {
-      throw new Error(`Unsupported parameter type: ${name}`);
-    }
-    if (
-      definition.type === "integer" &&
-      (!Number.isSafeInteger(Number(value)) || Number(value) < 0 || String(Number(value)) !== value)
-    ) {
-      throw new Error(`Invalid integer parameter: ${name}`);
-    }
     values[name] = value;
+    if (type === "string-list") {
+      const placeholder = definition.placeholder ?? name;
+      if (
+        !validName(placeholder) ||
+        aliases.has(placeholder) ||
+        (placeholder !== name && Object.hasOwn(definitions, placeholder))
+      ) {
+        throw new Error(`Invalid or conflicting placeholder: ${placeholder}`);
+      }
+      aliases.add(placeholder);
+      // JSON escapes used here are also valid in SPARQL double-quoted string literals.
+      lists[placeholder] = value
+        .split(",")
+        .map((item) => JSON.stringify(item.trim()))
+        .join(" ");
+    } else {
+      literals[name] = JSON.stringify(value);
+      if (type === "integer") {
+        if (
+          !Number.isSafeInteger(Number(value)) ||
+          Number(value) < 0 ||
+          String(Number(value)) !== value
+        ) {
+          throw new Error(`Invalid integer parameter: ${name}`);
+        }
+        integers[name] = value;
+      }
+    }
   }
-  // The whole literal is a placeholder, preventing raw SPARQL interpolation.
-  let rendered = query.replace(/"\{\{([A-Za-z_][A-Za-z0-9_]*)\}\}"/g, (_, name) => {
-    if (!Object.hasOwn(values, name)) throw new Error(`Undefined parameter: ${name}`);
-    return JSON.stringify(values[name]);
-  });
-  rendered = rendered.replace(/\{\{([A-Za-z_][A-Za-z0-9_]*)\}\}/g, (placeholder, name) => {
-    if (definitions[name]?.type !== "integer") return placeholder;
-    return values[name];
-  });
-  if (/\{\{[^}]+\}\}/.test(rendered))
+  return { values, literals, lists, integers };
+};
+
+// Replace tokens in the template once; never interpret braces in supplied values as tokens.
+export const mapQueryParameters = (query, prepared, replace) => {
+  const token = /"\{\{([A-Za-z_][A-Za-z0-9_]*)\}\}"|\{\{([^{}]*)\}\}/g;
+  return query.replace(token, (match, quoted, bare, offset) => {
+    if (quoted !== undefined) {
+      if (!Object.hasOwn(prepared.literals, quoted)) {
+        throw new Error(`Undefined scalar parameter: ${quoted}`);
+      }
+      return replace("literals", quoted);
+    }
+    if (Object.hasOwn(prepared.lists, bare)) {
+      const before = query.slice(0, offset);
+      const after = query.slice(offset + match.length);
+      if (
+        !/\bVALUES\s+[?$][A-Za-z_][A-Za-z0-9_]*\s*\{\s*$/i.test(before) ||
+        !/^\s*\}/.test(after)
+      ) {
+        throw new Error(
+          `List placeholder must occupy a complete single-variable VALUES body: ${bare}`,
+        );
+      }
+      return replace("lists", bare);
+    }
+    if (Object.hasOwn(prepared.integers, bare)) return replace("integers", bare);
     throw new Error(
-      "String parameters must occupy a complete double-quoted literal; bare parameters require integer type.",
+      `Undefined or unsupported placeholder: ${bare}. String parameters must occupy a complete double-quoted literal; bare parameters require integer type or a string-list VALUES body.`,
     );
-  return rendered;
+  });
+};
+
+export function renderParameters(query, definitions = {}, supplied = {}) {
+  const prepared = prepareParameters(definitions, supplied);
+  return mapQueryParameters(query, prepared, (kind, name) => prepared[kind][name]);
 }
 
 export const selectQueryFile = (file, config = {}, supplied = {}) => {

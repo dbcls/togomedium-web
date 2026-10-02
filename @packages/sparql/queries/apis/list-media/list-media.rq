@@ -1,0 +1,53 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+PREFIX olo:     <http://purl.org/ontology/olo/core#>
+PREFIX tax: <http://ddbj.nig.ac.jp/ontologies/taxonomy/>
+
+SELECT DISTINCT ?media_id ?original_media_id ?label ?source_uri ?strain_count ?species_count ?ph
+FROM <http://togomedium.org/media>
+FROM <http://togomedium.org/strain>
+FROM NAMED <http://togomedium.org/taxonomy/filtered_has_strain>
+WHERE {
+  ?medium_uri a gmo:GMO_000001 ;
+    dcterms:identifier ?media_id ;
+    rdfs:label ?media_name ;
+    olo:length ?paragraph_length .
+  FILTER (?paragraph_length > 0)
+  OPTIONAL {
+    SELECT ?medium_uri (COUNT(DISTINCT ?strain) AS ?registered_strain_count)
+           (COUNT(DISTINCT ?species) AS ?registered_species_count)
+    WHERE {
+      ?medium_uri gmo:GMO_000114/gmo:strain_id ?strain .
+      OPTIONAL {
+        ?strain gmo:taxon ?taxon .
+        GRAPH <http://togomedium.org/taxonomy/filtered_has_strain> {
+          ?taxon rdfs:subClassOf* ?species .
+          ?species tax:rank tax:Species .
+        }
+      }
+    }
+    GROUP BY ?medium_uri
+  }
+  BIND(COALESCE(?registered_strain_count, 0) AS ?strain_count)
+  BIND(COALESCE(?registered_species_count, 0) AS ?species_count)
+  OPTIONAL { ?medium_uri gmo:ph ?ph . }
+  OPTIONAL {
+    ?medium_uri skos:altLabel ?original_media_id .
+  }
+  OPTIONAL {
+    ?medium_uri gmo:GMO_000108 ?source_uri .
+  }
+  BIND (if(STR(?media_name) = "", "(Unnamed medium)", ?media_name) AS ?label)
+}
+ORDER BY
+  ASC(IF("{{sort}}" = "strain_count" && "{{order}}" = "asc", ?strain_count, ""))
+  DESC(IF("{{sort}}" = "strain_count" && "{{order}}" = "desc", ?strain_count, ""))
+  ASC(IF("{{sort}}" = "strain_count", ?media_id, ""))
+  ASC(IF("{{sort}}" = "strain_count", COALESCE(?original_media_id, ""), ""))
+  ASC(IF("{{sort}}" = "strain_count", ?label, ""))
+  ASC(IF("{{sort}}" = "strain_count", COALESCE(?source_uri, ""), ""))
+  ASC(IF("{{sort}}" = "strain_count", COALESCE(?ph, ""), ""))
+LIMIT {{limit}}
+OFFSET {{offset}}

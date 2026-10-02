@@ -99,3 +99,68 @@ await test("renders validated integers as bare tokens or string-valued metadata"
     /Unsupported/,
   );
 });
+
+await test("string lists preserve comma splitting, trimming, empty elements and duplicates", () => {
+  const defs = {
+    gm_ids: { type: "string-list", default: "M2794,M941", placeholder: "media_values" },
+  };
+  const query = "SELECT ?id WHERE { VALUES ?id { {{media_values}} } }";
+  const cases = [
+    [undefined, '"M2794" "M941"'],
+    [" M2794 , M941 ", '"M2794" "M941"'],
+    ["", '""'],
+    [",", '"" ""'],
+    ["M2794,", '"M2794" ""'],
+    ["M2794,M2794", '"M2794" "M2794"'],
+    ['a"b,c\\d,e\nf,{{unknown}},<tag>', '"a\\"b" "c\\\\d" "e\\nf" "{{unknown}}" "<tag>"'],
+  ];
+  for (const [value, expected] of cases) {
+    assert.equal(
+      renderParameters(query, defs, value === undefined ? {} : { gm_ids: value }),
+      `SELECT ?id WHERE { VALUES ?id { ${expected} } }`,
+    );
+  }
+  assert.equal(
+    renderParameters("VALUES ?id { {{ids}} }", { ids: { type: "string-list", default: "M1" } }),
+    'VALUES ?id { "M1" }',
+  );
+});
+
+await test("lists reject conflicting bindings and non-VALUES substitutions", () => {
+  const list = { type: "string-list", default: "M1", placeholder: "media_values" };
+  for (const placeholder of [
+    "prepared",
+    "__proto__",
+    "constructor",
+    "bad.name",
+    ["media_values"],
+  ]) {
+    assert.throws(() => renderParameters("", { gm_ids: { ...list, placeholder } }), /placeholder/);
+  }
+  assert.throws(
+    () => renderParameters("", { gm_ids: list, media_values: { default: "", pattern: ".*" } }),
+    /conflicting/,
+  );
+  assert.throws(() => renderParameters("", { gm_ids: list, other: list }), /conflicting/);
+  assert.throws(
+    () => renderParameters("", { id: { default: "M1", pattern: ".*", placeholder: "x" } }),
+    /string-list/,
+  );
+  for (const query of [
+    '"{{media_values}}"',
+    '"prefix{{media_values}}"',
+    "<{{media_values}}>",
+    "{{media_values}}",
+    "VALUES (?x ?y) { {{media_values}} }",
+    'VALUES ?x { "fixed" {{media_values}} }',
+    "VALUES ?x { {{missing}} }",
+  ]) {
+    assert.throws(() => renderParameters(query, { gm_ids: list }), /Undefined|VALUES/);
+  }
+  assert.throws(() => renderParameters("", { gm_ids: list }, { gm_ids: ["M1"] }), /Invalid/);
+  assert.throws(() => renderParameters("", { gm_ids: list }, { media_values: "M1" }), /Unknown/);
+  assert.throws(
+    () => renderParameters("", { gm_ids: { ...list, pattern: "^M[0-9]+$" } }, { gm_ids: "M1,M2" }),
+    /Invalid/,
+  );
+});

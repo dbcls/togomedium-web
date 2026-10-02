@@ -2,7 +2,12 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join, relative } from "node:path";
 import { pathToFileURL } from "node:url";
 import { loadApi, root, sparqlistSource } from "./build-output.mjs";
-import { renderParameters, selectQueryFile } from "./parameters.mjs";
+import {
+  renderParameters,
+  selectQueryFile,
+  prepareParameters,
+  mapQueryParameters,
+} from "./parameters.mjs";
 
 const contextKey = "prepared";
 const endpoint = "{{SPARQLIST_TOGOMEDIUM_ENDPOINT}}";
@@ -21,19 +26,13 @@ const codeBlock = (language, source) => {
 };
 
 // Embedded in the exported Markdown; dependencies are supplied as standalone functions.
-const prepareContext = (context, config, render, select) => {
+const prepareContext = (context, config, prepare, select) => {
   const supplied = Object.fromEntries(
     Object.keys(config.parameters ?? {})
       .filter((name) => Object.hasOwn(context, name))
       .map((name) => [name, context[name]]),
   );
-  render("", config.parameters, supplied);
-  const values = Object.fromEntries(
-    Object.entries(config.parameters ?? {}).map(([name, definition]) => [
-      name,
-      Object.hasOwn(supplied, name) ? supplied[name] : definition.default,
-    ]),
-  );
+  const prepared = prepare(config.parameters, supplied);
   const variants = Object.fromEntries(
     Object.entries(config.inputs).map(([name, file]) => {
       const selected = select(file, config, supplied);
@@ -48,28 +47,15 @@ const prepareContext = (context, config, render, select) => {
       ];
     }),
   );
-  return {
-    values,
-    literals: Object.fromEntries(
-      Object.entries(values).map(([name, value]) => [name, JSON.stringify(value)]),
-    ),
-    variants,
-  };
+  return { ...prepared, variants };
 };
 
-const templateQuery = (query, parameters) => {
-  // Check the same placeholder restrictions used by the local CLI before emitting a template.
-  renderParameters(query, parameters);
-  return query
-    .replace(
-      /"\{\{([A-Za-z_][A-Za-z0-9_]*)\}\}"/g,
-      (_, name) => `{{{${contextKey}.literals.${name}}}}`,
-    )
-    .replace(
-      /(?<!\{)\{\{([A-Za-z_][A-Za-z0-9_]*)\}\}(?!\})/g,
-      (_, name) => `{{{${contextKey}.values.${name}}}}`,
-    );
-};
+const templateQuery = (query, parameters) =>
+  mapQueryParameters(
+    query,
+    prepareParameters(parameters),
+    (kind, name) => `{{{${contextKey}.${kind === "integers" ? "values" : kind}.${name}}}}`,
+  );
 
 export const generateMarkdown = (config, sources, json) => {
   const title = markdownText(config.title, "title");
@@ -106,7 +92,7 @@ export const generateMarkdown = (config, sources, json) => {
     parameters: definitions,
     queryVariants: config.queryVariants,
   };
-  const prepareSource = `(context) => {\n  const render = ${renderParameters.toString()};\n  const select = ${selectQueryFile.toString()};\n  return (${prepareContext.toString()})(context, ${JSON.stringify(runtimeConfig, null, 2)}, render, select);\n}`;
+  const prepareSource = `(context) => {\n  const prepare = ${prepareParameters.toString()};\n  const select = ${selectQueryFile.toString()};\n  return (${prepareContext.toString()})(context, ${JSON.stringify(runtimeConfig, null, 2)}, prepare, select);\n}`;
   const blocks = [`# ${title}`, description];
   if (parameterLines.length) blocks.push("## Parameters", parameterLines.join("\n"));
   blocks.push(

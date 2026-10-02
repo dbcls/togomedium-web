@@ -151,3 +151,43 @@ await test("export CLI requires one folder and supports help without fetching", 
   assert.equal(help.status, 0);
   assert.match(help.stdout, /Usage: pnpm export/);
 });
+
+await test("exported string-list preparation matches local rendering and escapes literal content", async () => {
+  const { renderParameters } = await import("./parameters.mjs");
+  const config = {
+    title: "List test",
+    description: "List test",
+    inputs: { result: "result.rq" },
+    parameters: {
+      gm_ids: {
+        type: "string-list",
+        placeholder: "media_values",
+        default: "M2794,M941",
+        description: "Comma-separated medium IDs.",
+      },
+    },
+  };
+  const query = "SELECT ?id WHERE { VALUES ?id { {{media_values}} } }";
+  const markdown = generateMarkdown(config, { "result.rq": query }, json);
+  const prepare = vm.runInNewContext(blocks(markdown, "javascript")[0]);
+  const [template] = blocks(markdown, "sparql");
+  assert.match(template, /\{\{\{prepared.lists.media_values\}\}\}/);
+  for (const gm_ids of [
+    undefined,
+    "M1,M2",
+    " M1 , M2 ",
+    "",
+    ",",
+    "M1,M1,",
+    'a" } UNION { ?s ?p ?o } #,x\\y,z\nq,{{other}}',
+  ]) {
+    const supplied = gm_ids === undefined ? {} : { gm_ids };
+    const prepared = prepare(supplied);
+    // This template has one raw Handlebars substitution; its value is inserted once.
+    const expanded = template
+      .replace("{{{prepared.lists.media_values}}}", () => prepared.lists.media_values)
+      .trim();
+    assert.equal(expanded, renderParameters(query, config.parameters, supplied));
+  }
+  assert.throws(() => prepare({ gm_ids: 10 }), /Invalid/);
+});

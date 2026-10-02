@@ -1,0 +1,22 @@
+{
+  "title": "List growth media (for pagination)",
+  "description": "Show a list of growth media in TogoMedium.",
+  "inputs": {
+    "count": "count.rq",
+    "result": "result.rq"
+  },
+  "parameters": {
+    "limit": {
+      "type": "integer",
+      "default": "20",
+      "pattern": "^(?:0|[1-9][0-9]*)$",
+      "description": "limit"
+    },
+    "offset": {
+      "type": "integer",
+      "default": "0",
+      "pattern": "^(?:0|[1-9][0-9]*)$",
+      "description": "offset"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "title": "List growth media (for pagination)",
+  "description": "List growth media with registered strain and species counts and pH as recorded in TogoMedium.",
+  "inputs": {
+    "count": "count-media.rq",
+    "result": "list-media.rq"
+  },
+  "parameters": {
+    "sort": {
+      "default": "",
+      "pattern": "^(?:strain_count)?$",
+      "description": "Use strain_count to sort by the number of associated strains. Leave empty to preserve unspecified ordering.",
+      "examples": ["strain_count"]
+    },
+    "order": {
+      "default": "asc",
+      "pattern": "^(?:asc|desc)$",
+      "description": "Sort direction: asc or desc. Applies when sort is strain_count.",
+      "examples": ["asc", "desc"]
+    },
+    "limit": {
+      "type": "integer",
+      "default": "20",
+      "pattern": "^(?:0|[1-9][0-9]*)$",
+      "description": "Maximum number of media rows to return."
+    },
+    "offset": {
+      "type": "integer",
+      "default": "0",
+      "pattern": "^(?:0|[1-9][0-9]*)$",
+      "description": "Number of media rows to skip."
+    }
+  }
+}

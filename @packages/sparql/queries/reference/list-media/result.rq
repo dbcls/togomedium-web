@@ -1,0 +1,24 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+PREFIX olo:     <http://purl.org/ontology/olo/core#>
+
+SELECT DISTINCT ?media_id ?original_media_id ?label ?source_uri
+FROM <http://togomedium.org/media>
+WHERE {
+  ?medium_uri a gmo:GMO_000001 ;
+    dcterms:identifier ?media_id ;
+    rdfs:label ?media_name ;
+    olo:length ?paragraph_length .
+  FILTER (?paragraph_length > 0)
+  OPTIONAL {
+    ?medium_uri skos:altLabel ?original_media_id .
+  }
+  OPTIONAL {
+    ?medium_uri gmo:GMO_000108 ?source_uri .
+  }
+  BIND (if(STR(?media_name) = "", "(Unnamed medium)", ?media_name) AS ?label)
+}
+LIMIT {{limit}}
+OFFSET {{offset}}
