@@ -1,6 +1,6 @@
 {
   "title": "Search component list",
-  "description": "Search and paginate components before counting direct medium usages for the selected page. Return total count without facet aggregation.",
+  "description": "Search components without facet aggregation. Name/ID sorting counts medium usages after selecting the page; medium_count sorting counts all matching components before sorting and pagination.",
   "validation": "validate.mjs",
   "inputs": {
     "result": "list-components-with-properties.rq",
@@ -27,9 +27,9 @@
     },
     "sort": {
       "default": "name",
-      "pattern": "^(?:name|id)$",
-      "description": "Sort by preferred name or GMO ID. Sorting by medium_count is not supported.",
-      "examples": ["name", "id"]
+      "pattern": "^(?:name|medium_count|id)$",
+      "description": "Sort by preferred name, GMO ID, or direct medium usage count. medium_count requires aggregation over all matching components before pagination.",
+      "examples": ["name", "id", "medium_count"]
     },
     "order": {
       "default": "asc",
@@ -50,6 +50,14 @@
       "pattern": "^(?:0|[1-9][0-9]*)$",
       "description": "Number of components to skip. Use a non-negative safe integer.",
       "examples": ["0", "20"]
+    }
+  },
+  "queryVariants": {
+    "list-components-with-properties.rq": {
+      "parameter": "sort",
+      "cases": {
+        "medium_count": "list-components-by-medium-count.rq"
+      }
     }
   }
 }

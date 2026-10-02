@@ -5,14 +5,18 @@
 - 採用状態: 一覧を先に取得するため、検索とfacet集計を分離したAPI。
 - 外部名: `gmdb_search_components_list`、内部名: `searchComponentsList`。
 - ローカルDockerへ登録・検証。productionへのpush・deployと公開OpenAPI登録は未実施。
-- Zod正本: `@packages/api/src/searchComponentsList/definitions.ts`。searchComponents2の入力と応答の一覧部分を再利用する。
+- Zod正本: `@packages/api/src/searchComponentsList/definitions.ts`。searchComponents2の入力既定値と応答の一覧部分を再利用し、sortだけ既存統合APIと同じ3候補へ拡張する。
 - 比較元の`gmdb_search_components`と`gmdb_search_components2`は維持する。
 
 ## 仕様・構成
 
 名前・下位Role込みのRole・直接付与PropertyをAND条件で検索し、標準名またはGMO IDでページを確定してから、ページ内成分だけの直接利用培地数を集計する。検索・名前選定・別名・matched_names・直接培地数の意味は[search-components2](../search-components2/README.md)と同じ。
 
+人間の追加依頼によりmedium_countの昇順・降順も許可する。このソートだけは、検索結果全体の直接利用培地数を集計してからソート・ページ確定する。既定name/asc/20/0は維持する。name/idのページ後集計とは処理順が異なる。
+
 api.jsonは一覧クエリと総数クエリの2入力だけを持ち、facetクエリを実行しない。list-components-with-properties.rqとcount-components.rqは比較元と同一。Outputは一覧とページ情報だけを返し、facet結果を引数に必要としない。SPARQListで単独実行できる関数に保ち、Zod検証はローカルvalidate.mjsへ分離する。
+
+queryVariantsでsort=medium_countだけlist-components-by-medium-count.rqへ切り替える。このクエリは[既存統合API](../search-components/README.md)と本文が完全一致し、0利用成分もOPTIONALとCOUNTで保持する。name/idのクエリ本文とOutputは変更していない。
 
 ## 引数・応答
 
@@ -21,7 +25,7 @@ api.jsonは一覧クエリと総数クエリの2入力だけを持ち、facetク
 | name        | 空文字列 | 全言語の標準名・別名への大小文字を区別しない部分一致 |
 | role_id     | 空文字列 | 選択Role自身と下位Role。空なら未指定                 |
 | property_id | 空文字列 | 直接付与Property。空なら未指定                       |
-| sort        | name     | name / id。medium_countは拒否                        |
+| sort        | name     | name / id / medium_count                             |
 | order       | asc      | asc / desc                                           |
 | limit       | 20       | 非負の安全な整数文字列。20/50/100等を指定可能        |
 | offset      | 0        | 先頭から省略する成分数                               |
@@ -35,9 +39,11 @@ api.jsonの定義に従い、文字列リテラルと数値プレースホルダ
 ```sh
 mise exec -- pnpm api queries/apis/search-components-list
 mise exec -- pnpm api queries/apis/search-components-list --param role_id=GMO_000042 --param sort=id --param limit=50
+mise exec -- pnpm api queries/apis/search-components-list --param sort=medium_count --param order=desc
 mise exec -- pnpm api queries/apis/search-components-list --saved
 mise exec -- pnpm export queries/apis/search-components-list
 mise exec -- node queries/apis/search-components-list/verify-split.mjs
+mise exec -- node queries/apis/search-components-list/verify-medium-sort.mjs
 ```
 
 生の結果・output.json・output.sparqlist.jsはresults/、生成Markdownはdist/sparqlist.md。引数別には分離せず最後の実行で更新する。--savedは条件・鮮度を確認しない再整形で、--paramと併用できない。失敗時に旧結果が残るため終了結果を確認する。
@@ -67,3 +73,20 @@ name/idの全方向・offset=20・20/50/100件・limit=0・範囲外ページ、
 一覧データは中央値約0.28秒で利用可能になった。一方、条件連動件数まで揃う時刻は約3.65秒で、一体応答約3.42秒より早くはなっていない。分離の効果は一覧データを先に利用できることにあり、facet集計そのものの改善ではない。実際のカード描画時刻はApp未実装のため未測定。
 
 個々の観測値と端数を含む時間はresults/split-benchmark.jsonに保存する。事前照合後の3回だけの観測で、キャッシュ・負荷・通信の揺れを制御していないため、すべての条件やproductionでの性能を保証しない。
+
+## medium_countソート追加の検証（2026-10-02）
+
+verify-medium-sort.mjsで同じDockerの既存統合APIと22条件を比較し、contents/total/limit/offsetの全項目が一致した。medium_count両方向、20/50/100件、offset=20、範囲外ページ、limit=0、日本語標準名、名前・Role・Propertyの併用、未知Roleを含む。name/id両方向のoffset=20も非回帰を確認した。観測した0利用の行は延べ190行、同じ利用数でID昇順を確認した隣接組は延べ198組で、いずれも異なる成分の総数とは区別する。
+
+さらに同じDockerでname=water・role_id=GMO_000044・property_id=GMO_000040をmedium_count両方向へ指定し、9成分を返す非空の複合条件でも既存統合APIと全項目一致した（合計24条件）。応答はresults/complex-{asc,desc}-{list,combined}.jsonへ保存した。通常CLIのmedium_count/ascと同じ複合条件も実SPARQL取得・Zod検証に成功。check-allはVitest204件・Node78件成功。既存統合API・searchComponents2・facetsは変更していない。
+
+### ソート別のローカル応答時間
+
+22条件の照合後、同じDocker・接続先・名前/Role/Property未指定・limit=20・offset=0で、name/asc→medium_count/descの順に各3回計測した。単位はms、HTTP応答JSONの受信完了まで。異なる並べ替え条件の比較であり、同じページ内容の性能比較ではない。
+
+| ソート            | 1回目 | 2回目 | 3回目 | 中央値 |
+| ----------------- | ----: | ----: | ----: | -----: |
+| name/asc          |   398 |   191 |   163 |    191 |
+| medium_count/desc |   464 |   390 |   365 |    390 |
+
+この条件ではmedium_countソートの中央値は約0.39秒、nameソートは約0.19秒だった。medium_countは検索結果全体の集計が必要になるが、この3回だけから原因や一般的な速度差を断定しない。キャッシュ・負荷・通信を制御しておらず、コールドキャッシュ・同時アクセス・production・実描画時間は未検証。端数を含む観測値はresults/medium-sort-verification.jsonに保存した。今回もfacetクエリは実行しない。

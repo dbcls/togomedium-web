@@ -14,7 +14,12 @@ it("separates paging and sorting from facet input and response", () => {
     limit: "20",
     offset: "0",
   });
-  expect(searchComponentsListParamsSchema.safeParse({ sort: "medium_count" }).success).toBe(false);
+  for (const order of ["asc", "desc"])
+    expect(searchComponentsListParamsSchema.parse({ sort: "medium_count", order })).toMatchObject({
+      sort: "medium_count",
+      order,
+    });
+  expect(searchComponentsListParamsSchema.safeParse({ sort: "invalid" }).success).toBe(false);
   const page = { contents: [], total: "0", limit: "20", offset: "0" };
   expect(searchComponentsListResponseSchema.parse(page)).toEqual(page);
   expect(
