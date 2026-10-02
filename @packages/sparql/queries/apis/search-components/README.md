@@ -3,7 +3,7 @@
 ## 採用・公開状態
 
 - 採用状態: 採用予定。BIO-324で旧仮称`listComponents2`から`searchComponents`へ整理した。
-- 公開状態: ローカルDockerのSPARQListへ登録・検証済み。productionへの反映は未実施。正式API名は`search_components`。
+- 公開状態: ローカルDockerのSPARQListへ登録・検証済み。productionへの反映は未実施。正式API名は`gmdb_search_components`。
 - Zod連携: `@packages/api/src/searchComponents/definitions.ts`が入出力契約の正本。OpenAPI用定義は作成済みだが、公開確認前のため`openAPI.ts`へ未登録。
 - 移植元: `togomedium-sparql-playground`の`0c883d2`。既存公開APIの比較元`queries/reference/list-components/`は維持する。
 
@@ -55,9 +55,9 @@ mise exec -- pnpm export queries/apis/search-components
 
 生の結果と`output.sparqlist.js`も`results/`に保存する。引数ごとに分離せず、最後の実行で上書きする。`--saved`は最後に保存した結果の再整形で、条件・鮮度を確認せず、`--param`と併用できない。失敗時は前回のファイルが残るため、成功した終了結果を確認する。
 
-公開用Markdownは`dist/sparqlist.md`。生成物はGit管理外で、編集元はapi.json・.rq・output.mjs。`/Volumes/DATA/repositories/togomedium-sparqlist/repository/search_components.md`へ登録し、既存Dockerの`http://localhost:3000/sparqlist/api/search_components`で動作を確認した。既存コンテナのEndpointは`https://dev.togomedium.org/sparql`であり、本番SPARQLを使うローカルCLIとの応答一致も確認した。
+公開用Markdownは`dist/sparqlist.md`。生成物はGit管理外で、編集元はapi.json・.rq・output.mjs。`/Volumes/DATA/repositories/togomedium-sparqlist/repository/gmdb_search_components.md`へ登録し、既存Dockerの`http://localhost:3000/sparqlist/api/gmdb_search_components`で動作を確認した。既存コンテナのEndpointは`https://dev.togomedium.org/sparql`であり、本番SPARQLを使うローカルCLIとの応答一致も確認した。
 
-productionへのpush・deployは行っていない。公開OpenAPIのserversは`https://togomedium.org/sparqlist/api`を指すため、ローカル登録のみでは`openAPI.ts`へ登録しない。productionへの反映・確認とOpenAPI登録は承認後に別途行う。GUIを使う場合のAPI名は`search_components`で、Endpointの`SPARQLIST_TOGOMEDIUM_ENDPOINT`を確認する。
+productionへのpush・deployは行っていない。公開OpenAPIのserversは`https://togomedium.org/sparqlist/api`を指すため、ローカル登録のみでは`openAPI.ts`へ登録しない。productionへの反映・確認とOpenAPI登録は承認後に別途行う。GUIを使う場合のAPI名は`gmdb_search_components`で、Endpointの`SPARQLIST_TOGOMEDIUM_ENDPOINT`を確認する。
 
 ## 検証（2026-10-02）
 
@@ -80,8 +80,12 @@ mise exec -- pnpm query queries/apis/search-components/verification-associations
 mise exec -- pnpm query queries/apis/search-components/verification-media.rq
 mise exec -- node queries/apis/search-components/verify.mjs
 # 登録済みローカルSPARQListの実応答も同じ26条件で比較する
-mise exec -- node queries/apis/search-components/verify.mjs http://localhost:3000/sparqlist/api/search_components
+mise exec -- node queries/apis/search-components/verify.mjs http://localhost:3000/sparqlist/api/gmdb_search_components
 ```
+
+## API名称修正時の確認（2026-10-02）
+
+2026-10-02、外部API名を他のAPIに合わせて`gmdb_search_components`へ修正した。内部名`searchComponents`と検索・集計ロジックは維持した。新しいローカルエンドポイントを通常・日本語検索・分類併用・0件・50/100件の6条件で再照合し、不正4条件の拒否も確認した。check-all（Vitest201件・Node70件）と生成Markdown一致を確認した。
 
 ## 旧仮称APIの検証履歴
 

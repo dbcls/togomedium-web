@@ -147,6 +147,8 @@ APIパスを表す定数は `PATH_...` の `UPPER_SNAKE_CASE` にする。
 
 値としてのAPIパスは、外部API名に合わせて `snake_case` を維持する。
 
+新規の外部API名には `gmdb_` 接頭辞を必須とする。既存公開名は互換性を維持し、この規則だけを理由に変更しない。TypeScript内部の識別子は既存の `camelCase` 規約に従う。
+
 - 例: `"/gmdb_list_media_by_gmids"`
 - 例: `"/gmdb_taxonomy_children"`
 

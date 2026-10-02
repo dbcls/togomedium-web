@@ -1,7 +1,7 @@
 import type { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
-export const PATH_SEARCH_COMPONENTS = "/search_components";
+export const PATH_SEARCH_COMPONENTS = "/gmdb_search_components";
 
 const gmoIdSchema = z.string().regex(/^GMO_[0-9]{6}$/);
 const nonnegativeIntegerStringSchema = z

@@ -63,6 +63,7 @@ describe("component search contract", () => {
   });
 
   it("generates a query-parameter OpenAPI definition without publishing it", () => {
+    expect(PATH_SEARCH_COMPONENTS).toBe("/gmdb_search_components");
     expect(getDocs().paths?.[PATH_SEARCH_COMPONENTS]).toBeUndefined();
     const registry = new OpenAPIRegistry();
     registry.registerPath(searchComponentsDoc);
