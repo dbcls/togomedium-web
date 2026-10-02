@@ -6,6 +6,8 @@ import {
   searchComponentsResponseSchema,
 } from "%api/searchComponents/definitions";
 import { searchComponents2ParamsSchema } from "%api/searchComponents2/definitions";
+import { searchComponentsFacetsParamsSchema } from "%api/searchComponentsFacets/definitions";
+import { searchComponentsListParamsSchema } from "%api/searchComponentsList/definitions";
 import { json } from "../queries/apis/search-components/output.mjs";
 import { validate } from "../queries/apis/search-components/validate.mjs";
 import { renderParameters } from "./parameters.mjs";
@@ -122,5 +124,42 @@ await test("page-local component search CLI agrees with its restricted Zod contr
       accepted = false;
     }
     assert.equal(searchComponents2ParamsSchema.safeParse(supplied).success, accepted);
+  }
+});
+
+await test("split search CLI definitions agree with their separate input contracts", async () => {
+  for (const [folder, schema] of Object.entries({
+    "search-components-list": searchComponentsListParamsSchema,
+    "search-components-facets": searchComponentsFacetsParamsSchema,
+  })) {
+    const { parameters } = JSON.parse(
+      await readFile(new URL(`../queries/apis/${folder}/api.json`, import.meta.url), "utf8"),
+    );
+    assert.deepEqual(
+      schema.parse({}),
+      Object.fromEntries(Object.entries(parameters).map(([key, value]) => [key, value.default])),
+    );
+    for (const supplied of [
+      {},
+      { name: "リン酸鉄(III)" },
+      { sort: "name" },
+      { limit: "20" },
+      { offset: "0" },
+      { order: "asc" },
+      { sort: "medium_count" },
+      { role_id: "invalid" },
+    ]) {
+      let accepted = true;
+      try {
+        renderParameters("ASK {}", parameters, supplied);
+      } catch {
+        accepted = false;
+      }
+      assert.equal(
+        schema.safeParse(supplied).success,
+        accepted,
+        `${folder} ${JSON.stringify(supplied)}`,
+      );
+    }
   }
 });

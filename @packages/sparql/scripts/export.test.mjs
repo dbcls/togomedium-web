@@ -113,6 +113,8 @@ await test("all adopted API definitions export without saved results or network 
   for (const folder of [
     "search-components",
     "search-components2",
+    "search-components-list",
+    "search-components-facets",
     "list-component-roles",
     "count-components-by-role",
     "count-components-by-property",
