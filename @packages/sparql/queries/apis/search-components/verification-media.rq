@@ -1,0 +1,16 @@
+# Independent direct recipe usages; deduplicate medium URIs in the verifier.
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX olo: <http://purl.org/ontology/olo/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+SELECT DISTINCT ?gmo_id ?medium
+FROM <http://togomedium.org/gmo>
+FROM NAMED <http://togomedium.org/media>
+WHERE {
+  ?component dcterms:identifier ?gmo_id .
+  GRAPH <http://togomedium.org/media> {
+    ?medium olo:slot/olo:item ?table .
+    ?table rdf:type gmo:Component ; gmo:has_component ?entry .
+    ?entry gmo:gmo_id ?component .
+  }
+}

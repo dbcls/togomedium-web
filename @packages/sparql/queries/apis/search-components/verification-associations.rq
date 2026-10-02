@@ -1,0 +1,18 @@
+# Independent unaggregated Role ancestors and direct Property associations.
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+SELECT DISTINCT ?gmo_id ?role_id ?property_id
+FROM <http://togomedium.org/gmo>
+WHERE {
+  ?component dcterms:identifier ?gmo_id .
+  {
+    ?component gmo:GMO_000112 ?assigned_role .
+    ?assigned_role rdfs:subClassOf* ?role .
+    ?role rdfs:subClassOf+ gmo:GMO_000037 ; dcterms:identifier ?role_id .
+  }
+  UNION {
+    ?component gmo:GMO_000113 ?property .
+    ?property rdfs:subClassOf gmo:GMO_000039 ; dcterms:identifier ?property_id .
+  }
+}
