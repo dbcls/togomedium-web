@@ -2,14 +2,14 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
-  listComponents2ParamsSchema,
-  listComponents2ResponseSchema,
-} from "%api/listComponents2/definitions";
-import { json } from "../queries/apis/list-components2/output.mjs";
-import { validate } from "../queries/apis/list-components2/validate.mjs";
+  searchComponentsParamsSchema,
+  searchComponentsResponseSchema,
+} from "%api/searchComponents/definitions";
+import { json } from "../queries/apis/search-components/output.mjs";
+import { validate } from "../queries/apis/search-components/validate.mjs";
 import { renderParameters } from "./parameters.mjs";
 
-await test("list-components2 output satisfies the shared Zod contract without changing JSON", () => {
+await test("search-components output satisfies the shared Zod contract without changing JSON", () => {
   const value = (value) => ({ value });
   const count = {
     results: { bindings: [{ total: value("1"), limit: value("20"), offset: value("0") }] },
@@ -31,27 +31,42 @@ await test("list-components2 output satisfies the shared Zod contract without ch
       ],
     },
   };
-  const output = json({ result, count });
+  const output = json({
+    result,
+    count,
+    roles: { results: { bindings: [] } },
+    properties: { results: { bindings: [] } },
+  });
   assert.deepEqual(validate(output), output);
-  assert.equal(listComponents2ResponseSchema.safeParse({ ...output, columns: [] }).success, false);
-  assert.equal(listComponents2ResponseSchema.safeParse({ ...output, total: 1 }).success, false);
+  assert.equal(searchComponentsResponseSchema.safeParse({ ...output, columns: [] }).success, false);
+  assert.equal(searchComponentsResponseSchema.safeParse({ ...output, total: 1 }).success, false);
   assert.throws(() =>
     validate({ ...output, contents: [{ ...output.contents[0], medium_count: -1 }] }),
   );
   assert.throws(() =>
     validate({ ...output, contents: [{ ...output.contents[0], id: "invalid" }] }),
   );
-  assert.deepEqual(validate(json({ result: { results: { bindings: [] } }, count })).contents, []);
+  assert.deepEqual(
+    validate(
+      json({
+        result: { results: { bindings: [] } },
+        count,
+        roles: { results: { bindings: [] } },
+        properties: { results: { bindings: [] } },
+      }),
+    ).contents,
+    [],
+  );
 });
 
 await test("CLI parameter validation and Zod input contract agree", async () => {
   const { parameters } = JSON.parse(
-    await readFile(new URL("../queries/apis/list-components2/api.json", import.meta.url), "utf8"),
+    await readFile(new URL("../queries/apis/search-components/api.json", import.meta.url), "utf8"),
   );
   const defaults = Object.fromEntries(
     Object.entries(parameters).map(([key, definition]) => [key, definition.default]),
   );
-  assert.deepEqual(listComponents2ParamsSchema.parse({}), defaults);
+  assert.deepEqual(searchComponentsParamsSchema.parse({}), defaults);
   const cases = [
     {},
     { role_id: "GMO_000042", property_id: "GMO_000050" },
@@ -77,7 +92,7 @@ await test("CLI parameter validation and Zod input contract agree", async () => 
       accepted = false;
     }
     assert.equal(
-      listComponents2ParamsSchema.safeParse(supplied).success,
+      searchComponentsParamsSchema.safeParse(supplied).success,
       accepted,
       JSON.stringify(supplied),
     );

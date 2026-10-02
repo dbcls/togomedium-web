@@ -121,6 +121,6 @@ Component property（GMO_000039）の直下には、2026-09-26のTogoMediumエ�
 - `queries/apis/list-component-roles/README.md`: Role一覧と直接の親。
 - `queries/apis/count-components-by-role/README.md`: Role別の直接・下位込み成分数と親情報。
 - `queries/reference/gmdb-component-by-gmoid/README.md`: 元APIの成分詳細、Role・Propertyなどの取得。
-- `queries/apis/list-components2/README.md`: Property付き成分一覧。
+- `queries/apis/search-components/README.md`: Property付き成分一覧。
 - `UBIQUITOUS_LANGUAGE.md`: クエリ検証で使う用語の短い説明。
 - `docs/sparql-learning-notes.md`: RDF・トリプル・SPARQLの基礎。

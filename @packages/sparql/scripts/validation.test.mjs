@@ -18,7 +18,7 @@ await test("migrated APIs resolve in all three categories", async () => {
   for (const folder of [
     "reference/list-components",
     "experimental/components",
-    "apis/list-components2",
+    "apis/search-components",
   ]) {
     const api = await loadApi(`queries/${folder}`);
     for (const file of Object.values(api.inputs)) {

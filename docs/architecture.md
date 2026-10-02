@@ -25,7 +25,7 @@ Webに組み込むStanzaは、Reactコンポーネントとして直接importす
 
 `@packages/sparql` では、既存APIの比較元を `queries/reference/`、試案を `queries/experimental/`、採用予定・採用済みの定義を `queries/apis/` で管理する。既存定義を改良するときもreferenceは残す。採用状態とSPARQListへの公開状態は分け、公開・登録は `dbcls/togomedium-sparqlist` 側で行う。
 
-入出力スキーマの正本は `@packages/api`。最初の連携対象の `listComponents2` は、ローカルの出力保存前にZodで検証する。SPARQList用の整形関数にはZodを持ち込まない。採用予定のスキーマは、公開状態を確認するまで下記のOpenAPI登録に含めない。実行方法と状態管理は `@packages/sparql/README.md` を参照する。
+入出力スキーマの正本は `@packages/api`。最初の連携対象の `searchComponents` は、ローカルの出力保存前にZodで検証する。SPARQList用の整形関数にはZodを持ち込まない。採用予定のスキーマは、公開状態を確認するまで下記のOpenAPI登録に含めない。実行方法と状態管理は `@packages/sparql/README.md` を参照する。
 
 `@packages/api/src/` の各 `definitions.ts` はAPIパス、入力と出力の定義を持つ。`@packages/api/src/openAPI.ts` の `getDocs()` が登録済みの定義からOpenAPI文書を生成し、Webの `@packages/web/src/pages/ApiPage.tsx` がScalarへ渡して表示する。現在のAPI画面は、この生成結果を直接利用する。
 

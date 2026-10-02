@@ -1,0 +1,17 @@
+# Independent unpaginated component/association rows for network verification only.
+# No search parameters and no COUNT or sorting expressions from the production API.
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX olo: <http://purl.org/ontology/olo/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+
+SELECT DISTINCT ?gmo_id ?label ?alias
+FROM <http://togomedium.org/gmo>
+FROM NAMED <http://togomedium.org/media>
+WHERE {
+  ?component rdfs:subClassOf+ gmo:GMO_000002 ; dcterms:identifier ?gmo_id ; skos:prefLabel ?label .
+  FILTER(REGEX(STR(?gmo_id), "^GMO_[0-9]{6}$"))
+  OPTIONAL { ?component skos:altLabel ?alias . }
+}

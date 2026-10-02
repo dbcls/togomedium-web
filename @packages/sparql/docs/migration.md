@@ -40,3 +40,7 @@ Git管理されたクエリ、API設定、整形、テスト、README、用語�
 - resultsと.envがGit管理外であることを確認した。元リポジトリは変更していない。
 
 すべてのクエリの再問い合わせやSPARQListへの登録・公開は行っていない。各クエリの以前の検証記録は、移植時に再検証した結果とは区別する。
+
+## 成分検索APIへの名称整理（2026-10-02）
+
+旧`queries/apis/list-components2`は`queries/apis/search-components`へ移動した。入出力スキーマの現行参照先は`@packages/api/src/searchComponents/definitions.ts`。上記の移植時の名称・観測記録は当時の履歴として保持する。検索・集計仕様と現行検証は新しいフォルダのREADMEを参照する。

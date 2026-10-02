@@ -1,32 +1,40 @@
 {
-  "title": "List components",
-  "description": "List components filtered by role and property, ordered by name, GMO ID, or the number of media whose recipes directly include each component.",
+  "title": "Search components",
+  "description": "Search components and return conditional Role and Property facet counts.",
   "validation": "validate.mjs",
   "inputs": {
     "result": "list-components-with-properties.rq",
-    "count": "count-components.rq"
+    "count": "count-components.rq",
+    "roles": "count-components-by-role.rq",
+    "properties": "count-components-by-property.rq"
   },
   "parameters": {
+    "name": {
+      "default": "",
+      "pattern": "^[\\s\\S]*$",
+      "description": "Case-insensitive literal substring of a preferred or alternative name. Empty means no name filter.",
+      "examples": ["glucose", "Dextrose"]
+    },
     "role_id": {
       "default": "",
       "pattern": "^(?:GMO_[0-9]{6})?$",
-      "description": "GMO ID of a role directly assigned to the component. Leave empty to apply no role filter.",
+      "description": "Role GMO ID, including all descendant Roles. Empty means no Role filter. Role facet counts ignore this parameter.",
       "examples": ["GMO_000042"]
     },
     "property_id": {
       "default": "",
       "pattern": "^(?:GMO_[0-9]{6})?$",
-      "description": "GMO ID of a property directly assigned to the component. The property must be a direct subclass of Component property. Leave empty to apply no property filter.",
+      "description": "Directly assigned Property GMO ID. Empty means no Property filter. Property facet counts ignore this parameter.",
       "examples": ["GMO_000050"]
     },
     "sort": {
-      "default": "name",
+      "default": "medium_count",
       "pattern": "^(?:name|medium_count|id)$",
       "description": "Sort key: name for the preferred label, id for the GMO ID, or medium_count for the number of media whose recipes directly include the component.",
       "examples": ["name", "id", "medium_count"]
     },
     "order": {
-      "default": "asc",
+      "default": "desc",
       "pattern": "^(?:asc|desc)$",
       "description": "Sort direction: asc for ascending or desc for descending.",
       "examples": ["asc", "desc"]

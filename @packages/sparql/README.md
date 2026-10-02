@@ -23,10 +23,10 @@ TogoMediumのSPARQLクエリを実行・比較し、APIを設計するパッケ�
 mise exec -- pnpm --filter @packages/sparql query queries/experimental/components/list-components.rq
 
 # 採用予定APIの取得・整形・検証
-mise exec -- pnpm --filter @packages/sparql api queries/apis/list-components2 --param sort=medium_count --param order=desc --param limit=5
+mise exec -- pnpm --filter @packages/sparql api queries/apis/search-components --param sort=medium_count --param order=desc --param limit=5
 
 # 保存済みの生の結果を再整形（問い合わせなし）
-mise exec -- pnpm --filter @packages/sparql api queries/apis/list-components2 --saved
+mise exec -- pnpm --filter @packages/sparql api queries/apis/search-components --saved
 
 # 構文確認とパッケージのテスト
 mise exec -- pnpm --filter @packages/sparql check
@@ -47,13 +47,13 @@ mise exec -- pnpm --filter @packages/sparql test
 
 ## Zodとの連携
 
-検証モジュールでは `%api/listComponents2/definitions` のように、Webと同じパスエイリアスでスキーマを参照する。対応先はこのパッケージの `tsconfig.json` に定義し、Viteの `resolve.tsconfigPaths` で解決する。`.mjs` のまま利用でき、TypeScriptへの変更は不要。
+検証モジュールでは `%api/searchComponents/definitions` のように、Webと同じパスエイリアスでスキーマを参照する。対応先はこのパッケージの `tsconfig.json` に定義し、Viteの `resolve.tsconfigPaths` で解決する。`.mjs` のまま利用でき、TypeScriptへの変更は不要。
 
 CLIは検証モジュールをVite経由で読み込み、検証後に実行環境を閉じる。HTTPサーバーやファイル監視は起動しない。検証モジュールをNodeで直接実行せず、上記の `pnpm api` / `pnpm test` を使う。クエリ実行とSPARQList用Outputの読み込みは引き続きNodeで行う。
 
-`@packages/api/src/` にAPIの入出力スキーマを置き、このパッケージはそれを利用する。最初の連携対象は `list-components2`。`api.json` の `validation` が指定する `validate.mjs` を、整形後・出力保存前に実行する。検証エラー時には整形済み出力を更新しない。
+`@packages/api/src/` にAPIの入出力スキーマを置き、このパッケージはそれを利用する。最初の連携対象は `search-components`。`api.json` の `validation` が指定する `validate.mjs` を、整形後・出力保存前に実行する。検証エラー時には整形済み出力を更新しない。
 
-`output.mjs` はSPARQListへ移すため、外部importに依存しない単独関数を維持する。Zodへの依存はローカルの検証モジュールに置く。入力引数は `api.json` の定義で置換前に検証し、list-components2ではZodの入力定義と一致することもテストする。他の採用予定APIのスキーマ連携は未実施で、各READMEに状態を記載する。
+`output.mjs` はSPARQListへ移すため、外部importに依存しない単独関数を維持する。Zodへの依存はローカルの検証モジュールに置く。入力引数は `api.json` の定義で置換前に検証し、search-componentsではZodの入力定義と一致することもテストする。他の採用予定APIのスキーマ連携は未実施で、各READMEに状態を記載する。
 
 新しいスキーマを追加しても、公開状態を確認するまでは `@packages/api/src/openAPI.ts` に登録しない。Web・Stanzaはクエリ用パッケージを直接importせず、APIの型・スキーマを利用する。
 
@@ -63,7 +63,7 @@ CLIは検証モジュールをVite経由で読み込み、検証後に実行環�
 
 ```sh
 # モノリポのルートから、対象APIのMarkdownを生成
-mise exec -- pnpm --filter @packages/sparql export queries/apis/list-components2
+mise exec -- pnpm --filter @packages/sparql export queries/apis/search-components
 ```
 
 出力は対象フォルダの `dist/sparqlist.md`。生成時にクエリを実行せず、保存済み結果も不要。同じファイルを再生成で上書きする。`dist/` はGit管理外で、編集元は `api.json`・`.rq`・`output.mjs` とする。API名はGUI上で指定し、生成ファイル名には持たせない。

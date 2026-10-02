@@ -60,7 +60,7 @@ docs/                        構成・学習資料
 
 ### 引数によるクエリの切り替え
 
-`api.json` の任意の `queryVariants` で、入力引数に応じた実行ファイルの切り替えを指定できる。たとえば `list-components2` は `sort=medium_count` のとき、名前・ID順用のクエリから全対象を集計するクエリへ切り替える。
+`api.json` の任意の `queryVariants` で、入力引数に応じた実行ファイルの切り替えを指定できる。たとえば `search-components` は `sort=medium_count` のとき、名前・ID順用のクエリから全対象を集計するクエリへ切り替える。
 
 ```json
 {
@@ -118,7 +118,7 @@ docs/                        構成・学習資料
 たとえば、property付き一覧のAPI形式の結果を作る場合は次を実行する。
 
 ```sh
-mise exec -- pnpm api queries/apis/list-components2
+mise exec -- pnpm api queries/apis/search-components
 ```
 
 ```text
@@ -140,7 +140,7 @@ api.mjs
 
 ## 生成物と正本
 
-`queries/apis/list-components2/` の実行結果は、対応する `queries/apis/list-components2/results/` に保存される。
+`queries/apis/search-components/` の実行結果は、対応する `queries/apis/search-components/results/` に保存される。
 
 | 生成物                                                              | 内容                                              |
 | ------------------------------------------------------------------- | ------------------------------------------------- |

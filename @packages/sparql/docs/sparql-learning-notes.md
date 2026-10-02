@@ -139,7 +139,7 @@ LIMIT・OFFSETは結果の行を区切る。関連情報の展開で1対象が�
 | 一覧とcountの関係、WHEREの違い、offsetによるtotalの差 | `queries/reference/list-components/README.md`            |
 | 成分詳細の192行の内訳、19変数とOutputの整形           | `queries/reference/gmdb-component-by-gmoid/README.md`    |
 | UNION版の取得情報・行数の比較と未検証事項             | `queries/experimental/gmdb-component-by-gmoid/README.md` |
-| propertyの取得とページング、JSON配列への整形          | `queries/apis/list-components2/README.md`                |
+| propertyの取得とページング、JSON配列への整形          | `queries/apis/search-components/README.md`               |
 | Role一覧、親ID、観測した階層と複数親の扱い            | `queries/apis/list-component-roles/README.md`            |
 | Roleごとの直接・下位込み件数、集計時の重複排除        | `queries/apis/count-components-by-role/README.md`        |
 
