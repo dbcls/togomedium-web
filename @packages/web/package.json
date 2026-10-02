@@ -9,6 +9,8 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@heroui/react": "3.2.6",
+    "@heroui/styles": "3.2.6",
     "@scalar/api-reference-react": "^0.9.68",
     "@tanstack/react-router": "^1.170.38",
     "@tanstack/router-devtools": "^1.167.2",

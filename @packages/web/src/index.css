@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @import "tailwindcss";
+@import "@heroui/styles";
 /*noinspection CssInvalidAtRule*/
 @theme {
   --text-sm2: 13px;
@@ -30,6 +31,29 @@ html {
 }
 
 :root {
+  /* HeroUI semantic tokens share the existing TogoMedium palette. Portalled
+     popovers inherit these from the document, without a provider wrapper. */
+  --background: var(--color-stone-100);
+  --foreground: #000;
+  --surface: #fff;
+  --surface-foreground: var(--foreground);
+  --overlay: var(--surface);
+  --overlay-foreground: var(--foreground);
+  --accent: var(--color-primary);
+  --accent-foreground: var(--foreground);
+  --accent-hover: var(--color-primary-dark);
+  --focus: var(--color-primary-dark);
+  --link: var(--color-primary-dark);
+  --muted: var(--color-gray-600);
+  --default: var(--color-stone-100);
+  --default-foreground: var(--foreground);
+  --field-background: var(--surface);
+  --field-foreground: var(--foreground);
+  --field-placeholder: var(--muted);
+  --field-border: var(--color-gray-300);
+  --field-border-width: 1px;
+  --border: var(--color-gray-300);
+  --separator: var(--border);
   --dbcls-header-height: 24px;
   --dbcls-footer-height: 28px;
   --view-height: calc(100dvh - var(--dbcls-header-height) - var(--dbcls-footer-height));
