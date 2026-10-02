@@ -1,0 +1,30 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+
+SELECT ?property ?id ?label (COUNT(DISTINCT ?gmo_id) AS ?count)
+FROM <http://togomedium.org/gmo>
+WHERE {
+  ?property rdfs:subClassOf gmo:GMO_000039 ; dcterms:identifier ?id ; rdfs:label ?label .
+  FILTER(LANG(?label) = "en")
+  FILTER(REGEX(STR(?id), "^GMO_[0-9]{6}$"))
+  OPTIONAL {
+    ?component rdfs:subClassOf+ gmo:GMO_000002 ;
+               dcterms:identifier ?gmo_id ; skos:prefLabel ?preferred_label .
+    ?component gmo:GMO_000113 ?property .
+    FILTER(REGEX(STR(?gmo_id), "^GMO_[0-9]{6}$"))
+    FILTER("{{name}}" = "" || EXISTS {
+      ?component (skos:prefLabel|skos:altLabel) ?search_label .
+      FILTER(CONTAINS(LCASE(STR(?search_label)), LCASE("{{name}}")))
+    })
+    FILTER("{{role_id}}" = "" || EXISTS {
+      ?component gmo:GMO_000112 ?assigned_filter_role .
+      ?assigned_filter_role rdfs:subClassOf* ?filter_role .
+      ?filter_role rdfs:subClassOf+ gmo:GMO_000037 ;
+                   dcterms:identifier "{{role_id}}" .
+    })
+  }
+}
+GROUP BY ?property ?id ?label
+ORDER BY ?label ?id

@@ -112,6 +112,7 @@ await test("export rejects incomplete metadata and unsupported placeholders", ()
 await test("all adopted API definitions export without saved results or network access", async () => {
   for (const folder of [
     "search-components",
+    "search-components2",
     "list-component-roles",
     "count-components-by-role",
     "count-components-by-property",

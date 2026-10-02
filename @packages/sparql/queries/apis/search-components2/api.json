@@ -1,0 +1,57 @@
+{
+  "title": "Search components with page-local medium counts",
+  "description": "Search and paginate by name or GMO ID before counting direct medium usages for the selected page. Return conditional Role and Property facet counts.",
+  "validation": "validate.mjs",
+  "inputs": {
+    "result": "list-components-with-properties.rq",
+    "count": "count-components.rq",
+    "roles": "count-components-by-role.rq",
+    "properties": "count-components-by-property.rq"
+  },
+  "parameters": {
+    "name": {
+      "default": "",
+      "pattern": "^[\\s\\S]*$",
+      "description": "Case-insensitive literal substring of a preferred or alternative name. Empty means no name filter.",
+      "examples": ["glucose", "Dextrose"]
+    },
+    "role_id": {
+      "default": "",
+      "pattern": "^(?:GMO_[0-9]{6})?$",
+      "description": "Role GMO ID, including all descendant Roles. Empty means no Role filter. Role facet counts ignore this parameter.",
+      "examples": ["GMO_000042"]
+    },
+    "property_id": {
+      "default": "",
+      "pattern": "^(?:GMO_[0-9]{6})?$",
+      "description": "Directly assigned Property GMO ID. Empty means no Property filter. Property facet counts ignore this parameter.",
+      "examples": ["GMO_000050"]
+    },
+    "sort": {
+      "default": "name",
+      "pattern": "^(?:name|id)$",
+      "description": "Sort by preferred name or GMO ID. Sorting by medium_count is not supported.",
+      "examples": ["name", "id"]
+    },
+    "order": {
+      "default": "asc",
+      "pattern": "^(?:asc|desc)$",
+      "description": "Sort direction: asc for ascending or desc for descending.",
+      "examples": ["asc", "desc"]
+    },
+    "limit": {
+      "type": "integer",
+      "default": "20",
+      "pattern": "^(?:0|[1-9][0-9]*)$",
+      "description": "Maximum number of components to return. Use a non-negative safe integer; 0 returns an empty list.",
+      "examples": ["20", "0"]
+    },
+    "offset": {
+      "type": "integer",
+      "default": "0",
+      "pattern": "^(?:0|[1-9][0-9]*)$",
+      "description": "Number of components to skip. Use a non-negative safe integer.",
+      "examples": ["0", "20"]
+    }
+  }
+}

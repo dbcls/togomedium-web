@@ -5,6 +5,7 @@ import {
   searchComponentsParamsSchema,
   searchComponentsResponseSchema,
 } from "%api/searchComponents/definitions";
+import { searchComponents2ParamsSchema } from "%api/searchComponents2/definitions";
 import { json } from "../queries/apis/search-components/output.mjs";
 import { validate } from "../queries/apis/search-components/validate.mjs";
 import { renderParameters } from "./parameters.mjs";
@@ -96,5 +97,30 @@ await test("CLI parameter validation and Zod input contract agree", async () => 
       accepted,
       JSON.stringify(supplied),
     );
+  }
+});
+
+await test("page-local component search CLI agrees with its restricted Zod contract", async () => {
+  const { parameters } = JSON.parse(
+    await readFile(new URL("../queries/apis/search-components2/api.json", import.meta.url), "utf8"),
+  );
+  const defaults = Object.fromEntries(
+    Object.entries(parameters).map(([key, definition]) => [key, definition.default]),
+  );
+  assert.deepEqual(searchComponents2ParamsSchema.parse({}), defaults);
+  for (const supplied of [
+    {},
+    { sort: "name", order: "asc" },
+    { sort: "id", order: "desc" },
+    { sort: "medium_count" },
+    { limit: "01" },
+  ]) {
+    let accepted = true;
+    try {
+      renderParameters("ASK {}", parameters, supplied);
+    } catch {
+      accepted = false;
+    }
+    assert.equal(searchComponents2ParamsSchema.safeParse(supplied).success, accepted);
   }
 });
