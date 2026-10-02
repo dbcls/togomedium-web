@@ -4,9 +4,9 @@
 
 - 採用状態: 一覧を先に取得するため、検索とfacet集計を分離したAPI。
 - 外部名: `gmdb_search_components_list`、内部名: `searchComponentsList`。
-- ローカルDockerへ登録・検証。productionへのpush・deployと公開OpenAPI登録は未実施。
+- ローカルDockerへ登録・検証。人間レビュー済みで、ユーザーはSPARQListリポジトリへの登録を公開受入条件として承認し、OpenAPI登録を明示依頼したため`openAPI.ts`へ登録済み。productionへのpush・deploy・本番の実動作確認は行っていない。
 - Zod正本: `@packages/api/src/searchComponentsList/definitions.ts`。searchComponents2の入力と応答の一覧部分を再利用し、sort/orderは既存統合APIと同じ候補・既定値を使う。
-- 比較元の`gmdb_search_components`と`gmdb_search_components2`は維持する。
+- 比較元の`gmdb_search_components`と`gmdb_search_components2`はWeb側のソースを維持する。ユーザーの整理指示によりSPARQListリポジトリの比較用登録2件は削除した。
 
 ## 仕様・構成
 
@@ -95,4 +95,10 @@ verify-medium-sort.mjsで同じDockerの既存統合APIと22条件を比較し�
 
 sort=medium_count、order=descをAPI既定値とした。limit=20、offset=0は維持する。Zod・api.json・登録Markdownを揃え、引数なしのDocker応答が明示medium_count/descと完全一致した（検証時点で総数1539、20件、先頭GMO_001001）。明示name/ascとid/desc・offset=20はsearchComponents2の一覧部分と全項目一致した。check-allはVitest204件・Node78件成功。性能は再測定しておらず、上記計測は記載した明示ソート条件の観測として扱う。
 
-他APIの既定値は変更しない。verify-split.mjsは比較元のname/ascをlistへ明示して比較する。productionへの反映と公開OpenAPI登録は引き続き未実施。
+他APIの既定値は変更しない。verify-split.mjsは比較元のname/ascをlistへ明示して比較する。productionへの反映は未実施。
+
+## 受入・OpenAPI登録と比較登録の整理（2026-10-02）
+
+ユーザーが人間レビューとSPARQListリポジトリ登録を受け入れ、OpenAPI登録を明示依頼した。従来の本番実動作確認後に登録する保留条件を、この依頼に従って変更し、採用list/facetsのDocだけを登録した。これは本番の実動作を確認したという記録ではない。
+
+今回作成した比較登録gmdb_search_components.mdとgmdb_search_components2.mdはSPARQListリポジトリから削除した。検証スクリプトは比較用APIの登録がある環境を前提とするため、現在の整理後のDockerではそのまま再実行できない。過去の照合・性能記録とWeb側比較ソースは保持し、再登録は必要時に承認を得て判断する。

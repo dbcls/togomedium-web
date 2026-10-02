@@ -4,9 +4,9 @@
 
 - 採用状態: 成分一覧とは独立して条件連動件数を取得するAPI。
 - 外部名: `gmdb_search_components_facets`、内部名: `searchComponentsFacets`。
-- ローカルDockerへ登録・検証。productionへのpush・deployと公開OpenAPI登録は未実施。
+- ローカルDockerへ登録・検証。人間レビュー済みで、ユーザーはSPARQListリポジトリへの登録を公開受入条件として承認し、OpenAPI登録を明示依頼したため`openAPI.ts`へ登録済み。productionへのpush・deploy・本番の実動作確認は行っていない。
 - Zod正本: `@packages/api/src/searchComponentsFacets/definitions.ts`。既存応答のfacetsスキーマと検索条件を再利用する。
-- 旧統合APIは比較元として維持する。
+- 旧統合APIはWeb側の比較ソースを維持する。SPARQListリポジトリの比較用登録はユーザー指示で削除した。
 
 ## 入力・集計・応答
 

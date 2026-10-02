@@ -20,5 +20,11 @@ it("keeps only search filters and preserves zero-count facet options", () => {
   expect(
     searchComponentsFacetsResponseSchema.safeParse({ ...response, contents: [] }).success,
   ).toBe(false);
-  expect(getDocs().paths?.[PATH_SEARCH_COMPONENTS_FACETS]).toBeUndefined();
+  const operation = getDocs().paths?.[PATH_SEARCH_COMPONENTS_FACETS]?.get;
+  expect(operation?.responses?.[200]).toBeDefined();
+  expect(operation?.parameters).toEqual([
+    expect.objectContaining({ name: "name" }),
+    expect.objectContaining({ name: "role_id" }),
+    expect.objectContaining({ name: "property_id" }),
+  ]);
 });

@@ -17,7 +17,7 @@ export const searchComponentsListResponseSchema = searchComponents2ResponseSchem
 export type SearchComponentsListParams = z.infer<typeof searchComponentsListParamsSchema>;
 export type SearchComponentsListResponse = z.infer<typeof searchComponentsListResponseSchema>;
 
-// Local registration only; production publication and OpenAPI registration are pending.
+// SPARQList repository registration accepted by the user; OpenAPI registration authorized.
 export const searchComponentsListDoc: RouteConfig = {
   path: PATH_SEARCH_COMPONENTS_LIST,
   method: "get",

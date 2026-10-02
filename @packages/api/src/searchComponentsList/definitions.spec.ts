@@ -28,5 +28,26 @@ it("separates paging and sorting from facet input and response", () => {
   ).toBe(false);
   for (const key of ["sort", "order", "limit", "offset"])
     expect(searchComponentsFacetsParamsSchema.safeParse({ [key]: "name" }).success).toBe(false);
-  expect(getDocs().paths?.[PATH_SEARCH_COMPONENTS_LIST]).toBeUndefined();
+  const operation = getDocs().paths?.[PATH_SEARCH_COMPONENTS_LIST]?.get;
+  expect(operation?.responses?.[200]).toBeDefined();
+  expect(operation?.parameters).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        name: "sort",
+        schema: expect.objectContaining({ default: "medium_count" }),
+      }),
+      expect.objectContaining({
+        name: "order",
+        schema: expect.objectContaining({ default: "desc" }),
+      }),
+      expect.objectContaining({
+        name: "limit",
+        schema: expect.objectContaining({ default: "20" }),
+      }),
+      expect.objectContaining({
+        name: "offset",
+        schema: expect.objectContaining({ default: "0" }),
+      }),
+    ]),
+  );
 });
