@@ -34,6 +34,9 @@ export const HeroUiPreviewPanel = () => {
         </Select>
         <div className="flex flex-wrap gap-3">
           <Button onPress={() => setPressCount((count) => count + 1)}>Test button</Button>
+          <Button variant="outline" onPress={() => setPressCount(0)}>
+            Reset count
+          </Button>
           <Button isDisabled>Disabled</Button>
         </div>
         <p role="status">

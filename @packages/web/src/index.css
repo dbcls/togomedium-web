@@ -21,6 +21,34 @@
   }
 }
 
+@layer components {
+  /* Match Stanza action buttons without changing Select's accent foreground. */
+  .button {
+    border-radius: 4px;
+    box-shadow: none;
+    text-transform: none;
+
+    /* HeroUI's default focus ring uses a shadow. Keep keyboard focus visible
+       with an outline while removing button elevation. */
+    &:focus-visible:not([data-focused]),
+    &[data-focus-visible="true"] {
+      box-shadow: none;
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .button--primary {
+    --button-fg: #fff;
+  }
+
+  .button--outline {
+    --button-fg: var(--color-primary-dark);
+    --button-bg-hover: color-mix(in srgb, var(--color-primary) 8%, transparent);
+    border-color: var(--color-primary);
+  }
+}
+
 html {
   /*scroll-behavior: smooth;*/
 }
