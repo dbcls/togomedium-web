@@ -15,5 +15,5 @@ export const CompareMediaSelected = {
   parameters: { web: { initialPath: "/compare-media" } },
 } satisfies Story;
 export const SearchQuery = {
-  parameters: { web: { initialPath: "/search?query=Glucose", showLocation: true } },
+  parameters: { web: { initialPath: "/search?query=Glucose" } },
 } satisfies Story;

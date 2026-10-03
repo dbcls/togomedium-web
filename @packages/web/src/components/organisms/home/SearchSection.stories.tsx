@@ -6,6 +6,4 @@ const meta = {
 } satisfies Meta<typeof SearchSection>;
 export default meta;
 type Story = StoryObj<typeof meta>;
-export const Primary = {
-  parameters: { web: { showLocation: true } },
-} satisfies Story;
+export const Primary = {} satisfies Story;
