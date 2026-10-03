@@ -28,6 +28,8 @@
 - TypeScript内部の識別子: `camelCase` に変換する
   - 例: `gmId`, `gmoId`, `taxId`, `strainId`
 
+用語集に載る既存名や外部名が、すべて新規命名の推奨例とは限らない。命名の判断は、この文書の規定に従う。
+
 略語やIDの意味は名前だけで判断しない。`GM ID` と `GMO ID` のように別の意味を持つ語は、`docs/domain-terms.md` を確認してから命名する。
 
 ### 用語とIDを名前に使うとき
@@ -36,6 +38,7 @@
 - GMO IDを扱う名前は、成分・Role・Propertyなど、対象が分かる文脈で使う。既存APIの `gmo_id` など、公開済みの識別子は維持する。
 - `organism`、`taxon`、`strain` が混ざる場合は、対象の粒度が分かる名前にする。
 - 新規命名では、単一の分類群は `taxon`、分類体系や階層構造は `taxonomy` を優先する。
+  - 既存の `taxons` という表記の説明は `docs/domain-terms.md` を参照する。既存表記の紹介と、新規命名での選択を混同しない。
 - phenotype検索では、UI上の選択条件、APIへの検索条件、検索結果のorganismを区別する。
 - `GM ID` と `GMO ID` は別の識別子なので、短縮して `id` だけにしない。
 - NCBI以外のtaxonomyを扱う場合は、`taxonomyType` や `gtdbTaxon...` のように区別できる名前にする。
@@ -91,6 +94,8 @@ Reactコンポーネント、ページ、ラッパー、Storybook用の表示コ
   - 例: `routeTree.gen.ts`
 
 ### Stanza
+
+StanzaとTogoStanza、WebComponentとWeb側ラッパーの関係は `docs/domain-terms.md` を参照する。ここでは、それぞれの名前の付け方を定める。
 
 Stanzaの外部から参照される識別子は、WebComponentとしての公開名を優先する。
 

@@ -1,8 +1,10 @@
-# RDF・SPARQL・SPARQList 学習メモ
+# RDF・SPARQL・SPARQListの学習メモ
 
-更新日: 2026-09-28
+元メモの更新日: 2026-09-28
 
-TogoMediumのクエリを理解・改善するために、データの表し方から結果の整形までを整理する。個別クエリの取得条件や検証結果は各クエリのREADMEに記録する。DB上の名前や識別子の対応は `UBIQUITOUS_LANGUAGE.md` を参照する。
+TogoMediumのクエリを理解・改善するために、データの表し方から結果の整形までを整理する。個別クエリの取得条件や検証結果は各クエリのREADMEに記録する。共通用語の短い説明はモノリポの `docs/domain-terms.md`、DB上の名前や識別子の対応は `UBIQUITOUS_LANGUAGE.md` を参照する。
+
+以下のパスは、特記しない限り `@packages/sparql` 基準。
 
 ## RDFは関係をトリプルで表す
 
@@ -42,20 +44,9 @@ LIMIT 10
 
 ## SPARQListと実行環境
 
-SPARQListは、SPARQLによる問い合わせやJavaScriptによる整形を組み合わせてAPIを定義する仕組み。SPARQL自体とは役割が異なる。
+SPARQList・Virtuoso・SPARQLエンドポイントの意味はモノリポの `docs/domain-terms.md` を参照する。ここでは、クエリの実行場所と結果の整形場所を区別する。
 
-### Virtuosoはクエリを実行するデータベース
-
-VirtuosoはOpenLink Softwareが開発するデータベース製品。RDFの保存とSPARQLによる検索に対応しており、TogoMediumのSPARQLエンドポイントではVirtuosoがクエリを処理する。
-
-| 名前      | 役割                                                                   |
-| --------- | ---------------------------------------------------------------------- |
-| RDF       | データと関係を表す形式                                                 |
-| SPARQL    | RDFを検索・集計する言語                                                |
-| Virtuoso  | データを保存し、SPARQLクエリを実行するデータベース                     |
-| SPARQList | クエリとJavaScriptの整形処理を組み合わせ、HTTP APIとして提供する仕組み |
-
-SPARQLエンドポイントは、HTTPでクエリを受け付ける窓口。Virtuosoはその窓口の背後で検索や集計を実行する。SPARQLはVirtuoso専用の言語ではなく、ほかの対応データベースでも利用できる。
+### 公開APIでの検索と整形
 
 公開APIを利用するときの処理は、次のように流れる。
 
@@ -74,7 +65,7 @@ Webページ・Stanza
 
 ### ローカル実行と公開APIの違い
 
-このパッケージでは、ローカルの `.rq` ファイルを読み、`https://togomedium.org/sparql` へ送信する。検索処理はリモートで行われ、ローカルには結果を保存する。SPARQListの起動やAPI登録は不要。実行コマンドと保存先はパッケージの `README.md` に記載する。
+このパッケージでは、ローカルの `.rq` ファイルを読み、設定されたSPARQLエンドポイントへ送信する。検索処理はリモートで行われ、ローカルには結果を保存する。SPARQListの起動やAPI登録は不要。接続先・実行コマンド・保存先はパッケージの `README.md` を参照する。
 
 公開APIのOutputには、生のクエリ結果を表示用のJSONへまとめる処理がある。ローカルで `.rq` を実行しただけでは、この処理まで実行したことにはならない。
 
@@ -137,16 +128,16 @@ LIMIT・OFFSETは結果の行を区切る。関連情報の展開で1対象が�
 | ----------------------------------------------------- | -------------------------------------------------------- |
 | 最初の成分一覧クエリ                                  | `queries/experimental/components/README.md`              |
 | 一覧とcountの関係、WHEREの違い、offsetによるtotalの差 | `queries/reference/list-components/README.md`            |
-| 成分詳細の192行の内訳、19変数とOutputの整形           | `queries/reference/gmdb-component-by-gmoid/README.md`    |
+| 成分詳細の行数・変数とOutputの整形の検証記録          | `queries/reference/gmdb-component-by-gmoid/README.md`    |
 | UNION版の取得情報・行数の比較と未検証事項             | `queries/experimental/gmdb-component-by-gmoid/README.md` |
-| propertyの取得とページング、JSON配列への整形          | `queries/apis/search-components/README.md`               |
+| Propertyの取得とページング、JSON配列への整形          | `queries/apis/search-components/README.md`               |
 | Role一覧、親ID、観測した階層と複数親の扱い            | `queries/apis/list-component-roles/README.md`            |
 | Roleごとの直接・下位込み件数、集計時の重複排除        | `queries/apis/count-components-by-role/README.md`        |
 
 ## 仕様の参照先
 
-- RDF 1.1 Primer: https://www.w3.org/TR/rdf11-primer/
-- SPARQL 1.1 Query Language: https://www.w3.org/TR/sparql11-query/
-- SPARQL Results JSON: https://www.w3.org/TR/sparql11-results-json/
-- SPARQList: https://github.com/dbcls/sparqlist
-- Virtuoso: https://virtuoso.openlinksw.com/
+- [RDF 1.1 Primer](https://www.w3.org/TR/rdf11-primer/)
+- [SPARQL 1.1 Query Language](https://www.w3.org/TR/sparql11-query/)
+- [SPARQL Results JSON](https://www.w3.org/TR/sparql11-results-json/)
+- [SPARQList](https://github.com/dbcls/sparqlist)
+- [Virtuoso](https://virtuoso.openlinksw.com/)

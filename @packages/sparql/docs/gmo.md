@@ -1,6 +1,8 @@
 # GMOをクエリで参照する
 
-GMO（Growth Medium Ontology）は、TogoMediumのクエリでComponentやRoleなどを参照するときに使うオントロジー。この文書では、識別子・分類・関係をクエリでどう指定するかをまとめる。学問上の定義や分類の妥当性は扱わない。
+この文書では、GMOの識別子・分類・関係をクエリで指定する方法を示す。GMOなどの共通用語はモノリポの `docs/domain-terms.md`、RDF/SPARQLの構文は `docs/sparql-learning-notes.md` を参照する。学問上の定義や分類の妥当性は扱わない。
+
+以下のパスは、特記しない限り `@packages/sparql` 基準。
 
 ## 参照する場所
 
@@ -10,7 +12,7 @@ GMO（Growth Medium Ontology）は、TogoMediumのクエリでComponentやRole�
 | `https://togomedium.org/sparql`                                              | このパッケージのクエリを実行するエンドポイント      |
 | `http://togomedium.org/gmo`                                                  | 現在のクエリがFROMで指定するRDFグラフ               |
 
-エンドポイントは問い合わせの送信先、グラフは問い合わせ対象のデータのまとまりを指定する名前。BioPortalの画面はクラスを調べるために使い、ローカルのクエリはTogoMediumのエンドポイントへ送信する。
+BioPortalの画面はクラスを調べるために使い、ローカルのクエリはTogoMediumのエンドポイントへ送信する。エンドポイントとRDFグラフの違いはモノリポの `docs/domain-terms.md` を参照する。
 
 2026-09-26に確認したBioPortalの画面では、最終アップロード日は2024-08-28だった。BioPortalとTogoMediumのデータが同じ版であることは確認していないため、クエリの取得結果はTogoMedium側で検証する。
 
@@ -71,24 +73,18 @@ APIやクエリ中の `property` は、has propertyの関連先を指す変数�
 
 階層表示は全体を把握するために使い、関係を正確に確認するときは `subClassOf` などのプロパティも見る。BioPortalの表示名だけから、TogoMedium側のID・ラベルの有無や件数を判断しない。
 
-## Role階層の扱い
+## Role階層とAPIごとの扱い
 
-このプロジェクトでは、確認したデータに合わせてRole階層を木構造として扱い、各Roleの直接の親を1つとする。GMO全体やRDF一般に対する制約ではなく、現在のRole関連機能の前提となる。
+Role同士の階層は `rdfs:subClassOf`、成分への付与はhas role（GMO_000112）で取得する。RDF一般では直接の親が1つとは限らない。木構造として扱う前提や、複数の親が見つかったときの処理は、Role一覧・Role別件数の各READMEで確認する。
 
-Role一覧とRole別件数は、親を参照する平らな配列を返す。同じ親URIの繰り返しはまとめ、異なる親URIが複数あれば整形時にエラーにする。
+| 確認する仕様                                    | 参照先                                                                                 |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Role一覧、直接の親、欠損値、整形後のJSON        | `queries/apis/list-component-roles/README.md` の「API用の整形とSPARQListへの移植」     |
+| Role別の直接・下位込み件数、重複排除、0件の保持 | `queries/apis/count-components-by-role/README.md` の「目的と処理」「検証記録と注意点」 |
+| Role別件数の親情報と起点Roleの扱い              | 同READMEの「親子関係の確認」                                                           |
+| Property指定による絞り込み                      | 同READMEの「引数と変更箇所」「Propertyで絞ったRole別件数」                             |
 
-起点のRole（GMO_000037）自体は一覧・件数の対象外だが、生のクエリ結果では直接の親として現れる。整形後の扱いは次のように分かれる。
-
-| 出力       | 親の表現                        | 親が起点のRoleの場合                 |
-| ---------- | ------------------------------- | ------------------------------------ |
-| Role一覧   | URIとIDを持つparentオブジェクト | 一覧外の起点への参照を残す           |
-| Role別件数 | parentに親のGMO IDを格納        | parentをnullにして一覧の最上位とする |
-
-Role別件数には、指定Roleが直接付いた成分の `direct_count` と、そのRole自身または下位Roleが付いた成分の `inclusive_count` がある。どちらも成分URIで重複排除し、0件のRoleも残す。
-
-任意の `property_id` を指定すると、そのPropertyが直接付いた成分に絞り、両方の件数を取得できる。指定できる対象はComponent property（GMO_000039）の直接の子。省略時は全成分を対象とする。
-
-詳細な出力形式、欠損値の扱い、実行方法は `queries/apis/list-component-roles/README.md` と `queries/apis/count-components-by-role/README.md` に記録する。
+起点のRole（GMO_000037）が直接の親の場合、Role一覧の整形後JSONでは一覧外の起点への参照を残す。一方、Role別件数では `parent` をnullにする。両APIの親の表現を同一とはみなさない。
 
 ## Component propertyの構造と集計
 
@@ -107,13 +103,7 @@ Component property（GMO_000039）の直下には、2026-09-26のTogoMediumエ�
 
 成分から各Propertyへの関連はhas property（GMO_000113）で取得する。1つの成分が複数のPropertyを持つことがあるため、これらは成分を重複なく分割する分類としては扱わない。
 
-現在のカウント機能は、この1階層の構造に合わせて、直下の分類ごとに直接関連する成分を数える。成分URIで重複排除し、該当成分がない分類も0件として残す。分類をまたぐ重複は除かないため、件数の合計は成分総数とは限らない。
-
-任意の `role_id` を指定すると、そのRoleが直接付いた成分に絞ってProperty別件数を取得できる。下位Roleへの付与は含めず、省略時は全成分を対象とする。
-
-出力は `[{ id, label, count }]`。起点自身は含めず、親情報や下位込み件数は出力しない。今後孫以下が追加された場合も自動で集計対象にはならないため、その時点で取得範囲を見直す。
-
-具体的な件数、検証結果、実行方法は `queries/apis/count-components-by-property/README.md` に記録する。
+Property別集計の対象範囲、`role_id` による絞り込み、出力JSONは `queries/apis/count-components-by-property/README.md` を参照する。同READMEの「検証記録」では、具体的な件数と、孫以下が追加された場合の扱いも確認できる。
 
 ## 関連するクエリと資料
 
@@ -121,6 +111,6 @@ Component property（GMO_000039）の直下には、2026-09-26のTogoMediumエ�
 - `queries/apis/list-component-roles/README.md`: Role一覧と直接の親。
 - `queries/apis/count-components-by-role/README.md`: Role別の直接・下位込み成分数と親情報。
 - `queries/reference/gmdb-component-by-gmoid/README.md`: 元APIの成分詳細、Role・Propertyなどの取得。
-- `queries/apis/search-components/README.md`: Property付き成分一覧。
+- `queries/apis/search-components/README.md`: 成分検索と条件に連動するRole・Property件数。
 - `UBIQUITOUS_LANGUAGE.md`: クエリ検証で使う用語の短い説明。
 - `docs/sparql-learning-notes.md`: RDF・トリプル・SPARQLの基礎。
