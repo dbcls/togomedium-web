@@ -8,7 +8,7 @@ export const HeroUiPreviewPanel = () => {
 
   return (
     <main className="bg-background text-foreground min-h-screen p-8">
-      <div className="bg-surface mx-auto flex max-w-xl flex-col gap-6 rounded-lg p-6">
+      <div className="bg-surface mx-auto flex max-w-xl flex-col gap-6 rounded-[var(--heroui-radius)] p-6">
         <h1 className="text-2xl font-bold">HeroUI integration preview</h1>
         <p>Development preview. Use Tab, Enter, arrow keys, and Escape to navigate.</p>
         <Select
