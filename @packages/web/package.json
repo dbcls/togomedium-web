@@ -6,7 +6,9 @@
   "scripts": {
     "start": "vite serve ./ --config vite.config.ts",
     "build": "vite build ./ --config vite.config.ts  --outDir ./dist/",
-    "test": "vitest"
+    "test": "vitest",
+    "storybook": "storybook dev -p 6007",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@heroui/react": "3.2.6",

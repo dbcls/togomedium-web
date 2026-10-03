@@ -6,6 +6,8 @@
   "scripts": {
     "web:build": "pnpm --filter @packages/web build",
     "web:serve": "pnpm --filter @packages/web start",
+    "web:storybook:serve": "pnpm --filter @packages/web storybook",
+    "web:storybook:build": "pnpm --filter @packages/web build-storybook",
     "stanza:serve": "pnpm --filter @packages/stanza stanza:server",
     "stanza:build": "pnpm --filter @packages/stanza stanza:build",
     "storybook:serve": "pnpm stanza:storybook:serve",

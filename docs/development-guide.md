@@ -56,11 +56,15 @@ APIドキュメントはWebの `/api` で確認できる。`@packages/api` のZo
 
 ### Storybook
 
+- `pnpm web:storybook:serve`: Web用Storybookをポート6007で起動する
+- `pnpm web:storybook:build`: Web用Storybookをビルドする。出力先は `@packages/web/storybook-static/`
 - `pnpm stanza:storybook:serve`: Stanza用Storybookをポート6006で起動する
 - `pnpm stanza:storybook:build`: Stanza用Storybookをビルドする。出力先は `@packages/stanza/storybook-static/`
 - `pnpm storybook:serve`: Stanza用の互換コマンド。`stanza:storybook:serve` と同じ環境を起動する
 
 設定と補助コードは `@packages/stanza/.storybook/` に置く。Stanzaパッケージ内では `pnpm storybook` / `pnpm build-storybook` でも実行できる。
+
+Web用の設定と補助コードは `@packages/web/.storybook/` に置く。Webパッケージ内でも `pnpm storybook` / `pnpm build-storybook` を使える。Web側のReactコンポーネントのStory作成・固定データ・ルーターの扱いは `@packages/web/docs/storybook.md` を参照する。
 
 表示確認の補足は `docs/agent-browser.md` を参照する。
 
