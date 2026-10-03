@@ -99,6 +99,12 @@
 
 Storybookの設定と補助コードは `@packages/stanza/.storybook/` で管理する。`main.ts` は既存Storyの検出・アドオン、`vite.config.ts` はパス解決・React・Tailwindを設定し、Stanza配布用の `togostanza.config.ts` とは分ける。Storyは対象のReactコンポーネントに隣接して置き、`StoryProvider` と表示用ラッパーは `%stanza/.storybook/` からimportする。
 
+`main.ts` の検出範囲はパッケージ配下の `**/*.stories.@(js|jsx|mjs|ts|tsx)` で、一覧には `Stanza` 接頭辞が付く。Web用Storybookの `src/components/` に限定した検出範囲とは異なる。
+
+新規作成は `docs/agents/task-guides/storybookComponent.md` に従う。実API取得と引数の指定は `@packages/stanza/stanzas/gmdb-component-detail/App.stories.tsx`、MUIテーマも必要な場合は `@packages/stanza/stanzas/gmdb-find-media-by-organism-phenotype/App.stories.tsx` を参照する。これらはProviderの組み合わせを確認する例で、すべてのStoryへ同じ指定をコピーするものではない。
+
+`.storybook/preview.tsx` は背景などを設定するが、Web用のように共通decoratorでProviderを付与しない。対象コンポーネントの依存を確認し、必要な `reactQuery`・`mui`・`jotai`・`redux` を `.storybook/StoryProvider.tsx` のPropsと照合する。
+
 Storybookは実APIを使う開発プレビューとして扱う。`StoryProvider` のQueryClientは共有し、Jotai未指定時はdefault store、Reduxは渡されたstoreを利用する。既存の状態共有範囲を暗黙に変更しない。`mui` 指定時は共通テーマとグローバルCSSを適用し、Tailwindはpreview全体で読み込む。互換用の `tw` propでTailwindを切り替えることはできない。
 
 ### 確認対象
