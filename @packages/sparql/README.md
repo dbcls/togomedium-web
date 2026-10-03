@@ -1,6 +1,6 @@
 # TogoMedium SPARQL
 
-TogoMediumのSPARQLクエリを実行・比較し、APIを設計するパッケージ。検索は外部のSPARQLエンドポイント、整形と保存はローカルで行う。型・スキーマの正本は `@packages/api` に置く。
+このパッケージでは、TogoMediumのSPARQLクエリを実行・比較し、APIを設計する。検索は外部のSPARQLエンドポイント、整形と保存はローカルで行う。型・スキーマは `@packages/api` で一元管理する。
 
 ## クエリの区分
 
@@ -14,48 +14,64 @@ TogoMediumのSPARQLクエリを実行・比較し、APIを設計するパッケ�
 
 採用は「こちらで保守する方針を決めた状態」、公開は「SPARQListへの反映が完了した状態」を指す。apisに配置しただけで公開済みとは扱わない。移植時の分類と出典は `docs/migration.md` に記録している。
 
-## 実行
+## クエリを実行する
 
-実行環境はモノリポの `mise.toml` に従う。以下はモノリポのルートから実行する。
+環境の準備はモノリポの `docs/development-guide.md`、実行環境の定義は `mise.toml` に従う。まず対象クエリのREADMEで用途・引数・出力を確認する。以下はモノリポのルートから実行する。
 
 ```sh
 # 生のSPARQL結果を取得
 mise exec -- pnpm --filter @packages/sparql query queries/experimental/components/list-components.rq
 
-# 採用予定APIの取得・整形・検証
+# API形式の結果を取得・整形（検証設定がある場合は検証も行う）
 mise exec -- pnpm --filter @packages/sparql api queries/apis/search-components --param sort=medium_count --param order=desc --param limit=5
 
 # 保存済みの生の結果を再整形（問い合わせなし）
 mise exec -- pnpm --filter @packages/sparql api queries/apis/search-components --saved
+```
 
-# 構文確認とパッケージのテスト
+引数のパスはパッケージを基準にする。各クエリREADMEの短い `pnpm api` / `pnpm query` コマンドは、`@packages/sparql` に移動して実行する。
+
+`query` には `.rq` ファイル、`api` にはクエリフォルダを指定する。使い方は各コマンドの `--help` で確認できる。
+
+既定の接続先は `https://togomedium.org/sparql`。変更する場合は、このパッケージの `.env.example` を `.env` にコピーし、`SPARQL_ENDPOINT` を設定する。モノリポのルートにある `.env` とは別に読み込む。実行環境に同名の変数が設定済みなら、その値が優先される。
+
+### 結果を確認する
+
+結果は対象クエリフォルダの `results/` に保存する。
+
+| ファイル              | 確認する内容                              |
+| --------------------- | ----------------------------------------- |
+| `<クエリ名>.json`     | エンドポイントから返された生のSPARQL結果  |
+| `output.json`         | `api` コマンドで整形したAPI形式の結果     |
+| `output.sparqlist.js` | `api` コマンドで生成したSPARQList用Output |
+
+失敗時は前回の結果や途中まで更新された生の結果が残ることがある。ファイルの存在だけで成功と判断せず、コマンドの終了結果を確認する。
+
+`--saved` は結果の鮮度や引数を確認せず、`--param` と併用できない。クエリや引数を変えた場合は再取得する。
+
+クエリ変更時は実エンドポイントで結果を確認する。HTTP成功だけでなく、対象ID・取得項目・重複・欠損・件数・ページングを変更内容に応じて確認する。比較元と件数が同じでも情報が同一とは判断しない。観測件数は固定仕様と区別し、行数削減を実行速度の改善と同一視しない。
+
+通常結果と `.env` はGit管理外。判断の根拠となる検証日・条件・比較結果・未確認事項は対象READMEへ記録する。
+
+## クエリを追加・変更する
+
+1. 上記の区分から配置先を選び、`queries/<区分>/<機能名>/` に `.rq` とREADMEを置く。既存SPARQListの取り込みは `docs/import-sparqlist.md` に従う。
+2. API形式への整形が必要なら、同じフォルダに `api.json`、`output.mjs`、`output.test.mjs` を用意する。設定・引数・整形・スキーマ連携は `docs/project-structure.md` を参照する。
+3. READMEに目的、コピーして実行できる具体的なコマンド、引数の意味と置換方法、出力・保存先を記す。引数がなければその旨を示す。apisでは採用状態・公開状態・スキーマ連携の有無も記録する。
+4. 実エンドポイントで結果を確認し、整形と共通処理のテスト、構文確認を行う。検証日・条件・結果・未確認事項をREADMEへ記録する。
+
+```sh
 mise exec -- pnpm --filter @packages/sparql check
 mise exec -- pnpm --filter @packages/sparql test
 ```
 
-引数のパスはパッケージを基準にする。各クエリREADMEの短い `pnpm api` / `pnpm query` コマンドは、`@packages/sparql` に移動して実行する。個別API用のpackage scriptsは増やさない。
+上記のコマンドでパッケージを確認する。コード変更を含む作業の完了前確認は、モノリポの `docs/testing-policy.md` に従う。SPARQLのネットワーク検証は通常のテストから分離する。
 
-`query` はクエリファイル、`api` はクエリフォルダの指定が必須。指定がない場合はUsageを表示して終了コード1で終了する。`--help` なら使い方を表示して正常終了する。
+個別クエリの追加では `scripts/` と `package.json` を変更しない。共通スクリプトに個別API固有の処理を持たせず、個別API用のパッケージスクリプトも追加しない。
 
-既定の接続先は `https://togomedium.org/sparql`。変更する場合は、このパッケージの `.env.example` を `.env` にコピーし、`SPARQL_ENDPOINT` を設定する。モノリポのルートにある `.env` とは別に読み込む。
+入出力スキーマは `@packages/api` で一元管理し、独立して同じZod定義を作らない。実装時の制約と例外は `docs/project-structure.md` を参照する。
 
-実行結果は各クエリの `results/` に保存する。生の結果に加え、APIコマンドは `output.json` と `output.sparqlist.js` を生成する。通常結果と `.env` はGit管理外。`--output` による明示ファイルの上書きは拒否する。
-
-問い合わせはGET、タイムアウトは30秒。失敗すると前回の結果が残る場合があるため、ファイルの存在だけで成功と判断しない。`--saved` は結果の鮮度や引数を確認せず、`--param` と併用できない。
-
-カンマ区切りのIDをVALUES句へ渡す場合は、`api.json` の `type: "string-list"` と任意の `placeholder` を使う。設定・空要素・エスケープの扱いは `docs/project-structure.md` の「文字列リスト引数」を参照する。
-
-## Zodとの連携
-
-検証モジュールでは `%api/searchComponents/definitions` のように、Webと同じパスエイリアスでスキーマを参照する。対応先はこのパッケージの `tsconfig.json` に定義し、Viteの `resolve.tsconfigPaths` で解決する。`.mjs` のまま利用でき、TypeScriptへの変更は不要。
-
-CLIは検証モジュールをVite経由で読み込み、検証後に実行環境を閉じる。HTTPサーバーやファイル監視は起動しない。検証モジュールをNodeで直接実行せず、上記の `pnpm api` / `pnpm test` を使う。クエリ実行とSPARQList用Outputの読み込みは引き続きNodeで行う。
-
-`@packages/api/src/` にAPIの入出力スキーマを置き、このパッケージはそれを利用する。最初の連携対象は `search-components`。`api.json` の `validation` が指定する `validate.mjs` を、整形後・出力保存前に実行する。検証エラー時には整形済み出力を更新しない。
-
-`output.mjs` はSPARQListへ移すため、外部importに依存しない単独関数を維持する。Zodへの依存はローカルの検証モジュールに置く。入力引数は `api.json` の定義で置換前に検証し、search-componentsではZodの入力定義と一致することもテストする。他の採用予定APIのスキーマ連携は未実施で、各READMEに状態を記載する。
-
-新しいスキーマを追加しても、公開状態を確認するまでは `@packages/api/src/openAPI.ts` に登録しない。Web・Stanzaはクエリ用パッケージを直接importせず、APIの型・スキーマを利用する。
+個別クエリのREADMEは日本語で書く。公開用メタ情報との使い分けは、モノリポの `docs/agents/task-guides/documentation.md` の「使用言語」に従う。
 
 ## SPARQListへの公開
 
@@ -74,7 +90,7 @@ mise exec -- pnpm --filter @packages/sparql export queries/apis/search-component
 4. 公開先でも通常結果、空結果、引数、ページングを確認し、ローカル結果と比較する。
 5. 対象READMEに公開先・反映日・版・検証結果を記録する。
 
-生成物にはParameters、引数検証JS、クエリ切り替え、SPARQL、Outputが含まれる。`validate.mjs` とZodによる出力検証はローカル専用で、生成物には含めない。現在は `queries/apis/` の4つにメタ情報を用意している。ほかの定義を生成する場合も、先にメタ情報を追加する。項目と生成の仕組みは `docs/project-structure.md` を参照する。
+生成前に対象の `api.json` に必要なメタ情報があることを確認する。`validate.mjs` とZodによる出力検証はローカル専用で、生成物には含めない。項目と生成の仕組みは `docs/project-structure.md` を参照する。
 
 ローカルでの採用・検証、API文書への登録、SPARQListでの公開は別の作業として扱う。
 
@@ -82,9 +98,9 @@ mise exec -- pnpm --filter @packages/sparql export queries/apis/search-component
 
 このパッケージ内の参照は、特記しない限り `@packages/sparql` 基準のパス。
 
-- `docs/project-structure.md`: ファイルの責務と実行フロー
+- `docs/project-structure.md`: 設定項目、引数制約、検証と生成の仕組み
 - `docs/import-sparqlist.md`: 既存SPARQList Markdownの取り込み手順と、別セッションでの依頼例
-- `docs/migration.md`: 移植元、分類、正本の移行
+- `docs/migration.md`: 移植元、分類、管理元の移行
 - `docs/gmo.md`: GMOの識別子、分類、関係
 - `docs/sparql-learning-notes.md`: RDF・SPARQLの学習メモ
 - `UBIQUITOUS_LANGUAGE.md`: クエリ検証用の用語
