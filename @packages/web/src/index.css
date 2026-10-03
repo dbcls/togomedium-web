@@ -31,7 +31,7 @@
   .dropdown__popover,
   .list-box-item,
   .tooltip,
-  .modal__dialog,
+  .modal__dialog:not(.modal__dialog--full),
   .alert-dialog__dialog {
     --radius-xl: var(--heroui-radius);
     --radius-3xl: var(--heroui-radius);
