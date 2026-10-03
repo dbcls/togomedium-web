@@ -13,10 +13,14 @@
 - Stanza固有の実装か、`components/` `utils/` `styles/` に置く共通処理かを区別する。
 - SVGアイコン関連の作業では `docs/agents/task-guides/svgIcon.md` の指示も確認する。
 - `togostanza` のバージョンによってビルドや実行結果が変わりやすいため、変更後は対象Stanzaの動作への影響も確認対象として考える。
+- Storybookの設定・補助コードは `.storybook/` に置く。設定変更時は表示対象への影響を確認する。新しいStoryや表示用コンポーネントを作るときは `docs/agents/task-guides/storybookComponent.md` を確認する。
+- `.storybook/main.ts` はStory検出とアドオン、`.storybook/vite.config.ts` はStorybook専用のVite設定を管理し、役割を混ぜない。
 
 ## 起動と検証
 
 起動・ビルドは `docs/development-guide.md`、検証コマンドと完了条件は `docs/testing-policy.md` に従う。Stanza固有の確認対象は `@packages/stanza/docs/development-guide.md` の「確認の進め方」を参照する。
+
+Storybookのブラウザ確認の操作と一時成果物は `docs/agent-browser.md` に従う。
 
 ## よく触る場所
 
@@ -28,3 +32,4 @@
 - `stanzas/*/metadata.json`
 - `stanzas/*/index.tsx`
 - `togostanza.config.ts`
+- `.storybook/`

@@ -1,4 +1,4 @@
-import { StoryProvider } from "%storybook/StoryProvider";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { data1 } from "../utils/data1";
 import { data2 } from "../utils/data2";

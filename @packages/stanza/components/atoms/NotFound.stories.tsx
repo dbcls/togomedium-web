@@ -1,6 +1,6 @@
+import { ComponentWrapper } from "%stanza/.storybook/components/ComponentWrapper";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import { NotFound } from "%stanza/components/atoms/NotFound";
-import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta = {

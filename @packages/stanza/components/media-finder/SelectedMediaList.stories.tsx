@@ -1,8 +1,8 @@
+import { ComponentWrapper } from "%stanza/.storybook/components/ComponentWrapper";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import { SelectedMediaList } from "%stanza/components/media-finder/SelectedMediaList";
 import { useSelectedMediaMutators } from "%stanza/state/media-finder/selectedMedia";
 import { LabelInfo } from "%stanza/utils/labelInfo";
-import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 

@@ -56,8 +56,11 @@ APIドキュメントはWebの `/api` で確認できる。`@packages/api` のZo
 
 ### Storybook
 
-- `pnpm storybook:serve`: Storybookを起動する
-- `pnpm --filter @packages/storybook build-storybook`: Storybookをビルドする
+- `pnpm stanza:storybook:serve`: Stanza用Storybookをポート6006で起動する
+- `pnpm stanza:storybook:build`: Stanza用Storybookをビルドする。出力先は `@packages/stanza/storybook-static/`
+- `pnpm storybook:serve`: Stanza用の互換コマンド。`stanza:storybook:serve` と同じ環境を起動する
+
+設定と補助コードは `@packages/stanza/.storybook/` に置く。Stanzaパッケージ内では `pnpm storybook` / `pnpm build-storybook` でも実行できる。
 
 表示確認の補足は `docs/agent-browser.md` を参照する。
 

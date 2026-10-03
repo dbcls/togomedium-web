@@ -19,21 +19,20 @@ Web開発サーバーの設定ポートは5200。起動ログのURLをブラウ�
 接続先を変更しなければ、APIはTogoMediumの公開SPARQList、Stanzaは配信済みのJavaScriptを利用する。Webを起動するだけではローカルのStanza変更は反映されない。Stanzaの開発・確認は次のコマンドと `@packages/stanza/docs/development-guide.md` を入口にする。
 
 ```sh
-mise exec -- pnpm storybook:serve
+mise exec -- pnpm stanza:storybook:serve
 ```
 
 WebとStanzaの接続先設定は `docs/architecture.md` にまとめている。
 
 ## 構成と資料
 
-| パッケージ            | 役割                                                |
-| --------------------- | --------------------------------------------------- |
-| `@packages/web`       | Webサイトの画面構成、ルーティング、Stanzaの組み込み |
-| `@packages/stanza`    | 再利用可能なStanzaと共通UI                          |
-| `@packages/api`       | APIの型・スキーマ・OpenAPI定義                      |
-| `@packages/sparql`    | SPARQLの比較・実験・採用予定APIの実行と検証         |
-| `@packages/core`      | 通信や文字列処理などの共有処理                      |
-| `@packages/storybook` | コンポーネントを確認するStorybook環境               |
+| パッケージ         | 役割                                                |
+| ------------------ | --------------------------------------------------- |
+| `@packages/web`    | Webサイトの画面構成、ルーティング、Stanzaの組み込み |
+| `@packages/stanza` | 再利用可能なStanzaと共通UI、Stanza用Storybook       |
+| `@packages/api`    | APIの型・スキーマ・OpenAPI定義                      |
+| `@packages/sparql` | SPARQLの比較・実験・採用予定APIの実行と検証         |
+| `@packages/core`   | 通信や文字列処理などの共有処理                      |
 
 文書全体の入口は `docs/index.md`。構成とデータの流れは `docs/architecture.md`、環境構築と日常操作は `docs/development-guide.md`、変更後の確認は `docs/testing-policy.md` を参照する。
 

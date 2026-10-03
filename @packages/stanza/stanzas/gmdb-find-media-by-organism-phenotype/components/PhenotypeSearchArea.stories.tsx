@@ -1,5 +1,5 @@
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import { PhenotypeSearchArea } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/PhenotypeSearchArea";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta = {

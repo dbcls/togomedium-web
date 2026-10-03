@@ -16,7 +16,6 @@ export default ({ mode }: ConfigEnv) => {
       resolve: {
         alias: {
           "%stanza": envDir,
-          "%storybook": resolve(envDir, "../storybook/src"),
           "%core": resolve(envDir, "../core/src"),
           "%api": resolve(envDir, "../api/src"),
         },

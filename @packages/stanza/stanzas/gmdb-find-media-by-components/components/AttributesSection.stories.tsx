@@ -1,6 +1,6 @@
+import { ComponentWrapper } from "%stanza/.storybook/components/ComponentWrapper";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import { AttributesSection } from "%stanza/stanzas/gmdb-find-media-by-components/components/AttributesSection";
-import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta = {

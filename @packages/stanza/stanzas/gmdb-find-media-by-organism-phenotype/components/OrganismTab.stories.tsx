@@ -1,5 +1,5 @@
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import { OrganismTab } from "%stanza/stanzas/gmdb-find-media-by-organism-phenotype/components/OrganismTab";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta = {

@@ -1,5 +1,5 @@
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import { AlignmentCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/AlignmentCell";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta = {

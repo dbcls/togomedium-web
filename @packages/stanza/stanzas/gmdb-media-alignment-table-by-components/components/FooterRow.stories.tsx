@@ -1,7 +1,7 @@
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import { FooterRow } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/FooterRow";
 import { useIsMediaExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isMediaExpanded";
 import { useIsOrganismsExpandedMutators } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/states/isOrganismsExpanded";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 

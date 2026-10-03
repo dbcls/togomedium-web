@@ -1,6 +1,6 @@
 import { PATH_MEDIUM, PATH_TAXON } from "%core/consts";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import { InfoCell } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/InfoCell";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta = {

@@ -1,8 +1,8 @@
+import { ComponentWrapper } from "%stanza/.storybook/components/ComponentWrapper";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import { TaxonInput } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/components/TaxonInput";
 import { useTaxonomyTypeMutators } from "%stanza/stanzas/gmdb-find-media-by-taxonomic-tree/states/taxonomyType";
 import { sleep } from "%stanza/utils/promise";
-import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within } from "storybook/test";
 

@@ -65,7 +65,7 @@
 
 ## 共通基盤の扱い
 
-- `@packages/stanza/togostanza.config.ts` と `@packages/stanza/tsconfig.json` では `%stanza/` `%core/` `%api/` `%storybook/` のエイリアスを定義している。V4のビルド用設定とTypeScript用設定の参照先を揃え、importは既存パターンに揃える。
+- `@packages/stanza/togostanza.config.ts` と `@packages/stanza/tsconfig.json` では `%stanza/` `%core/` `%api/` のエイリアスを定義している。V4のビルド用設定とTypeScript用設定の参照先を揃え、importは既存パターンに揃える。
 - プロバイダー、テーマ、共通ユーティリティに寄せられる責務は、Stanza個別実装へ重複させない。
 - 逆に、ひとつのStanzaに強く依存する状態構造やドメイン知識は、共通基盤へ早い段階で持ち込まない。
 
@@ -94,6 +94,14 @@
 - APIレスポンスの整形や木構造処理など、UIに依存しない処理は `functions/` や `utils/` に分けてテスト可能にする。
 
 ## 確認の進め方
+
+### Storybookの設定と補助コード
+
+Storybookの設定と補助コードは `@packages/stanza/.storybook/` で管理する。`main.ts` は既存Storyの検出・アドオン、`vite.config.ts` はパス解決・React・Tailwindを設定し、Stanza配布用の `togostanza.config.ts` とは分ける。Storyは対象のReactコンポーネントに隣接して置き、`StoryProvider` と表示用ラッパーは `%stanza/.storybook/` からimportする。
+
+Storybookは実APIを使う開発プレビューとして扱う。`StoryProvider` のQueryClientは共有し、Jotai未指定時はdefault store、Reduxは渡されたstoreを利用する。既存の状態共有範囲を暗黙に変更しない。`mui` 指定時は共通テーマとグローバルCSSを適用し、Tailwindはpreview全体で読み込む。互換用の `tw` propでTailwindを切り替えることはできない。
+
+### 確認対象
 
 共通の検証コマンドと完了条件は `docs/testing-policy.md`、起動・ビルド手順は `docs/development-guide.md` に従う。以下はStanza固有の追加観点。
 

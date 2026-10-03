@@ -1,7 +1,7 @@
 import { data1 } from "%api/mediaStrainsAlignment/data1";
 import { data2 } from "%api/mediaStrainsAlignment/data2";
-import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
-import { StoryProvider } from "%storybook/StoryProvider";
+import { ComponentWrapper } from "%stanza/.storybook/components/ComponentWrapper";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AppContainer } from "./AppContainer";
 

@@ -1,7 +1,7 @@
+import { PageWrapper } from "%stanza/.storybook/components/PageWrapper";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import App from "%stanza/stanzas/gmdb-medium-builder/App";
 import { appStore } from "%stanza/stanzas/gmdb-medium-builder/state/appStore";
-import { PageWrapper } from "%storybook/components/PageWrapper";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, waitFor, within } from "storybook/test";
 

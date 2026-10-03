@@ -8,7 +8,7 @@
     "web:serve": "pnpm --filter @packages/web start",
     "stanza:serve": "pnpm --filter @packages/stanza stanza:server",
     "stanza:build": "pnpm --filter @packages/stanza stanza:build",
-    "storybook:serve": "pnpm --filter @packages/storybook storybook",
+    "storybook:serve": "pnpm stanza:storybook:serve",
     "lint": "oxlint -c oxlint.config.ts . --quiet",
     "lint:debug": "oxlint -c oxlint.config.ts .",
     "lint:fix": "oxlint -c oxlint.config.ts . --fix --quiet",
@@ -19,7 +19,9 @@
     "test": "vitest run && pnpm --filter @packages/sparql test",
     "test:watch": "vitest run --watch",
     "type-check": "oxlint -c oxlint.config.ts . --type-aware --type-check",
-    "check-all": "pnpm run format && pnpm run lint && pnpm run type-check && pnpm run test"
+    "check-all": "pnpm run format && pnpm run lint && pnpm run type-check && pnpm run test",
+    "stanza:storybook:serve": "pnpm --filter @packages/stanza storybook",
+    "stanza:storybook:build": "pnpm --filter @packages/stanza build-storybook"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",

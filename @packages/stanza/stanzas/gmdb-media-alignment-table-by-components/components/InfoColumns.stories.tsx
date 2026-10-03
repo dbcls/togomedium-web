@@ -1,6 +1,6 @@
 import { mediaAlignmentTableResponse1 } from "%api/mediaComponentAlignment/response1";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import { InfoColumns } from "%stanza/stanzas/gmdb-media-alignment-table-by-components/components/InfoColumns";
-import { StoryProvider } from "%storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta = {

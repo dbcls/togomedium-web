@@ -6,16 +6,17 @@
 
 pnpmワークスペースとして `@packages/*` を管理する。WebサイトとStanzaの実装を分け、API定義と基礎処理を共有する。
 
-| パッケージ            | 責務と利用関係                                                                                                             |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `@packages/web`       | React・Viteによるサイト。TanStack RouterでURLと画面を結び、ページにStanzaを組み込む。API定義とcoreの処理も直接利用する     |
-| `@packages/stanza`    | TogoStanzaによるWebComponent。現行のUIは主にReact・MUIで実装し、Shadow DOM内に描画する。API定義とcoreを利用する            |
-| `@packages/api`       | リクエスト・レスポンスのZodスキーマ、TypeScript型、APIパス、OpenAPI定義。APIサーバーの実装ではない                         |
-| `@packages/sparql`    | SPARQLクエリの比較・実験・採用予定APIの検証。CLIで問い合わせと整形を行い、APIスキーマを利用する。Webの実行時には依存しない |
-| `@packages/core`      | URL組み立て、通信、文字列処理など、パッケージ間で使う基礎処理                                                              |
-| `@packages/storybook` | Stanza配下のStoryを読み込む確認環境と補助コード。Stanzaの配布物とは別にコンポーネントを確認できる                          |
+| パッケージ         | 責務と利用関係                                                                                                             |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `@packages/web`    | React・Viteによるサイト。TanStack RouterでURLと画面を結び、ページにStanzaを組み込む。API定義とcoreの処理も直接利用する     |
+| `@packages/stanza` | TogoStanzaによるWebComponent。現行のUIは主にReact・MUIで実装し、Shadow DOM内に描画する。API定義とcoreを利用する            |
+| `@packages/api`    | リクエスト・レスポンスのZodスキーマ、TypeScript型、APIパス、OpenAPI定義。APIサーバーの実装ではない                         |
+| `@packages/sparql` | SPARQLクエリの比較・実験・採用予定APIの検証。CLIで問い合わせと整形を行い、APIスキーマを利用する。Webの実行時には依存しない |
+| `@packages/core`   | URL組み立て、通信、文字列処理など、パッケージ間で使う基礎処理                                                              |
 
 WebやStanzaからの `%api/`・`%core/` importは、各パッケージのTypeScriptソースを参照する。対応は `@packages/web/tsconfig.app.json`、`@packages/stanza/tsconfig.json` と `@packages/stanza/togostanza.config.ts` で確認できる。
+
+Stanza用Storybookの設定と補助コードは `@packages/stanza/.storybook/` に置く。Stanza内部のReactコンポーネントと実API接続を確認する環境であり、Shadow DOMを使うWeb Components配布物の検証を完全には代替しない。
 
 Webに組み込むStanzaは、Reactコンポーネントとして直接importするのではなく、配信されたJavaScriptを読み込んでcustom elementとして使う。この境界により、StanzaをTogoMedium以外のサイトにも組み込める。
 

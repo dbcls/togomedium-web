@@ -5,29 +5,25 @@ import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  root: "src/",
+  root: import.meta.dirname,
   plugins: [tailwindcss(), react()],
   resolve: {
     alias: [
       {
         find: /^%stanza\//,
-        replacement: join(import.meta.dirname, "../", "stanza/"),
-      },
-      {
-        find: /^%storybook\//,
-        replacement: join(import.meta.dirname, "../", "storybook/src/"),
+        replacement: join(import.meta.dirname, "../"),
       },
       {
         find: /^%core\//,
-        replacement: join(import.meta.dirname, "../", "core/src/"),
+        replacement: join(import.meta.dirname, "../../core/src/"),
       },
       {
         find: /^%api\//,
-        replacement: join(import.meta.dirname, "../", "api/src/"),
+        replacement: join(import.meta.dirname, "../../api/src/"),
       },
       {
         find: /^%web\//,
-        replacement: join(import.meta.dirname, "../", "web/src/"),
+        replacement: join(import.meta.dirname, "../../web/src/"),
       },
     ],
   },

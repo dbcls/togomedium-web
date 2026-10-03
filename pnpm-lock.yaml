@@ -194,12 +194,6 @@ importers:
         specifier: ^7.4.0
         version: 7.4.3
 
-  '@packages/storybook':
-    dependencies:
-      yohak-tools:
-        specifier: 0.4.1
-        version: 0.4.1
-
   '@packages/web':
     dependencies:
       '@heroui/react':
@@ -5534,9 +5528,6 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  yohak-tools@0.4.1:
-    resolution: {integrity: sha512-gbPyOhzhXpwpVLZVFO2NA36ccLlnMJC/A6Dp94AoJjqize5H8Hb7saBEpkzUn6IL3Gqv2xj9+KKnTWlL+8fbJA==}
-
   zod-validation-error@4.0.2:
     resolution: {integrity: sha512-Q6/nZLe6jxuU80qb/4uJ4t5v2VEZ44lzQjPDhYJNztRQ4wyWc6VF3D3Kb/fAuPetZQnhS3hnajCf9CsWesghLQ==}
     engines: {node: '>=18.0.0'}
@@ -8614,7 +8605,8 @@ snapshots:
 
   chalk@5.6.2: {}
 
-  change-case@5.4.4: {}
+  change-case@5.4.4:
+    optional: true
 
   character-entities-html4@2.1.0: {}
 
@@ -11009,10 +11001,6 @@ snapshots:
   yaml@2.9.1: {}
 
   yocto-queue@0.1.0: {}
-
-  yohak-tools@0.4.1:
-    dependencies:
-      change-case: 5.4.4
 
   zod-validation-error@4.0.2(zod@4.6.5):
     dependencies:

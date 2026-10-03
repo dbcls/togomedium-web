@@ -1,5 +1,5 @@
 import { mediaAlignmentTableResponse2 } from "%api/mediaComponentAlignment/response2";
-import { StoryProvider } from "%storybook/StoryProvider";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ScrollableTable } from "./ScrollableTable";
 

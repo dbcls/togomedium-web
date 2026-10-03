@@ -7,7 +7,9 @@
     "test": "vitest",
     "stanza:server": "togostanza s",
     "stanza:build": "togostanza build",
-    "stanza:generate": "togostanza g stanza"
+    "stanza:generate": "togostanza g stanza",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@types/d3-drag": "^3.0.7",

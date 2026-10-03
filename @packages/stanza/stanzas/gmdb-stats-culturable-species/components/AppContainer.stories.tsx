@@ -1,5 +1,5 @@
-import { ComponentWrapper } from "%storybook/components/ComponentWrapper";
-import { StoryProvider } from "%storybook/StoryProvider";
+import { ComponentWrapper } from "%stanza/.storybook/components/ComponentWrapper";
+import { StoryProvider } from "%stanza/.storybook/StoryProvider";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AppContainer } from "./AppContainer";
 
