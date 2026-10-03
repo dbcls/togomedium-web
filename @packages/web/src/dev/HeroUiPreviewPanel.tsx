@@ -9,14 +9,14 @@ export const HeroUiPreviewPanel = () => {
   return (
     <main className="bg-background text-foreground min-h-screen p-8">
       <div className="bg-surface mx-auto flex max-w-xl flex-col gap-6 rounded-lg p-6">
-        <h1 className="text-2xl font-bold">HeroUI 導入確認</h1>
-        <p>開発用の表示確認です。Tab・Enter・矢印キー・Escapeで操作できます。</p>
+        <h1 className="text-2xl font-bold">HeroUI integration preview</h1>
+        <p>Development preview. Use Tab, Enter, arrow keys, and Escape to navigate.</p>
         <Select
           className="w-64 max-w-full"
           value={limit}
           onChange={(value) => setLimit(String(value))}
         >
-          <Label>表示件数</Label>
+          <Label>Items per page</Label>
           <Select.Trigger>
             <Select.Value />
             <Select.Indicator />
@@ -24,8 +24,8 @@ export const HeroUiPreviewPanel = () => {
           <Select.Popover>
             <ListBox>
               {["20", "50", "100"].map((value) => (
-                <ListBox.Item key={value} id={value} textValue={`${value}件`}>
-                  {value}件
+                <ListBox.Item key={value} id={value} textValue={`${value} items`}>
+                  {value} items
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
               ))}
@@ -33,11 +33,11 @@ export const HeroUiPreviewPanel = () => {
           </Select.Popover>
         </Select>
         <div className="flex flex-wrap gap-3">
-          <Button onPress={() => setPressCount((count) => count + 1)}>動作確認</Button>
-          <Button isDisabled>無効状態</Button>
+          <Button onPress={() => setPressCount((count) => count + 1)}>Test button</Button>
+          <Button isDisabled>Disabled</Button>
         </div>
         <p role="status">
-          選択: {limit}件／ボタン操作: {pressCount}回
+          Selected: {limit} items / Button presses: {pressCount}
         </p>
       </div>
     </main>
