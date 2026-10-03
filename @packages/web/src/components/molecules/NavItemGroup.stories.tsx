@@ -13,7 +13,7 @@ const meta = {
       </>
     ),
   },
-  parameters: { web: { initialPath: "/medium", showLocation: true } },
+  parameters: { web: { initialPath: "/medium" } },
   decorators: [
     (Story) => (
       <ul className="w-64">
@@ -25,4 +25,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Primary = {} satisfies Story;
+export const Navigation = { parameters: { web: { showLocation: true } } } satisfies Story;
 export const LongTitle = { args: { title: "Find and compare growth media" } } satisfies Story;

@@ -3,13 +3,12 @@ import { SearchInput } from "./SearchInput";
 
 const meta = {
   component: SearchInput,
-  parameters: { web: { showLocation: true } },
 } satisfies Meta<typeof SearchInput>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Primary = {} satisfies Story;
 export const OnSearchRoute = {
-  parameters: { web: { initialPath: "/search?query=Bacillus" } },
+  parameters: { web: { initialPath: "/search?query=Bacillus", showLocation: true } },
 } satisfies Story;
 export const Narrow = {
   decorators: [

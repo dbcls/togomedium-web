@@ -9,7 +9,6 @@ const meta = {
     to: "/find-media-by-components",
     icon: <FridgeIcon />,
   },
-  parameters: { web: { showLocation: true } },
   decorators: [
     (Story, { parameters }) => (
       <ul className={parameters.narrow ? "w-64 bg-gray-100 p-4" : "max-w-md bg-gray-100 p-4"}>
@@ -21,6 +20,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Primary = {} satisfies Story;
+export const Navigation = { parameters: { web: { showLocation: true } } } satisfies Story;
 export const CompareMedia = {
   args: { title: "Compare media", to: "/compare-media", icon: <GridIcon /> },
 } satisfies Story;
