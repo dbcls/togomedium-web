@@ -20,7 +20,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Primary = {} satisfies Story;
-export const Navigation = { parameters: { web: { showLocation: true } } } satisfies Story;
 export const CompareMedia = {
   args: { title: "Compare media", to: "/compare-media", icon: <GridIcon /> },
 } satisfies Story;

@@ -8,7 +8,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 export const Primary = {} satisfies Story;
 export const OnSearchRoute = {
-  parameters: { web: { initialPath: "/search?query=Bacillus", showLocation: true } },
+  parameters: { web: { initialPath: "/search?query=Bacillus" } },
 } satisfies Story;
 export const Narrow = {
   decorators: [

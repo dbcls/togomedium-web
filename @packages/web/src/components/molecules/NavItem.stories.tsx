@@ -15,7 +15,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Primary = {} satisfies Story;
-export const Navigation = { parameters: { web: { showLocation: true } } } satisfies Story;
 export const Active = { parameters: { web: { initialPath: "/medium" } } } satisfies Story;
 export const ActiveDescendant = {
   args: { exactActive: false },

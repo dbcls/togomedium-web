@@ -25,5 +25,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Primary = {} satisfies Story;
-export const Navigation = { parameters: { web: { showLocation: true } } } satisfies Story;
 export const LongTitle = { args: { title: "Find and compare growth media" } } satisfies Story;
