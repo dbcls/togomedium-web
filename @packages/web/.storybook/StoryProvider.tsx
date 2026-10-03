@@ -5,7 +5,6 @@ import {
   createRoute,
   createRouter,
   RouterProvider,
-  useLocation,
 } from "@tanstack/react-router";
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { createCountFixtures, type StoryCounts } from "./fixtures";
@@ -13,25 +12,15 @@ import { createCountFixtures, type StoryCounts } from "./fixtures";
 export type StoryEnvironment = {
   initialPath?: string;
   counts?: StoryCounts;
-  showLocation?: boolean;
 };
 const StoryContent = createContext<ReactNode>(null);
 
 const StoryRoot = () => <>{useContext(StoryContent)}</>;
-const StoryLocation = () => {
-  const location = useLocation();
-  return (
-    <output aria-label="Story location" className="mt-6 block border-t pt-2 text-sm text-gray-600">
-      Story location: {location.href}
-    </output>
-  );
-};
 
 export const StoryProvider = ({
   children,
   initialPath = "/",
   counts,
-  showLocation = false,
 }: StoryEnvironment & { children: ReactNode }) => {
   const [queryClient] = useState(() => {
     const client = new QueryClient({
@@ -56,14 +45,7 @@ export const StoryProvider = ({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <StoryContent.Provider
-        value={
-          <>
-            {children}
-            {showLocation && <StoryLocation />}
-          </>
-        }
-      >
+      <StoryContent.Provider value={children}>
         <RouterProvider router={router} />
       </StoryContent.Provider>
     </QueryClientProvider>

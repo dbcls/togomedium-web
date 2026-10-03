@@ -12,13 +12,12 @@ Storyの `parameters.web` に、次を指定できる。これらはマウント
 parameters: {
   web: {
     initialPath: "/medium",
-    showLocation: true,
     counts: { media: 2400, strains: 12500, components: 850 },
   },
 }
 ```
 
-内部リンクと検索送信はmemory router内で遷移し、コンポーネントはそのまま表示する。`showLocation` を指定すると遷移先を表示する。ブラウザ本体のURLと本番のページ・loaderは変更しない。外部リンクは元のコンポーネントどおりに動く。
+内部リンクと検索送信はmemory router内で遷移し、コンポーネントはそのまま表示する。ブラウザ本体のURLと本番のページ・loaderは変更しない。外部リンクは元のコンポーネントどおりに動く。Storybookではコンポーネント自体の見た目を確認し、遷移先などの検証用UIは追加しない。ルーターの遷移と状態保持はテスト内のprobeで確認する。
 
 ## 固定データ
 
