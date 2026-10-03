@@ -32,9 +32,12 @@
 
 ```text
 http://127.0.0.1:6006/iframe.html?id=<story-id>
+http://127.0.0.1:6007/iframe.html?id=<story-id>
 ```
 
 管理画面上でStoryを選んだ場合も、最終確認では同じStoryの `iframe.html` URLを使う。
+
+6006はStanza用、6007はWeb用。Web用は固定データと実APIへの通信がないこと、Stanza用は実APIの応答と描画結果を区別して確認する。Web用はmemory router内で遷移するため、ブラウザのURLだけでは操作結果を判定できない。遷移と状態保持の検証方法は `@packages/web/docs/storybook.md` を参照する。
 
 ## Webアプリでの見方
 

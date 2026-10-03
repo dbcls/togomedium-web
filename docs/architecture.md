@@ -16,7 +16,9 @@ pnpmワークスペースとして `@packages/*` を管理する。Webサイト�
 
 WebやStanzaからの `%api/`・`%core/` importは、各パッケージのTypeScriptソースを参照する。対応は `@packages/web/tsconfig.app.json`、`@packages/stanza/tsconfig.json` と `@packages/stanza/togostanza.config.ts` で確認できる。
 
-Stanza用Storybookの設定と補助コードは `@packages/stanza/.storybook/` に置く。Stanza内部のReactコンポーネントと実API接続を確認する環境であり、Shadow DOMを使うWeb Components配布物の検証を完全には代替しない。
+Storybookの設定・補助コードは、Web用を `@packages/web/.storybook/`、Stanza用を `@packages/stanza/.storybook/` に置く。Providerとスタイルはそれぞれのパッケージで管理し、別のプレビュー環境として起動する。Storybook関連の依存パッケージはルートで管理する。
+
+Web用は本番CSSと固定データを使い、Web側のReactコンポーネントを確認する。memory router内の遷移は本番ページを読み込まず、実APIにも接続しない。Stanza用は内部のReactコンポーネントと実API接続を確認する環境であり、Shadow DOMを使うWeb Components配布物の検証を完全には代替しない。
 
 Webに組み込むStanzaは、Reactコンポーネントとして直接importするのではなく、配信されたJavaScriptを読み込んでcustom elementとして使う。この境界により、StanzaをTogoMedium以外のサイトにも組み込める。
 

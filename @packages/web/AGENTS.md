@@ -14,6 +14,7 @@
 - Stanza連携の変更では、ページ側で直接custom elementを触らず、既存の `src/components/stanzas/` を起点に影響範囲を確認する。
 - `src/routeTree.gen.ts` はTanStack Routerの自動生成ファイル。手動編集せず、必要な変更は `src/routes/` 側で行う。
 - SVGアイコン関連の作業では `docs/agents/task-guides/svgIcon.md` を確認する。
+- Story作成時は `docs/agents/task-guides/storybookComponent.md` と `@packages/web/docs/storybook.md` を確認する。Web用Storybookの設定・補助コードは `.storybook/` に置き、本番CSSと固定データを使う。
 
 ## 起動と検証
 

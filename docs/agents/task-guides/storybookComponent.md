@@ -7,6 +7,13 @@ description: Storybookに対応するReactコンポーネントを作るため�
 
 Reactの関数コンポーネントと、それに対応するStorybookのStoryファイルを作成する。
 
+## 対象環境
+
+- Web側のReactコンポーネントは `@packages/web` のStorybookで確認する。配置・固定データ・ルーター・共通decoratorは `@packages/web/docs/storybook.md` に従い、個別のStoryへProviderを重複して追加しない。
+- Stanza内部のReactコンポーネントは `@packages/stanza` のStorybookで確認する。実API接続と `StoryProvider` の使い方は `@packages/stanza/docs/development-guide.md` の「確認の進め方」を参照する。Web用の固定データ環境とは共有しない。
+- Web ComponentsはStanzaの配布・組み込みに使う技術を指す。Reactコンポーネントと区別して記載する。
+- 起動・ビルドは `docs/development-guide.md`、検証は `docs/testing-policy.md` を参照する。
+
 ## 作成手順
 
 コンポーネントの作成を依頼されたら、次の手順で進める。依頼に説明が含まれている場合は、その内容を反映する。

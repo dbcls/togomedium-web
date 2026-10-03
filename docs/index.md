@@ -21,13 +21,14 @@
 
 ## 実装の判断基準を確認する
 
-| 対象                                          | 参照先                                       |
-| --------------------------------------------- | -------------------------------------------- |
-| 共通のコード規約                              | `docs/development/coding-guidelines.md`      |
-| 型・変数・ファイル・API・Stanzaの命名         | `docs/naming-convention.md`                  |
-| Webのルーティング・画面・データ取得・スタイル | `@packages/web/docs/coding-guidelines.md`    |
-| WebへのStanzaの組み込み                       | `@packages/web/docs/stanza-integration.md`   |
-| Stanza内部の構成・公開パラメータ・接続設定    | `@packages/stanza/docs/development-guide.md` |
+| 対象                                            | 参照先                                       |
+| ----------------------------------------------- | -------------------------------------------- |
+| 共通のコード規約                                | `docs/development/coding-guidelines.md`      |
+| 型・変数・ファイル・API・Stanzaの命名           | `docs/naming-convention.md`                  |
+| Webのルーティング・画面・データ取得・スタイル   | `@packages/web/docs/coding-guidelines.md`    |
+| Web用Storybookの固定データ・ルーター・Story作成 | `@packages/web/docs/storybook.md`            |
+| WebへのStanzaの組み込み                         | `@packages/web/docs/stanza-integration.md`   |
+| Stanza内部の構成・公開パラメータ・接続設定      | `@packages/stanza/docs/development-guide.md` |
 
 各パッケージで作業する際の注意点は `@packages/*/AGENTS.md` にある。個別Stanzaの資料は `@packages/stanza/stanzas/` 配下に置く。
 

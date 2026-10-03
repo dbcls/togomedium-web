@@ -68,6 +68,8 @@ Web用の設定と補助コードは `@packages/web/.storybook/` に置く。Web
 
 表示確認の補足は `docs/agent-browser.md` を参照する。
 
+Web用とStanza用は別のターミナルで同時起動できる。ポート6007と6006を使い分け、`storybook:serve` を両環境の一括起動として扱わない。Web用は固定データ、Stanza用は実API接続を使う。Stanza側のStoryとProviderの扱いは `@packages/stanza/docs/development-guide.md` の「確認の進め方」を参照する。
+
 ## 検証と完了報告
 
 作業前の確認、変更種別ごとの検証、完了条件は `docs/testing-policy.md` に従う。画面確認の操作や一時成果物の扱いは `docs/agent-browser.md` を参照する。
