@@ -3,7 +3,6 @@ import { GlobalNavigation } from "./GlobalNavigation";
 
 const meta = {
   component: GlobalNavigation,
-  parameters: { web: { showLocation: true } },
 } satisfies Meta<typeof GlobalNavigation>;
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -16,5 +15,5 @@ export const CompareMediaSelected = {
   parameters: { web: { initialPath: "/compare-media" } },
 } satisfies Story;
 export const SearchQuery = {
-  parameters: { web: { initialPath: "/search?query=Glucose" } },
+  parameters: { web: { initialPath: "/search?query=Glucose", showLocation: true } },
 } satisfies Story;

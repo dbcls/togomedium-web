@@ -3,7 +3,6 @@ import { StatsSection } from "./StatsSection";
 
 const meta = {
   component: StatsSection,
-  parameters: { web: { showLocation: true } },
 } satisfies Meta<typeof StatsSection>;
 export default meta;
 type Story = StoryObj<typeof meta>;
