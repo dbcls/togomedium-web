@@ -1,4 +1,5 @@
 import type { SearchComponentsFacetsResponse } from "%api/searchComponentsFacets/definitions";
+import { COMPONENT_CLASSIFICATION_NONE } from "%api/searchComponentsList/classification";
 import { Button } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { H2 } from "@/components/atoms/H2.tsx";
@@ -66,15 +67,29 @@ export const ComponentListPage = () => {
   const choices = facets.data ?? catalog;
   const includeCounts = countsStatus === "ready";
   const roles = withSelectedOption(
-    componentRoleOptions(choices?.roles ?? [], includeCounts),
+    [
+      {
+        id: COMPONENT_CLASSIFICATION_NONE,
+        label: "No roles",
+        count: includeCounts ? choices?.role_none_count : undefined,
+      },
+      ...componentRoleOptions(choices?.roles ?? [], includeCounts),
+    ],
     search.role,
   );
   const properties = withSelectedOption(
-    (choices?.properties ?? []).map((property) => ({
-      id: property.gmo_id,
-      label: property.label_en || property.gmo_id,
-      count: includeCounts ? property.count : undefined,
-    })),
+    [
+      {
+        id: COMPONENT_CLASSIFICATION_NONE,
+        label: "No properties",
+        count: includeCounts ? choices?.property_none_count : undefined,
+      },
+      ...(choices?.properties ?? []).map((property) => ({
+        id: property.gmo_id,
+        label: property.label_en || property.gmo_id,
+        count: includeCounts ? property.count : undefined,
+      })),
+    ],
     search.property,
   );
   const total = Number(displayedList?.total ?? 0);

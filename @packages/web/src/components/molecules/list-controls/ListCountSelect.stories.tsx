@@ -3,6 +3,7 @@ import { useState, type ComponentProps } from "react";
 import { ListCountSelect, type ListCountOption } from "./ListCountSelect";
 
 const options: ListCountOption[] = [
+  { id: "none", label: "No roles", count: 12 },
   { id: "source", label: "Nutrient source", count: 240 },
   { id: "carbon", label: "Carbon source", count: 120, depth: 1 },
   { id: "sugar", label: "Sugar", count: 65, depth: 2 },
@@ -42,6 +43,7 @@ export const FlatOptions = {
   args: {
     label: "Property",
     options: [
+      { id: "none", label: "No properties", count: 8 },
       { id: "solid", label: "Solidifying agent", count: 24 },
       { id: "organic", label: "Organic compound", count: 83 },
       { id: "inorganic", label: "Inorganic compound", count: 0 },

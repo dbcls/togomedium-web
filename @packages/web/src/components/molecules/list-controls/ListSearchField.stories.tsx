@@ -8,7 +8,9 @@ const SearchExample = (args: ComponentProps<typeof ListSearchField>) => {
   return (
     <div className="flex flex-col gap-4">
       <ListSearchField {...args} value={value} onChange={setValue} onSubmit={setApplied} />
-      {applied !== undefined && <p role="status">Applied search: {applied || "Any name"}</p>}
+      {applied !== undefined && (
+        <p role="status">Applied search: {applied || "Any name or GMO ID"}</p>
+      )}
     </div>
   );
 };
@@ -32,7 +34,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary = {} satisfies Story;
 export const Prefilled = { args: { value: "Glucose" } } satisfies Story;
 export const EmptySearch = {
-  args: { value: "", placeholder: "Clear the name filter with an empty search" },
+  args: { value: "", placeholder: "Clear the name or GMO ID filter with an empty search" },
 } satisfies Story;
 export const Disabled = { args: { value: "Glucose", isDisabled: true } } satisfies Story;
 export const Narrow = {

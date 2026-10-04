@@ -1,4 +1,5 @@
 import type { SearchComponentsFacetsParams } from "%api/searchComponentsFacets/definitions";
+import { componentClassificationFilterSchema } from "%api/searchComponentsList/classification";
 import type { SearchComponentsListParams } from "%api/searchComponentsList/definitions";
 import {
   defaultStringifySearch,
@@ -47,11 +48,8 @@ export const validateComponentListSearch = (
         : typeof input.name === "number" || typeof input.name === "boolean"
           ? String(input.name)
           : "",
-    role: typeof input.role === "string" && /^GMO_[0-9]{6}$/.test(input.role) ? input.role : "",
-    property:
-      typeof input.property === "string" && /^GMO_[0-9]{6}$/.test(input.property)
-        ? input.property
-        : "",
+    role: componentClassificationFilterSchema.safeParse(input.role).data ?? "",
+    property: componentClassificationFilterSchema.safeParse(input.property).data ?? "",
     sort: input.sort === "name" || input.sort === "id" ? input.sort : "medium_count",
     order: input.order === "asc" ? "asc" : "desc",
     page: Number.isSafeInteger((page - 1) * size) ? page : 1,

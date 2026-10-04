@@ -2,6 +2,7 @@ import type { SearchComponentsListResponse } from "%api/searchComponentsList/def
 import { Card } from "@heroui/react";
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
+import { decodeLabelEntities } from "@/utils/decodeLabelEntities";
 
 type Props = {
   component: SearchComponentsListResponse["contents"][number];
@@ -10,6 +11,7 @@ type Props = {
 
 export const ComponentCard = ({ component, className }: Props) => {
   const { id, name, aliases, medium_count: mediumCount, roles, properties } = component;
+  const displayName = decodeLabelEntities(name) || "Unnamed component";
   const classifications = [
     { label: "Role", items: roles, tagClassName: "border-transparent bg-primary/15 text-gray-800" },
     {
@@ -26,7 +28,7 @@ export const ComponentCard = ({ component, className }: Props) => {
           {...props}
           to="/component/$gmoId"
           params={{ gmoId: id }}
-          aria-label={`${name || "Unnamed component"} (${id})`}
+          aria-label={`${displayName} (${id})`}
           draggable={false}
         />
       )}
@@ -39,11 +41,11 @@ export const ComponentCard = ({ component, className }: Props) => {
         <div className="min-w-0">
           <p className="mb-1 text-xs text-gray-500">{id}</p>
           <Card.Title className="text-primary text-2xl leading-tight font-medium [overflow-wrap:anywhere]">
-            {name || "Unnamed component"}
+            {displayName}
           </Card.Title>
           {aliases.length > 0 && (
             <p aria-label="Aliases" className="min-w-0 [overflow-wrap:anywhere] text-gray-700">
-              {aliases.join("; ")}
+              {aliases.map(decodeLabelEntities).join("; ")}
             </p>
           )}
         </div>

@@ -109,7 +109,15 @@ export const SingleColumn = {
           properties: [],
         }}
       />
-      <ComponentCard component={{ ...component, id: "GMO_000003", medium_count: 0 }} />
+      <ComponentCard
+        component={{
+          ...component,
+          id: "GMO_000003",
+          name: "Bacto &trade; Yeast extract",
+          aliases: ["Yeast &#8482; extract"],
+          medium_count: 0,
+        }}
+      />
     </div>
   ),
 } satisfies Story;

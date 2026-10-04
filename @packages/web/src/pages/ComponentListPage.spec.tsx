@@ -75,6 +75,49 @@ afterEach(() => {
 });
 
 describe("ComponentListPage", () => {
+  it("keeps Any distinct from zero-count unassigned choices and restores them through history", async () => {
+    const fetchMock = vi.fn(async (url: string) =>
+      json(
+        url.includes("_facets")
+          ? { ...facetData, role_none_count: 0, property_none_count: 0 }
+          : listData(url),
+      ),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    const { history } = await setup("/component?name=001009&page=2");
+    await screen.findByRole("link", { name: "Glucose (GMO_000001)" });
+    fireEvent.click(screen.getByRole("button", { name: "Any Role" }));
+    fireEvent.click(await screen.findByRole("option", { name: "No roles, 0 results" }));
+    await waitFor(() => expect(history.location.search).toContain("role=none"));
+    expect(history.location.search).not.toContain("page=");
+    fireEvent.click(screen.getByRole("button", { name: "Any Property" }));
+    fireEvent.click(await screen.findByRole("option", { name: "No properties, 0 results" }));
+    await waitFor(() =>
+      expect(
+        fetchMock.mock.calls.some(([url]) => {
+          const params = new URL(url).searchParams;
+          return (
+            params.get("name") === "001009" &&
+            params.get("role_id") === "none" &&
+            params.get("property_id") === "none"
+          );
+        }),
+      ).toBe(true),
+    );
+    await act(async () => {
+      history.back();
+    });
+    await screen.findByRole("button", { name: "Any Property" });
+    expect(screen.getByRole("button", { name: "No roles Role" })).toBeTruthy();
+    await act(async () => {
+      history.forward();
+    });
+    await screen.findByRole("button", { name: "No properties Property" });
+    fireEvent.click(screen.getByRole("button", { name: "No roles Role" }));
+    fireEvent.click(screen.getByRole("option", { name: "Any" }));
+    await waitFor(() => expect(history.location.search).not.toContain("role="));
+    expect(history.location.search).toContain("property=none");
+  });
   it("offers a list retry after failure and waits for successful rendering before fetching facets", async () => {
     let unavailable = true;
     const fetchMock = vi.fn(async (url: string) => {
@@ -175,7 +218,7 @@ describe("ComponentListPage", () => {
     await screen.findByRole("option", { name: "Nutrient source, 10 results" });
     fireEvent.click(screen.getByRole("option", { name: "Any" }));
     fireEvent.change(screen.getByRole("searchbox"), { target: { value: "new" } });
-    fireEvent.submit(screen.getByRole("search", { name: "Name" }));
+    fireEvent.submit(screen.getByRole("search", { name: "Name or GMO ID" }));
     await waitFor(() => expect(resolveFacets).toBeTypeOf("function"));
     fireEvent.click(screen.getByRole("button", { name: "Any Role" }));
     expect(

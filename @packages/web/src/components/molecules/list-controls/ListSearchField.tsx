@@ -1,4 +1,4 @@
-import { Button, Input, Label, TextField } from "@heroui/react";
+import { Button, Input, TextField } from "@heroui/react";
 import clsx from "clsx";
 import type { FC } from "react";
 
@@ -18,8 +18,8 @@ export const ListSearchField: FC<Props> = ({
   value,
   onChange,
   onSubmit,
-  label = "Name",
-  placeholder = "Search by name",
+  label = "Name or GMO ID",
+  placeholder = "Search by name or GMO ID",
   buttonLabel = "Search",
   isDisabled = false,
   className,
@@ -34,13 +34,14 @@ export const ListSearchField: FC<Props> = ({
     }}
   >
     <TextField
+      aria-label={label}
       className="min-w-0 flex-1 basis-48"
       value={value}
       onChange={onChange}
       isDisabled={isDisabled}
     >
-      <Label>{label}</Label>
       <Input
+        className="focus-visible:outline-primary-dark shadow-none focus-visible:outline-2 focus-visible:outline-offset-2"
         placeholder={placeholder}
         type="search"
         onKeyDown={(event) => {

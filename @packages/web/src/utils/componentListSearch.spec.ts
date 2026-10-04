@@ -10,6 +10,29 @@ import {
 } from "./componentListSearch";
 
 describe("component list URL contract", () => {
+  it("preserves unassigned classification choices in URLs and API parameters", () => {
+    const state = {
+      ...DEFAULT_COMPONENT_LIST_SEARCH,
+      name: "001009",
+      role: "none",
+      property: "none",
+    };
+    expect(
+      validateComponentListSearch(defaultParseSearch(canonicalComponentListSearch(state))),
+    ).toEqual(state);
+    expect(componentFacetsSearchParams(state)).toEqual({
+      name: "001009",
+      role_id: "none",
+      property_id: "none",
+    });
+    expect(componentListSearchParams(state)).toMatchObject({
+      role_id: "none",
+      property_id: "none",
+    });
+    expect(validateComponentListSearch({ role: "None", property: "invalid" })).toEqual(
+      DEFAULT_COMPONENT_LIST_SEARCH,
+    );
+  });
   it("defaults and normalizes unsupported values and unsafe offsets", () => {
     expect(validateComponentListSearch({})).toEqual(DEFAULT_COMPONENT_LIST_SEARCH);
     expect(

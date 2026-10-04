@@ -21,6 +21,23 @@ const component = {
 const Location = () => <output aria-label="Current path">{useLocation().pathname}</output>;
 
 describe("ComponentCard", () => {
+  it("uses decoded text in the title, aliases and accessible link name without rendering HTML", async () => {
+    render(
+      <StoryProvider>
+        <ComponentCard
+          component={{
+            ...component,
+            name: "Bacto &trade; Yeast extract",
+            aliases: ["Yeast &#8482;", "&lt;img src=x&gt;"],
+          }}
+        />
+      </StoryProvider>,
+    );
+    const link = await screen.findByRole("link", { name: "Bacto ™ Yeast extract (GMO_000001)" });
+    expect(screen.getByRole("heading").textContent).toBe("Bacto ™ Yeast extract");
+    expect(screen.getByLabelText("Aliases").textContent).toBe("Yeast ™; <img src=x>");
+    expect(link.querySelector("img")).toBeNull();
+  });
   it("links to the existing detail route without API requests", async () => {
     const network = vi.spyOn(globalThis, "fetch");
     render(

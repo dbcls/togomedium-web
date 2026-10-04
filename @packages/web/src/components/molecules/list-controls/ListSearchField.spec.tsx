@@ -13,7 +13,7 @@ describe("ListSearchField", () => {
       return <ListSearchField value={value} onChange={setValue} onSubmit={submit} />;
     };
     render(<Example />);
-    fireEvent.change(screen.getByRole("searchbox", { name: "Name" }), {
+    fireEvent.change(screen.getByRole("searchbox", { name: "Name or GMO ID" }), {
       target: { value: "Sucrose" },
     });
     expect(submit).not.toHaveBeenCalled();
@@ -24,7 +24,7 @@ describe("ListSearchField", () => {
   it("allows an empty search to clear the applied name filter", () => {
     const submit = vi.fn();
     render(<ListSearchField value="" onChange={() => {}} onSubmit={submit} />);
-    fireEvent.submit(screen.getByRole("search", { name: "Name" }));
+    fireEvent.submit(screen.getByRole("search", { name: "Name or GMO ID" }));
     expect(submit).toHaveBeenCalledExactlyOnceWith("");
   });
 
