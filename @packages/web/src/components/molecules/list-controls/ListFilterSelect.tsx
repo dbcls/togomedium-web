@@ -1,4 +1,4 @@
-import { Description, ListBox, Select } from "@heroui/react";
+import { ListBox, Select } from "@heroui/react";
 import clsx from "clsx";
 import type { FC } from "react";
 import {
@@ -63,17 +63,6 @@ export const ListFilterSelect: FC<Props> = ({
         </div>
         <Select.Indicator />
       </Select.Trigger>
-      <Description>
-        <span role="status">
-          {countsStatus === "loading"
-            ? "Loading counts…"
-            : countsStatus === "error"
-              ? "Counts unavailable. You can still change the filter."
-              : options.length === 0
-                ? "No filter options."
-                : "Counts show results for each option."}
-        </span>
-      </Description>
       <Select.Popover className="max-w-[calc(100vw-2rem)]">
         <ListBox items={items}>
           {(option) => (

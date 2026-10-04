@@ -48,22 +48,20 @@ describe("ListFilterSelect", () => {
           onChange={() => {}}
         />,
       );
-      expect(screen.getByRole("status").textContent).toContain(
-        countsStatus === "loading" ? "Loading counts" : "Counts unavailable",
-      );
+      expect(screen.queryByRole("status")).toBeNull();
       fireEvent.click(screen.getByRole("button", { name: "Any Role" }));
       expect(screen.queryByRole("option", { name: "Nutrient source, 120 results" })).toBeNull();
-      expect(
-        screen.getByRole("option", {
-          name: `Nutrient source, count ${countsStatus === "loading" ? "loading" : "unavailable"}`,
-        }),
-      ).toBeTruthy();
+      const option = screen.getByRole("option", {
+        name: `Nutrient source, count ${countsStatus === "loading" ? "loading" : "unavailable"}`,
+      });
+      expect(option.textContent).toContain("—");
+      expect(option.textContent).not.toContain("120");
     },
   );
 
   it("keeps Any available without options", () => {
     render(<ListFilterSelect label="Role" value={null} options={[]} onChange={() => {}} />);
-    expect(screen.getByRole("status").textContent).toBe("No filter options.");
+    expect(screen.queryByRole("status")).toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Any Role" }));
     expect(screen.getAllByRole("option")).toHaveLength(1);
   });
