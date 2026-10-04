@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState, type ComponentProps } from "react";
-import { ListFilterSelect, type ListFilterOption } from "./ListFilterSelect";
+import { ListCountSelect, type ListCountOption } from "./ListCountSelect";
 
-const options: ListFilterOption[] = [
+const options: ListCountOption[] = [
   { id: "source", label: "Nutrient source", count: 240 },
   { id: "carbon", label: "Carbon source", count: 120, depth: 1 },
   { id: "sugar", label: "Sugar", count: 65, depth: 2 },
@@ -10,16 +10,16 @@ const options: ListFilterOption[] = [
   { id: "buffer", label: "Buffer", count: 18 },
 ];
 
-const FilterExample = (args: ComponentProps<typeof ListFilterSelect>) => {
+const CountExample = (args: ComponentProps<typeof ListCountSelect>) => {
   const [value, setValue] = useState(args.value);
-  return <ListFilterSelect {...args} value={value} onChange={setValue} />;
+  return <ListCountSelect {...args} value={value} onChange={setValue} />;
 };
 
 const meta = {
-  title: "ListControls/ListFilterSelect",
-  component: ListFilterSelect,
+  title: "ListControls/ListCountSelect",
+  component: ListCountSelect,
   args: { label: "Role", value: null, options, onChange: () => {} },
-  render: (args) => <FilterExample {...args} />,
+  render: (args) => <CountExample {...args} />,
   decorators: [
     (Story) => (
       <div className="w-80 max-w-full p-4">
@@ -27,7 +27,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof ListFilterSelect>;
+} satisfies Meta<typeof ListCountSelect>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 

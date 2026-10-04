@@ -9,28 +9,31 @@ import {
   listSelectValueClasses,
 } from "./listSelectStyles";
 
-export type ListPageSize = 20 | 50 | 100;
+export type ListSelectOption = { id: string; label: string };
 
 type Props = {
-  value: ListPageSize;
-  onChange: (value: ListPageSize) => void;
+  label: string;
+  options: readonly ListSelectOption[];
+  value: string;
+  onChange: (value: string) => void;
   isDisabled?: boolean;
   className?: string;
 };
 
-export const ListPageSizeSelect: FC<Props> = ({
+export const ListSelect: FC<Props> = ({
+  label,
+  options,
   value,
   onChange,
   isDisabled = false,
   className,
 }) => (
   <Select
-    aria-label="Items per page"
+    aria-label={label}
     className={clsx("w-full min-w-0", className)}
-    value={String(value)}
+    value={value}
     onChange={(key) => {
-      const next = Number(key);
-      if (next === 20 || next === 50 || next === 100) onChange(next);
+      if (key !== null) onChange(String(key));
     }}
     isDisabled={isDisabled}
     selectionMode="single"
@@ -38,22 +41,22 @@ export const ListPageSizeSelect: FC<Props> = ({
     <Select.Trigger className={listSelectTriggerClasses}>
       <div className="flex min-w-0 flex-1 flex-col items-start gap-0.5 text-left">
         <span aria-hidden="true" className={listSelectLabelClasses}>
-          Items per page
+          {label}
         </span>
         <Select.Value className={listSelectValueClasses} />
       </div>
       <Select.Indicator />
     </Select.Trigger>
-    <Select.Popover>
+    <Select.Popover className="max-w-[calc(100vw-2rem)]">
       <ListBox>
-        {([20, 50, 100] as const).map((size) => (
+        {options.map((option) => (
           <ListBox.Item
-            key={size}
-            id={String(size)}
-            textValue={`${size} items`}
+            key={option.id}
+            id={option.id}
+            textValue={option.label}
             className={listSelectItemClasses}
           >
-            <span className="min-w-0 flex-1 truncate">{size} items</span>
+            <span className="min-w-0 flex-1 truncate">{option.label}</span>
             <ListBox.ItemIndicator className={listSelectIndicatorClasses} />
           </ListBox.Item>
         ))}

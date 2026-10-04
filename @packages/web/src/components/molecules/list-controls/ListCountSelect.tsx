@@ -9,7 +9,7 @@ import {
   listSelectValueClasses,
 } from "./listSelectStyles";
 
-export type ListFilterOption = {
+export type ListCountOption = {
   id: string;
   label: string;
   count?: number;
@@ -21,14 +21,14 @@ type Props = {
   label: string;
   value: string | null;
   onChange: (value: string | null) => void;
-  options: readonly ListFilterOption[];
+  options: readonly ListCountOption[];
   countsStatus?: "ready" | "loading" | "error";
   noneLabel?: string;
   isDisabled?: boolean;
   className?: string;
 };
 
-export const ListFilterSelect: FC<Props> = ({
+export const ListCountSelect: FC<Props> = ({
   label,
   value,
   onChange,

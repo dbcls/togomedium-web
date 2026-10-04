@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { useState } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ListFilterSelect } from "./ListFilterSelect";
+import { ListCountSelect } from "./ListCountSelect";
 
 afterEach(cleanup);
 
@@ -10,13 +10,13 @@ const options = [
   { id: "child", label: "Carbon source", count: 0, depth: 1 },
 ];
 
-describe("ListFilterSelect", () => {
+describe("ListCountSelect", () => {
   it("allows a zero-count option and clearing it back to Any", () => {
     const change = vi.fn();
     const Example = () => {
       const [value, setValue] = useState<string | null>(null);
       return (
-        <ListFilterSelect
+        <ListCountSelect
           label="Role"
           value={value}
           options={options}
@@ -40,7 +40,7 @@ describe("ListFilterSelect", () => {
     "does not expose stale counts while %s",
     (countsStatus) => {
       render(
-        <ListFilterSelect
+        <ListCountSelect
           label="Role"
           value={null}
           options={options}
@@ -60,7 +60,7 @@ describe("ListFilterSelect", () => {
   );
 
   it("keeps Any available without options", () => {
-    render(<ListFilterSelect label="Role" value={null} options={[]} onChange={() => {}} />);
+    render(<ListCountSelect label="Role" value={null} options={[]} onChange={() => {}} />);
     expect(screen.queryByRole("status")).toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Any Role" }));
     expect(screen.getAllByRole("option")).toHaveLength(1);
