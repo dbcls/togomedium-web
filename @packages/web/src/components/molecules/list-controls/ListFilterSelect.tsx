@@ -96,7 +96,9 @@ export const ListFilterSelect: FC<Props> = ({
                   {countsStatus === "ready" ? (option.count ?? "—") : "—"}
                 </span>
               )}
-              <ListBox.ItemIndicator />
+              {/* Reserve a flex column for the checkmark alongside the count.
+                  Select's item padding otherwise puts its absolute indicator over the count. */}
+              <ListBox.ItemIndicator className="static translate-y-0" />
             </ListBox.Item>
           )}
         </ListBox>
