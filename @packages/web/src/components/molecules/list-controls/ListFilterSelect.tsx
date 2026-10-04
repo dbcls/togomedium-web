@@ -1,6 +1,13 @@
-import { Description, Label, ListBox, Select } from "@heroui/react";
+import { Description, ListBox, Select } from "@heroui/react";
 import clsx from "clsx";
 import type { FC } from "react";
+import {
+  listSelectIndicatorClasses,
+  listSelectItemClasses,
+  listSelectLabelClasses,
+  listSelectTriggerClasses,
+  listSelectValueClasses,
+} from "./listSelectStyles";
 
 export type ListFilterOption = {
   id: string;
@@ -40,15 +47,20 @@ export const ListFilterSelect: FC<Props> = ({
 
   return (
     <Select
+      aria-label={label}
       className={clsx("w-full min-w-0", className)}
       value={value === null ? "none" : `option:${value}`}
       onChange={(key) => onChange(key === "none" || key === null ? null : String(key).slice(7))}
       isDisabled={isDisabled}
       selectionMode="single"
     >
-      <Label>{label}</Label>
-      <Select.Trigger>
-        <Select.Value>{selectedLabel}</Select.Value>
+      <Select.Trigger className={listSelectTriggerClasses}>
+        <div className="flex min-w-0 flex-1 flex-col items-start gap-0.5 text-left">
+          <span aria-hidden="true" className={listSelectLabelClasses}>
+            {label}
+          </span>
+          <Select.Value className={listSelectValueClasses}>{selectedLabel}</Select.Value>
+        </div>
         <Select.Indicator />
       </Select.Trigger>
       <Description>
@@ -66,6 +78,7 @@ export const ListFilterSelect: FC<Props> = ({
         <ListBox items={items}>
           {(option) => (
             <ListBox.Item
+              className={listSelectItemClasses}
               id={option.key}
               textValue={option.label}
               aria-label={[
@@ -98,7 +111,7 @@ export const ListFilterSelect: FC<Props> = ({
               )}
               {/* Reserve a flex column for the checkmark alongside the count.
                   Select's item padding otherwise puts its absolute indicator over the count. */}
-              <ListBox.ItemIndicator className="static translate-y-0" />
+              <ListBox.ItemIndicator className={listSelectIndicatorClasses} />
             </ListBox.Item>
           )}
         </ListBox>
