@@ -90,7 +90,6 @@ export const ListCountSelect: FC<Props> = ({
                 className="min-w-0 flex-1 break-words"
                 style={{ paddingInlineStart: `${Math.max(0, option.depth ?? 0) * 12}px` }}
               >
-                {(option.depth ?? 0) > 0 && <span aria-hidden="true">↳ </span>}
                 {option.label}
               </span>
               {option.key !== "none" && (
