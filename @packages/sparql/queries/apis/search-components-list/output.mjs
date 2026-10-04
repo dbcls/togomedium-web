@@ -53,6 +53,7 @@ export function json({ result, count }) {
   }
 
   for (const component of components.values()) {
+    component.aliases.sort((left, right) => (left < right ? -1 : left > right ? 1 : 0));
     for (const role of component.roles) {
       const parent = parents.get(role.gmo_id);
       role.parent =

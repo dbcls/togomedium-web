@@ -4,26 +4,28 @@
   "validation": "validate.mjs",
   "inputs": {
     "roles": "count-components-by-role.rq",
-    "properties": "count-components-by-property.rq"
+    "properties": "count-components-by-property.rq",
+    "role_none": "count-components-without-role.rq",
+    "property_none": "count-components-without-property.rq"
   },
   "parameters": {
     "name": {
       "default": "",
       "pattern": "^[\\s\\S]*$",
-      "description": "Case-insensitive literal substring of a preferred or alternative name. Empty means no name filter.",
-      "examples": ["glucose", "Dextrose"]
+      "description": "Case-insensitive literal substring of an all-language preferred/alternative name or GMO ID. Empty means no search filter.",
+      "examples": ["glucose", "GMO_001009", "001009"]
     },
     "role_id": {
       "default": "",
-      "pattern": "^(?:GMO_[0-9]{6})?$",
-      "description": "Role GMO ID, including all descendant Roles. Empty means no Role filter. Role facet counts ignore this parameter.",
-      "examples": ["GMO_000042"]
+      "pattern": "^(?:GMO_[0-9]{6}|none)?$",
+      "description": "Role GMO ID, including all descendant Roles. Empty means no Role filter. Role facet counts ignore this parameter. none selects components without any assignment of the classification predicate, independent of labels.",
+      "examples": ["GMO_000042", "none"]
     },
     "property_id": {
       "default": "",
-      "pattern": "^(?:GMO_[0-9]{6})?$",
-      "description": "Directly assigned Property GMO ID. Empty means no Property filter. Property facet counts ignore this parameter.",
-      "examples": ["GMO_000050"]
+      "pattern": "^(?:GMO_[0-9]{6}|none)?$",
+      "description": "Directly assigned Property GMO ID. Empty means no Property filter. Property facet counts ignore this parameter. none selects components without any assignment of the classification predicate, independent of labels.",
+      "examples": ["GMO_000050", "none"]
     }
   }
 }

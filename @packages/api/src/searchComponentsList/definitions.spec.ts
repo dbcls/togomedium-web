@@ -51,3 +51,12 @@ it("separates paging and sorting from facet input and response", () => {
     ]),
   );
 });
+
+it("accepts unassigned classifications without changing Any or GMO ID filters", () => {
+  for (const role_id of ["", "none", "GMO_000042"]) {
+    expect(searchComponentsListParamsSchema.parse({ role_id, property_id: "none" })).toMatchObject({
+      role_id,
+      property_id: "none",
+    });
+  }
+});

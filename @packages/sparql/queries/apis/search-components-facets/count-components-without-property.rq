@@ -1,0 +1,25 @@
+# Count all matching components, with the same filters as the list, independently of pagination.
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+
+SELECT (COUNT(DISTINCT ?gmo_id) AS ?count)
+FROM <http://togomedium.org/gmo>
+WHERE {
+  ?gmo rdfs:subClassOf+ gmo:GMO_000002 ;
+       dcterms:identifier ?gmo_id ;
+       skos:prefLabel ?label .
+  FILTER(REGEX(STR(?gmo_id), "^GMO_[0-9]{6}$"))
+  FILTER("{{name}}" = "" || CONTAINS(LCASE(STR(?gmo_id)), LCASE("{{name}}")) || EXISTS {
+    ?gmo (skos:prefLabel|skos:altLabel) ?search_label .
+    FILTER(CONTAINS(LCASE(STR(?search_label)), LCASE("{{name}}")))
+  })
+  FILTER("{{role_id}}" = "" || ("{{role_id}}" = "none" && NOT EXISTS { ?gmo gmo:GMO_000112 ?missing_assignment . }) || ("{{role_id}}" != "none" && EXISTS {
+    ?gmo gmo:GMO_000112 ?assigned_filter_role .
+    ?assigned_filter_role rdfs:subClassOf* ?filter_role .
+    ?filter_role rdfs:subClassOf+ gmo:GMO_000037 ;
+                 dcterms:identifier "{{role_id}}" .
+  }))
+  FILTER NOT EXISTS { ?gmo gmo:GMO_000113 ?assignment . }
+}

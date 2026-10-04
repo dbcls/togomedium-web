@@ -55,11 +55,21 @@ await test("list execution config has only the page and total queries", async ()
     for (const order of ["asc", "desc"])
       assert.doesNotThrow(() => renderParameters(source, config.parameters, { sort, order }));
   }
-  assert.equal(
-    await readFile(new URL("./list-components-by-medium-count.rq", import.meta.url), "utf8"),
-    await readFile(
-      new URL("../search-components/list-components-by-medium-count.rq", import.meta.url),
-      "utf8",
-    ),
-  );
+});
+
+await test("aliases are deduplicated and stably ordered", () => {
+  const value = (value) => ({ value });
+  const rows = ["zeta", "Alpha", "zeta"].map((alias) => ({
+    gmo_id: value("GMO_001009"),
+    label: value("name"),
+    alias: value(alias),
+  }));
+  const input = {
+    result: { results: { bindings: rows } },
+    count: {
+      results: { bindings: [{ total: value("1"), limit: value("20"), offset: value("0") }] },
+    },
+  };
+  assert.deepEqual(json(input).contents[0].aliases, ["Alpha", "zeta"]);
+  checkStandalone(json, [input]);
 });

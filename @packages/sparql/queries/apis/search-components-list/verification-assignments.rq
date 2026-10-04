@@ -1,0 +1,24 @@
+# Verification only: predicates are observed independently of classification labels.
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gmo: <http://purl.jp/bio/10/gmo/>
+SELECT DISTINCT ?gmo_id ?assigned_role ?assigned_property ?role_id ?property_id
+FROM <http://togomedium.org/gmo>
+WHERE {
+  ?component rdfs:subClassOf+ gmo:GMO_000002 ; dcterms:identifier ?gmo_id ; skos:prefLabel ?label .
+  FILTER(REGEX(STR(?gmo_id), "^GMO_[0-9]{6}$"))
+  OPTIONAL {
+    ?component gmo:GMO_000112 ?assigned_role .
+    OPTIONAL {
+      ?assigned_role rdfs:subClassOf* ?role .
+      ?role rdfs:subClassOf+ gmo:GMO_000037 ; dcterms:identifier ?role_id .
+    }
+  }
+  OPTIONAL {
+    ?component gmo:GMO_000113 ?assigned_property .
+    OPTIONAL {
+      ?assigned_property rdfs:subClassOf gmo:GMO_000039 ; dcterms:identifier ?property_id .
+    }
+  }
+}

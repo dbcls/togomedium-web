@@ -5,9 +5,12 @@ import {
   searchComponents2ParamsSchema,
   searchComponents2ResponseSchema,
 } from "../searchComponents2/definitions";
+import { componentClassificationFilterSchema } from "./classification";
 
 export const PATH_SEARCH_COMPONENTS_LIST = "/gmdb_search_components_list";
 export const searchComponentsListParamsSchema = searchComponents2ParamsSchema.extend({
+  role_id: componentClassificationFilterSchema,
+  property_id: componentClassificationFilterSchema,
   sort: searchComponentsParamsSchema.shape.sort,
   order: searchComponentsParamsSchema.shape.order,
 });
@@ -23,7 +26,7 @@ export const searchComponentsListDoc: RouteConfig = {
   method: "get",
   summary: "Search component list",
   description:
-    "Search component names, inclusive Role and direct Property. Name or GMO ID sorting counts direct medium usages after selecting a page; medium_count sorting counts all matching components before sorting and pagination. Return contents, total and pagination only; no facet aggregation runs.",
+    "Search all-language preferred/alternative names or GMO IDs by case-insensitive substring. aliases contains English alternative labels in stable lexical order. Intersect inclusive Role and direct Property; empty classification means Any and none means no assignment of that RDF predicate. Name or GMO ID sorting counts direct medium usages after selecting a page; medium_count sorting counts all matching components before sorting and pagination. Return contents, total and pagination only; no facet aggregation runs.",
   tags: ["Components"],
   request: { query: searchComponentsListParamsSchema },
   responses: {

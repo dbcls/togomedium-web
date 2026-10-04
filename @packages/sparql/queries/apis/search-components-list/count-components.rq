@@ -11,19 +11,19 @@ WHERE {
        dcterms:identifier ?gmo_id ;
        skos:prefLabel ?label .
   FILTER(REGEX(STR(?gmo_id), "^GMO_[0-9]{6}$"))
-  FILTER("{{name}}" = "" || EXISTS {
+  FILTER("{{name}}" = "" || CONTAINS(LCASE(STR(?gmo_id)), LCASE("{{name}}")) || EXISTS {
     ?gmo (skos:prefLabel|skos:altLabel) ?search_label .
     FILTER(CONTAINS(LCASE(STR(?search_label)), LCASE("{{name}}")))
   })
-  FILTER("{{role_id}}" = "" || EXISTS {
+  FILTER("{{role_id}}" = "" || ("{{role_id}}" = "none" && NOT EXISTS { ?gmo gmo:GMO_000112 ?missing_assignment . }) || ("{{role_id}}" != "none" && EXISTS {
     ?gmo gmo:GMO_000112 ?assigned_filter_role .
     ?assigned_filter_role rdfs:subClassOf* ?filter_role .
     ?filter_role rdfs:subClassOf+ gmo:GMO_000037 ;
                  dcterms:identifier "{{role_id}}" .
-  })
-  FILTER("{{property_id}}" = "" || EXISTS {
+  }))
+  FILTER("{{property_id}}" = "" || ("{{property_id}}" = "none" && NOT EXISTS { ?gmo gmo:GMO_000113 ?missing_assignment . }) || ("{{property_id}}" != "none" && EXISTS {
     ?gmo gmo:GMO_000113 ?filter_property .
     ?filter_property rdfs:subClassOf gmo:GMO_000039 ;
                      dcterms:identifier "{{property_id}}" .
-  })
+  }))
 }

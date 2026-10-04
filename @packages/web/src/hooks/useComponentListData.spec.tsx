@@ -22,6 +22,8 @@ const listResponse = (name = "Glucose") => ({
   offset: "0",
 });
 const facetsResponse = {
+  role_none_count: 0,
+  property_none_count: 0,
   roles: [{ gmo_id: "GMO_000002", label_en: "Carbon", parent: null, count: 1 }],
   properties: [],
 };
@@ -97,7 +99,9 @@ describe("component list split queries", () => {
     await waitFor(() => expect(result.current.list.data?.contents[0].name).toBe("new"));
     await act(async () => {
       resolveOldList(jsonResponse(listResponse("old")));
-      resolveOldFacets(jsonResponse({ roles: [], properties: [] }));
+      resolveOldFacets(
+        jsonResponse({ roles: [], properties: [], role_none_count: 0, property_none_count: 0 }),
+      );
     });
     expect(result.current.list.data?.contents[0].name).toBe("new");
     expect(result.current.facets.data).toBeUndefined();

@@ -14,16 +14,16 @@ WHERE {
                dcterms:identifier ?gmo_id ; skos:prefLabel ?preferred_label .
     ?component gmo:GMO_000113 ?property .
     FILTER(REGEX(STR(?gmo_id), "^GMO_[0-9]{6}$"))
-    FILTER("{{name}}" = "" || EXISTS {
+    FILTER("{{name}}" = "" || CONTAINS(LCASE(STR(?gmo_id)), LCASE("{{name}}")) || EXISTS {
       ?component (skos:prefLabel|skos:altLabel) ?search_label .
       FILTER(CONTAINS(LCASE(STR(?search_label)), LCASE("{{name}}")))
     })
-    FILTER("{{role_id}}" = "" || EXISTS {
+    FILTER("{{role_id}}" = "" || ("{{role_id}}" = "none" && NOT EXISTS { ?component gmo:GMO_000112 ?missing_assignment . }) || ("{{role_id}}" != "none" && EXISTS {
       ?component gmo:GMO_000112 ?assigned_filter_role .
       ?assigned_filter_role rdfs:subClassOf* ?filter_role .
       ?filter_role rdfs:subClassOf+ gmo:GMO_000037 ;
                    dcterms:identifier "{{role_id}}" .
-    })
+    }))
   }
 }
 GROUP BY ?property ?id ?label

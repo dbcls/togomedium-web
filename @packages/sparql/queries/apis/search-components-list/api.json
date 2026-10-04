@@ -10,20 +10,20 @@
     "name": {
       "default": "",
       "pattern": "^[\\s\\S]*$",
-      "description": "Case-insensitive literal substring of a preferred or alternative name. Empty means no name filter.",
-      "examples": ["glucose", "Dextrose"]
+      "description": "Case-insensitive literal substring of an all-language preferred/alternative name or GMO ID. Empty means no search filter.",
+      "examples": ["glucose", "GMO_001009", "001009"]
     },
     "role_id": {
       "default": "",
-      "pattern": "^(?:GMO_[0-9]{6})?$",
-      "description": "Role GMO ID, including all descendant Roles. Empty means no Role filter.",
-      "examples": ["GMO_000042"]
+      "pattern": "^(?:GMO_[0-9]{6}|none)?$",
+      "description": "Role GMO ID, including all descendant Roles. Empty means no Role filter. none selects components without any assignment of the classification predicate, independent of labels.",
+      "examples": ["GMO_000042", "none"]
     },
     "property_id": {
       "default": "",
-      "pattern": "^(?:GMO_[0-9]{6})?$",
-      "description": "Directly assigned Property GMO ID. Empty means no Property filter.",
-      "examples": ["GMO_000050"]
+      "pattern": "^(?:GMO_[0-9]{6}|none)?$",
+      "description": "Directly assigned Property GMO ID. Empty means no Property filter. none selects components without any assignment of the classification predicate, independent of labels.",
+      "examples": ["GMO_000050", "none"]
     },
     "sort": {
       "default": "medium_count",

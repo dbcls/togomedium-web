@@ -102,3 +102,19 @@ sort=medium_count、order=descをAPI既定値とした。limit=20、offset=0は�
 ユーザーが人間レビューとSPARQListリポジトリ登録を受け入れ、OpenAPI登録を明示依頼した。従来の本番実動作確認後に登録する保留条件を、この依頼に従って変更し、採用list/facetsのDocだけを登録した。これは本番の実動作を確認したという記録ではない。
 
 今回作成した比較登録gmdb_search_components.mdとgmdb_search_components2.mdはSPARQListリポジトリから削除した。検証スクリプトは比較用APIの登録がある環境を前提とするため、現在の整理後のDockerではそのまま再実行できない。過去の照合・性能記録とWeb側比較ソースは保持し、再登録は必要時に承認を得て判断する。
+
+## レビュー後のAPI調整（BIO-342、2026-10-04）
+
+`name`は全言語の標準名・別名またはGMO IDへの大小文字を区別しない部分一致とした。`GMO_001009`と`001009`のいずれも同じ成分に一致する。Role/Propertyとは引き続きAND。表示用`aliases`は詳細の`alt_labels_en`と同じ英語のみとし、両APIの英語別名を文字列の辞書順に安定化した。詳細側の変更は別名の並び順だけで、全言語検索と`matched_names`は維持する。
+
+分類入力は従来の空文字列（Any）・GMO IDに`none`を追加した。`none`はRoleの`gmo:GMO_000112`、Propertyの`gmo:GMO_000113`という実述語の付与がない成分を指す。分類名や英語ラベルの欠損とは区別する。両方の未付与もANDで指定できる。共有定数・型は`@packages/api/src/searchComponentsList/classification.ts`。
+
+独立コーパス照合は次で実行する。比較用SPARQListの登録は不要。採用APIはローカルDocker、独立コーパスはDockerと同じdev SPARQLを参照し、集計をJavaScriptで照合する。
+
+```sh
+mise exec -- node queries/apis/search-components-list/verify-adjustments.mjs
+```
+
+この検証は名前/日本語別名/ID全体・部分・大小文字、Any/未付与/両方未付与/分類AND/0件の15条件、全候補facetと未付与件数の自己条件除外、英語別名の詳細との一致、6ソート・方向のページ対応・利用培地数・空ページを確認する。観測総数1539、Role未付与513、Property未付与257、両方未付与87。これらは検証時の観測で、固定仕様ではない。保存先は`results/adjustments-verification.json`。本番push/deployは未実施。
+
+大offsetの追加確認では`offset=9999`がdev SPARQL側の500で失敗した（name/idとmedium_countの両系統）。既存確認と同じ`offset=2000`の範囲外ページは正常に空配列を返す。エンドポイント側の上限制約候補であり、原因確定や対応はこのIssueでは行っていない。

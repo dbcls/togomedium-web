@@ -26,6 +26,8 @@ const component = {
   properties: [],
 };
 const facetData = {
+  role_none_count: 0,
+  property_none_count: 0,
   roles: [{ gmo_id: "GMO_000002", label_en: "Nutrient source", parent: null, count: 10 }],
   properties: [],
 };

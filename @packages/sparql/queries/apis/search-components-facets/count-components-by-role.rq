@@ -20,15 +20,15 @@ WHERE {
     ?assigned_role rdfs:subClassOf* ?role .
     ?component gmo:GMO_000112 ?assigned_role .
     FILTER(REGEX(STR(?gmo_id), "^GMO_[0-9]{6}$"))
-    FILTER("{{name}}" = "" || EXISTS {
+    FILTER("{{name}}" = "" || CONTAINS(LCASE(STR(?gmo_id)), LCASE("{{name}}")) || EXISTS {
       ?component (skos:prefLabel|skos:altLabel) ?search_label .
       FILTER(CONTAINS(LCASE(STR(?search_label)), LCASE("{{name}}")))
     })
-    FILTER("{{property_id}}" = "" || EXISTS {
+    FILTER("{{property_id}}" = "" || ("{{property_id}}" = "none" && NOT EXISTS { ?component gmo:GMO_000113 ?missing_assignment . }) || ("{{property_id}}" != "none" && EXISTS {
       ?component gmo:GMO_000113 ?filter_property .
       ?filter_property rdfs:subClassOf gmo:GMO_000039 ;
                        dcterms:identifier "{{property_id}}" .
-    })
+    }))
   }
 }
 GROUP BY ?role ?id ?label ?parent ?parent_id

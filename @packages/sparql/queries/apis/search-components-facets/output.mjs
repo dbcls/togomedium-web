@@ -1,5 +1,5 @@
 // Standalone SPARQList Output; no module dependencies.
-export function json({ roles, properties }) {
+export function json({ roles, properties, role_none, property_none }) {
   const facet = (bindings, isRole) => {
     const items = new Map();
     const facetParents = new Map();
@@ -31,7 +31,17 @@ export function json({ roles, properties }) {
     return [...items.values()];
   };
 
+  const noneCount = (result) => {
+    const raw = result.results.bindings[0]?.count?.value;
+    const count = Number(raw);
+    if (!/^(?:0|[1-9][0-9]*)$/.test(raw ?? "") || !Number.isSafeInteger(count)) {
+      throw new Error("Invalid unassigned classification count.");
+    }
+    return count;
+  };
   return {
+    role_none_count: noneCount(role_none),
+    property_none_count: noneCount(property_none),
     roles: facet(roles.results.bindings, true),
     properties: facet(properties.results.bindings, false),
   };
