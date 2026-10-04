@@ -104,8 +104,8 @@ export const ComponentListPage = () => {
           <ListSearchField
             value={state.draftName}
             onChange={state.setDraftName}
-            onSubmit={() => {
-              void state.submitName();
+            onSubmit={(name) => {
+              void state.submitName(name);
             }}
           />
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -160,10 +160,6 @@ export const ComponentListPage = () => {
             </div>
           )}
         </div>
-        <p className="text-sm text-gray-600">
-          Medium counts include distinct media whose recipes directly list the component. Indirect
-          use through other media or solutions is excluded.
-        </p>
         {list.isError ? (
           <div role="alert" className="flex flex-col items-start gap-3">
             <p>Components could not be loaded.</p>

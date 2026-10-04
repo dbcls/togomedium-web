@@ -35,13 +35,13 @@ export const ListSearchField: FC<Props> = ({
   >
     <TextField
       aria-label={label}
-      className="min-w-0 flex-1 basis-48"
+      className="relative min-w-0 flex-1 basis-48"
       value={value}
       onChange={onChange}
       isDisabled={isDisabled}
     >
       <Input
-        className="focus-visible:outline-primary-dark shadow-none focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="focus-visible:outline-primary-dark pr-10 shadow-none focus-visible:outline-2 focus-visible:outline-offset-2 [&::-webkit-search-cancel-button]:appearance-none"
         placeholder={placeholder}
         type="search"
         onKeyDown={(event) => {
@@ -51,6 +51,22 @@ export const ListSearchField: FC<Props> = ({
           }
         }}
       />
+      {value !== "" && (
+        <button
+          type="button"
+          aria-label="Clear search"
+          disabled={isDisabled}
+          className="focus-visible:outline-primary-dark absolute top-1/2 right-2 flex size-6 -translate-y-1/2 items-center justify-center rounded text-lg text-gray-600 hover:bg-gray-100 focus-visible:outline-2 disabled:opacity-50"
+          onClick={() => {
+            if (!isDisabled) {
+              onChange("");
+              onSubmit("");
+            }
+          }}
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      )}
     </TextField>
     <Button type="submit" isDisabled={isDisabled}>
       {buttonLabel}

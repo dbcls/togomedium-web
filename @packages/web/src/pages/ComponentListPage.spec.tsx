@@ -75,6 +75,42 @@ afterEach(() => {
 });
 
 describe("ComponentListPage", () => {
+  it("clears the applied keyword immediately while retaining other options and resetting the page", async () => {
+    const fetchMock = vi.fn(async (url: string) =>
+      json(url.includes("_facets") ? facetData : listData(url, "200")),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    const { history } = await setup(
+      "/component?name=Glucose&role=none&property=GMO_000003&sort=id&order=asc&page=3&pageSize=50",
+    );
+    await screen.findByRole("link", { name: "Glucose (GMO_000001)" });
+    fireEvent.change(screen.getByRole("searchbox"), { target: { value: "Unapplied draft" } });
+    fireEvent.click(screen.getByRole("button", { name: "Clear search" }));
+    await waitFor(() => expect(history.location.search).not.toContain("name="));
+    const params = new URLSearchParams(history.location.search);
+    expect(Object.fromEntries(params)).toEqual({
+      role: "none",
+      property: "GMO_000003",
+      sort: "id",
+      order: "asc",
+      pageSize: "50",
+    });
+    expect(screen.getByRole<HTMLInputElement>("searchbox").value).toBe("");
+    await waitFor(() =>
+      expect(
+        fetchMock.mock.calls.some(([url]) => {
+          const api = new URL(url).searchParams;
+          return (
+            url.includes("_list") &&
+            api.get("name") === "" &&
+            api.get("offset") === "0" &&
+            api.get("role_id") === "none" &&
+            api.get("property_id") === "GMO_000003"
+          );
+        }),
+      ).toBe(true),
+    );
+  });
   it("keeps Any distinct from zero-count unassigned choices and restores them through history", async () => {
     const fetchMock = vi.fn(async (url: string) =>
       json(

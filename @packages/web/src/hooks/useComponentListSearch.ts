@@ -33,7 +33,7 @@ export const useComponentListSearch = () => {
     search,
     draftName: draft.locationKey === locationKey ? draft.name : search.name,
     setDraftName: (name: string) => setDraft({ locationKey, name }),
-    submitName: () => updateSearch({ name: draft.name }),
+    submitName: (name = draft.name) => updateSearch({ name }),
     setRole: (role: string | null) => updateSearch({ role: role ?? "" }),
     setProperty: (property: string | null) => updateSearch({ property: property ?? "" }),
     setSort: (sort: ComponentListSearch["sort"], order: ComponentListSearch["order"]) =>
